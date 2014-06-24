@@ -1,0 +1,11 @@
+接收
+{
+logo:"http://xxx.constructor.com/jjj.jpg",  #公司logo
+yu:30,  # 剩余邀请数
+uname:"用户名",
+test:[
+      {name:"测试名",id:"idxxxxx",type:"我觉得这里要考虑一个状态，比如测试过期啥啥的"},
+      {name:"测试名",id:"idxxxxx",type:"我觉得这里要考虑一个状态，比如测试过期啥啥的"},
+      {name:"测试名",id:"idxxxxx",type:"我觉得这里要考虑一个状态，比如测试过期啥啥的"},
+     ],
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html ng-app="OJApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>XXXOJ</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/oj.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="http://v3.bootcss.com/examples/carousel/carousel.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/carousel.css"/>
+    <!--<link href="http://v3.bootcss.com/docs-assets/css/docs.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="css/docs.css"/>
+</head>
+<body ng-controller="Indexx">
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="modal"
+                    data-target="#miniNav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="logo" class="navbar-brand" href="." title="XXXOJ">
+                <img width="167px" height="25px"
+                     src="./static/logo.png"
+                     alt="XXXOJ"> </a></div>
+        <div class="collapse navbar-collapse ">
+            <ul class="nav navbar-nav">
+                <li><a href="" data-toggle="modal" data-target="#Try">试用</a></li>
+                <li><a href="" data-toggle="modal" data-target="#Price">价格</a></li>
+                <li><a href="" data-toggle="modal" data-target="#Content">联系我们</a></li>
+            </ul>
+            <div class=" pull-right " style=" line-height:50px;">
+                <a class="btn btn-default" href="" data-toggle="modal" data-target="#Registration">注册</a></li>
+                <a class="btn bg-success " href="" data-toggle="modal" data-target="#Login">登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal miniNav -->
+<div class="modal fade" id="miniNav" tabindex="0"
+     role="dialog" aria-labelledby="TryLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="nav navbar-nav">
+                    <li><a href="" data-toggle="modal" data-target="#Try">试用</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#Price">价格</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#Content">联系我们</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#Registration">注册</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#Login">登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Try -->
+<div class="modal fade" id="Try" tabindex="0" role="dialog" aria-labelledby="TryLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="TryLabel">请注册以享受更多服务</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="passwd" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="repasswd" placeholder="重复密码">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-1">
+                            <input type="text" class="form-control" id="Verification" placeholder="请输入右框中的数字">
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
+                            <a href="renew">
+                                <img src="static/logo.png" alt="验证问题" style="height: 40px;width: 200px">
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">注册</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Price-->
+<div class="modal fade" id="Price" tabindex="0" role="dialog" aria-labelledby="PriceLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" style="min-height: 380px">
+                <div class="col-sm-3 col-xs-3">
+                    <img src="static/logo.png" style="height: 300px;width: 100%;">
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    <img src="static/logo.png" style="height: 300px;width: 100%;">
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    <img src="static/logo.png" style="height: 300px;width: 100%;">
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                    <img src="static/logo.png" style="height: 300px;width: 100%;">
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-success center-block">确认购买</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal ContentToUs-->
+<div class="modal fade" id="Content" tabindex="0" role="dialog" aria-labelledby="ContentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="ContentLabel">联系我们</h4>
+
+                <p class="text-center">有问题？写下来，您一定会得到满意的答复</p>
+
+            </div>
+            <div class="modal-body" style="min-height: 350px">
+                <form role="form">
+                    <div class="col-md-5 col-md-offset-1">
+                        <textarea type="text" class="form-control" id="Questions" rows="14"
+                                  placeholder="请在此写下您的问题"></textarea>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="YouName" placeholder="你的名字">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <button class="btn btn-success  col-md-2 col-sm-2 col-sm-offset-3 col-md-offset-0">提交</button>
+                    <button class="btn btn-default col-md-2 col-sm-2  col-sm-offset-2 col-md-offset-1">取消</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal Registration-->
+<div class="modal fade" id="Registration" tabindex="0" role="dialog" aria-labelledby="RegistrationLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="RegistrationLabel">请注册以享受更多服务</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="passwd" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="repasswd" placeholder="重复密码">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-1">
+                            <input type="text" class="form-control" id="Verification" placeholder="请输入右框中的数字">
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
+                            <a href="renew">
+                                <img src="static/logo.png" alt="验证问题" style="height: 40px;width: 200px">
+                            </a></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">注册</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Login -->
+<div class="modal fade" id="Login" tabindex="0" role="dialog"
+     aria-labelledby="LoginLabel" aria-hidden="true">
+    <div class="modal-dialog pull-right" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="LoginLabel">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <!--<label for="exampleInputEmail1"><span class="glyphicon glyphicon-envelope"></span>Email</label>-->
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<input type="username" class="form-control" id="usernam" placeholder="User Name">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <!--<label for="exampleInputPassword1">Password</label>-->
+                        <input type="password" class="form-control" id="passwd" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">记住我
+                        </label>
+                        <button class="btn btn-default pull-right">忘记密码</button>
+                    </div>
+                    <!--<div class="btn">-->
+                    <!--</div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a type="button" class="btn btn-primary" href="showPage.html">登录</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div id="landing">
+    <div class="eyemagnet">
+        <div class="wrapper">
+            <img src="./static/chosen.png" class="chosen">
+        </div>
+        <div class="content">
+            <h1>我们有丰富的题库<br>我们能找出最好的程序员</h1>
+
+            <!--<div class="pitch">我们能找出最好的程序员</div>-->
+
+            <button class="btn btn-warning btn-lg" style="margin: 60px">免费试用</button>
+            <!--<button class="btn btn-default"> demo</button>-->
+            <!--<a class="programmer-link" href="/programmers/">Are you a programmer?</a>-->
+        </div>
+    </div>
+    <div style="background: #374652 ; ">
+        <div class="carton container " style="border:solid 0px">
+            <div class="col-md-9">
+                <img src="./static/caton1.png" class="carton1">
+            </div>
+            <div class="col-md-3">
+                <p>是的，你很难找到一个天才程序员</p>
+            </div>
+        </div>
+        <div class="carton container">
+            <div class="col-md-3 ">
+                <p>但现在，你只要简单的选择题目，并发送给求职者</p>
+            </div>
+            <div class="col-md-9 pull-right">
+                <img src="./static/caton2.png" class="carton1">
+            </div>
+        </div>
+
+        <div class=" carton container ">
+            <div class="col-md-9" >
+                <img src="./static/caton3.png" class="carton1 " >
+            </div>
+            <div class="col-md-3" >
+                <p>你就会知道谁是最好的</p>
+            </div>
+        </div>
+
+        <div class="clients ">
+            <div class="wrapper text-center ">
+                <h1>几乎1000多家公司在使用我们的系统</h1>
+
+                <div class="elements layout-justified">
+
+                    <a class="part" data-page="0" style="display: inline-block; opacity: 0.5;">
+
+                        <img ng-src="{{co.img}}" alt={{co.name}} ng-repeat="co in customers">
+                    </a>
+                    <!--{{customers}}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="container">
+    <p class="pull-right"><a href="#">Back to top</a></p>
+
+    <p class="center-block">&copy; 2014 XXXOJ</p>
+</footer>
+
+
+<!--<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!--<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>-->
+<script src="js/holder.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/controller.js"></script>
+
+<!--<script src="js/showdown.js"></script>-->
+<!--<script src="js/marked.js"></script>-->
+<script src="js/markdown_preview.js"></script>
+</body>
+</html>

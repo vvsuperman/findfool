@@ -1,0 +1,37 @@
+<div class="col-md-12" style="padding: 20px" ng-controller="editor">
+    <div class="col-md-5" style="padding: 30px">
+        <div class="iiMdPreview highlight" url="./data/test.md" style="height: 600px"></div>
+
+        <button class="btn btn-default" ng-click="addTestCase()">添加测试用例</button>
+        <div class="highlight" style="height:190px;overflow: auto">
+
+            <div id="test_cases">
+                <div class="testCase col-md-11" ng-repeat="case in cases">
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="2" ng-model="case.value"
+                                  style="width: 120%;resize: none"></textarea>
+                    </div>
+                    <div class="col-md-1 pull-right">
+                        <a class="btn" ng-click="removeTestCase(case)">remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="col-md-12">
+            <p class="pull-right">Programming Language
+                <select ng-model="selected" ng-options="m.name for m in language" ng-change="refresh()"></select>
+            </p>
+        </div>
+        <div class="col-md-12">
+            <pre id="editor" style="height: 600px"></pre>
+            <button class="btn btn-default" ng-click="Run()">Run</button>
+            <!--{{zhuangtai}}-->
+        </div>
+        <div class="col-md-12 highlight" style="height: 190px;">
+
+            <div ng-bind-html="RESULT"></div>
+        </div>
+    </div>
+</div>

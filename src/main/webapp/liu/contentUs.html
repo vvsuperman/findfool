@@ -1,0 +1,16 @@
+<div class="highlight col-md-2  " style="bottom: 2px;right:2px;position: fixed " ng-controller="Ctrl">
+    <!--<div class="highlight col-md-2  " style="display: none;">-->
+    <button type="button" class="close pull-right" aria-hidden="true" ng-click="btn()">        &times;</button>
+    <div class="text-center">请给我们提出宝贵的建议</div>
+    <textarea rows="8" id="yr" style="width: 100% ;resize: none;" ng-class="{1: '', 0: 'hedden'}[show]"></textarea>
+    <button ng-class="{1: 'btn btn-success center-block', 0: 'hedden'}[show]">提交</button>
+</div>
+<script>
+    function Ctrl($scope) {
+        $scope.show = 1;
+        $scope.btn = function () {
+            $scope.show = -($scope.show - 1);
+        }
+    }
+
+</script>

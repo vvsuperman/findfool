@@ -1,0 +1,31 @@
+<div class="col-md-10 col-md-offset-1" style="padding: 70px">
+    <ul class="nav nav-tabs list-group">
+        <!--<ul class="nav nav-tabs" ng-model="template" ng-options="t.name for t in templates">-->
+        <li ng-repeat="template in templates"
+            ng-class="{true: 'active', false: 'inactive'}[template.data==active]">
+            <a href data="{{template.data}}" ng-click="GoPage($event.target)">
+                {{template.name}}</a>
+        </li>
+    </ul>
+    <p>题干</p>
+
+    <form class="form-inline" role="form">
+        <textarea class="form-control" type="text" rows=18 style="width: 100%;resize: none"></textarea>
+
+        <p style="padding: 20px">标签(以 , 区分)
+            <input type="text" class="form-control"></p>
+
+        <ol style="list-style-type:upper-alpha" class="col-md-offset-3">
+            <li><input type="text" style="width: 50%" class="form-control">
+            <span class="pull-right">
+            <input type="checkbox">是否正确
+            <button class="btn btn-default">新增</button></span>
+            </li>
+        </ol>
+    <div class="btn-group-justified" style="padding: 70px">
+        <a class="btn btn-default ">保存</a>
+        <a class="btn btn-default">重置</a>
+        <a class="btn btn-default">取消</a>
+    </div>
+    </form>
+</div>

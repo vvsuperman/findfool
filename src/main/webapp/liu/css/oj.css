@@ -1,0 +1,117 @@
+.hedden {
+    display: none;
+}
+
+#drop {
+    border: 2px dashed #bbb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    font: 20pt bold, "Vollkorn";
+    color: #bbb
+}
+
+.navbar-inverse {
+    /*background-color:#e7f7ff;*/
+    background: #374652;
+}
+
+.bg-success {
+    background-color: #26B363;
+    color: white;
+}
+
+#landing .eyemagnet {
+    background: #e3f5ff url("../static/large-010101.png") top center no-repeat;
+    border-top: 1px solid #999;
+    height: 549px
+}
+
+#landing .eyemagnet .chosen {
+    position: absolute;
+    margin-left: -50px;
+    margin-top: -1px
+}
+
+#landing .eyemagnet > .content {
+    width: 489px;
+    margin-left: 50%;
+    position: relative
+}
+
+#landing .eyemagnet h1 {
+    margin: 120px 0 .5em 0;
+    font: 400 40px "Open Sans", Verdana, sans-serif;
+    color: #283440
+}
+
+#landing .eyemagnet .pitch {
+    margin: 2em 0;
+    font-size: 18px
+}
+
+#landing .eyemagnet .programmer-link {
+    margin-top: 150px;
+    position: absolute;
+    right: 0
+}
+
+#landing .eyemagnet .programmer-link:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1em
+}
+
+#landing .eyemagnet .programmer-link:hover {
+    text-shadow: #046ba2 0 0 2px
+}
+
+#landing .eyemagnet button[name=requestdemo] {
+    padding-left: 1.5em;
+    padding-right: 2em
+}
+
+#landing .eyemagnet button[name=requestdemo]:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1em
+}
+
+#landing .eyemagnet .programmer-link:before {
+    width: 41px;
+    height: 41px;
+    background: url("../nux-img/icon-areyouaprogrammer.png") 0 0 no-repeat
+}
+
+#landing .eyemagnet button[name=requestdemo]:before {
+    width: 23px;
+    height: 24px;
+    background: url("../nux-img/icon-watchmovie.png") 0 0 no-repeat
+}
+
+.wrapper, .user-message, .downtime-box, #landing .testimonials blockquote {
+    width: 978px;
+    margin: 0 auto
+}
+
+#landing .eyemagnet .pitch {
+    margin: 2em 0;
+    font-size: 18px
+}
+
+#landing .carton {
+    background: #374652;
+    border-top: 1px solid #999;
+    height: 460px;
+    border: solid 0px
+}
+
+#landing .carton .carton1 {
+    position: absolute;
+    margin-left: -50px;
+    margin-top: -1px
+}
