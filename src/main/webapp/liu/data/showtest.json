@@ -1,4 +1,4 @@
-接收
+接收 /test/show 2 3
 {
 logo:"http://xxx.constructor.com/jjj.jpg",  #公司logo
 yu:30,  # 剩余邀请数

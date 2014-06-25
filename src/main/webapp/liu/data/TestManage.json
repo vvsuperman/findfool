@@ -1,8 +1,16 @@
+//post
+{
+    "user":post.json,
+    "test_id":"22"
+}
+
+//查看试题  测试管理 /test/manage 2 3
 [
+    // type 1:选择题  2:编程题  3:自定义  4:问答题
     {
         "id": "1",
         "name": "hdh1",
-        "type": "xzt",
+        "type": 1,
         "score": 4,
         "detail": "i dont know"
     },
@@ -16,14 +24,14 @@
     {
         "id": "3",
         "name": "hdh3",
-        "type": "xzt",
+        "type": 1,
         "score": 4,
         "detail": "i dont know"
     },
     {
         "id": "4",
         "name": "hdh4",
-        "type": "xzt",
+        "type": 1,
         "score": 4,
         "detail": "i dont know"
     }

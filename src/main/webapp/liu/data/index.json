@@ -1,19 +1,23 @@
 接收
 {
 logo:"http://xxx.constructor.com/jjj.jpg",  #公司logo
-caton:{
-       img:"http://xx.com/caton.png",  # 卡通漫画
-       note:"这货干什么的",
-       title:"标题",
-      },
+caton:[
+{img:"http://xx.com/caton.png",  # 卡通漫画
+note:"这货干什么的",
+title:"标题"},
+{img:"http://xx.com/caton.png",  # 卡通漫画
+note:"这货干什么的",
+title:"标题"}
+
+],
 customers:[
-          {name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
-          {name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
-          {name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
-          {name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
-          ],
-yzwt:"验证问题",
-yzwtA:"验证问题answer",
+{name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
+{name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
+{name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
+{name:"xxx公司",img:"http://sfa.cc/sd.png",note:"待定"},
+],
+//yzwt:"验证问题",
+//yzwtA:"验证问题answer",
 price:[这部分到底是img还是文字再商讨吧],
 
 }
@@ -22,7 +26,7 @@ price:[这部分到底是img还是文字再商讨吧],
 {
 type:1,   # 发送类型，1是注册，2是登录，3是联系我们，购买那个价格直接url链接过去吧
 email:"hhe@jl.com",  #email字符的合法性前端做了
-pwd:"密码",   #明文传输否？repwd在js做掉
+pwd:"密码",   #明文传输否？repwd在js做掉,md5(pwd)
 yrname:"联系我们这里的您的名字",
 q:"联系我们这里的textarea",
 

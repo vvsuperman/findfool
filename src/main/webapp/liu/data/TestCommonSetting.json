@@ -1,0 +1,20 @@
+//post
+{
+    "user":post.json,
+    "test_id":"22"
+}
+//通用设置 /test/manage/setting/query 2 3
+{
+    "testTime": 70,
+    "ExtraInfo": [1, 2, 3, 4],//1:学校  2:特长  3:项目经验  4:链接
+    "emails":["liuzheng@xx.com","liuzheng@xx.com","liuzheng@xx.com"]
+}
+
+//通用设置 /test/manage/setting/set 2 3
+{
+    "testTime": 70,
+    "ExtraInfo": [1, 2, 3, 4],//1:学校  2:特长  3:项目经验  4:链接
+    "emails":["liuzheng@xx.com","liuzheng@xx.com","liuzheng@xx.com"]
+}
+
+//return state.json
