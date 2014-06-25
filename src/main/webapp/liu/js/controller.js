@@ -6,18 +6,18 @@ angular.module('OJApp', [
     'evgenyneu.markdown-preview'
 ]);
 
-function Indexx($scope,$http) {
+function Indexx($scope, $http) {
 //    $scope.customers = [
 //        {name: "1公司", img: "./static/benefit-1.png", note: "待定"},
 //        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
 //        {name: "3公司", img: "./static/benefit-3.png", note: "待定"}
 //    ];
     $http({
-     url:'./data/indexGET.json',
-     method:'GET'
-     }).success(function(data){
+        url: './data/indexGET.json',
+        method: 'GET'
+    }).success(function (data) {
         $scope.customers = data.customers;
-     });
+    });
 }
 function TestShow($scope, $http) {
     $scope.local = false;
@@ -293,30 +293,32 @@ function editor($scope, $http, $sce, $timeout) {
             data: da
         }).success(function (data) {
 //            var flag = 0;
-            for (var i = 0; i < data.length; i++) {
-//                flag = 1;
-                $scope.result += '<br>';
-                var res = data[i];
-                $scope.result += "time:" + res.cost_time;
-                $scope.result += " mem:" + res.cost_mem;
-                if (res.test_case == null) {
-//                    there has a bug need fix
-                    $scope.result += " error:" + res.test_case_result;
-                    //$scope.result += " error:"+res.test_case_result.strlen()>200?res.test_case_result.substr(0,200)+"[...]":res.test_case_result;
-                } else {
-                    $scope.result += " testCase:" + res.test_case;
-                    $scope.result += " result:" + res.test_case_result;
-                }
-            }
-//            if (data.length==0){
+            if (data.length == 0) {
 //                $scope.result = '';
-//
-//            }
-            if ($scope.flag > 0) {
-//                $scope.result = '<br>Try again';
-                $scope.flag -= 1;
                 $timeout($scope.querry, 1000);
+            } else {
+                for (var i = 0; i < data.length; i++) {
+//                flag = 1;
+                    $scope.result += '<br>';
+                    var res = data[i];
+                    $scope.result += "time:" + res.cost_time;
+                    $scope.result += " mem:" + res.cost_mem;
+                    if (res.test_case == null) {
+//                    there has a bug need fix
+                        $scope.result += " error:" + res.test_case_result;
+                        //$scope.result += " error:"+res.test_case_result.strlen()>200?res.test_case_result.substr(0,200)+"[...]":res.test_case_result;
+                    } else {
+                        $scope.result += " testCase:" + res.test_case;
+                        $scope.result += " result:" + res.test_case_result;
+                    }
+                }
+
+//                if ($scope.flag > 0) {
+//                $scope.result = '<br>Try again';
+//                    $scope.flag -= 1;
+//                    $timeout($scope.querry, 1000);
 //                setTimeout($scope.querry(), 1000);
+//                }
             }
             $scope.RESULT = $sce.trustAsHtml($scope.result)
         }).error(function () {
@@ -350,7 +352,7 @@ function editor($scope, $http, $sce, $timeout) {
 
     $scope.Run = function () {
 
-        $scope.flag = 5;
+//        $scope.flag = 5;
         var el = document.getElementById("editor");
         $scope.code = el.env.editor.getValue();
         $scope.pid = 0;
