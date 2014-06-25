@@ -318,7 +318,7 @@ function editor($scope, $http, $sce, $timeout) {
                 $timeout($scope.querry, 1000);
 //                setTimeout($scope.querry(), 1000);
             }
-//            $scope.RESULT = $sce.trustAsHtml($scope.result)
+            $scope.RESULT = $sce.trustAsHtml($scope.result)
         }).error(function () {
             $scope.result += '<br>Try again'
         })
