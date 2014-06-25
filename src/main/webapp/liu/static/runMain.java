@@ -1,4 +1,4 @@
-public class InfiniteLoop {
+public class runMain {
 
     /*
      * This will cause the program to hang...
