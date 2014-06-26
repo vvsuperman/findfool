@@ -1,6 +1,13 @@
-<div class="col-md-10 col-md-offset-1" style="padding: 70px">
-    <p><strong>邀请候选人</strong><button class="btn btn-info pull-right">增加候选人</button></p>
-    <table class="table table-striped">
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="invite">
+    <div class="col-md-4" id="drop" ng-model="xlsusers">直接将 Excel 2003 文件拖到这里吧</div>
+    <div class="col-md-2">下载模版，然后选择上传
+        <button class="btn btn-default" ng-click="refresh()" >点我下载模版</button>
+        {{xlsusers}}
+    </div>
+    <p><strong>邀请候选人</strong>
+        <button class="btn btn-info pull-right">增加候选人</button>
+    </p>
+    <table class="table table-striped" >
         <thead>
         <tr>
             <th>姓</th>
@@ -10,42 +17,50 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><input type="text"></td>
-            <td><input type="text"> </td>
-            <td><input type="text"></td>
-            <td><input type="text"></td>
+        <tr ng-repeat="user in xlsusers" >
+            <td><input class="form-control" type="text" value="{{user.Fname}}"></td>
+            <td><input class="form-control" type="text" value="{{user.Lname}}"></td>
+            <td><input class="form-control" type="text" value="{{user.email}}"></td>
+            <td><input class="form-control" type="text" value="{{user.tel}}"></td>
         </tr>
         <tr>
-            <td><input type="text"></td>
-            <td><input type="text"> </td>
-            <td><input type="text"></td>
-            <td><input type="text"></td>
+            <td><input class="form-control" type="text"></td>
+            <td><input class="form-control" type="text"></td>
+            <td><input class="form-control" type="text"></td>
+            <td><input class="form-control" type="text"></td>
         </tr>
         </tbody>
     </table>
-<div class="col-md-8">
-    <p><strong>Customize the invitation email to your candidates:</strong></p>
-    <p>From:</p>
-    <p>Reply To:<input type="text"></p>
-    <p>Subject:<input type="text"></p>
-    Hello [FIRST_NAME] [LAST_NAME],
-    <br>
-    In order to assess your programming skills we've prepared a programming challenge that we would like you to complete.
-    <br>
-    The following link takes you to your test:
-    <br>
-    [PRIVATE_TEST_LINK]
-    <br>
-    After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.
-    <br>
-    Best of luck!
-    <br>
-    Regards,<br>
-    [COMPANY_NAME]
-    <div class="pull-right">
-        <button class="btn btn-default">Cancel</button>
-        <button class="btn btn-default">Preview</button>
+    <div class="col-md-8">
+        <p><strong>Customize the invitation email to your candidates:</strong></p>
+
+        <p>From:</p>
+
+        <p>Reply To:<input type="text"></p>
+
+        <p>Subject:<input type="text"></p>
+        Hello [FIRST_NAME] [LAST_NAME],
+        <br>
+        In order to assess your programming skills we've prepared a programming challenge that we would like you to
+        complete.
+        <br>
+        The following link takes you to your test:
+        <br>
+        [PRIVATE_TEST_LINK]
+        <br>
+        After clicking the link you will be able to choose to start the test, practice with a demo test or come back
+        later.
+        <br>
+        Best of luck!
+        <br>
+        Regards,<br>
+        [COMPANY_NAME]
+        <div class="pull-right">
+            <button class="btn btn-default">Cancel</button>
+            <button class="btn btn-default">Preview</button>
+        </div>
     </div>
 </div>
-</div>
+
+<script src="js/xls.js"></script>
+<!--<script src="js/xlsreader.js"></script>-->
