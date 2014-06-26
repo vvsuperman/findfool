@@ -12,15 +12,25 @@ function Indexx($scope, $http) {
 //        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
 //        {name: "3公司", img: "./static/benefit-3.png", note: "待定"}
 //    ];
-    $http({
-        url: './data/indexGET.json',
-        method: 'GET'
-    }).success(function (data) {
-        $scope.customers = data.customers;
-    });
+    /*$http({
+     url: './data/indexGET.json',
+     method: 'GET'
+     }).success(function (data) {
+     $scope.customers = data.customers;
+     });*/
+    $scope.login = function () {
+        $http({
+            url: 'index.html',
+            method: 'POST',
+            data: {"email": $scope.email, "pwd": $scope.pwd}
+        }).success(function (data) {
+            $scope.data = data;
+            window.location.href = "test.html"
+        });
+    }
 }
 function TestShow($scope, $http) {
-    $scope.local = false;
+    $scope.local = true;
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
@@ -54,6 +64,11 @@ function TestShow($scope, $http) {
         $scope.leftBar = '';
     };
 
+    $scope.navPersonal = function () {
+        $scope.template = 'user.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+    };
     $scope.createNewTest = function () {
         $scope.template = 'addtest.html';
         $scope.ContentUs = 'contentUs.html';
@@ -77,15 +92,55 @@ function TestShow($scope, $http) {
         $scope.leftBar = 'leftBar.html';
         $scope.name = $scope.tests[$scope.active - 1].name;
 //        TestManage($scope, $scope.tests[$scope.active - 1].id);
-        $http({
-            url: './data/TestManage.json',
-            method: 'GET',
-            data: {'testID': $scope.tests[$scope.active - 1].id}
+        if ($scope.local == true) {
+//            $scope.questions = [{
+//                "id": "1",
+//                "name": "hdh1",
+//                "type": 1,
+//                "score": 4,
+//                "detail": "i dont know"
+//            },
+//                {
+//                    "id": "2",
+//                    "name": "hdh2",
+//                    "type": "xzt",
+//                    "score": 4,
+//                    "detail": "i dont know"
+//                },
+//                {
+//                    "id": "3",
+//                    "name": "hdh3",
+//                    "type": 1,
+//                    "score": 4,
+//                    "detail": "i dont know"
+//                },
+//                {
+//                    "id": "4",
+//                    "name": "hdh4",
+//                    "type": 1,
+//                    "score": 4,
+//                    "detail": "i dont know"
+//                }]
+            $http({
+                url: './data/TestManage.json',
+                method: 'GET',
+                data: {'testID': $scope.tests[$scope.active - 1].id}
         }).success(function (data) {
-            $scope.questions = data;
+            $scope.questions = data.qs;
 //            console.log("testManage");
 //            console.log(data);
         })
+        } else {
+            $http({
+                url: './data/TestManage.json',
+                method: 'GET',
+                data: {'testID': $scope.tests[$scope.active - 1].id}
+            }).success(function (data) {
+                $scope.questions = data.qs;
+//            console.log("testManage");
+//            console.log(data);
+            })
+        }
         /*.error(function (response, status) {
          //            console.log('dddd');
          //            console.log(status)
@@ -171,13 +226,22 @@ function TestShow($scope, $http) {
 
  }*/
 
-function TestBank($scope) {
-    $scope.questions = [
-        {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
-        {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
-        {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
-        {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
-    ];
+function TestBank($scope, $http) {
+    if ($scope.local == ture) {
+        $scope.questions = [
+            {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
+            {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
+            {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
+            {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
+        ];
+    } else {
+        $http({
+            url: './data/indexGET.json',
+            method: 'GET'
+        }).success(function (data) {
+            $scope.questions = data.questions;
+        });
+    }
 
 }
 
@@ -403,4 +467,31 @@ function sign($scope) {
     $scope.GoPage = function () {
         $scope.active = 1 - $scope.active;
     }
+}
+
+function personal($scope, $http) {
+    if ($scope.local == true) {
+        $scope.personal = {
+            "email": "cc@qq.com",
+            "name": "myname",
+            "company": "国际大企业",
+            "tel": "2344",
+            "old_pwd": "dsds23454df",
+            "new_pwd": "dsdsdsdswew3"
+        };
+//        $http({
+//            url: './data/personal.json',
+//            method: 'GET'
+//        }).success(function (data) {
+//            $scope.personal = data;
+//        });
+    } else {
+        $http({
+            url: './data/indexGET.json',
+            method: 'GET'
+        }).success(function (data) {
+            $scope.personal = data;
+        });
+    }
+
 }

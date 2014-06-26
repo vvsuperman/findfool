@@ -1,21 +1,46 @@
-<div class="col-md-10 col-md-offset-1" style="padding: 70px">
-    <p>邮箱</p>
-    <input type="text">
+<div class="text-center container" style="padding: 70px" ng-controller="personal">
+    <form>
+        <div style="padding: 30px">
+            <div class="col-md-2 col-lg-offset-2">
+                <p>邮箱</p>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="text" placeholder={{personal.email}}>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div style="padding: 30px">
+            <div class="col-md-2 col-lg-offset-2">
+                <p>姓名</p>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="text" placeholder={{personal.name}}>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div style="padding: 30px">
+            <div class="col-md-2 col-lg-offset-2">
+                <p>公司名</p>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="text" placeholder={{personal.company}}>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div style="padding: 30px">
+            <div class="col-md-2 col-lg-offset-2">
+                <p>联系电话</p>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="text" placeholder={{personal.tel}}>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
 
-    <p>姓名</p>
-    <input type="text">
+        <div class="col-md-12 text-center" style="padding: 30px">
+            <button class="btn btn-default">保存</button>
+            <button class="btn btn-default">修改密码</button>
 
-    <p>公司名</p>
-    <input type="text">
-
-    <p>联系电话 </p>
-    <input type="text">
-
-
-    <div>
-        <button class="btn btn-default">保存</button>
-        <button class="btn btn-default">修改密码</button>
-
-    </div>
-
+        </div>
+    </form>
 </div>
