@@ -125,11 +125,11 @@ function TestShow($scope, $http) {
                 url: './data/TestManage.json',
                 method: 'GET',
                 data: {'testID': $scope.tests[$scope.active - 1].id}
-        }).success(function (data) {
-            $scope.questions = data.qs;
+            }).success(function (data) {
+                $scope.questions = data.qs;
 //            console.log("testManage");
 //            console.log(data);
-        })
+            })
         } else {
             $http({
                 url: './data/TestManage.json',
@@ -497,13 +497,25 @@ function personal($scope, $http) {
 }
 
 function invite($scope) {
-    $scope.xlsusers=[
-        {Fname:'dd',Lname:'ddd',email:'dsa@ss',tel:'12332'},
-        {Fname:'dd',Lname:'ddd',email:'dsa@ss',tel:'12332'}
+    $scope.xlsusers = [
+        {Fname: 'dd', Lname: 'ddd', email: 'dsa@ss', tel: '12332'},
+        {Fname: 'dd', Lname: 'ddd', email: 'dsa@ss', tel: '12332'}
     ];
+
+    var tmp = $scope.xlsusers;
+    var list = [];
+    var tmpp = [];
+    for (var i in tmp) {
+        if ($.inArray(tmp[i].email, list) == -1) {
+            list.push(tmp[i].email);
+            tmpp.push(tmp[i]);
+        }
+        $scope.xlsusers = tmpp;
+    }
 
     $scope.refresh = function () {
         console.log($scope.xlsusers);
+
     };
 
 //    $scope.$watch('xlsusers', function() {
@@ -519,6 +531,7 @@ function invite($scope) {
      excel read*/
 
     var use_worker = true;
+
     function xlsworker(data, cb) {
         var worker = new Worker('./js/xlsworker.js');
         worker.onmessage = function (e) {
@@ -552,18 +565,31 @@ function invite($scope) {
         if (typeof Worker !== 'undefined') XLS.SSF.load_table(wb.SSF);
         var output = "";
         output = to_json(wb);
-
-        console.log($scope.xlsusers);
-		$scope.$apply(function(){
-        $.merge($scope.xlsusers,output["Sheet1"])
-		});
+        $scope.$apply(function () {
+            $.merge($scope.xlsusers, output["Sheet1"]);
+            var tmp = $scope.xlsusers;
+            var list = [];
+            var tmpp = [];
+            for (var i in tmp) {
+                if ($.inArray(tmp[i].email, list) == -1) {
+                    list.push(tmp[i].email);
+                    tmpp.push(tmp[i]);
+                }
+                $scope.xlsusers = tmpp;
+            }
+//            var tmp = [];
+//            $.each($scope.xlsusers, function (i, el) {
+//                if ($.inArray(el, tmp) === -1) tmp.push(el);
+//            });
+//            $scope.xlsusers = tmp;
+//            $.unique($scope.xlsusers);
+        });
+//        console.log($scope.xlsusers);
 //        console.log(output["Sheet1"]);
-
-        console.log($scope.xlsusers);
-
     }
 
     var drop = document.getElementById('drop');
+
     function handleDrop(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -596,9 +622,6 @@ function invite($scope) {
         drop.addEventListener('dragover', handleDragover, false);
         drop.addEventListener('drop', handleDrop, false);
     }
-
-
-
 
 
 }
