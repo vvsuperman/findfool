@@ -554,7 +554,9 @@ function invite($scope) {
         output = to_json(wb);
 
         console.log($scope.xlsusers);
-        $.merge($scope.xlsusers,output["Sheet1"]);
+		$scope.$apply(function(){
+        $.merge($scope.xlsusers,output["Sheet1"])
+		});
 //        console.log(output["Sheet1"]);
 
         console.log($scope.xlsusers);
