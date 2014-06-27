@@ -1,5 +1,5 @@
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="invite">
-    <div class="col-md-4" id="drop" ng-model="xlsusers">直接将 Excel 2003 文件拖到这里吧</div>
+    <div class="col-md-4" id="drop" >直接将 Excel 2003 文件拖到这里吧</div>
     <div class="col-md-2">下载模版，然后选择上传
         <button class="btn btn-default" ng-click="refresh()" >点我下载模版</button>
         {{xlsusers}}
@@ -18,6 +18,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="user in xlsusers" >
+        <!--<tr ng-repeat="(index,user) in xlsusers" >-->
             <td><input class="form-control" type="text" value="{{user.Fname}}"></td>
             <td><input class="form-control" type="text" value="{{user.Lname}}"></td>
             <td><input class="form-control" type="text" value="{{user.email}}"></td>
