@@ -502,16 +502,37 @@ function invite($scope) {
         {Fname: 'dd', Lname: 'ddd', email: 'dsa@ss', tel: '12332'}
     ];
 
+    $scope.addOne = function(v){
+//        var tmp = $scope.xlsusers;
+        var i = $scope.xlsusers.indexOf(v);
+//        if (i > -1) {
+        $scope.xlsusers.splice(i+1, 0,{Fname: '', Lname: '', email: '', tel: ''});
+//        }
+//      $scope.xlsusers.push({Fname: '', Lname: '', email: '', tel: ''}) ;
+    };
+
+    $scope.removeOne = function(v){
+//        var tmp = $scope.xlsusers;
+        var i = $scope.xlsusers.indexOf(v);
+        if (i > -1) {
+            $scope.xlsusers.splice(i, 1);
+        }
+//        $scope.xlsusers = tmp;
+    };
+
+//    去重
     var tmp = $scope.xlsusers;
-    var list = [];
-    var tmpp = [];
+    var list = [''];
+    var tmpp = [{Fname: '', Lname: '', email: '', tel: ''}];
     for (var i in tmp) {
         if ($.inArray(tmp[i].email, list) == -1) {
             list.push(tmp[i].email);
             tmpp.push(tmp[i]);
         }
-        $scope.xlsusers = tmpp;
     }
+    $scope.xlsusers = tmpp;
+//    end
+
 
     $scope.refresh = function () {
         console.log($scope.xlsusers);
@@ -568,15 +589,15 @@ function invite($scope) {
         $scope.$apply(function () {
             $.merge($scope.xlsusers, output["Sheet1"]);
             var tmp = $scope.xlsusers;
-            var list = [];
-            var tmpp = [];
+            var list = [''];
+            var tmpp = [{Fname: '', Lname: '', email: '', tel: ''}];
             for (var i in tmp) {
                 if ($.inArray(tmp[i].email, list) == -1) {
                     list.push(tmp[i].email);
                     tmpp.push(tmp[i]);
                 }
-                $scope.xlsusers = tmpp;
             }
+            $scope.xlsusers = tmpp;
 //            var tmp = [];
 //            $.each($scope.xlsusers, function (i, el) {
 //                if ($.inArray(el, tmp) === -1) tmp.push(el);

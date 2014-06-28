@@ -1,62 +1,64 @@
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="invite">
-    <div class="col-md-4" id="drop" >直接将 Excel 2003 文件拖到这里吧</div>
+    <div class="col-md-4" id="drop">直接将 Excel 2003 文件拖到这里吧</div>
     <div class="col-md-2">下载模版，然后选择上传
-        <button class="btn btn-default" >点我下载模版</button>
+        <a class="btn btn-default" href="static/invite.xls">点我下载模版</a>
         {{xlsusers}}
     </div>
     <p><strong>邀请候选人</strong>
-        <button class="btn btn-info pull-right">增加候选人</button>
+        <button class="btn btn-info pull-right" ng-click="refresh()">增加候选人</button>
     </p>
-    <table class="table table-striped" >
-        <thead>
-        <tr>
-            <th>姓</th>
-            <th>名</th>
-            <th>Email</th>
-            <th>电话</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="user in xlsusers" >
+    <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
+        <table class="table form-inline">
+            <thead>
+            <tr>
+                <th>姓</th>
+                <th>名</th>
+                <th>Email</th>
+                <th>电话</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in xlsusers">
 
-        <!--<tr ng-repeat="(index,user) in xlsusers" >-->
-            <td><input class="form-control" type="text" value="{{user.Fname}}" /></td>
-            <td><input class="form-control" type="text" value="{{user.Lname}}" /></td>
-            <td><input class="form-control" type="text" value="{{user.email}}" /></td>
-            <td><input class="form-control" type="text" value="{{user.tel}}" /></td>
+                <!--<tr ng-repeat="(index,user) in xlsusers" >-->
+                <td>
+                    <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
+                    <input class="form-control" type="text" value="{{userFname}}" ng-model="user.Fname" style="width: 90%"/>
+                </td>
+                <td><input class="form-control" type="text" value="{{user.Lname}}" ng-model="user.Lname"/></td>
+                <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/></td>
+                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel" style="width: 90%"/>
+                    <a class="glyphicon glyphicon-plus aa" href="" ng-click="addOne(user)"></a>
+                </td>
 
-        </tr>
-        <tr>
-            <td><input class="form-control" type="text" /></td>
-            <td><input class="form-control" type="text" /></td>
-            <td><input class="form-control" type="text" /></td>
-            <td><input class="form-control" type="text" /></td>
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
     <div class="col-md-8">
         <p><strong>Customize the invitation email to your candidates:</strong></p>
 
         <p>From:</p>
 
-        <p>Reply To:<input type="text" /></p>
+        <p>Reply To:<input type="text"/></p>
 
-        <p>Subject:<input type="text" /></p>
+        <p>Subject:<input type="text"/></p>
         Hello [FIRST_NAME] [LAST_NAME],
-        <br />
+        <br/>
         In order to assess your programming skills we've prepared a programming challenge that we would like you to
         complete.
-        <br />
+        <br/>
         The following link takes you to your test:
-        <br />
+        <br/>
         [PRIVATE_TEST_LINK]
-        <br />
+        <br/>
         After clicking the link you will be able to choose to start the test, practice with a demo test or come back
         later.
-        <br />
+        <br/>
         Best of luck!
-        <br />
-        Regards,<br />
+        <br/>
+        Regards,<br/>
         [COMPANY_NAME]
         <div class="pull-right">
             <button class="btn btn-default">Cancel</button>
