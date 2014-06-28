@@ -3,28 +3,30 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>XXXOJ</title>
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="http://v3.bootcss.com/examples/carousel/carousel.css"/>
-    <link href="http://v3.bootcss.com/docs-assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/carousel.css"/>
+    <link rel="stylesheet" type="text/css" href="css/docs.css"/>
+    <link rel="stylesheet" type="text/css" href="css/oj.css"/>
 </head>
-<body>
+<body ng-controller="TestShow">
 <div ng-include src="'nav.html'"></div>
 <div class="container" style="padding: 10px;">
-    <!--<div ng-include src="'leftBar.html'"></div>-->
-    <div ng-include src="'test.html'"></div>
-
-
-
-
-
-
-<div ng-include src="'contentUs.html'"></div>
+    <div>
+        <div class="slide-animate-container">
+            <div class="slide-animate" ng-include="leftBar"></div>
+            <div class="slide-animate" ng-include="template"></div>
+            <div class="slide-animate" ng-include="ContentUs"></div>
+        </div>
+    </div>
 </div>
-<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/jquery.min.js"></script>
+<!--<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="js/ace.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
 <script src="js/holder.min.js"></script>
+<!--<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>-->
 <script src="js/angular.min.js"></script>
+<script src="js/controller.js"></script>
 </body>
 </html>
