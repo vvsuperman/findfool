@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <context:component-scan base-package="zpl.aspect,zpl.model">
+
+        <!-- 启动@Aspect支持 -->
+        <context:include-filter type="annotation"
+                                expression="org.aspectj.lang.annotation.Aspect"/>
+    </context:component-scan>
+
+
+    <aop:aspectj-autoproxy/>
+
+    <!--<bean id="loginAdvice" class="zpl.aspect.LoginAdviceSupport">-->
+
+    <!--</bean>-->
+    <!--<bean id="userTarget" class="zpl.model.UserImp">-->
+
+    <!--</bean>-->
+    <!--<bean id="user" class="org.springframework.aop.framework.ProxyFactoryBean">-->
+        <!--<property name="proxyInterfaces">-->
+            <!--<value>zpl.model.IUser</value>-->
+        <!--</property>-->
+        <!--<property name="interceptorNames">-->
+            <!--<list>-->
+                <!--<value>loginAdvice</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="target">-->
+            <!--<ref bean="userTarget"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+</beans>
