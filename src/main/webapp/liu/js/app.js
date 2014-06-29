@@ -2,24 +2,30 @@
 /**
  * Created by liuzheng on 6/19/14.
  */
-var OJApp = angular.module('phonecatApp', [
+var OJApp = angular.module('OJApp', [
     'ngRoute',
-    'evgenyneu.markdown-preview',
-    'phonecatFilters',
-    'phonecatServices'
+    'evgenyneu.markdown-preview'
 ]);
-phonecatApp.config(['$routeProvider',
+OJApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
-            when('/phones', {
-                templateUrl: 'partials/phone-list.html',
-                controller: 'PhoneListCtrl'
+            when('/', {
+                templateUrl: 'main.html',
+                controller: 'Indexx'
             }).
-            when('/phones/:phoneId', {
-                templateUrl: 'partials/phone-detail.html',
-                controller: 'PhoneDetailCtrl'
+            when('/user', {
+                templateUrl: 'page.html',
+                controller: 'TestShow'
+            }).
+            when('/test', {
+                templateUrl: 'page.html',
+                controller: 'TestPage'
+            }).
+            when('/upgrade', {
+                templateUrl: 'page.html',
+                controller: 'Upgrade'
             }).
             otherwise({
-                redirectTo: '/phones'
+                redirectTo: '/'
             });
     }]);

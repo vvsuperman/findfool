@@ -1,12 +1,14 @@
 /**
  * Created by liuzheng on 6/7/14.
  */
-angular.module('OJApp', [
-    'ngRoute',
-    'evgenyneu.markdown-preview'
-]);
+//angular.module('OJApp', [
+//    'ngRoute',
+//    'evgenyneu.markdown-preview'
+//]);
 
 function Indexx($scope, $http) {
+    $scope.url='#';
+
 //    $scope.customers = [
 //        {name: "1公司", img: "./static/benefit-1.png", note: "待定"},
 //        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
@@ -34,41 +36,36 @@ function TestShow($scope, $http) {
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-    $scope.tests = [
-        {id: '1', name: 'hh1', detail: 'i dont know'},
-        {id: '2', name: 'hh2', detail: 'i dont know'},
-        {id: '3', name: 'hh3', detail: 'i dont know'},
-        {id: '4', name: 'hh4', detail: 'i dont know'}
-    ];
 
-    $scope.navTest = function () {
-        $scope.template = 'testshow.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
-    $scope.navTestBank = function () {
-        $scope.template = 'testBank.html';
-        /*need update*/
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = 'leftBar1.html';
-    };
-    $scope.navmyTestBank = function () {
-        $scope.template = 'mytestBank.html';
-        /*need update*/
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = 'leftBar1.html';
-    };
-    $scope.navUpgrade = function () {
-        $scope.template = 'upgrade.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
 
-    $scope.navPersonal = function () {
-        $scope.template = 'user.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
+//    $scope.navTest = function () {
+//        $scope.template = 'testshow.html';
+//        $scope.ContentUs = 'contentUs.html';
+//        $scope.leftBar = '';
+//    };
+//    $scope.navTestBank = function () {
+//        $scope.template = 'testBank.html';
+//        /*need update*/
+//        $scope.ContentUs = 'contentUs.html';
+//        $scope.leftBar = 'leftBar1.html';
+//    };
+//    $scope.navmyTestBank = function () {
+//        $scope.template = 'mytestBank.html';
+//        /*need update*/
+//        $scope.ContentUs = 'contentUs.html';
+//        $scope.leftBar = 'leftBar1.html';
+//    };
+//    $scope.navUpgrade = function () {
+//        $scope.template = 'upgrade.html';
+//        $scope.ContentUs = 'contentUs.html';
+//        $scope.leftBar = '';
+//    };
+
+//    $scope.navPersonal = function () {
+//        $scope.template = 'user.html';
+//        $scope.ContentUs = 'contentUs.html';
+//        $scope.leftBar = '';
+//    };
     $scope.createNewTest = function () {
         $scope.template = 'addtest.html';
         $scope.ContentUs = 'contentUs.html';
@@ -225,6 +222,62 @@ function TestShow($scope, $http) {
  ];
 
  }*/
+function nav($scope) {
+    $scope.navTest = function () {
+        $scope.template = 'testshow.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+    };
+    $scope.navTestBank = function () {
+        $scope.template = 'testBank.html';
+        /*need update*/
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = 'leftBar1.html';
+    };
+    $scope.navmyTestBank = function () {
+        $scope.template = 'mytestBank.html';
+        /*need update*/
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = 'leftBar1.html';
+    };
+//    $scope.navUpgrade = function () {
+//        $scope.template = 'upgrade.html';
+//        $scope.ContentUs = 'contentUs.html';
+//        $scope.leftBar = '';
+//    };
+
+    $scope.navPersonal = function () {
+        $scope.template = 'user.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+    };
+    $scope.createNewTest = function () {
+        $scope.template = 'addtest.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+    };
+}
+
+
+function TestPage($scope) {
+    $scope.url='#/test';
+
+    $scope.template = 'testshow.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
+    $scope.tests = [
+        {id: '1', name: 'hh1', detail: 'i dont know'},
+        {id: '2', name: 'hh2', detail: 'i dont know'},
+        {id: '3', name: 'hh3', detail: 'i dont know'},
+        {id: '4', name: 'hh4', detail: 'i dont know'}
+    ];
+}
+function Upgrade($scope) {
+    $scope.url='#/upgrade';
+        $scope.template = 'upgrade.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+}
 
 function TestBank($scope, $http) {
     if ($scope.local == ture) {
