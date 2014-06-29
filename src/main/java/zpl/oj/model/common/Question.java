@@ -1,0 +1,57 @@
+package zpl.oj.model.common;
+
+import java.util.List;
+
+public class Question {
+
+	private int qid;
+	private String name;
+	private int type;
+	private int score;
+	private String tag;
+	private String context;
+	private List<QuestionTestCase> answer;
+	public int getQid() {
+		return qid;
+	}
+	public void setQid(int qid) {
+		this.qid = qid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
+	}
+	public List<QuestionTestCase> getAnswer() {
+		return answer;
+	}
+	public void setAnswer(List<QuestionTestCase> answer) {
+		this.answer = answer;
+	}
+	
+}

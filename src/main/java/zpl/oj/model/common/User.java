@@ -1,0 +1,206 @@
+package zpl.oj.model.common;
+
+import java.util.Date;
+
+public class User {
+
+	private int uid;
+	private String fname;
+	private String lname;
+	private String email;
+	private String company;
+	private int privilege;
+	private String pwd;
+	private String link;
+	private String age;
+	private String degree;
+	private String school;
+	private Date registerDate;
+	private Date lastLoginDate;
+	private int yu;
+	private int invitedNum;
+	private int state;
+	
+	
+	public User() {
+		this.fname = "no value";
+		this.lname = "no value";
+		this.email = "no value";
+		this.company = "no value";
+		this.privilege = 0;
+		this.pwd = "no value";
+		this.link = "no value";
+		this.age = "no value";
+		this.degree = "no value";
+		this.school = "no value";
+		this.registerDate = new Date();
+		this.lastLoginDate = new Date();
+		this.yu = 0;
+		this.invitedNum = 0;
+		this.state = 1;
+	}
+
+
+	public int getUid() {
+		return uid;
+	}
+
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+
+	public String getFname() {
+		return fname;
+	}
+
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+
+	public String getLname() {
+		return lname;
+	}
+
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+
+	public int getPrivilege() {
+		return privilege;
+	}
+
+
+	public void setPrivilege(int privilege) {
+		this.privilege = privilege;
+	}
+
+
+	public String getPwd() {
+		return pwd;
+	}
+
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+
+	public String getLink() {
+		return link;
+	}
+
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+
+	public String getAge() {
+		return age;
+	}
+
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+
+	public String getDegree() {
+		return degree;
+	}
+
+
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+
+
+	public String getSchool() {
+		return school;
+	}
+
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+
+
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
+	}
+
+
+	public Date getLastLoginDate() {
+		return lastLoginDate;
+	}
+
+
+	public void setLastLoginDate(Date lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
+	}
+
+
+	public int getYu() {
+		return yu;
+	}
+
+
+	public void setYu(int yu) {
+		this.yu = yu;
+	}
+
+
+	public int getInvitedNum() {
+		return invitedNum;
+	}
+
+
+	public void setInvitedNum(int invitedNum) {
+		this.invitedNum = invitedNum;
+	}
+
+
+	public int getState() {
+		return state;
+	}
+
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+
+	
+	
+}
