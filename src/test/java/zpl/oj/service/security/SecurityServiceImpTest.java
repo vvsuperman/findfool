@@ -22,7 +22,7 @@ public class SecurityServiceImpTest {
 	private UserService userService;
 	
 	@Test
-	public void test() {
+	public void testRightLevel() {
 		User u = new User();
 //		u.setFname("zpl");
 //		u.setCompany("hello kitty");
@@ -32,8 +32,16 @@ public class SecurityServiceImpTest {
 //		userService.addUser(u);
 		u = userService.getUserByEmail("524510356@qq.com");
 		String token = securityService.computeToken(u);
-		boolean res = securityService.checkToken(token);
+		boolean res = securityService.checkToken("/search/my",token);
 		assertTrue(res == true);
+	}
+	@Test
+	public void testHighLevel() {
+		User u = new User();
+		u = userService.getUserByEmail("524510356@qq.com");
+		String token = securityService.computeToken(u);
+		boolean res = securityService.checkToken("/search/admin",token);
+		assertTrue(res == false);
 	}
 
 }

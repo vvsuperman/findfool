@@ -1,30 +1,33 @@
 package zpl.oj.web.security;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import zpl.oj.service.security.inter.SecurityService;
 
-public class FilterUser extends OncePerRequestFilter  {
-
+public class AuthorizationInterceptors implements HandlerInterceptor{
 	@Autowired
 	private SecurityService securityService;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	@Override
+	public void afterCompletion(HttpServletRequest arg0,
+			HttpServletResponse arg1, Object arg2, Exception arg3)
+			throws Exception {
+	}
 
-	protected void doFilterInternal(HttpServletRequest request,  
-            HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+	@Override
+	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
+			Object arg2, ModelAndView arg3) throws Exception {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean preHandle(HttpServletRequest request,  
+            HttpServletResponse response, Object handler) throws Exception {
 		// 不过滤的uri  
         String[] notFilter = new String[] { "/user/add/hr", "index.html" };  
   
@@ -55,18 +58,20 @@ public class FilterUser extends OncePerRequestFilter  {
             	boolean isok = securityService.checkToken(uri,token);
             	if(isok == true){
             		 // 允许  
-                    filterChain.doFilter(request, response);  
+            		return true;
             	}else{
             		//wrong authorization token
                 	response.sendError(401);
+                	return false;
             	}
             }
         }
         else {  
             // 如果uri中不包含background，则继续  
-            filterChain.doFilter(request, response);  
+        	return true;
         }  
 		
+		return false;
 	}
 
 }

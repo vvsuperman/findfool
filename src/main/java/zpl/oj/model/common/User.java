@@ -17,9 +17,10 @@ public class User {
 	private String school;
 	private Date registerDate;
 	private Date lastLoginDate;
-	private int yu;
+	private int invited_left;
 	private int invitedNum;
 	private int state;
+	private String tel;
 	
 	
 	public User() {
@@ -35,7 +36,7 @@ public class User {
 		this.school = "no value";
 		this.registerDate = new Date();
 		this.lastLoginDate = new Date();
-		this.yu = 0;
+		this.invited_left = 0;
 		this.invitedNum = 0;
 		this.state = 1;
 	}
@@ -171,14 +172,6 @@ public class User {
 	}
 
 
-	public int getYu() {
-		return yu;
-	}
-
-
-	public void setYu(int yu) {
-		this.yu = yu;
-	}
 
 
 	public int getInvitedNum() {
@@ -199,6 +192,28 @@ public class User {
 	public void setState(int state) {
 		this.state = state;
 	}
+
+
+	public String getTel() {
+		return tel;
+	}
+
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+
+	public int getInvited_left() {
+		return invited_left;
+	}
+
+
+	public void setInvited_left(int invited_left) {
+		this.invited_left = invited_left;
+	}
+
+
 
 
 	

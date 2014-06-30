@@ -15,18 +15,37 @@ public class UserServiceImp implements UserService{
 	@Autowired
 	private UserDao userDao;
 	@Override
-	public void addUser(User u) {
-		userDao.addUser(u);
+	public boolean addUser(User u) {
+		//检查邮箱是否存在，
+		User dbU = userDao.getUserIdByEmail(u.getEmail());
+		if(dbU != null){
+			if(dbU.getPrivilege() <2){
+				//用户原来接受过测试，如今当hr了
+				dbU.setPrivilege(u.getPrivilege());
+				dbU.setPwd(u.getPwd());
+				dbU.setFname(u.getFname());
+				updateUser(dbU);
+			}
+			else{
+				//用户已存在
+				return false;				
+			}
+		}else{
+			userDao.addUser(u);			
+		}
+		return true;
 	}
 
 	@Override
-	public void deleteUserById(int uid) {
+	public boolean deleteUserById(int uid) {
 		userDao.deleteUserbyId(uid);
+		return true;
 	}
 
 	@Override
-	public void deleteUserByEmail(String email) {
+	public boolean deleteUserByEmail(String email) {
 		userDao.deleteUserbyEmail(email);
+		return true;
 	}
 
 	@Override
@@ -40,8 +59,9 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public void updateUser(User u) {
+	public boolean updateUser(User u) {
 		userDao.updateUser(u);
+		return true;
 	}
 
 	@Override

@@ -20,7 +20,10 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<context:component-scan base-package="zpl.oj.web.*" />
 
 	<mvc:annotation-driven />
-
+ 
+	 <mvc:interceptors>
+	 	<bean class="zpl.oj.web.security.AuthorizationInterceptors" />
+	 </mvc:interceptors>
 <!-- 配置视图解析器 -->
 
 	<bean 
