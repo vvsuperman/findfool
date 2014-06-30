@@ -25,6 +25,9 @@
         <module name="oj" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="oj" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
