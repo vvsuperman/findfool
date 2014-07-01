@@ -9,6 +9,6 @@ import zpl.oj.model.security.Privilege;
 
 public interface PrivilegeDataDao {
 
-	@Select("select api as uri,grant_level as level from privilege")
+	@Select("SELECT a.api as uri,b.roleid as level FROM api as a,role_api as b WHERE b.apiid = a.apiid")
 	List<Privilege> getPrivilegeData();
 }

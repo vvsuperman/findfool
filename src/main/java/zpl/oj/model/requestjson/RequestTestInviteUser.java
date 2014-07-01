@@ -2,7 +2,7 @@ package zpl.oj.model.requestjson;
 
 import java.util.List;
 
-import zpl.oj.model.common.InviteUser;
+import zpl.oj.model.request.InviteUser;
 
 public class RequestTestInviteUser {
 

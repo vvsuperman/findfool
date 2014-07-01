@@ -1,4 +1,4 @@
-package zpl.oj.model.common;
+package zpl.oj.model.request;
 
 import java.util.Date;
 
@@ -39,6 +39,7 @@ public class User {
 		this.invited_left = 0;
 		this.invitedNum = 0;
 		this.state = 1;
+		this.tel = "no value";
 	}
 
 

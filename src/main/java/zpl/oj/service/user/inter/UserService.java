@@ -2,7 +2,7 @@ package zpl.oj.service.user.inter;
 
 import java.util.Date;
 
-import zpl.oj.model.common.User;
+import zpl.oj.model.request.User;
 
 public interface UserService {
 

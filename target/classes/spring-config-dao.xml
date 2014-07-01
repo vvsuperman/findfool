@@ -32,10 +32,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<!-- 备注：这里要是在接口里面写了sql语句，那么这一样就可以注释掉，这一行的意思是寻找所有的sql映射文件			
 			<property name="mapperLocations" value="classpath:model/*Mapper.xml"></property>
 			 -->
-		</bean> 
-		
+		</bean>
+		 
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+       		<property name="basePackage" value="zpl.oj.dao" />  
+    	</bean>
 		<!-- 这个是创建一个bean，他的名字叫做userTaskDao，也可以使用基于包的方式来自动装在 -->
-
+<!--
 		<bean id="solutionRunDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 			<property name="mapperInterface"  
 	           value="zpl.oj.dao.SolutionRunDao" />  
@@ -61,4 +64,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	           value="zpl.oj.dao.user.UserDao" />  
 	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 		</bean>
+		<bean id="leftMessageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+			<property name="mapperInterface"  
+	           value="zpl.oj.dao.LeftMessageDao" />  
+	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+		</bean>
+-->
 </beans> 

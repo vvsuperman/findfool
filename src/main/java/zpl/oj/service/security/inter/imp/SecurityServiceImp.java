@@ -1,5 +1,6 @@
 package zpl.oj.service.security.inter.imp;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.security.PrivilegeDataDao;
-import zpl.oj.model.common.User;
+import zpl.oj.model.request.User;
 import zpl.oj.model.security.Privilege;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
@@ -22,7 +23,7 @@ import zpl.oj.util.base64.BASE64;
 @Service
 public class SecurityServiceImp implements SecurityService {
 
-	private Map<String,Integer> map;
+	private Map<String,List<Integer>> map;
 	private String regEx = "@,@,@,@";
 	private Integer addmin;
 	@Autowired
@@ -32,18 +33,24 @@ public class SecurityServiceImp implements SecurityService {
 	private UserService userService;
 	
 	public SecurityServiceImp() {
-		map = new HashMap<String, Integer>();
+		map = new HashMap<String, List<Integer>>();
 		addmin = null;
 	}
 	@Override
-	public Integer getLevel(String uri) {
-		Integer level = null;
+	public List<Integer> getLevel(String uri) {
+		List<Integer> level = null;
 		level = map.get(uri);
 		if(null == level){
 			List<Privilege> tmp = privilegeDataDao.getPrivilegeData();
 			map.clear();
 			for(Privilege p:tmp){
-				map.put(p.getUri(), p.getLevel());
+				List<Integer> tl = null;
+				tl = map.get(p.getUri());
+				if(tl == null){
+					tl = new ArrayList<Integer>();
+				}
+				tl.add(p.getLevel());
+				map.put(p.getUri(),tl);
 			}
 			level = map.get(uri);
 		}
@@ -91,7 +98,7 @@ public class SecurityServiceImp implements SecurityService {
 			String md5 = strs[0];
 			int uid = Integer.parseInt(strs[1]);
 			//先进行权限检查
-			Integer level = getLevel(uri);
+			List<Integer> level = getLevel(uri);
 			if(level == null)
 			{
 				return false;
@@ -102,10 +109,16 @@ public class SecurityServiceImp implements SecurityService {
 			 */
 			
 			User u = userService.getUserById(uid);
-			if(u.getPrivilege() <level){
-				//no auth
+			int flag = 0;
+			for(Integer i:level){
+				if(u.getPrivilege() == i){
+					flag = 1;
+				}			
+			}
+			if(flag == 0){
 				return false;
 			}
+
 			Date loginDate = u.getLastLoginDate();
 			//增加70min
 			Calendar c = Calendar.getInstance();
@@ -119,6 +132,12 @@ public class SecurityServiceImp implements SecurityService {
 			String serverToken = MD5Util.stringMD5(u.getUid()+u.getPwd()+loginDate.toString());
 			if(serverToken.equals(md5)){
 				//验证成功
+				//第二部验证是否过期
+				Date now = new Date();
+				if(now.compareTo(loginDate) >0){
+					//过期
+					return false;
+				}
 				return true;
 			}else{
 				//验证失败

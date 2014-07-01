@@ -1,4 +1,4 @@
-package zpl.oj.model.common;
+package zpl.oj.model.request;
 
 public class QuestionTestCase {
 

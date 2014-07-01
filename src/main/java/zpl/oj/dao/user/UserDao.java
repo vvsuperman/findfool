@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import zpl.oj.model.common.User;
+import zpl.oj.model.request.User;
 
 public interface UserDao {
 

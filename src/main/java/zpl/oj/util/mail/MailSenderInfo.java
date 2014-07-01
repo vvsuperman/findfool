@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import org.springframework.stereotype.Service;
 
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
+
 @Service
 public class MailSenderInfo {    
     // 发送邮件的服务器的IP和端口    
@@ -22,13 +24,20 @@ public class MailSenderInfo {
     private String userName;    
     private String password;    
     // 是否需要身份验证    
-    private boolean validate = false;    
+    private boolean validate = true;    
     // 邮件主题    
     private String subject;    
     // 邮件的文本内容    
     private String content;    
     // 邮件附件的文件名    
-    private String[] attachFileNames;      
+    private String[] attachFileNames;     
+
+    public MailSenderInfo(){
+    	mailServerHost = (String)PropertiesUtil.getContextProperty("mailServerHost");
+    	mailServerPort = (String)PropertiesUtil.getContextProperty("mailServerPort");
+    	userName = (String)PropertiesUtil.getContextProperty("userName");
+    	password = (String)PropertiesUtil.getContextProperty("password");
+    }
     /**   
       * 获得邮件会话属性   
       */    

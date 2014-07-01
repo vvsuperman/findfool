@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import zpl.oj.model.common.User;
+import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestChangeUserInfo;
 import zpl.oj.model.requestjson.RequestUser;
 import zpl.oj.model.requestjson.RequestUserLogin;
@@ -15,6 +15,9 @@ import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.responsejson.ResponseUserInfo;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
+import zpl.oj.util.mail.MailSenderInfo;
+import zpl.oj.util.mail.SimpleMailSender;
 
 @Controller
 @RequestMapping("/user") 
@@ -25,7 +28,9 @@ public class UserController {
 	@Autowired
 	private SecurityService securityService;
 	
-	@RequestMapping(value="/comfirm")
+
+	
+	@RequestMapping(value="/confirm")
 	@ResponseBody
 	public ResponseBase userLogin(@RequestBody RequestUserLogin request){
 		ResponseBase rb = new ResponseBase();
@@ -34,11 +39,11 @@ public class UserController {
 		ResponseMessage msg = new ResponseMessage();
 		u = userService.getUserByEmail(request.getEmail());
 		if(u == null ||!u.getPwd().equals(request.getPwd())){
-			msg.setMsg("failed login!  user:"+u.getEmail()+" error user or password");
+			msg.setMsg("failed login!  user:"+request.getEmail()+" error user or password");
 			msg.setHandler_url("/error");
 			rb.setState(0);		
 		}else{
-			userService.userLogin(u.getUid());
+			u = userService.userLogin(u.getUid());
 			msg.setMsg(new String()+u.getUid());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
@@ -72,6 +77,13 @@ public class UserController {
 			msg.setMsg(new String()+u.getUid());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
+			//发送邮件
+			MailSenderInfo mailSenderInfo = new MailSenderInfo();
+			mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
+			mailSenderInfo.setToAddress(u.getEmail());
+			mailSenderInfo.setSubject("欢迎新用户");
+			mailSenderInfo.setContent("欢迎你们彩笔们~");
+			SimpleMailSender.sendHtmlMail(mailSenderInfo);
 		}
 		
 		rb.setMessage(msg);

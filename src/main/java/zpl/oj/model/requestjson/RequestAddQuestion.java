@@ -1,6 +1,6 @@
 package zpl.oj.model.requestjson;
 
-import zpl.oj.model.common.Question;
+import zpl.oj.model.request.Question;
 
 public class RequestAddQuestion {
 	private RequestUser user;

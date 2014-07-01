@@ -1,4 +1,4 @@
-package zpl.oj.model.common;
+package zpl.oj.model.request;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class Question {
 	private String name;
 	private int type;
 	private int score;
-	private String tag;
+	private List<String> tag;
 	private String context;
 	private List<QuestionTestCase> answer;
 	public int getQid() {
@@ -35,12 +35,6 @@ public class Question {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
 	public String getContext() {
 		return context;
 	}
@@ -52,6 +46,12 @@ public class Question {
 	}
 	public void setAnswer(List<QuestionTestCase> answer) {
 		this.answer = answer;
+	}
+	public List<String> getTag() {
+		return tag;
+	}
+	public void setTag(List<String> tag) {
+		this.tag = tag;
 	}
 	
 }

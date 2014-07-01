@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.user.UserDao;
-import zpl.oj.model.common.User;
+import zpl.oj.model.request.User;
 import zpl.oj.service.user.inter.UserService;
 
 @Service
