@@ -7,7 +7,6 @@ public class Question {
 	private int qid;
 	private String name;
 	private int type;
-	private int score;
 	private List<String> tag;
 	private String context;
 	private List<QuestionTestCase> answer;
@@ -28,12 +27,6 @@ public class Question {
 	}
 	public void setType(int type) {
 		this.type = type;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
 	}
 	public String getContext() {
 		return context;

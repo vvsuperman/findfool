@@ -44,11 +44,10 @@ public class ProblemServiceImp implements ProblemService{
 			QuestionTestCase qt = new QuestionTestCase();
 			qt.setText(c.getArgs());
 			qt.setIsright(c.getExceptedRes());
-			score += c.getScore();
+			qt.setScore(c.getScore());
 			answer.add(qt);
 		}
 		q.setAnswer(answer);
-		q.setScore(score);
 		List<String> tags = problemTagDao.getTagByProblemId(p.getProblemId());
 		q.setTag(tags);
 		return q;
@@ -85,6 +84,7 @@ public class ProblemServiceImp implements ProblemService{
 			pt.setProblemId(pid);
 			pt.setArgs(qt.getText());
 			pt.setExceptedRes(qt.getIsright());
+			pt.setScore(qt.getScore());
 			problemTestCaseDao.insertProblemTestCase(pt);
 		}
 		problemDao.updateProblem(p);
