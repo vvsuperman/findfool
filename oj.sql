@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2014-07-01 19:55:29
+Date: 2014-07-02 16:42:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `api` (
   `apiid` int(11) NOT NULL AUTO_INCREMENT,
   `api` text NOT NULL COMMENT '这个是有该权限的api',
   PRIMARY KEY (`apiid`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='这个是api表\r\n';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='这个是api表\r\n';
 
 -- ----------------------------
 -- Records of api
@@ -39,13 +39,14 @@ INSERT INTO `api` VALUES ('8', '/search/admin');
 INSERT INTO `api` VALUES ('9', '/test/manage/submite');
 INSERT INTO `api` VALUES ('10', '/question/add');
 INSERT INTO `api` VALUES ('11', '/test/show');
-INSERT INTO `api` VALUES ('12', '/test/manage/');
+INSERT INTO `api` VALUES ('12', '/test/manage');
 INSERT INTO `api` VALUES ('13', '/test/manage/setting/set');
 INSERT INTO `api` VALUES ('14', '/test/manage/invite');
 INSERT INTO `api` VALUES ('15', '/user/setting/query');
 INSERT INTO `api` VALUES ('16', '/user/setting/set');
 INSERT INTO `api` VALUES ('17', '/set/manage');
 INSERT INTO `api` VALUES ('18', '/user/add/admin');
+INSERT INTO `api` VALUES ('19', '/test/add');
 
 -- ----------------------------
 -- Table structure for `contactus`
@@ -78,11 +79,14 @@ CREATE TABLE `invite` (
   `score` text COMMENT '存放的形式为 20/50',
   PRIMARY KEY (`iid`),
   KEY `f_t_i` (`testid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='这个是邀请的表，里面存放着被邀请的人';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='这个是邀请的表，里面存放着被邀请的人';
 
 -- ----------------------------
 -- Records of invite
 -- ----------------------------
+INSERT INTO `invite` VALUES ('1', '5', '3', '18', '2014-07-02 16:22:20', '2014-07-02 16:22:20', '0/0');
+INSERT INTO `invite` VALUES ('2', '5', '3', '19', '2014-07-02 16:31:29', '2014-07-02 16:31:29', '0/0');
+INSERT INTO `invite` VALUES ('3', '5', '3', '3', '2014-07-02 16:34:22', '2014-07-02 16:34:22', '0/0');
 
 -- ----------------------------
 -- Table structure for `problem`
@@ -105,7 +109,7 @@ CREATE TABLE `problem` (
   `modifyDate` datetime DEFAULT NULL COMMENT '修改者时间',
   PRIMARY KEY (`problem_id`),
   KEY `f_problem_owner` (`creator`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='这个是问题表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='这个是问题表';
 
 -- ----------------------------
 -- Records of problem
@@ -114,6 +118,9 @@ INSERT INTO `problem` VALUES ('-1', '3', '测试选择', '在下面的选项中�
 INSERT INTO `problem` VALUES ('-1', '4', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:30:58');
 INSERT INTO `problem` VALUES ('-1', '5', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:33:25');
 INSERT INTO `problem` VALUES ('-1', '6', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:36:55');
+INSERT INTO `problem` VALUES ('-1', '7', '第一个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:35:23');
+INSERT INTO `problem` VALUES ('-1', '8', '第一个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:37:41');
+INSERT INTO `problem` VALUES ('-1', '9', '第二个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:41:11');
 
 -- ----------------------------
 -- Table structure for `problem_test_case`
@@ -128,7 +135,7 @@ CREATE TABLE `problem_test_case` (
   `detail` text COMMENT '这个是说明测试用例',
   PRIMARY KEY (`test_case_id`),
   KEY `p_id` (`problem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='这个是问题相关联问题的测试用例\r\n这个也可以表示选择题的选项和答案\r\n';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='这个是问题相关联问题的测试用例\r\n这个也可以表示选择题的选项和答案\r\n';
 
 -- ----------------------------
 -- Records of problem_test_case
@@ -141,6 +148,12 @@ INSERT INTO `problem_test_case` VALUES ('5', '3', null, '1', '1+1=2', null);
 INSERT INTO `problem_test_case` VALUES ('6', '3', null, '0', '1+1=3', null);
 INSERT INTO `problem_test_case` VALUES ('7', '3', null, '0', '1+1=4', null);
 INSERT INTO `problem_test_case` VALUES ('8', '3', null, '0', '1+1=5', null);
+INSERT INTO `problem_test_case` VALUES ('9', '8', '4', '1', '1+1=2', null);
+INSERT INTO `problem_test_case` VALUES ('10', '8', '0', '0', '1+1=3', null);
+INSERT INTO `problem_test_case` VALUES ('11', '8', '0', '0', '1+1=4', null);
+INSERT INTO `problem_test_case` VALUES ('12', '9', '4', '1', '1+1=2', null);
+INSERT INTO `problem_test_case` VALUES ('13', '9', '0', '0', '1+1=3', null);
+INSERT INTO `problem_test_case` VALUES ('14', '9', '0', '0', '1+1=4', null);
 
 -- ----------------------------
 -- Table structure for `quiz`
@@ -156,11 +169,14 @@ CREATE TABLE `quiz` (
   `uuid` int(11) DEFAULT NULL COMMENT '全局唯一识别符，只要uuid相同的，那么都是同一个测试，以时间最新的为标准',
   `emails` text COMMENT '这个里面是测试报告发送地址的邮件，使用逗号隔开',
   PRIMARY KEY (`quizid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='这个是存放测试的表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='这个是存放测试的表';
 
 -- ----------------------------
 -- Records of quiz
 -- ----------------------------
+INSERT INTO `quiz` VALUES ('3', '3', '选择题测试', '2014-07-02 15:09:02', '70', '1,2', '3', 'ss@ss.com,sd@ss.com');
+INSERT INTO `quiz` VALUES ('4', '3', '选择题测试', '2014-07-02 15:09:02', '70', null, '3', 'ss@ss.com,sd@ss.com');
+INSERT INTO `quiz` VALUES ('5', '3', '选择题测试', '2014-07-02 15:09:02', '70', '1,2,3,4', '3', '524510356@qq.com');
 
 -- ----------------------------
 -- Table structure for `quizproblem`
@@ -175,11 +191,15 @@ CREATE TABLE `quizproblem` (
   PRIMARY KEY (`tpid`),
   KEY `f_tp_test` (`quizid`),
   KEY `f_tp_problem` (`problemid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='这个是测试与问题的关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='这个是测试与问题的关联表';
 
 -- ----------------------------
 -- Records of quizproblem
 -- ----------------------------
+INSERT INTO `quizproblem` VALUES ('1', '4', '6', '2014-07-02 15:14:19', null);
+INSERT INTO `quizproblem` VALUES ('2', '4', '9', '2014-07-02 15:14:19', null);
+INSERT INTO `quizproblem` VALUES ('3', '5', '6', '2014-07-02 15:16:52', null);
+INSERT INTO `quizproblem` VALUES ('4', '5', '9', '2014-07-02 15:16:52', null);
 
 -- ----------------------------
 -- Table structure for `resultinfo`
@@ -230,7 +250,7 @@ CREATE TABLE `role_api` (
   `roleid` int(11) DEFAULT NULL COMMENT '角色表',
   `apiid` int(11) DEFAULT NULL COMMENT 'api表',
   PRIMARY KEY (`rpid`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='这个是角色-权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COMMENT='这个是角色-权限表';
 
 -- ----------------------------
 -- Records of role_api
@@ -287,6 +307,8 @@ INSERT INTO `role_api` VALUES ('51', '4', '17');
 INSERT INTO `role_api` VALUES ('52', '1', '4');
 INSERT INTO `role_api` VALUES ('53', '1', '3');
 INSERT INTO `role_api` VALUES ('54', '0', '3');
+INSERT INTO `role_api` VALUES ('55', '2', '19');
+INSERT INTO `role_api` VALUES ('56', '3', '19');
 
 -- ----------------------------
 -- Table structure for `set`
@@ -359,13 +381,14 @@ CREATE TABLE `tag` (
   `tagid` int(11) NOT NULL AUTO_INCREMENT,
   `context` text COMMENT '内tag容',
   PRIMARY KEY (`tagid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='标签的表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='标签的表';
 
 -- ----------------------------
 -- Records of tag
 -- ----------------------------
 INSERT INTO `tag` VALUES ('1', '测试');
 INSERT INTO `tag` VALUES ('2', '水货');
+INSERT INTO `tag` VALUES ('3', '选择题');
 
 -- ----------------------------
 -- Table structure for `tagproblem`
@@ -376,7 +399,7 @@ CREATE TABLE `tagproblem` (
   `tagid` int(11) NOT NULL,
   `problemid` int(11) NOT NULL,
   PRIMARY KEY (`tpid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='tag和problem的关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='tag和problem的关联表';
 
 -- ----------------------------
 -- Records of tagproblem
@@ -385,6 +408,10 @@ INSERT INTO `tagproblem` VALUES ('1', '1', '3');
 INSERT INTO `tagproblem` VALUES ('2', '2', '3');
 INSERT INTO `tagproblem` VALUES ('3', '1', '3');
 INSERT INTO `tagproblem` VALUES ('4', '2', '3');
+INSERT INTO `tagproblem` VALUES ('5', '1', '8');
+INSERT INTO `tagproblem` VALUES ('6', '3', '8');
+INSERT INTO `tagproblem` VALUES ('7', '1', '9');
+INSERT INTO `tagproblem` VALUES ('8', '3', '9');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -409,15 +436,17 @@ CREATE TABLE `user` (
   `state` int(11) NOT NULL DEFAULT '1' COMMENT '1表示活着的，0表示死掉了，默认为1',
   `tel` text NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='这个是用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='这个是用户表';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', 'admin', 'xx@qq.com', 'zpl', '2', null, null, null, null, null, '2014-06-26 21:28:03', null, '0', '0', '1', '');
-INSERT INTO `user` VALUES ('3', 'zpl', 'no value', '524510356@qq.com', 'hello kitty', '2', '3872679963F9F6F7FC6E1B800E3714EA', 'no value', 'no value', 'no value', 'no value', '2014-06-29 18:36:15', '2014-07-01 18:08:36', '0', '0', '1', '');
+INSERT INTO `user` VALUES ('3', 'ss', 'no value', '524510356@qq.com', 'QQ', '2', 'zpl', 'no value', 'no value', 'no value', 'no value', '2014-06-29 18:36:15', '2014-07-02 16:11:31', '97', '1', '1', '188888888');
 INSERT INTO `user` VALUES ('4', 'atom', 'no value', '524510356@gmail.com', 'xxoo', '2', 'dhsyd7623', 'no value', 'no value', 'no value', 'no value', '2014-06-30 10:43:32', '2014-06-30 10:43:32', '0', '0', '1', '23232323232');
 INSERT INTO `user` VALUES ('17', 'zpl', 'no value', '294384672@qq.com', 'no value', '2', '3872679963F9F6F7FC6E1B800E3714EA', 'no value', 'no value', 'no value', 'no value', '2014-07-01 19:45:27', '2014-07-01 19:45:27', '0', '0', '1', 'no value');
+INSERT INTO `user` VALUES ('18', 'liu1', 'zheng', '294384672@ss.com', 'no value', '1', 'E64CA1FF2B519F0B4EF39D8E7183A15C', 'no value', 'no value', 'no value', 'no value', '2014-07-02 16:15:42', '2014-07-02 16:15:42', '0', '0', '1', '123232323');
+INSERT INTO `user` VALUES ('19', 'liu1', 'zheng', '524510356@ss.com', 'no value', '1', '7DE125139D33F97FB8DB63CD6F55E942', 'no value', 'no value', 'no value', 'no value', '2014-07-02 16:31:12', '2014-07-02 16:31:12', '0', '0', '1', '123232323');
 
 -- ----------------------------
 -- Table structure for `user_role`
