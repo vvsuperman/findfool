@@ -9,5 +9,5 @@ public interface ProblemService {
 	Question getProblemById(int problemId);
 	
 	//增加一个problem
-	void addProblem(RequestAddQuestion q);
+	int addProblem(RequestAddQuestion q);
 }

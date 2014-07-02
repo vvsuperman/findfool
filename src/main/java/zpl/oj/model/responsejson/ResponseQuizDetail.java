@@ -1,20 +1,23 @@
-package zpl.oj.model.requestjson;
+package zpl.oj.model.responsejson;
 
 import java.util.List;
 
-public class RequestTestMeta {
+import zpl.oj.model.request.Question;
 
-	private RequestUser user;
+
+public class ResponseQuizDetail {
+
+	private List<Question> qs;
+	
 	private int tid;
-	private String name;
 	private int testtime;
 	private String extrainfo;
 	private String emails;
-	public RequestUser getUser() {
-		return user;
+	public List<Question> getQs() {
+		return qs;
 	}
-	public void setUser(RequestUser user) {
-		this.user = user;
+	public void setQs(List<Question> qs) {
+		this.qs = qs;
 	}
 	public int getTid() {
 		return tid;
@@ -40,13 +43,6 @@ public class RequestTestMeta {
 	public void setEmails(String emails) {
 		this.emails = emails;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	
 	
 }

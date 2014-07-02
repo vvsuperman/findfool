@@ -10,8 +10,8 @@ import zpl.oj.model.common.Problem;
 
 public interface ProblemDao {
 
-	@Select("    select  UUID,  PROBLEM_ID,  TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE  FROM PROBLEM  WHERE problemId = #{id}")
+	@Select("    select  UUID,  PROBLEM_ID as problemId,  TITLE,  DESCRIPTION,  DATE,  "
+			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE  FROM PROBLEM  WHERE problem_Id = #{id}")
 	  Problem getProblem(int id);
 	  
 	@Insert("    INSERT INTO PROBLEM("
@@ -30,7 +30,7 @@ public interface ProblemDao {
 	Integer getProblemId(int creator);
 	
 	
-	@Select("    select  UUID,  PROBLEM_ID,  TITLE,  DESCRIPTION,  DATE,  "
+	@Select("    select  UUID,  PROBLEM_ID as problemId,  TITLE,  DESCRIPTION,  DATE,  "
 			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE  FROM PROBLEM"
 			+ " WHERE creator=${uid} limit ${begin},${end}")
 	  List<Problem> getProblemsByCreator(int uid,int begin,int end);  

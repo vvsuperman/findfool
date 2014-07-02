@@ -15,7 +15,6 @@ import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.responsejson.ResponseUserInfo;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
-import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 

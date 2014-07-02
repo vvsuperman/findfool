@@ -19,7 +19,7 @@ public class UserServiceImp implements UserService{
 		//检查邮箱是否存在，
 		User dbU = userDao.getUserIdByEmail(u.getEmail());
 		if(dbU != null){
-			if(dbU.getPrivilege() <2){
+			if(dbU.getPrivilege() <2 && u.getPrivilege() >1){
 				//用户原来接受过测试，如今当hr了
 				dbU.setPrivilege(u.getPrivilege());
 				dbU.setPwd(u.getPwd());

@@ -47,7 +47,11 @@ public class SimpleMailSender  {
       mailMessage.setFrom(from);    
       // 创建邮件的接收者地址，并设置到邮件消息中    
       Address to = new InternetAddress(mailInfo.getToAddress());    
-      mailMessage.setRecipient(Message.RecipientType.TO,to);    
+      mailMessage.setRecipient(Message.RecipientType.TO,to);   
+      
+      Address replyTo = new InternetAddress((mailInfo.getReplyToAddress() == null?mailInfo.getFromAddress():mailInfo.getReplyToAddress()));
+      Address[] replyTos = new Address[]{replyTo};
+      mailMessage.setReplyTo(replyTos);
       // 设置邮件消息的主题    
       mailMessage.setSubject(mailInfo.getSubject());    
       // 设置邮件消息发送的时间    

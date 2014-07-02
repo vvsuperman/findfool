@@ -20,6 +20,10 @@ public class MailSenderInfo {
     private String fromAddress;    
     // 邮件接收者的地址    
     private String toAddress;    
+    
+    //邮件回复的地址
+    private String replyToAddress;
+    
     // 登陆邮件发送服务器的用户名和密码    
     private String userName;    
     private String password;    
@@ -37,6 +41,7 @@ public class MailSenderInfo {
     	mailServerPort = (String)PropertiesUtil.getContextProperty("mailServerPort");
     	userName = (String)PropertiesUtil.getContextProperty("userName");
     	password = (String)PropertiesUtil.getContextProperty("password");
+    	replyToAddress = null;
     }
     /**   
       * 获得邮件会话属性   
@@ -107,5 +112,12 @@ public class MailSenderInfo {
     }   
     public void setContent(String textContent) {    
       this.content = textContent;    
-    }    
+    }
+	public String getReplyToAddress() {
+		return replyToAddress;
+	}
+	public void setReplyToAddress(String replyToAddress) {
+		this.replyToAddress = replyToAddress;
+	}    
+    
 } 

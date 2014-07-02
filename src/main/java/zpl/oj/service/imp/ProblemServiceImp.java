@@ -54,7 +54,7 @@ public class ProblemServiceImp implements ProblemService{
 	}
 
 	@Override
-	public void addProblem(RequestAddQuestion q) {
+	public int addProblem(RequestAddQuestion q) {
 		Problem p = new Problem();
 		p.setCreator(q.getUser().getUid());
 		p.setDate(new Date());
@@ -88,6 +88,7 @@ public class ProblemServiceImp implements ProblemService{
 			problemTestCaseDao.insertProblemTestCase(pt);
 		}
 		problemDao.updateProblem(p);
+		return pid;
 	}
 
 }

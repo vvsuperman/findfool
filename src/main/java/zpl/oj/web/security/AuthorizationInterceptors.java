@@ -29,7 +29,7 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request,  
             HttpServletResponse response, Object handler) throws Exception {
 		// 不过滤的uri  
-        String[] notFilter = new String[] { "/user/add/hr", "index.html","/liu","/contactus" };  
+        String[] notFilter = new String[] { "/user/confirm","/user/add/hr", "index.html","/liu","/contactus" };  
   
         // 请求的uri  
         String uri = request.getRequestURI();  

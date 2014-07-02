@@ -51,10 +51,12 @@ public class QuestionController {
 	@ResponseBody
 	public ResponseBase add(@RequestBody RequestAddQuestion request){
 		ResponseBase rb = new ResponseBase();
-		problemService.addProblem(request);
+		int pid = problemService.addProblem(request);
 		User u = new User();
 
 		ResponseMessage msg = new ResponseMessage();
+		msg.setMsg(""+pid);
+		rb.setMessage(msg);
 		
 		return rb;
 	}
