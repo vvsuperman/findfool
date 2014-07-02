@@ -1,33 +1,40 @@
 package zpl.oj.util.PropertiesUtil;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
-public class PropertiesUtil {
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
-	public static Properties getProperties(String filePath){
-		//将properties文件加载到输入字节流中 
-        InputStream is;
-		try {
-			is = new FileInputStream(filePath);
-	        //创建一个Properties容器 
-	        Properties prop = new Properties(); 
-	        //从流中加载properties文件信息 
-	        try {
-				prop.load(is);
-				return prop;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		return null;
+/**
+ * 自定义PropertiesUtil返回properties内容
+ * 
+ * @author LHY 2012-02-24
+ * 
+ */
+public class PropertiesUtil extends
+		PropertyPlaceholderConfigurer {
 
+	private static Map<String, Object> ctxPropertiesMap;
+
+	@Override
+	protected void processProperties(
+			ConfigurableListableBeanFactory beanFactoryToProcess,
+			Properties props) throws BeansException {
+		super.processProperties(beanFactoryToProcess, props);
+		ctxPropertiesMap = new HashMap<String, Object>();
+		for (Object key : props.keySet()) {
+			String keyStr = key.toString();
+			String value = props.getProperty(keyStr);
+			ctxPropertiesMap.put(keyStr, value);
+		}
 	}
+
+	public static Object getContextProperty(String name) {
+		return ctxPropertiesMap.get(name);
+	}
+
 }

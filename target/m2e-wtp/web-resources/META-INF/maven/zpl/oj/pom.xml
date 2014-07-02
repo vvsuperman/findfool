@@ -114,8 +114,25 @@
     	<artifactId>jackson-core-asl</artifactId>
     	<version>1.9.10</version>
     </dependency>
+    <dependency>
+    	<groupId>commons-codec</groupId>
+    	<artifactId>commons-codec</artifactId>
+    	<version>1.9</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>oj</finalName>
   </build>
+    <repositories>
+        <repository>
+            <id>spring-releases</id>
+            <url>http://repo.spring.io/libs-release</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <url>http://repo.spring.io/libs-release</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

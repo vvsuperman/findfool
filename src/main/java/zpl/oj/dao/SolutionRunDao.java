@@ -15,5 +15,5 @@ public interface SolutionRunDao {
 	void updateSolutionState(int solution_id);
 	//get newest solutionrun id
 	@Select("select solution_id from solution_run where user_id=${user_id} order by date DESC limit 1")
-	int getSolutionRunId(SolutionRun u);
+	Integer getSolutionRunId(SolutionRun u);
 }
