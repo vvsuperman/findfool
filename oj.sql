@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2014-07-02 16:42:59
+Date: 2014-07-02 23:04:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -107,6 +107,7 @@ CREATE TABLE `problem` (
   `sloved` int(11) DEFAULT NULL COMMENT '做对了的人次数',
   `modifier` int(11) DEFAULT NULL COMMENT '修改者id',
   `modifyDate` datetime DEFAULT NULL COMMENT '修改者时间',
+  `belong` int(11) DEFAULT '0' COMMENT '0表示网站的题，1表示是自己的题',
   PRIMARY KEY (`problem_id`),
   KEY `f_problem_owner` (`creator`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='这个是问题表';
@@ -114,13 +115,13 @@ CREATE TABLE `problem` (
 -- ----------------------------
 -- Records of problem
 -- ----------------------------
-INSERT INTO `problem` VALUES ('-1', '3', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:28:46');
-INSERT INTO `problem` VALUES ('-1', '4', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:30:58');
-INSERT INTO `problem` VALUES ('-1', '5', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:33:25');
-INSERT INTO `problem` VALUES ('-1', '6', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:36:55');
-INSERT INTO `problem` VALUES ('-1', '7', '第一个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:35:23');
-INSERT INTO `problem` VALUES ('-1', '8', '第一个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:37:41');
-INSERT INTO `problem` VALUES ('-1', '9', '第二个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:41:11');
+INSERT INTO `problem` VALUES ('4', '3', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:28:46', '0');
+INSERT INTO `problem` VALUES ('4', '4', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:30:58', '1');
+INSERT INTO `problem` VALUES ('5', '5', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:33:25', '1');
+INSERT INTO `problem` VALUES ('6', '6', '测试选择', '在下面的选项中选出正确的一项', '2014-07-01', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-01 18:36:55', '1');
+INSERT INTO `problem` VALUES ('7', '7', '第一个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:35:23', '1');
+INSERT INTO `problem` VALUES ('8', '8', '第一个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:37:41', '1');
+INSERT INTO `problem` VALUES ('9', '9', '第二个测试', '选择下面正确的一项', '2014-07-02', null, '3', '1', '5', '512', '0', '0', '0', '2014-07-02 14:41:11', '0');
 
 -- ----------------------------
 -- Table structure for `problem_test_case`
@@ -140,14 +141,14 @@ CREATE TABLE `problem_test_case` (
 -- ----------------------------
 -- Records of problem_test_case
 -- ----------------------------
-INSERT INTO `problem_test_case` VALUES ('1', '3', null, '1', '1+1=2', null);
-INSERT INTO `problem_test_case` VALUES ('2', '3', null, '0', '1+1=3', null);
-INSERT INTO `problem_test_case` VALUES ('3', '3', null, '0', '1+1=4', null);
-INSERT INTO `problem_test_case` VALUES ('4', '3', null, '0', '1+1=5', null);
-INSERT INTO `problem_test_case` VALUES ('5', '3', null, '1', '1+1=2', null);
-INSERT INTO `problem_test_case` VALUES ('6', '3', null, '0', '1+1=3', null);
-INSERT INTO `problem_test_case` VALUES ('7', '3', null, '0', '1+1=4', null);
-INSERT INTO `problem_test_case` VALUES ('8', '3', null, '0', '1+1=5', null);
+INSERT INTO `problem_test_case` VALUES ('1', '3', '4', '1', '1+1=2', null);
+INSERT INTO `problem_test_case` VALUES ('2', '3', '0', '0', '1+1=3', null);
+INSERT INTO `problem_test_case` VALUES ('3', '3', '0', '0', '1+1=4', null);
+INSERT INTO `problem_test_case` VALUES ('4', '3', '0', '0', '1+1=5', null);
+INSERT INTO `problem_test_case` VALUES ('5', '3', '0', '1', '1+1=2', null);
+INSERT INTO `problem_test_case` VALUES ('6', '3', '0', '0', '1+1=3', null);
+INSERT INTO `problem_test_case` VALUES ('7', '3', '0', '0', '1+1=4', null);
+INSERT INTO `problem_test_case` VALUES ('8', '3', '0', '0', '1+1=5', null);
 INSERT INTO `problem_test_case` VALUES ('9', '8', '4', '1', '1+1=2', null);
 INSERT INTO `problem_test_case` VALUES ('10', '8', '0', '0', '1+1=3', null);
 INSERT INTO `problem_test_case` VALUES ('11', '8', '0', '0', '1+1=4', null);
@@ -442,7 +443,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', 'admin', 'xx@qq.com', 'zpl', '2', null, null, null, null, null, '2014-06-26 21:28:03', null, '0', '0', '1', '');
-INSERT INTO `user` VALUES ('3', 'ss', 'no value', '524510356@qq.com', 'QQ', '2', 'zpl', 'no value', 'no value', 'no value', 'no value', '2014-06-29 18:36:15', '2014-07-02 16:11:31', '97', '1', '1', '188888888');
+INSERT INTO `user` VALUES ('3', 'ss', 'no value', '524510356@qq.com', 'QQ', '3', 'zpl', 'no value', 'no value', 'no value', 'no value', '2014-06-29 18:36:15', '2014-07-02 22:21:31', '97', '1', '1', '188888888');
 INSERT INTO `user` VALUES ('4', 'atom', 'no value', '524510356@gmail.com', 'xxoo', '2', 'dhsyd7623', 'no value', 'no value', 'no value', 'no value', '2014-06-30 10:43:32', '2014-06-30 10:43:32', '0', '0', '1', '23232323232');
 INSERT INTO `user` VALUES ('17', 'zpl', 'no value', '294384672@qq.com', 'no value', '2', '3872679963F9F6F7FC6E1B800E3714EA', 'no value', 'no value', 'no value', 'no value', '2014-07-01 19:45:27', '2014-07-01 19:45:27', '0', '0', '1', 'no value');
 INSERT INTO `user` VALUES ('18', 'liu1', 'zheng', '294384672@ss.com', 'no value', '1', 'E64CA1FF2B519F0B4EF39D8E7183A15C', 'no value', 'no value', 'no value', 'no value', '2014-07-02 16:15:42', '2014-07-02 16:15:42', '0', '0', '1', '123232323');

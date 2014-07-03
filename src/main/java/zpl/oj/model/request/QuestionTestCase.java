@@ -4,31 +4,36 @@ public class QuestionTestCase {
 
 	private String text;
 	private String isright;
-	private int score;
+	private Integer score;
 	
 	public QuestionTestCase() {
 		text = null;
 		isright = null;
 		score = 0;
 	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
+
 	public String getText() {
 		return text;
 	}
+
 	public void setText(String text) {
 		this.text = text;
 	}
+
 	public String getIsright() {
 		return isright;
 	}
+
 	public void setIsright(String isright) {
 		this.isright = isright;
 	}
-	
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 	
 }

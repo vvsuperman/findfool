@@ -40,6 +40,21 @@ public class Problem implements Serializable {
 	 */
 	private Integer problemSetId;
 	
+	/*
+	 * 试题属性类型
+	 * 0表示网站的题
+	 * 1表示是用户自定义的题
+	 */
+	private Integer belong;
+	
+	public Integer getBelong() {
+		return belong;
+	}
+
+	public void setBelong(Integer belong) {
+		this.belong = belong;
+	}
+
 	public int getCreator() {
 		return creator;
 	}
