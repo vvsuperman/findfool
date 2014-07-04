@@ -7,8 +7,8 @@
 //]);
 
 function Indexx($scope, $http) {
-    $scope.url='#';
-
+    $scope.url = '#';
+    $scope.email='';
 //    $scope.customers = [
 //        {name: "1公司", img: "./static/benefit-1.png", note: "待定"},
 //        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
@@ -22,12 +22,36 @@ function Indexx($scope, $http) {
      });*/
     $scope.login = function () {
         $http({
-            url: 'index.html',
+            url: "/user/confirm",
             method: 'POST',
-            data: {"email": $scope.email, "pwd": $scope.pwd}
+            headers: {
+                "Authorization": "token"/*$scope.token*/
+            },
+            data: {"email": $scope.email, "pwd": $scope.pwd, "name": "liuzheng"}
         }).success(function (data) {
-            $scope.data = data;
-            window.location.href = "test.html"
+            $scope.state = data["state"];//1 true or 0 false
+            $scope.token = data["token"];
+            $scope.message = data["message"];
+            //    $scope.data = data;
+            //   window.location.href = "test.html"
+        });
+    };
+    $scope.contactus = function () {
+        $http({
+            url: '/contactus',
+            method: 'POST',
+            headers: {
+                "Authorization": $scope.token
+            },
+            data: {"email": $scope.email, "name": $scope.name, "msg": $scope.msg}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            $scope.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state == 1) {
+
+            } else {
+            }
         });
     }
 }
@@ -260,7 +284,7 @@ function nav($scope) {
 
 
 function TestPage($scope) {
-    $scope.url='#/test';
+    $scope.url = '#/test';
 
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
@@ -273,10 +297,10 @@ function TestPage($scope) {
     ];
 }
 function Upgrade($scope) {
-    $scope.url='#/upgrade';
-        $scope.template = 'upgrade.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
+    $scope.url = '#/upgrade';
+    $scope.template = 'upgrade.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
 }
 
 function TestBank($scope, $http) {
@@ -555,16 +579,16 @@ function invite($scope) {
         {Fname: 'dd', Lname: 'ddd', email: 'dsa@ss', tel: '12332'}
     ];
 
-    $scope.addOne = function(v){
+    $scope.addOne = function (v) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
 //        if (i > -1) {
-        $scope.xlsusers.splice(i+1, 0,{Fname: '', Lname: '', email: '', tel: ''});
+        $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: ''});
 //        }
 //      $scope.xlsusers.push({Fname: '', Lname: '', email: '', tel: ''}) ;
     };
 
-    $scope.removeOne = function(v){
+    $scope.removeOne = function (v) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
         if (i > -1) {
@@ -576,7 +600,9 @@ function invite($scope) {
 //    去重
     var tmp = $scope.xlsusers;
     var list = [''];
-    var tmpp = [{Fname: '', Lname: '', email: '', tel: ''}];
+    var tmpp = [
+        {Fname: '', Lname: '', email: '', tel: ''}
+    ];
     for (var i in tmp) {
         if ($.inArray(tmp[i].email, list) == -1) {
             list.push(tmp[i].email);
@@ -643,7 +669,9 @@ function invite($scope) {
             $.merge($scope.xlsusers, output["Sheet1"]);
             var tmp = $scope.xlsusers;
             var list = [''];
-            var tmpp = [{Fname: '', Lname: '', email: '', tel: ''}];
+            var tmpp = [
+                {Fname: '', Lname: '', email: '', tel: ''}
+            ];
             for (var i in tmp) {
                 if ($.inArray(tmp[i].email, list) == -1) {
                     list.push(tmp[i].email);
