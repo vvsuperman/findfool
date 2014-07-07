@@ -6,9 +6,8 @@
 //    'evgenyneu.markdown-preview'
 //]);
 
-function Indexx($scope, $http) {
+function Indexx($scope, $http, Data) {
     $scope.url = '#';
-    $scope.email='';
 //    $scope.customers = [
 //        {name: "1公司", img: "./static/benefit-1.png", note: "待定"},
 //        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
@@ -20,46 +19,166 @@ function Indexx($scope, $http) {
      }).success(function (data) {
      $scope.customers = data.customers;
      });*/
-    $scope.login = function () {
-        $http({
-            url: "/user/confirm",
-            method: 'POST',
-            headers: {
-                "Authorization": $scope.token
-            },
-            data: {"email": $scope.email, "pwd": $scope.pwd, "name": "liuzheng"}
-        }).success(function (data) {
-            $scope.state = data["state"];//1 true or 0 false
-            $scope.token = data["token"];
-            $scope.message = data["message"];
-            //    $scope.data = data;
-            //   window.location.href = "test.html"
-        });
+    $scope.confirm = function () {
+        if ($scope.Lemail && $scope.Lpwd) {
+            $http({
+                url: "/user/confirm",
+                method: 'POST',
+                headers: {
+                    "Authorization": Data.token
+                },
+                data: {"email": $scope.Lemail, "pwd": md5($scope.Lpwd), "name": $scope.Lname}
+            }).success(function (data) {
+                $scope.state = data["state"];//1 true or 0 false
+                Data.token = data["token"];
+                Data.name = "测试用户";
+                $scope.message = data["message"];
+                Data.email = $scope.Lemail;
+
+                if ($scope.state) {
+                    var child = document.getElementsByClassName("modal-backdrop fade in");
+                    child[0].parentNode.removeChild(child[0]);
+                    window.location.href = '#/test';
+                    $scope.name = $scope.message.name;
+                } else {
+                    var child = document.getElementsByClassName("modal-backdrop fade in");
+                    child[0].parentNode.removeChild(child[0]);
+                    window.location.href = '#/test';
+                    $scope.name = "测试用户";
+                }
+
+            }).error(function () {
+                    alert("网络错误");
+                    window.location.reload(true);
+                }
+            )
+        }
     };
     $scope.contactus = function () {
-        $http({
+        if(Data.email){$http({
             url: '/contactus',
             method: 'POST',
             headers: {
-                "Authorization": $scope.token
+                "Authorization": Data.token
             },
-            data: {"email": $scope.email, "name": $scope.name, "msg": $scope.msg}
+            data: {"email": Data.email, "name":Data.name, "msg": $scope.msg}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            $scope.token = data["token"];
+            Data.token = data["token"];
             $scope.message = data["message"];
-            if ($scope.state == 1) {
+
+            if ($scope.state) {
+                $scope.thx = "感谢您的提交"
+            } else {
+
+            }
+        }).error(function () {
+                alert("网络错误");
+                window.location.reload(true);
+            }
+        );}else{
+        if ($scope.Cemail) {
+            $http({
+                url: '/contactus',
+                method: 'POST',
+                headers: {
+                    "Authorization": Data.token
+                },
+                data: {"email": $scope.Cemail, "name": $scope.name, "msg": $scope.msg}
+            }).success(function (data) {
+                $scope.state = data["state"];//1 true or 0 false
+                Data.token = data["token"];
+                $scope.message = data["message"];
+
+                if ($scope.state) {
+                    $scope.thx = "感谢您的提交"
+                } else {
+
+                }
+            }).error(function () {
+                    alert("网络错误");
+                    window.location.reload(true);
+                }
+            );
+        }}
+    };
+    $scope.addhr = function () {
+        if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.RVerification) {
+            if (($scope.Rpwd == $scope.Rrepwd) && ($scope.RVerification = $scope.Verification)) {
+
+                $http({
+                    url: "/user/add/hr",
+                    method: 'POST',
+                    headers: {
+                        "Authorization": Data.token
+                    },
+                    data: {"email": $scope.Remail, "pwd": $scope.Rpwd, "name": $scope.name}
+                }).success(function (data) {
+                    $scope.state = data["state"];//1 true or 0 false
+                    Data.token = data["token"];
+                    $scope.message = data["message"];
+                    if ($scope.state) {
+                        var child = document.getElementsByClassName("modal-backdrop fade in");
+                        child[0].parentNode.removeChild(child[0]);
+                        window.location.href = '#/test';
+                    } else {
+
+                    }
+                }).error(function () {
+                        alert("网络错误");
+                        window.location.reload(true);
+                    }
+                );
+            }
+        }
+    };
+    $scope.addadmin = function () {
+        $http({
+            url: "/user/add/admin",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: {"email": $scope.email, "pwd": $scope.pwd, "name": $scope.name}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
 
             } else {
+
             }
-        });
+        }).error(function () {
+                alert("网络错误");
+                window.location.reload(true);
+            }
+        );
+    };
+    $scope.createCode = function () {
+        code = "";
+        var codeLength = 4;//验证码的长度
+        var checkCode = document.getElementById("code");
+        var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+            'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');//随机数
+        for (var i = 0; i < codeLength; i++) {//循环操作
+            var index = Math.floor(Math.random() * 36);//取得随机数的索引（0~35）
+            code += random[index];//根据索引取得随机数加到code上
+        }
+        $scope.Verification = code;//把code值赋给验证码
+    };
+    $scope.createCode();
+    $scope.show = 1;
+    $scope.btn = function () {
+        $scope.show = -($scope.show - 1);
     }
 }
-function TestShow($scope, $http) {
-    $scope.local = true;
+function TestShow($scope, $http, Data) {
+    $scope.local = false;
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
+    $scope.name = Data.name;
 
 
 //    $scope.navTest = function () {
@@ -246,7 +365,9 @@ function TestShow($scope, $http) {
  ];
 
  }*/
-function nav($scope) {
+function nav($scope, Data) {
+    $scope.name = Data.name;
+    console.log(Data.name);
     $scope.navTest = function () {
         $scope.template = 'testshow.html';
         $scope.ContentUs = 'contentUs.html';
@@ -275,26 +396,47 @@ function nav($scope) {
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
     };
-    $scope.createNewTest = function () {
-        $scope.template = 'addtest.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
 }
 
 
-function TestPage($scope) {
+function TestPage($scope, $http, Data) {
     $scope.url = '#/test';
 
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-    $scope.tests = [
-        {id: '1', name: 'hh1', detail: 'i dont know'},
-        {id: '2', name: 'hh2', detail: 'i dont know'},
-        {id: '3', name: 'hh3', detail: 'i dont know'},
-        {id: '4', name: 'hh4', detail: 'i dont know'}
-    ];
+    $scope.tshow = function () {
+        $http({
+            url: "/test/show",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: {"user": {"uid": Data.uid}}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+                $scope.tests = $scope.message.tests
+            } else {
+
+            }
+        });
+    };
+    $scope.tshow();
+//    $scope.tests = [
+//        {id: '1', name: 'hh1', detail: 'i dont know'},
+//        {id: '2', name: 'hh2', detail: 'i dont know'},
+//        {id: '3', name: 'hh3', detail: 'i dont know'},
+//        {id: '4', name: 'hh4', detail: 'i dont know'}
+//    ];
+    $scope.createNewTest = function () {
+        $scope.template = 'addtest.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+    };
+
 }
 function Upgrade($scope) {
     $scope.url = '#/upgrade';
@@ -574,6 +716,10 @@ function personal($scope, $http) {
 }
 
 function invite($scope) {
+    $scope.template = 'invite.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
+
     $scope.xlsusers = [
         {Fname: 'dd', Lname: 'ddd', email: 'dsa@ss', tel: '12332'},
         {Fname: 'dd', Lname: 'ddd', email: 'dsa@ss', tel: '12332'}

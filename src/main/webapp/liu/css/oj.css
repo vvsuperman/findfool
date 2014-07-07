@@ -122,3 +122,10 @@
 .aa:active{text-decoration:none;}
 .aa:visited {text-decoration:none;}
 .aa:hover {text-decoration:none;}
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+input.ng-valid {
+    border: 1px solid green;
+}

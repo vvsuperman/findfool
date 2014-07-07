@@ -7,7 +7,7 @@ var OJApp = angular.module('OJApp', [
     'evgenyneu.markdown-preview'
 ]);
 OJApp.config(['$routeProvider',
-    function($routeProvider) {
+    function ($routeProvider) {
         $routeProvider.
             when('/', {
                 templateUrl: 'main.html',
@@ -25,7 +25,16 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'Upgrade'
             }).
+            when('/invite', {
+                templateUrl: 'page.html',
+                controller: ''
+            }).
             otherwise({
                 redirectTo: '/'
             });
     }]);
+OJApp.factory('Data', function () {
+    return {
+        token: "", uid: "", name: "",email:""
+    }
+});
