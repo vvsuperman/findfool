@@ -25,7 +25,7 @@ function Indexx($scope, $http) {
             url: "/user/confirm",
             method: 'POST',
             headers: {
-                "Authorization": "token"/*$scope.token*/
+                "Authorization": $scope.token
             },
             data: {"email": $scope.email, "pwd": $scope.pwd, "name": "liuzheng"}
         }).success(function (data) {
