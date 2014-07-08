@@ -55,36 +55,14 @@ function Indexx($scope, $http, Data) {
         }
     };
     $scope.contactus = function () {
-        if(Data.email){$http({
-            url: '/contactus',
-            method: 'POST',
-            headers: {
-                "Authorization": Data.token
-            },
-            data: {"email": Data.email, "name":Data.name, "msg": $scope.msg}
-        }).success(function (data) {
-            $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
-            $scope.message = data["message"];
-
-            if ($scope.state) {
-                $scope.thx = "感谢您的提交"
-            } else {
-
-            }
-        }).error(function () {
-                alert("网络错误");
-                window.location.reload(true);
-            }
-        );}else{
-        if ($scope.Cemail) {
+        if (Data.email) {
             $http({
                 url: '/contactus',
                 method: 'POST',
                 headers: {
                     "Authorization": Data.token
                 },
-                data: {"email": $scope.Cemail, "name": $scope.name, "msg": $scope.msg}
+                data: {"email": Data.email, "name": Data.name, "msg": $scope.msg}
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
                 Data.token = data["token"];
@@ -100,7 +78,32 @@ function Indexx($scope, $http, Data) {
                     window.location.reload(true);
                 }
             );
-        }}
+        } else {
+            if ($scope.Cemail) {
+                $http({
+                    url: '/contactus',
+                    method: 'POST',
+                    headers: {
+                        "Authorization": Data.token
+                    },
+                    data: {"email": $scope.Cemail, "name": $scope.name, "msg": $scope.msg}
+                }).success(function (data) {
+                    $scope.state = data["state"];//1 true or 0 false
+                    Data.token = data["token"];
+                    $scope.message = data["message"];
+
+                    if ($scope.state) {
+                        $scope.thx = "感谢您的提交"
+                    } else {
+
+                    }
+                }).error(function () {
+                        alert("网络错误");
+                        window.location.reload(true);
+                    }
+                );
+            }
+        }
     };
     $scope.addhr = function () {
         if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.RVerification) {
@@ -209,28 +212,8 @@ function TestShow($scope, $http, Data) {
 //        $scope.ContentUs = 'contentUs.html';
 //        $scope.leftBar = '';
 //    };
-    $scope.createNewTest = function () {
-        $scope.template = 'addtest.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
-    $scope.CommonSetting = function () {
-        $scope.template = 'commonsetting.html';
-        $scope.ContentUs = 'contentUs.html';
-//        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
 
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active - 1].name;
-    };
 
-    $scope.testPage = function (target) {
-        console.log('testPage');
-        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
-        $scope.template = 'testlist.html';
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active - 1].name;
 //        TestManage($scope, $scope.tests[$scope.active - 1].id);
         if ($scope.local == true) {
 //            $scope.questions = [{
@@ -285,7 +268,7 @@ function TestShow($scope, $http, Data) {
          //            console.log('dddd');
          //            console.log(status)
          })*/
-    };
+
     $scope.Invite = function (target) {
         console.log('Invite');
         $scope.active = target.getAttribute('data');
@@ -422,21 +405,80 @@ function TestPage($scope, $http, Data) {
             } else {
 
             }
+        }).error(function (data) {
+            $scope.tests = [
+                {id: '1', name: '现在网络错误', detail: 'i dont know'},
+                {id: '2', name: '所以这只是一个', detail: 'i dont know'},
+                {id: '3', name: '样例展示', detail: 'i dont know'},
+                {id: '4', name: 'hh4', detail: 'i dont know'}
+            ];
         });
     };
     $scope.tshow();
-//    $scope.tests = [
-//        {id: '1', name: 'hh1', detail: 'i dont know'},
-//        {id: '2', name: 'hh2', detail: 'i dont know'},
-//        {id: '3', name: 'hh3', detail: 'i dont know'},
-//        {id: '4', name: 'hh4', detail: 'i dont know'}
-//    ];
     $scope.createNewTest = function () {
         $scope.template = 'addtest.html';
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
     };
+    $scope.Invite = function (target) {
+        console.log('Invite');
+        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active - 1].name;
+        Data.tid = $scope.tid;
+        window.location.href = '#/invite';
+    };
+    $scope.MultInvite = function (target) {
+        console.log('MultInvite');
+        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.template = 'MutleInvite.html';
+        $scope.leftBar = 'leftBar.html';
+    };
+    $scope.Report = function (target) {
+        console.log('Report');
+        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.leftBar = 'leftBar.html';
+        $scope.template = 'report.html';
+    };
+    $scope.testPage = function (target) {
+        console.log('testPage');
+        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.template = 'testlist.html';
+        $scope.leftBar = 'leftBar.html';
+        $scope.name = $scope.tests[$scope.active - 1].name;
+    };
 
+    $scope.createNewTest = function () {
+        $scope.template = 'addtest.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
+    };
+    $scope.CommonSetting = function () {
+        $scope.template = 'commonsetting.html';
+        $scope.ContentUs = 'contentUs.html';
+//        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active - 1].id;
+
+        $scope.leftBar = 'leftBar.html';
+        $scope.name = $scope.tests[$scope.active - 1].name;
+    };
+
+    $scope.testPage = function (target) {
+        console.log('testPage');
+        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.template = 'testlist.html';
+        $scope.leftBar = 'leftBar.html';
+        $scope.name = $scope.tests[$scope.active - 1].name;
+    };
 }
 function Upgrade($scope) {
     $scope.url = '#/upgrade';
@@ -836,7 +878,6 @@ function invite($scope) {
 //        console.log(output["Sheet1"]);
     }
 
-    var drop = document.getElementById('drop');
 
     function handleDrop(e) {
         e.stopPropagation();
@@ -865,11 +906,13 @@ function invite($scope) {
         e.dataTransfer.dropEffect = 'copy';
     }
 
-    if (drop.addEventListener) {
-        drop.addEventListener('dragenter', handleDragover, false);
-        drop.addEventListener('dragover', handleDragover, false);
-        drop.addEventListener('drop', handleDrop, false);
+    window.onload = function () {
+        var drop = document.getElementById('drop');
+        if (drop.addEventListener) {
+            drop.addEventListener('dragenter', handleDragover, false);
+            drop.addEventListener('dragover', handleDragover, false);
+            drop.addEventListener('drop', handleDrop, false);
+        }
+
     }
-
-
 }

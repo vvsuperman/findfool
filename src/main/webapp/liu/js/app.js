@@ -27,7 +27,7 @@ OJApp.config(['$routeProvider',
             }).
             when('/invite', {
                 templateUrl: 'page.html',
-                controller: ''
+                controller: 'invite'
             }).
             otherwise({
                 redirectTo: '/'
@@ -35,6 +35,6 @@ OJApp.config(['$routeProvider',
     }]);
 OJApp.factory('Data', function () {
     return {
-        token: "", uid: "", name: "",email:""
+        token: "", uid: "", name: "", email: "", tid: ""
     }
 });
