@@ -43,17 +43,27 @@ public class QuizController {
 	@ResponseBody
 	public ResponseBase queryAllTest(@RequestBody RequestUser request){
 		ResponseBase rb = new ResponseBase();
-		ResponseQuizs rq = new ResponseQuizs();
-		User u = userService.getUserById(request.getUid());
-		rq.setUid(u.getUid());
-		rq.setInvitedNum(u.getInvitedNum());
-		rq.setInviteLeft(u.getInvited_left());
 		
-		List<Quiz> lists = quizService.getQuizByOwner(u.getUid());
-		rq.setTests(lists);
+		User u = userService.getUserById(request.getUid());
+		if(null != u){
+			ResponseQuizs rq = new ResponseQuizs();
+			rq.setUid(u.getUid());
+			rq.setInvitedNum(u.getInvitedNum());
+			rq.setInviteLeft(u.getInvited_left());
+			
+			List<Quiz> lists = quizService.getQuizByOwner(u.getUid());
+			rq.setTests(lists);
 
-		rb.setMessage(rq);
-		rb.setState(1);	
+			rb.setMessage(rq);
+			rb.setState(1);				
+		}else{
+			ResponseMessage rm = new ResponseMessage();
+			rm.setMsg("no such user");
+			rm.setHandler_url("/error");
+			rb.setMessage(rm);
+			rb.setState(0);	
+		}
+
 		return rb;
 	}
 	

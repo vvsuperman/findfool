@@ -44,6 +44,7 @@ public class UserController {
 		}else{
 			u = userService.userLogin(u.getUid());
 			msg.setMsg(new String()+u.getUid());
+			msg.setHandler_url(u.getFname());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 		}

@@ -31,15 +31,20 @@ function Indexx($scope, $http, Data) {
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
                 Data.token = data["token"];
-                Data.name = "测试用户";
+                var name = $scope.Lemail;
                 $scope.message = data["message"];
+                if(data["message"].handler_url != null && data["message"].handler_url ==""){
+                	name = data["message"].handler_url;
+                }
+                Data.name=name;
                 Data.email = $scope.Lemail;
 
                 if ($scope.state) {
+                	Data.uid = $scope.message.msg;
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
                     window.location.href = '#/test';
-                    $scope.name = $scope.message.name;
+                    $scope.name = $scope.message.handler_url;
                 } else {
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
@@ -112,7 +117,7 @@ function Indexx($scope, $http, Data) {
                     headers: {
                         "Authorization": Data.token
                     },
-                    data: {"email": $scope.Remail, "pwd": $scope.Rpwd, "name": $scope.name}
+                    data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name}
                 }).success(function (data) {
                     $scope.state = data["state"];//1 true or 0 false
                     Data.token = data["token"];
@@ -412,7 +417,7 @@ function TestPage($scope, $http, Data) {
             headers: {
                 "Authorization": Data.token
             },
-            data: {"user": {"uid": Data.uid}}
+            data: {"uid": Data.uid}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             Data.token = data["token"];
