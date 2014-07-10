@@ -25,6 +25,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'Upgrade'
             }).
+            when('/bank', {
+                templateUrl: 'page.html',
+                controller: 'TestBank'
+            }).
             when('/invite', {
                 templateUrl: 'page.html',
                 controller: 'invite'

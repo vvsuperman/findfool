@@ -10,11 +10,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="test in questions">
-            <td>{{test.id}}</td>
-            <td>{{test.name}}</td>
-            <td>{{test.type}}</td>
-            <td>{{test.score}}</td>
+        <tr ng-repeat="q in qs">
+            <td>{{q.qid}}</td>
+            <td>{{q.name}}</td>
+            <td>{{q.type}}</td>
+            <td>{{q.score}}</td>
             <td><a href="">查看/</a><a href="">修改/</a><a href="">删除</a></td>
         </tr>
         </tbody>

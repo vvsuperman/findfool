@@ -33,14 +33,14 @@ function Indexx($scope, $http, Data) {
                 Data.token = data["token"];
                 var name = $scope.Lemail;
                 $scope.message = data["message"];
-                if(data["message"].handler_url != null && data["message"].handler_url ==""){
-                	name = data["message"].handler_url;
+                if (data["message"].handler_url != null && data["message"].handler_url == "") {
+                    name = data["message"].handler_url;
                 }
-                Data.name=name;
+                Data.name = name;
                 Data.email = $scope.Lemail;
 
                 if ($scope.state) {
-                	Data.uid = $scope.message.msg;
+                    Data.uid = $scope.message.msg;
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
                     window.location.href = '#/test';
@@ -112,31 +112,39 @@ function Indexx($scope, $http, Data) {
     };
     $scope.addhr = function () {
         if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.RVerification) {
-            if (($scope.Rpwd == $scope.Rrepwd) && ($scope.RVerification = $scope.Verification)) {
-
-                $http({
-                    url: "/user/add/hr",
-                    method: 'POST',
-                    headers: {
-                        "Authorization": Data.token
-                    },
-                    data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name}
-                }).success(function (data) {
-                    $scope.state = data["state"];//1 true or 0 false
-                    Data.token = data["token"];
-                    $scope.message = data["message"];
-                    if ($scope.state) {
-                        var child = document.getElementsByClassName("modal-backdrop fade in");
-                        child[0].parentNode.removeChild(child[0]);
-                        window.location.href = '#/test';
-                    } else {
-
-                    }
-                }).error(function () {
-                        alert("网络错误");
-                        window.location.reload(true);
-                    }
-                );
+            if ($scope.Rpwd == $scope.Rrepwd) {
+                if ($scope.RVerification = $scope.Verification) {
+                    $http({
+                        url: "/user/add/hr",
+                        method: 'POST',
+                        headers: {
+                            "Authorization": Data.token
+                        },
+                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name}
+                    }).success(function (data) {
+                        $scope.state = data["state"];//1 true or 0 false
+                        Data.token = data["token"];
+                        $scope.message = data["message"];
+                        if ($scope.state) {
+                            Data.uid = $scope.message.msg;
+                            var child = document.getElementsByClassName("modal-backdrop fade in");
+                            child[0].parentNode.removeChild(child[0]);
+                            window.location.href = '#/test';
+                        } else {
+                            alert($scope.message.msg);
+                            window.location.reload(true);
+                        }
+                    }).error(function () {
+                            alert("网络错误");
+                            window.location.reload(true);
+                        }
+                    );
+                } else {
+                    alert("验证码错误");
+                    $scope.createCode();
+                }
+            } else {
+                alert("密码不相同")
             }
         }
     };
@@ -180,9 +188,13 @@ function Indexx($scope, $http, Data) {
     $scope.btn = function () {
         $scope.show = -($scope.show - 1);
     }
+    $scope.enter = function ($event) {
+        if ($event.keyCode == 13){
+            $scope.confirm()};
+    };
 }
 function TestShow($scope, $http, Data) {
-    $scope.local = false;
+//    $scope.local = false;
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
@@ -220,7 +232,7 @@ function TestShow($scope, $http, Data) {
 
 
 //        TestManage($scope, $scope.tests[$scope.active - 1].id);
-        if ($scope.local == true) {
+    if ($scope.local == true) {
 //            $scope.questions = [{
 //                "id": "1",
 //                "name": "hdh1",
@@ -249,30 +261,30 @@ function TestShow($scope, $http, Data) {
 //                    "score": 4,
 //                    "detail": "i dont know"
 //                }]
-            $http({
-                url: './data/TestManage.json',
-                method: 'GET',
-                data: {'testID': $scope.tests[$scope.active - 1].id}
-            }).success(function (data) {
-                $scope.questions = data.qs;
+        $http({
+            url: './data/TestManage.json',
+            method: 'GET',
+            data: {'testID': $scope.tests[$scope.active - 1].id}
+        }).success(function (data) {
+            $scope.questions = data.qs;
 //            console.log("testManage");
 //            console.log(data);
-            })
-        } else {
-            $http({
-                url: './data/TestManage.json',
-                method: 'GET',
-                data: {'testID': $scope.tests[$scope.active - 1].id}
-            }).success(function (data) {
-                $scope.questions = data.qs;
+        })
+    } else {
+        $http({
+            url: './data/TestManage.json',
+            method: 'GET',
+            data: {'testID': $scope.tests[$scope.active - 1].id}
+        }).success(function (data) {
+            $scope.questions = data.qs;
 //            console.log("testManage");
 //            console.log(data);
-            })
-        }
-        /*.error(function (response, status) {
-         //            console.log('dddd');
-         //            console.log(status)
-         })*/
+        })
+    }
+    /*.error(function (response, status) {
+     //            console.log('dddd');
+     //            console.log(status)
+     })*/
 
     $scope.Invite = function (target) {
         console.log('Invite');
@@ -389,7 +401,7 @@ function nav($scope, Data) {
 
 function TestPage($scope, $http, Data) {
     $scope.url = '#/test';
-
+    $scope.active = 1;
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
@@ -406,20 +418,24 @@ function TestPage($scope, $http, Data) {
             Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
-                $scope.tests = $scope.message.tests
+                $scope.tests = $scope.message.tests;
+                for (var i = 0; i < $scope.tests.length; i++) {
+                    $scope.tests[i].id = i;
+                }
+                console.log($scope.tests);
             } else {
 
             }
         }).error(function (data) {
             $scope.tests = [
-                {id: '1', name: '现在网络错误', detail: 'i dont know'},
-                {id: '2', name: '所以这只是一个', detail: 'i dont know'},
-                {id: '3', name: '样例展示', detail: 'i dont know'},
-                {id: '4', name: 'hh4', detail: 'i dont know'}
+                {quizid: 5, name: '现在网络错误', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
+                {quizid: 5, name: '所以这只是一个', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
+                {quizid: 5, name: '样例展示', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3}
             ];
         });
     };
     $scope.tshow();
+
     $scope.createNewTest = function () {
         $scope.template = 'addtest.html';
         $scope.ContentUs = 'contentUs.html';
@@ -428,37 +444,40 @@ function TestPage($scope, $http, Data) {
     $scope.Invite = function (target) {
         console.log('Invite');
         $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.tid = $scope.tests[$scope.active].quizid;
         $scope.active = target.getAttribute('data');
-        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.name = $scope.tests[$scope.active].name;
         Data.tid = $scope.tid;
         window.location.href = '#/invite';
     };
     $scope.MultInvite = function (target) {
         console.log('MultInvite');
         $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.tid = target.getAttribute('data');
+
         $scope.active = target.getAttribute('data');
-        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.name = $scope.tests[$scope.active].name;
         $scope.template = 'MutleInvite.html';
         $scope.leftBar = 'leftBar.html';
     };
     $scope.Report = function (target) {
         console.log('Report');
         $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
-        $scope.active = target.getAttribute('data');
-        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.tid = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active].name;
         $scope.leftBar = 'leftBar.html';
         $scope.template = 'report.html';
     };
-    $scope.testPage = function (target) {
-        console.log('testPage');
+    $scope.testDetail = function (target) {
+        console.log('testDetail');
         $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
+        console.log($scope.active);
+        console.log($scope.tests[$scope.active]);
+        $scope.tid = $scope.tests[$scope.active].quizid;
+//        $scope.tid = target.getAttribute('data');
         $scope.template = 'testlist.html';
         $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.name = $scope.tests[$scope.active].name;
     };
 
     $scope.createNewTest = function () {
@@ -470,20 +489,45 @@ function TestPage($scope, $http, Data) {
         $scope.template = 'commonsetting.html';
         $scope.ContentUs = 'contentUs.html';
 //        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.tid = $scope.tests[$scope.active].uuid;
 
         $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active - 1].name;
+        $scope.name = $scope.tests[$scope.active].name;
     };
 
     $scope.testPage = function (target) {
         console.log('testPage');
         $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active - 1].id;
+        $scope.tid = $scope.tests[$scope.active - 1].uuid;
         $scope.template = 'testlist.html';
         $scope.leftBar = 'leftBar.html';
         $scope.name = $scope.tests[$scope.active - 1].name;
     };
+    $scope.testManage = function () {
+        $http({
+            url: "/test/manage",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: {"user": {"uid": Data.uid}, "tid": $scope.tid}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+                $scope.qs = $scope.message.qs;
+            } else {
+
+            }
+        }).error(function (data) {
+            $scope.tests = [
+                {quizid: 5, name: '现在网络错误', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
+                {quizid: 5, name: '所以这只是一个', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
+                {quizid: 5, name: '样例展示', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3}
+            ];
+        });
+    }
 }
 function Upgrade($scope) {
     $scope.url = '#/upgrade';
@@ -493,33 +537,52 @@ function Upgrade($scope) {
 }
 
 function TestBank($scope, $http) {
-    if ($scope.local == ture) {
-        $scope.questions = [
-            {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
-            {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
-            {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
-            {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
-        ];
-    } else {
-        $http({
-            url: './data/indexGET.json',
-            method: 'GET'
-        }).success(function (data) {
-            $scope.questions = data.questions;
-        });
-    }
-
-}
-
-function TestBank($scope) {
+    $scope.url = '#/bank';
+    $scope.template = 'testBank.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;
-    $scope.template = $scope.Qtype[0];
+    $scope.questions = [
+        {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
+        {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
+        {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
+        {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
+    ];
+    $scope.Qtype = [
+        { name: '选择题', data: '1'},
+        { name: '编程题', data: '2'},
+        { name: '问答题', data: '3'}
+    ];
+    //$scope.template = $scope.Qtype[0];
     $scope.GoPage = function (target) {
         $scope.show = 1;
         $scope.active = target.getAttribute('data');
         $scope.question = $scope.questionss[target.getAttribute('data') - 1];
     };
+    $scope.navTestBank = function () {
+        $scope.template = 'testBank.html';
+        /*need update*/
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = 'leftBar1.html';
+    };
+    $scope.navmyTestBank = function () {
+        $scope.template = 'mytestBank.html';
+        /*need update*/
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = 'leftBar1.html';
+    };
+
 }
+
+//function TestBank($scope) {
+//    $scope.active = 1;
+//    $scope.template = $scope.Qtype[0];
+//    $scope.GoPage = function (target) {
+//        $scope.show = 1;
+//        $scope.active = target.getAttribute('data');
+//        $scope.question = $scope.questionss[target.getAttribute('data') - 1];
+//    };
+//}
 function MyTestBank($scope) {
     $scope.active = 1;
 

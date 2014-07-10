@@ -1,4 +1,3 @@
-
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -139,7 +138,9 @@
                             <input type="email" class="form-control" id="Cemail" placeholder="Email" ng-model="Cemail">
                         </div>
                     </div>
-                    <button class="btn btn-success  col-md-2 col-sm-2 col-sm-offset-3 col-md-offset-0" ng-click="contactus()">提交</button>
+                    <button class="btn btn-success  col-md-2 col-sm-2 col-sm-offset-3 col-md-offset-0"
+                            ng-click="contactus()">提交
+                    </button>
                     <button class="btn btn-default col-md-2 col-sm-2  col-sm-offset-2 col-md-offset-1">取消</button>
                     {{thx}}
                 </form>
@@ -164,18 +165,21 @@
                         <input type="email" class="form-control" id="Remail" placeholder="Email" ng-model="Remail">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="Rpasswd" placeholder="密码6~20位" ng-model="Rpwd" ng-maxlength=20 ng-minlength=6>
+                        <input type="password" class="form-control" id="passwd" placeholder="密码6~20位" ng-model="Rpwd"
+                               ng-maxlength=20 ng-minlength=6>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="Rrepasswd" placeholder="重复密码" ng-model="Rrepwd"  ng-maxlength=20 ng-minlength=6>
+                        <input type="password" class="form-control" id="repasswd" placeholder="重复密码" ng-model="Rrepwd"
+                               ng-maxlength=20 ng-minlength=6>
                     </div>
                     <div class="form-group">
                         <div class="col-md-4 col-md-offset-1">
-                            <input type="text" class="form-control" id="RVerification" placeholder="请输入右框中的数字" ng-model="RVerification">
+                            <input type="text" class="form-control" id="RVerification" placeholder="请输入右框中的数字"
+                                   ng-model="RVerification">
                         </div>
                         <div class="col-md-4 col-md-offset-1">
                             <a href="" ng-click="createCode()">
-                                <img src="static/logo.png" alt="验证问题" style="height: 40px;width: 200px" >
+                                <img src="static/logo.png" alt="验证问题" style="height: 40px;width: 200px">
                             </a></div>
                     </div>
                 </form>
@@ -199,25 +203,27 @@
                 <h4 class="modal-title" id="LoginLabel">登录</h4>
             </div>
             <div class="modal-body">
-                <form  role="form">
+                <form role="form">
                     <div class="form-group">
                         <!--<label for="exampleInputEmail1"><span class="glyphicon glyphicon-envelope"></span>Email</label>-->
-                        <!--<input name="uemail" type="email" class="form-control" id="email1" placeholder="Email" ng-model="email" required />&lt;!&ndash;http://jsfiddle.net/adamdbradley/Qdk5M/&ndash;&gt;-->
+                        <!--<input name="uemail" type="email" class="form-control" id="email1" placeholder="Email" ng-model="email" required />&lt;!&ndash;http://jsfiddle.net/adamdbradley/Qdk5M/&ndash;&gt;
+                        -->
                         <!--<span ng-show="!myForm.uemail.$valid">输入的Email格式不对</span>-->
                         <!--<span ng-show="myForm.uemail.$error.required">必填</span>-->
                         <!--<span ng-show="myform.uemail.$error.email">email 地址不对</span>-->
 
-                        <input type="email" class="form-control" id="Lemail" placeholder="Email" ng-model="Lemail"> </div>
+                        <input type="email" class="form-control" id="email" placeholder="Email" ng-model="Lemail"></div>
                     <!--<div class="form-group">-->
                     <!--<input type="username" class="form-control" id="usernam" placeholder="User Name">-->
                     <!--</div>-->
                     <div class="form-group">
                         <!--<label for="exampleInputPassword1">Password</label>-->
-                        <input type="password" class="form-control" id="Lpasswd" placeholder="Password" ng-model="Lpwd" ng-maxlength=20 ng-minlength=6/>
+                        <input type="password" class="form-control" id="passwd" placeholder="Password" ng-model="Lpwd"
+                               ng-maxlength=20 ng-minlength=6 ng-keyup="enter($event)"/>
                     </div>
-                    <div >
+                    <div>
                         <label>
-                            <input type="checkbox">记住我
+                            <input type="checkbox" ng-keyup="enter($event)">记住我
                         </label>
                         <button class="btn btn-default pull-right" ng-click="login()">忘记密码</button>
                     </div>
