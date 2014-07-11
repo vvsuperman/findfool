@@ -5,9 +5,17 @@
         {{xlsusers}}
     </div>
     <p><strong>邀请候选人</strong>
-        <button class="btn btn-info pull-right" ng-click="refresh()">增加候选人</button>
+        <button class="btn btn-info pull-right" ng-click="refresh()">清理重复联系人</button>
     </p>
+
     <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
+        <ul class="nav nav-tabs list-group">
+            <li ng-repeat="tl in testlist"
+                ng-class="{true: 'active', false: 'inactive'}[tl==active]">
+                <a href data="{{tl}}" ng-click="selectTest($event.target)">
+                    {{tl}}</a>
+            </li>
+        </ul>
         <table class="table form-inline">
             <thead>
             <tr>
@@ -18,16 +26,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in xlsusers">
+            <tr ng-repeat="user in xlsusers|filterTest:active">
 
                 <!--<tr ng-repeat="(index,user) in xlsusers" >-->
                 <td>
                     <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
-                    <input class="form-control" type="text" value="{{userFname}}" ng-model="user.Fname" style="width: 90%"/>
+                    <input class="form-control" type="text" value="{{userFname}}" ng-model="user.Fname"
+                           style="width: 90%"/>
                 </td>
                 <td><input class="form-control" type="text" value="{{user.Lname}}" ng-model="user.Lname"/></td>
                 <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/></td>
-                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel" style="width: 80%"/>
+                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel"
+                           style="width: 80%"/>
                     <a class="glyphicon glyphicon-plus aa" href="" ng-click="addOne(user)"></a>
                 </td>
 

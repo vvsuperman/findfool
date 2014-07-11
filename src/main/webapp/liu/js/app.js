@@ -43,6 +43,6 @@ OJApp.config(['$routeProvider',
     }]);
 OJApp.factory('Data', function () {
     return {
-        token: "", uid: "", name: "", email: "", tid: ""
+        token: "", uid: "", name: "", email: "", tid: "", tname: ""
     }
 });
