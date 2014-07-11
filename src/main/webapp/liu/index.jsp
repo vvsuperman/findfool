@@ -23,8 +23,6 @@
 <script src="js/angular-route.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controller.js"></script>
-<script src="js/myTestBank.js"></script>
-<script src="js/testBank.js"></script>
 
 <!--<script src="js/showdown.js"></script>-->
 <!--<script src="js/marked.js"></script>-->

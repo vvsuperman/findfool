@@ -33,6 +33,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'invite'
             }).
+            when('/mybank', {
+                templateUrl: 'page.html',
+                controller: 'MyTestBank'
+            }).
             otherwise({
                 redirectTo: '/'
             });
