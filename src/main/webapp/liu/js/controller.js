@@ -571,7 +571,10 @@ function TestBank($scope, $http) {
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = 'leftBar1.html';
     };
-
+    $scope.AddPage = function (target) {
+        $scope.active = target.getAttribute('data');
+        $scope.show = 0;
+    };
 }
 
 //function TestBank($scope) {
