@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -56,10 +56,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invite.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="invite.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/invite.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5017857" vertical-offset="711" max-vertical-offset="4216">
+            <state vertical-scroll-proportion="-10.0" vertical-offset="711" max-vertical-offset="4216">
               <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
               <folding>
                 <element signature="e#488#951#0" expanded="false" />
@@ -93,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invite.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="invite.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/invite.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.55" vertical-offset="1240" max-vertical-offset="3224">
-              <caret line="38" column="49" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.6256881" vertical-offset="434" max-vertical-offset="2976">
+              <caret line="24" column="67" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -161,8 +161,8 @@
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
       </list>
     </option>
   </component>
@@ -1132,7 +1132,7 @@
       <workItem from="1404821584074" duration="4238000" />
       <workItem from="1404905640927" duration="4272000" />
       <workItem from="1404987983912" duration="6272000" />
-      <workItem from="1405041197574" duration="26496000" />
+      <workItem from="1405041197574" duration="26704000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1198,11 +1198,15 @@
       <created>1405088776019</created>
       <updated>1405088776019</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="完成清理重复联系人，下一步上传&#10;">
+      <created>1405094026643</created>
+      <updated>1405094026643</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109946000" />
+    <option name="totallyTimeSpent" value="110154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1288" y="18" width="1296" height="1040" extended-state="6" />
@@ -1299,7 +1303,8 @@
     <MESSAGE value="添加自动路径index.html和index.jsp" />
     <MESSAGE value="update&#10;" />
     <MESSAGE value="邀请页面已全面完成解析任务，下一步上传&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="邀请页面已全面完成解析任务，下一步上传&#10;" />
+    <MESSAGE value="完成清理重复联系人，下一步上传&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成清理重复联系人，下一步上传&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1694,16 +1699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/invite.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.55" vertical-offset="1240" max-vertical-offset="3224">
-          <caret line="38" column="49" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.96" vertical-offset="0" max-vertical-offset="1674">
@@ -1753,7 +1748,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/invite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5017857" vertical-offset="711" max-vertical-offset="4216">
+        <state vertical-scroll-proportion="-10.0" vertical-offset="711" max-vertical-offset="4216">
           <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
           <folding>
             <element signature="e#488#951#0" expanded="false" />
@@ -1764,6 +1759,16 @@
             <element signature="n#!!block;n#handleDragover#0;n#!!block;n#invite#0" expanded="false" />
             <element signature="e#5164#5474#0" expanded="false" />
             <element signature="e#5509#6129#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/invite.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6256881" vertical-offset="434" max-vertical-offset="2976">
+          <caret line="24" column="67" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
