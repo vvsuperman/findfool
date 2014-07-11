@@ -17,7 +17,10 @@ function invite($scope, $http, Data) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
 //        if (i > -1) {
-        $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: ''});
+        if($scope.active=='notSelect') {
+            $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: ''});
+        }else{
+        $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: $scope.active});}
 //        }
 //      $scope.xlsusers.push({Fname: '', Lname: '', email: '', tel: ''}) ;
     };
@@ -35,38 +38,49 @@ function invite($scope, $http, Data) {
     $scope.refresh = function () {
 //    去重
         var tmp = $scope.xlsusers;
-        var list = ['::'];
+        var list = [];
         $scope.testlist = [];
-        var tmpp = [
-            {Fname: '', Lname: '', email: '', tel: '', test: ''}
-        ];
+        var tmpp = [];
         for (var i in tmp) {
             if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
                 list.push(tmp[i].email + "::" + tmp[i].test);
                 tmpp.push(tmp[i]);
-                if ($.inArray(tmp[i].test, $scope.testlist) == -1) {
-                    if (tmp[i].test == '') {
-                        $scope.testlist.push('notSelect');
-                        continue
-                    }
-                    $scope.testlist.push(tmp[i].test);
+
+            }
+            if ($.inArray(tmp[i].test, $scope.testlist) == -1) {
+                if (tmp[i].test == '') {
+                    $scope.testlist.push('notSelect');
+                    continue
                 }
+                $scope.testlist.push(tmp[i].test);
             }
 
 
         }
-        console.log($scope.testlist);
+//        console.log($scope.testlist);
+        $scope.xlsusers = tmpp;
+        for (t in $scope.testlist) {
+            if ($scope.testlist[t] == "notSelect") {
+                $scope.xlsusers.unshift({Fname: '', Lname: '', email: '', tel: '', test: ''});
+            } else {
+                $scope.xlsusers.unshift({Fname: '', Lname: '', email: '', tel: '', test: $scope.testlist[t]})
+            }
+        }
+        var tmp = $scope.xlsusers;
+        var tmpp = [];
+        var list = [];
+        for (var i in tmp) {
+            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
+                list.push(tmp[i].email + "::" + tmp[i].test);
+                tmpp.push(tmp[i]);
+            }
+        }
         $scope.xlsusers = tmpp;
     };
     $scope.refresh();
+//    console.log($scope.testlist);
+
     $scope.active = $scope.testlist[1];
-//    $scope.$watch('xlsusers', function() {
-////        $scope.updated++;
-//
-//        console.log('ddddddddddd');
-//        console.log($scope.xlsusers);
-//        console.log('ddddddddddd');
-//    });
     $scope.selectTest = function (target) {
         $scope.active = target.getAttribute('data');
     };
@@ -186,15 +200,20 @@ function invite($scope, $http, Data) {
 OJApp.filter('filterTest', function () {
     return function (items, v) {
         var r = [];
-        if (v=="notSelect"){v=""};
+        if (v == "notSelect") {
+            v = ""
+        }
+        ;
         angular.forEach(items, function (item) {
             if (item.test == v) {
                 r.push(item);
-            } else {
+            } /*else {
                 if ((item.test == '') && (item.email == '')) {
+                    item.test = v;
                     r.push(item)
                 }
-            }
+            }*/
+
         });
         return r;
     }
