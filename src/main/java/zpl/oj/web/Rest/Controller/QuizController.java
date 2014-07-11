@@ -175,7 +175,7 @@ public class QuizController {
 	@ResponseBody
 	public ResponseBase submitAQuiz(@RequestBody RequestTestSubmit request){
 		ResponseBase rb = new ResponseBase();
-		boolean res = quizService.updateQuiz(request.getTestid(), request.getQids());
+		boolean res = quizService.updateQuiz(request.getQuizid(), request.getQids());
 		
 		ResponseMessage msg = new ResponseMessage();
 		if(res == false){
