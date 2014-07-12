@@ -17,10 +17,11 @@ function invite($scope, $http, Data) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
 //        if (i > -1) {
-        if($scope.active=='notSelect') {
+        if ($scope.active == 'notSelect') {
             $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: ''});
-        }else{
-        $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: $scope.active});}
+        } else {
+            $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: $scope.active});
+        }
 //        }
 //      $scope.xlsusers.push({Fname: '', Lname: '', email: '', tel: ''}) ;
     };
@@ -31,6 +32,15 @@ function invite($scope, $http, Data) {
         if (i > -1) {
             $scope.xlsusers.splice(i, 1);
         }
+//        $scope.xlsusers = tmp;
+    };
+    $scope.removeTest = function (v) {
+        //等待增加功能
+//        var tmp = $scope.xlsusers;
+//        var i = $scope.xlsusers.indexOf(v);
+//        if (i > -1) {
+//            $scope.xlsusers.splice(i, 1);
+//        }
 //        $scope.xlsusers = tmp;
     };
 
@@ -175,14 +185,14 @@ function invite($scope, $http, Data) {
 
     };
 
-    $scope.upload = function () {
+    $scope.upload = function (tid, userlist) {
         $http({
             url: "/test/manage/invite",
             method: 'POST',
             headers: {
                 "Authorization": Data.token
             },
-            data: {"user": {"uid": Data.uid}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": $scope.tid, "invite": $scope.userlist}
+            data: {"user": {"uid": Data.uid}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             Data.token = data["token"];
@@ -195,6 +205,23 @@ function invite($scope, $http, Data) {
         }).error(function (data) {
 
         });
+    };
+
+    $scope.sent = function () {
+        for (tid in $scope.testlist) {
+            var tmp = [];
+            if ($scope.testlist[tid] == 'notSelect') {
+                continue
+            }
+            for (var user in $scope.xlsusers) {
+//                console.log($scope.xlsusers[user])
+                if ($scope.xlsusers[user].test == $scope.testlist[tid]) {
+                    if ($scope.xlsusers[user].email != "")
+                        tmp.push($scope.xlsusers[user]);
+                }
+            }
+            $scope.upload($scope.testlist[tid], tmp);
+        }
     }
 }
 OJApp.filter('filterTest', function () {
@@ -203,16 +230,16 @@ OJApp.filter('filterTest', function () {
         if (v == "notSelect") {
             v = ""
         }
-        ;
         angular.forEach(items, function (item) {
             if (item.test == v) {
                 r.push(item);
-            } /*else {
-                if ((item.test == '') && (item.email == '')) {
-                    item.test = v;
-                    r.push(item)
-                }
-            }*/
+            }
+            /*else {
+             if ((item.test == '') && (item.email == '')) {
+             item.test = v;
+             r.push(item)
+             }
+             }*/
 
         });
         return r;
