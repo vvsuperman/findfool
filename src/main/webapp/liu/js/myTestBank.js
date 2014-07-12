@@ -30,4 +30,26 @@ function MyTestBank($scope) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
     };
+    $scope.addQuestion = function () {
+        $http({
+            url: "/question/add",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: {"user": {"uid": Data.uid}, "question":$scope.newQuestion}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+
+            } else {
+
+            }
+        }).error(function (data) {
+
+        });
+    };
+
 }
