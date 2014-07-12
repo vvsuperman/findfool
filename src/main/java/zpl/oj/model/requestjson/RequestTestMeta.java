@@ -1,6 +1,5 @@
 package zpl.oj.model.requestjson;
 
-import java.util.List;
 
 public class RequestTestMeta {
 

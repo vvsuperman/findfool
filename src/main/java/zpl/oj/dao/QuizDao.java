@@ -15,6 +15,10 @@ public interface QuizDao {
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
   Quiz getQuiz(int tid);
 	
+  @Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS "
+			+ "FROM QUIZ WHERE NAME=#{0} and OWNER = #{1} ORDER BY QUIZID DESC limit 1")
+  Quiz getQuizByOwnerAndName(String name, int uid);  
+	  
 	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO,  UUID, EMAILS "
 			+ "FROM QUIZ WHERE UUID = #{0} ORDER BY QUIZID DESC limit 1")
   Quiz getNewestQuizByUuid(int uuid);
@@ -38,8 +42,9 @@ public interface QuizDao {
     
   @Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS  "
   		+ " FROM (select * from Quiz order by quizid DESC) as b WHERE OWNER=#{0} group by uuid")
-  List<Quiz> getQuizs(int owner);  
-  
+  List<Quiz> getQuizs(int owner);
+
+
   
   
 //  /**主要用于分页，可返回一页的记录*/

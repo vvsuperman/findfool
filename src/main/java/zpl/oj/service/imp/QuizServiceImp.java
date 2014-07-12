@@ -41,7 +41,7 @@ public class QuizServiceImp implements QuizService {
 		detail.setEmails(quiz.getEmails());
 		detail.setExtrainfo(quiz.getExtraInfo());
 		detail.setTesttime(quiz.getTime());
-		detail.setTid(tid);
+		detail.setQuizid(tid);
 		
 		List<Question> qlist = new ArrayList<Question>();
 		List<QuizProblem> qps = quizProblemDao.getQuizProblemsByQuizId(tid);
@@ -65,11 +65,6 @@ public class QuizServiceImp implements QuizService {
 			quiz.setExtraInfo(tm.getExtrainfo());
 			quizDao.updateQuiz(quiz);
 		}
-	}
-
-	@Override
-	public Quiz getQuizMetaInfo(int tid) {
-		return quizDao.getQuiz(tid);
 	}
 
 	@Override
@@ -106,10 +101,19 @@ public class QuizServiceImp implements QuizService {
 		quizDao.insertQuiz(quiz);
 		quiz = quizDao.getNewestQuizByOwner(tm.getUser().getUid());
 		quiz.setUuid(quiz.getQuizid());
-		if(quiz == null)
-			return null;
-		quizDao.updateQuiz(quiz);
+		if(quiz != null)
+			quizDao.updateQuiz(quiz);
 		return quiz;
+	}
+
+	@Override
+	public Quiz getQuizMetaInfoByID(int tid) {
+		return quizDao.getQuiz(tid);
+	}
+
+	@Override
+	public Quiz getQuizMetaInfoByName(String name,int uid) {
+		return quizDao.getQuizByOwnerAndName(name,uid);
 	}
 
 }

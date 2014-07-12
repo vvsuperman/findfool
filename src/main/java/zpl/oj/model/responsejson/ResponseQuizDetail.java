@@ -9,21 +9,27 @@ public class ResponseQuizDetail {
 
 	private List<Question> qs;
 	
-	private int tid;
+	private int quizid;
 	private int testtime;
 	private String extrainfo;
 	private String emails;
+	public ResponseQuizDetail(){
+		extrainfo = null;
+		emails = null;
+		qs = null;
+	}
 	public List<Question> getQs() {
 		return qs;
 	}
 	public void setQs(List<Question> qs) {
 		this.qs = qs;
 	}
-	public int getTid() {
-		return tid;
+
+	public int getQuizid() {
+		return quizid;
 	}
-	public void setTid(int tid) {
-		this.tid = tid;
+	public void setQuizid(int quizid) {
+		this.quizid = quizid;
 	}
 	public int getTesttime() {
 		return testtime;

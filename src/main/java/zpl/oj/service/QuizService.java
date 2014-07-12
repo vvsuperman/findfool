@@ -12,7 +12,9 @@ public interface QuizService {
 	
 	ResponseQuizDetail getQuizDetail(int tid);
 	
-	Quiz getQuizMetaInfo(int tid);
+	Quiz getQuizMetaInfoByID(int tid);
+	
+	Quiz getQuizMetaInfoByName(String name,int uid);
 	
 	void updateQuizMetaInfo(RequestTestMeta tm);
 	
