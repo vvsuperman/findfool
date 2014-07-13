@@ -36,6 +36,9 @@
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.10" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.10" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.10" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-excelant:3.10" />
         </element>
       </element>
     </root>
