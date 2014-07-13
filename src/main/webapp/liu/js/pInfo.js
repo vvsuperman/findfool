@@ -6,6 +6,9 @@ function pInfo($scope, $http, Data) {
     $scope.template = 'profile.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
+    $scope.company = "";
+    $scope.name = "";
+    $scope.tel = "";
     $scope.getInfo = function () {
         $http({
             url: "/user/setting/query",
@@ -46,7 +49,7 @@ function pInfo($scope, $http, Data) {
         $scope.tel = document.getElementById("tel").value;
         $scope.pwd = document.getElementById("pwd").value;
         $scope.newpwd = document.getElementById("newpwd").value;
-        if ($scope.newpwd) {
+        if ($scope.newpwd=="") {
             $scope.newPWD = md5($scope.pwd)
         } else {
             $scope.newPWD = md5($scope.newpwd)

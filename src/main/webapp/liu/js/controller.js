@@ -133,6 +133,8 @@ function Indexx($scope, $http, Data) {
                             Data.email = $scope.Remail;
                             //end bu zpl
                             var child = document.getElementsByClassName("modal-backdrop fade in");
+                            $scope.name=$scope.name;
+                            Data.name=$scope.name;
                             child[0].parentNode.removeChild(child[0]);
                             window.location.href = '#/test';
                         } else {
@@ -437,7 +439,7 @@ function addQuestion($scope) {
     ];
     $scope.goT = function (target) {
         $scope.Tactive = target.getAttribute('data');
-    }
+    };
     $scope.goQ = function (target) {
         $scope.Qactive = target.getAttribute('data');
     }
