@@ -2,8 +2,8 @@
  * Created by liuzheng on 2014/7/11.
  */
 function pInfo($scope, $http, Data) {
-    $scope.url = '#/pInfo';
-    $scope.template = 'user.html';
+    $scope.url = '#/profile';
+    $scope.template = 'profile.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
     $scope.getInfo = function () {
@@ -28,17 +28,28 @@ function pInfo($scope, $http, Data) {
                 Data.name = $scope.name;
                 Data.tel = $scope.tel;
             } else {
-
             }
         }).error(function (data) {
+            alert("测试数据");
+            $scope.email = "liuzheng@ss.ss";
+            $scope.company = "";
+            $scope.name = "";
+            $scope.tel = "";
 
         });
     };
-    $scope.setInfo = function () {
-        if ($scope.repwd) {
+    $scope.getInfo();
+
+    $scope.sendInfo = function () {
+        $scope.name = document.getElementById("name").value;
+        $scope.company = document.getElementById("company").value;
+        $scope.tel = document.getElementById("tel").value;
+        $scope.pwd = document.getElementById("pwd").value;
+        $scope.newpwd = document.getElementById("newpwd").value;
+        if ($scope.newpwd) {
             $scope.newPWD = md5($scope.pwd)
         } else {
-            $scope.newPWD = md5($scope.repwd)
+            $scope.newPWD = md5($scope.newpwd)
         }
         $scope.PWD = md5($scope.pwd);
         $http({
@@ -47,7 +58,8 @@ function pInfo($scope, $http, Data) {
             headers: {
                 "Authorization": Data.token
             },
-            data: {"user": {"uid": Data.uid}, "name": $scope.name, "company": $scope.company, "tel": $scope.tel, "pwd": $scope.PWD, "newPWD": $scope.newPWD}
+            data: {"user": {"uid": Data.uid}, "name": $scope.name, "company": $scope.company, "tel": $scope.tel, "pwd": $scope.PWD, "newPWD": $scope.newPWD }
+
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             Data.token = data["token"];
@@ -61,5 +73,4 @@ function pInfo($scope, $http, Data) {
 
         });
     };
-    $scope.getInfo();
 }

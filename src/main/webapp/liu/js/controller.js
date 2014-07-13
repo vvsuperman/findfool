@@ -230,7 +230,7 @@ function TestShow($scope, $http, Data) {
 //    };
 
 //    $scope.navPersonal = function () {
-//        $scope.template = 'user.html';
+//        $scope.template = 'profile.html';
 //        $scope.ContentUs = 'contentUs.html';
 //        $scope.leftBar = '';
 //    };
