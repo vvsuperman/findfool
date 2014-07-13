@@ -77,7 +77,54 @@ function TestPage($scope, $http, Data) {
         $scope.testManage();
 
     };
+    $scope.pushTest = function(){
+        //检查名字是否为空
+        if($scope.addtest.name == ''){
+            alert("名字不允许为空");
+            return;
+        }
+        var senddata = new Object();
+        senddata.user = new Object();
+        senddata.user.uid=Data.uid;
+        senddata.name = $scope.addtest.name;
+        senddata.testtime = $scope.addtest.time;
+        senddata.extrainfo = ''+($scope.addtest.school == true?'1':'')+
+            ($scope.addtest.prof == true?',2':'')+
+            ($scope.addtest.project == true?',3':'')+
+            ($scope.addtest.link == true?',4':'');
+        senddata.emails = $scope.addtest.eamils+
+            ($scope.addtest.defaultEmail==true? Data.email:'');
 
+        //发送
+        $http({
+            url: "/test/add",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: senddata
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            $scope.message = data["message"];
+            if ($scope.state) {
+                alert('添加成功');
+                //跳转到testdetail
+                console.log('testDetail');
+                $scope.template = 'testlist.html';
+                $scope.leftBar = 'leftBar.html';
+                $scope.name = senddata.name;
+                $scope.tid = $scope.message.msg;
+                Data.tid = $scope.tid;
+                Data.tname = $scope.name;
+                $scope.testManage();
+            } else {
+                alert('error:'+$scope.message.msg);
+            }
+        }).error(function (data) {
+            //relogin
+        });
+
+    };
     $scope.createNewTest = function () {
         $scope.template = 'addtest.html';
         $scope.ContentUs = 'contentUs.html';
@@ -100,56 +147,9 @@ function TestPage($scope, $http, Data) {
         $scope.addtest.defaultEmail = true;
         //邮件列表
         $scope.addtest.eamils = '';
-        
+
         //推向服务器
-        $scope.pushTest = function(){
-        	//检查名字是否为空
-        	if($scope.addtest.name == ''){
-        		alert("名字不允许为空");
-        		return;
-        	}
-        	var senddata = new Object();
-        	senddata.user = new Object();
-        	senddata.user.uid=Data.uid;
-        	senddata.name = $scope.addtest.name;
-        	senddata.testtime = $scope.addtest.time;
-        	senddata.extrainfo = ''+($scope.addtest.school == true?'1':'')+
-        	($scope.addtest.prof == true?',2':'')+
-        	($scope.addtest.project == true?',3':'')+
-        	($scope.addtest.link == true?',4':'');
-        	senddata.emails = $scope.addtest.eamils+
-        				($scope.addtest.defaultEmail==true? Data.email:'');
-        	
-        	//发送
-        	$http({
-                url: "/test/add",
-                method: 'POST',
-                headers: {
-                    "Authorization": Data.token
-                },
-                data: senddata
-            }).success(function (data) {
-                $scope.state = data["state"];//1 true or 0 false
-                $scope.message = data["message"];
-                if ($scope.state) {
-                	alert('添加成功');
-                	//跳转到testdetail
-                    console.log('testDetail');
-                    $scope.template = 'testlist.html';
-                    $scope.leftBar = 'leftBar.html';
-                    $scope.name = senddata.name;
-                    $scope.tid = $scope.message.msg;
-                    Data.tid = $scope.tid;
-                    Data.tname = $scope.name;
-                    $scope.testManage();
-                } else {
-                	alert('error:'+$scope.message.msg);
-                }
-            }).error(function (data) {
-            	//relogin
-            });
-        	
-        };
+        $scope.pushTest()
     };
     $scope.CommonSetting = function () {
         $scope.template = 'commonsetting.html';

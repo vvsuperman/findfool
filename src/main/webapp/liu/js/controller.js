@@ -129,7 +129,7 @@ function Indexx($scope, $http, Data) {
                         if ($scope.state) {
                             Data.uid = $scope.message.msg;
                             //add by zpl
-                            Data.token = $scope.token;
+//                            Data.token = $scope.token;//ignore by lz,token 直接都在Data里的，不走$scope
                             Data.email = $scope.Remail;
                             //end bu zpl
                             var child = document.getElementsByClassName("modal-backdrop fade in");
