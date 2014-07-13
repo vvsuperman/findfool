@@ -17,7 +17,6 @@ function TestPage($scope, $http, Data) {
             data: {"uid": Data.uid}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
                 $scope.tests = $scope.message.tests;
@@ -83,6 +82,74 @@ function TestPage($scope, $http, Data) {
         $scope.template = 'addtest.html';
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
+        //author zpl
+        //这个是处理增加一个测试的对象
+        $scope.addtest = new Object();
+        //增加测试的名字
+        $scope.addtest.name = '';
+        //是否自定义时间
+        $scope.addtest.selfTime = false;
+        //测试所需时间，默认为70
+        $scope.addtest.time = 70;
+        //额外信息
+        $scope.addtest.school = false;
+        $scope.addtest.prof = false;
+        $scope.addtest.project = false;
+        $scope.addtest.link = false;
+        //是否使用默认email
+        $scope.addtest.defaultEmail = true;
+        //邮件列表
+        $scope.addtest.eamils = '';
+        
+        //推向服务器
+        $scope.pushTest = function(){
+        	//检查名字是否为空
+        	if($scope.addtest.name == ''){
+        		alert("名字不允许为空");
+        		return;
+        	}
+        	var senddata = new Object();
+        	senddata.user = new Object();
+        	senddata.user.uid=Data.uid;
+        	senddata.name = $scope.addtest.name;
+        	senddata.testtime = $scope.addtest.time;
+        	senddata.extrainfo = ''+($scope.addtest.school == true?'1':'')+
+        	($scope.addtest.prof == true?',2':'')+
+        	($scope.addtest.project == true?',3':'')+
+        	($scope.addtest.link == true?',4':'');
+        	senddata.emails = $scope.addtest.eamils+
+        				($scope.addtest.defaultEmail==true? Data.email:'');
+        	
+        	//发送
+        	$http({
+                url: "/test/add",
+                method: 'POST',
+                headers: {
+                    "Authorization": Data.token
+                },
+                data: senddata
+            }).success(function (data) {
+                $scope.state = data["state"];//1 true or 0 false
+                $scope.message = data["message"];
+                if ($scope.state) {
+                	alert('添加成功');
+                	//跳转到testdetail
+                    console.log('testDetail');
+                    $scope.template = 'testlist.html';
+                    $scope.leftBar = 'leftBar.html';
+                    $scope.name = senddata.name;
+                    $scope.tid = $scope.message.msg;
+                    Data.tid = $scope.tid;
+                    Data.tname = $scope.name;
+                    $scope.testManage();
+                } else {
+                	alert('error:'+$scope.message.msg);
+                }
+            }).error(function (data) {
+            	//relogin
+            });
+        	
+        };
     };
     $scope.CommonSetting = function () {
         $scope.template = 'commonsetting.html';
@@ -102,16 +169,20 @@ function TestPage($scope, $http, Data) {
         $scope.testManage()
     };
     $scope.testManage = function () {
+    	//add by zpl
+    	var sendData = new Object();
+    	sendData.user = new Object();
+    	sendData.user.uid = Data.uid;
+    	sendData.quizid = Data.tid;
         $http({
             url: "/test/manage",
             method: 'POST',
             headers: {
                 "Authorization": Data.token
             },
-            data: {"user": {"uid": Data.uid}, "tid": $scope.tid, "quizid": $scope.tid}
+            data:sendData
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
                 $scope.qs = $scope.message.qs;

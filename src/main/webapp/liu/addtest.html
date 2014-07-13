@@ -2,29 +2,29 @@
 
     <form class="form-inline" role="form">
         <p>新增测试</p>
-        <p>测试名<input class="form-control"></p>
+        <p>测试名<input class="form-control" ng-model="addtest.name"></p>
         <div class="col-md-6">
             <p>该测试为试用版，为使用更多试题，请<strong>升级</strong>您的账号</p>
             <p>请输入该测试时间：</p>
-            <p>70分钟<input type="checkbox">自定义</input>
-                <input class="form-control" type="text" style="width:80px;">
+            <p>70分钟<input type="checkbox" ng-model="addtest.selfTime">自定义</input>
+                <input ng-enable="addtest.selfTime" ng-model="addtest.time" class="form-control" type="text" style="width:80px;">
 
                 </input>分钟</p>
             <p>候选人需输入的额外信息</p>
             <ul style="list-style-type: none;margin:0">
-                <li><input type="checkbox">学校</input></li>
-                <li><input type="checkbox">特长</input></li>
-                <li><input type="checkbox">项目经验</input></li>
-                <li><input type="checkbox">链接(Github,LinkedIn等)</input></li>
+                <li><input type="checkbox" ng-model="addtest.school">学校</input></li>
+                <li><input type="checkbox" ng-model="addtest.prof">特长</input></li>
+                <li><input type="checkbox" ng-model="addtest.project">项目经验</input></li>
+                <li><input type="checkbox" ng-model="addtest.link">链接(Github,LinkedIn等)</input></li>
             </ul>
         </div>
         <div class="col-md-6">
             <p>请输入需要接受测试报告的邮箱地址：</p>
-            <p><input type="checkbox">默认@email.com</input></p>
-            <textarea class="form-control" rows=8 style="width:100%;resize: none"></textarea>
+            <p><input type="checkbox" ng-model="addtest.defaultEmail">默认@email.com</input></p>
+            <textarea ng-model="addtest.eamils" class="form-control" rows=8 style="width:100%;resize: none"></textarea>
             <p>一个或多个email地址，每行一个地址</p>
 
-            <div class="col-xs-4"><button class="btn btn-info">保存</button></div>
+            <div class="col-xs-4"><button class="btn btn-info" ng-click="pushTest()">保存</button></div>
             <div class="col-xs-4"><button class="btn btn-warning">取消</button></div>
 
         </div>

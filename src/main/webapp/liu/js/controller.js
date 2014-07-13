@@ -128,6 +128,10 @@ function Indexx($scope, $http, Data) {
                         $scope.message = data["message"];
                         if ($scope.state) {
                             Data.uid = $scope.message.msg;
+                            //add by zpl
+                            Data.token = $scope.token;
+                            Data.email = $scope.Remail;
+                            //end bu zpl
                             var child = document.getElementsByClassName("modal-backdrop fade in");
                             child[0].parentNode.removeChild(child[0]);
                             window.location.href = '#/test';

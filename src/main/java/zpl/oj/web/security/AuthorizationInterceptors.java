@@ -50,7 +50,7 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
         if(doFilter){
         	//进行过滤
         	String token = request.getHeader("Authorization");
-            if(null == token || "null".equals(token)){
+            if(null == token || "null".equals(token)||"".equals(token)){
             	//no authorization
             	response.sendError(401);
             }else{
