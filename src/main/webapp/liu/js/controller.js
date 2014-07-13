@@ -192,7 +192,7 @@ function Indexx($scope, $http, Data) {
     $scope.show = 1;
     $scope.btn = function () {
         $scope.show = -($scope.show - 1);
-    }
+    };
     $scope.enter = function ($event) {
         if ($event.keyCode == 13){
             $scope.confirm()};
@@ -372,7 +372,7 @@ function TestShow($scope, $http, Data) {
  }*/
 function nav($scope, Data) {
     $scope.name = Data.name;
-    console.log(Data.name);
+//    console.log(Data.name);
     $scope.navTest = function () {
         $scope.template = 'testshow.html';
         $scope.ContentUs = 'contentUs.html';
