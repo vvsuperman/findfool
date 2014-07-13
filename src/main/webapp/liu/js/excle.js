@@ -55,7 +55,9 @@ function Excel($scope, Data) {
             }
             if ($.inArray(tmp[i].test, $scope.testlist) == -1) {
                 if (tmp[i].test == '') {
-                    $scope.testlist.push('notSelect');
+                    if ($.inArray('notSelect', $scope.testlist) == -1) {
+                        $scope.testlist.push('notSelect');
+                    }
                     continue
                 }
                 $scope.testlist.push(tmp[i].test);
@@ -213,7 +215,7 @@ function Excel($scope, Data) {
         drop.addEventListener('dragover', handleDragover, false);
         drop.addEventListener('drop', handleDrop, false);
     }
-    console.log("excel");
+//    console.log("excel");
 //        };
 
 }

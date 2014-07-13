@@ -2,7 +2,8 @@
     <div class="col-md-4" id="drop">直接将 Excel 2003 文件拖到这里吧</div>
     <div class="col-md-2">下载模版，然后选择上传
         <a class="btn btn-default" href="static/invite.xls">点我下载模版</a>
-        {{xlsusers}}
+        <!--{{testlist}}-->
+        <!--{{xlsusers}}-->
     </div>
     <p><strong>邀请候选人</strong>
         <button class="btn btn-info pull-right" ng-click="refresh()">清理重复联系人</button>
@@ -10,7 +11,7 @@
 
     <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
         <ul class="nav nav-tabs list-group">
-            <li ng-repeat="tl in testlist"
+            <li ng-repeat="tl in testlist track by $index"
                 ng-class="{true: 'active', false: 'inactive'}[tl==active]">
                 <a href data="{{tl}}" ng-click="selectTest($event.target)">
                     {{tl}}</a>
