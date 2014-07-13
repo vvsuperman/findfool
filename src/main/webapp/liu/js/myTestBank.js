@@ -66,16 +66,20 @@ function MyTestBank($scope, $http, Data) {
 
         });
     };
-    $scope.searchmy = function () {
+    $scope.searchmy = function (keyword) {
 //        console.log({"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": $scope.keyword});
 //        try{$scope.keyword = document.getElementById("keyword").value}catch(err){};
+//        $scope.ke=$scope.keyword;
+//        $scope.$apply();
+//        console.log(ke);
+//        console.log($scope.keyword);
         $http({
             url: "/search/my",
             method: 'POST',
             headers: {
                 "Authorization": Data.token
             },
-            data: {"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": $scope.keyword}
+            data: {"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": keyword}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             Data.token = data["token"];

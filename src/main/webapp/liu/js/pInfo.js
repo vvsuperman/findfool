@@ -43,12 +43,12 @@ function pInfo($scope, $http, Data) {
     };
     $scope.getInfo();
 
-    $scope.sendInfo = function () {
-        $scope.name = document.getElementById("name").value;
-        $scope.company = document.getElementById("company").value;
-        $scope.tel = document.getElementById("tel").value;
-        $scope.pwd = document.getElementById("pwd").value;
-        $scope.newpwd = document.getElementById("newpwd").value;
+    $scope.sendInfo = function (name,company,tel,pwd,newpwd) {
+        $scope.name = name;
+        $scope.company = company;
+        $scope.tel = tel;
+        $scope.pwd = pwd;
+        $scope.newpwd = newpwd;
         if ($scope.newpwd=="") {
             $scope.newPWD = md5($scope.pwd)
         } else {
