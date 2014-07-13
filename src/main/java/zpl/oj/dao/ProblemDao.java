@@ -3,7 +3,9 @@ package zpl.oj.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Problem;
@@ -42,6 +44,11 @@ public interface ProblemDao {
 			+ " WHERE creator=${uid} limit ${begin},${end}")
 	  List<Problem> getProblemsByCreator(int uid,int begin,int end);  
 
+	@SelectProvider(type=ProblemDaoSQL.class,method="getCountProblemIdbySetSiteSQL")
+	Integer getCountSiteProblemIdbySet(@Param("setid") Integer setid,@Param("type") Integer type);
+	
+	@SelectProvider(type=ProblemDaoSQL.class,method="getProblemIdbySetSiteSQL")
+	List<Integer> getSiteProblemIdbySet(@Param("setid") Integer setid,@Param("type") Integer type,@Param("begin") Integer begin,@Param("end") Integer end);
 	  
 	  /**主要用于分页，可返回总记录数*/
 	@Select("    select  COUNT(*) FROM PROBLEM"

@@ -12,20 +12,20 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 		<!-- 这个是一个数据源，专门连接数据库的 -->
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+ <!--		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 			<property name="url" value="jdbc:mysql://maven.gettongji.info:3306/ojsite"></property>
 			<property name="username" value="root"></property>
 			<property name="password" value="liuzheng"></property>
 		</bean> 
- <!-- 
+  -->
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 			<property name="url" value="jdbc:mysql://localhost:3306/oj"></property>
 			<property name="username" value="root"></property>
 			<property name="password" value="123456"></property>
 		</bean> 
- -->
+
 		<!-- 这下面都是mybatis的配置 -->
 		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />

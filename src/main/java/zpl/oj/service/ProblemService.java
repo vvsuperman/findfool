@@ -14,4 +14,6 @@ public interface ProblemService {
 	int addProblem(RequestAddQuestion q);
 	
 	ResponseSearchResult getQuestionByTag(RequestSearch s);
+	
+	ResponseSearchResult getQuestionBySetId(RequestSearch s);
 }

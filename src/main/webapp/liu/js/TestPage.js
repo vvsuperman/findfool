@@ -149,7 +149,7 @@ function TestPage($scope, $http, Data) {
         $scope.addtest.eamils = '';
 
         //推向服务器
-        $scope.pushTest()
+        //$scope.pushTest()
     };
     $scope.CommonSetting = function () {
         $scope.template = 'commonsetting.html';
