@@ -47,7 +47,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
         <p><strong>Customize the invitation email to your candidates:</strong></p>
 
         <p>From:</p>
@@ -55,22 +55,7 @@
         <p>Reply To:<input type="text"/></p>
 
         <p>Subject:<input type="text"/></p>
-        Hello [FIRST_NAME] [LAST_NAME],
-        <br/>
-        In order to assess your programming skills we've prepared a programming challenge that we would like you to
-        complete.
-        <br/>
-        The following link takes you to your test:
-        <br/>
-        [PRIVATE_TEST_LINK]
-        <br/>
-        After clicking the link you will be able to choose to start the test, practice with a demo test or come back
-        later.
-        <br/>
-        Best of luck!
-        <br/>
-        Regards,<br/>
-        [COMPANY_NAME]
+        <div ng-include src="'mdeditor.html'" ng-controller="mdeditor"></div>
         <div class="pull-right">
             <button class="btn btn-default">Cancel</button>
             <button class="btn btn-default">Preview</button>

@@ -136,3 +136,26 @@ input.ng-valid {
 .quizquestion li:hover div,.quizquestion li div:hover div{visibility:visible;}/*鼠标经过ul时，显示li的内容*/
 .quizquestion li div a{margin-right:10px;color:#333;}
 .quizquestion li {color:#333;margin-top:10px;margin-bottom:10px;margin-left:-17px;width:100%;display:block;height:40px;line-height:25px;background:#eee;border:#dfdfdf 1px solid;text-decoration:none;text-indent:10px;}
+
+
+/* sprite button slicing style information */
+#wmd-button-bar { width: 560px; background-color: #FEFEFE; border: 1px solid #EFEFEF; margin-bottom: 4px; padding: 4px; }
+#wmd-button-bar #wmd-button-row { position: relative; margin: 10px 5px 5px 5px; padding: 0px; height: 20px; background: #fff; }
+#wmd-button-bar #wmd-button-row .wmd-button { width: 20px; height: 20px; margin-left: 5px; margin-right: 5px; position: absolute; background: url(../static/wmd-buttons.png) no-repeat; display: inline-block; list-style: none; }
+#wmd-button-bar #wmd-button-row .wmd-spacer { width: 1px; height: 20px; margin-left: 14px; position: absolute; background-color: Silver; display: inline-block; list-style: none; }
+#wmd-button-bar #wmd-button-row #wmd-bold-button { left: 0px; background-position: 0px 0; }
+#wmd-button-bar #wmd-button-row #wmd-italic-button { left: 25px; background-position: -20px 0; }
+#wmd-button-bar #wmd-button-row #wmd-spacer1 { left: 50px; }
+#wmd-button-bar #wmd-button-row #wmd-link-button { left: 75px; background-position: -40px 0; }
+#wmd-button-bar #wmd-button-row #wmd-quote-button { left: 100px; background-position: -60px 0; }
+#wmd-button-bar #wmd-button-row #wmd-code-button { left: 125px; background-position: -80px 0; }
+#wmd-button-bar #wmd-button-row #wmd-image-button { left: 150px; background-position: -100px 0; }
+#wmd-button-bar #wmd-button-row #wmd-spacer2 { left: 175px; }
+#wmd-button-bar #wmd-button-row #wmd-olist-button { left: 200px; background-position: -120px 0; }
+#wmd-button-bar #wmd-button-row #wmd-ulist-button { left: 225px; background-position: -140px 0; }
+#wmd-button-bar #wmd-button-row #wmd-heading-button { left: 250px; background-position: -160px 0; }
+#wmd-button-bar #wmd-button-row #wmd-hr-button { left: 275px; background-position: -180px 0; }
+#wmd-button-bar #wmd-button-row #wmd-spacer3 { left: 300px; }
+#wmd-button-bar #wmd-button-row #wmd-undo-button { left: 325px; background-position: -200px 0; }
+#wmd-button-bar #wmd-button-row #wmd-redo-button { left: 350px; background-position: -220px 0; }
+#wmd-button-bar #wmd-button-row #wmd-help-button { right: 0px; display: none; background-position: -240px 0; }

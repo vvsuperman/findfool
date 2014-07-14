@@ -133,8 +133,8 @@ function Indexx($scope, $http, Data) {
                             Data.email = $scope.Remail;
                             //end bu zpl
                             var child = document.getElementsByClassName("modal-backdrop fade in");
-                            $scope.name=$scope.name;
-                            Data.name=$scope.name;
+                            $scope.name = $scope.name;
+                            Data.name = $scope.name;
                             child[0].parentNode.removeChild(child[0]);
                             window.location.href = '#/test';
                         } else {
@@ -196,8 +196,10 @@ function Indexx($scope, $http, Data) {
         $scope.show = -($scope.show - 1);
     };
     $scope.enter = function ($event) {
-        if ($event.keyCode == 13){
-            $scope.confirm()};
+        if ($event.keyCode == 13) {
+            $scope.confirm()
+        }
+        ;
     };
 }
 function TestShow($scope, $http, Data) {
@@ -404,7 +406,6 @@ function nav($scope, Data) {
         $scope.leftBar = '';
     };
 }
-
 
 
 function Upgrade($scope) {
@@ -617,14 +618,25 @@ function editor($scope, $http, $sce, $timeout) {
 
 
 }
+function mdeditor($scope) {
+    $scope.text="Hello [FIRST_NAME] [LAST_NAME],<br/>In order to assess your programming skills we've prepared a programming challenge that we would like you to complete. <br/>    The following link takes you to your test:<br/> [PRIVATE_TEST_LINK] <br/>  After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.  <br/>  Best of luck!  <br/> Regards,<br/>  [COMPANY_NAME]";
+    $scope.copyHTML = function () {
 
-function sign($scope) {
-    $scope.active = 0;
-    $scope.GoPage = function () {
-        $scope.active = 1 - $scope.active;
+        $scope.html = document.getElementById("wmd-output").innerText;
+        console.log($scope.html);
+    };
+    $scope.clean = function () {
+        $scope.text = "";
+        document.getElementById("wmd-output").innerHTML = "<pre><code></code></pre>";
+        $scope.html = "";
+    };
+    function sign($scope) {
+        $scope.active = 0;
+        $scope.GoPage = function () {
+            $scope.active = 1 - $scope.active;
+        }
     }
 }
-
 function personal($scope, $http) {
     if ($scope.local == true) {
         $scope.personal = {
