@@ -628,6 +628,8 @@ function mdeditor($scope) {
     $scope.clean = function () {
         $scope.text = "";
         document.getElementById("wmd-output").innerHTML = "<pre><code></code></pre>";
+        document.getElementById("wmd-preview").innerHTML = "";
+        document.getElementById("wmd-input").value="";
         $scope.html = "";
     };
     function sign($scope) {
