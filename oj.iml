@@ -15,19 +15,6 @@
         </sourceRoots>
       </configuration>
     </facet>
-    <facet type="Spring" name="Spring">
-      <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config-dao.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config-util.xml</file>
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/learn-servlet.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring-config-service.xml</file>
-        </fileset>
-      </configuration>
-    </facet>
-    <facet type="Python" name="Python">
-      <configuration sdkName="" />
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
