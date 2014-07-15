@@ -100,7 +100,7 @@ function Excel($scope, Data) {
             data: {"user": {"uid": Data.uid}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
+            //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
 

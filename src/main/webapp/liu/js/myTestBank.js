@@ -154,6 +154,7 @@ function MyTestBank($scope, $http, Data) {
 //        }).error(function (data) {
 //
 //        });
+
     };
     $scope.searchmy = function (keyword) {
 //        console.log({"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": $scope.keyword});

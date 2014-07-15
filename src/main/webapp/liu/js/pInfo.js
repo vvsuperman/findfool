@@ -19,7 +19,7 @@ function pInfo($scope, $http, Data) {
             data: {"uid": Data.uid}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
+            //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
                 $scope.email = $scope.message.email;
@@ -65,7 +65,7 @@ function pInfo($scope, $http, Data) {
 
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
+            //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
                 alert($scope.message.msg)
