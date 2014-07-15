@@ -167,4 +167,30 @@ public class ProblemServiceImp implements ProblemService{
 		return res;
 	}
 
+	@Override
+	public ResponseSearchResult getQuestionByUser(RequestSearch s) {
+		ResponseSearchResult res = new ResponseSearchResult();
+
+		List<Question> questions = new ArrayList<Question>();
+		int begin = (s.getPage()-1)*s.getPageNum();
+		int end = s.getPage()*s.getPageNum();
+		Integer total = problemDao.getCountUserProblemIdbyUid(s.getUser().getUid(), s.getType());
+		if(end > total){
+			end = total;
+		}
+		List<Integer> tp = problemDao.getUserProblemIdbyUid(s.getUser().getUid(), s.getType(), begin, end);
+
+		for(Integer i:tp){
+			Question question = getProblemById(i);			
+			if (question !=null){
+				questions.add(question);
+			}
+		}
+		res.setCurPage(s.getPage());
+		res.setPageNum(s.getPageNum());
+		res.setTotalPage(total);
+		res.setQuestions(questions);
+		return res;
+	}
+
 }
