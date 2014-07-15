@@ -152,6 +152,7 @@ public class ProblemServiceImp implements ProblemService{
 		if(end > total){
 			end = total;
 		}
+		end = (end -begin) == 0? 1:(end -begin);
 		List<Integer> tp = problemDao.getSiteProblemIdbySet(s.getSetid(), s.getType(), begin, end);
 
 		for(Integer i:tp){
@@ -178,6 +179,7 @@ public class ProblemServiceImp implements ProblemService{
 		if(end > total){
 			end = total;
 		}
+		end = (total -begin) == 0? 1:(total -begin);
 		List<Integer> tp = problemDao.getUserProblemIdbyUid(s.getUser().getUid(), s.getType(), begin, end);
 
 		for(Integer i:tp){
