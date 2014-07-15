@@ -15,7 +15,7 @@ function TestBank($scope, $http,Data) {
 	$scope.reciveData.pageNum = 1;//默认一页10个
 	$scope.reciveData.type = 1;
 	$scope.reciveData.keyword = '';
-	$scope.reciveData.pagelist;
+	$scope.reciveData.pagelist = new Array();
 	$scope.reciveData.frontPage = false;
 	$scope.reciveData.rearPage = false;
 	$scope.reciveData.currentPage = 1;
@@ -135,8 +135,9 @@ function TestBank($scope, $http,Data) {
     }
     //载入页面时候向服务器获取试题集
     $scope.getSets();
-    $scope.queryQuestions(1);
     $scope.computePage();
+    $scope.queryQuestions(1);
+    
     
     //end by zpl
    

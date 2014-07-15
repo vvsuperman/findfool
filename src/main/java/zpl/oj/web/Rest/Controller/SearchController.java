@@ -56,7 +56,12 @@ public class SearchController {
 	public ResponseBase searchMy(@RequestBody RequestSearch request){
 		ResponseBase rb = new ResponseBase();
 		request.setBelong(request.getUser().getUid());
-		ResponseSearchResult res = problemService.getQuestionByTag(request);
+		ResponseSearchResult res = null;
+		if(request.getKeyword() == null || "".equals(request.getKeyword())){
+			res = problemService.getQuestionByUser(request);
+		}else{
+			res = problemService.getQuestionByTag(request);
+		}
 		rb.setState(1);
 		rb.setMessage(res);
 		return rb;

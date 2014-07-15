@@ -31,4 +31,34 @@ public class ProblemDaoSQL {
 		return sql;
 		
 	}
+	
+	
+	public String getCountProblemIdbySetUserSQL(Map<String,Object>  para){
+		String sql = "select count(*) from problem"
+			+ " where belong=1";
+		if(para.get("type") != null){
+			sql += " and type="+para.get("type");
+		}
+		if(para.get("uid") != null){
+			sql += " and creator="+para.get("uid");
+		}
+		return sql;
+		
+	}
+	
+	public String getProblemIdbySetUserSQL(Map<String,Object>  para){
+		String sql = "select problem_id from problem"
+			+ " where belong=1";
+		if(para.get("type") != null){
+			sql += " and type="+para.get("type");
+		}
+		if(para.get("uid") != null){
+			sql += " and creator="+para.get("uid");
+		}
+		if(para.get("begin") != null &&para.get("end") != null){
+			sql += " limit "+para.get("begin")+","+para.get("end");
+		}
+		return sql;
+		
+	}
 }
