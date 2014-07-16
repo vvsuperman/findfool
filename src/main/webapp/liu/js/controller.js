@@ -199,8 +199,13 @@ function Indexx($scope, $http, Data) {
         if ($event.keyCode == 13) {
             $scope.confirm()
         }
-        ;
     };
+}
+function aceEditor($scope) {
+    $scope.url="#/editor";
+    $scope.template = 'editor.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
 }
 function TestShow($scope, $http, Data) {
 //    $scope.local = false;
