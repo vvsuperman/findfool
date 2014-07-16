@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
+    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="invite 还是得按原来的。。。">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" />
@@ -36,7 +36,7 @@
       <file leaf-file-name="controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="12.84" vertical-offset="14457" max-vertical-offset="16399">
+            <state vertical-scroll-proportion="24.0" vertical-offset="14736" max-vertical-offset="16399">
               <caret line="626" column="4" selection-start-line="626" selection-start-column="4" selection-end-line="626" selection-end-column="4" />
               <folding>
                 <element signature="n#!!block;n#editor#0" expanded="false" />
@@ -49,8 +49,8 @@
       <file leaf-file-name="ShowEditor.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/ShowEditor.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="620" max-vertical-offset="1209">
-              <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="21" selection-end-column="33" />
+            <state vertical-scroll-proportion="-2.325" vertical-offset="713" max-vertical-offset="1302">
+              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -59,8 +59,8 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.675" vertical-offset="725" max-vertical-offset="1550">
-              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.3" vertical-offset="1066" max-vertical-offset="1581">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -110,27 +110,27 @@
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/invite.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.3" vertical-offset="2027" max-vertical-offset="2511">
-              <caret line="65" column="22" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
+              <caret line="65" column="13" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invite.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="invite.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/invite.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5938" max-vertical-offset="8060">
-              <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.47328246" vertical-offset="0" max-vertical-offset="1147">
+              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="excle.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="excle.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/excle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3507014" vertical-offset="6242" max-vertical-offset="7192">
-              <caret line="201" column="5" selection-start-line="201" selection-start-column="5" selection-end-line="201" selection-end-column="5" />
+            <state vertical-scroll-proportion="4.84" vertical-offset="6693" max-vertical-offset="7192">
+              <caret line="214" column="29" selection-start-line="214" selection-start-column="29" selection-end-line="214" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -191,11 +191,11 @@
         <option value="$PROJECT_DIR$/src/main/webapp/liu/mdeditor.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/excle.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" />
       </list>
     </option>
   </component>
@@ -1174,7 +1174,7 @@
       <workItem from="1405340257127" duration="3413000" />
       <workItem from="1405433595051" duration="3462000" />
       <workItem from="1405509238652" duration="310000" />
-      <workItem from="1405516550144" duration="1784000" />
+      <workItem from="1405516550144" duration="2138000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1304,11 +1304,15 @@
       <created>1405434619978</created>
       <updated>1405434619978</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="invite 还是得按原来的。。。">
+      <created>1405521259285</created>
+      <updated>1405521259285</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153660000" />
+    <option name="totallyTimeSpent" value="154014000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1418,7 +1422,8 @@
     <MESSAGE value="invite页面里面编辑页面可以很好的展示" />
     <MESSAGE value="修复一些invite内容框的bug&#10;" />
     <MESSAGE value="注释token" />
-    <option name="LAST_COMMIT_MESSAGE" value="注释token" />
+    <MESSAGE value="invite 还是得按原来的。。。" />
+    <option name="LAST_COMMIT_MESSAGE" value="invite 还是得按原来的。。。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1747,14 +1752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/ShowEditor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="620" max-vertical-offset="1209">
-          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="21" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring-config-dao.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19871795" vertical-offset="527" max-vertical-offset="5022">
@@ -1781,7 +1778,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="12.84" vertical-offset="14457" max-vertical-offset="15655">
+        <state vertical-scroll-proportion="24.0" vertical-offset="14736" max-vertical-offset="16399">
           <caret line="626" column="4" selection-start-line="626" selection-start-column="4" selection-end-line="626" selection-end-column="4" />
           <folding>
             <element signature="n#!!block;n#editor#0" expanded="false" />
@@ -1790,18 +1787,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/invite.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/ShowEditor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5938" max-vertical-offset="8060">
-          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+        <state vertical-scroll-proportion="-2.325" vertical-offset="713" max-vertical-offset="1302">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.675" vertical-offset="725" max-vertical-offset="1550">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.3" vertical-offset="1066" max-vertical-offset="1581">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1809,15 +1806,23 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/invite.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3" vertical-offset="2027" max-vertical-offset="2511">
-          <caret line="65" column="22" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
+          <caret line="65" column="13" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/excle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3507014" vertical-offset="6242" max-vertical-offset="7192">
-          <caret line="201" column="5" selection-start-line="201" selection-start-column="5" selection-end-line="201" selection-end-column="5" />
+        <state vertical-scroll-proportion="4.84" vertical-offset="6693" max-vertical-offset="7192">
+          <caret line="214" column="29" selection-start-line="214" selection-start-column="29" selection-end-line="214" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/invite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47328246" vertical-offset="0" max-vertical-offset="1147">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
           <folding />
         </state>
       </provider>
