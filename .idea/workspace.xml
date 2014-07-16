@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="invite 还是得按原来的。。。">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/invite.js" />
+    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -1174,7 +1171,7 @@
       <workItem from="1405340257127" duration="3413000" />
       <workItem from="1405433595051" duration="3462000" />
       <workItem from="1405509238652" duration="310000" />
-      <workItem from="1405516550144" duration="2138000" />
+      <workItem from="1405516550144" duration="2146000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1308,11 +1305,15 @@
       <created>1405521259285</created>
       <updated>1405521259285</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="invite 还是得按原来的。。。">
+      <created>1405521591274</created>
+      <updated>1405521591274</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154014000" />
+    <option name="totallyTimeSpent" value="154022000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
