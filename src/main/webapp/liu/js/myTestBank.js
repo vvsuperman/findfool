@@ -24,7 +24,8 @@ function MyTestBank($scope, $http, Data) {
 	$scope.reciveData.currentPage = 1;
 	$scope.reciveData.index = 1;
 	$scope.reciveData.choosedQ = null;
-	
+	$scope.progrma = new Object();
+	$scope.progrma.show = false;
 	$scope.newQuestion = null;
 	
     $scope.Qtype = [
@@ -134,10 +135,14 @@ function MyTestBank($scope, $http, Data) {
         $scope.newQuestion.context = "";
         $scope.newQuestion.answer = new Array();
         $scope.newQuestion.tag = "";
+        
         var ans = new Object();
         ans.text="";
         ans.score=0;
-        ans.isright=false;
+        if($scope.active == "1")
+        	ans.isright=false;
+        else
+        	ans.isright = "";
         $scope.newQuestion.answer.push(ans);
         var tags = "";
         $scope.newQuestion.tag = tags;
@@ -151,7 +156,7 @@ function MyTestBank($scope, $http, Data) {
     	$scope.newQuestion.name = $scope.reciveData.choosedQ.name;
     	$scope.newQuestion.context = $scope.reciveData.choosedQ.context;
         var ans = $scope.reciveData.choosedQ.answer;
-        if($scope.newQuestion.type == 0){
+        if($scope.newQuestion.type == 1){
             for(a in ans){
             	a.isright = (a.isright == "0"?false:true);
             }     	
@@ -172,7 +177,7 @@ function MyTestBank($scope, $http, Data) {
     $scope.isNum = function(q){
     	if(q == null || q=="")
     		return;
-    	var r = /^\+?[1-9][0-9]*$/;
+    	var r = /^\+?[0-9][0-9]*$/;
         if(!r.test(q)){
         	alert("必须是数字！")
         	q = 0;
@@ -203,9 +208,12 @@ function MyTestBank($scope, $http, Data) {
     $scope.addQuestion = function () {
         $scope.newQuestion.type = parseInt($scope.active);
         var ans = $scope.newQuestion.answer;
-        for(a in ans){
-        	a.isright = (a.isright == false?"0":"1");
+        if($scope.active == "1"){
+            for(a in ans){
+            	a.isright = (a.isright == false?"0":"1");
+            }    	
         }
+
         var tags = $scope.newQuestion.tag.split(",");
         $scope.newQuestion.tag = tags;
         
@@ -217,59 +225,24 @@ function MyTestBank($scope, $http, Data) {
     $scope.cancel = function(){
     	$scope.show="1";
     }
+    $scope.resetQuestion = function(){
+        $scope.newQuestion = new Object();
+        $scope.newQuestion.context = "";
+        $scope.newQuestion.answer = new Array();
+        $scope.newQuestion.tag = "";
+        var ans = new Object();
+        ans.text="";
+        ans.score=0;
+        if($scope.active == "1")
+        	ans.isright=false;
+        else
+        	ans.isright = "";
+        $scope.newQuestion.answer.push(ans);
+        var tags = "";
+        $scope.newQuestion.tag = tags;
+    }
     $scope.searchmy = function (keyword) {
-//        console.log({"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": $scope.keyword});
-//        try{$scope.keyword = document.getElementById("keyword").value}catch(err){};
-//        $scope.ke=$scope.keyword;
-//        $scope.$apply();
-//        console.log(ke);
-//        console.log($scope.keyword);
-//        $http({
-//            url: "/search/my",
-//            method: 'POST',
-//            headers: {
-//                "Authorization": Data.token
-//            },
-//            data: {"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": keyword}
-//        }).success(function (data) {
-//            $scope.state = data["state"];//1 true or 0 false
-//            Data.token = data["token"];
-//            $scope.message = data["message"];
-//            if ($scope.state) {
-////仅需要对message中的数据做处理
-//                $scope.curPage = $scope.message.curPage;
-//                $scope.pageNum = $scope.message.pageNum;
-//                $scope.totalPage = $scope.message.totalPage;
-//                $scope.qs = $scope.message.questions;
-//
-//            } else {
-//
-//            }
-//        }).error(function (data) {
-//            $scope.qs = [
-//                {qid: 1, name: '第一个测试', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]},
-//                {qid: 2, name: 'hdh2', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]},
-//                {qid: 3, name: 'hdh3', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]},
-//                {qid: 4, name: 'hdh4', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]}
-//            ];
-//        });
-//        $scope.keyword =""
+
     };
 //    $scope.searchmy();
 
@@ -277,19 +250,17 @@ function MyTestBank($scope, $http, Data) {
         var ans = new Object();
         ans.text="";
         ans.score=0;
-        ans.isright=false;
+        if($scope.active == "1")
+        	ans.isright=false;
+        else
+        	ans.isright = "";
         $scope.newQuestion.answer.push(ans);
     };
 
     $scope.removeOne = function (v) {
-//        var tmp = $scope.xlsusers;
-//        console.log(v);
-//        var i = $scope.newQuestion.answer.indexOf(v);
-//        console.log(i);
+
         if (v > 0) {
             $scope.newQuestion.answer.splice(v, 1);
         }
-//        $scope.xlsusers = tmp;
-//        Data.xlsusers=$scope.xlsusers;
     };
 }

@@ -76,7 +76,7 @@
                 </ol>
                 <div class="btn-group-justified" style="padding: 70px">
                     <a class="btn btn-default " ng-click="addQuestion()">保存</a>
-                    <a class="btn btn-default">重置</a>
+                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
                     <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
             </form>
@@ -91,33 +91,52 @@
             <p>题干</p>
 
             <form class="form-inline" role="form">
-                <textarea class="form-control" type="text" rows=18 style="width: 100% ;resize: none"></textarea>
+                <textarea class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>
 
                 <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control">
                 </p>
                 <ul>
-                    <input type="radio">测试用例
-                    <input type="radio">无测试用例
+                    <input type="radio" ng-model="progrma.show" ng-value="true" />测试用例
+                    <input type="radio" ng-model="progrma.show" ng-value="false" />无测试用例
                 </ul>
-                <div class="col-md-5 col-md-offset-1">
-                    <p>输入</p>
-                    <textarea class="form-control" name="" id="" cols="35" rows="10" style="resize: none"></textarea>
-                </div>
-                <div class="col-md-5 col-md-offset-1">
-                    <p>输出</p>
-                    <textarea class="form-control" name="" id="" cols="35" rows="10" style="resize: none"></textarea>
-                </div>
-                <p>语言选择</p>
-                <ul>
-                    <input type="radio">C
-                    <input type="radio">Java
+                <button class="btn btn-default" ng-class="{true:'', false: 'hedden'}[progrma.show]" ng-click="addOne()">新增测试用例</button>
+                <div style="list-style-type:upper-alpha;width: 100% ;" ng-class="{true:'', false: 'hedden'}[newQuestion.show]">
+                    <li ng-repeat="ans in newQuestion.answer">
+                        <div class="col-md-12">		                 
+                        <div class="col-md-5">
+		                    <p>输入</p>
+		                   <input type="text" style="width: 100%" class="form-control" ng-model="ans.text">
+		                </div>
+		                <div class="col-md-4">
+		                    <p>输出</p>
+		                    <input type="text" style="width: 100%" class="form-control" ng-model="ans.isright">
+		                </div>
+		                <div class="col-md-3">
+		                	<p>分数</p>
+		                <input type="text"  style="width: 80%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)" />
+		                <button class="glyphicon glyphicon-remove aa"
+		                           ng-click="removeOne($index)"></button>  		                
+		                </div>
 
-                </ul>
+		                </div>
+
+                    </li>
+                </div>
+
+				<div div class="btn-group-justified">
+					<p>语言选择</p>
+	                <ul>
+	                    <input type="radio">C
+	                    <input type="radio">Java
+	
+	                </ul>
+				</div>
+
 
                 <div class="btn-group-justified" style="padding: 70px">
-                    <a class="btn btn-default ">保存</a>
-                    <a class="btn btn-default">重置</a>
-                    <a class="btn btn-default">取消</a>
+                    <a class="btn btn-default " ng-click="addQuestion()">保存</a>
+                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
+                    <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
             </form>
         </div>
