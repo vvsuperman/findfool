@@ -13,6 +13,8 @@ public interface ProblemService {
 	//增加一个problem
 	int addProblem(RequestAddQuestion q);
 	
+	int modifyProblem(RequestAddQuestion q);
+	
 	ResponseSearchResult getQuestionByTag(RequestSearch s);
 	
 	ResponseSearchResult getQuestionBySetId(RequestSearch s);

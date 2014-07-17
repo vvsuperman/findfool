@@ -116,4 +116,9 @@ public class QuizServiceImp implements QuizService {
 		return quizDao.getQuizByOwnerAndName(name,uid);
 	}
 
+	@Override
+	public List<QuizProblem> getQuizsByProblemId(Integer pid) {
+		return quizProblemDao.getQuizProblemsByProblemId(pid);
+	}
+
 }

@@ -23,6 +23,10 @@ function MyTestBank($scope, $http, Data) {
 	$scope.reciveData.rearPage = false;
 	$scope.reciveData.currentPage = 1;
 	$scope.reciveData.index = 1;
+	$scope.reciveData.choosedQ = null;
+	
+	$scope.newQuestion = null;
+	
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
@@ -126,35 +130,93 @@ function MyTestBank($scope, $http, Data) {
     $scope.AddPage = function (target) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
+        $scope.newQuestion = new Object();
+        $scope.newQuestion.context = "";
+        $scope.newQuestion.answer = new Array();
+        $scope.newQuestion.tag = "";
+        var ans = new Object();
+        ans.text="";
+        ans.score=0;
+        ans.isright=false;
+        $scope.newQuestion.answer.push(ans);
+        var tags = "";
+        $scope.newQuestion.tag = tags;
+        console.log($scope.newQuestion);
     };
+    $scope.modifyQuestion = function() {
+    	$scope.show="0";
+    	console.log($scope.reciveData.choosedQ);
+    	$scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+    	$scope.newQuestion.type = $scope.reciveData.choosedQ.type;
+    	$scope.newQuestion.name = $scope.reciveData.choosedQ.name;
+    	$scope.newQuestion.context = $scope.reciveData.choosedQ.context;
+        var ans = $scope.reciveData.choosedQ.answer;
+        if($scope.newQuestion.type == 0){
+            for(a in ans){
+            	a.isright = (a.isright == "0"?false:true);
+            }     	
+        }
+        $scope.newQuestion.answer=ans;
+        var tags = "";
+        for(var i=0;i<$scope.reciveData.choosedQ.tag.length;i++){
+        	if(i ==0){
+        		tags += $scope.reciveData.choosedQ.tag[i];
+        	}else{
+        		tags += "&";
+        		tags += $scope.reciveData.choosedQ.tag[i];
+        	}
+        }
+        $scope.newQuestion.tag = tags;
+        console.log($scope.newQuestion);    	
+    }
+    $scope.isNum = function(q){
+    	if(q == null || q=="")
+    		return;
+    	var r = /^\+?[1-9][0-9]*$/;
+        if(!r.test(q)){
+        	alert("必须是数字！")
+        	q = 0;
+        }
+    }
+    $scope.pushQuestion = function(sendData){
+    	$http({
+            url: "/question/add",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: sendData
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            if(data["token"] != "" && data["token"] != null)
+            	Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+            	alert('添加成功');
+            } else {
+            	alert('添加失败');
+            }
+        }).error(function (data) {
+
+        });
+    }
     $scope.addQuestion = function () {
-//        $scope.newQuestion.type = $scope.active;
-//        $scope.newQuestion.name = "null";
-////        var tag = $scope.tag;
-////        console.log(tag);
-//        $scope.newQuestion.tag = document.getElementById("tag").value.split(",");
-////        $scope.newQuestion.tag = tag.split(",");
-////        console.log($scope.newQuestion.tag)
-//        $http({
-//            url: "/question/add",
-//            method: 'POST',
-//            headers: {
-//                "Authorization": Data.token
-//            },
-//            data: {"user": {"uid": Data.uid}, "question": $scope.newQuestion}
-//        }).success(function (data) {
-//            $scope.state = data["state"];//1 true or 0 false
-//            Data.token = data["token"];
-//            $scope.message = data["message"];
-//            if ($scope.state) {
-//
-//            } else {
-//
-//            }
-//        }).error(function (data) {
-//
-//        });
+        $scope.newQuestion.type = parseInt($scope.active);
+        var ans = $scope.newQuestion.answer;
+        for(a in ans){
+        	a.isright = (a.isright == false?"0":"1");
+        }
+        var tags = $scope.newQuestion.tag.split(",");
+        $scope.newQuestion.tag = tags;
+        
+        $scope.newQuestion.answer = ans;
+        console.log($scope.newQuestion);
+        sendData ={"user": {"uid": Data.uid}, "question": $scope.newQuestion};
+        $scope.pushQuestion(sendData);
     };
+    $scope.cancel = function(){
+    	$scope.show="1";
+    }
     $scope.searchmy = function (keyword) {
 //        console.log({"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": $scope.keyword});
 //        try{$scope.keyword = document.getElementById("keyword").value}catch(err){};
@@ -212,7 +274,11 @@ function MyTestBank($scope, $http, Data) {
 //    $scope.searchmy();
 
     $scope.addOne = function () {
-        $scope.newQuestion.answer.push({text: "", isright: 0, score: 0});
+        var ans = new Object();
+        ans.text="";
+        ans.score=0;
+        ans.isright=false;
+        $scope.newQuestion.answer.push(ans);
     };
 
     $scope.removeOne = function (v) {

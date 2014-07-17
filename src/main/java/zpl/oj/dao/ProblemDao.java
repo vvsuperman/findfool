@@ -24,9 +24,9 @@ public interface ProblemDao {
 	  Problem getNewestProblemByid(int id);
 	  
 	@Insert("    INSERT INTO PROBLEM("
-			+ " UUID, belong,PROBLEM_ID,   TITLE,   DESCRIPTION,   DATE,   PROBLEM_SET_ID,  CREATOR,   TYPE,   LIMIT_TIME, "
+			+ " UUID, belong,   TITLE,   DESCRIPTION,   DATE,   PROBLEM_SET_ID,  CREATOR,   TYPE,   LIMIT_TIME, "
 			+ "  LIMIT_MEM,   SUBMIT,   SLOVED,   MODIFIER,   MODIFYDATE)"
-			+ " VALUES( #{uuid},#{belong}, #{problemId},  #{title},  #{description},  #{date},  #{problemSetId},  #{creator},  #{type},  "
+			+ " VALUES( #{uuid},#{belong},  #{title},  #{description},  #{date},  #{problemSetId},  #{creator},  #{type},  "
 			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate})")
 	  void insertProblem(Problem problem);	  
 	   
