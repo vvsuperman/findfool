@@ -15,6 +15,9 @@ public interface ProblemService {
 	
 	int modifyProblem(RequestAddQuestion q);
 	
+	//delete
+	int deleteProblem(Integer problemId);
+	
 	ResponseSearchResult getQuestionByTag(RequestSearch s);
 	
 	ResponseSearchResult getQuestionBySetId(RequestSearch s);

@@ -1,6 +1,32 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
+/*
+ * object for page
+ * created by zpl on 2014/7/18
+ */
+function Answers(){
+	this.text = "";
+	this.isright = "";
+	this.score = 4;
+}
+function QuestionMeta(){
+    this.context = "";
+    this.answer = null;
+    this.tag = "";
+    this.name = "";
+    this.type = "";
+    this.qid="";
+    this.addAnswer = function (ans){
+    	if(this.answer == null)
+    		this.answer = new Array();
+    	this.answer.push(ans);
+    }
+    this.removeAnswer = function (v){
+    	this.answer.splice(v,1);
+    }
+}
+
 function MyTestBank($scope, $http, Data) {
     $scope.url = '#/mybank';
     $scope.template = 'mytestBank.html';
@@ -26,17 +52,14 @@ function MyTestBank($scope, $http, Data) {
 	$scope.reciveData.choosedQ = null;
 	$scope.progrma = new Object();
 	$scope.progrma.show = false;
-	$scope.newQuestion = null;
+	$scope.newQuestion = new QuestionMeta();
 	
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
         { name: '问答题', data: '3'}
     ];
-    $scope.newQuestion = {};
-    $scope.newQuestion.answer = [
-        {text: "", isright: 0, score: 0}
-    ];
+
     
     //add by zpl
     $scope.computePage = function(){
@@ -119,35 +142,60 @@ function MyTestBank($scope, $http, Data) {
         $scope.show = 1;
         $scope.keyword = "";
         $scope.tag = "";
-        $scope.newQuestion = {};
-        $scope.newQuestion.answer = [
-            {text: "", isright: 0, score: 0}
-        ];
         $scope.active = target.getAttribute('data');
         $scope.reciveData.type = $scope.active;
+        $scope.newQuestion.tag = "";
         $scope.queryQuestions(1);
 //        $scope.template = $scope.templates[$scope.active - 1];
     };
     $scope.AddPage = function (target) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
-        $scope.newQuestion = new Object();
-        $scope.newQuestion.context = "";
-        $scope.newQuestion.answer = new Array();
-        $scope.newQuestion.tag = "";
-        
-        var ans = new Object();
-        ans.text="";
-        ans.score=0;
-        if($scope.active == "1")
-        	ans.isright=false;
-        else
-        	ans.isright = "";
-        $scope.newQuestion.answer.push(ans);
-        var tags = "";
-        $scope.newQuestion.tag = tags;
+//        $scope.newQuestion = new Object();
+//        $scope.newQuestion.context = "";
+//        $scope.newQuestion.answer = new Array();
+//        $scope.newQuestion.tag = "";
+//        
+//        var ans = new Object();
+//        ans.text="";
+//        ans.score=0;
+//        if($scope.active == "1")
+//        	ans.isright=false;
+//        else
+//        	ans.isright = "";
+//        $scope.newQuestion.answer.push(ans);
+//        var tags = "";
+//        $scope.newQuestion.tag = tags;
         console.log($scope.newQuestion);
     };
+    $scope.deleteQuestion = function(){
+    	var res = confirm("确定删除吗？删除之后不可恢复");
+    	if(res == true){
+    		$http({
+                url: "/question/delete",
+                method: 'POST',
+                headers: {
+                    "Authorization": Data.token
+                },
+                data: {"user": {"uid": Data.uid}, "qid": $scope.reciveData.choosedQ.qid}
+            }).success(function (data) {
+                $scope.state = data["state"];//1 true or 0 false
+                if(data["token"] != "" && data["token"] != null)
+                	Data.token = data["token"];
+                $scope.message = data["message"];
+                if ($scope.state) {
+                	alert('删除成功');
+                	$scope.show="1";
+                	$scope.queryQuestions(1);
+                	$scope.newQuestion = new QuestionMeta();
+                } else {
+                	alert('添加失败');
+                }
+            }).error(function (data) {
+
+            });
+    	}
+    }
     $scope.modifyQuestion = function() {
     	$scope.show="0";
     	console.log($scope.reciveData.choosedQ);
@@ -167,7 +215,7 @@ function MyTestBank($scope, $http, Data) {
         	if(i ==0){
         		tags += $scope.reciveData.choosedQ.tag[i];
         	}else{
-        		tags += "&";
+        		tags += ",";
         		tags += $scope.reciveData.choosedQ.tag[i];
         	}
         }
@@ -198,6 +246,9 @@ function MyTestBank($scope, $http, Data) {
             $scope.message = data["message"];
             if ($scope.state) {
             	alert('添加成功');
+            	$scope.show="1";
+            	$scope.queryQuestions(1);
+            	$scope.newQuestion = new QuestionMeta();
             } else {
             	alert('添加失败');
             }
@@ -226,18 +277,18 @@ function MyTestBank($scope, $http, Data) {
     	$scope.show="1";
     }
     $scope.resetQuestion = function(){
-        $scope.newQuestion = new Object();
         $scope.newQuestion.context = "";
-        $scope.newQuestion.answer = new Array();
+        $scope.newQuestion.answer = null;
+ //       $scope.newQuestion.answer = new Array();
         $scope.newQuestion.tag = "";
-        var ans = new Object();
-        ans.text="";
-        ans.score=0;
-        if($scope.active == "1")
-        	ans.isright=false;
-        else
-        	ans.isright = "";
-        $scope.newQuestion.answer.push(ans);
+//        var ans = new Object();
+//        ans.text="";
+//        ans.score=0;
+//        if($scope.active == "1")
+//        	ans.isright=false;
+//        else
+//        	ans.isright = "";
+//        $scope.newQuestion.answer.push(ans);
         var tags = "";
         $scope.newQuestion.tag = tags;
     }
@@ -247,20 +298,15 @@ function MyTestBank($scope, $http, Data) {
 //    $scope.searchmy();
 
     $scope.addOne = function () {
-        var ans = new Object();
-        ans.text="";
-        ans.score=0;
+        var ans = new Answers();
         if($scope.active == "1")
         	ans.isright=false;
         else
         	ans.isright = "";
-        $scope.newQuestion.answer.push(ans);
+        $scope.newQuestion.addAnswer(ans);
     };
 
     $scope.removeOne = function (v) {
-
-        if (v > 0) {
-            $scope.newQuestion.answer.splice(v, 1);
-        }
+    	$scope.newQuestion.removeAnswer(v);
     };
 }

@@ -106,14 +106,17 @@ public class ProblemServiceImp implements ProblemService{
 			problemTagDao.insertTagProblem(tagid, pid);
 		}
 		
-		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
-			ProblemTestCase pt = new ProblemTestCase();
-			pt.setProblemId(pid);
-			pt.setArgs(qt.getText());
-			pt.setExceptedRes(qt.getIsright());
-			pt.setScore(qt.getScore());
-			problemTestCaseDao.insertProblemTestCase(pt);
+		if(q.getQuestion().getAnswer() != null){
+			for(QuestionTestCase qt:q.getQuestion().getAnswer()){
+				ProblemTestCase pt = new ProblemTestCase();
+				pt.setProblemId(pid);
+				pt.setArgs(qt.getText());
+				pt.setExceptedRes(qt.getIsright());
+				pt.setScore(qt.getScore());
+				problemTestCaseDao.insertProblemTestCase(pt);
+			}		
 		}
+
 		p.setProblemId(pid);
 		problemDao.updateProblem(p);
 		return pid;
@@ -144,12 +147,12 @@ public class ProblemServiceImp implements ProblemService{
 		List<Integer> qsId = mergeLists(questionIds);
 		//filter
 		List<Problem> plist = filterResult(qsId);
-		
-		int total = plist.size();
+		questions = checkTags(plist,tags);
+		int total = questions.size();
 		if(end > total){
 			end = total;
 		}
-		questions = checkTags(plist,tags,begin,end);
+		questions =questions.subList(begin, end);
 		res.setCurPage(s.getPage());
 		res.setPageNum(s.getPageNum());
 		res.setTotalPage(total);
@@ -267,7 +270,7 @@ public class ProblemServiceImp implements ProblemService{
 		}
 		return pid;
 	}
-	List<Question> checkTags(List<Problem> prbs,String[] tags,int begin,int end){
+	List<Question> checkTags(List<Problem> prbs,String[] tags){
 		List<Question> q = new ArrayList<Question>();
 		int index = 0;
 		for(Problem p:prbs){
@@ -275,14 +278,7 @@ public class ProblemServiceImp implements ProblemService{
 			for(int i=0;i<tags.length;i++){
 				if(tmp.getTag().contains(tags[i])){
 					index++;
-					if(index >=begin){
-						if(index<=end){
-							q.add(tmp);
-							break;
-						}else{
-							return q;
-						}
-					}
+					q.add(tmp);
 				}
 			}
 		}
@@ -299,6 +295,29 @@ public class ProblemServiceImp implements ProblemService{
 			questions.add(entry.getValue());
 		}
 		return questions;
+	}
+
+	@Override
+	public int deleteProblem(Integer problemId) {
+		problemDao.deleteProblem(problemId);
+		//更新quiz们
+		List<QuizProblem> qps = quizService.getQuizsByProblemId(problemId);
+		Map<Integer,List<Integer>> quizs = new HashMap<Integer,List<Integer>>();
+		for(QuizProblem qp:qps){
+			List<Integer> ps = quizs.get(qp.getQuizid());
+			if(ps == null){
+				ps = new ArrayList<Integer>();
+			}
+			if(!problemId.equals(qp.getProblemid())){
+				ps.add(qp.getProblemid());
+			}
+			quizs.put(qp.getQuizid(), ps);
+		}
+		
+		for(Map.Entry<Integer, List<Integer>> entry:quizs.entrySet()){
+			quizService.updateQuiz(entry.getKey(), entry.getValue());
+		}
+		return 0;
 	}
 
 }

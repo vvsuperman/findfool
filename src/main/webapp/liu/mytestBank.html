@@ -43,7 +43,7 @@
         <div class="btn-group-justified">
             <a class="btn btn-default " data="{{active}}" ng-click="AddPage($event.target)">新增</a>
             <a class="btn btn-default" ng-click="modifyQuestion()">修改</a>
-            <a class="btn btn-default">删除</a>
+            <a class="btn btn-default" ng-click="deleteQuestion()">删除</a>
         </div>
     </div>
 
@@ -62,8 +62,8 @@
 
                 <p style="padding: 20px">标签(以 英文,符号 区分)
                     <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
-                    <button class="btn btn-default" ng-click="addOne()">新增</button>
                 </p>
+                <button class="btn btn-default" ng-click="addOne()">新增选项</button>
                 <ol style="list-style-type:upper-alpha" class="col-md-offset-3">
                     <li ng-repeat="ans in newQuestion.answer">
                         <input type="text" style="width: 50%" class="form-control" ng-model="ans.text">
@@ -91,9 +91,9 @@
             <p>题干</p>
 
             <form class="form-inline" role="form">
-                <textarea class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>
+                <textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>
 
-                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control">
+                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
                 <ul>
                     <input type="radio" ng-model="progrma.show" ng-value="true" />测试用例
@@ -141,19 +141,23 @@
             </form>
         </div>
         <div ng-class="{true:'', false: 'hedden'}[active==3]">
+               <p>标题
+                   <input type="text" id="name" class="form-control" ng-model="newQuestion.name">
+               </p>
             <p>题干</p>
 
             <form class="form-inline" role="form">
-                <textarea class="form-control" type="text" rows=18 style="width: 100%;resize: none"></textarea>
+                <textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>
 
-                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control">
+
+                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
 
 
                 <div class="btn-group-justified" style="padding: 70px">
-                    <a class="btn btn-default ">保存</a>
-                    <a class="btn btn-default">重置</a>
-                    <a class="btn btn-default">取消</a>
+                    <a class="btn btn-default " ng-click="addQuestion()">保存</a>
+                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
+                    <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
             </form>
         </div>

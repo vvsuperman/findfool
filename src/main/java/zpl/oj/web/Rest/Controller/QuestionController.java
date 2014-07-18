@@ -47,6 +47,18 @@ public class QuestionController {
 	}
 	
 	
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public ResponseBase delete(@RequestBody RequestQuestion request){
+		ResponseBase rb = new ResponseBase();
+		Integer pid = request.getQid();
+		problemService.deleteProblem(pid);
+		ResponseMessage msg = new ResponseMessage();
+		msg.setMsg(""+pid);
+		rb.setMessage(msg);
+		rb.setState(1);
+		return rb;
+	}
 	@RequestMapping(value="/add")
 	@ResponseBody
 	public ResponseBase add(@RequestBody RequestAddQuestion request){
