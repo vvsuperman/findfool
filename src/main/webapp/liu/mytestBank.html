@@ -19,7 +19,7 @@
         <div style="border:#dfdfdf 1px solid">
         	<ul class="quizquestion">
         		<li ng-repeat="q in reciveData.questions">
-        			<input type="checkbox">
+        			<input type="radio" ng-model="reciveData.choosedQ" ng-value="q">
                         {{q.name}}
                     </input>
         			<div>
@@ -42,8 +42,8 @@
         </ul>
         <div class="btn-group-justified">
             <a class="btn btn-default " data="{{active}}" ng-click="AddPage($event.target)">新增</a>
-            <a class="btn btn-default">修改</a>
-            <a class="btn btn-default">删除</a>
+            <a class="btn btn-default" ng-click="modifyQuestion()">修改</a>
+            <a class="btn btn-default" ng-click="deleteQuestion()">删除</a>
         </div>
     </div>
 
@@ -51,84 +51,113 @@
     <div ng-class="{0:'', 1: 'hedden'}[show]">
 
         <div ng-class="{true:'', false: 'hedden'}[active==1]">
+             <p>标题
+                   <input type="text" id="name" class="form-control" ng-model="newQuestion.name">
+               </p>
             <p>题干</p>
 
             <form class="form-inline" role="form">
-                <textarea class="form-control" type="text" rows=18 style="width: 100%;resize: none"
+                <textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"
                           ng-model="newQuestion.context"></textarea>
 
-                <p style="padding: 20px">标签(以 , 区分)
-                    <input type="text" id="tag" class="form-control" ng-model="tag">
-                    <button class="btn btn-default" ng-click="addOne()">新增</button>
+                <p style="padding: 20px">标签(以 英文,符号 区分)
+                    <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
                 </p>
+                <button class="btn btn-default" ng-click="addOne()">新增选项</button>
                 <ol style="list-style-type:upper-alpha" class="col-md-offset-3">
                     <li ng-repeat="ans in newQuestion.answer">
                         <input type="text" style="width: 50%" class="form-control" ng-model="ans.text">
-                        <input type="text" style="width: 7%" class="form-control" ng-model="ans.score">
+                        <input type="text" style="width: 7%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
                         <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
                            ng-click="removeOne($index)"></a>
-                        <span class="pull-right"><input type="checkbox">是否正确</span>
+                        <span class="pull-right"><input type="checkbox" ng-model="ans.isright">是否正确</span>
 
                     </li>
                 </ol>
                 <div class="btn-group-justified" style="padding: 70px">
                     <a class="btn btn-default " ng-click="addQuestion()">保存</a>
-                    <a class="btn btn-default">重置</a>
-                    <a class="btn btn-default">取消</a>
+                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
+                    <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
             </form>
         </div>
         <div ng-class="{true:'', false: 'hedden'}[active==2]">
+               <p>标题
+                   <input type="text" id="name" class="form-control" ng-model="newQuestion.name">
+               </p>
             <p>提示信息：编程题主要考虑对基本概念及算法的理解程度，程序的默认入口为solution，为单一函数。若需要考察复杂的类或多个
                 方法，请选择无测试用例，并由出题人员手工判断是否正确</p>
 
             <p>题干</p>
 
             <form class="form-inline" role="form">
-                <textarea class="form-control" type="text" rows=18 style="width: 100% ;resize: none"></textarea>
+                <textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>
 
-                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control">
+                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
                 <ul>
-                    <input type="radio">测试用例
-                    <input type="radio">无测试用例
+                    <input type="radio" ng-model="progrma.show" ng-value="true" />测试用例
+                    <input type="radio" ng-model="progrma.show" ng-value="false" />无测试用例
                 </ul>
-                <div class="col-md-5 col-md-offset-1">
-                    <p>输入</p>
-                    <textarea class="form-control" name="" id="" cols="35" rows="10" style="resize: none"></textarea>
-                </div>
-                <div class="col-md-5 col-md-offset-1">
-                    <p>输出</p>
-                    <textarea class="form-control" name="" id="" cols="35" rows="10" style="resize: none"></textarea>
-                </div>
-                <p>语言选择</p>
-                <ul>
-                    <input type="radio">C
-                    <input type="radio">Java
+                <button class="btn btn-default" ng-class="{true:'', false: 'hedden'}[progrma.show]" ng-click="addOne()">新增测试用例</button>
+                <div style="list-style-type:upper-alpha;width: 100% ;" ng-class="{true:'', false: 'hedden'}[newQuestion.show]">
+                    <li ng-repeat="ans in newQuestion.answer">
+                        <div class="col-md-12">		                 
+                        <div class="col-md-5">
+		                    <p>输入</p>
+		                   <input type="text" style="width: 100%" class="form-control" ng-model="ans.text">
+		                </div>
+		                <div class="col-md-4">
+		                    <p>输出</p>
+		                    <input type="text" style="width: 100%" class="form-control" ng-model="ans.isright">
+		                </div>
+		                <div class="col-md-3">
+		                	<p>分数</p>
+		                <input type="text"  style="width: 80%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)" />
+		                <button class="glyphicon glyphicon-remove aa"
+		                           ng-click="removeOne($index)"></button>  		                
+		                </div>
 
-                </ul>
+		                </div>
+
+                    </li>
+                </div>
+
+				<div div class="btn-group-justified">
+					<p>语言选择</p>
+	                <ul>
+	                    <input type="radio">C
+	                    <input type="radio">Java
+	
+	                </ul>
+				</div>
+
 
                 <div class="btn-group-justified" style="padding: 70px">
-                    <a class="btn btn-default ">保存</a>
-                    <a class="btn btn-default">重置</a>
-                    <a class="btn btn-default">取消</a>
+                    <a class="btn btn-default " ng-click="addQuestion()">保存</a>
+                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
+                    <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
             </form>
         </div>
         <div ng-class="{true:'', false: 'hedden'}[active==3]">
+               <p>标题
+                   <input type="text" id="name" class="form-control" ng-model="newQuestion.name">
+               </p>
             <p>题干</p>
 
             <form class="form-inline" role="form">
-                <textarea class="form-control" type="text" rows=18 style="width: 100%;resize: none"></textarea>
+                <textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>
 
-                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control">
+
+                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
 
 
                 <div class="btn-group-justified" style="padding: 70px">
-                    <a class="btn btn-default ">保存</a>
-                    <a class="btn btn-default">重置</a>
-                    <a class="btn btn-default">取消</a>
+                    <a class="btn btn-default " ng-click="addQuestion()">保存</a>
+                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
+                    <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
             </form>
         </div>

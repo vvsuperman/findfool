@@ -11,8 +11,8 @@ import zpl.oj.model.common.QuizProblem;
 public interface QuizProblemDao {
 
 	@Select("select TPID,  QUIZID,  PROBLEMID,  DATE,  LANG "
-			+ " FROM QUIZPROBLE WHERE PROBLEMID = #{0}")
-  List<QuizProblem> getQuizProblemsByProblemId(Long id);
+			+ " FROM QUIZPROBLEM WHERE PROBLEMID = #{0}")
+  List<QuizProblem> getQuizProblemsByProblemId(int id);
   
 	@Select("SELECT TPID,   QUIZID,   PROBLEMID,   DATE,   LANG    "
 			+ "  FROM QUIZPROBLEM WHERE QUIZID=#{0}")

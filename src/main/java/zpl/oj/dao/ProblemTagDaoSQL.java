@@ -7,7 +7,7 @@ public class ProblemTagDaoSQL {
 	public String getCountProblemIdbyTagSiteSQL(Map<String,Object>  para){
 		String sql = "select count(a.problemid) from tagproblem as a,tag as b,problem as c"
 				+ " where a.tagid = b.tagid and b.context like '%"+para.get("tag")+"%'"
-				+ " and c.belong=0 and c.problem_id=a.problemid";
+				+ " and c.belong=0 and c.isdelete=0 and c.problem_id=a.problemid";
 		if(para.get("type") != null){
 			sql += " and type="+para.get("type");
 		}
@@ -20,7 +20,7 @@ public class ProblemTagDaoSQL {
 	public String getProblemIdbyTagSiteSQL(Map<String,Object>  para){
 		String sql = "select DISTINCT a.problemid from tagproblem as a,tag as b,problem as c"
 				+ " where a.tagid = b.tagid and b.context like '%"+para.get("tag")+"%'"
-				+ " and c.belong=0 and c.problem_id=a.problemid";
+				+ " and c.belong=0 and c.isdelete=0 and c.problem_id=a.problemid";
 		if(para.get("type") != null){
 			sql += " and type="+para.get("type");
 		}
@@ -33,7 +33,7 @@ public class ProblemTagDaoSQL {
 	public String getCountProblemIdbyTagUserSQL(Map<String,Object>  para){
 		String sql = "select count(a.problemid) from tagproblem as a,tag as b,problem as c"
 				+ " where a.tagid = b.tagid and b.context like '%"+para.get("tag")+"%'"
-				+ " and c.belong=1 and c.problem_id=a.problemid and c.creator="+para.get("id");
+				+ " and c.belong=1 and c.isdelete=0 and c.problem_id=a.problemid and c.creator="+para.get("id");
 		if(para.get("type") != null){
 			sql += " and type="+para.get("type");
 		}
@@ -43,7 +43,7 @@ public class ProblemTagDaoSQL {
 	public String getProblemIdbyTagUserSQL(Map<String,Object>  para){
 		String sql = "select DISTINCT a.problemid from tagproblem as a,tag as b,problem as c"
 				+ " where a.tagid = b.tagid and b.context like '%"+para.get("tag")+"%'"
-				+ " and c.belong=1 and c.problem_id=a.problemid and c.creator="+para.get("id");
+				+ " and c.belong=1 and c.isdelete=0 and c.problem_id=a.problemid and c.creator="+para.get("id");
 		if(para.get("type") != null){
 			sql += " and type="+para.get("type");
 		}

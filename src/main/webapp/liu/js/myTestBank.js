@@ -1,6 +1,32 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
+/*
+ * object for page
+ * created by zpl on 2014/7/18
+ */
+function Answers(){
+	this.text = "";
+	this.isright = "";
+	this.score = 4;
+}
+function QuestionMeta(){
+    this.context = "";
+    this.answer = null;
+    this.tag = "";
+    this.name = "";
+    this.type = "";
+    this.qid="";
+    this.addAnswer = function (ans){
+    	if(this.answer == null)
+    		this.answer = new Array();
+    	this.answer.push(ans);
+    }
+    this.removeAnswer = function (v){
+    	this.answer.splice(v,1);
+    }
+}
+
 function MyTestBank($scope, $http, Data) {
     $scope.url = '#/mybank';
     $scope.template = 'mytestBank.html';
@@ -23,15 +49,17 @@ function MyTestBank($scope, $http, Data) {
 	$scope.reciveData.rearPage = false;
 	$scope.reciveData.currentPage = 1;
 	$scope.reciveData.index = 1;
+	$scope.reciveData.choosedQ = null;
+	$scope.progrma = new Object();
+	$scope.progrma.show = false;
+	$scope.newQuestion = new QuestionMeta();
+	
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
         { name: '问答题', data: '3'}
     ];
-    $scope.newQuestion = {};
-    $scope.newQuestion.answer = [
-        {text: "", isright: 0, score: 0}
-    ];
+
     
     //add by zpl
     $scope.computePage = function(){
@@ -114,117 +142,171 @@ function MyTestBank($scope, $http, Data) {
         $scope.show = 1;
         $scope.keyword = "";
         $scope.tag = "";
-        $scope.newQuestion = {};
-        $scope.newQuestion.answer = [
-            {text: "", isright: 0, score: 0}
-        ];
         $scope.active = target.getAttribute('data');
         $scope.reciveData.type = $scope.active;
+        $scope.newQuestion.tag = "";
         $scope.queryQuestions(1);
 //        $scope.template = $scope.templates[$scope.active - 1];
     };
     $scope.AddPage = function (target) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
+//        $scope.newQuestion = new Object();
+//        $scope.newQuestion.context = "";
+//        $scope.newQuestion.answer = new Array();
+//        $scope.newQuestion.tag = "";
+//        
+//        var ans = new Object();
+//        ans.text="";
+//        ans.score=0;
+//        if($scope.active == "1")
+//        	ans.isright=false;
+//        else
+//        	ans.isright = "";
+//        $scope.newQuestion.answer.push(ans);
+//        var tags = "";
+//        $scope.newQuestion.tag = tags;
+        console.log($scope.newQuestion);
     };
-    $scope.addQuestion = function () {
-//        $scope.newQuestion.type = $scope.active;
-//        $scope.newQuestion.name = "null";
-////        var tag = $scope.tag;
-////        console.log(tag);
-//        $scope.newQuestion.tag = document.getElementById("tag").value.split(",");
-////        $scope.newQuestion.tag = tag.split(",");
-////        console.log($scope.newQuestion.tag)
-//        $http({
-//            url: "/question/add",
-//            method: 'POST',
-//            headers: {
-//                "Authorization": Data.token
-//            },
-//            data: {"user": {"uid": Data.uid}, "question": $scope.newQuestion}
-//        }).success(function (data) {
-//            $scope.state = data["state"];//1 true or 0 false
-//            Data.token = data["token"];
-//            $scope.message = data["message"];
-//            if ($scope.state) {
-//
-//            } else {
-//
-//            }
-//        }).error(function (data) {
-//
-//        });
+    $scope.deleteQuestion = function(){
+    	var res = confirm("确定删除吗？删除之后不可恢复");
+    	if(res == true){
+    		$http({
+                url: "/question/delete",
+                method: 'POST',
+                headers: {
+                    "Authorization": Data.token
+                },
+                data: {"user": {"uid": Data.uid}, "qid": $scope.reciveData.choosedQ.qid}
+            }).success(function (data) {
+                $scope.state = data["state"];//1 true or 0 false
+                if(data["token"] != "" && data["token"] != null)
+                	Data.token = data["token"];
+                $scope.message = data["message"];
+                if ($scope.state) {
+                	alert('删除成功');
+                	$scope.show="1";
+                	$scope.queryQuestions(1);
+                	$scope.newQuestion = new QuestionMeta();
+                } else {
+                	alert('添加失败');
+                }
+            }).error(function (data) {
 
+            });
+    	}
+    }
+    $scope.modifyQuestion = function() {
+    	$scope.show="0";
+    	console.log($scope.reciveData.choosedQ);
+    	$scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+    	$scope.newQuestion.type = $scope.reciveData.choosedQ.type;
+    	$scope.newQuestion.name = $scope.reciveData.choosedQ.name;
+    	$scope.newQuestion.context = $scope.reciveData.choosedQ.context;
+        var ans = $scope.reciveData.choosedQ.answer;
+        if($scope.newQuestion.type == 1){
+            for(a in ans){
+            	a.isright = (a.isright == "0"?false:true);
+            }     	
+        }
+        $scope.newQuestion.answer=ans;
+        var tags = "";
+        for(var i=0;i<$scope.reciveData.choosedQ.tag.length;i++){
+        	if(i ==0){
+        		tags += $scope.reciveData.choosedQ.tag[i];
+        	}else{
+        		tags += ",";
+        		tags += $scope.reciveData.choosedQ.tag[i];
+        	}
+        }
+        $scope.newQuestion.tag = tags;
+        console.log($scope.newQuestion);    	
+    }
+    $scope.isNum = function(q){
+    	if(q == null || q=="")
+    		return;
+    	var r = /^\+?[0-9][0-9]*$/;
+        if(!r.test(q)){
+        	alert("必须是数字！")
+        	q = 0;
+        }
+    }
+    $scope.pushQuestion = function(sendData){
+    	$http({
+            url: "/question/add",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token
+            },
+            data: sendData
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            if(data["token"] != "" && data["token"] != null)
+            	Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+            	alert('添加成功');
+            	$scope.show="1";
+            	$scope.queryQuestions(1);
+            	$scope.newQuestion = new QuestionMeta();
+            } else {
+            	alert('添加失败');
+            }
+        }).error(function (data) {
+
+        });
+    }
+    $scope.addQuestion = function () {
+        $scope.newQuestion.type = parseInt($scope.active);
+        var ans = $scope.newQuestion.answer;
+        if($scope.active == "1"){
+            for(a in ans){
+            	a.isright = (a.isright == false?"0":"1");
+            }    	
+        }
+
+        var tags = $scope.newQuestion.tag.split(",");
+        $scope.newQuestion.tag = tags;
+        
+        $scope.newQuestion.answer = ans;
+        console.log($scope.newQuestion);
+        sendData ={"user": {"uid": Data.uid}, "question": $scope.newQuestion};
+        $scope.pushQuestion(sendData);
     };
+    $scope.cancel = function(){
+    	$scope.show="1";
+    }
+    $scope.resetQuestion = function(){
+        $scope.newQuestion.context = "";
+        $scope.newQuestion.answer = null;
+ //       $scope.newQuestion.answer = new Array();
+        $scope.newQuestion.tag = "";
+//        var ans = new Object();
+//        ans.text="";
+//        ans.score=0;
+//        if($scope.active == "1")
+//        	ans.isright=false;
+//        else
+//        	ans.isright = "";
+//        $scope.newQuestion.answer.push(ans);
+        var tags = "";
+        $scope.newQuestion.tag = tags;
+    }
     $scope.searchmy = function (keyword) {
-//        console.log({"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": $scope.keyword});
-//        try{$scope.keyword = document.getElementById("keyword").value}catch(err){};
-//        $scope.ke=$scope.keyword;
-//        $scope.$apply();
-//        console.log(ke);
-//        console.log($scope.keyword);
-//        $http({
-//            url: "/search/my",
-//            method: 'POST',
-//            headers: {
-//                "Authorization": Data.token
-//            },
-//            data: {"user": {"uid": Data.uid}, "type": $scope.active, "page": $scope.page, "pageNum": 10, "keyword": keyword}
-//        }).success(function (data) {
-//            $scope.state = data["state"];//1 true or 0 false
-//            Data.token = data["token"];
-//            $scope.message = data["message"];
-//            if ($scope.state) {
-////仅需要对message中的数据做处理
-//                $scope.curPage = $scope.message.curPage;
-//                $scope.pageNum = $scope.message.pageNum;
-//                $scope.totalPage = $scope.message.totalPage;
-//                $scope.qs = $scope.message.questions;
-//
-//            } else {
-//
-//            }
-//        }).error(function (data) {
-//            $scope.qs = [
-//                {qid: 1, name: '第一个测试', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]},
-//                {qid: 2, name: 'hdh2', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]},
-//                {qid: 3, name: 'hdh3', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]},
-//                {qid: 4, name: 'hdh4', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: 1, score: 4},
-//                    {text: "1+1=3", isright: 0, score: 0},
-//                    {text: "1+1=1", isright: 0, score: 0}
-//                ]}
-//            ];
-//        });
-//        $scope.keyword =""
+
     };
 //    $scope.searchmy();
 
     $scope.addOne = function () {
-        $scope.newQuestion.answer.push({text: "", isright: 0, score: 0});
+        var ans = new Answers();
+        if($scope.active == "1")
+        	ans.isright=false;
+        else
+        	ans.isright = "";
+        $scope.newQuestion.addAnswer(ans);
     };
 
     $scope.removeOne = function (v) {
-//        var tmp = $scope.xlsusers;
-//        console.log(v);
-//        var i = $scope.newQuestion.answer.indexOf(v);
-//        console.log(i);
-        if (v > 0) {
-            $scope.newQuestion.answer.splice(v, 1);
-        }
-//        $scope.xlsusers = tmp;
-//        Data.xlsusers=$scope.xlsusers;
+    	$scope.newQuestion.removeAnswer(v);
     };
 }
