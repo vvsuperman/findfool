@@ -5,7 +5,7 @@ $http({
     url: "/user/setting/query",
     method: 'POST',
     headers: {
-        "Authorization": Data.token
+        "Authorization": Data.token()
     },
     data: {"uid": Data.uid}
 }).success(function (data) {
