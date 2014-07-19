@@ -30,6 +30,10 @@ function pInfo($scope, $http, Data) {
                 Data.company = $scope.company;
                 Data.name = $scope.name;
                 Data.tel = $scope.tel;
+				Data.setEmail($scope.email);
+				Data.setCompany($scope.company);
+				Data.setName($scope.name);
+				Data.setTel($scope.tel);
             } else {
             }
         }).error(function (data) {

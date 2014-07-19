@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="invite页面的Data fix">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/http.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/http.js" />
+    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -35,8 +34,8 @@
       <file leaf-file-name="controller.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47251463" vertical-offset="557" max-vertical-offset="21607">
-              <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.7625731" vertical-offset="557" max-vertical-offset="21607">
+              <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
               <folding>
                 <marker date="1405765809357" expanded="false" signature="16315:16334" placeholder="..." />
               </folding>
@@ -1303,7 +1302,7 @@
       <workItem from="1405516550144" duration="2146000" />
       <workItem from="1405739409284" duration="3448000" />
       <workItem from="1405745083585" duration="10732000" />
-      <workItem from="1405760639578" duration="6224000" />
+      <workItem from="1405760639578" duration="6536000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1453,11 +1452,15 @@
       <created>1405777220569</created>
       <updated>1405777220569</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="修复 所有Data.token">
+      <created>1405777654179</created>
+      <updated>1405777654179</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174426000" />
+    <option name="totallyTimeSpent" value="174738000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1288" y="18" width="1296" height="1040" extended-state="6" />
@@ -1543,7 +1546,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Merge branch 'master' of ssh://bitbucket.org/tjcoder/ojweb&#10;修改去重功能，针对email进行去重&#10;Conflicts:&#10;&#9;src/main/webapp/liu/invite.html&#10;" />
     <MESSAGE value="增加添加/删除功能" />
     <MESSAGE value="组合" />
     <MESSAGE value="很多更新" />
@@ -1568,7 +1570,8 @@
     <MESSAGE value="删" />
     <MESSAGE value="将markdown编辑器嵌入其他几个页面，依然有bug，工具栏无法显示，继续修改ing" />
     <MESSAGE value="invite页面的Data fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="invite页面的Data fix" />
+    <MESSAGE value="修复 所有Data.token" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复 所有Data.token" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1977,8 +1980,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47251463" vertical-offset="557" max-vertical-offset="21607">
-          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.7625731" vertical-offset="557" max-vertical-offset="21607">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
           <folding>
             <marker date="1405765809357" expanded="false" signature="16315:16334" placeholder="..." />
           </folding>
