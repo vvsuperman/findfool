@@ -52,12 +52,12 @@
 
         <p>From:</p>
 
-        <p>Reply To:<input type="text"/></p>
+        <p>Reply To:<input class="form-control" type="text" ng-model="subject"/></p>
 
-        <p>Subject:<input type="text"/></p>
-        <div ng-include src="'mdeditor.html'" ng-controller="mdeditor"></div>
+        <p>Subject:<input class="form-control" type="text" ng-model="replyTo"/></p>
+        <div ng-include src="'mdeditor.html'" ></div>
         <div class="pull-right">
-            <button class="btn btn-default">Cancel</button>
+            <button class="btn btn-default" ng-click="clean()">Clean</button>
             <button class="btn btn-default">Preview</button>
             <button class="btn btn-success" ng-click="sent()">Sent</button>
         </div>

@@ -3,7 +3,7 @@
  */
 /*
  excel read*/
-function Excel($scope, Data) {
+function Excel($scope,$http, Data) {
     $scope.xlsusers = [
         {Fname: 'dd', Lname: 'Data.tname', email: 'dsa@ss', tel: '12332', test: Data.tname},
         {Fname: 'dd', Lname: 'test1', email: 'dsa@ss', tel: '12332', test: 'test1'}
@@ -95,7 +95,7 @@ function Excel($scope, Data) {
             url: "/test/manage/invite",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+//                "Authorization": Data.token
             },
             data: {"user": {"uid": Data.uid}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist}
         }).success(function (data) {
@@ -113,6 +113,8 @@ function Excel($scope, Data) {
     };
 
     $scope.sent = function () {
+        $scope.html = document.getElementById("wmd-output").innerText;
+        console.log($scope.html);
         for (tid in $scope.testlist) {
             var tmp = [];
             if ($scope.testlist[tid] == 'notSelect') {
