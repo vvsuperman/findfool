@@ -55,7 +55,8 @@
         <p>Reply To:<input class="form-control" type="text" ng-model="subject"/></p>
 
         <p>Subject:<input class="form-control" type="text" ng-model="replyTo"/></p>
-        <div ng-include src="'mdeditor.html'" ></div>
+        <!--<div ng-include src="'mdeditor.html'" ></div>-->
+        <textarea cleditor ng-model="content"></textarea>
         <div class="pull-right">
             <button class="btn btn-default" ng-click="clean()">Clean</button>
             <button class="btn btn-default">Preview</button>

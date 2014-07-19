@@ -7,6 +7,34 @@ var OJApp = angular.module('OJApp', [
     'evgenyneu.markdown-preview',
 	'webStorageModule'
 ]);
+OJApp.run(['$rootScope', function ($rootScope) {
+    $rootScope.content = 'Default content';
+}]);
+OJApp.directive('cleditor', function () {
+    return {
+        require: '?ngModel',
+        link   : function (scope, elm, attr, ngModel) {
+
+            if (!ngModel) return;
+
+            ngModel.$render = function () {
+                elm.val(ngModel.$viewValue).blur();
+            };
+
+
+
+            elm.cleditor().change(function(){
+                var value = elm.val();
+
+                if (!scope.$$phase) {
+                    scope.$apply(function () {
+                        ngModel.$setViewValue(value);
+                    });
+                }
+            });
+        }
+    }
+});
 OJApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
