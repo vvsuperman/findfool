@@ -5,7 +5,7 @@
  excel read*/
 function Excel($scope,$http, Data) {
     $scope.xlsusers = [
-        {Fname: 'dd', Lname: 'Data.tname', email: 'dsa@ss', tel: '12332', test: Data.tname},
+        {Fname: 'dd', Lname: 'Data.tname', email: 'dsa@ss', tel: '12332', test: Data.tname()},
         {Fname: 'dd', Lname: 'test1', email: 'dsa@ss', tel: '12332', test: 'test1'}
     ];
     $scope.addOne = function (v) {
@@ -95,9 +95,9 @@ function Excel($scope,$http, Data) {
             url: "/test/manage/invite",
             method: 'POST',
             headers: {
-//                "Authorization": Data.token
+                "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
