@@ -64,12 +64,12 @@ function TestBank($scope, $http,Data) {
     }
     $scope.getSets = function(){
     	var user = new Object();
-    	user.uid = Data.uid;
+    	user.uid = Data.uid();
     	$http({
     	    url: "/search/sets",
     	    method: 'POST',
     	    headers: {
-    	        "Authorization": Data.token
+    	        "Authorization": Data.token()
     	    },
     	    data: user
     	}).success(function (data) {
@@ -91,7 +91,7 @@ function TestBank($scope, $http,Data) {
     	    url: "/search/site",
     	    method: 'POST',
     	    headers: {
-    	        "Authorization": Data.token
+    	        "Authorization": Data.token()
     	    },
     	    data: sendData
     	}).success(function (data) {
@@ -123,7 +123,7 @@ function TestBank($scope, $http,Data) {
     	$scope.reciveData.pagelist[index-1].current=true;
     	var sendData = new Object();
     	sendData.user = new Object();
-    	sendData.user.uid = Data.uid;
+    	sendData.user.uid = Data.uid();
     	sendData.type = $scope.reciveData.type;
     	if($scope.reciveData.type != "2" && $scope.reciveData.selectedSets != null){
     		sendData.setid=$scope.reciveData.selectedSets.problemSetId;

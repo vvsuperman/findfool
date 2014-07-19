@@ -97,7 +97,7 @@ function MyTestBank($scope, $http, Data) {
     	    url: "/search/my",
     	    method: 'POST',
     	    headers: {
-    	        "Authorization": Data.token
+    	        "Authorization": Data.token()
     	    },
     	    data: sendData
     	}).success(function (data) {
@@ -127,7 +127,7 @@ function MyTestBank($scope, $http, Data) {
     	$scope.reciveData.pagelist[index-1].current=true;
     	var sendData = new Object();
     	sendData.user = new Object();
-    	sendData.user.uid = Data.uid;
+    	sendData.user.uid = Data.uid();
     	sendData.type = $scope.reciveData.type;
     	sendData.keyword = $scope.reciveData.keyword;
     	sendData.page = index;
@@ -175,13 +175,13 @@ function MyTestBank($scope, $http, Data) {
                 url: "/question/delete",
                 method: 'POST',
                 headers: {
-                    "Authorization": Data.token
+                    "Authorization": Data.token()
                 },
-                data: {"user": {"uid": Data.uid}, "qid": $scope.reciveData.choosedQ.qid}
+                data: {"user": {"uid": Data.uid()}, "qid": $scope.reciveData.choosedQ.qid}
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
                 if(data["token"] != "" && data["token"] != null)
-                	Data.token = data["token"];
+                	Data.setToken(data["token"]);
                 $scope.message = data["message"];
                 if ($scope.state) {
                 	alert('删除成功');
@@ -236,13 +236,13 @@ function MyTestBank($scope, $http, Data) {
             url: "/question/add",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
             data: sendData
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             if(data["token"] != "" && data["token"] != null)
-            	Data.token = data["token"];
+            	Data.setToken(data["token"]);
             $scope.message = data["message"];
             if ($scope.state) {
             	alert('添加成功');
@@ -270,7 +270,7 @@ function MyTestBank($scope, $http, Data) {
         
         $scope.newQuestion.answer = ans;
         console.log($scope.newQuestion);
-        sendData ={"user": {"uid": Data.uid}, "question": $scope.newQuestion};
+        sendData ={"user": {"uid": Data.uid()}, "question": $scope.newQuestion};
         $scope.pushQuestion(sendData);
     };
     $scope.cancel = function(){
