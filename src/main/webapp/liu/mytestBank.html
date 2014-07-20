@@ -59,7 +59,8 @@
             <form class="form-inline" role="form">
                 <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
                           <!--ng-model="newQuestion.context"></textarea>-->
-                <div ng-include src="'mdeditor.html'" ></div>
+                <!--<div ng-include src="'mdeditor.html'" ></div>-->
+                <textarea cleditor ng-model="content"></textarea>
                 <p style="padding: 20px">标签(以 英文,符号 区分)
                     <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
                 </p>
@@ -92,7 +93,8 @@
 
             <form class="form-inline" role="form">
                 <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
-                <div ng-include src="'mdeditor.html'" ></div>
+                <!--<div ng-include src="'mdeditor.html'" ></div>-->
+                <textarea cleditor ng-model="content"></textarea>
                 <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
                 <ul>
@@ -148,8 +150,8 @@
 
             <form class="form-inline" role="form">
                 <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
-                <div ng-include src="'mdeditor.html'" ></div>
-
+                <!--<div ng-include src="'mdeditor.html'" ></div>-->
+                <textarea cleditor ng-model="content"></textarea>
                 <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
 

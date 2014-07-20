@@ -14,7 +14,7 @@ function pInfo($scope, $http, Data) {
             url: "/user/setting/query",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
             data: {"uid": Data.uid}
         }).success(function (data) {
@@ -30,6 +30,10 @@ function pInfo($scope, $http, Data) {
                 Data.company = $scope.company;
                 Data.name = $scope.name;
                 Data.tel = $scope.tel;
+				Data.setEmail($scope.email);
+				Data.setCompany($scope.company);
+				Data.setName($scope.name);
+				Data.setTel($scope.tel);
             } else {
             }
         }).error(function (data) {
@@ -59,7 +63,7 @@ function pInfo($scope, $http, Data) {
             url: "/user/setting/query",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
             data: {"user": {"uid": Data.uid}, "name": $scope.name, "company": $scope.company, "tel": $scope.tel, "pwd": $scope.PWD, "newPWD": $scope.newPWD }
 
