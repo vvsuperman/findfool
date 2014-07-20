@@ -27,13 +27,15 @@ function QuestionMeta() {
     }
 }
 
-function MyTestBank($scope, $http, Data) {
+function MyTestBank($scope) {
     $scope.url = '#/mybank';
     $scope.template = 'mytestBank.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;
     $scope.show = 1;
+}
+function mytestbank($scope, $http, Data) {
     $scope.page = 1;
     $scope.keyword = "";
     $scope.tag = "";
@@ -147,7 +149,8 @@ function MyTestBank($scope, $http, Data) {
         $scope.context = "";
         $scope.active = target.getAttribute('data');
         $scope.reciveData.type = $scope.active;
-        $scope.newQuestion.tag = "";
+//        $scope.newQuestion.tag = "";
+        $scope.newQuestion = new QuestionMeta();
         $scope.queryQuestions(1);
 //        $scope.template = $scope.templates[$scope.active - 1];
     };
@@ -259,11 +262,11 @@ function MyTestBank($scope, $http, Data) {
 
         });
     }
- /*   $scope.$watch('context', function () {
-        var context = $scope.context;
-        $scope.newQuestion.context =context;
-        console.log(context)
-    })*/
+    /*   $scope.$watch('context', function () {
+     var context = $scope.context;
+     $scope.newQuestion.context =context;
+     console.log(context)
+     })*/
 
 //    $scope.$apply();
     $scope.addQuestion = function () {
@@ -274,13 +277,13 @@ function MyTestBank($scope, $http, Data) {
                 a.isright = (a.isright == false ? "0" : "1");
             }
         }
-
-        var tags = $scope.newQuestion.tag.split(",");
+//console.log($scope.newQuestion.tag)
+        var tags = $scope.tag.split(",");
         $scope.newQuestion.tag = tags;
 
         $scope.newQuestion.answer = ans;
         var context = $scope.context;
-        $scope.newQuestion.context =context;
+        $scope.newQuestion.context = context;
 
         console.log($scope.newQuestion);
         sendData = {"user": {"uid": Data.uid()}, "question": $scope.newQuestion};
