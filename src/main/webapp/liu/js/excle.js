@@ -41,6 +41,11 @@ function Excel($scope,$http, Data) {
 //        $scope.xlsusers = tmp;
     };
 
+    $scope.clean = function () {
+//        $scope.$apply();
+        console.log($scope.content);
+        $scope.content=""
+    }
     $scope.refresh = function () {
 //    去重
         var tmp = $scope.xlsusers;
@@ -113,8 +118,8 @@ function Excel($scope,$http, Data) {
     };
 
     $scope.sent = function () {
-        $scope.html = document.getElementById("wmd-output").innerText;
-        console.log($scope.html);
+//        $scope.html = document.getElementById("wmd-output").innerText;
+//        console.log($scope.html);
         for (tid in $scope.testlist) {
             var tmp = [];
             if ($scope.testlist[tid] == 'notSelect') {

@@ -8,14 +8,14 @@ function invite($scope, $http, Data) {
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
     $scope.text="Hello [FIRST_NAME] [LAST_NAME],<br/>In order to assess your programming skills we've prepared a programming challenge that we would like you to complete. <br/>    The following link takes you to your test:<br/> [PRIVATE_TEST_LINK] <br/>  After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.  <br/>  Best of luck!  <br/> Regards,<br/>  [COMPANY_NAME]";
-    $scope.clean = function () {
+    $scope.content="";
+    $scope.cleanWMD = function () {
         $scope.text = "";
         document.getElementById("wmd-output").innerHTML = "<pre><code></code></pre>";
         document.getElementById("wmd-preview").innerHTML = "";
         document.getElementById("wmd-input").value="";
         $scope.html = "";
-    }
-
+    };
 }
 OJApp.filter('filterTest', function () {
     return function (items, v) {
