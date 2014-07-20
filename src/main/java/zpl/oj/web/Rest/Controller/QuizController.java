@@ -203,9 +203,11 @@ public class QuizController {
 				mailSenderInfo.setToAddress(u.getEmail());
 				mailSenderInfo.setReplyToAddress(request.getReplyTo());
 				mailSenderInfo.setSubject(request.getSubject());
-				mailSenderInfo.setContent("欢迎来xxoo做测试，请登录到xx，"
+				String context = request.getContext();
+				context += "欢迎来xxoo做测试，请登录到xx，"
 						+ "<br/>您的登录账号为：" + u.getEmail() + " <br/>您的密码为：" + pwd
-						+ "<br/>您的测试时间为：" + q.getTime());
+						+ "<br/>您的测试时间为：" + q.getTime();
+				mailSenderInfo.setContent(context);
 				SimpleMailSender.sendHtmlMail(mailSenderInfo);
 
 			}

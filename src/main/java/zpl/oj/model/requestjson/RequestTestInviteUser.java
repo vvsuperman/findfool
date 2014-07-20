@@ -10,6 +10,7 @@ public class RequestTestInviteUser {
 	private int tid;
 	private String subject;
 	private String replyTo;
+	private String context;
 	private List<InviteUser> invite;
 	public RequestUser getUser() {
 		return user;
@@ -40,6 +41,12 @@ public class RequestTestInviteUser {
 	}
 	public void setInvite(List<InviteUser> invite) {
 		this.invite = invite;
+	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
 	}
 	
 }
