@@ -44,7 +44,7 @@ function mytestbank($scope, $http, Data) {
     $scope.reciveData = new Object();
     $scope.reciveData.selectedSets = null;
     $scope.reciveData.totalPage = 1;
-    $scope.reciveData.pageNum = 1;//默认一页10个
+    $scope.reciveData.pageNum = 10;//默认一页10个
     $scope.reciveData.type = 1;
     $scope.reciveData.keyword = '';
     $scope.reciveData.pagelist = new Array();

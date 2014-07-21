@@ -4,11 +4,12 @@
 /*
  excel read*/
 function Excel($scope,$http, Data) {
-    $scope.xlsusers = [
+    /*$scope.xlsusers = [
         {fname: 'dd', lname: 'Data.tname', email: 'liuzheng712@gmail.com', tel: '12332', test: Data.tname()},
         {fname: 'dd', lname: 'test1', email: 'liuzheng712@gmail.com', tel: '12332', test: 1}
-    ];
-    $scope.addOne = function (v) {
+    ];*/
+    $scope.xlsusers =[{fname: '', lname: '', email: '', tel: '', test: Data.tname()}];
+        $scope.addOne = function (v) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
 //        if (i > -1) {
@@ -70,7 +71,7 @@ function Excel($scope,$http, Data) {
         }
 //        console.log($scope.testlist);
 
-        $scope.active = $scope.testlist[1];
+        $scope.active = $scope.testlist[0];
         $scope.selectTest = function (target) {
             $scope.active = target.getAttribute('data');
         };

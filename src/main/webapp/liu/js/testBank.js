@@ -12,7 +12,7 @@ function TestBank($scope, $http,Data) {
     $scope.reciveData = new Object();
     $scope.reciveData.selectedSets = null;
     $scope.reciveData.totalPage = 1;
-	$scope.reciveData.pageNum = 1;//默认一页10个
+	$scope.reciveData.pageNum = 10;//默认一页10个
 	$scope.reciveData.type = 1;
 	$scope.reciveData.keyword = '';
 	$scope.reciveData.pagelist = new Array();
@@ -101,7 +101,7 @@ function TestBank($scope, $http,Data) {
     	//仅需要对message中的数据做处理
     	    	//total pageNum
     	    	$scope.reciveData.totalPage = $scope.message.totalPage;
-    	    	$scope.reciveData.pageNum = $scope.message.pageNum;
+//    	    	$scope.reciveData.pageNum = $scope.message.pageNum;
     	    	$scope.reciveData.questions = $scope.message.questions;
     	    	$scope.computePage();
     	    } else {

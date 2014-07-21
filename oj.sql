@@ -12,7 +12,9 @@ File Encoding         : 65001
 
 Date: 2014-07-18 23:15:34
 */
-
+drop database if exists ojsite;
+create database ojsite character set utf8;
+use ojsite;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -445,7 +447,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` VALUES ('1', 'admin', 'admin', 'xx@qq.com', 'zpl', '2', null, null, null, null, null, '2014-06-26 21:28:03', null, '0', '0', '1', '');
 INSERT INTO `user` VALUES ('3', 'ss', 'no value', '524510356@qq.com', 'QQ', '3', 'zpl', 'no value', 'no value', 'no value', 'no value', '2014-06-29 18:36:15', '2014-07-12 17:39:08', '97', '1', '1', '188888888');
 INSERT INTO `user` VALUES ('4', 'atom', 'no value', '524510356@gmail.com', 'xxoo', '2', 'dhsyd7623', 'no value', 'no value', 'no value', 'no value', '2014-06-30 10:43:32', '2014-06-30 10:43:32', '0', '0', '1', '23232323232');
-INSERT INTO `user` VALUES ('18', 'liu1', 'zheng', '294384672@ss.com', 'no value', '1', 'E64CA1FF2B519F0B4EF39D8E7183A15C', 'no value', 'no value', 'no value', 'no value', '2014-07-02 16:15:42', '2014-07-02 16:15:42', '0', '0', '1', '123232323');
+INSERT INTO `user` VALUES ('18', 'liu1', 'zheng', 'liuzheng712@gmail.com', 'no value', '2', 'eb6efe717485bd28fb98f89b3d924725', 'no value', 'no value', 'no value', 'no value', '2014-07-02 16:15:42', '2014-07-02 16:15:42', '0', '0', '1', '123232323');
 INSERT INTO `user` VALUES ('19', 'liu1', 'zheng', '524510356@ss.com', 'no value', '1', '7DE125139D33F97FB8DB63CD6F55E942', 'no value', 'no value', 'no value', 'no value', '2014-07-02 16:31:12', '2014-07-02 16:31:12', '0', '0', '1', '123232323');
 INSERT INTO `user` VALUES ('20', null, 'no value', 'test4test@qq.com', 'no value', '2', 'zplzplzpl', 'no value', 'no value', 'no value', 'no value', '2014-07-08 21:25:44', '2014-07-08 21:25:44', '0', '0', '1', 'no value');
 INSERT INTO `user` VALUES ('21', null, 'no value', 'ttt@qq.com', 'no value', '2', '5a190b68893cef8c888a9f72df07b361', 'no value', 'no value', 'no value', 'no value', '2014-07-08 21:32:57', '2014-07-08 21:51:44', '0', '0', '1', 'no value');

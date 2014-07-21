@@ -52,6 +52,11 @@ function TestPage($scope, $http, Data) {
     $scope.MultInvite = function (target) {
         console.log('MultInvite');
         window.location.href = '#/invite';
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active].name;
+        $scope.tid = $scope.tests[$scope.active].quizid;
+        Data.setTid($scope.tid);
+        Data.setTname($scope.name);
 //        $scope.active = target.getAttribute('data');
 //        $scope.tid = target.getAttribute('data');
 //
@@ -64,6 +69,12 @@ function TestPage($scope, $http, Data) {
         console.log('Report');
         $scope.leftBar = 'leftBar.html';
         $scope.template = 'report.html';
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active].name;
+        $scope.tid = $scope.tests[$scope.active].quizid;
+        Data.setTid($scope.tid);
+        Data.setTname($scope.name);
+//        $scope.testManage();
     };
     $scope.testDetail = function (target) {
         console.log('testDetail');
