@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-function TestBank($scope, $http,Data) {
+function TestBank($scope, $http,Data,$sce) {
     $scope.url = '#/bank';
     $scope.template = 'testBank.html';
     $scope.ContentUs = 'contentUs.html';
@@ -85,6 +85,19 @@ function TestBank($scope, $http,Data) {
     	}).error(function (data) {
     		//error
     	});
+    }
+    $scope.gettrustContext = function(q){
+    	var trust = "内容";
+    	trust += q.context +"<br/>";
+    	trust +="标签";
+    	trust += q.tag+"<br/> <span>";
+    	for(a in q.answer){
+    		trust += "<p>";
+    		trust +=a.text;
+    		trust +="</p>";
+    	}
+    	trust +="</span>";
+    	return $sce.trustAsHtml(trust);
     }
     $scope.getQuestions = function(sendData){
     	$http({
