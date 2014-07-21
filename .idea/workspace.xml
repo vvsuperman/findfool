@@ -10,8 +10,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/liu/rrtest.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/excle.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/excle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -43,8 +41,8 @@
       <file leaf-file-name="excle.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/excle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3263158" vertical-offset="4185" max-vertical-offset="8494">
-              <caret line="138" column="180" selection-start-line="138" selection-start-column="180" selection-end-line="138" selection-end-column="180" />
+            <state vertical-scroll-proportion="0.50760233" vertical-offset="4185" max-vertical-offset="8494">
+              <caret line="143" column="31" selection-start-line="143" selection-start-column="31" selection-end-line="143" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -1164,7 +1162,7 @@
       <workItem from="1405842347676" duration="845000" />
       <workItem from="1405843405579" duration="1293000" />
       <workItem from="1405857358531" duration="808000" />
-      <workItem from="1405907089580" duration="11202000" />
+      <workItem from="1405907089580" duration="11261000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1342,11 +1340,15 @@
       <created>1405942392973</created>
       <updated>1405942392973</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="fix 邀请页面，可以提交了，tid也好了，缺tid的权限检测，待完成">
+      <created>1405958259412</created>
+      <updated>1405958259412</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="204434000" />
+    <option name="totallyTimeSpent" value="204493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1288" y="18" width="1296" height="1040" extended-state="6" />
@@ -1432,7 +1434,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="完成清理重复联系人，下一步上传&#10;" />
     <MESSAGE value="上传完成，等待由test.name 获取 test.id 的api" />
     <MESSAGE value="加入了md编辑器，测试在te.html页面&#10;" />
     <MESSAGE value="对zpl的修改稍作修改" />
@@ -1457,7 +1458,8 @@
     <MESSAGE value="fix 龙哥bug" />
     <MESSAGE value="2014年7月20日下午和龙哥的修改" />
     <MESSAGE value="修复一些测试小bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复一些测试小bug" />
+    <MESSAGE value="fix 邀请页面，可以提交了，tid也好了，缺tid的权限检测，待完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix 邀请页面，可以提交了，tid也好了，缺tid的权限检测，待完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1868,8 +1870,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/excle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3263158" vertical-offset="4185" max-vertical-offset="8494">
-          <caret line="138" column="180" selection-start-line="138" selection-start-column="180" selection-end-line="138" selection-end-column="180" />
+        <state vertical-scroll-proportion="0.50760233" vertical-offset="4185" max-vertical-offset="8494">
+          <caret line="143" column="31" selection-start-line="143" selection-start-column="31" selection-end-line="143" selection-end-column="31" />
           <folding />
         </state>
       </provider>

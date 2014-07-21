@@ -418,6 +418,13 @@ function Upgrade($scope) {
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
 }
+function RockRoll($scope, $routeParams) {
+    $scope.url = '#/upgrade';
+    $scope.template = 'rrtest.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
+    $scope.rrid =  $routeParams.rrid;
+}
 
 
 //function TestBank($scope) {

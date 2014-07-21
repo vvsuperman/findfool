@@ -40,6 +40,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'TestShow'
             }).
+            when('/rock&roll/:rrid', {
+                templateUrl: 'page.html',
+                controller: 'RockRoll'
+            }).
             when('/test', {
                 templateUrl: 'page.html',
                 controller: 'TestPage'
