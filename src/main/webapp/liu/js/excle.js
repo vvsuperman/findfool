@@ -3,13 +3,15 @@
  */
 /*
  excel read*/
-function Excel($scope,$http, Data) {
+function Excel($scope, $http, Data) {
     /*$scope.xlsusers = [
-        {fname: 'dd', lname: 'Data.tname', email: 'liuzheng712@gmail.com', tel: '12332', test: Data.tname()},
-        {fname: 'dd', lname: 'test1', email: 'liuzheng712@gmail.com', tel: '12332', test: 1}
-    ];*/
-    $scope.xlsusers =[{fname: '', lname: '', email: '', tel: '', test: Data.tname()}];
-        $scope.addOne = function (v) {
+     {fname: 'dd', lname: 'Data.tname', email: 'liuzheng712@gmail.com', tel: '12332', test: Data.tname()},
+     {fname: 'dd', lname: 'test1', email: 'liuzheng712@gmail.com', tel: '12332', test: 1}
+     ];*/
+    $scope.xlsusers = [
+        {fname: '', lname: '', email: '', tel: '', test: Data.tname()}
+    ];
+    $scope.addOne = function (v) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
 //        if (i > -1) {
@@ -45,7 +47,7 @@ function Excel($scope,$http, Data) {
     $scope.clean = function () {
 //        $scope.$apply();
         console.log($scope.content);
-        $scope.content=""
+        $scope.content = ""
     }
     $scope.refresh = function () {
 //    去重
@@ -96,22 +98,53 @@ function Excel($scope,$http, Data) {
 //        Data.xlsusers=$scope.xlsusers
     };
     $scope.refresh();
-    $scope.upload = function (tid, userlist) {
+    $scope.tnamelist={};
+
+    $scope.queryByName = function (tname) {
+        $http({
+            url: "/test/queryByName",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user": {"uid": Data.uid()}, "name": tname}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+//            console.log(tname);
+            if ($scope.state) {
+                $scope.tnamelist[tname] = $scope.message.quizid;
+                console.log($scope.tnamelist)
+            } else {
+
+            }
+        }).error(function (data) {
+
+        });
+    };
+    $scope.testlist.forEach($scope.queryByName);
+//    for (i in $scope.testlist){
+//        console.log($scope.testlist[i])
+//        $scope.queryByName($scope.testlist[i])
+//    }
+
+    $scope.upload = function (tname, userlist) {
         $http({
             url: "/test/manage/invite",
             method: 'POST',
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist,"context":$scope.content}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
-
+alert("邀请成功")
             } else {
-
+alert($scope.message.msg)
             }
         }).error(function (data) {
 
