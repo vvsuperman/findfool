@@ -35,7 +35,7 @@ function MyTestBank($scope) {
     $scope.active = 1;
     $scope.show = 1;
 }
-function mytestbank($scope, $http, Data) {
+function mytestbank($scope, $http, Data,$sce) {
     $scope.page = 1;
     $scope.keyword = "";
     $scope.tag = "";
@@ -122,6 +122,21 @@ function mytestbank($scope, $http, Data) {
             //error
         });
     }
+    
+    $scope.gettrustContext = function(q){
+    	var trust = "内容";
+    	trust += q.context +"<br/>";
+    	trust +="标签";
+    	trust += q.tag+"<br/> <span>";
+    	for(a in q.answer){
+    		trust += "<p>";
+    		trust +=a.text;
+    		trust +="</p>";
+    	}
+    	trust +="</span>";
+    	return $sce.trustAsHtml(trust);
+    }
+    
     $scope.queryQuestions = function (index) {
         $scope.reciveData.currentPage = index;
         for (i = 0; i < $scope.reciveData.pagelist.length; i++) {

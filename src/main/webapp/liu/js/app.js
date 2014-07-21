@@ -4,6 +4,7 @@
  */
 var OJApp = angular.module('OJApp', [
     'ngRoute',
+    'ngSanitize',
     'evgenyneu.markdown-preview',
 	'webStorageModule'
 ]);

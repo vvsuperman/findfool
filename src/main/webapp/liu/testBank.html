@@ -33,15 +33,7 @@
         	<ul class="quizquestion">
         		<li ng-repeat="q in reciveData.questions">
         			名称：{{q.name}}
-        			<div>
-        			内容{{q.context}}
-        			<br/>
-        			&nbsp;&nbsp;&nbsp;标签{{q.tag}}
-        			<br/>
-        			
-        			<span ng-repeat=" a in q.answer">
-        				<p>{{a.text}}</p>
-        			</span>
+        			<div ng-bind-html="gettrustContext(q)" compile-template>
         			</div>
         		</li>
         	</ul>
@@ -62,15 +54,7 @@
         	<ul class="quizquestion">
         		<li ng-repeat="q in reciveData.questions">
         			名称：{{q.name}}
-        			<div>
-        			内容{{q.context}}
-        			<br/>
-        			&nbsp;&nbsp;&nbsp;标签{{q.tag}}
-        			<br/>
-        			
-        			<span ng-repeat=" a in q.answer">
-        				<p>{{a.text}}</p>
-        			</span>
+        			<div ng-bind-html="gettrustContext(q)" compile-template>
         			</div>
         		</li>
         	</ul>
@@ -108,15 +92,7 @@
         	<ul class="quizquestion">
         		<li ng-repeat="q in reciveData.questions">
         			名称：{{q.name}}
-        			<div>
-        			内容{{q.context}}
-        			<br/>
-        			&nbsp;&nbsp;&nbsp;标签{{q.tag}}
-        			<br/>
-        			
-        			<span ng-repeat=" a in q.answer">
-        				<p>{{a.text}}</p>
-        			</span>
+        			<div ng-bind-html="gettrustContext(q)" compile-template>
         			</div>
         		</li>
         	</ul>
