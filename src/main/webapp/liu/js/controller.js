@@ -30,7 +30,7 @@ function Indexx($scope, $http, Data) {
                 data: {"email": $scope.Lemail, "pwd": md5($scope.Lpwd), "name": $scope.Lname}
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
-                Data.setToken(data["token"]);
+
                 var name = $scope.Lemail;
                 $scope.message = data["message"];
                 if (data["message"].handler_url != null && data["message"].handler_url == "") {
@@ -40,6 +40,9 @@ function Indexx($scope, $http, Data) {
                 Data.setEmail($scope.Lemail);
 
                 if ($scope.state) {
+                    Data.setToken(data["token"]);
+                    console.log(Data.token());
+                    console.log(data["token"]);
                     Data.setUid($scope.message.msg);
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);

@@ -5,20 +5,20 @@
  excel read*/
 function Excel($scope,$http, Data) {
     $scope.xlsusers = [
-        {Fname: 'dd', Lname: 'Data.tname', email: 'dsa@ss', tel: '12332', test: Data.tname()},
-        {Fname: 'dd', Lname: 'test1', email: 'dsa@ss', tel: '12332', test: 'test1'}
+        {fname: 'dd', lname: 'Data.tname', email: 'liuzheng712@gmail.com', tel: '12332', test: Data.tname()},
+        {fname: 'dd', lname: 'test1', email: 'liuzheng712@gmail.com', tel: '12332', test: 1}
     ];
     $scope.addOne = function (v) {
 //        var tmp = $scope.xlsusers;
         var i = $scope.xlsusers.indexOf(v);
 //        if (i > -1) {
         if ($scope.active == 'notSelect') {
-            $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: ''});
+            $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: ''});
         } else {
-            $scope.xlsusers.splice(i + 1, 0, {Fname: '', Lname: '', email: '', tel: '', test: $scope.active});
+            $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: $scope.active});
         }
 //        }
-//      $scope.xlsusers.push({Fname: '', Lname: '', email: '', tel: ''}) ;
+//      $scope.xlsusers.push({fname: '', lname: '', email: '', tel: ''}) ;
 //        Data.xlsusers=$scope.xlsusers;
     };
 
@@ -77,9 +77,9 @@ function Excel($scope,$http, Data) {
         $scope.xlsusers = tmpp;
         for (t in $scope.testlist) {
             if ($scope.testlist[t] == "notSelect") {
-                $scope.xlsusers.unshift({Fname: '', Lname: '', email: '', tel: '', test: ''});
+                $scope.xlsusers.unshift({fname: '', lname: '', email: '', tel: '', test: ''});
             } else {
-                $scope.xlsusers.unshift({Fname: '', Lname: '', email: '', tel: '', test: $scope.testlist[t]})
+                $scope.xlsusers.unshift({fname: '', lname: '', email: '', tel: '', test: $scope.testlist[t]})
             }
         }
         var tmp = $scope.xlsusers;
@@ -102,7 +102,7 @@ function Excel($scope,$http, Data) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject, "replyTo": $scope.replyTo, "tid": tid, "invite": userlist,"context":$scope.content}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];

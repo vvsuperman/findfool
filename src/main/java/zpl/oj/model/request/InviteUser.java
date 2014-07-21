@@ -6,6 +6,16 @@ public class InviteUser {
 	private String Lname;
 	private String email;
 	private String tel;
+
+    private String test;
+    public void setTest(String test) {
+        this.test = test;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
 	public String getFname() {
 		return Fname;
 	}
