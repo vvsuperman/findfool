@@ -175,6 +175,37 @@ OJApp.factory('Data', function (webStorage) {
 
 					webStorage.add('tname',to);
 					this._tname = to;
+			};
+
+			this._company="";
+			this.company=function(){
+				if(this._company==""||this._company==null){
+					return  webStorage.get("company");
+				}else{
+					return this._company;
+				}
+			};
+			this.setCompany =function(to){
+
+					webStorage.remove('company');
+
+					webStorage.add('company',to);
+					this._company = to;
+			};
+			this._tel="";
+			this.tel=function(){
+				if(this._tel==""||this._tel==null){
+					return  webStorage.get("tel");
+				}else{
+					return this._tel;
+				}
+			};
+			this.setTel =function(to){
+
+					webStorage.remove('tel');
+
+					webStorage.add('tel',to);
+					this._tel = to;
 			}
 
 		}
