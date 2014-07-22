@@ -79,8 +79,10 @@ function pInfo($scope, $http, Data) {
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
+                console.log($scope.name);
                 alert($scope.message.msg);
                 Data.setName($scope.name);
+                console.log(Data.name);
                 window.location.reload(true);
             } else {
 

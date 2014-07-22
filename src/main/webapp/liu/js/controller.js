@@ -379,6 +379,7 @@ function TestShow($scope, $http, Data) {
 
  }*/
 function nav($scope, Data) {
+    console.log(Data.name());
     $scope.name = Data.name();
 //    console.log(Data.name);
     $scope.navTest = function () {
