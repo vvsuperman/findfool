@@ -73,6 +73,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'aceEditor'
             }).
+            when('/MChoice', {
+                templateUrl: 'page.html',
+                controller: 'MChoice'
+            }).
             otherwise({
                 redirectTo: '/'
             });

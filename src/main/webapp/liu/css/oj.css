@@ -159,3 +159,22 @@ input.ng-valid {
 #wmd-button-bar #wmd-button-row #wmd-undo-button { left: 325px; background-position: -200px 0; }
 #wmd-button-bar #wmd-button-row #wmd-redo-button { left: 350px; background-position: -220px 0; }
 #wmd-button-bar #wmd-button-row #wmd-help-button { right: 0px; display: none; background-position: -240px 0; }
+
+.p-answerlist a {
+    height: 38px;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    padding-left: 38px;
+    background: #fff;
+    display: block;
+    line-height: 38px;
+    color: #333;
+    font-size: 14px;
+}
+
+ul li {
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: upper-alpha;
+    padding: 10px;
+}

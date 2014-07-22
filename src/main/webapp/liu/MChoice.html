@@ -1,0 +1,21 @@
+<div class="col-lg-6 col-lg-offset-3" style="padding: 50px;" >
+    <div id="js-skill-question" class="highlight">
+        <h3>
+            <div id="js-titleMaxHeight" style="height: auto;">
+                {{context}}
+            </div>
+        </h3>
+
+        <form>
+            <div class="p-answerlist">
+                <ul class="list">
+                    <li ng-repeat="an in answer">
+                        <a class="selected aa" href="" data="{{$index}}" ng-click="chose($index)">
+                            {{an.text}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
