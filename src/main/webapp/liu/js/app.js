@@ -82,10 +82,10 @@ OJApp.factory('Data', function (webStorage) {
 			this._token="";
 			this.token=function(){
 				if(this._token==""||this._token==null){
-					return  webStorage.get("token");
-				}else{
-					return this._token;
+					this._token = webStorage.get("token");
 				}
+				return this._token;
+				
 			};
 			this.setToken =function(to){
 					webStorage.remove('token');
@@ -98,10 +98,10 @@ OJApp.factory('Data', function (webStorage) {
 			this._uid="";
 			this.uid=function(){
 				if(this._uid==""||this._uid==null){
-					return  webStorage.get("uid");
-				}else{
-					return this._uid;
+					this._uid=  webStorage.get("uid");
 				}
+				return this._uid;
+
 			};
 			this.setUid =function(to){
 
@@ -114,10 +114,10 @@ OJApp.factory('Data', function (webStorage) {
 			this._name="";
 			this.name=function(){
 				if(this._name==""||this._name==null){
-					return  webStorage.get("name");
-				}else{
-					return this._name;
+					this._name=  webStorage.get("name");
 				}
+					return this._name;
+
 			};
 			this.setName =function(to){
 
@@ -130,10 +130,10 @@ OJApp.factory('Data', function (webStorage) {
 			this._email="";
 			this.email=function(){
 				if(this._email==""||this._email==null){
-					return  webStorage.get("email");
-				}else{
-					return this._email;
+					this._email=  webStorage.get("email");
 				}
+					return this._email;
+
 			};
 			this.setEmail =function(to){
 
@@ -147,10 +147,9 @@ OJApp.factory('Data', function (webStorage) {
 			this._tid="";
 			this.tid=function(){
 				if(this._tid==""||this._tid==null){
-					return  webStorage.get("tid");
-				}else{
-					return this._tid;
+					this._tid=  webStorage.get("tid");
 				}
+					return this._tid;
 			};
 			this.setTid =function(to){
 
@@ -164,10 +163,9 @@ OJApp.factory('Data', function (webStorage) {
 			this._tname="";
 			this.tname=function(){
 				if(this._tname==""||this._tname==null){
-					return  webStorage.get("tname");
-				}else{
-					return this._tname;
+					this._tname=  webStorage.get("tname");
 				}
+					return this._tname;
 			};
 			this.setTname =function(to){
 
@@ -180,10 +178,10 @@ OJApp.factory('Data', function (webStorage) {
 			this._company="";
 			this.company=function(){
 				if(this._company==""||this._company==null){
-					return  webStorage.get("company");
-				}else{
-					return this._company;
+					this._company=  webStorage.get("company");
 				}
+					return this._company;
+
 			};
 			this.setCompany =function(to){
 
@@ -195,10 +193,10 @@ OJApp.factory('Data', function (webStorage) {
 			this._tel="";
 			this.tel=function(){
 				if(this._tel==""||this._tel==null){
-					return  webStorage.get("tel");
-				}else{
-					return this._tel;
+					this._tel=  webStorage.get("tel");
 				}
+					return this._tel;
+
 			};
 			this.setTel =function(to){
 
@@ -206,8 +204,22 @@ OJApp.factory('Data', function (webStorage) {
 
 					webStorage.add('tel',to);
 					this._tel = to;
-			}
+			};
+			this._privi = "";
+			this.privi=function(){
+				if(this._privi==""||this._privi==null){
+					this._privi=  webStorage.get("privi");
+				}
+					return this._privi;
 
+			};
+			this.setPrivi =function(to){
+
+					webStorage.remove('privi');
+
+					webStorage.add('privi',to);
+					this._privi = to;
+			};			
 		}
     return new _data();
 });

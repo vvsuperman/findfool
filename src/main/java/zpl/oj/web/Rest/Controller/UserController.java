@@ -41,15 +41,15 @@ public class UserController {
 			msg.setMsg("failed login!  user:"+request.getEmail()+" error user or password");
 			msg.setHandler_url("/error");
 			rb.setState(0);		
+			rb.setMessage(msg);
 		}else{
 			u = userService.userLogin(u.getUid());
-			msg.setMsg(new String()+u.getUid());
-			msg.setHandler_url(u.getFname());
+			rb.setMessage(u);
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 		}
 		
-		rb.setMessage(msg);
+		
 		return rb;
 	}
 	
@@ -70,6 +70,7 @@ public class UserController {
 		if(res == false){
 			msg.setMsg("failed register! because this email has been registed!");
 			msg.setHandler_url("/error");
+			rb.setMessage(msg);
 			rb.setState(0);			
 		}else{
 			u = userService.getUserByEmail(u.getEmail());
@@ -77,6 +78,7 @@ public class UserController {
 			msg.setMsg(new String()+u.getUid());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
+			rb.setMessage(u);
 			//发送邮件
 			MailSenderInfo mailSenderInfo = new MailSenderInfo();
 			mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
@@ -86,7 +88,7 @@ public class UserController {
 			SimpleMailSender.sendHtmlMail(mailSenderInfo);
 		}
 		
-		rb.setMessage(msg);
+		
 		return rb;
 	}
 	
@@ -107,15 +109,17 @@ public class UserController {
 			msg.setMsg("failed register! because this email has been registed!");
 			msg.setHandler_url("/error");
 			rb.setState(0);			
+			rb.setMessage(msg);
 		}else{
 			u = userService.getUserByEmail(u.getEmail());
 			userService.userLogin(u.getUid());
 			msg.setMsg(new String()+u.getUid());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
+			rb.setMessage(u);
 		}
 		
-		rb.setMessage(msg);
+		
 		return rb;
 	}
 	

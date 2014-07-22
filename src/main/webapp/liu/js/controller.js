@@ -43,7 +43,11 @@ function Indexx($scope, $http, Data) {
                     Data.setToken(data["token"]);
                     console.log(Data.token());
                     console.log(data["token"]);
-                    Data.setUid($scope.message.msg);
+                    Data.setUid($scope.message.uid);
+                    Data.setPrivi($scope.message.privilege);
+                    Data.setTel($scope.message.tel);
+                    Data.setCompany($scope.message.company);
+
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
                     window.location.href = '#/test';
@@ -127,7 +131,14 @@ function Indexx($scope, $http, Data) {
                         $scope.state = data["state"];//1 true or 0 false
                         $scope.message = data["message"];
                         if ($scope.state) {
-                            Data.setUid ($scope.message.msg);
+                            Data.setUid ($scope.message.uid);
+                            Data.setToken(data["token"]);
+                            console.log(Data.token());
+                            console.log(data["token"]);
+                            Data.setUid($scope.message.uid);
+                            Data.setPrivi($scope.message.privilege);
+                            Data.setTel($scope.message.tel);
+                            Data.setCompany($scope.message.company);
                             //add by zpl
 //                            Data.token = $scope.token;//ignore by lz,token 直接都在Data里的，不走$scope
                             Data.setEmail($scope.Remail);
