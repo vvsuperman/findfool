@@ -33,7 +33,7 @@ function Indexx($scope, $http, Data) {
 
                 var name = $scope.Lemail;
                 $scope.message = data["message"];
-                if (data["message"].handler_url != null && data["message"].handler_url == "") {
+                if (data["message"].handler_url != null && data["message"].handler_url !== "") {
                     name = data["message"].handler_url;
                 }
                 Data.setName(name);

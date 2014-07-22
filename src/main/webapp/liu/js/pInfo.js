@@ -31,14 +31,10 @@ function pInfo($scope, $http, Data) {
                 $scope.company = $scope.message.company;
                 $scope.name = $scope.message.name;
                 $scope.tel = $scope.message.tel;
-                Data.email = $scope.email;
-                Data.company = $scope.company;
-                Data.name = $scope.name;
-                Data.tel = $scope.tel;
+                Data.setCompany($scope.company);
+                Data.setName($scope.name);
+                Data.setTel($scope.tel);
 				Data.setEmail($scope.email);
-				Data.setCompany($scope.company);
-				Data.setName($scope.name);
-				Data.setTel($scope.tel);
             } else {
             }
         }).error(function (data) {
@@ -79,10 +75,10 @@ function pInfo($scope, $http, Data) {
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
-                console.log($scope.name);
+//                console.log($scope.name);
                 alert($scope.message.msg);
                 Data.setName($scope.name);
-                console.log(Data.name);
+//                console.log(Data.name);
                 window.location.reload(true);
             } else {
 
