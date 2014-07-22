@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -67,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pInfo.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="pInfo.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1395" max-vertical-offset="2015">
-              <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.2780269" vertical-offset="1302" max-vertical-offset="2015">
+              <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
               <folding>
                 <element signature="e#441#1629#0" expanded="false" />
               </folding>
@@ -139,13 +140,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20852017" vertical-offset="11904" max-vertical-offset="21762">
-              <caret line="378" column="0" selection-start-line="378" selection-start-column="0" selection-end-line="378" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="11904" max-vertical-offset="21731">
+              <caret line="381" column="0" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
               <folding>
-                <marker date="1406034060882" expanded="false" signature="16660:16679" placeholder="..." />
+                <marker date="1406034183067" expanded="false" signature="16630:16649" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -1193,7 +1194,7 @@
       <workItem from="1405857358531" duration="808000" />
       <workItem from="1405907089580" duration="11261000" />
       <workItem from="1405958490786" duration="315000" />
-      <workItem from="1406025872217" duration="3670000" />
+      <workItem from="1406025872217" duration="3709000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1383,11 +1384,15 @@
       <created>1406034148464</created>
       <updated>1406034148464</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="完成更新用户信息">
+      <created>1406034156178</created>
+      <updated>1406034156178</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208478000" />
+    <option name="totallyTimeSpent" value="208517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1860,22 +1865,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1395" max-vertical-offset="2015">
-          <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="11904" max-vertical-offset="21731">
+          <caret line="381" column="0" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
           <folding>
-            <element signature="e#441#1629#0" expanded="false" />
+            <marker date="1406034183067" expanded="false" signature="16630:16649" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20852017" vertical-offset="11904" max-vertical-offset="21762">
-          <caret line="378" column="0" selection-start-line="378" selection-start-column="0" selection-end-line="378" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.2780269" vertical-offset="1302" max-vertical-offset="2015">
+          <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
           <folding>
-            <marker date="1406034060882" expanded="false" signature="16660:16679" placeholder="..." />
+            <element signature="e#441#1629#0" expanded="false" />
           </folding>
         </state>
       </provider>
