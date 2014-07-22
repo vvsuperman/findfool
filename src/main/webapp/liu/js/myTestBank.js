@@ -224,6 +224,7 @@ function mytestbank($scope, $http, Data,$sce) {
         $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
         $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
         $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
+        $scope.context=$scope.newQuestion.context;
         var ans = $scope.reciveData.choosedQ.answer;
         if ($scope.newQuestion.type == 1) {
             for (a in ans) {

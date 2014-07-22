@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -30,28 +30,6 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/app.js">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="1.7370787" vertical-offset="1211" max-vertical-offset="5332">
-                    <caret line="110" column="30" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
-                    <folding>
-                      <element signature="e#875#2292#0" expanded="false" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="oj" />
@@ -68,14 +46,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pInfo.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="pInfo.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2780269" vertical-offset="1302" max-vertical-offset="2015">
-              <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
-              <folding>
-                <element signature="e#441#1629#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="-8.68" vertical-offset="2139" max-vertical-offset="2976">
+              <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myTestBank.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="myTestBank.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1829" max-vertical-offset="10726">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.38589212" vertical-offset="6510" max-vertical-offset="10757">
+              <caret line="220" column="26" selection-start-line="220" selection-start-column="26" selection-end-line="220" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -143,10 +119,22 @@
       <file leaf-file-name="controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="11904" max-vertical-offset="21731">
-              <caret line="381" column="0" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.8" vertical-offset="977" max-vertical-offset="21731">
+              <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
               <folding>
-                <marker date="1406034183067" expanded="false" signature="16630:16649" placeholder="..." />
+                <marker date="1406034473694" expanded="false" signature="16631:16650" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="5332">
+              <caret line="110" column="30" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
+              <folding>
+                <element signature="e#875#2292#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -207,15 +195,15 @@
         <option value="dbtable:/89e7d83/3b7c6c51-a335-4f5e-8d38-f7759eaf92b8/ojsite..problem" />
         <option value="db-console:/89e7d83/3b7c6c51-a335-4f5e-8d38-f7759eaf92b8/" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/rrtest.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/invite.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/excle.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/profile.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
       </list>
     </option>
   </component>
@@ -590,36 +578,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="liu" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ojweb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ojweb" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="liu" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1194,7 +1152,7 @@
       <workItem from="1405857358531" duration="808000" />
       <workItem from="1405907089580" duration="11261000" />
       <workItem from="1405958490786" duration="315000" />
-      <workItem from="1406025872217" duration="3709000" />
+      <workItem from="1406025872217" duration="5262000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1388,11 +1346,19 @@
       <created>1406034156178</created>
       <updated>1406034156178</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="完成更新用户信息">
+      <created>1406034203048</created>
+      <updated>1406034203048</updated>
+    </task>
+    <task id="LOCAL-00050" summary="修复bug">
+      <created>1406035536489</created>
+      <updated>1406035536489</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208517000" />
+    <option name="totallyTimeSpent" value="210070000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1421,7 +1387,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18253969" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47032475" sideWeight="0.5860806" order="2" side_tool="false" content_ui="tabs" x="45" y="169" width="1276" height="329" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16013438" sideWeight="0.5860806" order="2" side_tool="false" content_ui="tabs" x="45" y="169" width="1276" height="329" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297619" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1446,7 +1412,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="加入了md编辑器，测试在te.html页面&#10;" />
     <MESSAGE value="对zpl的修改稍作修改" />
     <MESSAGE value="http.js是http请求的模板" />
     <MESSAGE value="修复Excel在ff和chrome的bug" />
@@ -1471,7 +1436,8 @@
     <MESSAGE value="修复一些测试小bug" />
     <MESSAGE value="fix 邀请页面，可以提交了，tid也好了，缺tid的权限检测，待完成" />
     <MESSAGE value="完成更新用户信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成更新用户信息" />
+    <MESSAGE value="修复bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1831,14 +1797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="10323">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/nav.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.65" vertical-offset="372" max-vertical-offset="992">
@@ -1857,7 +1815,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7370787" vertical-offset="1211" max-vertical-offset="5332">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="5332">
           <caret line="110" column="30" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
           <folding>
             <element signature="e#875#2292#0" expanded="false" />
@@ -1867,21 +1825,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11904" max-vertical-offset="21731">
-          <caret line="381" column="0" selection-start-line="381" selection-start-column="0" selection-end-line="381" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.8" vertical-offset="977" max-vertical-offset="21731">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
           <folding>
-            <marker date="1406034183067" expanded="false" signature="16630:16649" placeholder="..." />
+            <marker date="1406034473694" expanded="false" signature="16631:16650" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/pInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2780269" vertical-offset="1302" max-vertical-offset="2015">
-          <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
-          <folding>
-            <element signature="e#441#1629#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-8.68" vertical-offset="2139" max-vertical-offset="2976">
+          <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38589212" vertical-offset="6510" max-vertical-offset="10757">
+          <caret line="220" column="26" selection-start-line="220" selection-start-column="26" selection-end-line="220" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
