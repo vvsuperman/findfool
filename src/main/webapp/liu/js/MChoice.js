@@ -45,8 +45,10 @@ function MChoice($scope, $routeParams) {
             {text: "CCC", isright: true, score: 4}
         ]}
     ];
-    $scope.context=$scope.allMC[$scope.section].context;
-    $scope.answer=$scope.allMC[$scope.section].answer
+    if($scope.section) {
+        $scope.context = $scope.allMC[$scope.section].context;
+        $scope.answer = $scope.allMC[$scope.section].answer
+    }
 
 
 }

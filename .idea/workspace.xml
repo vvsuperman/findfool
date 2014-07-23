@@ -8,13 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/liu/css/docs.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/scrollspy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/MChoice.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/MChoice.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/css/oj.css" afterPath="$PROJECT_DIR$/src/main/webapp/liu/css/oj.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/test.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/test.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -62,8 +56,8 @@
       <file leaf-file-name="MChoice.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5164645" vertical-offset="1190" max-vertical-offset="1860">
-              <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.4627383" vertical-offset="1128" max-vertical-offset="1922">
+              <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -1170,7 +1164,7 @@
       <workItem from="1405907089580" duration="11261000" />
       <workItem from="1405958490786" duration="315000" />
       <workItem from="1406025872217" duration="11241000" />
-      <workItem from="1406109658377" duration="7974000" />
+      <workItem from="1406109658377" duration="8811000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1380,11 +1374,15 @@
       <created>1406044726383</created>
       <updated>1406044726383</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="做题页面，哈哈">
+      <created>1406117685601</created>
+      <updated>1406117685601</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224023000" />
+    <option name="totallyTimeSpent" value="224860000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1470,7 +1468,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="修复Excel在ff和chrome的bug" />
     <MESSAGE value="person info" />
     <MESSAGE value="person info 强制使用getElementById" />
     <MESSAGE value="update&#10;" />
@@ -1495,7 +1492,8 @@
     <MESSAGE value="修复bug" />
     <MESSAGE value="我的试题库，修改bug" />
     <MESSAGE value="选择题 接近完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="选择题 接近完成" />
+    <MESSAGE value="做题页面，哈哈" />
+    <option name="LAST_COMMIT_MESSAGE" value="做题页面，哈哈" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1949,8 +1947,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5164645" vertical-offset="1190" max-vertical-offset="1860">
-          <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.4627383" vertical-offset="1128" max-vertical-offset="1922">
+          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
           <folding />
         </state>
       </provider>
