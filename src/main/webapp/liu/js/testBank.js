@@ -47,7 +47,7 @@ function TestBank($scope, $http,Data,$sce) {
     $scope.progrma = new Object();
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
-    
+    $scope.tag = "";
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
@@ -115,13 +115,13 @@ function TestBank($scope, $http,Data,$sce) {
     	});
     }
     $scope.gettrustContext = function(q){
-    	var trust = "内容";
-    	trust += q.context +"<br/>";
-    	trust +="标签";
-    	trust += q.tag+"<br/> <span>";
-    	for(a in q.answer){
-    		trust += "<p>";
-    		trust +=a.text;
+    	var trust = "<span>内容:";
+    	trust += q.context +"</span><br/>";
+    	trust +="<span>&nbsp;&nbsp;&nbsp;标签:";
+    	trust += q.tag+"</span><br/> <span>";
+    	for(var i=0;i<q.answer.length;i++){
+    		trust += "<p>"+i+":";
+    		trust +=q.answer[i].text;
     		trust +="</p>";
     	}
     	trust +="</span>";
@@ -186,6 +186,7 @@ function TestBank($scope, $http,Data,$sce) {
         $scope.show = 1;
         $scope.active = target.getAttribute('data');
         $scope.reciveData.type = $scope.active;
+        $scope.tag = "";
         $scope.queryQuestions(1);
 //        console.log($scope.active);
         $scope.question = $scope.qs[$scope.active - 1];

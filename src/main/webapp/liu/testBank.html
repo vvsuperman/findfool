@@ -31,7 +31,7 @@
         			<input type="radio" ng-model="reciveData.choosedQ" ng-value="q" ng-class="{false:'hedden', true: ''}[privi>2]">
                     </input>
         			名称：{{q.name}}
-        			<div ng-bind-html="gettrustContext(q)" compile-template>
+        			<div class="show" ng-bind-html="gettrustContext(q)" compile-template>
         			</div>
         		</li>
         	</ul>
