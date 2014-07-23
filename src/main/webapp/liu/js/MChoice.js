@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/22.
  */
-function MChoice($scope, $routeParams) {
+function MChoice($scope,$sce, $routeParams) {
     $scope.url = '#/MChoice';
     $scope.template = 'MChoice.html';
     $scope.ContentUs = 'contentUs.html';
@@ -33,20 +33,45 @@ function MChoice($scope, $routeParams) {
     $scope.chose = function (an) {
         console.log($scope.answer[an]);
     };
-    $scope.allMC = [
-        {title: "选择题1", context: "选择题1选择题1选择题1选择题1选择题1选择题1选择题1", answer: [
-            {text: "AAAA", isright: false, score: 4},
-            {text: "BBB", isright: false, score: 4},
-            {text: "CCC", isright: true, score: 4}
-        ]},
-        {title: "选择题2", context: "选择题2选择题2选择题2选择题2选择题2选择题2选择题2", answer: [
-            {text: "AAAA", isright: false, score: 4},
-            {text: "BBB", isright: false, score: 4},
-            {text: "CCC", isright: true, score: 4}
-        ]}
-    ];
+    $scope.getALL = function () {
+        $http({
+            url: "/test/manage",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user":{"uid": Data.uid()},"quizid":10}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+//仅需要对message中的数据做处理
+                $scope.allMC = $scope.message.qs
+            } else {
+
+            }
+        }).error(function (data) {
+            alert("测试数据");
+            $scope.allMC = [
+                {title: "选择题1", context: "选择题1<br />选择题1选择题1选择题1选择题1选择题1选择题1", answer: [
+                    {text: "AAAA", isright: false, score: 4},
+                    {text: "BBB", isright: false, score: 4},
+                    {text: "CCC", isright: true, score: 4}
+                ]},
+                {title: "选择题2", context: "选择题2选择题2选择题2选择题2选择题2选择题2选择题2", answer: [
+                    {text: "AAAA", isright: false, score: 4},
+                    {text: "BBB", isright: false, score: 4},
+                    {text: "CCC", isright: true, score: 4}
+                ]}
+            ];
+        });
+    }
+
     if($scope.section) {
-        $scope.context = $scope.allMC[$scope.section].context;
+        $scope.getALL();
+        $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
+//        console.log($scope.context);
         $scope.answer = $scope.allMC[$scope.section].answer
     }
 

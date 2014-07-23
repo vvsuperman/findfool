@@ -7,7 +7,7 @@ $http({
     headers: {
         "Authorization": Data.token()
     },
-    data: {"uid": Data.uid}
+    data: {"uid": Data.uid()}
 }).success(function (data) {
     $scope.state = data["state"];//1 true or 0 false
     //Data.token = data["token"];
