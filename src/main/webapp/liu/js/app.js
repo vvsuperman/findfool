@@ -77,6 +77,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'MChoice'
             }).
+            when('/MChoice/:qqid', {
+                templateUrl: 'page.html',
+                controller: 'MChoice'
+            }).
             otherwise({
                 redirectTo: '/'
             });
