@@ -124,13 +124,13 @@ function mytestbank($scope, $http, Data,$sce) {
     }
     
     $scope.gettrustContext = function(q){
-    	var trust = "内容";
-    	trust += q.context +"<br/>";
-    	trust +="标签";
-    	trust += q.tag+"<br/> <span>";
-    	for(a in q.answer){
-    		trust += "<p>";
-    		trust +=a.text;
+    	var trust = "<span>内容:";
+    	trust += q.context +"</span><br/>";
+    	trust +="<span>&nbsp;&nbsp;&nbsp;标签:";
+    	trust += q.tag+"</span><br/> <span>";
+    	for(var i=0;i<q.answer.length;i++){
+    		trust += "<p>"+i+":";
+    		trust +=q.answer[i].text;
     		trust +="</p>";
     	}
     	trust +="</span>";

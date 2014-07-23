@@ -20,10 +20,13 @@ public interface ProblemTestCaseDao {
   		+ " where test_case_id = #{testCaseId}")
   void updateProblemTestCase(ProblemTestCase problemTestCase);
   
-  @Select("select TEST_CASE_ID, PROBLEM_ID,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "
+  @Select("select TEST_CASE_ID as testCaseId, PROBLEM_ID as problemId,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "
 			+ "PROBLEM_TEST_CASE WHERE PROBLEM_ID = #{0}")
   List<ProblemTestCase> getProblemTestCases(int problemId);  
   
+  @Select("select TEST_CASE_ID as testCaseId, PROBLEM_ID as problemId,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "
+			+ "PROBLEM_TEST_CASE WHERE TEST_CASE_ID = #{0}")
+  ProblemTestCase getProblemTestCaseById(Integer testCaseId);
 
     
 }

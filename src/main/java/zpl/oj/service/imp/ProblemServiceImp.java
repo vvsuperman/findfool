@@ -57,6 +57,7 @@ public class ProblemServiceImp implements ProblemService{
 			qt.setText(c.getArgs());
 			qt.setIsright(c.getExceptedRes());
 			qt.setScore(c.getScore());
+			qt.setCaseId(c.getTestCaseId());
 			answer.add(qt);
 		}
 		q.setAnswer(answer);

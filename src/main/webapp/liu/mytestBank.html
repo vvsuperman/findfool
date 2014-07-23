@@ -22,8 +22,10 @@
         			<input type="radio" ng-model="reciveData.choosedQ" ng-value="q">
                         {{q.name}}
                     </input>
-        			<div ng-bind-html="gettrustContext(q)" compile-template>
+                    <div class="show" ng-bind-html="gettrustContext(q)" compile-template>
         			</div>
+
+        			
         		</li>
         	</ul>
         </div>
