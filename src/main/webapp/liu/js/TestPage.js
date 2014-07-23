@@ -217,5 +217,21 @@ function TestPage($scope, $http, Data) {
             $scope.extraInfo = "1,2";
             $scope.emails = "ss@ss.com,sd@ss.com"
         });
+    };
+
+//    $scope.myu = 1;
+//    $scope.tjkst = function () {
+//        $scope.myu = 3;
+//    };
+//    $scope.tjzdy = function () {
+//        $scope.myu = 2;
+//    }
+    $scope.addKUtest = function (tid) {
+        console.log(tid);
+        $scope.template = 'testBank.html';
+    };
+    $scope.addZItest = function (tid) {
+        console.log(tid);
+        $scope.template = 'mytestBank.html';
     }
 }
