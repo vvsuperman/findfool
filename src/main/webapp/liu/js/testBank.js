@@ -13,6 +13,7 @@ function QuestionMeta() {
     this.name = "";
     this.type = "";
     this.qid = "";
+    this.setid = "";
     this.addAnswer = function (ans) {
         if (this.answer == null)
             this.answer = new Array();
@@ -48,6 +49,7 @@ function TestBank($scope, $http,Data,$sce) {
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
     $scope.tag = "";
+    $scope.setObj = null;
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
@@ -233,6 +235,7 @@ function TestBank($scope, $http,Data,$sce) {
         $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
         $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
         $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
+        $scope.newQuestion.setid =($scope.setObj == null?null:$scope.setObj.problemSetId);
         $scope.context=$scope.newQuestion.context;
         var ans = $scope.reciveData.choosedQ.answer;
         if ($scope.newQuestion.type == 1) {
@@ -286,6 +289,7 @@ function TestBank($scope, $http,Data,$sce) {
         }).error(function (data) {
 
         });
+        $scope.setObj = null;
     }
     /*   $scope.$watch('context', function () {
      var context = $scope.context;
@@ -309,6 +313,7 @@ function TestBank($scope, $http,Data,$sce) {
         $scope.newQuestion.answer = ans;
         var context = $scope.context;
         $scope.newQuestion.context = context;
+        $scope.newQuestion.setid =($scope.setObj == null?null:$scope.setObj.problemSetId);
 
         console.log($scope.newQuestion);
         sendData = {"user": {"uid": Data.uid()}, "question": $scope.newQuestion};

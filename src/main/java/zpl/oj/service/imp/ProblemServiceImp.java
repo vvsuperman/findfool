@@ -77,6 +77,7 @@ public class ProblemServiceImp implements ProblemService{
 	@Override
 	public int addProblem(RequestAddQuestion q) {
 		Problem p = new Problem();
+		p.setProblemSetId(q.getQuestion().getSetid());
 		p.setCreator(q.getUser().getUid());
 		p.setDate(new Date());
 		p.setDescription(q.getQuestion().getContext());
@@ -222,6 +223,7 @@ public class ProblemServiceImp implements ProblemService{
 			return addProblem(q);
 		}
 		p.setModifier(q.getUser().getUid());
+		p.setProblemSetId(q.getQuestion().getSetid());
 		p.setDescription(q.getQuestion().getContext());
 		p.setLimitMem(512);
 		p.setLimitTime(5);

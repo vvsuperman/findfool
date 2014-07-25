@@ -62,20 +62,40 @@
                           <!--ng-model="newQuestion.context"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
                 <textarea cleditor ng-model="context"></textarea>
-                <p style="padding: 20px">标签(以 英文,符号 区分)
-                    <input type="text" id="tag" class="form-control" ng-model="tag">
-                </p>
-                <button class="btn btn-default" ng-click="addOne()">新增选项</button>
-                <ol style="list-style-type:upper-alpha" class="col-md-offset-3">
-                    <li ng-repeat="ans in newQuestion.answer">
-                        <input type="text" style="width: 50%" class="form-control" ng-model="ans.text">
-                        <input type="text" style="width: 7%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
-                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
-                           ng-click="removeOne($index)"></a>
-                        <span class="pull-right"><input type="checkbox" ng-model="ans.isright">是否正确</span>
 
-                    </li>
-                </ol>
+                <div class="col-md-12">
+                	<div class="col-md-6">
+		                <p style="padding-top: 20px;margin-bottom: 0px;">标签(以 英文,符号 区分)</p>
+		                <input type="text" id="tag" class="form-control" ng-model="tag">
+		                
+                	</div>
+		            <div ng-class="{true:'hedden', false: 'col-md-6'}[active==2]"> 
+			        	<p style="padding-top: 20px;margin-bottom: 0px;">选择试题集</p>
+			           <select class="form-control" ng-model="setObj" ng-options="m.name for m in reciveData.sets">
+		                    <option value="">-- 请选择 --</option>
+		                </select>
+			        </div>  
+					<div class="col-md-12" style="margin-top:20px">
+						<div class="col-md-12">
+							<button class="btn btn-default" ng-click="addOne()">新增选项</button>
+						</div>
+		                <div class="col-md-12">
+			                <ol style="list-style-type:upper-alpha" class="col-md-10">
+			                    <li ng-repeat="ans in newQuestion.answer" style="margin:5px">
+			                        <input type="text" style="width: 65%" class="form-control" ng-model="ans.text">
+			                        <input type="text" style="width: 15%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
+			                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
+			                           ng-click="removeOne($index)"></a>
+			                        <span class="pull-right"><input type="checkbox" ng-model="ans.isright">是否正确</span>
+			
+			                    </li>
+			                </ol>
+		                </div>
+
+					</div>              	
+                </div>
+
+
                 <div class="btn-group-justified" style="padding: 70px">
                     <a class="btn btn-default " ng-click="addQuestion()">保存</a>
                     <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
