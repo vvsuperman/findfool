@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Question {
 
-	private int qid;
+	private Integer qid;
 	private String name;
 	private int type;
 	private List<String> tag;
 	private String context;
 	private List<QuestionTestCase> answer;
-	public int getQid() {
+	public Integer getQid() {
 		return qid;
 	}
-	public void setQid(int qid) {
+	public void setQid(Integer qid) {
 		this.qid = qid;
 	}
 	public String getName() {

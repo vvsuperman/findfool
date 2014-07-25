@@ -12,9 +12,9 @@ function TestPage($scope, $http, Data) {
             url: "/test/show",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
-            data: {"uid": Data.uid}
+            data: {"uid": Data.uid()}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
@@ -52,6 +52,11 @@ function TestPage($scope, $http, Data) {
     $scope.MultInvite = function (target) {
         console.log('MultInvite');
         window.location.href = '#/invite';
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active].name;
+        $scope.tid = $scope.tests[$scope.active].quizid;
+        Data.setTid($scope.tid);
+        Data.setTname($scope.name);
 //        $scope.active = target.getAttribute('data');
 //        $scope.tid = target.getAttribute('data');
 //
@@ -64,6 +69,12 @@ function TestPage($scope, $http, Data) {
         console.log('Report');
         $scope.leftBar = 'leftBar.html';
         $scope.template = 'report.html';
+        $scope.active = target.getAttribute('data');
+        $scope.name = $scope.tests[$scope.active].name;
+        $scope.tid = $scope.tests[$scope.active].quizid;
+        Data.setTid($scope.tid);
+        Data.setTname($scope.name);
+//        $scope.testManage();
     };
     $scope.testDetail = function (target) {
         console.log('testDetail');
@@ -72,8 +83,8 @@ function TestPage($scope, $http, Data) {
         $scope.leftBar = 'leftBar.html';
         $scope.name = $scope.tests[$scope.active].name;
         $scope.tid = $scope.tests[$scope.active].quizid;
-        Data.tid = $scope.tid;
-        Data.tname = $scope.name;
+        Data.setTid($scope.tid);
+        Data.setTname($scope.name);
         $scope.testManage();
 
     };
@@ -85,7 +96,7 @@ function TestPage($scope, $http, Data) {
         }
         var senddata = new Object();
         senddata.user = new Object();
-        senddata.user.uid=Data.uid;
+        senddata.user.uid=Data.uid();
         senddata.name = $scope.addtest.name;
         senddata.testtime = $scope.addtest.time;
         senddata.extrainfo = ''+($scope.addtest.school == true?'1':'')+
@@ -93,14 +104,14 @@ function TestPage($scope, $http, Data) {
             ($scope.addtest.project == true?',3':'')+
             ($scope.addtest.link == true?',4':'');
         senddata.emails = $scope.addtest.eamils+
-            ($scope.addtest.defaultEmail==true? Data.email:'');
+            ($scope.addtest.defaultEmail==true? Data.email():'');
 
         //发送
         $http({
             url: "/test/add",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
             data: senddata
         }).success(function (data) {
@@ -114,8 +125,8 @@ function TestPage($scope, $http, Data) {
                 $scope.leftBar = 'leftBar.html';
                 $scope.name = senddata.name;
                 $scope.tid = $scope.message.msg;
-                Data.tid = $scope.tid;
-                Data.tname = $scope.name;
+                Data.setTid($scope.tid);
+                Data.setTname($scope.name);
                 $scope.testManage();
             } else {
                 alert('error:'+$scope.message.msg);
@@ -172,13 +183,13 @@ function TestPage($scope, $http, Data) {
     	//add by zpl
     	var sendData = new Object();
     	sendData.user = new Object();
-    	sendData.user.uid = Data.uid;
-    	sendData.quizid = Data.tid;
+    	sendData.user.uid = Data.uid();
+    	sendData.quizid = Data.tid();
         $http({
             url: "/test/manage",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
             data:sendData
         }).success(function (data) {
@@ -206,5 +217,21 @@ function TestPage($scope, $http, Data) {
             $scope.extraInfo = "1,2";
             $scope.emails = "ss@ss.com,sd@ss.com"
         });
+    };
+
+//    $scope.myu = 1;
+//    $scope.tjkst = function () {
+//        $scope.myu = 3;
+//    };
+//    $scope.tjzdy = function () {
+//        $scope.myu = 2;
+//    }
+    $scope.addKUtest = function (tid) {
+        console.log(tid);
+        $scope.template = 'testBank.html';
+    };
+    $scope.addZItest = function (tid) {
+        console.log(tid);
+        $scope.template = 'mytestBank.html';
     }
 }

@@ -2,7 +2,9 @@ package zpl.oj.service.imp;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,16 @@ import zpl.oj.dao.ProblemTagDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
+import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
+import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestAddQuestion;
 import zpl.oj.model.requestjson.RequestSearch;
 import zpl.oj.model.responsejson.ResponseSearchResult;
 import zpl.oj.service.ProblemService;
+import zpl.oj.service.QuizService;
+import zpl.oj.service.user.inter.UserService;
 
 @Service
 public class ProblemServiceImp implements ProblemService{
@@ -28,6 +34,10 @@ public class ProblemServiceImp implements ProblemService{
 	private ProblemTestCaseDao problemTestCaseDao;
 	@Autowired
 	private ProblemTagDao problemTagDao;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private QuizService quizService;
 
 	@Override
 	public Question getProblemById(int problemId) {
@@ -47,6 +57,7 @@ public class ProblemServiceImp implements ProblemService{
 			qt.setText(c.getArgs());
 			qt.setIsright(c.getExceptedRes());
 			qt.setScore(c.getScore());
+			qt.setCaseId(c.getTestCaseId());
 			answer.add(qt);
 		}
 		q.setAnswer(answer);
@@ -76,9 +87,16 @@ public class ProblemServiceImp implements ProblemService{
 		p.setSubmit(0);
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
+		User u = userService.getUserById(q.getUser().getUid());
+		if(u.getPrivilege() >=3)
+			p.setBelong(0);
+		else{
+			p.setBelong(1);
+		}
 		problemDao.insertProblem(p);
 		int pid = problemDao.getProblemId(p.getCreator());
 		p.setUuid(pid);
+		
 		
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);
@@ -89,14 +107,18 @@ public class ProblemServiceImp implements ProblemService{
 			problemTagDao.insertTagProblem(tagid, pid);
 		}
 		
-		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
-			ProblemTestCase pt = new ProblemTestCase();
-			pt.setProblemId(pid);
-			pt.setArgs(qt.getText());
-			pt.setExceptedRes(qt.getIsright());
-			pt.setScore(qt.getScore());
-			problemTestCaseDao.insertProblemTestCase(pt);
+		if(q.getQuestion().getAnswer() != null){
+			for(QuestionTestCase qt:q.getQuestion().getAnswer()){
+				ProblemTestCase pt = new ProblemTestCase();
+				pt.setProblemId(pid);
+				pt.setArgs(qt.getText());
+				pt.setExceptedRes(qt.getIsright());
+				pt.setScore(qt.getScore());
+				problemTestCaseDao.insertProblemTestCase(pt);
+			}		
 		}
+
+		p.setProblemId(pid);
 		problemDao.updateProblem(p);
 		return pid;
 	}
@@ -124,16 +146,14 @@ public class ProblemServiceImp implements ProblemService{
 		
 		//merge
 		List<Integer> qsId = mergeLists(questionIds);
-		int total = qsId.size();
+		//filter
+		List<Problem> plist = filterResult(qsId);
+		questions = checkTags(plist,tags);
+		int total = questions.size();
 		if(end > total){
 			end = total;
 		}
-		for(int i=begin;i<end ;i++){
-			Question question = getProblemById(qsId.get(i));			
-			if (question !=null){
-				questions.add(question);
-			}
-		}
+		questions =questions.subList(begin, end);
 		res.setCurPage(s.getPage());
 		res.setPageNum(s.getPageNum());
 		res.setTotalPage(total);
@@ -152,6 +172,7 @@ public class ProblemServiceImp implements ProblemService{
 		if(end > total){
 			end = total;
 		}
+		end = (end -begin) == 0? 1:(end -begin);
 		List<Integer> tp = problemDao.getSiteProblemIdbySet(s.getSetid(), s.getType(), begin, end);
 
 		for(Integer i:tp){
@@ -178,6 +199,7 @@ public class ProblemServiceImp implements ProblemService{
 		if(end > total){
 			end = total;
 		}
+		end = (end -begin) == 0? 1:(end -begin);
 		List<Integer> tp = problemDao.getUserProblemIdbyUid(s.getUser().getUid(), s.getType(), begin, end);
 
 		for(Integer i:tp){
@@ -191,6 +213,112 @@ public class ProblemServiceImp implements ProblemService{
 		res.setTotalPage(total);
 		res.setQuestions(questions);
 		return res;
+	}
+
+	@Override
+	public int modifyProblem(RequestAddQuestion q) {
+		Problem p = problemDao.getProblem(q.getQuestion().getQid());
+		if(p == null){
+			return addProblem(q);
+		}
+		p.setModifier(q.getUser().getUid());
+		p.setDescription(q.getQuestion().getContext());
+		p.setLimitMem(512);
+		p.setLimitTime(5);
+		p.setModifydate(new Date());
+		p.setTitle(q.getQuestion().getName());
+		p.setType(q.getQuestion().getType());
+		User u = userService.getUserById(q.getUser().getUid());
+		problemDao.insertProblem(p);
+		int pid = problemDao.getProblemId(p.getCreator());
+		
+		for(String tag:q.getQuestion().getTag()){
+			Integer tagid = problemTagDao.getTagId(tag);
+			if(tagid == null){
+				problemTagDao.insertTag(tag);
+				tagid = problemTagDao.getTagId(tag);
+			}
+			problemTagDao.insertTagProblem(tagid, pid);
+		}
+		
+		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
+			ProblemTestCase pt = new ProblemTestCase();
+			pt.setProblemId(pid);
+			pt.setArgs(qt.getText());
+			pt.setExceptedRes(qt.getIsright());
+			pt.setScore(qt.getScore());
+			problemTestCaseDao.insertProblemTestCase(pt);
+		}
+		problemDao.updateProblem(p);
+		//更新quiz们
+		List<QuizProblem> qps = quizService.getQuizsByProblemId(q.getQuestion().getQid());
+		Map<Integer,List<Integer>> quizs = new HashMap<Integer,List<Integer>>();
+		for(QuizProblem qp:qps){
+			List<Integer> ps = quizs.get(qp.getQuizid());
+			if(ps == null){
+				ps = new ArrayList<Integer>();
+			}
+			if(qp.getProblemid() ==q.getQuestion().getQid()){
+				ps.add(pid);
+			}else{
+				ps.add(qp.getProblemid());
+			}
+			quizs.put(qp.getQuizid(), ps);
+		}
+		
+		for(Map.Entry<Integer, List<Integer>> entry:quizs.entrySet()){
+			quizService.updateQuiz(entry.getKey(), entry.getValue());
+		}
+		return pid;
+	}
+	List<Question> checkTags(List<Problem> prbs,String[] tags){
+		List<Question> q = new ArrayList<Question>();
+		int index = 0;
+		for(Problem p:prbs){
+			Question tmp = getProblemById(p.getProblemId());
+			for(int i=0;i<tags.length;i++){
+				if(tmp.getTag().contains(tags[i])){
+					index++;
+					q.add(tmp);
+				}
+			}
+		}
+		return q;
+	}
+	List<Problem> filterResult(List<Integer> pq){
+		List<Problem> questions = new ArrayList<Problem>();
+		Map<Integer,Problem> map = new HashMap<Integer, Problem>();
+		for(Integer i:pq){
+			Problem q = problemDao.getNewestProblemByid(i);
+			map.put(q.getUuid(), q);
+		}
+		for(Map.Entry<Integer, Problem> entry: map.entrySet()){
+			questions.add(entry.getValue());
+		}
+		return questions;
+	}
+
+	@Override
+	public int deleteProblem(Integer problemId) {
+		problemDao.deleteProblem(problemId);
+		//更新quiz们
+		List<QuizProblem> qps = quizService.getQuizsByProblemId(problemId);
+		Map<Integer,List<Integer>> quizs = new HashMap<Integer,List<Integer>>();
+		for(QuizProblem qp:qps){
+			List<Integer> ps = quizs.get(qp.getQuizid());
+			if(ps == null){
+				ps = new ArrayList<Integer>();
+			}
+			if(!problemId.equals(qp.getProblemid())){
+				ps.add(qp.getProblemid());
+			}
+			quizs.put(qp.getQuizid(), ps);
+		}
+		
+		for(Map.Entry<Integer, List<Integer>> entry:quizs.entrySet()){
+			quizService.updateQuiz(entry.getKey(), entry.getValue());
+		}
+		return 0;
 	}
 
 }

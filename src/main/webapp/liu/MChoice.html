@@ -1,0 +1,51 @@
+<div class="col-md-3 ">
+    <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" role="complementary" style="top: 111px;">
+        <ul class="nav bs-docs-sidenav">
+
+
+            <li ng-class="{true: 'active', false: 'inactive'}[character==1]">
+                <a href="#/MChoice/1" ng-click="agree()">选择题</a>
+                <ul class="nav">
+                    <li ng-repeat="ans in allMC" ng-class="{true: 'active', false: 'inactive'}[section==$index]"><a href="#/MChoice/{{character}},{{$index}}" >{{ans.title}}</a>
+                    </li>
+                    <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
+                </ul>
+            </li>
+
+
+        </ul>
+
+    </div>
+</div>
+<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==1 && character==0]">
+    做题申明
+    <button class="btn btn-success" ng-click="agree()">同意</button>
+    <button class="btn btn-warning">不同意</button>
+</div>
+<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==0 && !section]">
+    选择题申明
+    <!--<button class="btn btn-success" ng-click="agree()">同意</button>-->
+    <!--<button class="btn btn-warning">不同意</button>-->
+</div>
+
+<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==0 && section>-1]">
+    <div id="js-skill-question" class="highlight">
+        <h3>
+            <div id="js-titleMaxHeight" style="height: auto;" ng-bind-html="context">
+
+            </div>
+        </h3>
+
+        <form>
+            <div class="p-answerlist">
+                <ul class="list">
+                    <li ng-repeat="an in answer">
+                        <a class="selected aa" href="" data="{{$index}}" ng-click="chose($index)">
+                            {{an.text}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>

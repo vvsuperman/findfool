@@ -2,7 +2,7 @@
     <div class="col-md-4" id="drop">直接将 Excel 2003 文件拖到这里吧</div>
     <div class="col-md-2">下载模版，然后选择上传
         <a class="btn btn-default" href="static/invite.xls">点我下载模版</a>
-        <!--{{testlist}}-->
+        {{testlist}}
         <!--{{xlsusers}}-->
     </div>
     <p><strong>邀请候选人</strong>
@@ -32,10 +32,10 @@
                 <!--<tr ng-repeat="(index,user) in xlsusers" >-->
                 <td>
                     <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
-                    <input class="form-control" type="text" value="{{userFname}}" ng-model="user.Fname"
+                    <input class="form-control" type="text" value="{{userfname}}" ng-model="user.fname"
                            style="width: 90%"/>
                 </td>
-                <td><input class="form-control" type="text" value="{{user.Lname}}" ng-model="user.Lname"/></td>
+                <td><input class="form-control" type="text" value="{{user.lname}}" ng-model="user.lname"/></td>
                 <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/></td>
                 <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel"
                            style="width: 80%"/>
@@ -52,16 +52,19 @@
 
         <p>From:</p>
 
-        <p>Reply To:<input type="text"/></p>
+        <p>Reply To:<input class="form-control" type="text" ng-model="subject"/></p>
 
-        <p>Subject:<input type="text"/></p>
-        <div ng-include src="'mdeditor.html'" ng-controller="mdeditor"></div>
+        <p>Subject:<input class="form-control" type="text" ng-model="replyTo"/></p>
+        <!--<div ng-include src="'mdeditor.html'" ></div>-->
+        <textarea cleditor ng-model="content"></textarea>
+        <!--{{content}}-->
         <div class="pull-right">
-            <button class="btn btn-default">Cancel</button>
+            <button class="btn btn-default" ng-click="clean()">Clean</button>
             <button class="btn btn-default">Preview</button>
             <button class="btn btn-success" ng-click="sent()">Sent</button>
         </div>
     </div>
+    <!--<button ng-click="btntest()">btntest</button>-->
 </div>
-<script src="./js/excle.js"></script>
+<script src="js/excle.js"></script>
 <!--<script src="js/xlsreader.js"></script>-->

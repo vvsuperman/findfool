@@ -25,22 +25,29 @@ function Indexx($scope, $http, Data) {
                 url: "/user/confirm",
                 method: 'POST',
                 headers: {
-                    "Authorization": Data.token
+                    "Authorization": Data.token()
                 },
                 data: {"email": $scope.Lemail, "pwd": md5($scope.Lpwd), "name": $scope.Lname}
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
-                Data.token = data["token"];
+
                 var name = $scope.Lemail;
                 $scope.message = data["message"];
-                if (data["message"].handler_url != null && data["message"].handler_url == "") {
+                if (data["message"].handler_url != null && data["message"].handler_url !== "") {
                     name = data["message"].handler_url;
                 }
-                Data.name = name;
-                Data.email = $scope.Lemail;
+                Data.setName(name);
+                Data.setEmail($scope.Lemail);
 
                 if ($scope.state) {
-                    Data.uid = $scope.message.msg;
+                    Data.setToken(data["token"]);
+                    console.log(Data.token());
+                    console.log(data["token"]);
+                    Data.setUid($scope.message.uid);
+                    Data.setPrivi($scope.message.privilege);
+                    Data.setTel($scope.message.tel);
+                    Data.setCompany($scope.message.company);
+
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
                     window.location.href = '#/test';
@@ -61,17 +68,16 @@ function Indexx($scope, $http, Data) {
     };
     $scope.contactus = function () {
 //        Data.email=$scope.Cemail;
-        if (Data.email) {
+        if (Data.email()) {
             $http({
                 url: '/contactus',
                 method: 'POST',
                 headers: {
-                    "Authorization": Data.token
+                    "Authorization": Data.token()
                 },
-                data: {"email": Data.email, "name": Data.name, "msg": $scope.msg}
+                data: {"email": Data.email(), "name": Data.name(), "msg": $scope.msg}
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
-                Data.token = data["token"];
                 $scope.message = data["message"];
 
                 if ($scope.state) {
@@ -90,12 +96,11 @@ function Indexx($scope, $http, Data) {
                     url: '/contactus',
                     method: 'POST',
                     headers: {
-                        "Authorization": Data.token
+                        "Authorization": Data.token()
                     },
                     data: {"email": $scope.Cemail, "name": $scope.name, "msg": $scope.msg}
                 }).success(function (data) {
                     $scope.state = data["state"];//1 true or 0 false
-                    Data.token = data["token"];
                     $scope.message = data["message"];
 
                     if ($scope.state) {
@@ -119,22 +124,28 @@ function Indexx($scope, $http, Data) {
                         url: "/user/add/hr",
                         method: 'POST',
                         headers: {
-                            "Authorization": Data.token
+                            "Authorization": Data.token()
                         },
                         data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name}
                     }).success(function (data) {
                         $scope.state = data["state"];//1 true or 0 false
-                        Data.token = data["token"];
                         $scope.message = data["message"];
                         if ($scope.state) {
-                            Data.uid = $scope.message.msg;
+                            Data.setUid ($scope.message.uid);
+                            Data.setToken(data["token"]);
+                            console.log(Data.token());
+                            console.log(data["token"]);
+                            Data.setUid($scope.message.uid);
+                            Data.setPrivi($scope.message.privilege);
+                            Data.setTel($scope.message.tel);
+                            Data.setCompany($scope.message.company);
                             //add by zpl
 //                            Data.token = $scope.token;//ignore by lz,token 直接都在Data里的，不走$scope
-                            Data.email = $scope.Remail;
+                            Data.setEmail($scope.Remail);
                             //end bu zpl
                             var child = document.getElementsByClassName("modal-backdrop fade in");
                             $scope.name = $scope.name;
-                            Data.name = $scope.name;
+                            Data.setName($scope.name);
                             child[0].parentNode.removeChild(child[0]);
                             window.location.href = '#/test';
                         } else {
@@ -160,12 +171,11 @@ function Indexx($scope, $http, Data) {
             url: "/user/add/admin",
             method: 'POST',
             headers: {
-                "Authorization": Data.token
+                "Authorization": Data.token()
             },
             data: {"email": $scope.email, "pwd": $scope.pwd, "name": $scope.name}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
-            Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
 
@@ -199,15 +209,20 @@ function Indexx($scope, $http, Data) {
         if ($event.keyCode == 13) {
             $scope.confirm()
         }
-        ;
     };
+}
+function aceEditor($scope) {
+    $scope.url="#/editor";
+    $scope.template = 'editor.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
 }
 function TestShow($scope, $http, Data) {
 //    $scope.local = false;
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-    $scope.name = Data.name;
+    $scope.name = Data.name();
 
 
 //    $scope.navTest = function () {
@@ -375,7 +390,7 @@ function TestShow($scope, $http, Data) {
 
  }*/
 function nav($scope, Data) {
-    $scope.name = Data.name;
+    $scope.name = Data.name();
 //    console.log(Data.name);
     $scope.navTest = function () {
         $scope.template = 'testshow.html';
@@ -413,6 +428,13 @@ function Upgrade($scope) {
     $scope.template = 'upgrade.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
+}
+function RockRoll($scope, $routeParams) {
+    $scope.url = '#/upgrade';
+    $scope.template = 'rrtest.html';
+    $scope.ContentUs = 'contentUs.html';
+    $scope.leftBar = '';
+    $scope.rrid =  $routeParams.rrid;
 }
 
 

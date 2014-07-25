@@ -13,6 +13,11 @@ public interface ProblemService {
 	//增加一个problem
 	int addProblem(RequestAddQuestion q);
 	
+	int modifyProblem(RequestAddQuestion q);
+	
+	//delete
+	int deleteProblem(Integer problemId);
+	
 	ResponseSearchResult getQuestionByTag(RequestSearch s);
 	
 	ResponseSearchResult getQuestionBySetId(RequestSearch s);

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.model.requestjson.RequestSolution;
+import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.solution.ReciveOK;
 import zpl.oj.model.solution.ReciveSolution;
 import zpl.oj.model.solution.ResultInfo;
@@ -23,24 +26,41 @@ public class SolutionRunController {
 	private SolutionRunService solutionRunService;
 	@Autowired
 	private ResultInfoService resultInfoService;
+	
+	@RequestMapping(value="/submit")
+	@ResponseBody
+	public ResponseBase submitSolution(@RequestBody RequestSolution request){
+		ResponseMessage msg = new ResponseMessage();
+		ResponseBase rs = new ResponseBase();
+		
+		
+		msg.setMsg("ok");
+		rs.setMessage(msg);
+		rs.setState(1);
+		return rs;
+	}
 	@RequestMapping(value="/run")
 	@ResponseBody
-	public ReciveOK getSolutions(@RequestBody ReciveSolution request){
-
+	public ResponseBase getSolutions(@RequestBody ReciveSolution request){
+		ResponseBase rb = new ResponseBase();
+		ResponseMessage msg = new ResponseMessage();
 		int solution_id = solutionRunService.addSolutionRun(request);
-		ReciveOK rs = new ReciveOK();
-		rs.setSolution_id(solution_id);
-		return rs;
+		msg.setMsg(""+solution_id);
+		rb.setMessage(msg);
+		rb.setState(1);
+		return rb;
 	}
 	
 	
 	@RequestMapping(value="/query")
 	@ResponseBody
-	public List<ResultInfo> getResult(@RequestBody ReciveOK request){
+	public ResponseBase getResult(@RequestBody ReciveOK request){
+		ResponseBase rb = new ResponseBase();
 		List<ResultInfo> rs = new ArrayList<>();
 		int solutionId = request.getSolution_id();
 		rs = resultInfoService.getResultInfoBySolutionId(solutionId);
-		return rs;
+		rb.setMessage(rs);
+		return rb;
 	}
 
 }

@@ -39,6 +39,10 @@ public class Problem implements Serializable {
 	 * 试题集id,
 	 */
 	private Integer problemSetId;
+	/*
+	 * 是否已被删除
+	 */
+	private Integer isdelete;
 	
 	/*
 	 * 试题属性类型
@@ -199,5 +203,13 @@ public class Problem implements Serializable {
     public void setModifydate(Date modifydate) {
         this.modifydate = modifydate;
     }
+
+	public Integer getIsdelete() {
+		return isdelete;
+	}
+
+	public void setIsdelete(Integer isdelete) {
+		this.isdelete = isdelete;
+	}
     
 }
