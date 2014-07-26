@@ -223,7 +223,7 @@ function mytestbank($scope, $http, Data,$sce) {
         $scope.show = "0";
         console.log($scope.reciveData.choosedQ);
         $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
-        $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
+        $scope.newQuestion.type = $scope.active;
         $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
         $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
         $scope.context=$scope.newQuestion.context;
