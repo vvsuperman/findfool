@@ -119,7 +119,13 @@ public class QuizServiceImp implements QuizService {
 
 	@Override
 	public List<QuizProblem> getQuizsByProblemId(Integer pid) {
-		return quizProblemDao.getQuizProblemsByProblemId(pid);
+		List<QuizProblem> res = new ArrayList<QuizProblem>();
+		List<QuizProblem> quizs= quizProblemDao.getQuizProblemsByProblemId(pid);
+		for(QuizProblem q:quizs){
+			List<QuizProblem> tmp = quizProblemDao.getQuizProblemsByQuizId(q.getQuizid());
+			res.addAll(tmp);
+		}
+		return res;
 	}
 
 }
