@@ -1,12 +1,34 @@
-<div class="col-md-3 ">
+<div class="col-md-1 ">
     <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" role="complementary" style="top: 111px;">
         <ul class="nav bs-docs-sidenav">
 
 
-            <li ng-class="{true: 'active', false: ''}[character==1]">
-                <a href="#/MChoice/1" ng-click="agree()">选择题</a>
+            <li ng-class="{true: 'active', false: ''}[chapter==1]">
+                <a href="#/MChoice/1,0">选择题</a>
                 <ul class="nav">
-                    <li data="{{$index}}" ng-repeat="ans in allMC" ng-class="{true: 'active', false: ''}[section==$index]"><a href="#/MChoice/{{character}},{{$index}}" >{{ans.name}}</a>
+                    <li data="{{$index}}" ng-repeat="ans in xzt"
+                        ng-class="{true: 'active', false: ''}[section==$index]"><a
+                            href="#/MChoice/{{chapter}},{{$index}}">{{ans.name}}</a>
+                    </li>
+                    <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
+                </ul>
+            </li>
+            <li ng-class="{true: 'active', false: ''}[chapter==2]">
+                <a href="#/MChoice/2,0">编程题</a>
+                <ul class="nav">
+                    <li data="{{$index}}" ng-repeat="ans in bct"
+                        ng-class="{true: 'active', false: ''}[section==$index]"><a
+                            href="#/MChoice/{{chapter}},{{$index}}">{{ans.name}}</a>
+                    </li>
+                    <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
+                </ul>
+            </li>
+            <li ng-class="{true: 'active', false: ''}[chapter==3]">
+                <a href="#/MChoice/3,0">问答题</a>
+                <ul class="nav">
+                    <li data="{{$index}}" ng-repeat="ans in wdt"
+                        ng-class="{true: 'active', false: ''}[section==$index]"><a
+                            href="#/MChoice/{{chapter}},{{$index}}">{{ans.name}}</a>
                     </li>
                     <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
                 </ul>
@@ -17,25 +39,23 @@
 
     </div>
 </div>
-<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==1 && character==0]">
+<div class="col-md-9" style="padding: 50px;"
+     ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==1 && chapter==0]">
     做题申明
     <button class="btn btn-success" ng-click="agree()">同意</button>
     <button class="btn btn-warning">不同意</button>
 </div>
-<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==0 && !section]">
-    选择题申明
-    <!--<button class="btn btn-success" ng-click="agree()">同意</button>-->
-    <!--<button class="btn btn-warning">不同意</button>-->
-</div>
-
-<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==0 && section>-1]">
+<!--<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==0 && !section]">-->
+<!--选择题申明-->
+<!--&lt;!&ndash;<button class="btn btn-success" ng-click="agree()">同意</button>&ndash;&gt;-->
+<!--&lt;!&ndash;<button class="btn btn-warning">不同意</button>&ndash;&gt;-->
+<!--</div>-->
+<!--选择题-->
+<div style="padding: 50px;" ng-class="{true: 'col-lg-6 col-lg-offset-2', false: 'hedden'}[chapter==1 && section>-1]">
     <div id="js-skill-question" class="highlight">
         <h3>
-            <div id="js-titleMaxHeight" style="height: auto;" ng-bind-html="context">
-
-            </div>
+            <div id="js-titleMaxHeight" style="height: auto;" ng-bind-html="context"></div>
         </h3>
-
         <form>
             <div class="p-answerlist">
                 <ul class="list">
@@ -48,4 +68,52 @@
             </div>
         </form>
     </div>
+</div>
+
+
+<!--编程题-->
+<div style="padding: 50px;"
+     ng-class="{true: 'col-md-11  ', false: 'hedden'}[chapter==2 && section>-1]" ng-controller="editor">
+    <div class="col-md-11" style="padding: 30px">
+        <!--<div class="iiMdPreview highlight" url="./data/test.md" style="height: 600px"></div>-->
+<div class="highlight" ng-bind-html="context"></div>
+
+
+    </div>
+    <div class="col-md-11">
+        <div class="col-md-12">
+            <p class="pull-right">Programming Language
+                <select ng-model="selected" ng-options="m.name for m in language"></select>
+            </p>
+        </div>
+        <div class="col-md-12">
+            <pre id="editor" style="height: 600px"></pre>
+
+            <!--{{zhuangtai}}-->
+        </div>
+<div class="col-md-12">
+        <button class="btn btn-default" ng-click="addTestCase()">添加测试用例</button>
+        <button class="btn btn-default" ng-click="Run()">Run</button>
+</div>
+        <div class=" col-md-6 highlight" style="height:190px;overflow: auto">
+
+            <div id="test_cases">
+                <div class="testCase col-md-11" ng-repeat="case in cases">
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="2" ng-model="case.value"
+                                  style="width: 120%;resize: none"></textarea>
+                    </div>
+                    <div class="col-md-1 pull-right">
+                        <a class="btn" ng-click="removeTestCase(case)">remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 highlight" style="height: 190px;">
+
+            <div ng-bind-html="RESULT"></div>
+        </div>
+    </div>
+
+
 </div>

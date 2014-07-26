@@ -154,6 +154,7 @@ function mytestbank($scope, $http, Data,$sce) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
         $scope.context="";
+        $scope.tag="";
 //        $scope.newQuestion = new Object();
 //        $scope.newQuestion.context = "";
 //        $scope.newQuestion.answer = new Array();

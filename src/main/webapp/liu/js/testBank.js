@@ -219,7 +219,7 @@ function TestBank($scope, $http,Data,$sce) {
         $scope.reciveData.setObj = null;
         $scope.queryQuestions(1);
 //        console.log($scope.active);
-        $scope.question = $scope.qs[$scope.active - 1];
+//        $scope.question = $scope.qs[$scope.active - 1];
 //        console.log($scope.question);
     };
 

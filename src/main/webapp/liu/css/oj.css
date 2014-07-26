@@ -176,7 +176,7 @@ ul li {
     list-style-image: none;
     list-style-position: outside;
     list-style-type: upper-alpha;
-    padding: 10px;
+    /*padding: 10px;*/
 }
 
 .bs-docs-sidebar.affix {
