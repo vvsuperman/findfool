@@ -233,7 +233,6 @@ public class ProblemServiceImp implements ProblemService{
 		User u = userService.getUserById(q.getUser().getUid());
 		problemDao.insertProblem(p);
 		int pid = problemDao.getProblemId(p.getCreator());
-		
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);
 			if(tagid == null){
@@ -251,7 +250,7 @@ public class ProblemServiceImp implements ProblemService{
 			pt.setScore(qt.getScore());
 			problemTestCaseDao.insertProblemTestCase(pt);
 		}
-		problemDao.updateProblem(p);
+		//problemDao.updateProblem(p);
 		//更新quiz们
 		List<QuizProblem> qps = quizService.getQuizsByProblemId(q.getQuestion().getQid());
 		Map<Integer,List<Integer>> quizs = new HashMap<Integer,List<Integer>>();
