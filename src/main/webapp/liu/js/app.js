@@ -49,6 +49,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'TestPage'
             }).
+            when('/test/:tid', {
+                templateUrl: 'page.html',
+                controller: 'TestPageTid'
+            }).
             when('/upgrade', {
                 templateUrl: 'page.html',
                 controller: 'Upgrade'

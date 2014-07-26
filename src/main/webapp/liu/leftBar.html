@@ -1,4 +1,4 @@
-<style type="text/css">
+<!--<style type="text/css">
     /*li .dropdown-menu {*/
     /*margin: 0;*/
     /*}*/
@@ -69,7 +69,7 @@
         content: " "
     }
 
-</style>
+</style>-->
 
 <div class="col-md-1">
     <div class="bs-sidebar hidden-print affix" role="complementary" style="width: 180px!important;">
@@ -81,25 +81,25 @@
             <li class=""><h3 class="text-center"><strong>测试管理</strong></h3></li>
 
             <li class="">
-                <a   data="{{tid}}" ng-click="testPage($event.target)">查看试题</a>
+                <a href=""  data="{{tid}}" ng-click="testManage($event.target)">查看试题</a>
             </li>
             <li>
-                <a data="{{tid}}" ng-click="CommonSetting($event.target)">通用设置</a>
+                <a href="" data="{{tid}}" ng-click="CommonSetting($event.target)">通用设置</a>
             </li>
             <li><h3 class="text-center"><strong>测试报告</strong></h3>
             </li>
 
-            <li class="dropdown-submenu">
+            <li>
                 <!--http://bootstrap.kinghack.com/components.html-->
-                <a>邀请</a>
+                <a href="#/invite">邀请</a>
 
-                <ul class="dropdown-menu">
-                    <li><a data="{{tid}}" ng-click="Invite($event.target)">邀请单个用户</a></li>
-                    <li><a data="{{tid}}" ng-click="MultInvite($event.target)">邀请多个用户</a></li>
-                </ul>
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li><a data="{{tid}}" ng-click="Invite($event.target)">邀请单个用户</a></li>-->
+                    <!--<li><a data="{{tid}}" ng-click="MultInvite($event.target)">邀请多个用户</a></li>-->
+                <!--</ul>-->
             </li>
-            <li class="">
-                <a data="{{tid}}" ng-click="Report($event.target)">测试报告</a>
+            <li>
+                <a href="" data="{{tid}}" ng-click="Report($event.target)">测试报告</a>
             </li>
         </ul>
     </div>

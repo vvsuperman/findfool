@@ -27,15 +27,18 @@ function QuestionMeta() {
     }
 }
 
-function MyTestBank($scope) {
+function MyTestBank($scope, $http, Data,$sce) {
     $scope.url = '#/mybank';
     $scope.template = 'mytestBank.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;
     $scope.show = 1;
-}
-function mytestbank($scope, $http, Data,$sce) {
+    $scope.Qtype = [
+        { name: '选择题', data: '1'},
+        { name: '编程题', data: '2'},
+        { name: '问答题', data: '3'}
+    ];
     $scope.page = 1;
     $scope.keyword = "";
     $scope.tag = "";
@@ -57,11 +60,7 @@ function mytestbank($scope, $http, Data,$sce) {
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
 
-    $scope.Qtype = [
-        { name: '选择题', data: '1'},
-        { name: '编程题', data: '2'},
-        { name: '问答题', data: '3'}
-    ];
+
 
 
     //add by zpl
