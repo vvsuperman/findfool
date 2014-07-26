@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -46,16 +45,23 @@
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="testBank.js" pinned="false" current="false" current-in-tab="true">
+            <file leaf-file-name="testBank.js" pinned="false" current="true" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.19616686" vertical-offset="10273" max-vertical-offset="11315">
-                    <caret line="410" column="38" selection-start-line="410" selection-start-column="18" selection-end-line="410" selection-end-column="38" />
+                  <state vertical-scroll-proportion="0.5806088" vertical-offset="5902" max-vertical-offset="6789">
+                    <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
                     <folding>
-                      <element signature="e#6618#7079#0" expanded="false" />
-                      <element signature="e#7121#7282#0" expanded="false" />
-                      <element signature="e#7329#8361#0" expanded="false" />
-                      <element signature="e#8402#9679#0" expanded="false" />
+                      <element signature="e#2528#3538#0" expanded="false" />
+                      <element signature="e#3570#4150#0" expanded="false" />
+                      <element signature="e#4191#4547#0" expanded="false" />
+                      <element signature="e#4592#5424#0" expanded="false" />
+                      <element signature="e#5468#6460#0" expanded="false" />
+                      <element signature="e#6630#7091#0" expanded="false" />
+                      <element signature="e#7133#7294#0" expanded="false" />
+                      <element signature="e#7341#8373#0" expanded="false" />
+                      <element signature="e#8414#9691#0" expanded="false" />
+                      <element signature="e#9724#9904#0" expanded="false" />
+                      <element signature="e#9951#10746#0" expanded="false" />
                     </folding>
                   </state>
                 </provider>
@@ -95,13 +101,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myTestBank.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="myTestBank.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16949153" vertical-offset="9654" max-vertical-offset="10509">
+            <state vertical-scroll-proportion="1.76" vertical-offset="9685" max-vertical-offset="10540">
               <caret line="313" column="42" selection-start-line="313" selection-start-column="42" selection-end-line="313" selection-end-column="42" />
               <folding>
                 <element signature="e#11011#12204#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="oj.css" pinned="false" current="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/css/oj.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="6.300231" vertical-offset="837" max-vertical-offset="6541">
+              <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
+              <folding>
+                <element signature="e#5345#5548#0" expanded="false" />
+                <element signature="e#5699#5723#0" expanded="false" />
+                <element signature="e#5725#5810#0" expanded="false" />
+                <element signature="e#5829#5878#0" expanded="false" />
+                <element signature="e#5911#6016#0" expanded="false" />
+                <element signature="e#6093#6237#0" expanded="false" />
+                <element signature="e#6361#6500#0" expanded="false" />
+                <element signature="e#6529#6576#0" expanded="false" />
+                <element signature="e#6614#6730#0" expanded="false" />
+                <element signature="e#6817#6843#0" expanded="false" />
+                <element signature="e#6982#7030#0" expanded="false" />
+                <element signature="e#7032#7519#0" expanded="false" />
+                <element signature="e#7521#7638#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -213,10 +243,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1288" />
-    <option name="y" value="18" />
-    <option name="width" value="1296" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -599,6 +629,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ojweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ojweb" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="liu" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1312,7 +1372,7 @@
       <workItem from="1406355337239" duration="450000" />
       <workItem from="1406358462638" duration="6984000" />
       <workItem from="1406371009646" duration="38000" />
-      <workItem from="1406371060432" duration="3896000" />
+      <workItem from="1406371060432" duration="4989000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1582,14 +1642,18 @@
       <created>1406373651623</created>
       <updated>1406373651623</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="update&#10;">
+      <created>1406382151903</created>
+      <updated>1406382151903</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="256222000" />
+    <option name="totallyTimeSpent" value="257315000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1288" y="18" width="1296" height="1040" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1614,8 +1678,8 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2835218" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42227122" sideWeight="0.5860806" order="2" side_tool="false" content_ui="tabs" x="45" y="169" width="1276" height="329" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2832723" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4288914" sideWeight="0.5860806" order="2" side_tool="false" content_ui="tabs" x="45" y="169" width="1276" height="329" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297619" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1637,9 +1701,9 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297619" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2835218" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2832723" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42329228" sideWeight="0.5860806" order="2" side_tool="false" content_ui="tabs" x="45" y="169" width="1276" height="329" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4288914" sideWeight="0.5860806" order="2" side_tool="false" content_ui="tabs" x="45" y="169" width="1276" height="329" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1672,7 +1736,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="修复 所有Data" />
     <MESSAGE value="加入龙哥找的富文本框，明天将数据接上" />
     <MESSAGE value="完善富文本框数据的获取，bug：龙哥的tag获取部分有问题" />
     <MESSAGE value="fix 龙哥bug" />
@@ -1697,7 +1760,8 @@
     <MESSAGE value="初始一些值" />
     <MESSAGE value="修复添加测试白屏问题" />
     <MESSAGE value="修复tag" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复tag" />
+    <MESSAGE value="update&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="update&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1869,13 +1933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.037439615" vertical-offset="279" max-vertical-offset="1395">
           <caret line="10" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/css/oj.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89491916" vertical-offset="5487" max-vertical-offset="9455">
-          <caret line="177" column="33" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -2103,25 +2160,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19616686" vertical-offset="10273" max-vertical-offset="11315">
-          <caret line="410" column="38" selection-start-line="410" selection-start-column="18" selection-end-line="410" selection-end-column="38" />
+        <state vertical-scroll-proportion="1.76" vertical-offset="9685" max-vertical-offset="10540">
+          <caret line="313" column="42" selection-start-line="313" selection-start-column="42" selection-end-line="313" selection-end-column="42" />
           <folding>
-            <element signature="e#6618#7079#0" expanded="false" />
-            <element signature="e#7121#7282#0" expanded="false" />
-            <element signature="e#7329#8361#0" expanded="false" />
-            <element signature="e#8402#9679#0" expanded="false" />
+            <element signature="e#11011#12204#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/css/oj.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16949153" vertical-offset="9654" max-vertical-offset="10509">
-          <caret line="313" column="42" selection-start-line="313" selection-start-column="42" selection-end-line="313" selection-end-column="42" />
+        <state vertical-scroll-proportion="6.300231" vertical-offset="837" max-vertical-offset="6541">
+          <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
           <folding>
-            <element signature="e#11011#12204#0" expanded="false" />
+            <element signature="e#5345#5548#0" expanded="false" />
+            <element signature="e#5699#5723#0" expanded="false" />
+            <element signature="e#5725#5810#0" expanded="false" />
+            <element signature="e#5829#5878#0" expanded="false" />
+            <element signature="e#5911#6016#0" expanded="false" />
+            <element signature="e#6093#6237#0" expanded="false" />
+            <element signature="e#6361#6500#0" expanded="false" />
+            <element signature="e#6529#6576#0" expanded="false" />
+            <element signature="e#6614#6730#0" expanded="false" />
+            <element signature="e#6817#6843#0" expanded="false" />
+            <element signature="e#6982#7030#0" expanded="false" />
+            <element signature="e#7032#7519#0" expanded="false" />
+            <element signature="e#7521#7638#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5806088" vertical-offset="5902" max-vertical-offset="6789">
+          <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
+          <folding>
+            <element signature="e#2528#3538#0" expanded="false" />
+            <element signature="e#3570#4150#0" expanded="false" />
+            <element signature="e#4191#4547#0" expanded="false" />
+            <element signature="e#4592#5424#0" expanded="false" />
+            <element signature="e#5468#6460#0" expanded="false" />
+            <element signature="e#6630#7091#0" expanded="false" />
+            <element signature="e#7133#7294#0" expanded="false" />
+            <element signature="e#7341#8373#0" expanded="false" />
+            <element signature="e#8414#9691#0" expanded="false" />
+            <element signature="e#9724#9904#0" expanded="false" />
+            <element signature="e#9951#10746#0" expanded="false" />
           </folding>
         </state>
       </provider>

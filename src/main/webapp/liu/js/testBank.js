@@ -74,12 +74,12 @@ function TestBank($scope, $http,Data,$sce) {
         { name: '编程题', data: '2'},
         { name: '问答题', data: '3'}
     ];
-    $scope.qs = [
-        {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
-        {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
-        {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
-        {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
-    ];
+//    $scope.qs = [
+//        {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
+//        {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
+//        {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
+//        {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
+//    ];
     //$scope.template = $scope.Qtype[0];
     //add by zpl
     $scope.computePage = function(){
