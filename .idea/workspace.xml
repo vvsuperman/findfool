@@ -6,14 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="type 初始bug。。。修复">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/nav.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/nav.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/nothing.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/nothing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js" />
+    <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -55,50 +49,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myTestBank.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
+      <file leaf-file-name="testBank.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="24.76" vertical-offset="10167" max-vertical-offset="12772">
-              <caret line="310" column="81" selection-start-line="310" selection-start-column="8" selection-end-line="310" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ojsite.user" pinned="false" current="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/89e7d83/3b7c6c51-a335-4f5e-8d38-f7759eaf92b8/ojsite..user">
-          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="775">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.061200924" vertical-offset="226" max-vertical-offset="10819">
-              <caret line="214" column="9" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4619" max-vertical-offset="9331">
+              <caret line="159" column="31" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
               <folding>
-                <element signature="n#!!block;n#Indexx#0" expanded="false" />
-                <element signature="n#!!block;n#aceEditor#0" expanded="false" />
-                <element signature="n#!!block;n#TestShow#0" expanded="false" />
-                <element signature="e#13671#14059#0" expanded="false" />
-                <marker date="1406372239033" expanded="true" signature="17420:17439" placeholder="..." />
+                <element signature="e#5880#6264#0" expanded="false" />
+                <element signature="e#6306#6391#0" expanded="false" />
+                <element signature="e#6438#7430#0" expanded="false" />
+                <element signature="e#7471#8617#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nav.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/nav.html">
+      <file leaf-file-name="TestPage.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1116">
-              <caret line="0" column="88" selection-start-line="0" selection-start-column="85" selection-end-line="0" selection-end-column="88" />
+            <state vertical-scroll-proportion="0.4839477" vertical-offset="3716" max-vertical-offset="7688">
+              <caret line="127" column="27" selection-start-line="127" selection-start-column="27" selection-end-line="127" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -157,7 +127,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/MChoice.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
@@ -169,6 +138,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/liu/nav.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/controller.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
       </list>
     </option>
   </component>
@@ -1171,7 +1141,7 @@
       <workItem from="1406355337239" duration="450000" />
       <workItem from="1406358462638" duration="6984000" />
       <workItem from="1406371009646" duration="38000" />
-      <workItem from="1406371060432" duration="1191000" />
+      <workItem from="1406371060432" duration="1939000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1425,11 +1395,19 @@
       <created>1406370187057</created>
       <updated>1406370187057</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="nav 邀请数">
+      <created>1406372277925</created>
+      <updated>1406372277925</updated>
+    </task>
+    <task id="LOCAL-00065" summary="初始一些值">
+      <created>1406372425786</created>
+      <updated>1406372425786</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253517000" />
+    <option name="totallyTimeSpent" value="254265000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1440,7 +1418,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1923077" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1923077" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922733" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922733" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1483,8 +1461,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="删" />
-    <MESSAGE value="将markdown编辑器嵌入其他几个页面，依然有bug，工具栏无法显示，继续修改ing" />
     <MESSAGE value="invite页面的Data fix" />
     <MESSAGE value="修复 所有Data.token" />
     <MESSAGE value="修复 所有Data" />
@@ -1508,7 +1484,9 @@
     <MESSAGE value="8 /test/manage/submite     api似乎有问题&#10;" />
     <MESSAGE value="郁闷。。。修复标签网站试题集选择bug" />
     <MESSAGE value="type 初始bug。。。修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="type 初始bug。。。修复" />
+    <MESSAGE value="nav 邀请数" />
+    <MESSAGE value="初始一些值" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始一些值" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1789,32 +1767,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31794873" vertical-offset="5704" max-vertical-offset="7657">
-          <caret line="184" column="11" selection-start-line="184" selection-start-column="11" selection-end-line="184" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7380952" vertical-offset="0" max-vertical-offset="6324">
           <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.57193" vertical-offset="0" max-vertical-offset="9548">
-          <caret line="323" column="33" selection-start-line="323" selection-start-column="33" selection-end-line="323" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1085" max-vertical-offset="2914">
-          <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1885,7 +1841,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="24.76" vertical-offset="10167" max-vertical-offset="12772">
+        <state vertical-scroll-proportion="3.68" vertical-offset="9640" max-vertical-offset="12183">
           <caret line="310" column="81" selection-start-line="310" selection-start-column="8" selection-end-line="310" selection-end-column="81" />
           <folding />
         </state>
@@ -1895,6 +1851,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1116">
           <caret line="0" column="88" selection-start-line="0" selection-start-column="85" selection-end-line="0" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="691" max-vertical-offset="10819">
+          <caret line="214" column="9" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!block;n#Indexx#0" expanded="false" />
+            <element signature="n#!!block;n#aceEditor#0" expanded="false" />
+            <element signature="n#!!block;n#TestShow#0" expanded="false" />
+            <element signature="e#13671#14059#0" expanded="false" />
+            <marker date="1406372239033" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.43418" vertical-offset="0" max-vertical-offset="3100">
+          <caret line="65" column="28" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1910,17 +1888,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/controller.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.061200924" vertical-offset="226" max-vertical-offset="10819">
-          <caret line="214" column="9" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4619" max-vertical-offset="9331">
+          <caret line="159" column="31" selection-start-line="159" selection-start-column="31" selection-end-line="159" selection-end-column="31" />
           <folding>
-            <element signature="n#!!block;n#Indexx#0" expanded="false" />
-            <element signature="n#!!block;n#aceEditor#0" expanded="false" />
-            <element signature="n#!!block;n#TestShow#0" expanded="false" />
-            <element signature="e#13671#14059#0" expanded="false" />
-            <marker date="1406372239033" expanded="true" signature="17420:17439" placeholder="..." />
+            <element signature="e#5880#6264#0" expanded="false" />
+            <element signature="e#6306#6391#0" expanded="false" />
+            <element signature="e#6438#7430#0" expanded="false" />
+            <element signature="e#7471#8617#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4839477" vertical-offset="3716" max-vertical-offset="7688">
+          <caret line="127" column="27" selection-start-line="127" selection-start-column="27" selection-end-line="127" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
