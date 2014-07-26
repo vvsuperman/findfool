@@ -157,8 +157,12 @@ function TestBank($scope, $http,Data,$sce) {
     	});
     }
     $scope.queryQuestions = function(index){
-//    	if($scope.reciveData.type != "2" &&$scope.reciveData.selectedSets == null)
-//    		return;
+        console.log("$scope.reciveData.type");
+        console.log($scope.reciveData.type);
+        console.log("$scope.reciveData.selectedSets");
+        console.log($scope.reciveData.selectedSets);
+    	if($scope.reciveData.type != "2" &&$scope.reciveData.selectedSets == null)
+    		return;
     	$scope.reciveData.currentPage = index;
     	for(i=0;i<$scope.reciveData.pagelist.length;i++){
     		$scope.reciveData.pagelist[i].current = false;

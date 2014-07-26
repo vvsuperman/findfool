@@ -100,14 +100,14 @@
       <file leaf-file-name="testBank.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40665874" vertical-offset="4525" max-vertical-offset="8494">
-              <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.33293697" vertical-offset="5362" max-vertical-offset="8618">
+              <caret line="182" column="21" selection-start-line="182" selection-start-column="21" selection-end-line="182" selection-end-column="21" />
               <folding>
-                <element signature="e#6413#7405#0" expanded="false" />
-                <element signature="e#7446#8592#0" expanded="false" />
-                <element signature="e#8625#8805#0" expanded="false" />
-                <element signature="e#8852#9641#0" expanded="false" />
-                <element signature="e#9646#9802#0" expanded="false" />
+                <element signature="e#6609#7601#0" expanded="false" />
+                <element signature="e#7642#8788#0" expanded="false" />
+                <element signature="e#8821#9001#0" expanded="false" />
+                <element signature="e#9048#9837#0" expanded="false" />
+                <element signature="e#9842#9998#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1190,7 +1190,7 @@
       <workItem from="1406338841429" duration="12000" />
       <workItem from="1406338865452" duration="4938000" />
       <workItem from="1406355337239" duration="450000" />
-      <workItem from="1406358462638" duration="5526000" />
+      <workItem from="1406358462638" duration="6162000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1436,11 +1436,15 @@
       <created>1406362559217</created>
       <updated>1406362559217</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="郁闷。。。修复标签网站试题集选择bug">
+      <created>1406369591155</created>
+      <updated>1406369591155</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250830000" />
+    <option name="totallyTimeSpent" value="251466000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1526,7 +1530,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="invite 还是得按原来的。。。" />
     <MESSAGE value="删" />
     <MESSAGE value="将markdown编辑器嵌入其他几个页面，依然有bug，工具栏无法显示，继续修改ing" />
     <MESSAGE value="invite页面的Data fix" />
@@ -1551,7 +1554,8 @@
     <MESSAGE value="/test/manage/submite api似乎有问题&#10;" />
     <MESSAGE value="8 /test/manage/submite     api似乎有问题&#10;" />
     <MESSAGE value="type 初始bug。。。修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="type 初始bug。。。修复" />
+    <MESSAGE value="郁闷。。。修复标签网站试题集选择bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="郁闷。。。修复标签网站试题集选择bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1967,14 +1971,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40665874" vertical-offset="4525" max-vertical-offset="8494">
-          <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.33293697" vertical-offset="5362" max-vertical-offset="8618">
+          <caret line="182" column="21" selection-start-line="182" selection-start-column="21" selection-end-line="182" selection-end-column="21" />
           <folding>
-            <element signature="e#6413#7405#0" expanded="false" />
-            <element signature="e#7446#8592#0" expanded="false" />
-            <element signature="e#8625#8805#0" expanded="false" />
-            <element signature="e#8852#9641#0" expanded="false" />
-            <element signature="e#9646#9802#0" expanded="false" />
+            <element signature="e#6609#7601#0" expanded="false" />
+            <element signature="e#7642#8788#0" expanded="false" />
+            <element signature="e#8821#9001#0" expanded="false" />
+            <element signature="e#9048#9837#0" expanded="false" />
+            <element signature="e#9842#9998#0" expanded="false" />
           </folding>
         </state>
       </provider>
