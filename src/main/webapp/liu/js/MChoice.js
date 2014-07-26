@@ -95,10 +95,6 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
 
     if ($scope.section) {
         $scope.getALL();
-        console.log($scope.bct)
-//        $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
-//        console.log($scope.context);
-//        $scope.answer = $scope.allMC[$scope.section].answer
     }
 
 
