@@ -42,12 +42,11 @@
             <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)">&raquo</a></li>
         </ul>
         <div class="btn-group-justified" ng-class="{false:'hedden', true: ''}[privi>2]">
+            <a ng-class="{true:'btn btn-default',false:'hedden'}[myu==2]" ng-click="InsertQuestion()">加入</a>
             <a class="btn btn-default " data="{{active}}" ng-click="AddPage($event.target)">新增</a>
             <a class="btn btn-default" ng-click="modifyQuestion()">修改</a>
             <a class="btn btn-default" ng-click="deleteQuestion()">删除</a>
         </div>
-            <br />
-            <a ng-class="{true:'btn btn-default',false:'hedden'}[myu==2]">加入</a>
         </form>
     </div>
     <!--<h1>{{active==1}}</h1>-->

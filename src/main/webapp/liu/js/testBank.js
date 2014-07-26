@@ -392,4 +392,42 @@ function TestBank($scope, $http,Data,$sce) {
     $scope.removeOne = function (v) {
         $scope.newQuestion.removeAnswer(v);
     };
+
+    $scope.InsertQuestion = function () {
+//        $scope.show = "0";
+//        console.log($scope.reciveData.choosedQ);
+//        $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+        var qid=[];
+        console.log($scope.qs);
+        for (q in $scope.qs){
+            qid.push($scope.qs[q].qid)
+        }
+        qid.push($scope.reciveData.choosedQ.qid);
+        var uqid = [];
+        $.each(qid, function(i, el){
+            if($.inArray(el, uqid) === -1) uqid.push(el);
+        });
+        $http({
+            url: "/test/manage/submite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user":{"uid": Data.uid()},"quizid":$scope.tid,"qids": uqid}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+//仅需要对message中的数据做处理
+//                alert($scope.message.msg);
+                $scope.tid=$scope.message.quizid;
+                window.location.href = '#/test/'+$scope.tid;
+            } else {
+
+            }
+        }).error(function (data) {
+
+        });
+    };
 }
