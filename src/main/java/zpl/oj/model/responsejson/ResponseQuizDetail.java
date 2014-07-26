@@ -10,6 +10,7 @@ public class ResponseQuizDetail {
 	private List<Question> qs;
 	
 	private int quizid;
+	private String name;
 	private int testtime;
 	private String extrainfo;
 	private String emails;
@@ -48,6 +49,12 @@ public class ResponseQuizDetail {
 	}
 	public void setEmails(String emails) {
 		this.emails = emails;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

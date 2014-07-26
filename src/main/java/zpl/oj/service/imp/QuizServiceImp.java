@@ -38,6 +38,7 @@ public class QuizServiceImp implements QuizService {
 		ResponseQuizDetail detail = new ResponseQuizDetail();
 		Quiz quiz = quizDao.getQuiz(tid);
 		
+		detail.setName(quiz.getName());
 		detail.setEmails(quiz.getEmails());
 		detail.setExtrainfo(quiz.getExtraInfo());
 		detail.setTesttime(quiz.getTime());
