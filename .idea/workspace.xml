@@ -9,7 +9,6 @@
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/liu/css/docs.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -92,9 +91,20 @@
       <file leaf-file-name="myTestBank.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="10726" max-vertical-offset="11625">
-              <caret line="352" column="43" selection-start-line="352" selection-start-column="43" selection-end-line="352" selection-end-column="43" />
-              <folding />
+            <state vertical-scroll-proportion="0.5" vertical-offset="7254" max-vertical-offset="8215">
+              <caret line="362" column="37" selection-start-line="362" selection-start-column="37" selection-end-line="362" selection-end-column="37" />
+              <folding>
+                <element signature="n#!!block;n#QuestionMeta#0" expanded="false" />
+                <element signature="e#1690#2853#0" expanded="false" />
+                <element signature="e#8514#9273#0" expanded="false" />
+                <element signature="e#9279#9435#0" expanded="false" />
+                <element signature="e#9497#10167#0" expanded="false" />
+                <element signature="e#10201#10235#0" expanded="false" />
+                <element signature="e#10276#10759#0" expanded="false" />
+                <element signature="e#10802#10810#0" expanded="false" />
+                <element signature="e#10869#11062#0" expanded="false" />
+                <element signature="e#11101#11152#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1451,11 +1461,15 @@
       <created>1406348007894</created>
       <updated>1406348007894</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="/test/manage/submite api似乎有问题&#10;">
+      <created>1406348615460</created>
+      <updated>1406348615460</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="238120000" />
+    <option name="totallyTimeSpent" value="239075000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1509,7 +1523,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="invite页面里面编辑页面可以很好的展示" />
     <MESSAGE value="修复一些invite内容框的bug&#10;" />
     <MESSAGE value="注释token" />
     <MESSAGE value="invite 还是得按原来的。。。" />
@@ -1534,7 +1547,8 @@
     <MESSAGE value="试题集内添加试题页面绑定完成，待调优整合" />
     <MESSAGE value="试题集页面，准备增加新增" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="/test/manage/submite api似乎有问题&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="/test/manage/submite api似乎有问题&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1965,9 +1979,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="10726" max-vertical-offset="11625">
-          <caret line="352" column="43" selection-start-line="352" selection-start-column="43" selection-end-line="352" selection-end-column="43" />
-          <folding />
+        <state vertical-scroll-proportion="0.5" vertical-offset="7254" max-vertical-offset="8215">
+          <caret line="362" column="37" selection-start-line="362" selection-start-column="37" selection-end-line="362" selection-end-column="37" />
+          <folding>
+            <element signature="n#!!block;n#QuestionMeta#0" expanded="false" />
+            <element signature="e#1690#2853#0" expanded="false" />
+            <element signature="e#8514#9273#0" expanded="false" />
+            <element signature="e#9279#9435#0" expanded="false" />
+            <element signature="e#9497#10167#0" expanded="false" />
+            <element signature="e#10201#10235#0" expanded="false" />
+            <element signature="e#10276#10759#0" expanded="false" />
+            <element signature="e#10802#10810#0" expanded="false" />
+            <element signature="e#10869#11062#0" expanded="false" />
+            <element signature="e#11101#11152#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

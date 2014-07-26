@@ -344,13 +344,23 @@ function MyTestBank($scope, $http, Data,$sce) {
 //        $scope.show = "0";
 //        console.log($scope.reciveData.choosedQ);
 //        $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+        var qid=[];
+        console.log($scope.qs);
+        for (q in $scope.qs){
+            qid.push($scope.qs[q].qid)
+        }
+        qid.push($scope.reciveData.choosedQ.qid);
+        var uqid = [];
+        $.each(qid, function(i, el){
+            if($.inArray(el, uqid) === -1) uqid.push(el);
+        });
         $http({
             url: "/test/manage/submite",
             method: 'POST',
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user":{"uid": Data.uid()},"quizid":$scope.tid,"qids": [$scope.reciveData.choosedQ.qid]}
+            data: {"user":{"uid": Data.uid()},"quizid":$scope.tid,"qids": uqid}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
