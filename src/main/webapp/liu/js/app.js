@@ -106,6 +106,21 @@ OJApp.factory('Data', function (webStorage) {
 					this._token = to;
 
 			};
+			this._invitedleft="";
+			this.invitedleft=function(){
+				if(this._invitedleft==""||this._invitedleft==null){
+					this._invitedleft = webStorage.get("invitedleft");
+				}
+				return this._invitedleft;
+
+			};
+			this.setInvitedleft =function(to){
+					webStorage.remove('invitedleft');
+
+					webStorage.add('invitedleft',to);
+					this._invitedleft = to;
+
+			};
 			
 			this._uid="";
 			this.uid=function(){
