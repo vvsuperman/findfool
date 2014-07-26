@@ -187,6 +187,21 @@ OJApp.factory('Data', function (webStorage) {
 					this._tname = to;
 			};
 
+			this._context="";
+			this.context=function(){
+				if(this._context==""||this._context==null){
+					this._context=  webStorage.get("context");
+				}
+					return this._context;
+			};
+			this.setContext =function(to){
+
+					webStorage.remove('context');
+
+					webStorage.add('context',to);
+					this._context = to;
+			};
+
 			this._company="";
 			this.company=function(){
 				if(this._company==""||this._company==null){

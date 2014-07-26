@@ -179,45 +179,46 @@ function TestPage($scope, $http, Data) {
 //        $scope.leftBar = 'leftBar.html';
 //        $scope.testManage()
 //    };
-//    $scope.testManage = function () {
-//    	//add by zpl
-//    	var sendData = new Object();
-//    	sendData.user = new Object();
-//    	sendData.user.uid = Data.uid();
-//    	sendData.quizid = Data.tid();
-//        $http({
-//            url: "/test/manage",
-//            method: 'POST',
-//            headers: {
-//                "Authorization": Data.token()
-//            },
-//            data:sendData
-//        }).success(function (data) {
-//            $scope.state = data["state"];//1 true or 0 false
-//            $scope.message = data["message"];
-//            if ($scope.state) {
-//                $scope.qs = $scope.message.qs;
-//                $scope.testtime = $scope.message.testtime;
-//                $scope.extraInfo = $scope.message.extraInfo;
-//                $scope.emails = $scope.message.emails
-//            } else {
-//
-//            }
-//        }).error(function (data) {
-//            alert("现在使用的是展示数据");
-//            $scope.qs = [
-//                {qid: 6, name: '测试选择', type: 0, tag: [], context: "在下面的选项中选出正确的一项", answer: []},
-//                {qid: 9, name: '第二个测试', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-//                    {text: "1+1=2", isright: "1", score: 4},
-//                    {text: "1+1=3", isright: "0", score: 0},
-//                    {text: "1+1=4", isright: "0", score: 0}
-//                ]}
-//            ];
-//            $scope.testtime = 70;
-//            $scope.extraInfo = "1,2";
-//            $scope.emails = "ss@ss.com,sd@ss.com"
-//        });
-//    };
+
+    $scope.testManage = function () {
+    	//add by zpl
+    	var sendData = new Object();
+    	sendData.user = new Object();
+    	sendData.user.uid = Data.uid();
+    	sendData.quizid = Data.tid();
+        $http({
+            url: "/test/manage",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data:sendData
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            $scope.message = data["message"];
+            if ($scope.state) {
+                $scope.qs = $scope.message.qs;
+                $scope.testtime = $scope.message.testtime;
+                $scope.extraInfo = $scope.message.extraInfo;
+                $scope.emails = $scope.message.emails
+            } else {
+
+            }
+        }).error(function (data) {
+            alert("现在使用的是展示数据");
+            $scope.qs = [
+                {qid: 6, name: '测试选择', type: 0, tag: [], context: "在下面的选项中选出正确的一项", answer: []},
+                {qid: 9, name: '第二个测试', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
+                    {text: "1+1=2", isright: "1", score: 4},
+                    {text: "1+1=3", isright: "0", score: 0},
+                    {text: "1+1=4", isright: "0", score: 0}
+                ]}
+            ];
+            $scope.testtime = 70;
+            $scope.extraInfo = "1,2";
+            $scope.emails = "ss@ss.com,sd@ss.com"
+        });
+    };
 
 
 //    $scope.addKUtest = function (tid) {

@@ -27,13 +27,15 @@ function QuestionMeta() {
     }
 }
 
-function MyTestBank($scope, $http, Data,$sce) {
+function MyTestBank($scope) {
     $scope.url = '#/mybank';
     $scope.template = 'mytestBank.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;
     $scope.show = 1;
+}
+function mytestbank($scope, $http, Data,$sce) {
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
@@ -43,6 +45,7 @@ function MyTestBank($scope, $http, Data,$sce) {
     $scope.keyword = "";
     $scope.tag = "";
     $scope.context = "";
+    //document.getElementById("context").
     //add by zpl
     $scope.reciveData = new Object();
     $scope.reciveData.selectedSets = null;
@@ -297,6 +300,7 @@ function MyTestBank($scope, $http, Data,$sce) {
         $scope.newQuestion.tag = tags;
 
         $scope.newQuestion.answer = ans;
+        //var context = document.getElementById("context").innerText;
         var context = $scope.context;
         $scope.newQuestion.context = context;
 
@@ -367,7 +371,9 @@ function MyTestBank($scope, $http, Data,$sce) {
             $scope.message = data["message"];
             if ($scope.state) {
 //仅需要对message中的数据做处理
-                alert($scope.message.msg)
+//                alert($scope.message.msg);
+                $scope.tid=$scope.message.quizid;
+                window.location.href = '#/test/'+$scope.tid;
             } else {
 
             }

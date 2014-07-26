@@ -1,4 +1,4 @@
-<div class="col-md-10 col-md-offset-1" style="padding: 70px" >
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="mytestbank">
     <ul class="nav nav-tabs list-group">
         <!--<ul class="nav nav-tabs" ng-model="template" ng-options="t.name for t in templates">-->
         <li ng-repeat="tt in Qtype"
@@ -55,7 +55,8 @@
                 <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
                           <!--ng-model="newQuestion.context"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
-                <textarea cleditor ng-model="context"></textarea>
+                <textarea id="cleditor" cleditor ng-model="context" ></textarea>
+                <div class="hedden" id="context" >{{context}}</div>
                 <p style="padding: 20px">标签(以 英文,符号 区分)
                     <input type="text" id="tag" class="form-control" ng-model="tag">
                 </p>

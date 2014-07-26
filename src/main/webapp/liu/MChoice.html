@@ -3,10 +3,10 @@
         <ul class="nav bs-docs-sidenav">
 
 
-            <li ng-class="{true: 'active', false: 'inactive'}[character==1]">
+            <li ng-class="{true: 'active', false: ''}[character==1]">
                 <a href="#/MChoice/1" ng-click="agree()">选择题</a>
                 <ul class="nav">
-                    <li ng-repeat="ans in allMC" ng-class="{true: 'active', false: 'inactive'}[section==$index]"><a href="#/MChoice/{{character}},{{$index}}" >{{ans.title}}</a>
+                    <li data="{{$index}}" ng-repeat="ans in allMC" ng-class="{true: 'active', false: ''}[section==$index]"><a href="#/MChoice/{{character}},{{$index}}" >{{ans.name}}</a>
                     </li>
                     <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
                 </ul>

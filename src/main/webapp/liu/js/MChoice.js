@@ -18,8 +18,8 @@ function MChoice($scope,$sce,$http,Data, $routeParams) {
         $scope.main = 1;
         $scope.character = 0;
     } else {
+
         var a = $routeParams.qqid.split(",");
-        console.log(a);
         $scope.main = 0;
         $scope.character = a[0];
         $scope.section = a[1];
@@ -30,9 +30,6 @@ function MChoice($scope,$sce,$http,Data, $routeParams) {
         $scope.character = 1;
         window.location.href = '#/MChoice/1';
         $scope.getALL();
-        $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
-//        console.log($scope.context);
-        $scope.answer = $scope.allMC[$scope.section].answer
     };
     $scope.chose = function (an) {
         console.log($scope.answer[an]);
@@ -44,28 +41,35 @@ function MChoice($scope,$sce,$http,Data, $routeParams) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user":{"uid": Data.uid()},"quizid":10}
+            data: {"user":{"uid": Data.uid()},"quizid":31}
         }).success(function (data) {
-            console.log(data["message"])
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
 //仅需要对message中的数据做处理
                 $scope.allMC = $scope.message.qs;
-                console.log($scope.allMC)
+
+                if($scope.section) {
+                    $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
+
+        console.log($scope.section);
+        console.log($scope.allMC[$scope.section].context);
+        console.log($scope.context);
+                    $scope.answer = $scope.allMC[$scope.section].answer;
+                }
             } else {
 
             }
         }).error(function (data) {
             alert("测试数据");
             $scope.allMC = [
-                {title: "选择题1", context: "选择题1<br />选择题1选择题1选择题1选择题1选择题1选择题1", answer: [
+                {name: "选择题1", context: "选择题1<br />选择题1选择题1选择题1选择题1选择题1选择题1", answer: [
                     {text: "AAAA", isright: false, score: 4},
                     {text: "BBB", isright: false, score: 4},
                     {text: "CCC", isright: true, score: 4}
                 ]},
-                {title: "选择题2", context: "选择题2选择题2选择题2选择题2选择题2选择题2选择题2", answer: [
+                {name: "选择题2", context: "选择题2选择题2选择题2选择题2选择题2选择题2选择题2", answer: [
                     {text: "AAAA", isright: false, score: 4},
                     {text: "BBB", isright: false, score: 4},
                     {text: "CCC", isright: true, score: 4}
@@ -76,9 +80,9 @@ function MChoice($scope,$sce,$http,Data, $routeParams) {
 
     if($scope.section) {
         $scope.getALL();
-        $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
+//        $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
 //        console.log($scope.context);
-        $scope.answer = $scope.allMC[$scope.section].answer
+//        $scope.answer = $scope.allMC[$scope.section].answer
     }
 
 
