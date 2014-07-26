@@ -18,9 +18,27 @@ function QuestionMeta() {
         if (this.answer == null)
             this.answer = new Array();
         this.answer.push(ans);
-    }
+    };
     this.removeAnswer = function (v) {
         this.answer.splice(v, 1);
+    };
+    this.reset = function(){
+        this.context = "";
+        this.answer = null;
+        this.tag = "";
+        this.name = "";
+        this.type = "";
+        this.qid = "";
+        this.setid = "";   	
+    };
+    this.copyObj = function(obj){
+        this.context = obj.context;
+        this.answer = obj.answer;
+        this.tag = obj.tag;
+        this.name = obj.name;
+        this.type = obj.type;
+        this.qid = obj.qid;
+        this.setid = obj.setid;    	
     }
 }
 
@@ -45,11 +63,12 @@ function TestBank($scope, $http,Data,$sce) {
 	$scope.reciveData.currentPage = 1;
 	$scope.reciveData.index = 1;
 	$scope.reciveData.choosedQ = null;
+	$scope.reciveData.setObj = null;
     $scope.progrma = new Object();
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
+    $scope.sendQuestion = new QuestionMeta();
     $scope.tag = "";
-    $scope.setObj = null;
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
@@ -161,8 +180,8 @@ function TestBank($scope, $http,Data,$sce) {
         console.log($scope.reciveData.type);
         console.log("$scope.reciveData.selectedSets");
         console.log($scope.reciveData.selectedSets);
-    	if($scope.reciveData.type != "2" &&$scope.reciveData.selectedSets == null)
-    		return;
+//    	if($scope.reciveData.type != "2" &&$scope.reciveData.selectedSets == null)
+//    		return;
     	$scope.reciveData.currentPage = index;
     	for(i=0;i<$scope.reciveData.pagelist.length;i++){
     		$scope.reciveData.pagelist[i].current = false;
@@ -194,6 +213,8 @@ function TestBank($scope, $http,Data,$sce) {
         $scope.active = target.getAttribute('data');
         $scope.reciveData.type = $scope.active;
         $scope.tag = "";
+        $scope.newQuestion.reset();
+        $scope.reciveData.setObj = null;
         $scope.queryQuestions(1);
 //        console.log($scope.active);
         $scope.question = $scope.qs[$scope.active - 1];
@@ -203,6 +224,8 @@ function TestBank($scope, $http,Data,$sce) {
     $scope.AddPage = function (target) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
+        $scope.newQuestion.reset();
+        $scope.reciveData.keyword = '';
     };
     
     $scope.deleteQuestion = function () {
@@ -224,7 +247,8 @@ function TestBank($scope, $http,Data,$sce) {
                     alert('删除成功');
                     $scope.show = "1";
                     $scope.queryQuestions(1);
-                    $scope.newQuestion = new QuestionMeta();
+                    $scope.newQuestion.reset();
+                    $scope.reciveData.setObj = null;
                 } else {
                     alert('添加失败');
                 }
@@ -236,30 +260,31 @@ function TestBank($scope, $http,Data,$sce) {
     $scope.modifyQuestion = function () {
         $scope.show = "0";
         console.log($scope.reciveData.choosedQ);
-        $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
-        $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
-        $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
-        $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
-        $scope.newQuestion.setid =($scope.setObj == null?null:$scope.setObj.problemSetId);
-        $scope.context=$scope.newQuestion.context;
-        var ans = $scope.reciveData.choosedQ.answer;
-        if ($scope.newQuestion.type == 1) {
-            for (a in ans) {
-                a.isright = (a.isright == "0" ? false : true);
+            $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+            $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
+            $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
+            $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
+            $scope.newQuestion.setid =($scope.reciveData.setObj == null?null:$scope.reciveData.setObj.problemSetId);
+            //$scope.context=$scope.newQuestion.context;
+            var ans = $scope.reciveData.choosedQ.answer;
+            if ($scope.newQuestion.type == 1) {
+                for (a in ans) {
+                    a.isright = (a.isright == "0" ? false : true);
+                }
             }
-        }
-        $scope.newQuestion.answer = ans;
-        var tags = "";
-        for (var i = 0; i < $scope.reciveData.choosedQ.tag.length; i++) {
-            if (i == 0) {
-                tags += $scope.reciveData.choosedQ.tag[i];
-            } else {
-                tags += ",";
-                tags += $scope.reciveData.choosedQ.tag[i];
+            $scope.newQuestion.answer = ans;
+            var tags = "";
+            for (var i = 0; i < $scope.reciveData.choosedQ.tag.length; i++) {
+                if (i == 0) {
+                    tags += $scope.reciveData.choosedQ.tag[i];
+                } else {
+                    tags += ",";
+                    tags += $scope.reciveData.choosedQ.tag[i];
+                }
             }
-        }
-        $scope.newQuestion.tag = tags;
-        console.log($scope.newQuestion);
+            $scope.newQuestion.tag = tags;
+            console.log($scope.newQuestion);     	   	
+
     }
     $scope.isNum = function (q) {
         if (q == null || q == "")
@@ -287,14 +312,14 @@ function TestBank($scope, $http,Data,$sce) {
                 alert('添加成功');
                 $scope.show = "1";
                 $scope.queryQuestions(1);
-                $scope.newQuestion = new QuestionMeta();
+                $scope.newQuestion.reset();
+                $scope.reciveData.setObj = null;
             } else {
                 alert('添加失败');
             }
         }).error(function (data) {
 
         });
-        $scope.setObj = null;
     }
     /*   $scope.$watch('context', function () {
      var context = $scope.context;
@@ -304,7 +329,8 @@ function TestBank($scope, $http,Data,$sce) {
 
 //    $scope.$apply();
     $scope.addQuestion = function () {
-        $scope.newQuestion.type = parseInt($scope.active);
+    	$scope.sendQuestion.copyObj($scope.newQuestion);
+        $scope.sendQuestion.type = parseInt($scope.active);
         var ans = $scope.newQuestion.answer;
         if ($scope.active == "1") {
             for (a in ans) {
@@ -312,17 +338,18 @@ function TestBank($scope, $http,Data,$sce) {
             }
         }
 //console.log($scope.newQuestion.tag)
-        var tags = $scope.tag.split(",");
-        $scope.newQuestion.tag = tags;
+        var tags = $scope.newQuestion.tag.split(",");
+        $scope.sendQuestion.tag = tags;
 
-        $scope.newQuestion.answer = ans;
-        var context = $scope.context;
-        $scope.newQuestion.context = context;
-        $scope.newQuestion.setid =($scope.setObj == null?null:$scope.setObj.problemSetId);
+        $scope.sendQuestion.answer = ans;
+        //var context = $scope.context;
+        //$scope.newQuestion.context = context;
+        $scope.sendQuestion.setid =($scope.reciveData.setObj == null?null:$scope.reciveData.setObj.problemSetId);
 
-        console.log($scope.newQuestion);
-        sendData = {"user": {"uid": Data.uid()}, "question": $scope.newQuestion};
+        console.log($scope.sendQuestion);
+        sendData = {"user": {"uid": Data.uid()}, "question": $scope.sendQuestion};
         $scope.pushQuestion(sendData);
+        $scope.reciveData.keyword = '';
     };
     $scope.cancel = function () {
         $scope.show = "1";
@@ -343,6 +370,7 @@ function TestBank($scope, $http,Data,$sce) {
 //        $scope.newQuestion.answer.push(ans);
         var tags = "";
         $scope.newQuestion.tag = tags;
+        $scope.newQuestion.reset();
     };
     
     $scope.searchmy = function (keyword) {

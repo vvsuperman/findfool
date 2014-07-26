@@ -5,27 +5,6 @@
  * object for page
  * created by zpl on 2014/7/18
  */
-function Answers() {
-    this.text = "";
-    this.isright = "";
-    this.score = 4;
-}
-function QuestionMeta() {
-    this.context = "";
-    this.answer = null;
-    this.tag = "";
-    this.name = "";
-    this.type = "";
-    this.qid = "";
-    this.addAnswer = function (ans) {
-        if (this.answer == null)
-            this.answer = new Array();
-        this.answer.push(ans);
-    }
-    this.removeAnswer = function (v) {
-        this.answer.splice(v, 1);
-    }
-}
 
 function MyTestBank($scope) {
     $scope.url = '#/mybank';
