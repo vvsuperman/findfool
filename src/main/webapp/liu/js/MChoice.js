@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/22.
  */
-function MChoice($scope,$sce, $routeParams) {
+function MChoice($scope,$sce,$http,Data, $routeParams) {
     $scope.url = '#/MChoice';
     $scope.template = 'MChoice.html';
     $scope.ContentUs = 'contentUs.html';
@@ -29,6 +29,10 @@ function MChoice($scope,$sce, $routeParams) {
         $scope.main = 0;
         $scope.character = 1;
         window.location.href = '#/MChoice/1';
+        $scope.getALL();
+        $scope.context = $sce.trustAsHtml($scope.allMC[$scope.section].context);
+//        console.log($scope.context);
+        $scope.answer = $scope.allMC[$scope.section].answer
     };
     $scope.chose = function (an) {
         console.log($scope.answer[an]);
@@ -42,12 +46,14 @@ function MChoice($scope,$sce, $routeParams) {
             },
             data: {"user":{"uid": Data.uid()},"quizid":10}
         }).success(function (data) {
+            console.log(data["message"])
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
 //仅需要对message中的数据做处理
-                $scope.allMC = $scope.message.qs
+                $scope.allMC = $scope.message.qs;
+                console.log($scope.allMC)
             } else {
 
             }

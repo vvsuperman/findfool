@@ -9,7 +9,6 @@ function TestPageTid($scope, $routeParams,$http,  Data) {
     console.log('testDetail');
     $scope.tid = $routeParams.tid;
     Data.setTid($scope.tid);
-    Data.setTname($scope.name);
     $scope.testManage = function () {
         //add by zpl
         var sendData = new Object();
@@ -31,7 +30,9 @@ function TestPageTid($scope, $routeParams,$http,  Data) {
                 $scope.qs = $scope.message.qs;
                 $scope.testtime = $scope.message.testtime;
                 $scope.extraInfo = $scope.message.extraInfo;
-                $scope.emails = $scope.message.emails
+                $scope.emails = $scope.message.emails;
+                $scope.name = $scope.message.name;
+                Data.setTname($scope.name);
             } else {
 
             }

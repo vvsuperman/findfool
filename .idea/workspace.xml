@@ -7,17 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e66166-8f4c-4210-801e-d907dbf695bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/liu/css/docs.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/leftBar.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/leftBar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js" afterPath="$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/testlist.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/testlist.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/liu/testshow.html" afterPath="$PROJECT_DIR$/src/main/webapp/liu/testshow.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="27e847cf-d7d5-4a98-9ba0-a45e10013f40" name="New changelist" comment="" />
@@ -77,25 +71,37 @@
       <file leaf-file-name="testBank.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1432" max-vertical-offset="11377">
-              <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="56" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="11377">
+              <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestPageTid.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="testBank.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/testBank.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-31.775" vertical-offset="0" max-vertical-offset="7068">
+              <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPageTid.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1490" max-vertical-offset="2356">
-              <caret line="52" column="23" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.21269296" vertical-offset="279" max-vertical-offset="2387">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
               <folding>
                 <element signature="n#!!doc;n#TestPageTid#0" expanded="false" />
-                <element signature="e#2237#2545#0" expanded="false" />
-                <element signature="e#2585#2666#0" expanded="false" />
-                <element signature="e#2710#3344#0" expanded="false" />
-                <element signature="e#3384#3770#0" expanded="false" />
-                <element signature="e#3804#3835#0" expanded="false" />
+                <element signature="e#2301#2609#0" expanded="false" />
+                <element signature="e#2649#2730#0" expanded="false" />
+                <element signature="e#2774#3408#0" expanded="false" />
+                <element signature="e#3448#3834#0" expanded="false" />
+                <element signature="e#3868#3899#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -104,8 +110,8 @@
       <file leaf-file-name="leftBar.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/leftBar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.475" vertical-offset="0" max-vertical-offset="1364">
-              <caret line="100" column="15" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="15" />
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1364">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="71" selection-end-column="11" />
               <folding>
                 <element signature="e#0#2043#0" expanded="false" />
               </folding>
@@ -113,15 +119,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testlist.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="testlist.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/testlist.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65745854" vertical-offset="170" max-vertical-offset="713">
+            <state vertical-scroll-proportion="-5.05" vertical-offset="170" max-vertical-offset="713">
               <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="tag#table#0;tag#div#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MChoice.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="2883">
+              <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mytestBank.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.775" vertical-offset="1116" max-vertical-offset="6045">
+              <caret line="37" column="80" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="80" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -180,17 +206,17 @@
         <option value="$PROJECT_DIR$/src/main/webapp/liu/MChoice.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/http.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/data/addQ2Ku.json" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/testshow.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/index.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPage.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/leftBar.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/app.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/liu/testlist.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/testBank.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js" />
       </list>
     </option>
   </component>
@@ -1189,7 +1215,7 @@
       <workItem from="1406109658377" duration="12385000" />
       <workItem from="1406198269853" duration="2295000" />
       <workItem from="1406338841429" duration="12000" />
-      <workItem from="1406338865452" duration="4878000" />
+      <workItem from="1406338865452" duration="4938000" />
     </task>
     <task id="LOCAL-00001" summary="intellij">
       <created>1403685789938</created>
@@ -1415,11 +1441,15 @@
       <created>1406127572446</created>
       <updated>1406127572446</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="试题集页面，准备增加新增">
+      <created>1406343792122</created>
+      <updated>1406343792122</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="235619000" />
+    <option name="totallyTimeSpent" value="237529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1473,7 +1503,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="mytestBank，又遇到ngModel绑定传参的bug，暂时不会&#10;" />
     <MESSAGE value="通过function传参的方式传进去了。。。" />
     <MESSAGE value="invite页面里面编辑页面可以很好的展示" />
     <MESSAGE value="修复一些invite内容框的bug&#10;" />
@@ -1498,7 +1527,8 @@
     <MESSAGE value="做题页面fix" />
     <MESSAGE value="做题页面update" />
     <MESSAGE value="试题集内添加试题页面绑定完成，待调优整合" />
-    <option name="LAST_COMMIT_MESSAGE" value="试题集内添加试题页面绑定完成，待调优整合" />
+    <MESSAGE value="试题集页面，准备增加新增" />
+    <option name="LAST_COMMIT_MESSAGE" value="试题集页面，准备增加新增" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1523,14 +1553,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="93" max-vertical-offset="2511">
-          <caret line="37" column="61" selection-start-line="37" selection-start-column="61" selection-end-line="37" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring-config-service.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="434" max-vertical-offset="1054">
@@ -1814,34 +1836,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2697">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/leftBar1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="558">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1211" max-vertical-offset="2356">
-          <caret line="52" column="23" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
-          <folding>
-            <element signature="n#!!doc;n#TestPageTid#0" expanded="false" />
-            <element signature="e#2237#2545#0" expanded="false" />
-            <element signature="e#2585#2666#0" expanded="false" />
-            <element signature="e#2710#3344#0" expanded="false" />
-            <element signature="e#3384#3770#0" expanded="false" />
-            <element signature="e#3804#3835#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1869,47 +1868,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1432" max-vertical-offset="11377">
-          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="56" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/myTestBank.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.0205832" vertical-offset="0" max-vertical-offset="10757">
           <caret line="40" column="6" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6014">
-          <caret line="0" column="61" selection-start-line="0" selection-start-column="61" selection-end-line="0" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/testBank.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="7006">
-          <caret line="0" column="46" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/leftBar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.475" vertical-offset="0" max-vertical-offset="1364">
-          <caret line="100" column="15" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#2043#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1921,13 +1884,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/mytestBank2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42538592" vertical-offset="0" max-vertical-offset="1798">
+          <caret line="7" column="93" selection-start-line="7" selection-start-column="93" selection-end-line="7" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/mytestBank.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.775" vertical-offset="1116" max-vertical-offset="6045">
+          <caret line="37" column="80" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/testBank.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-31.775" vertical-offset="0" max-vertical-offset="7068">
+          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/leftBar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1364">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="71" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#2043#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/testlist.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65745854" vertical-offset="170" max-vertical-offset="713">
+        <state vertical-scroll-proportion="-5.05" vertical-offset="170" max-vertical-offset="713">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="tag#table#0;tag#div#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/MChoice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="2883">
+          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/testBank.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1432" max-vertical-offset="11377">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/liu/js/TestPageTid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21269296" vertical-offset="279" max-vertical-offset="2387">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!doc;n#TestPageTid#0" expanded="false" />
+            <element signature="e#2301#2609#0" expanded="false" />
+            <element signature="e#2649#2730#0" expanded="false" />
+            <element signature="e#2774#3408#0" expanded="false" />
+            <element signature="e#3448#3834#0" expanded="false" />
+            <element signature="e#3868#3899#0" expanded="false" />
           </folding>
         </state>
       </provider>
