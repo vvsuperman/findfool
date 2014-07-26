@@ -242,16 +242,16 @@ function MyTestBank($scope, $http, Data,$sce) {
         }
         $scope.newQuestion.tag = tags;
         console.log($scope.newQuestion);
-    }
+    };
     $scope.isNum = function (q) {
         if (q == null || q == "")
             return;
         var r = /^\+?[0-9][0-9]*$/;
         if (!r.test(q)) {
-            alert("必须是数字！")
+            alert("必须是数字！");
             q = 0;
         }
-    }
+    };
     $scope.pushQuestion = function (sendData) {
         $http({
             url: "/question/add",
@@ -276,7 +276,7 @@ function MyTestBank($scope, $http, Data,$sce) {
         }).error(function (data) {
 
         });
-    }
+    };
     /*   $scope.$watch('context', function () {
      var context = $scope.context;
      $scope.newQuestion.context =context;
@@ -306,7 +306,7 @@ function MyTestBank($scope, $http, Data,$sce) {
     };
     $scope.cancel = function () {
         $scope.show = "1";
-    }
+    };
     $scope.resetQuestion = function () {
         $scope.newQuestion.context = "";
         $scope.newQuestion.answer = null;
@@ -322,7 +322,7 @@ function MyTestBank($scope, $http, Data,$sce) {
 //        $scope.newQuestion.answer.push(ans);
         var tags = "";
         $scope.newQuestion.tag = tags;
-    }
+    };
     $scope.searchmy = function (keyword) {
 
     };
@@ -339,4 +339,31 @@ function MyTestBank($scope, $http, Data,$sce) {
     $scope.removeOne = function (v) {
         $scope.newQuestion.removeAnswer(v);
     };
+
+    $scope.InsertQuestion = function () {
+//        $scope.show = "0";
+//        console.log($scope.reciveData.choosedQ);
+//        $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+        $http({
+            url: "/test/manage/submite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user":{"uid": Data.uid()},"quizid":$scope.tid,"qids": [$scope.reciveData.choosedQ.qid]}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+//仅需要对message中的数据做处理
+                alert($scope.message.msg)
+            } else {
+
+            }
+        }).error(function (data) {
+
+        });
+    };
+
 }

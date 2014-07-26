@@ -35,7 +35,7 @@
             <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)">&raquo</a></li>
         </ul>
         <div class="btn-group-justified">
-            <a ng-class="{true:'btn btn-default',false:'hedden'}[myu==3]">加入</a>
+            <a ng-class="{true:'btn btn-default',false:'hedden'}[myu==3]" ng-click="InsertQuestion()">加入</a>
             <a class="btn btn-default " data="{{active}}" ng-click="AddPage($event.target)">新增</a>
             <a class="btn btn-default" ng-click="modifyQuestion()">修改</a>
             <a class="btn btn-default" ng-click="deleteQuestion()">删除</a>
