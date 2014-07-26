@@ -19,7 +19,7 @@ public interface QuizService {
 	
 	void updateQuizMetaInfo(RequestTestMeta tm);
 	
-	boolean updateQuiz(int tid,List<Integer> qids);
+	Quiz updateQuiz(int tid,List<Integer> qids);
 	
 	Quiz addQuiz(RequestTestMeta tm);
 	

@@ -69,11 +69,11 @@ public class QuizServiceImp implements QuizService {
 	}
 
 	@Override
-	public boolean updateQuiz(int tid, List<Integer> qids) {
+	public Quiz updateQuiz(int tid, List<Integer> qids) {
 		//step1:得到tid的uuid
 		Quiz q = quizDao.getQuiz(tid);
 		if(q == null)
-			return false;
+			return null;
 		int uuid = q.getUuid();
 		//step2:构造一个quiz，其uuid为刚刚取出的quiz的值
 		//step3:将这个quiz插入数据库,并且得到最新的版本的Quiz
@@ -86,7 +86,7 @@ public class QuizServiceImp implements QuizService {
 			qp.setProblemid(qid);
 			quizProblemDao.insertQuizproblem(qp);
 		}
-		return true;
+		return q;
 	}
 
 	@Override

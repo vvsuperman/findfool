@@ -227,19 +227,18 @@ public class QuizController {
 	@ResponseBody
 	public ResponseBase submitAQuiz(@RequestBody RequestTestSubmit request) {
 		ResponseBase rb = new ResponseBase();
-		boolean res = quizService.updateQuiz(request.getQuizid(),
+		Quiz res = quizService.updateQuiz(request.getQuizid(),
 				request.getQids());
 
 		ResponseMessage msg = new ResponseMessage();
-		if (res == false) {
+		if (res == null) {
 			msg.setMsg("update failed");
 			msg.setHandler_url("/error");
 			rb.setState(0);
 			rb.setMessage(msg);
 		} else {
-			msg.setMsg("update ok");
-			msg.setHandler_url("/");
-			rb.setMessage(msg);
+
+			rb.setMessage(res);
 			rb.setState(1);
 		}
 		return rb;
