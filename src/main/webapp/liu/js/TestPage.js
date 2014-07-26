@@ -121,13 +121,14 @@ function TestPage($scope, $http, Data) {
                 alert('添加成功');
                 //跳转到testdetail
                 console.log('testDetail');
-                $scope.template = 'testlist.html';
-                $scope.leftBar = 'leftBar.html';
                 $scope.name = senddata.name;
                 $scope.tid = $scope.message.msg;
                 Data.setTid($scope.tid);
                 Data.setTname($scope.name);
                 $scope.testManage();
+                window.location.href = '#/test/'+$scope.tid ;
+//                $scope.template = 'testlist.html';
+//                $scope.leftBar = 'leftBar.html';
             } else {
                 alert('error:'+$scope.message.msg);
             }

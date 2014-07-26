@@ -182,6 +182,7 @@ function TestBank($scope, $http,Data,$sce) {
         console.log($scope.reciveData.selectedSets);
 //    	if($scope.reciveData.type != "2" &&$scope.reciveData.selectedSets == null)
 //    		return;
+
     	$scope.reciveData.currentPage = index;
     	for(i=0;i<$scope.reciveData.pagelist.length;i++){
     		$scope.reciveData.pagelist[i].current = false;
@@ -209,6 +210,7 @@ function TestBank($scope, $http,Data,$sce) {
    
     $scope.GoPage = function (target) {
         $scope.show = 1;
+        $scope.context = "";
         $scope.keyword = "";
         $scope.active = target.getAttribute('data');
         $scope.reciveData.type = $scope.active;
@@ -356,6 +358,7 @@ function TestBank($scope, $http,Data,$sce) {
     };
     
     $scope.resetQuestion = function () {
+        $scope.newQuestion.name="";
         $scope.newQuestion.context = "";
         $scope.newQuestion.answer = null;
         //       $scope.newQuestion.answer = new Array();

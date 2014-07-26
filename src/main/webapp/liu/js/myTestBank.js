@@ -153,6 +153,7 @@ function mytestbank($scope, $http, Data,$sce) {
     $scope.AddPage = function (target) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
+        $scope.context="";
 //        $scope.newQuestion = new Object();
 //        $scope.newQuestion.context = "";
 //        $scope.newQuestion.answer = new Array();
@@ -203,6 +204,8 @@ function mytestbank($scope, $http, Data,$sce) {
         console.log($scope.reciveData.choosedQ);
         $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
         $scope.newQuestion.type = $scope.active;
+       console.log($scope.active) ;
+
         $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
         $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
         $scope.context=$scope.newQuestion.context;
@@ -291,10 +294,12 @@ function mytestbank($scope, $http, Data,$sce) {
         $scope.show = "1";
     };
     $scope.resetQuestion = function () {
+        $scope.newQuestion.name = "";
         $scope.newQuestion.context = "";
         $scope.newQuestion.answer = null;
         //       $scope.newQuestion.answer = new Array();
         $scope.newQuestion.tag = "";
+        $scope.newQuestion.type = $scope.active;
 //        var ans = new Object();
 //        ans.text="";
 //        ans.score=0;
@@ -303,8 +308,8 @@ function mytestbank($scope, $http, Data,$sce) {
 //        else
 //        	ans.isright = "";
 //        $scope.newQuestion.answer.push(ans);
-        var tags = "";
-        $scope.newQuestion.tag = tags;
+//        var tags = "";
+//        $scope.newQuestion.tag = tags;
     };
     $scope.searchmy = function (keyword) {
 
