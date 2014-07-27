@@ -91,6 +91,54 @@ OJApp.config(['$routeProvider',
     }]);
 OJApp.factory('Data', function (webStorage) {
 	function _data(){
+			this._key1="";
+			this.key1=function(){
+				if(this._key1==""||this._key1==null){
+					this._key1 = webStorage.get("key1");
+				}
+				return this._key1;
+				
+			};
+			this.setKey1 =function(to){
+					webStorage.remove('key1');
+
+					webStorage.add('key1',to);
+					this._key1 = to;
+
+			};
+			
+			this._key2="";
+			this.key2=function(){
+				if(this._key2==""||this._key2==null){
+					this._key1 = webStorage.get("key2");
+				}
+				return this._key2;
+				
+			};
+			this.setKey2 =function(to){
+					webStorage.remove('key2');
+
+					webStorage.add('key2',to);
+					this._key2 = to;
+
+			};
+			
+			this._key3="";
+			this.key3=function(){
+				if(this._key3==""||this._key3==null){
+					this._key3 = webStorage.get("key3");
+				}
+				return this._key3;
+				
+			};
+			this.setKey3 =function(to){
+					webStorage.remove('key3');
+
+					webStorage.add('key3',to);
+					this._key3 = to;
+
+			};
+			
 			this._token="";
 			this.token=function(){
 				if(this._token==""||this._token==null){

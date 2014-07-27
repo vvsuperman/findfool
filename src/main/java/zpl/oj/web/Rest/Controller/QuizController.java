@@ -24,6 +24,7 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.MD5.MD5Util;
+import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
@@ -38,6 +39,9 @@ public class QuizController {
 	private UserService userService;
 	@Autowired
 	private InviteService inviteService;
+	
+	@Autowired
+	private DESService desService;
 
 	@RequestMapping(value = "/queryByID")
 	@ResponseBody
@@ -196,14 +200,14 @@ public class QuizController {
 				if (pwd == null) {
 					pwd = "请使用网站账号密码登陆";
 				}
-
+				String url = desService.encode(""+q.getQuizid());
 				MailSenderInfo mailSenderInfo = new MailSenderInfo();
 				mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
 				mailSenderInfo.setToAddress(u.getEmail());
 				mailSenderInfo.setReplyToAddress(request.getReplyTo());
 				mailSenderInfo.setSubject(request.getSubject());
 				String context = request.getContext();
-				context += "<p>欢迎来xxoo做测试，请登录到xx，"
+				context += "<p>欢迎来xxoo做测试，请登录到"+"http://xx.com/answer/"+url
 						+ "<br/>您的登录账号为：" + u.getEmail() + " <br/>您的密码为：" + pwd
 						+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
 				mailSenderInfo.setContent(context);
