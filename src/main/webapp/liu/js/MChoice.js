@@ -6,12 +6,13 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
     $scope.template = 'MChoice.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
+    if(Data.xzt()){
     if(Object.keys(Data.context()).length){
         $scope.context=Data.context();
-    }
+    }}if(Data.xzt()){
     if(Object.keys(Data.answer()).length){
         $scope.answer=Data.answer();
-    }
+    }}
     if(Data.xzt()){
         $scope.xzt=Data.xzt();
     }
