@@ -178,7 +178,7 @@ public class QuizController {
 	public ResponseBase inviteUserToQuiz(
 			@RequestBody RequestTestInviteUser request) {
 		ResponseBase rb = new ResponseBase();
-		Quiz q = quizService.getQuizMetaInfoByID(request.getTid());
+		Quiz q = quizService.getQuizMetaInfoByID(request.getQuizid());
 		User ht = userService.getUserById(request.getUser().getUid());
 		ResponseMessage msg = new ResponseMessage();
 		int num = request.getInvite().size();
