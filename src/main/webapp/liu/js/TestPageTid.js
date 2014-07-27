@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/26.
  */
-function TestPageTid($scope, $routeParams,$http,  Data) {
+function TestPageTid($scope, $routeParams, $http, Data) {
     $scope.url = '#/test';
     $scope.ContentUs = 'contentUs.html';
     $scope.template = 'testlist.html';
@@ -21,7 +21,7 @@ function TestPageTid($scope, $routeParams,$http,  Data) {
             headers: {
                 "Authorization": Data.token()
             },
-            data:sendData
+            data: sendData
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
@@ -60,15 +60,17 @@ function TestPageTid($scope, $routeParams,$http,  Data) {
 //        $scope.leftBar = 'leftBar.html';
 //        $scope.testManage()
 //    };
-    $scope.CommonSetting = function () {
+    $scope.CommonSetting = function (target) {
         $scope.template = 'commonsetting.html';
         $scope.ContentUs = 'contentUs.html';
 //        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active].uuid;
-
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active].name;
+//        $scope.tid = $scope.active;
+//
+//        $scope.leftBar = 'leftBar.html';
+//        $scope.name = $scope.tests[$scope.active].name;
     };
+
+
     $scope.Invite = function (target) {
         console.log('Invite');
         window.location.href = '#/invite';
