@@ -69,40 +69,7 @@ function TestPageTid($scope, $routeParams, $http, Data) {
 //        $scope.leftBar = 'leftBar.html';
 //        $scope.name = $scope.tests[$scope.active].name;
     };
-    $scope.comSave = function () {
-        var qid = [];
-        console.log($scope.qs);
-        for (q in $scope.qs) {
-            qid.push($scope.qs[q].qid)
-        }
-        qid.push($scope.reciveData.choosedQ.qid);
-        var uqid = [];
-        $.each(qid, function (i, el) {
-            if ($.inArray(el, uqid) === -1) uqid.push(el);
-        });
-        $http({
-            url: "/test/manage/submite",
-            method: 'POST',
-            headers: {
-                "Authorization": Data.token()
-            },
-            data: {"user": {"uid": Data.uid()}, "quizid": $scope.tid, "qids": uqid}
-        }).success(function (data) {
-            $scope.state = data["state"];//1 true or 0 false
-            //Data.token = data["token"];
-            $scope.message = data["message"];
-            if ($scope.state) {
-//仅需要对message中的数据做处理
-//                alert($scope.message.msg);
-                $scope.tid = $scope.message.quizid;
-                window.location.href = '#/test/' + $scope.tid;
-            } else {
 
-            }
-        }).error(function (data) {
-
-        });
-    };
 
     $scope.Invite = function (target) {
         console.log('Invite');
