@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/26.
  */
-function TestPageTid($scope, $routeParams,$http,  Data) {
+function TestPageTid($scope, $routeParams, $http, Data) {
     $scope.url = '#/test';
     $scope.ContentUs = 'contentUs.html';
     $scope.template = 'testlist.html';
@@ -21,7 +21,7 @@ function TestPageTid($scope, $routeParams,$http,  Data) {
             headers: {
                 "Authorization": Data.token()
             },
-            data:sendData
+            data: sendData
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
@@ -60,15 +60,50 @@ function TestPageTid($scope, $routeParams,$http,  Data) {
 //        $scope.leftBar = 'leftBar.html';
 //        $scope.testManage()
 //    };
-    $scope.CommonSetting = function () {
+    $scope.CommonSetting = function (target) {
         $scope.template = 'commonsetting.html';
         $scope.ContentUs = 'contentUs.html';
 //        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active].uuid;
-
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active].name;
+//        $scope.tid = $scope.active;
+//
+//        $scope.leftBar = 'leftBar.html';
+//        $scope.name = $scope.tests[$scope.active].name;
     };
+    $scope.comSave = function () {
+        var qid = [];
+        console.log($scope.qs);
+        for (q in $scope.qs) {
+            qid.push($scope.qs[q].qid)
+        }
+        qid.push($scope.reciveData.choosedQ.qid);
+        var uqid = [];
+        $.each(qid, function (i, el) {
+            if ($.inArray(el, uqid) === -1) uqid.push(el);
+        });
+        $http({
+            url: "/test/manage/submite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user": {"uid": Data.uid()}, "quizid": $scope.tid, "qids": uqid}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+//仅需要对message中的数据做处理
+//                alert($scope.message.msg);
+                $scope.tid = $scope.message.quizid;
+                window.location.href = '#/test/' + $scope.tid;
+            } else {
+
+            }
+        }).error(function (data) {
+
+        });
+    };
+
     $scope.Invite = function (target) {
         console.log('Invite');
         window.location.href = '#/invite';
