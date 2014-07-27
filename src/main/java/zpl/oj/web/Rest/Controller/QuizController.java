@@ -197,19 +197,17 @@ public class QuizController {
 					pwd = "请使用网站账号密码登陆";
 				}
 
-				// 发送邮件
 				MailSenderInfo mailSenderInfo = new MailSenderInfo();
 				mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
 				mailSenderInfo.setToAddress(u.getEmail());
 				mailSenderInfo.setReplyToAddress(request.getReplyTo());
 				mailSenderInfo.setSubject(request.getSubject());
 				String context = request.getContext();
-				context += "欢迎来xxoo做测试，请登录到xx，"
+				context += "<p>欢迎来xxoo做测试，请登录到xx，"
 						+ "<br/>您的登录账号为：" + u.getEmail() + " <br/>您的密码为：" + pwd
-						+ "<br/>您的测试时间为：" + q.getTime();
+						+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
 				mailSenderInfo.setContent(context);
 				SimpleMailSender.sendHtmlMail(mailSenderInfo);
-
 			}
 
 			ht.setInvited_left(ht.getInvited_left() - num);

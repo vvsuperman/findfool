@@ -28,7 +28,7 @@ public class SimpleMailSender  {
   * 以文本格式发送邮件   
   * @param mailInfo 待发送的邮件的信息   
   */    
-    public boolean sendTextMail(MailSenderInfo mailInfo) {    
+    public static boolean sendTextMail(MailSenderInfo mailInfo) {    
       // 判断是否需要身份认证    
       MyAuthenticator authenticator = null;    
       Properties pro = mailInfo.getProperties();   
