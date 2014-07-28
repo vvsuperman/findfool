@@ -59,7 +59,7 @@ public class QuizServiceImp implements QuizService {
 
 	@Override
 	public void updateQuizMetaInfo(RequestTestMeta tm) {
-		Quiz quiz = quizDao.getQuiz(tm.getTid());
+		Quiz quiz = quizDao.getQuiz(tm.getQuizid());
 		if(quiz != null){
 			quiz.setTime(tm.getTesttime());
 			quiz.setEmails(tm.getEmails());

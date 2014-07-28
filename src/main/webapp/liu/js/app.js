@@ -91,6 +91,25 @@ OJApp.config(['$routeProvider',
     }]);
 OJApp.factory('Data', function (webStorage) {
 	function _data(){
+	
+			this._flag = 0;
+			this.flag = function(){
+				if(this._flag==""||this._flag==null){
+					this._flag = webStorage.get("flag");
+					if(this._flag==""||this._flag==null){
+						this._flag = 0;
+						webStorage.add('flag',0);
+					}
+				}
+				return this._flag;				
+			};
+			this.setFlag = function(to){
+					webStorage.remove('flag');
+
+					webStorage.add('flag',to);
+					this._flag = to;			
+			};
+			
 			this._key1="";
 			this.key1=function(){
 				if(this._key1==""||this._key1==null){
