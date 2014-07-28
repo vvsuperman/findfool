@@ -279,7 +279,7 @@ function mytestbank($scope, $http, Data,$sce) {
             }
         }
 //console.log($scope.newQuestion.tag)
-        var tags = $scope.tag.split(",");
+        var tags = $scope.newQuestion.tag.split(",");
         $scope.newQuestion.tag = tags;
 
         $scope.newQuestion.answer = ans;
