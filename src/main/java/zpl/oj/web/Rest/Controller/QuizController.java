@@ -24,6 +24,7 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.MD5.MD5Util;
+import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
@@ -38,6 +39,9 @@ public class QuizController {
 	private UserService userService;
 	@Autowired
 	private InviteService inviteService;
+	
+	@Autowired
+	private DESService desService;
 
 	@RequestMapping(value = "/queryByID")
 	@ResponseBody
@@ -174,7 +178,7 @@ public class QuizController {
 	public ResponseBase inviteUserToQuiz(
 			@RequestBody RequestTestInviteUser request) {
 		ResponseBase rb = new ResponseBase();
-		Quiz q = quizService.getQuizMetaInfoByID(request.getTid());
+		Quiz q = quizService.getQuizMetaInfoByID(request.getQuizid());
 		User ht = userService.getUserById(request.getUser().getUid());
 		ResponseMessage msg = new ResponseMessage();
 		int num = request.getInvite().size();
@@ -196,20 +200,18 @@ public class QuizController {
 				if (pwd == null) {
 					pwd = "请使用网站账号密码登陆";
 				}
-
-				// 发送邮件
+				String url = desService.encode(""+q.getQuizid());
 				MailSenderInfo mailSenderInfo = new MailSenderInfo();
 				mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
 				mailSenderInfo.setToAddress(u.getEmail());
 				mailSenderInfo.setReplyToAddress(request.getReplyTo());
 				mailSenderInfo.setSubject(request.getSubject());
 				String context = request.getContext();
-				context += "欢迎来xxoo做测试，请登录到xx，"
+				context += "<p>欢迎来xxoo做测试，请登录到"+"http://xx.com/answer/"+url
 						+ "<br/>您的登录账号为：" + u.getEmail() + " <br/>您的密码为：" + pwd
-						+ "<br/>您的测试时间为：" + q.getTime();
+						+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
 				mailSenderInfo.setContent(context);
 				SimpleMailSender.sendHtmlMail(mailSenderInfo);
-
 			}
 
 			ht.setInvited_left(ht.getInvited_left() - num);
@@ -227,19 +229,18 @@ public class QuizController {
 	@ResponseBody
 	public ResponseBase submitAQuiz(@RequestBody RequestTestSubmit request) {
 		ResponseBase rb = new ResponseBase();
-		boolean res = quizService.updateQuiz(request.getQuizid(),
+		Quiz res = quizService.updateQuiz(request.getQuizid(),
 				request.getQids());
 
 		ResponseMessage msg = new ResponseMessage();
-		if (res == false) {
+		if (res == null) {
 			msg.setMsg("update failed");
 			msg.setHandler_url("/error");
 			rb.setState(0);
 			rb.setMessage(msg);
 		} else {
-			msg.setMsg("update ok");
-			msg.setHandler_url("/");
-			rb.setMessage(msg);
+
+			rb.setMessage(res);
 			rb.setState(1);
 		}
 		return rb;

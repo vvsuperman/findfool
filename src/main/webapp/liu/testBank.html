@@ -1,4 +1,4 @@
-<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="TestBank">
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" >
     <ul class="nav nav-tabs list-group">
         <!--<ul class="nav nav-tabs" ng-model="template" ng-options="t.name for t in templates">-->
         <li ng-repeat="tt in Qtype"
@@ -42,6 +42,7 @@
             <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)">&raquo</a></li>
         </ul>
         <div class="btn-group-justified" ng-class="{false:'hedden', true: ''}[privi>2]">
+            <a ng-class="{true:'btn btn-default',false:'hedden'}[myu==2]" ng-click="InsertQuestion()">加入</a>
             <a class="btn btn-default " data="{{active}}" ng-click="AddPage($event.target)">新增</a>
             <a class="btn btn-default" ng-click="modifyQuestion()">修改</a>
             <a class="btn btn-default" ng-click="deleteQuestion()">删除</a>
@@ -57,31 +58,51 @@
                </p>
             <p>题干</p>
 
-            <form class="form-inline" role="form">
+            <div class="form-inline" role="form">
                 <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
                           <!--ng-model="newQuestion.context"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
-                <textarea cleditor ng-model="context"></textarea>
-                <p style="padding: 20px">标签(以 英文,符号 区分)
-                    <input type="text" id="tag" class="form-control" ng-model="tag">
-                </p>
-                <button class="btn btn-default" ng-click="addOne()">新增选项</button>
-                <ol style="list-style-type:upper-alpha" class="col-md-offset-3">
-                    <li ng-repeat="ans in newQuestion.answer">
-                        <input type="text" style="width: 50%" class="form-control" ng-model="ans.text">
-                        <input type="text" style="width: 7%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
-                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
-                           ng-click="removeOne($index)"></a>
-                        <span class="pull-right"><input type="checkbox" ng-model="ans.isright">是否正确</span>
+                <textarea cleditor ng-model="newQuestion.context"></textarea>
 
-                    </li>
-                </ol>
+                <div class="col-md-12">
+                	<div class="col-md-6">
+		                <p style="padding-top: 20px;margin-bottom: 0px;">标签(以 英文,符号 区分)</p>
+		                <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
+		                
+                	</div>
+		            <div ng-class="{true:'hedden', false: 'col-md-6'}[active==2]"> 
+			        	<p style="padding-top: 20px;margin-bottom: 0px;">选择试题集</p>
+			           <select class="form-control" ng-model="reciveData.setObj"  ng-options="m.name for m in reciveData.sets">
+		                    <option value="">-- 请选择 --</option>
+		                </select>
+			        </div>  
+					<div class="col-md-12" style="margin-top:20px">
+						<div class="col-md-12">
+							<button class="btn btn-default" ng-click="addOne()">新增选项</button>
+						</div>
+		                <div class="col-md-12">
+			                <ol style="list-style-type:upper-alpha" class="col-md-10">
+			                    <li ng-repeat="ans in newQuestion.answer" style="margin:5px">
+			                        <input type="text" style="width: 65%" class="form-control" ng-model="ans.text">
+			                        <input type="text" style="width: 15%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
+			                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
+			                           ng-click="removeOne($index)"></a>
+			                        <span class="pull-right"><input type="checkbox" ng-model="ans.isright">是否正确</span>
+			
+			                    </li>
+			                </ol>
+		                </div>
+
+					</div>              	
+                </div>
+
+
                 <div class="btn-group-justified" style="padding: 70px">
                     <a class="btn btn-default " ng-click="addQuestion()">保存</a>
                     <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
                     <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
-            </form>
+            </div>
         </div>
         <div ng-class="{true:'', false: 'hedden'}[active==2]">
                <p>标题
@@ -92,10 +113,10 @@
 
             <p>题干</p>
 
-            <form class="form-inline" role="form">
+            <div class="form-inline" role="form">
                 <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
-                <textarea cleditor ng-model="context"></textarea>
+                <textarea cleditor ng-model="newQuestion.context"></textarea>
                 <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
                 <ul>
@@ -141,7 +162,7 @@
                     <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
                     <a class="btn btn-default" ng-click="cancel()">取消</a>
                 </div>
-            </form>
+            </div>
         </div>
         <div ng-class="{true:'', false: 'hedden'}[active==3]">
                <p>标题
@@ -152,7 +173,7 @@
             <form class="form-inline" role="form">
                 <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
-                <textarea cleditor ng-model="context"></textarea>
+                <textarea cleditor ng-model="newQuestion.context"></textarea>
                 <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
 

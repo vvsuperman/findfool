@@ -5,8 +5,9 @@ import java.util.List;
 public class Question {
 
 	private Integer qid;
+	private Integer setid;
 	private String name;
-	private int type;
+	private Integer type;
 	private List<String> tag;
 	private String context;
 	private List<QuestionTestCase> answer;
@@ -21,12 +22,6 @@ public class Question {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
 	}
 	public String getContext() {
 		return context;
@@ -45,6 +40,18 @@ public class Question {
 	}
 	public void setTag(List<String> tag) {
 		this.tag = tag;
+	}
+	public Integer getSetid() {
+		return setid;
+	}
+	public void setSetid(Integer setid) {
+		this.setid = setid;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	
 }

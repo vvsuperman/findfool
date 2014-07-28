@@ -38,6 +38,7 @@ public class QuizServiceImp implements QuizService {
 		ResponseQuizDetail detail = new ResponseQuizDetail();
 		Quiz quiz = quizDao.getQuiz(tid);
 		
+		detail.setName(quiz.getName());
 		detail.setEmails(quiz.getEmails());
 		detail.setExtrainfo(quiz.getExtraInfo());
 		detail.setTesttime(quiz.getTime());
@@ -68,11 +69,11 @@ public class QuizServiceImp implements QuizService {
 	}
 
 	@Override
-	public boolean updateQuiz(int tid, List<Integer> qids) {
+	public Quiz updateQuiz(int tid, List<Integer> qids) {
 		//step1:得到tid的uuid
 		Quiz q = quizDao.getQuiz(tid);
 		if(q == null)
-			return false;
+			return null;
 		int uuid = q.getUuid();
 		//step2:构造一个quiz，其uuid为刚刚取出的quiz的值
 		//step3:将这个quiz插入数据库,并且得到最新的版本的Quiz
@@ -85,7 +86,7 @@ public class QuizServiceImp implements QuizService {
 			qp.setProblemid(qid);
 			quizProblemDao.insertQuizproblem(qp);
 		}
-		return true;
+		return q;
 	}
 
 	@Override
@@ -118,7 +119,13 @@ public class QuizServiceImp implements QuizService {
 
 	@Override
 	public List<QuizProblem> getQuizsByProblemId(Integer pid) {
-		return quizProblemDao.getQuizProblemsByProblemId(pid);
+		List<QuizProblem> res = new ArrayList<QuizProblem>();
+		List<QuizProblem> quizs= quizProblemDao.getQuizProblemsByProblemId(pid);
+		for(QuizProblem q:quizs){
+			List<QuizProblem> tmp = quizProblemDao.getQuizProblemsByQuizId(q.getQuizid());
+			res.addAll(tmp);
+		}
+		return res;
 	}
 
 }

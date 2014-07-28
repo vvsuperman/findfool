@@ -5,27 +5,6 @@
  * object for page
  * created by zpl on 2014/7/18
  */
-function Answers() {
-    this.text = "";
-    this.isright = "";
-    this.score = 4;
-}
-function QuestionMeta() {
-    this.context = "";
-    this.answer = null;
-    this.tag = "";
-    this.name = "";
-    this.type = "";
-    this.qid = "";
-    this.addAnswer = function (ans) {
-        if (this.answer == null)
-            this.answer = new Array();
-        this.answer.push(ans);
-    }
-    this.removeAnswer = function (v) {
-        this.answer.splice(v, 1);
-    }
-}
 
 function MyTestBank($scope) {
     $scope.url = '#/mybank';
@@ -36,10 +15,16 @@ function MyTestBank($scope) {
     $scope.show = 1;
 }
 function mytestbank($scope, $http, Data,$sce) {
+    $scope.Qtype = [
+        { name: '选择题', data: '1'},
+        { name: '编程题', data: '2'},
+        { name: '问答题', data: '3'}
+    ];
     $scope.page = 1;
     $scope.keyword = "";
     $scope.tag = "";
     $scope.context = "";
+    //document.getElementById("context").
     //add by zpl
     $scope.reciveData = new Object();
     $scope.reciveData.selectedSets = null;
@@ -57,11 +42,7 @@ function mytestbank($scope, $http, Data,$sce) {
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
 
-    $scope.Qtype = [
-        { name: '选择题', data: '1'},
-        { name: '编程题', data: '2'},
-        { name: '问答题', data: '3'}
-    ];
+
 
 
     //add by zpl
@@ -172,6 +153,8 @@ function mytestbank($scope, $http, Data,$sce) {
     $scope.AddPage = function (target) {
         $scope.active = target.getAttribute('data');
         $scope.show = 0;
+        $scope.context="";
+        $scope.tag="";
 //        $scope.newQuestion = new Object();
 //        $scope.newQuestion.context = "";
 //        $scope.newQuestion.answer = new Array();
@@ -221,7 +204,9 @@ function mytestbank($scope, $http, Data,$sce) {
         $scope.show = "0";
         console.log($scope.reciveData.choosedQ);
         $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
-        $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
+        $scope.newQuestion.type = $scope.active;
+       console.log($scope.active) ;
+
         $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
         $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
         $scope.context=$scope.newQuestion.context;
@@ -243,16 +228,16 @@ function mytestbank($scope, $http, Data,$sce) {
         }
         $scope.newQuestion.tag = tags;
         console.log($scope.newQuestion);
-    }
+    };
     $scope.isNum = function (q) {
         if (q == null || q == "")
             return;
         var r = /^\+?[0-9][0-9]*$/;
         if (!r.test(q)) {
-            alert("必须是数字！")
+            alert("必须是数字！");
             q = 0;
         }
-    }
+    };
     $scope.pushQuestion = function (sendData) {
         $http({
             url: "/question/add",
@@ -277,7 +262,7 @@ function mytestbank($scope, $http, Data,$sce) {
         }).error(function (data) {
 
         });
-    }
+    };
     /*   $scope.$watch('context', function () {
      var context = $scope.context;
      $scope.newQuestion.context =context;
@@ -298,6 +283,7 @@ function mytestbank($scope, $http, Data,$sce) {
         $scope.newQuestion.tag = tags;
 
         $scope.newQuestion.answer = ans;
+        //var context = document.getElementById("context").innerText;
         var context = $scope.context;
         $scope.newQuestion.context = context;
 
@@ -307,12 +293,14 @@ function mytestbank($scope, $http, Data,$sce) {
     };
     $scope.cancel = function () {
         $scope.show = "1";
-    }
+    };
     $scope.resetQuestion = function () {
+        $scope.newQuestion.name = "";
         $scope.newQuestion.context = "";
         $scope.newQuestion.answer = null;
         //       $scope.newQuestion.answer = new Array();
         $scope.newQuestion.tag = "";
+        $scope.newQuestion.type = $scope.active;
 //        var ans = new Object();
 //        ans.text="";
 //        ans.score=0;
@@ -321,9 +309,9 @@ function mytestbank($scope, $http, Data,$sce) {
 //        else
 //        	ans.isright = "";
 //        $scope.newQuestion.answer.push(ans);
-        var tags = "";
-        $scope.newQuestion.tag = tags;
-    }
+//        var tags = "";
+//        $scope.newQuestion.tag = tags;
+    };
     $scope.searchmy = function (keyword) {
 
     };
@@ -340,4 +328,43 @@ function mytestbank($scope, $http, Data,$sce) {
     $scope.removeOne = function (v) {
         $scope.newQuestion.removeAnswer(v);
     };
+
+    $scope.InsertQuestion = function () {
+//        $scope.show = "0";
+//        console.log($scope.reciveData.choosedQ);
+//        $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
+        var qid=[];
+        console.log($scope.qs);
+        for (q in $scope.qs){
+            qid.push($scope.qs[q].qid)
+        }
+        qid.push($scope.reciveData.choosedQ.qid);
+        var uqid = [];
+        $.each(qid, function(i, el){
+            if($.inArray(el, uqid) === -1) uqid.push(el);
+        });
+        $http({
+            url: "/test/manage/submite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user":{"uid": Data.uid()},"quizid":$scope.tid,"qids": uqid}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+//仅需要对message中的数据做处理
+//                alert($scope.message.msg);
+                $scope.tid=$scope.message.quizid;
+                window.location.href = '#/test/'+$scope.tid;
+            } else {
+
+            }
+        }).error(function (data) {
+
+        });
+    };
+
 }

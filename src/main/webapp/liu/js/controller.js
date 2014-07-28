@@ -47,7 +47,8 @@ function Indexx($scope, $http, Data) {
                     Data.setPrivi($scope.message.privilege);
                     Data.setTel($scope.message.tel);
                     Data.setCompany($scope.message.company);
-
+                    Data.setInvitedleft($scope.message.invited_left);
+                    $scope.invitedleft = $scope.message.invited_left;
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
                     window.location.href = '#/test';
@@ -131,7 +132,7 @@ function Indexx($scope, $http, Data) {
                         $scope.state = data["state"];//1 true or 0 false
                         $scope.message = data["message"];
                         if ($scope.state) {
-                            Data.setUid ($scope.message.uid);
+                            Data.setUid($scope.message.uid);
                             Data.setToken(data["token"]);
                             console.log(Data.token());
                             console.log(data["token"]);
@@ -212,7 +213,7 @@ function Indexx($scope, $http, Data) {
     };
 }
 function aceEditor($scope) {
-    $scope.url="#/editor";
+    $scope.url = "#/editor";
     $scope.template = 'editor.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
@@ -390,6 +391,7 @@ function TestShow($scope, $http, Data) {
 
  }*/
 function nav($scope, Data) {
+    $scope.invitedleft = Data.invitedleft();
     $scope.name = Data.name();
 //    console.log(Data.name);
     $scope.navTest = function () {
@@ -434,7 +436,7 @@ function RockRoll($scope, $routeParams) {
     $scope.template = 'rrtest.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-    $scope.rrid =  $routeParams.rrid;
+    $scope.rrid = $routeParams.rrid;
 }
 
 
@@ -641,7 +643,7 @@ function editor($scope, $http, $sce, $timeout) {
 
 }
 function mdeditor($scope) {
-    $scope.text="Hello [FIRST_NAME] [LAST_NAME],<br/>In order to assess your programming skills we've prepared a programming challenge that we would like you to complete. <br/>    The following link takes you to your test:<br/> [PRIVATE_TEST_LINK] <br/>  After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.  <br/>  Best of luck!  <br/> Regards,<br/>  [COMPANY_NAME]";
+    $scope.text = "Hello [FIRST_NAME] [LAST_NAME],<br/>In order to assess your programming skills we've prepared a programming challenge that we would like you to complete. <br/>    The following link takes you to your test:<br/> [PRIVATE_TEST_LINK] <br/>  After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.  <br/>  Best of luck!  <br/> Regards,<br/>  [COMPANY_NAME]";
     $scope.copyHTML = function () {
 
         $scope.html = document.getElementById("wmd-output").innerText;
@@ -651,7 +653,7 @@ function mdeditor($scope) {
         $scope.text = "";
         document.getElementById("wmd-output").innerHTML = "<pre><code></code></pre>";
         document.getElementById("wmd-preview").innerHTML = "";
-        document.getElementById("wmd-input").value="";
+        document.getElementById("wmd-input").value = "";
         $scope.html = "";
     };
     function sign($scope) {

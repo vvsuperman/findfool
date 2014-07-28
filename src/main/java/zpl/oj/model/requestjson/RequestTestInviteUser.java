@@ -7,7 +7,7 @@ import zpl.oj.model.request.InviteUser;
 public class RequestTestInviteUser {
 
 	private RequestUser user;
-	private int tid;
+	private Integer quizid;
 	private String subject;
 	private String replyTo;
 	private String context;
@@ -18,11 +18,11 @@ public class RequestTestInviteUser {
 	public void setUser(RequestUser user) {
 		this.user = user;
 	}
-	public int getTid() {
-		return tid;
+	public Integer getQuizid() {
+		return quizid;
 	}
-	public void setTid(int tid) {
-		this.tid = tid;
+	public void setQuizid(Integer quizid) {
+		this.quizid = quizid;
 	}
 	public String getSubject() {
 		return subject;

@@ -4,22 +4,22 @@ package zpl.oj.model.requestjson;
 public class RequestTestMeta {
 
 	private RequestUser user;
-	private int tid;
+	private int quizid;
 	private String name;
 	private int testtime;
 	private String extrainfo;
 	private String emails;
+	public int getQuizid() {
+		return quizid;
+	}
+	public void setQuizid(int quizid) {
+		this.quizid = quizid;
+	}
 	public RequestUser getUser() {
 		return user;
 	}
 	public void setUser(RequestUser user) {
 		this.user = user;
-	}
-	public int getTid() {
-		return tid;
-	}
-	public void setTid(int tid) {
-		this.tid = tid;
 	}
 	public int getTesttime() {
 		return testtime;

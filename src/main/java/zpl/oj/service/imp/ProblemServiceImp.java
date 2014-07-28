@@ -49,6 +49,7 @@ public class ProblemServiceImp implements ProblemService{
 		q.setQid(p.getProblemId());
 		q.setName(p.getTitle());
 		q.setContext(p.getDescription());
+		q.setType(p.getType());
 		
 		List<ProblemTestCase> cases = problemTestCaseDao.getProblemTestCases(p.getProblemId());
 		List<QuestionTestCase> answer = new ArrayList<QuestionTestCase>();
@@ -77,6 +78,7 @@ public class ProblemServiceImp implements ProblemService{
 	@Override
 	public int addProblem(RequestAddQuestion q) {
 		Problem p = new Problem();
+		p.setProblemSetId(q.getQuestion().getSetid());
 		p.setCreator(q.getUser().getUid());
 		p.setDate(new Date());
 		p.setDescription(q.getQuestion().getContext());
@@ -222,6 +224,7 @@ public class ProblemServiceImp implements ProblemService{
 			return addProblem(q);
 		}
 		p.setModifier(q.getUser().getUid());
+		p.setProblemSetId(q.getQuestion().getSetid());
 		p.setDescription(q.getQuestion().getContext());
 		p.setLimitMem(512);
 		p.setLimitTime(5);
@@ -231,7 +234,6 @@ public class ProblemServiceImp implements ProblemService{
 		User u = userService.getUserById(q.getUser().getUid());
 		problemDao.insertProblem(p);
 		int pid = problemDao.getProblemId(p.getCreator());
-		
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);
 			if(tagid == null){
@@ -249,7 +251,7 @@ public class ProblemServiceImp implements ProblemService{
 			pt.setScore(qt.getScore());
 			problemTestCaseDao.insertProblemTestCase(pt);
 		}
-		problemDao.updateProblem(p);
+		//problemDao.updateProblem(p);
 		//更新quiz们
 		List<QuizProblem> qps = quizService.getQuizsByProblemId(q.getQuestion().getQid());
 		Map<Integer,List<Integer>> quizs = new HashMap<Integer,List<Integer>>();

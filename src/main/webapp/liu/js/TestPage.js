@@ -45,26 +45,26 @@ function TestPage($scope, $http, Data) {
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
     };
-    $scope.Invite = function (target) {
-        console.log('Invite');
-        window.location.href = '#/invite';
-    };
-    $scope.MultInvite = function (target) {
-        console.log('MultInvite');
-        window.location.href = '#/invite';
-        $scope.active = target.getAttribute('data');
-        $scope.name = $scope.tests[$scope.active].name;
-        $scope.tid = $scope.tests[$scope.active].quizid;
-        Data.setTid($scope.tid);
-        Data.setTname($scope.name);
-//        $scope.active = target.getAttribute('data');
-//        $scope.tid = target.getAttribute('data');
-//
+//    $scope.Invite = function (target) {
+//        console.log('Invite');
+//        window.location.href = '#/invite';
+//    };
+//    $scope.MultInvite = function (target) {
+//        console.log('MultInvite');
+//        window.location.href = '#/invite';
 //        $scope.active = target.getAttribute('data');
 //        $scope.name = $scope.tests[$scope.active].name;
-//        $scope.template = 'MutleInvite.html';
-//        $scope.leftBar = 'leftBar.html';
-    };
+//        $scope.tid = $scope.tests[$scope.active].quizid;
+//        Data.setTid($scope.tid);
+//        Data.setTname($scope.name);
+////        $scope.active = target.getAttribute('data');
+////        $scope.tid = target.getAttribute('data');
+////
+////        $scope.active = target.getAttribute('data');
+////        $scope.name = $scope.tests[$scope.active].name;
+////        $scope.template = 'MutleInvite.html';
+////        $scope.leftBar = 'leftBar.html';
+//    };
     $scope.Report = function (target) {
         console.log('Report');
         $scope.leftBar = 'leftBar.html';
@@ -76,18 +76,18 @@ function TestPage($scope, $http, Data) {
         Data.setTname($scope.name);
 //        $scope.testManage();
     };
-    $scope.testDetail = function (target) {
-        console.log('testDetail');
-        $scope.active = target.getAttribute('data');
-        $scope.template = 'testlist.html';
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active].name;
-        $scope.tid = $scope.tests[$scope.active].quizid;
-        Data.setTid($scope.tid);
-        Data.setTname($scope.name);
-        $scope.testManage();
-
-    };
+//    $scope.testDetail = function (target) {
+//        console.log('testDetail');
+//        $scope.active = target.getAttribute('data');
+//        $scope.template = 'testlist.html';
+//        $scope.leftBar = 'leftBar.html';
+//        $scope.name = $scope.tests[$scope.active].name;
+//        $scope.tid = $scope.tests[$scope.active].quizid;
+//        Data.setTid($scope.tid);
+//        Data.setTname($scope.name);
+//        $scope.testManage();
+//
+//    };
     $scope.pushTest = function(){
         //检查名字是否为空
         if($scope.addtest.name == ''){
@@ -121,13 +121,14 @@ function TestPage($scope, $http, Data) {
                 alert('添加成功');
                 //跳转到testdetail
                 console.log('testDetail');
-                $scope.template = 'testlist.html';
-                $scope.leftBar = 'leftBar.html';
                 $scope.name = senddata.name;
                 $scope.tid = $scope.message.msg;
                 Data.setTid($scope.tid);
                 Data.setTname($scope.name);
                 $scope.testManage();
+                window.location.href = '#/test/'+$scope.tid ;
+//                $scope.template = 'testlist.html';
+//                $scope.leftBar = 'leftBar.html';
             } else {
                 alert('error:'+$scope.message.msg);
             }
@@ -162,23 +163,24 @@ function TestPage($scope, $http, Data) {
         //推向服务器
         //$scope.pushTest()
     };
-    $scope.CommonSetting = function () {
-        $scope.template = 'commonsetting.html';
-        $scope.ContentUs = 'contentUs.html';
-//        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active].uuid;
+//    $scope.CommonSetting = function () {
+//        $scope.template = 'commonsetting.html';
+//        $scope.ContentUs = 'contentUs.html';
+////        $scope.active = target.getAttribute('data');
+//        $scope.tid = $scope.tests[$scope.active].uuid;
+//
+//        $scope.leftBar = 'leftBar.html';
+//        $scope.name = $scope.tests[$scope.active].name;
+//    };
 
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active].name;
-    };
 
+//    $scope.testPage = function (target) {
+//        console.log('testPage');
+//        $scope.template = 'testlist.html';
+//        $scope.leftBar = 'leftBar.html';
+//        $scope.testManage()
+//    };
 
-    $scope.testPage = function (target) {
-        console.log('testPage');
-        $scope.template = 'testlist.html';
-        $scope.leftBar = 'leftBar.html';
-        $scope.testManage()
-    };
     $scope.testManage = function () {
     	//add by zpl
     	var sendData = new Object();
@@ -218,20 +220,30 @@ function TestPage($scope, $http, Data) {
             $scope.emails = "ss@ss.com,sd@ss.com"
         });
     };
+$scope.CheckOut = function (target) {
+    console.log(target.getAttribute('data'));
+    $scope.tmp  = target.getAttribute('data');
+    alert($scope.tmp)
+};
 
-//    $scope.myu = 1;
-//    $scope.tjkst = function () {
-//        $scope.myu = 3;
+$scope.Modify = function (target) {
+
+};
+
+$scope.Delete = function (target) {
+
+};
+
+
+    
+
+//    $scope.addKUtest = function (tid) {
+//        console.log(tid);
+//        $scope.template = 'testBank.html';
 //    };
-//    $scope.tjzdy = function () {
-//        $scope.myu = 2;
+//    $scope.addZItest = function (tid) {
+//        console.log(tid);
+//        $scope.template = 'mytestBank.html';
 //    }
-    $scope.addKUtest = function (tid) {
-        console.log(tid);
-        $scope.template = 'testBank.html';
-    };
-    $scope.addZItest = function (tid) {
-        console.log(tid);
-        $scope.template = 'mytestBank.html';
-    }
 }
+
