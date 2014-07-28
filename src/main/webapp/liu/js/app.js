@@ -6,7 +6,7 @@ var OJApp = angular.module('OJApp', [
     'ngRoute',
     'ngSanitize',
     'evgenyneu.markdown-preview',
-	'webStorageModule'
+    'webStorageModule'
 ]);
 //OJApp.run(['$rootScope', function ($rootScope) {
 //    $rootScope.content = '';
@@ -14,12 +14,12 @@ var OJApp = angular.module('OJApp', [
 OJApp.directive('cleditor', function () {
     return {
         require: '?ngModel',
-        link   : function (scope, elm, attr, ngModel) {
+        link: function (scope, elm, attr, ngModel) {
             if (!ngModel) return;
             ngModel.$render = function () {
                 elm.val(ngModel.$viewValue).blur();
             };
-            elm.cleditor().change(function(){
+            elm.cleditor().change(function () {
                 var value = elm.val();
                 if (!scope.$$phase) {
                     scope.$apply(function () {

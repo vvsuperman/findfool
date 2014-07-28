@@ -28,39 +28,39 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             $scope.section = -2;
         }
     }
-if($scope.chapter>0 && $scope.section > -1){
-if(Data.qs()){
-	$scope.allMC=Data.qs();
-	$scope.xzt = [];
-	$scope.bct = [];
-	$scope.wdt = [];
-	for (i in $scope.allMC) {
-	if ($scope.allMC[i].type == 1) {
-	$scope.xzt.push($scope.allMC[i])
-                    } else if ($scope.allMC[i].type == 2) {
-                        $scope.bct.push($scope.allMC[i])
-                    } else if ($scope.allMC[i].type == 3) {
-                        $scope.wdt.push($scope.allMC[i])
-                    }
+    if ($scope.chapter > 0 && $scope.section > -1) {
+        if (Data.qs()) {
+            $scope.allMC = Data.qs();
+            $scope.xzt = [];
+            $scope.bct = [];
+            $scope.wdt = [];
+            for (i in $scope.allMC) {
+                if ($scope.allMC[i].type == 1) {
+                    $scope.xzt.push($scope.allMC[i])
+                } else if ($scope.allMC[i].type == 2) {
+                    $scope.bct.push($scope.allMC[i])
+                } else if ($scope.allMC[i].type == 3) {
+                    $scope.wdt.push($scope.allMC[i])
                 }
-                if ($scope.chapter == 1) {
-                    $scope.context=$sce.trustAsHtml($scope.xzt[$scope.section].context);
-                    $scope.answer=$scope.xzt[$scope.section].answer;
-                } else if ($scope.chapter == 2) {
-                    $scope.context=$sce.trustAsHtml($scope.bct[$scope.section].context);
-                    $scope.answer=$scope.bct[$scope.section].answer;
-                }else if ($scope.chapter == 3) {
-                    $scope.context=$sce.trustAsHtml($scope.wdt[$scope.section].context);
-                    $scope.answer=$scope.wdt[$scope.section].answer;
-                }
-	}
-}else{
-$scope.context = "";
-$scope.answer="";
-	$scope.xzt = [];
-	$scope.bct = [];
-	$scope.wdt = [];
-}
+            }
+            if ($scope.chapter == 1) {
+                $scope.context = $sce.trustAsHtml($scope.xzt[$scope.section].context);
+                $scope.answer = $scope.xzt[$scope.section].answer;
+            } else if ($scope.chapter == 2) {
+                $scope.context = $sce.trustAsHtml($scope.bct[$scope.section].context);
+                $scope.answer = $scope.bct[$scope.section].answer;
+            } else if ($scope.chapter == 3) {
+                $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
+                $scope.answer = $scope.wdt[$scope.section].answer;
+            }
+        }
+    } else {
+        $scope.context = "";
+        $scope.answer = "";
+        $scope.xzt = [];
+        $scope.bct = [];
+        $scope.wdt = [];
+    }
     $scope.agree = function () {
         $scope.main = 0;
         $scope.chapter = 1;
@@ -87,7 +87,7 @@ $scope.answer="";
 //仅需要对message中的数据做处理
                 $scope.allMC = $scope.message.qs;
                 $scope.quiz = $scope.message;
-                
+
                 window.location.href = $scope.url + '/1,0';
             } else if ($scope.chapter == 3) {
                 $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
