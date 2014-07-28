@@ -28,38 +28,59 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             $scope.section = -2;
         }
     }
-    if ($scope.chapter > 0 && $scope.section > -1) {
-        if (Data.qs()) {
-            $scope.allMC = Data.qs();
+    if ($scope.context) {
+        if ($scope.chapter > 0 && $scope.section > -1) {
+            if (Data.qs()) {
+                $scope.allMC = Data.qs();
+                $scope.xzt = [];
+                $scope.bct = [];
+                $scope.wdt = [];
+                for (i in $scope.allMC) {
+                    if ($scope.allMC[i].type == 1) {
+                        $scope.xzt.push($scope.allMC[i])
+                    } else if ($scope.allMC[i].type == 2) {
+                        $scope.bct.push($scope.allMC[i])
+                    } else if ($scope.allMC[i].type == 3) {
+                        $scope.wdt.push($scope.allMC[i])
+                    }
+                }
+                if ($scope.chapter == 1) {
+                    if ($scope.xzt[$scope.section]) {
+                        $scope.context = $sce.trustAsHtml($scope.xzt[$scope.section].context);
+                        $scope.answer = $scope.xzt[$scope.section].answer;
+                    }
+                } else if ($scope.chapter == 2) {
+                    if ($scope.bct[$scope.section]) {
+                        $scope.context = $sce.trustAsHtml($scope.bct[$scope.section].context);
+                        $scope.answer = $scope.bct[$scope.section].answer;
+                    }
+                } else if ($scope.chapter == 3) {
+                    if ($scope.wdt[$scope.section]) {
+                        $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
+                        $scope.answer = $scope.wdt[$scope.section].answer;
+                    }
+                }
+                if (!$scope.context) {
+                    $scope.context = "木有题目"
+                }
+                if (!$scope.answer) {
+                    $scope.answer = "木有题目"
+                }
+            }
+        } else {
+            $scope.context = "";
+            $scope.answer = "";
             $scope.xzt = [];
             $scope.bct = [];
             $scope.wdt = [];
-            for (i in $scope.allMC) {
-                if ($scope.allMC[i].type == 1) {
-                    $scope.xzt.push($scope.allMC[i])
-                } else if ($scope.allMC[i].type == 2) {
-                    $scope.bct.push($scope.allMC[i])
-                } else if ($scope.allMC[i].type == 3) {
-                    $scope.wdt.push($scope.allMC[i])
-                }
-            }
-            if ($scope.chapter == 1) {
-                $scope.context = $sce.trustAsHtml($scope.xzt[$scope.section].context);
-                $scope.answer = $scope.xzt[$scope.section].answer;
-            } else if ($scope.chapter == 2) {
-                $scope.context = $sce.trustAsHtml($scope.bct[$scope.section].context);
-                $scope.answer = $scope.bct[$scope.section].answer;
-            } else if ($scope.chapter == 3) {
-                $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
-                $scope.answer = $scope.wdt[$scope.section].answer;
-            }
         }
-    } else {
-        $scope.context = "";
-        $scope.answer = "";
-        $scope.xzt = [];
-        $scope.bct = [];
-        $scope.wdt = [];
+
+        if (!$scope.context) {
+            $scope.context = "木有题目"
+        }
+        if (!$scope.answer) {
+            $scope.answer = "木有题目"
+        }
     }
     $scope.agree = function () {
         $scope.main = 0;
@@ -78,7 +99,7 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid()}, "quizid": 406}
+            data: {"user": {"uid": Data.uid()}, "quizid": Data.tid()}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
@@ -86,6 +107,7 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             if ($scope.state) {
 //仅需要对message中的数据做处理
                 $scope.allMC = $scope.message.qs;
+                Data.setQs($scope.allMC);
                 $scope.quiz = $scope.message;
 
                 window.location.href = $scope.url + '/1,0';
@@ -117,6 +139,8 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
     $scope.start = function () {
         console.log($scope.MCemail);
         console.log($scope.MCpwd);
+        console.log($scope.nowID);
+        Data.setTid($scope.nowID);
         if ($scope.MCemail && $scope.MCpwd) {
             $http({
                 url: "/user/confirm",
