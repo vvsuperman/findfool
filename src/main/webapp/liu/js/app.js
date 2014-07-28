@@ -278,48 +278,21 @@ OJApp.factory('Data', function (webStorage) {
 					webStorage.add('answer',to);
 					this._answer = to;
 			};
-			this._xzt="";
-			this.xzt=function(){
-				if(this._xzt==""||this._xzt==null){
-					this._xzt=  webStorage.get("xzt");
+			this._qs="";
+			this.qs=function(){
+				if(this._qs==""||this._qs==null){
+					this._qs=  webStorage.get("qs");
 				}
-					return this._xzt;
+					return this._qs;
 			};
-			this.setXzt =function(to){
+			this.setQs =function(to){
 
-					webStorage.remove('xzt');
+					webStorage.remove('qs');
 
-					webStorage.add('xzt',to);
-					this._xzt = to;
+					webStorage.add('qs',to);
+					this._qs = to;
 			};
-			this._bct="";
-			this.bct=function(){
-				if(this._bct==""||this._bct==null){
-					this._bct=  webStorage.get("bct");
-				}
-					return this._bct;
-			};
-			this.setBct =function(to){
-
-					webStorage.remove('bct');
-
-					webStorage.add('bct',to);
-					this._bct = to;
-			};
-			this._wdt="";
-			this.wdt=function(){
-				if(this._wdt==""||this._wdt==null){
-					this._wdt=  webStorage.get("wdt");
-				}
-					return this._wdt;
-			};
-			this.setWdt =function(to){
-
-					webStorage.remove('wdt');
-
-					webStorage.add('wdt',to);
-					this._wdt = to;
-			};
+			
 
 			this._company="";
 			this.company=function(){

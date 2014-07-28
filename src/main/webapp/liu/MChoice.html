@@ -105,18 +105,17 @@
         <p>在你开始之前，你的招聘人员希望获得一些额外信息
         </p>
 
-        <div ng-class="{true: 'col-md-10', false: 'hidden'}[quiz.extrainfo.school==1]">
-            毕业院校：<input ng-model="quiz.extrainfo.schoolname" type="text"></input>
+        <div ng-class="{true: 'col-md-10', false: 'hidden'}[school==1]">
+            毕业院校：<input class="form-control" ng-model="schoolname" type="text"></input>
         </div>
-        <div ng-model="extrainfo.eduname" ng-class="{true: 'col-md-10', false: 'hidden'}[quiz.extrainfo.edu==1]">
-            最高学历：<input ng-model="quiz.extrainfo.eduname" type="text"></input>
+        <div ng-class="{true: 'col-md-10', false: 'hidden'}[edu==1]">
+            最高学历：<input class="form-control" ng-model="eduname" type="text"></input>
         </div>
-        <div ng-model="quiz.extrainfo.agename"
-             ng-class="{true: 'col-md-10', false: 'hidden'}[quiz.extrainfo.age==1]">
-            编程年限：<input ng-model="quiz.extrainfo.agename" type="text"></input>
+        <div ng-class="{true: 'col-md-10', false: 'hidden'}[age==1]">
+            编程年限：<input class="form-control" ng-model="agename" type="text"></input>
         </div>
-        <div ng-model="quiz.extrainfo.linkname" ng-class="{true: 'col-md-10', false: 'hidden'}[extrainfo.link==1]">
-            个人链接：<input ng-model="quiz.extrainfo.linkname" type="text"></input>
+        <div ng-class="{true: 'col-md-10', false: 'hidden'}[link==1]">
+            个人链接：<input class="form-control" ng-model="linkname" type="text"></input>
         </div>
         <a type="button" class="btn btn-primary" ng-click="agree()">开始测试</a>
     </div>
@@ -194,5 +193,12 @@
         </div>
 
 
+    </div>
+	<div style="padding: 50px;"
+         ng-class="{true: 'col-md-11  ', false: 'hedden'}[chapter==3 && section>-1]" ng-controller="editor">
+
+		 <div class="highlight" ng-bind-html="context"></div>
+		 <p>请在下框中写下你的答案</p>
+		 <textarea class="form-control" ng-model="yranswer"></textarea>
     </div>
 </div>
