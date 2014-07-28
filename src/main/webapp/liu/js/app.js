@@ -6,7 +6,7 @@ var OJApp = angular.module('OJApp', [
     'ngRoute',
     'ngSanitize',
     'evgenyneu.markdown-preview',
-	'webStorageModule'
+    'webStorageModule'
 ]);
 //OJApp.run(['$rootScope', function ($rootScope) {
 //    $rootScope.content = '';
@@ -14,12 +14,12 @@ var OJApp = angular.module('OJApp', [
 OJApp.directive('cleditor', function () {
     return {
         require: '?ngModel',
-        link   : function (scope, elm, attr, ngModel) {
+        link: function (scope, elm, attr, ngModel) {
             if (!ngModel) return;
             ngModel.$render = function () {
                 elm.val(ngModel.$viewValue).blur();
             };
-            elm.cleditor().change(function(){
+            elm.cleditor().change(function () {
                 var value = elm.val();
                 if (!scope.$$phase) {
                     scope.$apply(function () {
@@ -90,255 +90,256 @@ OJApp.config(['$routeProvider',
             });
     }]);
 OJApp.factory('Data', function (webStorage) {
-	function _data(){
-			this._key1="";
-			this.key1=function(){
-				if(this._key1==""||this._key1==null){
-					this._key1 = webStorage.get("key1");
-				}
-				return this._key1;
-				
-			};
-			this.setKey1 =function(to){
-					webStorage.remove('key1');
+    function _data() {
+        this._key1 = "";
+        this.key1 = function () {
+            if (this._key1 == "" || this._key1 == null) {
+                this._key1 = webStorage.get("key1");
+            }
+            return this._key1;
 
-					webStorage.add('key1',to);
-					this._key1 = to;
+        };
+        this.setKey1 = function (to) {
+            webStorage.remove('key1');
 
-			};
-			
-			this._key2="";
-			this.key2=function(){
-				if(this._key2==""||this._key2==null){
-					this._key1 = webStorage.get("key2");
-				}
-				return this._key2;
-				
-			};
-			this.setKey2 =function(to){
-					webStorage.remove('key2');
+            webStorage.add('key1', to);
+            this._key1 = to;
 
-					webStorage.add('key2',to);
-					this._key2 = to;
+        };
 
-			};
-			
-			this._key3="";
-			this.key3=function(){
-				if(this._key3==""||this._key3==null){
-					this._key3 = webStorage.get("key3");
-				}
-				return this._key3;
-				
-			};
-			this.setKey3 =function(to){
-					webStorage.remove('key3');
+        this._key2 = "";
+        this.key2 = function () {
+            if (this._key2 == "" || this._key2 == null) {
+                this._key1 = webStorage.get("key2");
+            }
+            return this._key2;
 
-					webStorage.add('key3',to);
-					this._key3 = to;
+        };
+        this.setKey2 = function (to) {
+            webStorage.remove('key2');
 
-			};
-			
-			this._token="";
-			this.token=function(){
-				if(this._token==""||this._token==null){
-					this._token = webStorage.get("token");
-				}
-				return this._token;
-				
-			};
-			this.setToken =function(to){
-					webStorage.remove('token');
+            webStorage.add('key2', to);
+            this._key2 = to;
 
-					webStorage.add('token',to);
-					this._token = to;
+        };
 
-			};
-			this._invitedleft="";
-			this.invitedleft=function(){
-				if(this._invitedleft==""||this._invitedleft==null){
-					this._invitedleft = webStorage.get("invitedleft");
-				}
-				return this._invitedleft;
+        this._key3 = "";
+        this.key3 = function () {
+            if (this._key3 == "" || this._key3 == null) {
+                this._key3 = webStorage.get("key3");
+            }
+            return this._key3;
 
-			};
-			this.setInvitedleft =function(to){
-					webStorage.remove('invitedleft');
+        };
+        this.setKey3 = function (to) {
+            webStorage.remove('key3');
 
-					webStorage.add('invitedleft',to);
-					this._invitedleft = to;
+            webStorage.add('key3', to);
+            this._key3 = to;
 
-			};
-			
-			this._uid="";
-			this.uid=function(){
-				if(this._uid==""||this._uid==null){
-					this._uid=  webStorage.get("uid");
-				}
-				return this._uid;
+        };
 
-			};
-			this.setUid =function(to){
+        this._token = "";
+        this.token = function () {
+            if (this._token == "" || this._token == null) {
+                this._token = webStorage.get("token");
+            }
+            return this._token;
 
-					webStorage.remove('uid');
+        };
+        this.setToken = function (to) {
+            webStorage.remove('token');
 
-					webStorage.add('uid',to);
-					this._uid = to;
-			};
-			
-			this._name="";
-			this.name=function(){
-				if(this._name==""||this._name==null){
-					this._name=  webStorage.get("name");
-				}
-					return this._name;
+            webStorage.add('token', to);
+            this._token = to;
 
-			};
-			this.setName =function(to){
+        };
+        this._invitedleft = "";
+        this.invitedleft = function () {
+            if (this._invitedleft == "" || this._invitedleft == null) {
+                this._invitedleft = webStorage.get("invitedleft");
+            }
+            return this._invitedleft;
 
-					webStorage.remove('name');
+        };
+        this.setInvitedleft = function (to) {
+            webStorage.remove('invitedleft');
 
-					webStorage.add('name',to);
-					this._name=to;
-			};
-			
-			this._email="";
-			this.email=function(){
-				if(this._email==""||this._email==null){
-					this._email=  webStorage.get("email");
-				}
-					return this._email;
+            webStorage.add('invitedleft', to);
+            this._invitedleft = to;
 
-			};
-			this.setEmail =function(to){
+        };
 
-					webStorage.remove('email');
+        this._uid = "";
+        this.uid = function () {
+            if (this._uid == "" || this._uid == null) {
+                this._uid = webStorage.get("uid");
+            }
+            return this._uid;
 
-					webStorage.add('email',to);
-					this._email=to;
+        };
+        this.setUid = function (to) {
 
-			};
-			
-			this._tid="";
-			this.tid=function(){
-				if(this._tid==""||this._tid==null){
-					this._tid=  webStorage.get("tid");
-				}
-					return this._tid;
-			};
-			this.setTid =function(to){
+            webStorage.remove('uid');
 
-					webStorage.remove('tid');
+            webStorage.add('uid', to);
+            this._uid = to;
+        };
 
-					webStorage.add('tid',to);
-					this._tid = to;
+        this._name = "";
+        this.name = function () {
+            if (this._name == "" || this._name == null) {
+                this._name = webStorage.get("name");
+            }
+            return this._name;
 
-			};
-			
-			this._tname="";
-			this.tname=function(){
-				if(this._tname==""||this._tname==null){
-					this._tname=  webStorage.get("tname");
-				}
-					return this._tname;
-			};
-			this.setTname =function(to){
+        };
+        this.setName = function (to) {
 
-					webStorage.remove('tname');
+            webStorage.remove('name');
 
-					webStorage.add('tname',to);
-					this._tname = to;
-			};
+            webStorage.add('name', to);
+            this._name = to;
+        };
 
-			this._context="";
-			this.context=function(){
-				if(this._context==""||this._context==null){
-					this._context=  webStorage.get("context");
-				}
-					return this._context;
-			};
-			this.setContext =function(to){
+        this._email = "";
+        this.email = function () {
+            if (this._email == "" || this._email == null) {
+                this._email = webStorage.get("email");
+            }
+            return this._email;
 
-					webStorage.remove('context');
+        };
+        this.setEmail = function (to) {
 
-					webStorage.add('context',to);
-					this._context = to;
-			};
-			this._answer="";
-			this.answer=function(){
-				if(this._answer==""||this._answer==null){
-					this._answer=  webStorage.get("answer");
-				}
-					return this._answer;
-			};
-			this.setAnswer =function(to){
+            webStorage.remove('email');
 
-					webStorage.remove('answer');
+            webStorage.add('email', to);
+            this._email = to;
 
-					webStorage.add('answer',to);
-					this._answer = to;
-			};
-			this._qs="";
-			this.qs=function(){
-				if(this._qs==""||this._qs==null){
-					this._qs=  webStorage.get("qs");
-				}
-					return this._qs;
-			};
-			this.setQs =function(to){
+        };
 
-					webStorage.remove('qs');
+        this._tid = "";
+        this.tid = function () {
+            if (this._tid == "" || this._tid == null) {
+                this._tid = webStorage.get("tid");
+            }
+            return this._tid;
+        };
+        this.setTid = function (to) {
 
-					webStorage.add('qs',to);
-					this._qs = to;
-			};
-			
+            webStorage.remove('tid');
 
-			this._company="";
-			this.company=function(){
-				if(this._company==""||this._company==null){
-					this._company=  webStorage.get("company");
-				}
-					return this._company;
+            webStorage.add('tid', to);
+            this._tid = to;
 
-			};
-			this.setCompany =function(to){
+        };
 
-					webStorage.remove('company');
+        this._tname = "";
+        this.tname = function () {
+            if (this._tname == "" || this._tname == null) {
+                this._tname = webStorage.get("tname");
+            }
+            return this._tname;
+        };
+        this.setTname = function (to) {
 
-					webStorage.add('company',to);
-					this._company = to;
-			};
-			this._tel="";
-			this.tel=function(){
-				if(this._tel==""||this._tel==null){
-					this._tel=  webStorage.get("tel");
-				}
-					return this._tel;
+            webStorage.remove('tname');
 
-			};
-			this.setTel =function(to){
+            webStorage.add('tname', to);
+            this._tname = to;
+        };
 
-					webStorage.remove('tel');
+        this._context = "";
+        this.context = function () {
+            if (this._context == "" || this._context == null) {
+                this._context = webStorage.get("context");
+            }
+            return this._context;
+        };
+        this.setContext = function (to) {
 
-					webStorage.add('tel',to);
-					this._tel = to;
-			};
-			this._privi = "";
-			this.privi=function(){
-				if(this._privi==""||this._privi==null){
-					this._privi=  webStorage.get("privi");
-				}
-					return this._privi;
+            webStorage.remove('context');
 
-			};
-			this.setPrivi =function(to){
+            webStorage.add('context', to);
+            this._context = to;
+        };
+        this._answer = "";
+        this.answer = function () {
+            if (this._answer == "" || this._answer == null) {
+                this._answer = webStorage.get("answer");
+            }
+            return this._answer;
+        };
+        this.setAnswer = function (to) {
 
-					webStorage.remove('privi');
+            webStorage.remove('answer');
 
-					webStorage.add('privi',to);
-					this._privi = to;
-			};			
-		}
+            webStorage.add('answer', to);
+            this._answer = to;
+        };
+        this._qs = "";
+        this.qs = function () {
+            if (this._qs == "" || this._qs == null) {
+                this._qs = webStorage.get("qs");
+            }
+            return this._qs;
+        };
+        this.setQs = function (to) {
+
+            webStorage.remove('qs');
+
+            webStorage.add('qs', to);
+            this._qs = to;
+        };
+
+
+        this._company = "";
+        this.company = function () {
+            if (this._company == "" || this._company == null) {
+                this._company = webStorage.get("company");
+            }
+            return this._company;
+
+        };
+        this.setCompany = function (to) {
+
+            webStorage.remove('company');
+
+            webStorage.add('company', to);
+            this._company = to;
+        };
+        this._tel = "";
+        this.tel = function () {
+            if (this._tel == "" || this._tel == null) {
+                this._tel = webStorage.get("tel");
+            }
+            return this._tel;
+
+        };
+        this.setTel = function (to) {
+
+            webStorage.remove('tel');
+
+            webStorage.add('tel', to);
+            this._tel = to;
+        };
+        this._privi = "";
+        this.privi = function () {
+            if (this._privi == "" || this._privi == null) {
+                this._privi = webStorage.get("privi");
+            }
+            return this._privi;
+
+        };
+        this.setPrivi = function (to) {
+
+            webStorage.remove('privi');
+
+            webStorage.add('privi', to);
+            this._privi = to;
+        };
+    }
+
     return new _data();
 });
