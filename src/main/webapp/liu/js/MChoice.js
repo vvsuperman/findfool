@@ -6,12 +6,6 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
     $scope.template = 'MChoice.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-	$scope.school=1;
-	$scope.edu = 1;
-	$scope.age=1;
-	$scope.link=1;
-	
-	
 
 //    $scope.context = "HTML 4.01 与 HTML 5的属性之间有差异的，下面不是HTML5中新增加的属性是（）。";
 //    $scope.answer = [

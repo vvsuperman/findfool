@@ -28,7 +28,7 @@ function commonsetting($scope,$http,Data) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid()}, "quizid": Data.tid(), "testtime": $scope.testtime, "extrainfo": $scope.extrainfo, "emails": $scope.emails}
+            data: {"user": {"uid": Data.uid()}, "quizid": Data.tid(), "testtime": $scope.testtime, "extrainfo": $scope.extrainfo.toString(), "emails": $scope.emails}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
