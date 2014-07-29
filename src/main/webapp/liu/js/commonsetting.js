@@ -35,9 +35,8 @@ function commonsetting($scope,$http,Data) {
             $scope.message = data["message"];
             if ($scope.state) {
 //仅需要对message中的数据做处理
-//                alert($scope.message.msg);
-                $scope.tid = $scope.message.quizid;
-                window.location.href = '#/test/' + $scope.tid;
+                alert($scope.message.msg);
+//                window.location.href = '#/test/' + Data.tid();
             } else {
 
             }
