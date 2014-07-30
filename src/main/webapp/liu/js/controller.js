@@ -51,12 +51,12 @@ function Indexx($scope, $http, Data) {
                     $scope.invitedleft = $scope.message.invited_left;
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
-                    window.location.href = '#/test';
+                    window.location.href = '#/loginok';
                     $scope.name = $scope.message.handler_url;
                 } else {
                     var child = document.getElementsByClassName("modal-backdrop fade in");
                     child[0].parentNode.removeChild(child[0]);
-                    window.location.href = '#/test';
+                    window.location.href = '#/loginok';
                     $scope.name = "测试用户";
                 }
 

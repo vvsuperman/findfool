@@ -7,14 +7,6 @@ function TestPage($scope, $http, Data) {
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-	//add by zpl
-	var flag = Data.flag();
-	if(flag == 0){
-		Data.setFlag(1);
-		window.location.reload();
-	}else{
-		Data.setFlag(0);		
-	}
     $scope.tshow = function () {
         $http({
             url: "/test/show",
