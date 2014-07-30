@@ -50,14 +50,6 @@ function TestBank($scope, $http,Data,$sce) {
     $scope.active = 1;
     $scope.show = 1;
     $scope.privi = Data.privi();
-    //add by zpl
-	var flag = Data.flag();
-	if(flag == 0){
-		Data.setFlag(1);
-		window.location.reload();
-	}else{
-		Data.setFlag(0);		
-	}
     $scope.reciveData = new Object();
     $scope.reciveData.selectedSets = null;
     $scope.reciveData.totalPage = 1;
