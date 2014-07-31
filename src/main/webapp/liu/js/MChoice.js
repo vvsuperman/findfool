@@ -6,7 +6,11 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
     $scope.template = 'MChoice.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-
+	Data.setKey1("1");
+	Data.setKey2("2");
+	Data.setKey3("3");
+	route=strDec($routeParams.r,Data.key1(),Data.key2(),Data.key3()).split(",");
+	$scope.tid=route[0];
 //    $scope.context = "HTML 4.01 与 HTML 5的属性之间有差异的，下面不是HTML5中新增加的属性是（）。";
 //    $scope.answer = [
 //        {text: "AAAA", isright: false, score: 4},
@@ -15,15 +19,17 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
 //    ];
     $scope.main = 1;
     $scope.chapter = 0;
-    if (!$routeParams.qqid) {
-        $scope.main = 1;
-        $scope.chapter = 0;
+    if (!$routeParams.r) {
+        //$scope.main = 1;
+        //$scope.chapter = 0;
+		alert("错误链接，跳转到主页");
+		window.location.href = '#/';
     } else {
 
-        var a = $routeParams.qqid.split(",");
-        $scope.main = 0;
-        $scope.chapter = a[0];
-        $scope.section = a[1];
+        //var a = $routeParams.qqid.split(",");
+        //$scope.main = 0;
+        $scope.chapter = route[1];
+        $scope.section = route[2];
         if (!$scope.section) {
             $scope.section = -2;
         }
@@ -99,7 +105,7 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid()}, "quizid": Data.tid()}
+            data: {"user": {"uid": Data.uid()}, "quizid": $scope.tid}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
@@ -136,11 +142,15 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             $scope.start()
         }
     };
+	$scope.getUrl = function(target){
+	window.location.href = $scope.url + '/'+ strEnc($scope.tid+","+$scope.chapter+","+target,Data.key1(),Data.key2(),Data.key3());
+	}
+	$scope.getChar = function(target){
+	console.log(target)
+	window.location.href = $scope.url + '/'+ strEnc($scope.tid+","+target+",0",Data.key1(),Data.key2(),Data.key3());
+	}
+	
     $scope.start = function () {
-        console.log($scope.MCemail);
-        console.log($scope.MCpwd);
-        console.log($scope.nowID);
-        Data.setTid($scope.nowID);
         if ($scope.MCemail && $scope.MCpwd) {
             $http({
                 url: "/user/confirm",
@@ -159,8 +169,6 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
 
                 if ($scope.state) {
                     Data.setToken(data["token"]);
-                    console.log(Data.token());
-                    console.log(data["token"]);
                     Data.setUid($scope.message.uid);
                     Data.setPrivi($scope.message.privilege);
                     Data.setTel($scope.message.tel);
@@ -170,7 +178,7 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
                     Data.setName($scope.message.handler_url);
                     Data.setQs($scope.message.qs);
                     $scope.name = Data.name();
-                    window.location.href = $scope.url + '/1';
+                    window.location.href = $scope.url + '/'+ strEnc($scope.tid+",1,",Data.key1(),Data.key2(),Data.key3());
                 } else {
 
                 }

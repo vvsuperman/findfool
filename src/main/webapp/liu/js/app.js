@@ -108,6 +108,10 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'RockRoll'
             }).
+			when('/loginok', {
+                templateUrl: 'page.html',
+                controller: 'LoginOk'
+            }).
             when('/test', {
                 templateUrl: 'page.html',
                 controller: 'TestPage'
@@ -144,7 +148,7 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page.html',
                 controller: 'MChoice'
             }).
-            when('/MChoice/:qqid', {
+            when('/MChoice/:r', {
                 templateUrl: 'page.html',
                 controller: 'MChoice'
             }).

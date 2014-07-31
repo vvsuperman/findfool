@@ -5,30 +5,30 @@
 
 
                 <li ng-class="{true: 'active', false: ''}[chapter==1]">
-                    <a href="#/MChoice/1,0">选择题</a>
+                    <a ng-click="getChar(1)" href="">选择题</a>
                     <ul class="nav">
                         <li data="{{$index}}" ng-repeat="ans in xzt"
                             ng-class="{true: 'active', false: ''}[section==$index]"><a
-                                href="#/MChoice/{{chapter}},{{$index}}">{{ans.name}}</a>
+                                ng-click="getUrl($index)">{{ans.name}}</a>
                         </li>
                     </ul>
                 </li>
                 <li ng-class="{true: 'active', false: ''}[chapter==2]">
-                    <a href="#/MChoice/2,0">编程题</a>
+                    <a ng-click="getChar(2)" href="">编程题</a>
                     <ul class="nav">
                         <li data="{{$index}}" ng-repeat="ans in bct"
                             ng-class="{true: 'active', false: ''}[section==$index]"><a
-                                href="#/MChoice/{{chapter}},{{$index}}">{{ans.name}}</a>
+                                ng-click="getUrl($index)">{{ans.name}}</a>
                         </li>
                         <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
                     </ul>
                 </li>
                 <li ng-class="{true: 'active', false: ''}[chapter==3]">
-                    <a href="#/MChoice/3,0">问答题</a>
+                    <a ng-click="getChar(3)" href="">问答题</a>
                     <ul class="nav">
                         <li data="{{$index}}" ng-repeat="ans in wdt"
                             ng-class="{true: 'active', false: ''}[section==$index]"><a
-                                href="#/MChoice/{{chapter}},{{$index}}">{{ans.name}}</a>
+                                ng-click="getUrl($index)">{{ans.name}}</a>
                         </li>
                         <!--<li class=""><a href="#scrollspy-usage">用法</a></li>-->
                     </ul>
@@ -39,6 +39,7 @@
 
         </div>
     </div>
+	
     <div style="padding: 50px;"
          ng-class="{true: 'col-lg-6 col-lg-offset-1', false: 'hedden'}[main==1 && chapter==0]">
         <div id="title" class="col-md-12">
@@ -87,7 +88,6 @@
                 <div class="form-group">
                     <input type="password" class="form-control" id="MCpasswd" placeholder="Password" ng-model="MCpwd"
                            ng-maxlength=20 ng-minlength=6 ng-keyup="enter($event)"/>
-                    <input class="form-control"placeholder="ID写这里"  ng-model="nowID" />
 
                 </div>
             </form>
