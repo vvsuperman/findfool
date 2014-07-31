@@ -6,11 +6,11 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
     $scope.template = 'MChoice.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-	Data.setKey1("1");
-	Data.setKey2("2");
-	Data.setKey3("3");
-	route=strDec($routeParams.r,Data.key1(),Data.key2(),Data.key3()).split(",");
-	$scope.tid=route[0];
+    Data.setKey1("1");
+    Data.setKey2("2");
+    Data.setKey3("3");
+    route = strDec($routeParams.r, Data.key1(), Data.key2(), Data.key3()).split(",");
+    $scope.tid = route[0];
 //    $scope.context = "HTML 4.01 与 HTML 5的属性之间有差异的，下面不是HTML5中新增加的属性是（）。";
 //    $scope.answer = [
 //        {text: "AAAA", isright: false, score: 4},
@@ -22,8 +22,8 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
     if (!$routeParams.r) {
         //$scope.main = 1;
         //$scope.chapter = 0;
-		alert("错误链接，跳转到主页");
-		window.location.href = '#/';
+        alert("错误链接，跳转到主页");
+        window.location.href = '#/';
     } else {
 
         //var a = $routeParams.qqid.split(",");
@@ -34,52 +34,52 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             $scope.section = -2;
         }
     }
-    if ($scope.context) {
-        if ($scope.chapter > 0 && $scope.section > -1) {
-            if (Data.qs()) {
-                $scope.allMC = Data.qs();
-                $scope.xzt = [];
-                $scope.bct = [];
-                $scope.wdt = [];
-                for (i in $scope.allMC) {
-                    if ($scope.allMC[i].type == 1) {
-                        $scope.xzt.push($scope.allMC[i])
-                    } else if ($scope.allMC[i].type == 2) {
-                        $scope.bct.push($scope.allMC[i])
-                    } else if ($scope.allMC[i].type == 3) {
-                        $scope.wdt.push($scope.allMC[i])
-                    }
-                }
-                if ($scope.chapter == 1) {
-                    if ($scope.xzt[$scope.section]) {
-                        $scope.context = $sce.trustAsHtml($scope.xzt[$scope.section].context);
-                        $scope.answer = $scope.xzt[$scope.section].answer;
-                    }
-                } else if ($scope.chapter == 2) {
-                    if ($scope.bct[$scope.section]) {
-                        $scope.context = $sce.trustAsHtml($scope.bct[$scope.section].context);
-                        $scope.answer = $scope.bct[$scope.section].answer;
-                    }
-                } else if ($scope.chapter == 3) {
-                    if ($scope.wdt[$scope.section]) {
-                        $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
-                        $scope.answer = $scope.wdt[$scope.section].answer;
-                    }
-                }
-                if (!$scope.context) {
-                    $scope.context = "木有题目"
-                }
-                if (!$scope.answer) {
-                    $scope.answer = "木有题目"
-                }
-            }
-        } else {
-            $scope.context = "";
-            $scope.answer = "";
+//    if ($scope.context) {
+    if ($scope.chapter > 0 && $scope.section > -1) {
+        if (Data.qs()) {
+            $scope.allMC = Data.qs();
             $scope.xzt = [];
             $scope.bct = [];
             $scope.wdt = [];
+            for (i in $scope.allMC) {
+                if ($scope.allMC[i].type == 1) {
+                    $scope.xzt.push($scope.allMC[i])
+                } else if ($scope.allMC[i].type == 2) {
+                    $scope.bct.push($scope.allMC[i])
+                } else if ($scope.allMC[i].type == 3) {
+                    $scope.wdt.push($scope.allMC[i])
+                }
+            }
+            if ($scope.chapter == 1) {
+                if ($scope.xzt[$scope.section]) {
+                    $scope.context = $sce.trustAsHtml($scope.xzt[$scope.section].context);
+                    $scope.answer = $scope.xzt[$scope.section].answer;
+                }
+            } else if ($scope.chapter == 2) {
+                if ($scope.bct[$scope.section]) {
+                    $scope.context = $sce.trustAsHtml($scope.bct[$scope.section].context);
+                    $scope.answer = $scope.bct[$scope.section].answer;
+                }
+            } else if ($scope.chapter == 3) {
+                if ($scope.wdt[$scope.section]) {
+                    $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
+                    $scope.answer = $scope.wdt[$scope.section].answer;
+                }
+            }
+            if (!$scope.context) {
+                $scope.context = "木有题目"
+            }
+            if (!$scope.answer) {
+                $scope.answer = "木有题目"
+            }
         }
+//        } else {
+//            $scope.context = "";
+//            $scope.answer = "";
+//            $scope.xzt = [];
+//            $scope.bct = [];
+//            $scope.wdt = [];
+//        }
 
         if (!$scope.context) {
             $scope.context = "木有题目"
@@ -95,8 +95,36 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
         $scope.getALL();
 
     };
+    $scope.selected = function () {
+        $scope.ans = Data.ans();
+        console.log(Data.ans());
+        console.log($scope.answer);
+        $scope.chosen = {};
+        for (i in $scope.ans[$scope.section]) {
+            for (j in $scope.answer) {
+                if ($scope.answer[j].caseId == $scope.ans[$scope.section][i]) {
+                    $scope.chosen[j] = j;
+                    break;
+                }
+            }
+        }
+        console.log($scope.chosen)
+    };
+    $scope.selected();
     $scope.chose = function (an) {
-        console.log($scope.answer[an]);
+        $scope.ans = Data.ans();
+        if ($.inArray($scope.answer[an].caseId, $scope.ans[$scope.section]) == -1) {
+            if (!$scope.ans[$scope.section]) {
+                $scope.ans[$scope.section] = []
+            }
+            $scope.ans[$scope.section].push($scope.answer[an].caseId);
+            $scope.chosen[an]=an;
+        } else {
+            $scope.ans[$scope.section].splice($.inArray($scope.answer[an].caseId, $scope.ans[$scope.section]), 1);
+            $scope.chosen[an]=-1;
+        }
+        Data.setAns($scope.ans);
+        console.log(Data.ans());
     };
     $scope.getALL = function () {
         $http({
@@ -114,9 +142,8 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
 //仅需要对message中的数据做处理
                 $scope.allMC = $scope.message.qs;
                 Data.setQs($scope.allMC);
-                $scope.quiz = $scope.message;
-
-                window.location.href = $scope.url + '/1,0';
+//                $scope.quiz = $scope.message;
+                window.location.href = $scope.url + '/' + strEnc($scope.tid + ",1,0", Data.key1(), Data.key2(), Data.key3());
             } else if ($scope.chapter == 3) {
                 $scope.context = $sce.trustAsHtml($scope.wdt[$scope.section].context);
                 $scope.answer = $scope.wdt[$scope.section].answer;
@@ -142,14 +169,14 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
             $scope.start()
         }
     };
-	$scope.getUrl = function(target){
-	window.location.href = $scope.url + '/'+ strEnc($scope.tid+","+$scope.chapter+","+target,Data.key1(),Data.key2(),Data.key3());
-	}
-	$scope.getChar = function(target){
-	console.log(target)
-	window.location.href = $scope.url + '/'+ strEnc($scope.tid+","+target+",0",Data.key1(),Data.key2(),Data.key3());
-	}
-	
+    $scope.getUrl = function (target) {
+        window.location.href = $scope.url + '/' + strEnc($scope.tid + "," + $scope.chapter + "," + target, Data.key1(), Data.key2(), Data.key3());
+    }
+    $scope.getChar = function (target) {
+        console.log(target)
+        window.location.href = $scope.url + '/' + strEnc($scope.tid + "," + target + ",0", Data.key1(), Data.key2(), Data.key3());
+    }
+
     $scope.start = function () {
         if ($scope.MCemail && $scope.MCpwd) {
             $http({
@@ -178,7 +205,7 @@ function MChoice($scope, $sce, $http, Data, $routeParams) {
                     Data.setName($scope.message.handler_url);
                     Data.setQs($scope.message.qs);
                     $scope.name = Data.name();
-                    window.location.href = $scope.url + '/'+ strEnc($scope.tid+",1,",Data.key1(),Data.key2(),Data.key3());
+                    window.location.href = $scope.url + '/' + strEnc($scope.tid + ",1,", Data.key1(), Data.key2(), Data.key3());
                 } else {
 
                 }

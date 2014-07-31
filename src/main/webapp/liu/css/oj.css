@@ -122,6 +122,8 @@
 .aa:active{text-decoration:none;}
 .aa:visited {text-decoration:none;}
 .aa:hover {text-decoration:none;}
+a.selected {background-color: lightpink!important;}
+
 
 input.ng-invalid {
     border: 1px solid red;
@@ -269,3 +271,4 @@ ul li {
         width: 263px
     }
 }
+
