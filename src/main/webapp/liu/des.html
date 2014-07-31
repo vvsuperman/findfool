@@ -6,18 +6,26 @@
 	<script>		
 		function getResult(){
 			//待加密字符串
-			var str = document.getElementById("str").innerText;
+			var str = document.getElementById("str").value;
 			//第一个参数必须；第二个、第三个参数可选
 			var key1 = document.getElementById("key1").innerText;  
 			var key2 = document.getElementById("key2").innerText; 
 			var key3 = document.getElementById("key3").innerText; 
 			//加密方法		
-			var  enResult = strEnc(str,key1,key2,key3);			
+			var  enResult = strEnc(str+",0,",key1,key2,key3);			
 			//解密方法
 			var deResult = strDec(enResult,key1,key2,key3);
 			//展示结果
 			document.getElementById("enStr").innerText = enResult; 
 			document.getElementById("dnStr").innerText = deResult; 
+		}
+		function gopage(){
+		var wstr = document.getElementById("str").value;
+			//第一个参数必须；第二个、第三个参数可选
+			var wkey1 = document.getElementById("key1").innerText;  
+			var wkey2 = document.getElementById("key2").innerText; 
+			var wkey3 = document.getElementById("key3").innerText; 
+			window.location.href = "http://"+document.domain+"#/MChoice/"+ strEnc(wstr+",0,",wkey1,wkey2,wkey3);	
 		}
 	</script>
 </head>
@@ -26,7 +34,8 @@
 	<table>
 		<tr>
 		  <td align="left">字符串：</td>
-		  <td><span id="str">17,0,</span></td>		 
+		  <td><input id="str" placeholder="Test ID" />
+		  </td>		 
 		</tr>
 		<tr>		  
 		  <td>加密key：</td>
@@ -40,6 +49,8 @@
 		  <td align="left">解密结果： </td>
 		  <td align="left"><label id = "dnStr"></label></td>
 		</tr>
+		<tr>
+		<button onclick="gopage()">跳转页面</button>
 	<table>
 </body>
 </html>
