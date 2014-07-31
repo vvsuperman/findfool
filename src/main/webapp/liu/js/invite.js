@@ -1,21 +1,208 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-
 function invite($scope, $http, Data) {
     $scope.url = '#/invite';
     $scope.template = 'invite.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-//    $scope.text="Hello [FIRST_NAME] [LAST_NAME],<br/>In order to assess your programming skills we've prepared a programming challenge that we would like you to complete. <br/>    The following link takes you to your test:<br/> [PRIVATE_TEST_LINK] <br/>  After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.  <br/>  Best of luck!  <br/> Regards,<br/>  [COMPANY_NAME]";
-//    $scope.content="";
-//    $scope.cleanWMD = function () {
-//        $scope.text = "";
-//        document.getElementById("wmd-output").innerHTML = "<pre><code></code></pre>";
-//        document.getElementById("wmd-preview").innerHTML = "";
-//        document.getElementById("wmd-input").value="";
-//        $scope.html = "";
-//    };
+}
+function Excel($scope, $http, Data) {
+    $scope.xlsusers = [
+        {fname: '', lname: '', email: '', tel: '', test: Data.tname()}
+    ];
+    $scope.addOne = function (v) {
+        var i = $scope.xlsusers.indexOf(v);
+        if ($scope.active == 'notSelect') {
+            $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: ''});
+        } else {
+            $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: $scope.active});
+        }
+    };
+    $scope.removeOne = function (v) {
+        var i = $scope.xlsusers.indexOf(v);
+        if (i > -1) {
+            $scope.xlsusers.splice(i, 1);
+        }
+    };
+    $scope.removeTest = function (v) {
+        //等待增加功能
+//        var tmp = $scope.xlsusers;
+//        var i = $scope.xlsusers.indexOf(v);
+//        if (i > -1) {
+//            $scope.xlsusers.splice(i, 1);
+//        }
+//        $scope.xlsusers = tmp;
+    };
+    $scope.clean = function () {
+        $scope.content = ""
+    };
+    $scope.refresh = function () {
+        var tmp = $scope.xlsusers;
+        var list = [];
+        $scope.testlist = [];
+        var tmpp = [];
+        for (var i in tmp) {
+            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
+                list.push(tmp[i].email + "::" + tmp[i].test);
+                tmpp.push(tmp[i]);
+            }
+            if ($.inArray(tmp[i].test, $scope.testlist) == -1) {
+                if (tmp[i].test == '') {
+                    if ($.inArray('notSelect', $scope.testlist) == -1) {
+                        $scope.testlist.push('notSelect');
+                    }
+                    continue
+                }
+                $scope.testlist.push(tmp[i].test);
+            }
+        }
+        $scope.active = $scope.testlist[0];
+        $scope.selectTest = function (target) {
+            $scope.active = target.getAttribute('data');
+        };
+        $scope.xlsusers = tmpp;
+        for (t in $scope.testlist) {
+            if ($scope.testlist[t] == "notSelect") {
+                $scope.xlsusers.unshift({fname: '', lname: '', email: '', tel: '', test: ''});
+            } else {
+                $scope.xlsusers.unshift({fname: '', lname: '', email: '', tel: '', test: $scope.testlist[t]})
+            }
+        }
+        var tmp = $scope.xlsusers;
+        var tmpp = [];
+        var list = [];
+        for (var i in tmp) {
+            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
+                list.push(tmp[i].email + "::" + tmp[i].test);
+                tmpp.push(tmp[i]);
+            }
+        }
+        $scope.xlsusers = tmpp;
+    };
+    $scope.refresh();
+    $scope.tnamelist = {};
+    $scope.queryByName = function (tname) {
+        $http({
+            url: "/test/queryByName",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user": {"uid": Data.uid()}, "name": tname}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            $scope.message = data["message"];
+            if ($scope.state) {
+                $scope.tnamelist[tname] = $scope.message.quizid;
+                console.log($scope.tnamelist)
+            } else {
+            }
+        }).error(function (data) {
+        });
+    };
+    $scope.testlist.forEach($scope.queryByName);
+    $scope.upload = function (tname, userlist) {
+        $http({
+            url: "/test/manage/invite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+                alert("邀请成功")
+            } else {
+                alert($scope.message.msg)
+            }
+        }).error(function (data) {
+        });
+    };
+    $scope.sent = function () {
+        for (tid in $scope.testlist) {
+            var tmp = [];
+            if ($scope.testlist[tid] == 'notSelect') {
+                continue
+            }
+            for (var user in $scope.xlsusers) {
+                if ($scope.xlsusers[user].test == $scope.testlist[tid]) {
+                    if ($scope.xlsusers[user].email != "")
+                        tmp.push($scope.xlsusers[user]);
+                }
+            }
+            $scope.upload($scope.testlist[tid], tmp);
+        }
+    };
+    var use_worker = true;
+    function xlsworker(data, cb) {
+        var worker = new Worker('./js/xlsworker.js');
+        worker.onmessage = function (e) {
+            switch (e.data.t) {
+                case 'ready':
+                    break;
+                case 'e':
+                    console.error(e.data);
+                    break;
+                case 'xls':
+                    cb(e.data.d);
+                    break;
+            }
+        };
+        worker.postMessage(data);
+    }
+    function to_json(workbook) {
+        var result = {};
+        workbook.SheetNames.forEach(function (sheetName) {
+            var roa = XLS.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+            if (roa.length > 0) {
+                result[sheetName] = roa;
+            }
+        });
+        return result;
+    }
+    function process_wb(wb) {
+        if (typeof Worker !== 'undefined') XLS.SSF.load_table(wb.SSF);
+        var output = "";
+        output = to_json(wb);
+        $scope.$apply(function () {
+            $.merge($scope.xlsusers, output["Sheet1"]);
+            $scope.refresh();
+        });
+    }
+    function handleDrop(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var files = e.dataTransfer.files;
+        var i, f;
+        for (i = 0, f = files[i]; i != files.length; ++i) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                if (use_worker && typeof Worker !== 'undefined') {
+                    xlsworker(data, process_wb);
+                } else {
+                    var wb = XLS.read(data, {type: 'binary'});
+                    process_wb(wb);
+                }
+            };
+            reader.readAsBinaryString(f);
+        }
+    }
+    function handleDragover(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+    }
+    var drop = document.getElementById('drop');
+    if (drop.addEventListener) {
+        drop.addEventListener('dragenter', handleDragover, false);
+        drop.addEventListener('dragover', handleDragover, false);
+        drop.addEventListener('drop', handleDrop, false);
+    }
 }
 OJApp.filter('filterTest', function () {
     return function (items, v) {
@@ -27,13 +214,6 @@ OJApp.filter('filterTest', function () {
             if (item.test == v) {
                 r.push(item);
             }
-            /*else {
-             if ((item.test == '') && (item.email == '')) {
-             item.test = v;
-             r.push(item)
-             }
-             }*/
-
         });
         return r;
     }
