@@ -1,0 +1,29 @@
+//post post.json
+
+// 测试查看 /test/query 2 3
+{
+    "user":"xxxx",
+    "tests": [
+        {
+            id: "1",
+            name: "hh1",
+            detail: "i dont know"
+        },
+        {
+            id: "2",
+            name: "hh2",
+            detail: "i dont know"
+        },
+        {
+            id: "3",
+            name: "hh3",
+            detail: "i dont know"
+        },
+        {
+            id: "4",
+            name: "hh4",
+            detail: "i dont know"
+        }
+    ]
+}
+

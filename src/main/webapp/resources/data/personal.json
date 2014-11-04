@@ -1,0 +1,13 @@
+//personal set
+// /personal/query  post.json 2 3
+// /personal/set/ 2 3
+{
+    "email":"cc@qq.com",
+    "name":"xxx",
+    "company":"xxx",
+    "phone":"2344",
+    "old_pwd":"dsds23454df",
+    "new_pwd":"dsdsdsdswew3"
+}
+
+//return state.json

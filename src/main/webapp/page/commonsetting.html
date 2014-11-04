@@ -1,0 +1,30 @@
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="commonsetting">
+
+<form class="form-inline" role="form">
+<div class="col-md-6">
+<p>该测试为试用版，为使用更多试题，请<strong>升级</strong>您的账号</p>
+<p>请输入该测试时间：</p>
+<p>70分钟<input type="checkbox" ng-model="zdy">自定义</input><input class="form-control " type="text" style="width:70px;" ng-disabled="{true:'',false:'disabled'}[zdy]" ng-model="testtime"></input>分钟</p>
+<p>候选人需输入的额外信息</p>
+<ul style="list-style-type: none;margin:0;">
+<li style="list-style-type: none;"><input type="checkbox" ng-model="school" ng-true-value="1" ng-false-value="">学校</input></li>
+<li style="list-style-type: none;"><input type="checkbox" ng-model="spcial" ng-true-value="2" ng-false-value="">特长</input></li>
+<li style="list-style-type: none;"><input type="checkbox" ng-model="exp" ng-true-value="3" ng-false-value="">项目经验</input></li>
+<li style="list-style-type: none;"><input type="checkbox" ng-model="link" ng-true-value="4" ng-false-value="">链接(Github,LinkedIn等)</input></li>
+</ul>
+</div>
+<div class="col-md-6">
+<p>请输入需要接受测试报告的邮箱地址：</p>
+<p><input type="checkbox">默认@email.com</input></p>
+<textarea class="form-control" rows=8 style="width:100%;resize: none"></textarea>
+<p>一个或多个email地址，每行一个地址</p>
+
+<div class="col-xs-4"><button class="btn btn-info" ng-click="comSave()">保存</button></div>
+<div class="col-xs-4"><button class="btn btn-warning">取消</button></div>
+
+</div>
+
+
+
+</form>
+</div>

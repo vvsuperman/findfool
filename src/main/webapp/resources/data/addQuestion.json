@@ -1,0 +1,43 @@
+// 网站试题库  /qs/addfromsite/ 2 3
+{
+
+    // 网站试题库  选择试题集/qs/site/query
+
+// 查看试题  测试管理 TestManage.json show 已添加
+}
+
+
+//post /qs/addfrommy/ 2 3
+{
+"type":1,// type 1:选择题  2:编程题  3:问答题
+"tag":["tag1","tag2"],
+"score":4,
+"answer":[
+{"text":"ddddd","isright":0},
+{"text":"ddddd","isright":1}
+
+]
+"lang":["1","2","3"]
+
+}
+
+//return state.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,93 @@
+<h2>50道编程题之永恒的循环</h2>
+
+<div><p><strong>题目：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？<br>
+    1.程序分析：可填在百位、十位、个位的数字都是1、2、3、4。组成所有的排列后再去掉不满足条件的排列。</strong></p>
+
+    <p>这一篇将重点讲讲一组和循环有关的程序。<br>
+        <span></span><br>
+        说到循环，有三点是循环所需要确定的：<strong>循环体、终止条件、增量</strong>。</p>
+
+    <p>那么这道题，我们可以通过三层的循环嵌套，来实现输出所有组合。另外，我们还需要一个if语句作为筛子，把不符合条件的数字过滤掉。</p>
+<pre>	for(a=1;a&lt;=4;a++)
+	{
+		for(b=1;b&lt;=4;b++)
+		{
+			for(c=1;c&lt;=4;c++)
+			{
+				if(a!=b&amp;&amp;b!=c&amp;&amp;a!=c)  //筛子
+					printf("%d%d%d\t",a,b,c);
+			}
+		}
+	}</pre>
+    <p>另外，我们还需要计数符合条件的个数。因此，完整代码：</p>
+<pre>#include "stdio.h"
+void main()
+{
+	int a,b,c,n=0;
+	printf("There are \n");
+	for(a=1;a&lt;=4;a++)
+	{
+		for(b=1;b&lt;=4;b++)
+		{
+			for(c=1;c&lt;=4;c++)
+			{
+				if(a!=b&amp;&amp;b!=c&amp;&amp;a!=c)
+					printf("%d%d%d\t",a,b,c);
+				n++;
+			}
+		}
+	}
+	printf("This is a total of %d.\n",n);
+}</pre>
+    <p><strong>题目：打印出如下图案（菱形）</strong><br>
+        <img class="alignnone size-full wp-image-217" title="50"
+             src="http://c-code.cc/wp-content/uploads/2011/06/50.png" alt="" width="70" height="112"></p>
+
+    <p>循环的使用也有很多是和数组有关的，比如给数组赋初值。而对于二维数组，我们则需要使用嵌套循环来解决~</p>
+
+    <p>我们先把每一行的字符分布放置到一个二维数组里（每行8个字符，共7行），然后采用嵌套循环将其打印出来~</p>
+<pre>#include "stdio.h"
+void main()
+{
+	char s[7][8]={"   *    ","  ***   "," ****** ","********"," ****** ","  ***  ","   *    "};
+	int i,j;
+	for(i=0;i&lt;7;i++)
+	{
+		for(j=0;j&lt;8;j++)
+			printf("%c",s[i][j]);
+		printf("\n");
+	}
+}</pre>
+    <p><strong>题目：求1+2!+3!+…+20!的和</strong></p>
+
+    <p>循环，也常常用来计算一些有特定规律的数学运算，如累加、累乘。这道题就是累乘与累加的结合。毋须赘言，你能懂的：</p>
+<pre>#include "stdio.h"
+void main()
+{
+	int i,j,s1=0,s2;
+	for(i=1;i&lt;=20;i++)
+	{
+		for(j=1,s2=1;j&lt;=i;j++)
+			s2*=j;
+		s1+=s2;
+	}
+	printf("%d",s1);
+}</pre>
+    <p><strong>题目：有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13…求出这个数列的前20项之和。</strong></p>
+
+    <p>其实数学问题式的C语言都不难，找出其中规律就成了~</p>
+<pre>#include “stdio.h”
+void main()
+{
+	float i,a=2,b=1,tmp,s=0;
+	for(i=0;i&lt;=20;i++)
+	{
+		s+=a/b;
+		tmp=a;
+		a+=b;
+		b=tmp;
+	}
+	printf("%f",s);
+}</pre>
+
+

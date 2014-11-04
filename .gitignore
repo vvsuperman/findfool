@@ -9,3 +9,4 @@ target/*
 oj.iml
 
 .idea/*
+/target/

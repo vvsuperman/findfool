@@ -1,0 +1,39 @@
+// 网站试题库  /Ku/addQ2Ku 2 3
+//post post.json
+
+//return
+{
+    "lists": ["C", "C++", "JAVA"]
+}
+
+//
+{
+    "test": {
+
+        "Ku_name": "C",
+        "Ku_id": "3434",
+        "type": 1,// type 1:选择题  2:编程题  3:问答题
+        "qs": [
+            {
+                "id": "1",
+                "name": "hdh1",
+                "type": "1",// type 1:选择题  2:编程题  3:自定义  4:问答题
+                "score": 4,
+                "detail": "i dont know"
+            },
+            {
+                "id": "2",
+                "name": "hdh2",
+                "type": "2",
+                "score": 4,
+                "detail": "i dont know"
+            }
+        ]
+    }
+}
+
+
+
+//add testset
+
+

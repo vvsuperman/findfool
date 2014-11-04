@@ -1,0 +1,106 @@
+<!--<style type="text/css">
+    /*li .dropdown-menu {*/
+    /*margin: 0;*/
+    /*}*/
+
+    /*li:hover .dropdown-menu {*/
+    /*display: block;*/
+    /*}*/
+    .bs-sidebar .nav > li > a:hover,
+    .bs-sidebar .nav > li > a:focus {
+        background-color: #0081c2;
+    }
+
+    .dropdown-menu > li > a:hover,
+    .dropdown-menu > li > a:focus,
+    .dropdown-submenu:hover > a,
+    .dropdown-submenu:focus > a {
+        color: #fff;
+        text-decoration: none;
+        background-color: #0081c2;
+        background-image: -moz-linear-gradient(top, #08c, #0077b3);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08c), to(#0077b3));
+        background-image: -webkit-linear-gradient(top, #08c, #0077b3);
+        background-image: -o-linear-gradient(top, #08c, #0077b3);
+        background-image: linear-gradient(to bottom, #08c, #0077b3);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)
+    }
+
+    .dropdown-submenu {
+        position: relative
+    }
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 60%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px 6px;
+        border-radius: 0 6px 6px 6px
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block
+    }
+
+    .dropup .dropdown-submenu > .dropdown-menu {
+        top: auto;
+        bottom: 0;
+        margin-top: 0;
+        margin-bottom: -2px;
+        -webkit-border-radius: 5px 5px 5px 0;
+        -moz-border-radius: 5px 5px 5px 0;
+        border-radius: 5px 5px 5px 0
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        float: right;
+        width: 0;
+        height: 0;
+        margin-top: 5px;
+        margin-right: -10px;
+        border-color: transparent;
+        border-left-color: #ccc;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        content: " "
+    }
+
+</style>-->
+
+<div class="col-md-1">
+    <div class="bs-sidebar hidden-print affix" role="complementary" style="width: 180px!important;">
+        <ul class="nav bs-sidenav">
+
+            <li class="">
+                <h2 class="text-center">{{name}}</h2>
+            </li>
+            <li class=""><h3 class="text-center"><strong>测试管理</strong></h3></li>
+
+            <li class="">
+                <a href=""  data="{{tid}}" ng-click="testManage($event.target)">查看试题</a>
+            </li>
+            <li>
+                <a href="" data="{{tid}}" ng-click="CommonSetting($event.target)">通用设置</a>
+            </li>
+            <li><h3 class="text-center"><strong>测试报告</strong></h3>
+            </li>
+
+            <li>
+                <!--http://bootstrap.kinghack.com/components.html-->
+                <a href="#/invite">邀请</a>
+
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li><a data="{{tid}}" ng-click="Invite($event.target)">邀请单个用户</a></li>-->
+                    <!--<li><a data="{{tid}}" ng-click="MultInvite($event.target)">邀请多个用户</a></li>-->
+                <!--</ul>-->
+            </li>
+            <li>
+                <a href="" data="{{tid}}" ng-click="Report($event.target)">测试报告</a>
+            </li>
+        </ul>
+    </div>
+</div>

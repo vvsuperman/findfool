@@ -1,0 +1,34 @@
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-class="{true:'',false:'hedden'}[myu==1]" ng-controller="TestPage">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th>试题</th>
+            <th>类型</th>
+            <th>分数</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="q in qs">
+            <td>{{q.qid}}</td>
+            <td>{{q.name}}</td>
+            <td>{{q.type}}</td>
+            <td>{{q.score}}</td>
+            <td>
+                <a href="" data="{{q}}" ng-click="CheckOut($event.target)">查看/</a>
+                <a href="" data="{{q}}" ng-click="Modify($event.target)">修改/</a>
+                <a href="" data="{{q}}" ng-click="Delete($event.target)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-default" data="{{tid}}" ng-click="tjkst($event.target)">添加库试题</button>
+        <button class="btn btn-default" data="{{tid}}" ng-click="tjzdy($event.target)">添加自定义试题</button>
+
+    </div>
+</div>
+
+<div ng-include src="'testBank.html'" ng-controller="TestBank" ng-class="{true:'',false:'hedden'}[myu==2]"></div>
+
+<div ng-include src="'mytestBank.html'" ng-controller="MyTestBank" ng-class="{true:'',false:'hedden'}[myu==3]"></div>
