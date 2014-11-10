@@ -8,7 +8,7 @@
 
 function MyTestBank($scope) {
     $scope.url = '#/mybank';
-    $scope.template = 'mytestBank.html';
+    $scope.template = 'page/mytestBank.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;

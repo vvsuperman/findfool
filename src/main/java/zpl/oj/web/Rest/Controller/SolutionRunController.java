@@ -56,7 +56,7 @@ public class SolutionRunController {
 	@ResponseBody
 	public ResponseBase getResult(@RequestBody ReciveOK request){
 		ResponseBase rb = new ResponseBase();
-		List<ResultInfo> rs = new ArrayList<>();
+		List<ResultInfo> rs = new ArrayList<ResultInfo>();
 		int solutionId = request.getSolution_id();
 		rs = resultInfoService.getResultInfoBySolutionId(solutionId);
 		rb.setMessage(rs);

@@ -44,7 +44,7 @@ function QuestionMeta() {
 
 function TestBank($scope, $http,Data,$sce) {
     $scope.url = '#/bank';
-    $scope.template = 'testBank.html';
+    $scope.template = 'page/testBank.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;

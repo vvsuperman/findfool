@@ -6,9 +6,9 @@
 //    'evgenyneu.markdown-preview'
 //]);
 
-var WEBROOT = "/ojweb";
+var WEBROOT = "/oj";
 
-function Indexx($scope, $http, Data) {
+function Indexx($scope, $http, Data) {	
     $scope.url = '#';
     $scope.loginError = false;
     
@@ -27,7 +27,7 @@ function Indexx($scope, $http, Data) {
     $scope.confirm = function () {
         if ($scope.Lemail && $scope.Lpwd) {
             $http({
-                url: "/user/confirm",
+                url: WEBROOT+"/user/confirm",
                 method: 'POST',
                 headers: {
                     "Authorization": Data.token()
@@ -414,13 +414,13 @@ function nav($scope, Data) {
         $scope.leftBar = '';
     };
     $scope.navTestBank = function () {
-        $scope.template = 'testBank.html';
+        $scope.template = 'page/testBank.html';
         /*need update*/
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = 'leftBar1.html';
     };
     $scope.navmyTestBank = function () {
-        $scope.template = 'mytestBank.html';
+        $scope.template = 'page/mytestBank.html';
         /*need update*/
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = 'leftBar1.html';

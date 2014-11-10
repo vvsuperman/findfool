@@ -22,13 +22,17 @@
         </tr>
         </tbody>
     </table>
+    
+   
     <div>
-        <button class="btn btn-default" data="{{tid}}" ng-click="tjkst($event.target)">添加库试题</button>
-        <button class="btn btn-default" data="{{tid}}" ng-click="tjzdy($event.target)">添加自定义试题</button>
+        <button class="btn btn-default" data="{{tid}}" ng-click="addDefault()">添加库试题</button>
+        <button class="btn btn-default" data="{{tid}}" ng-click="addCustom()">添加自定义试题</button>
 
     </div>
 </div>
 
-<div ng-include src="'testBank.html'" ng-controller="TestBank" ng-class="{true:'',false:'hedden'}[myu==2]"></div>
+ <div ng-show="showDefault"> just test</div>
 
-<div ng-include src="'mytestBank.html'" ng-controller="MyTestBank" ng-class="{true:'',false:'hedden'}[myu==3]"></div>
+<div ng-include src="'page/testBank.html'" ng-controller="TestBank" ng-show="showDefault"></div>
+
+<div ng-include src="'page/mytestBank.html'" ng-controller="MyTestBank" ng-show="showCustom"></div>

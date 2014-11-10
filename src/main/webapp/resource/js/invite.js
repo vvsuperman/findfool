@@ -3,8 +3,8 @@
  */
 function invite($scope, $http, Data) {
     $scope.url = '#/invite';
-    $scope.template = 'invite.html';
-    $scope.ContentUs = 'contentUs.html';
+    $scope.template = 'page/invite.html';
+    $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
 }
 function Excel($scope, $http, Data) {

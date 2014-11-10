@@ -37,7 +37,12 @@ public class UserController {
 
 		ResponseMessage msg = new ResponseMessage();
 		u = userService.getUserByEmail(request.getEmail());
-		if(u == null ||!u.getPwd().equals(request.getPwd())){
+		if(u== null){		
+			msg.setMsg("usernotexist");
+			rb.setState(0);
+			rb.setMessage(msg);
+		}
+		else if(!u.getPwd().equals(request.getPwd())){
 			msg.setMsg("failed login!  user:"+request.getEmail()+" error user or password");
 			msg.setHandler_url("/error");
 			rb.setState(0);		
@@ -48,8 +53,6 @@ public class UserController {
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 		}
-		
-		
 		return rb;
 	}
 	

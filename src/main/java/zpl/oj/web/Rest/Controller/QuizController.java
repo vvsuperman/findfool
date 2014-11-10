@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.model.common.Quiz;
@@ -95,7 +96,7 @@ public class QuizController {
 		return rb;
 	}
 
-	@RequestMapping(value = "/show")
+	@RequestMapping(value = "/show",method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase queryAllTest(@RequestBody RequestUser request) {
 		ResponseBase rb = new ResponseBase();

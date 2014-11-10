@@ -8,6 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import zpl.oj.service.security.inter.SecurityService;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 public class AuthorizationInterceptors implements HandlerInterceptor{
 	@Autowired
@@ -28,20 +29,36 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,  
             HttpServletResponse response, Object handler) throws Exception {
-		// 不过滤的uri  
-        String[] notFilter = new String[] { "/user/confirm","/user/add/hr", "index.html","/resources","/contactus" };  
+		// 不过滤的url
+		String WEBROOT = (String) PropertiesUtil.getContextProperty("WEBROOT");
+		
+//        String[] notFilter = new String[] { WEBROOT+"/user/confirm",WEBROOT+"/user/add/hr", 
+//        		WEBROOT+"/page/","/contactus",WEBROOT+"/resource" };  
+		
+		 String[] notFilter = new String[] { "/user/confirm","/user/add/hr", 
+ 	        		"/page/","/contactus","/resource/" };  
   
         // 请求的uri  
-        String uri = request.getRequestURI();  
+        String url ="";
+        url = request.getRequestURI();
+        
+        boolean doFilter = true;  
+        if(url.length()>WEBROOT.length()+1){
+        	url = url.substring(WEBROOT.length(),url.length()); 
+        }else{
+        	url ="/";
+        	doFilter = false;
+        }
+        
         
         //TODO check uri privilege
 
         //TODO chek request's privilege
         
         //TODO is permit? if no, return 401,else contiune filter chain
-        boolean doFilter = true;  
+        
         for (String s : notFilter) {  
-            if (uri.indexOf(s) != -1) {  
+            if (url.indexOf(s) != -1) {  
                 // 如果uri中包含不过滤的uri，则不进行过滤  
                 doFilter = false;  
                 break;  
@@ -55,14 +72,16 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
             	response.sendError(401);
             }else{
             	//check authorization
-            	boolean isok = securityService.checkToken(uri,token);
+            	boolean isok = securityService.checkToken(url,token);
             	if(isok == true){
             		 // 允许  
             		return true;
             	}else{
             		//wrong authorization token
+            		System.out.println(url);
                 	response.sendError(401);
-                	return false;
+//                	response.sendRedirect(WEBROOT+"/page/401.html");
+                	return false;     	
             	}
             }
         }
@@ -72,6 +91,8 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
         }  
 		
 		return false;
+        
+   
 	}
 
 }

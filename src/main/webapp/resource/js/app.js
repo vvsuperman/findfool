@@ -8,139 +8,69 @@ var OJApp = angular.module('OJApp', [
     'evgenyneu.markdown-preview',
     'webStorageModule'
 ]);
-//OJApp.run(['$rootScope', function ($rootScope) {
-//    $rootScope.content = '';
-//}]);
-/*
- OJApp.directive('cleditor', function () {
- return {
- require: '?ngModel',
- link: function (scope, elm, attr, ngModel) {
- if (!ngModel) return;
- ngModel.$render = function () {
- elm.val(ngModel.$viewValue).blur();
- };
- elm.cleditor().change(function () {
- var value = elm.val();
- if (!scope.$$phase) {
- scope.$apply(function () {
- ngModel.$setViewValue(value);
- });
- }
- });
- }
- }
- });
- */
-OJApp.directive('ckEditor', [function () {
-    return {
-        require: '?ngModel',
-        restrict: 'C',
-        link: function (scope, elm, attr, model) {
-            var isReady = false;
-            var data = [];
-            var ck = CKEDITOR.replace(elm[0]);
-            function setData() {
-                if (!data.length) {
-                    return;
-                }
-                var d = data.splice(0, 1);
-                ck.setData(d[0] || '<span></span>', function () {
-                    setData();
-                    isReady = true;
-                });
-            }
-            ck.on('instanceReady', function (e) {
-                if (model) {
-                    setData();
-                }
-            });
-            elm.bind('$destroy', function () {
-                ck.destroy(false);
-            });
-            if (model) {
-                ck.on('change', function () {
-                    scope.$apply(function () {
-                        var data = ck.getData();
-                        if (data == '<span></span>') {
-                            data = null;
-                        }
-                        model.$setViewValue(data);
-                    });
-                });
-                model.$render = function (value) {
-                    if (model.$viewValue === undefined) {
-                        model.$setViewValue(null);
-                        model.$viewValue = null;
-                    }
-                    data.push(model.$viewValue);
-                    if (isReady) {
-                        isReady = false;
-                        setData();
-                    }
-                };
-            }
-        }
-    };
-}]);
+
 OJApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
             when('/', {
-                templateUrl: 'main.html',
+                templateUrl: 'page/main.html',
                 controller: 'Indexx'
             }).
             when('/user', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'TestShow'
             }).
             when('/rock&roll/:rrid', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'RockRoll'
             }).
             when('/loginok', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'LoginOk'
             }).
             when('/test', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'TestPage'
             }).
             when('/test/:tid', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'TestPageTid'
             }).
             when('/upgrade', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'Upgrade'
             }).
             when('/bank', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'TestBank'
             }).
             when('/invite', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'invite'
             }).
             when('/mybank', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'MyTestBank'
             }).
             when('/profile', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'pInfo'
             }).
             when('/editor', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'aceEditor'
             }).
             when('/MChoice', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'MChoice'
             }).
             when('/MChoice/:r', {
-                templateUrl: 'page.html',
+                templateUrl: 'page/page.html',
                 controller: 'MChoice'
+            }).
+            when('/adminhome', {
+                templateUrl: 'page/admin/adminhome.html',
+                controller: 'adminController'
             }).
             otherwise({
                 redirectTo: '/'
@@ -388,3 +318,56 @@ OJApp.factory('Data', function (webStorage) {
     }
     return new _data();
 });
+
+
+OJApp.directive('ckEditor', [function () {
+    return {
+        require: '?ngModel',
+        restrict: 'C',
+        link: function (scope, elm, attr, model) {
+            var isReady = false;
+            var data = [];
+            var ck = CKEDITOR.replace(elm[0]);
+            function setData() {
+                if (!data.length) {
+                    return;
+                }
+                var d = data.splice(0, 1);
+                ck.setData(d[0] || '<span></span>', function () {
+                    setData();
+                    isReady = true;
+                });
+            }
+            ck.on('instanceReady', function (e) {
+                if (model) {
+                    setData();
+                }
+            });
+            elm.bind('$destroy', function () {
+                ck.destroy(false);
+            });
+            if (model) {
+                ck.on('change', function () {
+                    scope.$apply(function () {
+                        var data = ck.getData();
+                        if (data == '<span></span>') {
+                            data = null;
+                        }
+                        model.$setViewValue(data);
+                    });
+                });
+                model.$render = function (value) {
+                    if (model.$viewValue === undefined) {
+                        model.$setViewValue(null);
+                        model.$viewValue = null;
+                    }
+                    data.push(model.$viewValue);
+                    if (isReady) {
+                        isReady = false;
+                        setData();
+                    }
+                };
+            }
+        }
+    };
+}]);

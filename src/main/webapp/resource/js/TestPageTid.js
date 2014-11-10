@@ -3,12 +3,15 @@
  */
 function TestPageTid($scope, $routeParams, $http, Data) {
     $scope.url = '#/test';
-    $scope.ContentUs = 'contentUs.html';
-    $scope.template = 'testlist.html';
-    $scope.leftBar = 'leftBar.html';
+    $scope.ContentUs = 'page/contentUs.html';
+    $scope.template = 'page/testlist.html';
+    $scope.leftBar = 'page/leftBar.html';
     console.log('testDetail');
     $scope.tid = $routeParams.tid;
     Data.setTid($scope.tid);
+    $scope.showDefault = false;
+    $scope.showCustom = false;
+    
     $scope.testManage = function () {
         //add by zpl
         var sendData = new Object();
@@ -39,7 +42,7 @@ function TestPageTid($scope, $routeParams, $http, Data) {
         }).error(function (data) {
             console.log("get test info error");
         });
-        $scope.template = 'testlist.html';
+        $scope.template = 'page/testlist.html';
         $scope.myu = 1;
     };
     $scope.testManage();
@@ -50,8 +53,8 @@ function TestPageTid($scope, $routeParams, $http, Data) {
 //        $scope.testManage()
 //    };
     $scope.CommonSetting = function (target) {
-        $scope.template = 'commonsetting.html';
-        $scope.ContentUs = 'contentUs.html';
+        $scope.template = 'page/commonsetting.html';
+        $scope.ContentUs = 'page/contentUs.html';
 //        $scope.active = target.getAttribute('data');
 //        $scope.tid = $scope.active;
 //
@@ -82,8 +85,8 @@ function TestPageTid($scope, $routeParams, $http, Data) {
     };
     $scope.Report = function (target) {
         console.log('Report');
-        $scope.leftBar = 'leftBar.html';
-        $scope.template = 'report.html';
+        $scope.leftBar = 'page/leftBar.html';
+        $scope.template = 'page/report.html';
         $scope.active = target.getAttribute('data');
         $scope.name = $scope.tests[$scope.active].name;
         $scope.tid = $scope.tests[$scope.active].quizid;
@@ -93,10 +96,13 @@ function TestPageTid($scope, $routeParams, $http, Data) {
     };
     
     $scope.addDefault = function () {
-        $scope.myu = 2;
+//        $scope.myu = 2;
+    	console.log("addDefault");
+	    $scope.showDefault = true;
     };
     $scope.addCustom = function () {
-    	console.log("add custom");
-        $scope.myu = 3;
+//        $scope.myu = 3;        
+        console.log("add custom");
+		$scope.showCustom = true;
     };
 }

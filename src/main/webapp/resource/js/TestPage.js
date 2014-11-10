@@ -4,9 +4,11 @@
 function TestPage($scope, $http, Data) {
     $scope.url = '#/test';
     $scope.active = 1;
-    $scope.template = 'testshow.html';
-    $scope.ContentUs = 'contentUs.html';
+    $scope.template = 'page/testshow.html';
+    $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
+   
+    
     $scope.tshow = function () {
         $http({
             url: WEBROOT+"/test/show",
@@ -33,15 +35,18 @@ function TestPage($scope, $http, Data) {
     };
     $scope.tshow();
 
-    $scope.createNewTest = function () {
-        $scope.template = 'addtest.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
-//    $scope.Invite = function (target) {
-//        console.log('Invite');
-//        window.location.href = '#/invite';
+//    $scope.createNewTest = function () {
+//        $scope.template = 'page/addtest.html';
+//        $scope.ContentUs = 'page/contentUs.html';
+//        $scope.leftBar = '';
 //    };
+//    
+    
+    $scope.Invite = function (target) {
+        console.log('Invite');
+        window.location.href = '#/invite';
+    };
+    
 //    $scope.MultInvite = function (target) {
 //        console.log('MultInvite');
 //        window.location.href = '#/invite';
@@ -100,7 +105,6 @@ function TestPage($scope, $http, Data) {
             ($scope.addtest.defaultEmail==true? Data.email():'');
 
         //发送
-        console.log("WEBroot...............",WEBROOT);
         $http({
             url: WEBROOT+"/test/add",
             method: 'POST',
@@ -132,8 +136,8 @@ function TestPage($scope, $http, Data) {
 
     };
     $scope.createNewTest = function () {
-        $scope.template = 'addtest.html';
-        $scope.ContentUs = 'contentUs.html';
+        $scope.template = 'page/addtest.html';
+        $scope.ContentUs = 'page/contentUs.html';
         $scope.leftBar = '';
         //author zpl
         //这个是处理增加一个测试的对象
@@ -157,15 +161,16 @@ function TestPage($scope, $http, Data) {
         //推向服务器
         //$scope.pushTest()
     };
-//    $scope.CommonSetting = function () {
-//        $scope.template = 'commonsetting.html';
-//        $scope.ContentUs = 'contentUs.html';
-////        $scope.active = target.getAttribute('data');
-//        $scope.tid = $scope.tests[$scope.active].uuid;
-//
-//        $scope.leftBar = 'leftBar.html';
-//        $scope.name = $scope.tests[$scope.active].name;
-//    };
+    
+    $scope.CommonSetting = function () {
+        $scope.template = 'commonsetting.html';
+        $scope.ContentUs = 'contentUs.html';
+//        $scope.active = target.getAttribute('data');
+        $scope.tid = $scope.tests[$scope.active].uuid;
+
+        $scope.leftBar = 'leftBar.html';
+        $scope.name = $scope.tests[$scope.active].name;
+    };
 
 
 //    $scope.testPage = function (target) {
@@ -200,18 +205,8 @@ function TestPage($scope, $http, Data) {
 
             }
         }).error(function (data) {
-            alert("现在使用的是展示数据");
-            $scope.qs = [
-                {qid: 6, name: '测试选择', type: 0, tag: [], context: "在下面的选项中选出正确的一项", answer: []},
-                {qid: 9, name: '第二个测试', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
-                    {text: "1+1=2", isright: "1", score: 4},
-                    {text: "1+1=3", isright: "0", score: 0},
-                    {text: "1+1=4", isright: "0", score: 0}
-                ]}
-            ];
-            $scope.testtime = 70;
-            $scope.extraInfo = "1,2";
-            $scope.emails = "ss@ss.com,sd@ss.com"
+            console.log("现在使用的是展示数据");
+            
         });
     };
 	$scope.CheckOut = function (target) {
@@ -229,11 +224,12 @@ function TestPage($scope, $http, Data) {
 	};
 	
 	$scope.addDefault = function () {
-	    $scope.myu = 2;
+		console.log("addDefault...");
+	    $scope.showDefault = true;
 	};
 	$scope.addCustom = function () {
-		console.log("add custom");
-	    $scope.myu = 3;
+		console.log("add custom...");
+		$scope.showCustom = true;
 	};
 
     

@@ -61,7 +61,7 @@
     
     
 	<welcome-file-list>
-		<welcome-file>template/code.html</welcome-file>
+		<welcome-file>/page/index.html</welcome-file>
 	</welcome-file-list>
 	
 	
