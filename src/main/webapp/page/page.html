@@ -1,9 +1,13 @@
 <div ng-include src="'page/nav.html'"></div>
-<div class="container" style="padding: 10px;">
+<div class="container-fluid" style="padding: 10px;">
     <div>
         <div class="slide-animate-container">
-            <div class="slide-animate" ng-include="leftBar"></div>
-            <div class="slide-animate" ng-include="template"></div>
+			<div class="container-fluid">
+				<div class="row">		
+					<div class="slide-animate" ng-include="leftBar"></div>
+					<div class="slide-animate" ng-include="template"></div>
+				</div>
+			</div>
             <div class="slide-animate" ng-include="ContentUs"></div>
         </div>
     </div>

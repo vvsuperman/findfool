@@ -1,5 +1,6 @@
-<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="mytestbank">
-    <ul class="nav nav-tabs list-group">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<h2 class="sub-header">我的试题</h2>
+   <ul class="nav nav-tabs list-group">
         <!--<ul class="nav nav-tabs" ng-model="template" ng-options="t.name for t in templates">-->
         <li ng-repeat="tt in Qtype"
             ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
@@ -16,18 +17,21 @@
         
         </form>
         <br>
-        <div style="border:#dfdfdf 1px solid">
-        	<ul class="quizquestion">
-        		<li ng-repeat="q in reciveData.questions">
-        			<input type="radio" ng-model="reciveData.choosedQ" ng-value="q">
-                        {{q.name}}
+        <div class="questionbox" >
+			<accordion close-others="false" ng-repeat="q in reciveData.questions">
+				<div style="float:left;width:1%;padding-top:8px">
+					<input type="checkbox" ng-click="addOnelist(q)" ng-value="q" ng-checked="reciveData.choosedQlist.indexOf(q) > -1" ng-class="{false:'hedden', true: ''}[privi>2]">
                     </input>
-                    <div class="show" ng-bind-html="gettrustContext(q)" compile-template>
-        			</div>
+				</div>
 
-        			
-        		</li>
-        	</ul>
+				<accordion-group is-open="status.open">
+					<accordion-heading>
+						<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+					标题：{{q.name}}					
+					</accordion-heading>
+					<div ng-bind-html="gettrustContext(q)" compile-template></div>
+				</accordion-group>
+			 </accordion>
         </div>
         <ul class="pagination">
             <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)">&laquo;</a></li>
@@ -55,8 +59,8 @@
                 <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
                           <!--ng-model="newQuestion.context"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
-				<!-- textarea class="ck-editor" ckEditor ng-model="context"></textarea> -->
-				<mymdeditor></mymdeditor>
+				<!--  textarea class="ck-editor" ckEditor="editorOptions" ng-model="newQuestion.context"></textarea-->
+				<textarea ng-model="newQuestion.context"></textarea>
                 <div class="hedden" id="context" >{{context}}</div>
                 <p style="padding: 20px">标签(以 英文,符号 区分)
                     <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
@@ -91,7 +95,7 @@
             <form class="form-inline" role="form">
                 <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
                 <!--<div ng-include src="'mdeditor.html'" ></div>-->
-<!--                <textarea class="ck-editor" ckEditor ng-model="context"></textarea>-->
+                <textarea   ng-model="context"></textarea>
                 <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
                 <ul>
@@ -147,9 +151,9 @@
 
             <form class="form-inline" role="form">
                 <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
-                <!--<div ng-include src="'mdeditor.html'" ></div>--><!--
-                <textarea class="ck-editor" ckEditor ng-model="context"></textarea>
-                --><p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
+                <!--<div ng-include src="'mdeditor.html'" ></div>-->
+                <textarea ng-model="context"></textarea>
+                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
                 </p>
 
 

@@ -9,9 +9,6 @@ function TestPageTid($scope, $routeParams, $http, Data) {
     console.log('testDetail');
     $scope.tid = $routeParams.tid;
     Data.setTid($scope.tid);
-    $scope.showDefault = false;
-    $scope.showCustom = false;
-    
     $scope.testManage = function () {
         //add by zpl
         var sendData = new Object();
@@ -37,10 +34,11 @@ function TestPageTid($scope, $routeParams, $http, Data) {
                 $scope.name = $scope.message.name;
                 Data.setTname($scope.name);
             } else {
-            	console.log("user not authorition");
+
             }
         }).error(function (data) {
-            console.log("get test info error");
+            alert("现在使用的是展示数据");
+           
         });
         $scope.template = 'page/testlist.html';
         $scope.myu = 1;
@@ -94,15 +92,13 @@ function TestPageTid($scope, $routeParams, $http, Data) {
         Data.setTname($scope.name);
 //        $scope.testManage();
     };
-    
-    $scope.addDefault = function () {
-//        $scope.myu = 2;
-    	console.log("addDefault");
-	    $scope.showDefault = true;
+
+    $scope.tjkst = function () {
+    	console.log("add default.............");
+        $scope.myu = 2;
     };
-    $scope.addCustom = function () {
-//        $scope.myu = 3;        
-        console.log("add custom");
-		$scope.showCustom = true;
+    $scope.tjzdy = function () {
+    	console.log("add customf.............");
+        $scope.myu = 3;
     };
 }

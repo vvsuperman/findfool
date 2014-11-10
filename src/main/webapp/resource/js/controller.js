@@ -10,9 +10,6 @@ var WEBROOT = "/oj";
 
 function Indexx($scope, $http, Data) {	
     $scope.url = '#';
-    $scope.loginError = false;
-    
-    
 //    $scope.customers = [
 //        {name: "1公司", img: "./static/benefit-1.png", note: "待定"},
 //        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
@@ -34,39 +31,35 @@ function Indexx($scope, $http, Data) {
                 },
                 data: {"email": $scope.Lemail, "pwd": md5($scope.Lpwd), "name": $scope.Lname}
             }).success(function (data) {
-                $scope.state = data["state"];//1:loginok 0:some error happaned
-               
-                if($scope.state==0){
-                	console.log("message",data["message"]);
-                	if(data["message"]["msg"] == "usernotexist"){
-                		$scope.failMsg = "用户名不存在";
-                    	$scope.loginError = true;
-                	}else{
-                		$scope.failMsg = "用户名或密码错误";
-                    	$scope.loginError = true;
-                	}
-                }else{
-                	   var name = $scope.Lemail;
-                       $scope.message = data["message"];
-                       if (data["message"].handler_url != null && data["message"].handler_url !== "") {
-                           name = data["message"].handler_url;
-                       }
-                                                             
-                       Data.setEmail($scope.Lemail);
-                       Data.setToken(data["token"]);
-                       console.log("token...........",Data["token"]);
-                       Data.setUid($scope.message.uid);
-                       Data.setPrivi($scope.message.privilege);
-                       Data.setTel($scope.message.tel);
-                       Data.setCompany($scope.message.company);
-                       Data.setInvitedleft($scope.message.invited_left);
-                       $scope.invitedleft = $scope.message.invited_left;
-                       var child = document.getElementsByClassName("modal-backdrop fade in");
-                       child[0].parentNode.removeChild(child[0]);  
-                       $scope.name = $scope.message.handler_url;
-                       window.location.href = '#/test';
-                       
-                	
+                $scope.state = data["state"];//1 true or 0 false
+
+                var name = $scope.Lemail;
+                $scope.message = data["message"];
+                if (data["message"].handler_url != null && data["message"].handler_url !== "") {
+                    name = data["message"].handler_url;
+                }
+                Data.setName(name);
+                Data.setEmail($scope.Lemail);
+
+                if ($scope.state) {
+                    Data.setToken(data["token"]);
+                    console.log(Data.token());
+                    console.log(data["token"]);
+                    Data.setUid($scope.message.uid);
+                    Data.setPrivi($scope.message.privilege);
+                    Data.setTel($scope.message.tel);
+                    Data.setCompany($scope.message.company);
+                    Data.setInvitedleft($scope.message.invited_left);
+                    $scope.invitedleft = $scope.message.invited_left;
+                    var child = document.getElementsByClassName("modal-backdrop fade in");
+                    child[0].parentNode.removeChild(child[0]);
+                    window.location.href = '#/loginok';
+                    $scope.name = $scope.message.handler_url;
+                } else {
+                    var child = document.getElementsByClassName("modal-backdrop fade in");
+                    child[0].parentNode.removeChild(child[0]);
+                    window.location.href = '#/loginok';
+                    $scope.name = "测试用户";
                 }
                 
              
@@ -435,11 +428,6 @@ function nav($scope, Data) {
         $scope.template = 'user.html';
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
-    };
-    
-    $scope.logout = function(){
-    	Data.clear();
-    	window.location.href = '#/';
     };
 }
 

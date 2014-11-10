@@ -62,17 +62,40 @@ function TestBank($scope, $http,Data,$sce) {
 	$scope.reciveData.currentPage = 1;
 	$scope.reciveData.index = 1;
 	$scope.reciveData.choosedQ = null;
+	$scope.reciveData.choosedQlist = new Array();
 	$scope.reciveData.setObj = null;
     $scope.progrma = new Object();
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
     $scope.sendQuestion = new QuestionMeta();
     $scope.tag = "";
+	$scope.myu = 1;
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
         { name: '问答题', data: '3'}
     ];
+    
+    
+    
+    $scope.editorOptions =
+	{
+	    language: 'ru',
+	    uiColor: '#000000'
+	};
+    
+    $scope.editorOptions1 =
+	{
+	    language: 'ru',
+	    uiColor: '#000000'
+	};
+    
+    $scope.editorOptions2 =
+	{
+	    language: 'ru',
+	    uiColor: '#000000'
+	};
+    
 //    $scope.qs = [
 //        {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
 //        {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
@@ -230,6 +253,10 @@ function TestBank($scope, $http,Data,$sce) {
     };
     
     $scope.deleteQuestion = function () {
+		if($scope.reciveData.choosedQ == null){
+			alert("请选题一个题目")
+			return;
+		}
         var res = confirm("确定删除吗？删除之后不可恢复");
         if (res == true) {
             $http({
@@ -259,6 +286,10 @@ function TestBank($scope, $http,Data,$sce) {
         }
     }
     $scope.modifyQuestion = function () {
+		if($scope.reciveData.choosedQ == null){
+			alert("请选题一个题目")
+			return;
+		}
         $scope.show = "0";
         console.log($scope.reciveData.choosedQ);
             $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
@@ -339,7 +370,9 @@ function TestBank($scope, $http,Data,$sce) {
             }
         }
 //console.log($scope.newQuestion.tag)
-        var tags = $scope.newQuestion.tag.split(",");
+		var tags = [];
+		if($scope.newQuestion.tag)
+			tags= $scope.newQuestion.tag.split(",");
         $scope.sendQuestion.tag = tags;
 
         $scope.sendQuestion.answer = ans;
@@ -429,4 +462,20 @@ function TestBank($scope, $http,Data,$sce) {
 
         });
     };
+	$scope.addOnelist = function(q){
+		var idx = $scope.reciveData.choosedQlist.indexOf(q);
+
+		// is currently selected
+		if (idx > -1) {
+		  $scope.reciveData.choosedQlist.splice(idx, 1);
+		}
+		// is newly selected
+		else {
+			if($scope.myu == 1){
+				$scope.reciveData.choosedQ = q;
+				$scope.reciveData.choosedQlist = new Array();
+			}
+			  $scope.reciveData.choosedQlist.push(q);		
+		}		
+	}
 }

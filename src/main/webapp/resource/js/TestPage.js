@@ -30,23 +30,27 @@ function TestPage($scope, $http, Data) {
 
             }
         }).error(function (data) {
-           console.log("net work error");
+            $scope.tests = [
+                {quizid: 5, name: '现在网络错误', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
+                {quizid: 5, name: '所以这只是一个', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
+                {quizid: 5, name: '样例展示', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3}
+            ];
+            for (var i = 0; i < $scope.tests.length; i++) {
+                $scope.tests[i].data = i;
+            }
         });
     };
     $scope.tshow();
 
-//    $scope.createNewTest = function () {
-//        $scope.template = 'page/addtest.html';
-//        $scope.ContentUs = 'page/contentUs.html';
-//        $scope.leftBar = '';
-//    };
-//    
-    
-    $scope.Invite = function (target) {
-        console.log('Invite');
-        window.location.href = '#/invite';
+    $scope.createNewTest = function () {
+        $scope.template = 'addtest.html';
+        $scope.ContentUs = 'contentUs.html';
+        $scope.leftBar = '';
     };
-    
+//    $scope.Invite = function (target) {
+//        console.log('Invite');
+//        window.location.href = '#/invite';
+//    };
 //    $scope.MultInvite = function (target) {
 //        console.log('MultInvite');
 //        window.location.href = '#/invite';
@@ -161,16 +165,15 @@ function TestPage($scope, $http, Data) {
         //推向服务器
         //$scope.pushTest()
     };
-    
-    $scope.CommonSetting = function () {
-        $scope.template = 'commonsetting.html';
-        $scope.ContentUs = 'contentUs.html';
-//        $scope.active = target.getAttribute('data');
-        $scope.tid = $scope.tests[$scope.active].uuid;
-
-        $scope.leftBar = 'leftBar.html';
-        $scope.name = $scope.tests[$scope.active].name;
-    };
+//    $scope.CommonSetting = function () {
+//        $scope.template = 'commonsetting.html';
+//        $scope.ContentUs = 'contentUs.html';
+////        $scope.active = target.getAttribute('data');
+//        $scope.tid = $scope.tests[$scope.active].uuid;
+//
+//        $scope.leftBar = 'leftBar.html';
+//        $scope.name = $scope.tests[$scope.active].name;
+//    };
 
 
 //    $scope.testPage = function (target) {
@@ -205,11 +208,21 @@ function TestPage($scope, $http, Data) {
 
             }
         }).error(function (data) {
-            console.log("现在使用的是展示数据");
-            
+            alert("现在使用的是展示数据");
+            $scope.qs = [
+                {qid: 6, name: '测试选择', type: 0, tag: [], context: "在下面的选项中选出正确的一项", answer: []},
+                {qid: 9, name: '第二个测试', type: 0, tag: ["测试", "选择题"], context: "选择下面正确的一项", answer: [
+                    {text: "1+1=2", isright: "1", score: 4},
+                    {text: "1+1=3", isright: "0", score: 0},
+                    {text: "1+1=4", isright: "0", score: 0}
+                ]}
+            ];
+            $scope.testtime = 70;
+            $scope.extraInfo = "1,2";
+            $scope.emails = "ss@ss.com,sd@ss.com"
         });
     };
-	$scope.CheckOut = function (target) {
+$scope.CheckOut = function (target) {
 	    console.log(target.getAttribute('data'));
 	    $scope.tmp  = target.getAttribute('data');
 	    alert($scope.tmp)
@@ -223,14 +236,6 @@ function TestPage($scope, $http, Data) {
 	
 	};
 	
-	$scope.addDefault = function () {
-		console.log("addDefault...");
-	    $scope.showDefault = true;
-	};
-	$scope.addCustom = function () {
-		console.log("add custom...");
-		$scope.showCustom = true;
-	};
 
     
 

@@ -41,7 +41,27 @@ function mytestbank($scope, $http, Data,$sce) {
     $scope.progrma = new Object();
     $scope.progrma.show = false;
     $scope.newQuestion = new QuestionMeta();
+	$scope.myu = 1;
+	$scope.reciveData.choosedQlist = new Array();
 
+	$scope.editorOptions =
+	{
+	    language: 'ru',
+	    uiColor: '#000000'
+	};
+	
+	$scope.editorOptions1 =
+	{
+	    language: 'ru',
+	    uiColor: '#000000'
+	};
+	
+	$scope.editorOptions2 =
+	{
+	    language: 'ru',
+	    uiColor: '#000000'
+	};
+	
 
 
 
@@ -98,11 +118,9 @@ function mytestbank($scope, $http, Data,$sce) {
                 $scope.reciveData.totalPage = 1;
                 $scope.reciveData.pageNum = 0;
                 $scope.reciveData.questions = null;
-                console.log("user not authoriztion")
             }
         }).error(function (data) {
             //error
-        	console.log("search data error");
         });
     }
     
@@ -175,6 +193,10 @@ function mytestbank($scope, $http, Data,$sce) {
         console.log($scope.newQuestion);
     };
     $scope.deleteQuestion = function () {
+		if($scope.reciveData.choosedQ == null){
+			alert("请选题一个题目")
+			return;
+		}
         var res = confirm("确定删除吗？删除之后不可恢复");
         if (res == true) {
             $http({
@@ -203,6 +225,10 @@ function mytestbank($scope, $http, Data,$sce) {
         }
     }
     $scope.modifyQuestion = function () {
+		if($scope.reciveData.choosedQ == null){
+			alert("请选题一个题目")
+			return;
+		}
         $scope.show = "0";
         console.log($scope.reciveData.choosedQ);
         $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
@@ -281,13 +307,15 @@ function mytestbank($scope, $http, Data,$sce) {
             }
         }
 //console.log($scope.newQuestion.tag)
+		if($scope.newQuestion.tag){
         var tags = $scope.newQuestion.tag.split(",");
-        $scope.newQuestion.tag = tags;
+        $scope.newQuestion.tag = tags;		
+		}
 
         $scope.newQuestion.answer = ans;
         //var context = document.getElementById("context").innerText;
-        var context = $scope.context;
-        $scope.newQuestion.context = context;
+        //var context = $scope.context;
+        //scope.newQuestion.context = context;
 
         console.log($scope.newQuestion);
         sendData = {"user": {"uid": Data.uid()}, "question": $scope.newQuestion};
@@ -368,5 +396,20 @@ function mytestbank($scope, $http, Data,$sce) {
 
         });
     };
+	$scope.addOnelist = function(q){
+		var idx = $scope.reciveData.choosedQlist.indexOf(q);
 
+		// is currently selected
+		if (idx > -1) {
+		  $scope.reciveData.choosedQlist.splice(idx, 1);
+		}
+		// is newly selected
+		else {
+			if($scope.myu == 1){
+				$scope.reciveData.choosedQ = q;
+				$scope.reciveData.choosedQlist = new Array();
+			}
+			  $scope.reciveData.choosedQlist.push(q);		
+		}		
+	}
 }
