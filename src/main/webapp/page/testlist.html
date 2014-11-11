@@ -1,4 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top: 50px">
    <div class="table-responsive">
    <table class="table table-striped">
         <thead>
@@ -23,14 +23,13 @@
         </tr>
         </tbody>
     </table>
-    <div>
-        <button class="btn btn-default" data="{{tid}}" ng-click="tjkst($event.target)">添加库试题</button>
-        <button class="btn btn-default" data="{{tid}}" ng-click="tjzdy($event.target)">添加自定义试题</button>
+    <div ng-if="showButton">
+        <button class="btn btn-default" data="{{tid}}" ng-click="showDefaultPanel()">添加库试题</button>
+        <button class="btn btn-default" data="{{tid}}" ng-click="showCustomPanel()">添加自定义试题</button>
 
     </div>
 	</div>
 </div>
 
-<div ng-include src="'page/testBank.html'" ng-controller="TestBank" ng-class="{true:'',false:'hedden'}[myu==2]"></div>
-
-<div ng-include src="'page/mytestBank.html'" ng-controller="MyTestBank" ng-class="{true:'',false:'hedden'}[myu==3]"></div>
+<div ng-include src="'page/testBank.html'" ng-controller="TestBank" ng-if="showDefault"></div>
+<div ng-include src="'page/mytestBank.html'"  ng-if="showCustom"></div>

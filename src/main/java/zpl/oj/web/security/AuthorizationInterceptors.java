@@ -50,7 +50,7 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
         	doFilter = false;
         }
         
-        
+        System.out.println("I am new too");
         //TODO check uri privilege
 
         //TODO chek request's privilege

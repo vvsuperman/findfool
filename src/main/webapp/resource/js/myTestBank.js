@@ -15,7 +15,11 @@ function MyTestBank($scope) {
     $scope.show = 1;
 }
 function mytestbank($scope, $http, Data,$sce) {
-    $scope.Qtype = [
+	
+	$scope.active = 1;
+	$scope.show = 1;
+    
+	$scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
         { name: '问答题', data: '3'}
@@ -267,6 +271,7 @@ function mytestbank($scope, $http, Data,$sce) {
         }
     };
     $scope.pushQuestion = function (sendData) {
+    	
         $http({
             url: WEBROOT+"/question/add",
             method: 'POST',
@@ -317,10 +322,11 @@ function mytestbank($scope, $http, Data,$sce) {
         //var context = $scope.context;
         //scope.newQuestion.context = context;
 
-        console.log($scope.newQuestion);
+        console.log($scope.newQuestion+"  "+$scope.tid);
         sendData = {"user": {"uid": Data.uid()}, "question": $scope.newQuestion};
         $scope.pushQuestion(sendData);
     };
+    
     $scope.cancel = function () {
         $scope.show = "1";
     };

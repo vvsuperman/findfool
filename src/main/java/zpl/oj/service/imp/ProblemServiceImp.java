@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTagDao;
 import zpl.oj.dao.ProblemTestCaseDao;
+import zpl.oj.dao.QuizProblemDao;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.common.QuizProblem;
@@ -38,6 +41,9 @@ public class ProblemServiceImp implements ProblemService{
 	private UserService userService;
 	@Autowired
 	private QuizService quizService;
+	
+	@Resource
+	private QuizProblemDao quizProblemDao;
 
 	@Override
 	public Question getProblemById(int problemId) {
@@ -98,7 +104,14 @@ public class ProblemServiceImp implements ProblemService{
 		problemDao.insertProblem(p);
 		int pid = problemDao.getProblemId(p.getCreator());
 		p.setUuid(pid);
-		
+	/*	
+		if(q.getQuizId()!=0){
+			QuizProblem quizProblem = new QuizProblem();
+			quizProblem.setQuizid(q.getQuizId());
+			quizProblem.setProblemid(pid);
+			quizProblemDao.insertQuizproblem(quizProblem);
+		}
+	*/	
 		
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);

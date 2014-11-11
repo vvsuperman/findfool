@@ -6,7 +6,10 @@ public class RequestAddQuestion {
 	private RequestUser user;
 
 	private Question question;
+	//add by fw 20141111
 
+
+	
 	public RequestUser getUser() {
 		return user;
 	}
