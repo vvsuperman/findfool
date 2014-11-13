@@ -81,6 +81,8 @@ public class ProblemServiceImp implements ProblemService{
 		}
 		return res;
 	}
+	
+	
 	@Override
 	public int addProblem(RequestAddQuestion q) {
 		Problem p = new Problem();
@@ -104,14 +106,14 @@ public class ProblemServiceImp implements ProblemService{
 		problemDao.insertProblem(p);
 		int pid = problemDao.getProblemId(p.getCreator());
 		p.setUuid(pid);
-	/*	
+		
 		if(q.getQuizId()!=0){
 			QuizProblem quizProblem = new QuizProblem();
 			quizProblem.setQuizid(q.getQuizId());
 			quizProblem.setProblemid(pid);
 			quizProblemDao.insertQuizproblem(quizProblem);
 		}
-	*/	
+		
 		
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);

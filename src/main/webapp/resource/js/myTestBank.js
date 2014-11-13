@@ -54,17 +54,7 @@ function mytestbank($scope, $http, Data,$sce) {
 	    uiColor: '#000000'
 	};
 	
-	$scope.editorOptions1 =
-	{
-	    language: 'ru',
-	    uiColor: '#000000'
-	};
-	
-	$scope.editorOptions2 =
-	{
-	    language: 'ru',
-	    uiColor: '#000000'
-	};
+
 	
 
 
@@ -305,25 +295,23 @@ function mytestbank($scope, $http, Data,$sce) {
 //    $scope.$apply();
     $scope.addQuestion = function () {
         $scope.newQuestion.type = parseInt($scope.active);
-        var ans = $scope.newQuestion.answer;
+        if($scope.newQuestion.answer==""){
+        	alert("请输入至少一个选项");
+        	return false;
+        }
         if ($scope.active == "1") {
-            for (a in ans) {
+            for (a in $scope.newQuestion.answer) {
                 a.isright = (a.isright == false ? "0" : "1");
             }
         }
-//console.log($scope.newQuestion.tag)
-		if($scope.newQuestion.tag){
-        var tags = $scope.newQuestion.tag.split(",");
-        $scope.newQuestion.tag = tags;		
-		}
-
-        $scope.newQuestion.answer = ans;
-        //var context = document.getElementById("context").innerText;
-        //var context = $scope.context;
-        //scope.newQuestion.context = context;
-
+        
+        $scope.newQuestion.tag = $scope.newQuestion.tag.split(",");
+        if( $scope.newQuestion.tag==""){
+        	  $scope.newQuestion.tag=[];
+        }
+        
         console.log($scope.newQuestion+"  "+$scope.tid);
-        sendData = {"user": {"uid": Data.uid()}, "question": $scope.newQuestion};
+        sendData = {"user": {"uid": Data.uid()}, "quizId":$scope.tid,"question": $scope.newQuestion};
         $scope.pushQuestion(sendData);
     };
     

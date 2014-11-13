@@ -222,19 +222,7 @@ function TestPage($scope, $http, Data) {
             $scope.emails = "ss@ss.com,sd@ss.com"
         });
     };
-$scope.CheckOut = function (target) {
-	    console.log(target.getAttribute('data'));
-	    $scope.tmp  = target.getAttribute('data');
-	    alert($scope.tmp)
-	};
-	
-	$scope.Modify = function (target) {
-	
-	};
-	
-	$scope.Delete = function (target) {
-	
-	};
+
 	
 
     

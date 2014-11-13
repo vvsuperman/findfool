@@ -1,22 +1,31 @@
-<div class="container-fluid" style="padding: 10px;">
-    <a href="#/invite">invite</a>
-    <button class="btn btn-info pull-right" ng-click="createNewTest()">创建新测试</button>
-
-    <div style="padding: 20px" ng-repeat="test in tests">
+<div class="container-fluid" style="padding-top: 70px;">
+    <!-- a href="#/invite">invite</a-->
+    <div class="row">
+    	<button class="btn btn-info col-md-offset-10" ng-click="createNewTest()">创建新测试</button>
+	</div>
+	
+    <div style="padding-top: 50px" ng-repeat="test in tests">
         <div class="starter-template">
             <div class="col-md-9 col-md-offset-2 ">
                 <div class="highlight">
             <pre>
                 <ul style="list-style:none;">
                     <li style="float:left;list-style-type: none;">
-                        <a class="aa" href="#/test/{{test.quizid}}" >{{test.name}}</a></li>
-                    <li style="float:right;list-style-type: none;">
-                        <a data="{{test.data}}" class="btn btn-default" ng-click="Report($event.target)">报告</a></li>
-                    <li style="float:right;list-style-type: none;">
-                        <a data="{{test.data}}" class="btn btn-default" ng-click="MultInvite($event.target)">批量邀请</a>
+                        <a class="aa" href="#/test/{{test.quizid}}" >{{test.name}}</a>
                     </li>
-                    <li style="float:right;list-style-type: none;">
-                        <a data="{{test.data}}" class="btn btn-default" ng-click="Invite($event.target)">邀请</a></li>
+                    
+                    <li class="pull-right" style="list-style-type: none;margin-left: 10px">
+                        <button data="{{test.data}}" class="btn btn-default" ng-click="Report($event.target)">报告</button>
+                    </li>
+                    
+                    <li class="pull-right" style="list-style-type: none;margin-left: 10px">
+                        <button data="{{test.data}}" class="btn btn-default" ng-click="MultInvite($event.target)">批量邀请</button>
+                    </li>
+                    
+                    <li class="pull-right" style="list-style-type: none;margin-left: 10px">
+                        <button data="{{test.data}}" class="btn btn-default" ng-click="Invite($event.target)">邀请</button>
+                    </li>
+                    
                 </ul>
             </pre>
                 </div>

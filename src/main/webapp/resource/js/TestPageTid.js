@@ -109,6 +109,22 @@ function TestPageTid($scope, $routeParams, $http, Data) {
     	$scope.showDefault = false;
     	$scope.showButton = false;
     }
+    
+    //by fw 修改混乱逻辑，将方法从testpage移入
+    
+    $scope.CheckOut = function (target) {
+	    console.log(target.getAttribute('data'));
+	    $scope.tmp  = target.getAttribute('data');
+	    alert($scope.tmp)
+	};
+	
+	$scope.Modify = function (target) {
+	
+	};
+	
+	$scope.Delete = function (target) {
+	
+	};
 
  
 }

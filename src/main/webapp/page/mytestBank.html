@@ -20,11 +20,11 @@
         <div class="questionbox" >
 			<accordion close-others="false" ng-repeat="q in reciveData.questions">
 				<div style="float:left;width:1%;padding-top:8px">
-					<input type="checkbox" ng-click="addOnelist(q)" ng-value="q" ng-checked="reciveData.choosedQlist.indexOf(q) > -1" ng-class="{false:'hedden', true: ''}[privi>2]">
+					<input type="checkbox" ng-click="addOnelist(q)" ng-value="q" ng-checked="reciveData.choosedQlist.indexOf(q) > -1" >
                     </input>
 				</div>
 
-				<accordion-group is-open="status.open">
+				<accordion-group>
 					<accordion-heading>
 						<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
 					标题：{{q.name}}					
@@ -33,6 +33,26 @@
 				</accordion-group>
 			 </accordion>
         </div>
+        
+        
+       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		  <div class="panel panel-default">
+		    <div class="panel-heading" role="tab" id="headingOne">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#" aria-expanded="true" aria-controls="collapseOne">
+		          Collapsible Group Item #1
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+		      <div class="panel-body">
+		          test1
+		      </div>
+		    </div>
+		  </div> 
+		</div>
+    
+    
         <ul class="pagination">
             <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)">&laquo;</a></li>
             <li ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)">{{i.index}}</a></li>
@@ -60,7 +80,7 @@
 		                <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
 		                          <!--ng-model="newQuestion.context"></textarea>-->
 		                <!--<div ng-include src="'mdeditor.html'" ></div>-->
-						<textarea ckEditor="editorOptions" ng-model="newQuestion.context"></textarea>
+						<textarea ckEditor="" ng-model="newQuestion.context"></textarea>
 						<!-- textarea ng-model="newQuestion.context"></textarea-->
 		                <div class="hedden" id="context" >{{context}}</div>
 		                <p style="padding: 20px">标签(以 英文,符号 区分)

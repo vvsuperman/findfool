@@ -1,35 +1,47 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top: 50px">
-   <div class="table-responsive">
-   <table class="table table-striped">
-        <thead>
-        <tr>
-            <th></th>
-            <th>试题</th>
-            <th>类型</th>
-            <th>分数</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="q in qs">
-            <td>{{q.qid}}</td>
-            <td>{{q.name}}</td>
-            <td>{{q.type}}</td>
-            <td>{{q.score}}</td>
-            <td>
-                <a href="" data="{{q}}" ng-click="CheckOut($event.target)">查看/</a>
-                <a href="" data="{{q}}" ng-click="Modify($event.target)">修改/</a>
-                <a href="" data="{{q}}" ng-click="Delete($event.target)">删除</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <div ng-if="showButton">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top: 80px" >
+		
+		  <div class="col-md-8">
+		   <div class="panel panel-info">
+			   <div class="panel-heading">
+			   	  已有试题
+			   </div>
+			   
+				   <div class="table-responsive">
+					   <table class="table table-striped">
+					        <thead>
+					        <tr>
+					            <th>试题内容</th>
+					            <th>类型</th>
+					            <th>分数</th>
+					            <th></th>
+					        </tr>
+					        </thead>
+					        <tbody>
+					        <tr ng-repeat="q in qs">
+					            
+					            <td>{{q.content}}</td>
+					            <td>{{q.type}}</td>
+					            <td>{{q.score}}</td>
+					            <td>
+					                <a href="" data="{{q}}" ng-click="CheckOut($event.target)">查看/</a>
+					                <a href="" data="{{q}}" ng-click="Modify($event.target)">修改/</a>
+					                <a href="" data="{{q}}" ng-click="Delete($event.target)">删除</a></td>
+					        </tr>
+					        </tbody>
+					    </table>      
+					</div>
+				
+			
+		</div>
+	 </div> 
+	 <div class="col-md-8"  ng-if="showButton">
         <button class="btn btn-default" data="{{tid}}" ng-click="showDefaultPanel()">添加库试题</button>
         <button class="btn btn-default" data="{{tid}}" ng-click="showCustomPanel()">添加自定义试题</button>
 
     </div>
-	</div>
 </div>
+
+
 
 <div ng-include src="'page/testBank.html'" ng-controller="TestBank" ng-if="showDefault"></div>
 <div ng-include src="'page/mytestBank.html'"  ng-if="showCustom"></div>
