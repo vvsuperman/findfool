@@ -118,6 +118,14 @@ function mytestbank($scope, $http, Data,$sce) {
         });
     }
     
+    $scope.oneAtATime = true;
+    
+    $scope.showContent = function(qid){
+    	console.log("qid........."+qid);
+    	var panelId = "panel"+qid;
+    	panelId = true;
+    }
+    
     $scope.gettrustContext = function(q){
     	var trust = "<span>内容:";
     	trust += q.context +"</span><br/>";

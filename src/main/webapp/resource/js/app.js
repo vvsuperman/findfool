@@ -3,11 +3,13 @@
  * Created by liuzheng on 6/19/14.
  */
 var OJApp = angular.module('OJApp', [
+    'ui.bootstrap',
     'ngRoute',
     'ngSanitize',
     'evgenyneu.markdown-preview',
     'webStorageModule',
     'ngCkeditor'
+    
 ]);
 /*
 OJApp.directive('ckEditor', [function () {
