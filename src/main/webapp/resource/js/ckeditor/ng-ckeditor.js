@@ -35,12 +35,11 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
     return {
         restrict: 'AC',
         require: ['ngModel', '^?form'],
-        scope: false,
+        scope: true,
         link: function (scope, element, attrs, ctrls) {
             
         	//by fw 20141113计算高度
         	var text = element.text();
-        	console.log("test",text);
         	var realHeight = "120px";
         	var length = text.split("\n").length-1;
             if(length > 5){
@@ -79,19 +78,23 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                     uiColor: '#FAFAFA',
                     height: realHeight,
                     width: attrs.width,
-                    removePlugins : 'elementspath',
                     resize_enabled : false
                 };
                 //by fw 20141113 判断是否只读及toolbar是否需要隐藏
-                
+                var removePlugin =[];
                 if(attrs.toolbar == "none"){
-                	console.log("children..........."+element.children());
-                	 element.children("div:first").children("span:first").hide();
-                	 options.toolbarCanCollapse = true;
-                	 options.toolbarStartupExpanded = false;
+                   removePlugin.push('toolbar');
                 }
+                
+                if(attrs.footer == "none"){
+                   removePlugin.push('elementspath');	
+                }
+                
+                console.log("removePlugin.......",removePlugin.join(","));
+                
+                options.removePlugins = removePlugin.join(",");
+                
              
-                console.log("read:",attrs.read);
                 if(attrs.read == "readonly"){
                 	options.readOnly = true;
                 }
@@ -103,6 +106,7 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                 var instance = (isTextarea) ? CKEDITOR.replace(element[0], options) : CKEDITOR.inline(element[0], options),
                     configLoaderDef = $q.defer();
 
+                
                 element.bind('$destroy', function () {
                     instance.destroy(
                         false //If the instance is replacing a DOM element, this parameter indicates whether or not to update the element with the instance contents.
