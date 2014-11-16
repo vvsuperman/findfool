@@ -38,14 +38,6 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
         scope: true,
         link: function (scope, element, attrs, ctrls) {
             
-        	//by fw 20141113计算高度
-        	var text = element.text();
-        	var realHeight = "120px";
-        	var length = text.split("\n").length-1;
-            if(length > 5){
-            	 realHeight =length*20+"px";
-            }
-        	
             var ngModel = ctrls[0];
             var form    = ctrls[1] || null;
             var EMPTY_HTML = '<p></p>',
@@ -76,7 +68,7 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
     	                    ],
                     disableNativeSpellChecker: false,
                     uiColor: '#FAFAFA',
-                    height: realHeight,
+                   // height: realHeight,
                     width: attrs.width,
                     resize_enabled : false
                 };
@@ -90,10 +82,11 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                    removePlugin.push('elementspath');	
                 }
                 
-                console.log("removePlugin.......",removePlugin.join(","));
                 
+                if(attrs.minheight != ""){
+                	options.autoGrow_minHeight = attrs.minheight;
+                }
                 options.removePlugins = removePlugin.join(",");
-                
              
                 if(attrs.read == "readonly"){
                 	options.readOnly = true;

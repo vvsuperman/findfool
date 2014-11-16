@@ -6,6 +6,9 @@
  * created by zpl on 2014/7/18
  */
 
+
+ 
+
 function MyTestBank($scope) {
     $scope.url = '#/mybank';
     $scope.template = 'page/mytestBank.html';
@@ -15,6 +18,12 @@ function MyTestBank($scope) {
     $scope.show = 1;
 }
 function mytestbank($scope, $http, Data,$sce) {
+	
+    $(".checkbox, .radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
+	
+    $(".checkbox, .radio").click(function(){
+	        setupLabel();	      
+	  });
 	
 	$scope.active = 1;
 	$scope.show = 1;

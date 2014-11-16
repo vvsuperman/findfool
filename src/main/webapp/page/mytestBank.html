@@ -1,3 +1,5 @@
+ <link rel="stylesheet" type="text/css" href="resource/css/testbank.css"/>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" ng-controller="mytestbank">
 <h2 class="sub-header">我的试题</h2>
    <ul class="nav nav-tabs list-group">
@@ -77,12 +79,12 @@
 		        
 		       <div class="row">
 		       	<div class="col-md-10">
-		       	  <textarea ckeditor toolbar="none" footer="none" read="readonly" width="80%"   ng-model="q.context"></textarea>
+		       	  <textarea ckeditor toolbar="none" footer="none" read="readonly" minheight="120" width="100%"   ng-model="q.context"></textarea>
 		       	
 		       	<div class="options list col-md-12 col-sm-12  col-xs-12" >
-		       	  <label class='optionlabel checkbox' for={{option.caseId}} ng-repeat="option in q.answer">
-		       	  <input id={{option.caseId}} type='checkbox'>
-		       	    <textarea class='optiontext' disabled='disabled' ng-model="option.text"></textarea>
+		       	  <label customcheckbox class='optionlabel checkbox'  ng-repeat="option in q.answer">
+		       	    <input id= type='checkbox'>
+		       	    <textarea  class='optiontext'  ng-model="option.text"></textarea>
 		       	  </label>
 		        </div>
 		       </div>
@@ -229,3 +231,5 @@
         </div>
     </div>
 </div>
+
+

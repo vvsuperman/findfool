@@ -1,0 +1,22 @@
+label input{
+	cursor: pointer;
+	width:100% !important;
+	height:100% !important;
+}
+
+label span{
+ 	margin-top: 3%; 
+	margin-left: 2%;
+}
+
+.optionlabel{
+/* 	height:50px; */
+	cursor: pointer;
+	border-width: 2px;
+    border-style: solid; 
+    border-color: #f2f2f2;
+	border-radius :5px;
+/* 	padding-top: 15px; */
+	padding-top: 2% !important;
+	padding-bottom:0px !important;
+}
