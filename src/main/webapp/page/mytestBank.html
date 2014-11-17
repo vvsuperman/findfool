@@ -10,7 +10,7 @@
                 {{tt.name}}</a>
         </li>
     </ul>
-    <div ng-class="{0:'hedden', 1: ''}[show]">
+    <div class="col-md-10" ng-class="{0:'hedden', 1: ''}[show]">
         <p>搜索我的题目（标签）</p>
 
         <form class="form-inline" role="form">
@@ -19,60 +19,21 @@
         
         </form>
         <br>
-        <!-- div class="questionbox" >
-			<accordion close-others="false" ng-repeat="q in reciveData.questions">
-				<div style="float:left;width:1%;padding-top:8px">
-					<input type="checkbox" ng-click="addOnelist(q)" ng-value="q" ng-checked="reciveData.choosedQlist.indexOf(q) > -1" >
-                    </input>
-				</div>
-
-				<accordion-group>
-					<accordion-heading>
-						<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-					标题：{{q.name}}					
-					</accordion-heading>
-					<div ng-bind-html="gettrustContext(q)" compile-template></div>
-				</accordion-group>
-			 </accordion>
-        </div-->
-        
-        
-       <!-- div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">`
-		  <div class="panel panel-default"  ng-repeat="q in reciveData.questions">
-		    <div class="panel-heading" role="tab" id="headingOne">
-		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="" ng-click="showContent(q.qid)" aria-expanded="true" aria-controls="collapseOne">
-		          {{q.name}}
-		        </a>
-		         <button class="btn btn-link pull-right" ng-click="deleteQuestion(q.qid)">删除</button>
-		         <button class="btn btn-link  pull-right" ng-click="modifyQuestion(q.qid)">修改</button>
-		         <button class="btn btn-link pull-right"  ng-click="addQuestion(q.qid)">增加</button>
-		      </h4>
-		    </div>
-		    <div class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" ng-if="panel+q.qid">
-		      <div class="panel-body">
-		          test1caocaocao
-		      </div>
-		    </div>
-		  </div> 
-		</div-->
+      
 		
 		 <accordion close-others="oneAtATime">
 		    
 		    <accordion-group  ng-repeat="q in reciveData.questions">
 		      <accordion-heading>
 			       <div class="row">
-			         <div class="col-md-6">
-			            {{index}}{{q.name}} 
+			         <div class="col-md-6 accordinhead">
+			            {{q.name}} 
 			       	 </div>
-			       	 <div class="col-md-1" >
-			       	 	<i class=" glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-			       	 </div>
-			       	 <div class="col-md-5">
-			       	 	 <button class="btn btn-link"  ng-click="addQuestion(q.qid)">增加</button>
-				         <button class="btn btn-link" ng-click="modifyQuestion(q.qid)">修改</button>
-				         <button class="btn btn-link" ng-click="deleteQuestion(q.qid)">删除</button>
-				         
+			       	 
+			       	 <div class="col-md-5 ">
+			        	 <a class="pull-right" href="" ng-click="deleteQuestion(q.qid)"><h6> 删除</h6></a>
+				         <a class="pull-right" href="" ng-click="modifyQuestion(q.qid)"><h6> 修改/</h6></a>
+				         <a class="pull-right" href="" ng-click="addQuestionToTest(q.qid)"><h6>增加/</h6></a>
 			       	 </div>
 			       </div>
 		        </accordion-heading>
@@ -82,9 +43,9 @@
 		       	  <textarea ckeditor toolbar="none" footer="none" read="readonly" minheight="120" width="100%"   ng-model="q.context"></textarea>
 		       	
 		       	<div class="options list col-md-12 col-sm-12  col-xs-12" >
-		       	  <label customcheckbox class='optionlabel checkbox'  ng-repeat="option in q.answer">
-		       	    <input id= type='checkbox'>
-		       	    <textarea  class='optiontext'  ng-model="option.text"></textarea>
+		       	  <label customcheckbox isright={{option.isright}} operation={{operation}} class='optionlabel checkbox'  ng-repeat="option in q.answer">
+		       	    <textarea disabled="disabled"  class='optiontext'  ng-model="option.text"></textarea>
+		       	     <input type="checkbox">
 		       	  </label>
 		        </div>
 		       </div>

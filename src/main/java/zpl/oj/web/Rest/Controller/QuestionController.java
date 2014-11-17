@@ -64,7 +64,6 @@ public class QuestionController {
 	public ResponseBase add(@RequestBody RequestAddQuestion request){
 		ResponseBase rb = new ResponseBase();
 		Integer pid = null;
-
 		
 		if(request.getQuestion().getQid() == null){
 			pid = problemService.addProblem(request);

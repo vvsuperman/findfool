@@ -19,11 +19,6 @@ function MyTestBank($scope) {
 }
 function mytestbank($scope, $http, Data,$sce) {
 	
-    $(".checkbox, .radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
-	
-    $(".checkbox, .radio").click(function(){
-	        setupLabel();	      
-	  });
 	
 	$scope.active = 1;
 	$scope.show = 1;
@@ -63,8 +58,19 @@ function mytestbank($scope, $http, Data,$sce) {
 	    uiColor: '#000000'
 	};
 	
-
+	$scope.addQuestionToTest = function(qId){
+		
+	}
 	
+
+	$scope.modifyQuestion = function (qId) {
+		
+	};
+	
+	$scope.deleteQuestion = function (qId) {
+	
+	};
+
 
 
 
@@ -303,13 +309,8 @@ function mytestbank($scope, $http, Data,$sce) {
 
         });
     };
-    /*   $scope.$watch('context', function () {
-     var context = $scope.context;
-     $scope.newQuestion.context =context;
-     console.log(context)
-     })*/
 
-//    $scope.$apply();
+    
     $scope.addQuestion = function () {
         $scope.newQuestion.type = parseInt($scope.active);
         if($scope.newQuestion.answer==""){

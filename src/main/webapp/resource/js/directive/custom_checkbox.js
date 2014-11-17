@@ -5,24 +5,35 @@ OJApp.directive('customcheckbox', function() {
 		restrict: 'A',
 		scope: true,
 		link: function(scope, elem, attrs, ctrl) {
-			console.log("initial directive");
 			elem.prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
-		    elem.click(function(){
-			    var checkBoxChecked = "checked";
-			    var checkBoxDisabled = "disabled";
-
-			    // Radio
-			    var radioOn = "checked";
-			    var radioDisabled = "disabled";	     
-			    
-			    if(elem.children("input").prop("checked") == false){
-			    	elem.children("input").prop("checked",true);
-			    	elem.addClass(checkBoxChecked);
-			    }else{
-			    	elem.children("input").prop("checked",false);
-			    	elem.removeClass(checkBoxChecked)
-			    }
-			  });
+			 var checkBoxChecked = "checked";
+			 var checkBoxDisabled = "disabled";
+			//Radio
+			 var radioOn = "checked";
+			 var radioDisabled = "disabled";	
+			
+			//判断选项是否正确
+			if(attrs.isright == "true"){
+				elem.addClass(checkBoxChecked);
+				elem.css("border-color","#2fe2bf");	
+			}
+			 
+			//若当前是编辑，则可以点击。否则点击无效
+			 if(attrs.operation == "true"){
+				 elem.click(function(){	    	
+					    elem.toggleClass(checkBoxChecked);
+					    if(elem.hasClass(checkBoxChecked)){
+				        	elem.css("border-color","#2fe2bf");	
+				        }else{
+				        	elem.css("border-color","#f2f2f2");
+				        }
+					  });
+				
+			} 
+			 
+		
+			
+		   
 
 		},
 		replace: false   

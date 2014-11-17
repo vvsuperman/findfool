@@ -118,13 +118,6 @@ function TestPageTid($scope, $routeParams, $http, Data) {
 	    alert($scope.tmp)
 	};
 	
-	$scope.Modify = function (target) {
 	
-	};
-	
-	$scope.Delete = function (target) {
-	
-	};
-
  
 }
