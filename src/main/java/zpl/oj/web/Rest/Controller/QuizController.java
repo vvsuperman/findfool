@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestDetail;
@@ -246,5 +248,27 @@ public class QuizController {
 		}
 		return rb;
 	}
+	
+	@RequestMapping(value = "/addquestion",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase addQuestion(
+			@RequestBody QuizProblem quizProblem
+//			@RequestParam(value="quizId", required=true)   String quizId,
+//			@RequestParam(value="questionId", required=true)   Integer questionId
+			) {
+		ResponseBase rb = new ResponseBase();
+		String msg = quizService.addQuestionToQuiz(quizProblem);
+		if(msg != null){
+			rb.setState(1);
+			rb.setMessage(msg);
+		}else{
+			rb.setState(0);
+			rb.setMessage("success");
+		}
+		
+		return rb;
+	}
+	
+	
 
 }

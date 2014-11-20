@@ -4,7 +4,7 @@ import zpl.oj.model.request.Question;
 
 public class RequestAddQuestion {
 	private RequestUser user;
-	private int quizId;
+	private int quizId;   //add by fw 20141111
 	public int getQuizId() {
 		return quizId;
 	}
@@ -12,7 +12,7 @@ public class RequestAddQuestion {
 		this.quizId = quizId;
 	}
 	private Question question;
-	//add by fw 20141111
+	
 
 
 	

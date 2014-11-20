@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.QuizProblem;
 
@@ -18,9 +19,22 @@ public interface QuizProblemDao {
 			+ "  FROM QUIZPROBLEM WHERE QUIZID=#{0}")
   List<QuizProblem> getQuizProblemsByQuizId(int quizId);  
 	
-	@Insert("INSERT INTO QUIZPROBLEM( QUIZID,  PROBLEMID,  DATE,  LANG)"
+	
+  @Select("SELECT TPID,   QUIZID,   PROBLEMID,   DATE,   LANG    "
+			+ "  FROM QUIZPROBLEM WHERE QUIZID=#{quizid} AND PROBLEMID=#{problemid}")
+  List<QuizProblem> getQuizProblemsByQuizProblem(QuizProblem quizproblem);  
+	
+  @Insert("INSERT INTO QUIZPROBLEM( QUIZID,  PROBLEMID,  DATE,  LANG)"
 			+ " VALUES( #{quizid}, #{problemid}, #{date}, #{lang})")
   void insertQuizproblem(QuizProblem quizproblem);
+	
+	
+  //若测试已发出，则不更新试题	
+  @Update("UPDATE QUIZPROBLEM SET PROBLEMID = #{problemId} WHERE"
+  		+ "QUIZID NOT IN (SELECT TESTID FROM INVITE ) AND QUIZID=#{quizid} AND PROBLEMID=#{oldProblemId}")
+  void updateByQuizproblem(int quizId, int oldProblemId,int problemId);
+	
+	
   
  // void deleteQuizproblem();
   

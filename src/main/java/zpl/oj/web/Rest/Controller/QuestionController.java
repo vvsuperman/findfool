@@ -59,6 +59,7 @@ public class QuestionController {
 		rb.setState(1);
 		return rb;
 	}
+	
 	@RequestMapping(value="/add")
 	@ResponseBody
 	public ResponseBase add(@RequestBody RequestAddQuestion request){
@@ -78,4 +79,8 @@ public class QuestionController {
 		rb.setState(1);
 		return rb;
 	}
+	
+	
+	
+
 }

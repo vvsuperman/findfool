@@ -23,4 +23,6 @@ public interface ProblemService {
 	ResponseSearchResult getQuestionBySetId(RequestSearch s);
 	
 	ResponseSearchResult getQuestionByUser(RequestSearch s);
+
+	String modifyQuestion(Question question);
 }

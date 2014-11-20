@@ -1,13 +1,10 @@
-/**
- * Created by liuzheng on 2014/7/11.
- */
+
 /*
  * object for page
  * created by zpl on 2014/7/18
  */
 
 
- 
 
 function MyTestBank($scope) {
     $scope.url = '#/mybank';
@@ -17,7 +14,42 @@ function MyTestBank($scope) {
     $scope.active = 1;
     $scope.show = 1;
 }
-function mytestbank($scope, $http, Data,$sce) {
+
+
+OJApp.controller('ModalInstanceCtrl',function ($scope,$http, $modalInstance,question,Data) {
+	//绑定变量到服务
+	$scope.question = question;
+	$scope.saveQustion = function () {
+			 var sendData={"quizid":$scope.tid,"user":{"uid": Data.uid()},"question":question};
+			 console.log("sendData",sendData);
+			 $http({
+		            url: WEBROOT+"/question/add",
+		            method: 'POST',
+		            headers: {
+		                "Authorization": Data.token()
+		            },
+		            data: sendData
+		        }).success(function (data) {
+		        	alert("试题修改成功");
+		        }).error(function (data) {
+		           console.log("获取数据错误");
+		        });
+		
+		
+		$modalInstance.dismiss('cancel');
+	};
+	
+	
+	$scope.cancel = function(){
+		$modalInstance.dismiss('cancel');
+	}
+	
+	
+});
+
+
+
+function mytestbank($scope, $http, Data,$sce,$modal) {
 	
 	
 	$scope.active = 1;
@@ -58,17 +90,57 @@ function mytestbank($scope, $http, Data,$sce) {
 	    uiColor: '#000000'
 	};
 	
-	$scope.addQuestionToTest = function(qId){
-		
+	$scope.addQuestionToTest = function(qid,$event){
+		 var sendData={"quizid":$scope.tid,"problemid":qid};
+		 $http({
+	            url: WEBROOT+"/test/addquestion",
+	            method: 'POST',
+	            headers: {
+	                "Authorization": Data.token()
+	            },
+	            data: sendData
+	        }).success(function (data) {
+	        	if(data.message == "success"){
+	        		alert("添加试题成功");
+	        		//在我的试题列表中删除元素
+	        		for(i in $scope.reciveData.questions){
+	        			 if($scope.reciveData.questions[i] == qid){
+	        				$scope.reciveData.questions.splite(i,1);
+	        			 }
+	        		}
+	        	}else{
+	        		alert(data.message);
+	        	}
+	        }).error(function (data) {
+	           console.log("获取数据错误");
+	        });
+		//阻止事件传播
+		 $event.stopPropagation();
 	}
 	
 
-	$scope.modifyQuestion = function (qId) {
-		
-	};
+	$scope.modifyQuestionInTest = function (size,q) {
+	 
+		 var modalInstance = $modal.open({
+		      templateUrl: 'myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      size: size,
+		      resolve: {
+		          question: function () {
+		            return q;
+		          }
+		      }
+		 });
+	 };
+
 	
-	$scope.deleteQuestion = function (qId) {
 	
+	
+	
+	
+	
+	
+	$scope.deleteQuestionFromTest = function (qid,$event) {
 	};
 
 

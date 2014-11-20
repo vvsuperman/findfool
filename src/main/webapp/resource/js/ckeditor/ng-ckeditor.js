@@ -82,7 +82,7 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                    removePlugin.push('elementspath');	
                 }
                 
-                
+                //最小高度
                 if(attrs.minheight != ""){
                 	options.autoGrow_minHeight = attrs.minheight;
                 }

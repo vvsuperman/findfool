@@ -238,6 +238,7 @@ public class ProblemServiceImp implements ProblemService{
 		if(p == null){
 			return addProblem(q);
 		}
+		//新建一个problem
 		p.setModifier(q.getUser().getUid());
 		p.setProblemSetId(q.getQuestion().getSetid());
 		p.setDescription(q.getQuestion().getContext());
@@ -249,6 +250,7 @@ public class ProblemServiceImp implements ProblemService{
 		User u = userService.getUserById(q.getUser().getUid());
 		problemDao.insertProblem(p);
 		int pid = problemDao.getProblemId(p.getCreator());
+		//更新tag
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);
 			if(tagid == null){
@@ -257,7 +259,7 @@ public class ProblemServiceImp implements ProblemService{
 			}
 			problemTagDao.insertTagProblem(tagid, pid);
 		}
-		
+		//新建选项
 		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
 			ProblemTestCase pt = new ProblemTestCase();
 			pt.setProblemId(pid);
@@ -266,8 +268,21 @@ public class ProblemServiceImp implements ProblemService{
 			pt.setScore(qt.getScore());
 			problemTestCaseDao.insertProblemTestCase(pt);
 		}
+		
+		//by fangwei，修改试题后，更新所有关联到该试题的测试，若测试已发送，则不更新
+		List<QuizProblem> quizProblems= quizProblemDao.getQuizProblemsByProblemId(pid);
+		for(QuizProblem quizProblem: quizProblems){
+			quizProblemDao.updateByQuizproblem(quizProblem.getQuizid(), quizProblem.getProblemid(), pid);
+		}
+		
+			
+		
+		//by fangwei,修改试题不用更新quiz的版本，太麻烦，改用quiz的clone好了
 		//problemDao.updateProblem(p);
 		//更新quiz们
+		/*
+		
+		
 		List<QuizProblem> qps = quizService.getQuizsByProblemId(q.getQuestion().getQid());
 		Map<Integer,List<Integer>> quizs = new HashMap<Integer,List<Integer>>();
 		for(QuizProblem qp:qps){
@@ -275,19 +290,27 @@ public class ProblemServiceImp implements ProblemService{
 			if(ps == null){
 				ps = new ArrayList<Integer>();
 			}
+			
+			/*
 			if(qp.getProblemid() ==q.getQuestion().getQid()){
 				ps.add(pid);
 			}else{
 				ps.add(qp.getProblemid());
 			}
 			quizs.put(qp.getQuizid(), ps);
+			
 		}
+		
+		
 		
 		for(Map.Entry<Integer, List<Integer>> entry:quizs.entrySet()){
 			quizService.updateQuiz(entry.getKey(), entry.getValue());
 		}
+		*/
+		
 		return pid;
 	}
+	
 	List<Question> checkTags(List<Problem> prbs,String[] tags){
 		List<Question> q = new ArrayList<Question>();
 		int index = 0;
@@ -336,6 +359,15 @@ public class ProblemServiceImp implements ProblemService{
 			quizService.updateQuiz(entry.getKey(), entry.getValue());
 		}
 		return 0;
+	}
+
+	
+	//by fw, add simple modify
+	@Override
+	public String modifyQuestion(Question question) {
+		// TODO Auto-generated method stub
+	
+		return null;
 	}
 
 }

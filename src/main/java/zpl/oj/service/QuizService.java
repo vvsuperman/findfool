@@ -24,5 +24,8 @@ public interface QuizService {
 	Quiz addQuiz(RequestTestMeta tm);
 	
 	List<QuizProblem> getQuizsByProblemId(Integer pid);
+
+
+	String addQuestionToQuiz(QuizProblem quizProblem);
 	
 }

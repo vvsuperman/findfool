@@ -32,6 +32,17 @@ public class QuizServiceImp implements QuizService {
 	public List<Quiz> getQuizByOwner(int owner) {
 		return quizDao.getQuizs(owner);
 	}
+	
+	@Override
+	public String addQuestionToQuiz(QuizProblem quizProblem){
+		List<QuizProblem> lists = quizProblemDao.getQuizProblemsByQuizProblem(quizProblem);
+		if(lists.size() !=0){
+			return "测试已包含此试题";
+		}else{
+			quizProblemDao.insertQuizproblem(quizProblem);
+			return null;
+		}	
+	}
 
 	@Override
 	public ResponseQuizDetail getQuizDetail(int tid) {

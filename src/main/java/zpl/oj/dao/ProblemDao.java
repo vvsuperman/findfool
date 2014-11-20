@@ -29,7 +29,8 @@ public interface ProblemDao {
 			+ " VALUES( #{uuid},#{belong},  #{title},  #{description},  #{date},  #{problemSetId},  #{creator},  #{type},  "
 			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate})")
 	  void insertProblem(Problem problem);	  
-	   
+	
+
 	
 	@Update("    update PROBLEM set "
 			+ " UUID = #{uuid} where problem_id=#{problemId}")

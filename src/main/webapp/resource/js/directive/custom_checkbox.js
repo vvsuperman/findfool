@@ -3,7 +3,10 @@
 OJApp.directive('customcheckbox', function() {
 	return {
 		restrict: 'A',
-		scope: true,
+		scope:true,
+//		scope: {
+//			option:'=option'
+//		},
 		link: function(scope, elem, attrs, ctrl) {
 			elem.prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
 			 var checkBoxChecked = "checked";
@@ -13,28 +16,24 @@ OJApp.directive('customcheckbox', function() {
 			 var radioDisabled = "disabled";	
 			
 			//判断选项是否正确
-			if(attrs.isright == "true"){
+			if(scope.option.isright == "true"){
 				elem.addClass(checkBoxChecked);
 				elem.css("border-color","#2fe2bf");	
 			}
 			 
-			//若当前是编辑，则可以点击。否则点击无效
+			//若当前是编辑，则可以点击。否则不可编辑
 			 if(attrs.operation == "true"){
 				 elem.click(function(){	    	
 					    elem.toggleClass(checkBoxChecked);
 					    if(elem.hasClass(checkBoxChecked)){
 				        	elem.css("border-color","#2fe2bf");	
+				        	scope.option.isright = true;
 				        }else{
 				        	elem.css("border-color","#f2f2f2");
+				        	scope.option.isright = false;
 				        }
 					  });
-				
 			} 
-			 
-		
-			
-		   
-
 		},
 		replace: false   
 	};
