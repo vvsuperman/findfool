@@ -18,14 +18,13 @@
 					        </thead>
 					        <tbody>
 					        <tr ng-repeat="q in qs">
-					            
 					            <td>{{q.content}}</td>
 					            <td>{{q.type}}</td>
 					            <td>{{q.score}}</td>
 					            <td>
-					                <a href="" data="{{q}}" ng-click="CheckOut($event.target)">查看/</a>
-					                <a href="" data="{{q}}" ng-click="Modify($event.target)">修改/</a>
-					                <a href="" data="{{q}}" ng-click="Delete($event.target)">删除</a></td>
+					                <a href="" ng-click="checkOut(q,'lg')">查看/</a>
+					                <a href="" ng-click="Modify(q,'lg')">修改/</a>
+					                <a href="" ng-click="Delete(qs,q)">删除</a></td>
 					        </tr>
 					        </tbody>
 					    </table>      

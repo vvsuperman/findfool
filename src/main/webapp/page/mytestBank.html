@@ -1,4 +1,5 @@
- <link rel="stylesheet" type="text/css" href="resource/css/testbank.css"/>
+<link rel="stylesheet" type="text/css" href="resource/css/testbank.css"/>
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" ng-controller="mytestbank">
 <h2 class="sub-header">未添加试题</h2>
@@ -20,32 +21,6 @@
         </form>
         <br>
       
-      <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" >修改试题</h3>
-        </div>
-
-        <div class="modal-body">
-			<div class="col-md-10">
-		       	  <textarea ckeditor footer="none" minheight="120" width="100%"   ng-model="question.context"></textarea>
-		    </div>
-
-			<div class="options list col-md-12 col-sm-12  col-xs-12" >
-		       	  <label customcheckbox option={{option}} operation="true" class='optionlabel checkbox'  ng-repeat="option in question.answer">
-		       	    <textarea disabled="disabled"  class='optiontext'  ng-model="option.text"></textarea>
-		       	     <input type="checkbox">
-		       	  </label>
-		    </div>
-
-			<div style="clear:both"></div>
-        </div>
-
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="saveQustion()">保存</button>
-            <button class="btn btn-warning" ng-click="cancel()">取消</button>
-        </div>
-      </script>
-      
 		
 		 <accordion close-others="oneAtATime">
 		    
@@ -64,15 +39,15 @@
 		        
 		       <div class="row">
 		       	 <div class="col-md-10">
-		       	  <textarea ckeditor toolbar="none" footer="none" read="readonly" minheight="120" width="100%"   ng-model="q.context"></textarea>
+		       	  <textarea ckeditor toolbar="none" footer="none" read="read" minheight="120" width="100%"   ng-model="q.context"></textarea>
 		       	 </div>
 		       	 <div class="col-md-2">
 		       	  <button class="btn btn-primary" data-target="#modifyModal" ng-click="modifyQuestionInTest('lg',q)"><h6>修改</h6></button>
 		       
 		       	 </div>
 		       	<div class="options list col-md-12 col-sm-12  col-xs-12" >
-		       	  <label customcheckbox  operation={{operation}} class='optionlabel checkbox'  ng-repeat="option in q.answer">
-		       	    <textarea disabled="disabled"  class='optiontext'  ng-model="option.text"></textarea>
+		       	  <label customcheckbox  operation="view" class='optionlabel checkbox'  ng-repeat="option in q.answer">
+		       	    <textarea  class='optiontext'  ng-model="option.text"></textarea>
 		       	     <input type="checkbox">
 		       	  </label>
 		       </div>

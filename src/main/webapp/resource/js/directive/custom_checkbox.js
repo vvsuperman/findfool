@@ -3,11 +3,12 @@
 OJApp.directive('customcheckbox', function() {
 	return {
 		restrict: 'A',
-		scope:true,
+		scope:false,
 //		scope: {
 //			option:'=option'
 //		},
 		link: function(scope, elem, attrs, ctrl) {
+			
 			elem.prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
 			 var checkBoxChecked = "checked";
 			 var checkBoxDisabled = "disabled";
@@ -20,20 +21,30 @@ OJApp.directive('customcheckbox', function() {
 				elem.addClass(checkBoxChecked);
 				elem.css("border-color","#2fe2bf");	
 			}
+			
+			elem.children("textarea").click(function(event){
+				console.log("textarea stop propagation......");
+				event.stopPropagation();
+			})
 			 
 			//若当前是编辑，则可以点击。否则不可编辑
-			 if(attrs.operation == "true"){
-				 elem.click(function(){	    	
-					    elem.toggleClass(checkBoxChecked);
-					    if(elem.hasClass(checkBoxChecked)){
-				        	elem.css("border-color","#2fe2bf");	
-				        	scope.option.isright = true;
-				        }else{
-				        	elem.css("border-color","#f2f2f2");
-				        	scope.option.isright = false;
-				        }
-					  });
-			} 
+			console.log("operation.......",attrs.operation);
+			 if(attrs.operation == "edit"){
+				 elem.click(function(event){	    	
+					 console.log("operation",attrs.operation);
+						 elem.toggleClass(checkBoxChecked);
+						    if(elem.hasClass(checkBoxChecked)){
+					        	elem.css("border-color","#2fe2bf");	
+					        	scope.option.isright = true;
+					        }else{
+					        	elem.css("border-color","#f2f2f2");
+					        	scope.option.isright = false;
+					        }
+					    event.stopPropagation();
+				 });
+			} else{
+				elem.children("textarea").attr("disabled","disabled");
+			}
 		},
 		replace: false   
 	};

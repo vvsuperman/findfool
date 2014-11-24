@@ -45,9 +45,13 @@ body {
 }
 .logohead{
 	 background: url("../static/large-background.png") no-repeat scroll center top;
-  	 height: 595px; 
+  	 height: 550px; 
   	 margin-top: -30px;
   	 background-size:100% 100%;	
+}
+
+.logohead img{
+	height:540px;
 }
 
 .mainimg{

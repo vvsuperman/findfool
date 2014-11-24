@@ -15,43 +15,7 @@ function MyTestBank($scope) {
     $scope.show = 1;
 }
 
-
-OJApp.controller('ModalInstanceCtrl',function ($scope,$http, $modalInstance,question,Data) {
-	//绑定变量到服务
-	$scope.question = question;
-	$scope.saveQustion = function () {
-			 var sendData={"quizid":$scope.tid,"user":{"uid": Data.uid()},"question":question};
-			 console.log("sendData",sendData);
-			 $http({
-		            url: WEBROOT+"/question/add",
-		            method: 'POST',
-		            headers: {
-		                "Authorization": Data.token()
-		            },
-		            data: sendData
-		        }).success(function (data) {
-		        	alert("试题修改成功");
-		        }).error(function (data) {
-		           console.log("获取数据错误");
-		        });
-		
-		
-		$modalInstance.dismiss('cancel');
-	};
-	
-	
-	$scope.cancel = function(){
-		$modalInstance.dismiss('cancel');
-	}
-	
-	
-});
-
-
-
 function mytestbank($scope, $http, Data,$sce,$modal) {
-	
-	
 	$scope.active = 1;
 	$scope.show = 1;
     
@@ -118,16 +82,24 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
 		 $event.stopPropagation();
 	}
 	
-
+	$scope.readonly="readonly";
+	$scope.disabled = "disabled";
+	
 	$scope.modifyQuestionInTest = function (size,q) {
-	 
+		
+	   	var question = jQuery.extend(true, {}, q);
 		 var modalInstance = $modal.open({
-		      templateUrl: 'myModalContent.html',
+		      templateUrl: 'page/myModalContent.html',
 		      controller: 'ModalInstanceCtrl',
 		      size: size,
 		      resolve: {
-		          question: function () {
-		            return q;
+		          params:function(){
+		        	  var obj ={};
+		        	  obj.readonly = "";
+		        	  obj.operation = "edit";
+		        	  obj.title="修改试题";
+		        	  obj.question = question;
+		        	  return obj;
 		          }
 		      }
 		 });

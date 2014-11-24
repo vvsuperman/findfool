@@ -35,7 +35,7 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
     return {
         restrict: 'AC',
         require: ['ngModel', '^?form'],
-        scope: true,
+        scope: {},
         link: function (scope, element, attrs, ctrls) {
             
             var ngModel = ctrls[0];
@@ -87,8 +87,7 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                 	options.autoGrow_minHeight = attrs.minheight;
                 }
                 options.removePlugins = removePlugin.join(",");
-             
-                if(attrs.read == "readonly"){
+                if(attrs.read == "read"){
                 	options.readOnly = true;
                 }
                 

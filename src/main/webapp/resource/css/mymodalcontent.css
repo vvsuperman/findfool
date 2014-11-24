@@ -1,0 +1,38 @@
+.optionlabel{
+/* 	height:50px; */
+	cursor: pointer;
+	border-width: 2px;
+    border-style: solid; 
+    border-color: #f2f2f2;
+	border-radius :5px;
+/* 	padding-top: 15px; */
+	padding-top: 2% !important;
+	padding-bottom:0px !important;
+	position:relative;
+}
+
+label input{
+	cursor: pointer;
+	width:100% !important;
+	height:100% !important;
+	position:absolute; 
+	top:0px;
+	left:0px;
+}
+
+label span{
+ 	margin-top: 3%; 
+	margin-left: 2%;
+}
+
+label textarea{	
+	color:#000000!important;
+	background-color: #ffffff!important;	
+	resize:none;
+	cursor: pointer !important;
+}
+
+label div.cke{
+	margin-left: 10px;
+	margin-bottom:10px;
+}

@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/26.
  */
-function TestPageTid($scope, $routeParams, $http, Data) {
+function TestPageTid($scope, $routeParams, $http,$modal, Data) {
     $scope.url = '#/test';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testlist.html';
@@ -112,10 +112,22 @@ function TestPageTid($scope, $routeParams, $http, Data) {
     
     //by fw 修改混乱逻辑，将方法从testpage移入
     
-    $scope.CheckOut = function (target) {
-	    console.log(target.getAttribute('data'));
-	    $scope.tmp  = target.getAttribute('data');
-	    alert($scope.tmp)
+    $scope.checkOut = function (q,size) {
+    	 var modalInstance = $modal.open({
+		      templateUrl: 'page/myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      size: size,
+		      resolve: {
+		          params:function(){
+		        	  var obj ={};
+		        	  obj.read = "read";
+		        	  obj.operation = "edit";
+		        	  obj.title="查看试题";
+		        	  obj.question = q;
+		        	  return obj;
+		          }
+		      }
+		 });
 	};
 	
 	

@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+<!-- 接受read， -->
+<div class="modal-header">
+            <h3 class="modal-title" >{{title}}</h3>
+        </div>
+
+        <div class="modal-body">
+			<div class="col-md-10">
+		       	  <textarea ckeditor footer="none" minheight="120" width="100%" read={{read}}  ng-model="question.context"></textarea>
+		    </div>
+		    
+
+			<div class="options list col-md-12 col-sm-12  col-xs-12" >
+		       	  <label customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}}>
+		       	    <textarea ckeditor footer="none" minheight="70" width="90%" read={{read}}  class='optiontext'   ng-model="option.text"></textarea>
+		       	     <!--  input type="checkbox"-->
+		       	  </label>
+		    </div>
+
+			<div style="clear:both"></div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="saveQustion()">保存</button>
+            <button class="btn btn-warning" ng-click="cancel()">取消</button>
+        </div>
