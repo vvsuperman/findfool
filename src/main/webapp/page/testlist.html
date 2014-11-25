@@ -1,3 +1,5 @@
+
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top: 80px" >
 		
 		  <div class="col-md-8">
@@ -18,12 +20,12 @@
 					        </thead>
 					        <tbody>
 					        <tr ng-repeat="q in qs">
-					            <td>{{q.content}}</td>
+					            <td abstract context={{q.context}}></td>
 					            <td>{{q.type}}</td>
 					            <td>{{q.score}}</td>
 					            <td>
-					                <a href="" ng-click="checkOut(q,'lg')">查看/</a>
-					                <a href="" ng-click="Modify(q,'lg')">修改/</a>
+					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
+					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
 					                <a href="" ng-click="Delete(qs,q)">删除</a></td>
 					        </tr>
 					        </tbody>

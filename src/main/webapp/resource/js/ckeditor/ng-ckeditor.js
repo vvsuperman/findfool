@@ -72,24 +72,20 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                     width: attrs.width,
                     resize_enabled : false
                 };
-                //by fw 20141113 判断是否只读及toolbar是否需要隐藏
-                var removePlugin =[];
-                if(attrs.toolbar == "none"){
-                   removePlugin.push('toolbar');
+                //by fw 20141113 根据编辑或查看判断是否只读及toolbar是否需要隐藏
+                var removePlugin =[]; 
+                removePlugin.push('elementspath');	
+                if(attrs.operation=="view"){
+                	 removePlugin.push('toolbar');
+                	 options.readOnly = true;
                 }
-                
-                if(attrs.footer == "none"){
-                   removePlugin.push('elementspath');	
-                }
+                options.removePlugins = removePlugin.join(",");
                 
                 //最小高度
                 if(attrs.minheight != ""){
                 	options.autoGrow_minHeight = attrs.minheight;
                 }
-                options.removePlugins = removePlugin.join(",");
-                if(attrs.read == "read"){
-                	options.readOnly = true;
-                }
+              
                 
                 
                 

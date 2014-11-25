@@ -82,28 +82,9 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
 		 $event.stopPropagation();
 	}
 	
-	$scope.readonly="readonly";
-	$scope.disabled = "disabled";
+
 	
-	$scope.modifyQuestionInTest = function (size,q) {
-		
-	   	var question = jQuery.extend(true, {}, q);
-		 var modalInstance = $modal.open({
-		      templateUrl: 'page/myModalContent.html',
-		      controller: 'ModalInstanceCtrl',
-		      size: size,
-		      resolve: {
-		          params:function(){
-		        	  var obj ={};
-		        	  obj.readonly = "";
-		        	  obj.operation = "edit";
-		        	  obj.title="修改试题";
-		        	  obj.question = question;
-		        	  return obj;
-		          }
-		      }
-		 });
-	 };
+	
 
 	
 	

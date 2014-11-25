@@ -5,14 +5,26 @@
         </div>
 
         <div class="modal-body">
-			<div class="col-md-10">
-		       	  <textarea ckeditor footer="none" minheight="120" width="100%" read={{read}}  ng-model="question.context"></textarea>
-		    </div>
+        	<!-- div class="row">
+	       	    <form class="form-horizontal" role="form">
+		        	<div class="from-group">
+		        		<label class="control-label col-md-2">试题名称</label>
+		        		<div class="col-md-4">
+		        			<input class="form-control" type="text" ng-model="question.name">
+		        		</div>
+		        	</div>	
+	        	</form>
+        	</div-->
+			
+				<div class="col-md-12" style="margin-top: 20px">
+		       	  	<textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea>
+		       	</div>  
+		  
 		    
 
 			<div class="options list col-md-12 col-sm-12  col-xs-12" >
 		       	  <label customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}}>
-		       	    <textarea ckeditor footer="none" minheight="70" width="90%" read={{read}}  class='optiontext'   ng-model="option.text"></textarea>
+		       	    <textarea ckeditor  minheight="70" width="90%" operation={{operation}} class='optiontext'   ng-model="option.text"></textarea>
 		       	     <!--  input type="checkbox"-->
 		       	  </label>
 		    </div>

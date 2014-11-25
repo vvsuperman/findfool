@@ -20,8 +20,31 @@
         
         </form>
         <br>
-      
-		
+        
+         <div class="table-responsive">
+					   <table class="table table-striped">
+					        <thead>
+					        <tr>
+					            <th>试题内容</th>
+					            
+					            <th></th>
+					        </tr>
+					        </thead>
+					        <tbody>
+					        <tr ng-repeat="q in reciveData.questions">
+					            <td abstract context={{q.context}}></td>
+					           
+					            <td>
+					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
+					                <a href="" ng-click="addQuestionToTest(q.qid,$event)">增加/</a>
+					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
+					                <a href="" ng-click="deleteQuestionFromTest(qs,q)">删除</a>
+					            </td>
+					        </tr>
+					        </tbody>
+					    </table>      
+		   </div>
+	<!-- 
 		 <accordion close-others="oneAtATime">
 		    
 		    <accordion-group  ng-repeat="q in reciveData.questions">
@@ -57,7 +80,8 @@
 		    
 		  </accordion>
     
-    
+     -->	
+     
         <ul class="pagination">
             <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)">&laquo;</a></li>
             <li ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)">{{i.index}}</a></li>

@@ -232,6 +232,8 @@ public class ProblemServiceImp implements ProblemService{
 		return res;
 	}
 
+	
+	//by fangwei 20141125 不管什么版本的问题，全部更新,加入事务
 	@Override
 	public int modifyProblem(RequestAddQuestion q) {
 		Problem p = problemDao.getProblem(q.getQuestion().getQid());
@@ -248,8 +250,8 @@ public class ProblemServiceImp implements ProblemService{
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
 		User u = userService.getUserById(q.getUser().getUid());
-		problemDao.insertProblem(p);
-		int pid = problemDao.getProblemId(p.getCreator());
+		problemDao.updateProblemInstance(p);
+		int pid = p.getProblemId();
 		//更新tag
 		for(String tag:q.getQuestion().getTag()){
 			Integer tagid = problemTagDao.getTagId(tag);
@@ -261,19 +263,19 @@ public class ProblemServiceImp implements ProblemService{
 		}
 		//新建选项
 		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
-			ProblemTestCase pt = new ProblemTestCase();
-			pt.setProblemId(pid);
+			ProblemTestCase pt = problemTestCaseDao.getProblemTestCaseById(qt.getCaseId());
 			pt.setArgs(qt.getText());
 			pt.setExceptedRes(qt.getIsright());
 			pt.setScore(qt.getScore());
-			problemTestCaseDao.insertProblemTestCase(pt);
+			problemTestCaseDao.updateProblemTestCase(pt);
 		}
 		
 		//by fangwei，修改试题后，更新所有关联到该试题的测试，若测试已发送，则不更新
+		/*
 		List<QuizProblem> quizProblems= quizProblemDao.getQuizProblemsByProblemId(pid);
 		for(QuizProblem quizProblem: quizProblems){
 			quizProblemDao.updateByQuizproblem(quizProblem.getQuizid(), quizProblem.getProblemid(), pid);
-		}
+		}*/
 		
 			
 		

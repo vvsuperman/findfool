@@ -30,6 +30,11 @@ public interface ProblemDao {
 			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate})")
 	  void insertProblem(Problem problem);	  
 	
+	//by fangwei 
+	@Update("    update PROBLEM set "
+			+ " UUID = #{uuid} , title=#{title},description=#{description},problem_set_id=#{problemSetId},limit_time=#{limitTime},"
+			+ "limit_mem=#{limitMem},submit=#{submit},sloved=#{sloved},modifier=#{modifier},modifydate=#{modifydate} where problem_id=#{problemId}")
+	  void updateProblemInstance(Problem problem);	
 
 	
 	@Update("    update PROBLEM set "

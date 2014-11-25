@@ -130,6 +130,27 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
 		 });
 	};
 	
+	//查看和修改试题的通用方法
+	$scope.modifyQuestionInTest = function (size,q,params) {
+		
+	   	var question = jQuery.extend(true, {}, q);
+		 var modalInstance = $modal.open({
+		      templateUrl: 'page/myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      size: size,
+		      resolve: {
+		          params:function(){
+		        	  var obj ={};
+		        	
+		        	  obj.operation = params.operation;
+		        	  obj.title=params.title;
+		        	  obj.question = question;
+		        	  return obj;
+		          }
+		      }
+		 });
+	 };
+	
 	
  
 }
