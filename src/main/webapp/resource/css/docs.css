@@ -71,7 +71,9 @@ body {
 .btn-outline {
   color: #563d7c;
   background-color: #fff;
-  border-color: #e5e5e5;
+  border-color: #563d7c;
+  border-width: 1px;
+  border-style: solid;
 }
 .btn-outline:hover,
 .btn-outline:focus,

@@ -2,6 +2,8 @@ package zpl.oj.web.Rest.Controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -205,16 +207,25 @@ public class QuizController {
 				}
 				String url = desService.encode(""+q.getQuizid());
 				MailSenderInfo mailSenderInfo = new MailSenderInfo();
-				mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
+				mailSenderInfo.setMailServerHost("smtp.163.com");   
+				mailSenderInfo.setMailServerPort("25");
+				mailSenderInfo.setUserName("weifangscs@163.com");   
+				mailSenderInfo.setPassword("fw820721");//您的邮箱密码  
+				
+				mailSenderInfo.setFromAddress("weifangscs@163.com");
 				mailSenderInfo.setToAddress(u.getEmail());
 				mailSenderInfo.setReplyToAddress(request.getReplyTo());
 				mailSenderInfo.setSubject(request.getSubject());
 				String context = request.getContext();
-				context += "<p>欢迎来xxoo做测试，请登录到"+"http://live.gettongji.info/liu/#/Mchoice/"+url+",,"
+				context += "<p>欢迎来xxoo做测试，请登录到"+"http://localhost:8080/oj/#/mchoice/"+url+",,"
 						+ "<br/>您的登录账号为：" + u.getEmail() + " <br/>您的密码为：" + pwd
 						+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
 				mailSenderInfo.setContent(context);
-				SimpleMailSender.sendHtmlMail(mailSenderInfo);
+				try {
+					SimpleMailSender.sendHtmlMail(mailSenderInfo);
+				} catch (Exception e) {
+					e.printStackTrace();    
+				}
 			}
 
 			ht.setInvited_left(ht.getInvited_left() - num);

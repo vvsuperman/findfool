@@ -116,13 +116,13 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page/page.html',
                 controller: 'aceEditor'
             }).
-            when('/MChoice', {
+            when('/mchoice', {
                 templateUrl: 'page/page.html',
-                controller: 'MChoice'
+                controller: 'mchoice'
             }).
-            when('/MChoice/:r', {
+            when('/mchoice/:r', {
                 templateUrl: 'page/page.html',
-                controller: 'MChoice'
+                controller: 'mchoice'
             }).
             when('/adminhome', {
                 templateUrl: 'page/admin/adminhome.html',

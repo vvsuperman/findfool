@@ -1,9 +1,9 @@
 /**
  * Created by liuzheng on 2014/7/22.
  */
-function MChoice($scope, $sce, $http, Data, $routeParams) {
-    $scope.url = '#/MChoice';
-    $scope.template = 'MChoice.html';
+function mchoice($scope, $sce, $http, Data, $routeParams) {
+    $scope.url = '#/mchoice';
+    $scope.template = 'mchoice.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
     Data.setKey1("1");
