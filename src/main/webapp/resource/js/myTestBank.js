@@ -68,8 +68,10 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
 	        		alert("添加试题成功");
 	        		//在我的试题列表中删除元素
 	        		for(i in $scope.reciveData.questions){
-	        			 if($scope.reciveData.questions[i] == qid){
-	        				$scope.reciveData.questions.splite(i,1);
+	        			 if($scope.reciveData.questions[i].qid == qid){
+	        				$scope.qs.push($scope.reciveData.questions[i]);
+	        				$scope.reciveData.questions.splice(i,1);
+	        				break;
 	        			 }
 	        		}
 	        	}else{
@@ -79,24 +81,9 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
 	           console.log("获取数据错误");
 	        });
 		//阻止事件传播
-		 $event.stopPropagation();
+		// $event.stopPropagation();
 	}
 	
-
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	$scope.deleteQuestionFromTest = function (qid,$event) {
-	};
-
-
 
 
     //add by zpl
@@ -146,6 +133,19 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
                 //total pageNum
                 $scope.reciveData.totalPage = $scope.message.totalPage;
                 $scope.reciveData.pageNum = $scope.message.pageNum;
+                //删除已添加到测试中的试题
+                /*
+                var questions = $scope.message.questions;
+                var pids=[];
+                for(i in $scope.qs){
+                	pids.push($scope.qs[i].pid);
+                }
+                for(i in questions){
+                	if(pids.indexOf(questions[i].pid)!=-1){
+                		questions.splice(i,1);
+                	}
+                }
+                $scope.reciveData.questions = questions;*/
                 $scope.reciveData.questions = $scope.message.questions;
                 $scope.computePage();
             } else {

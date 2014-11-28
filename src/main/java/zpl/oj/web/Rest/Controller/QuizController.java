@@ -265,10 +265,19 @@ public class QuizController {
 			rb.setState(0);
 			rb.setMessage("success");
 		}
-		
 		return rb;
 	}
 	
+	@RequestMapping(value = "/delquestion",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase deleteQuestionFromTest(
+			@RequestBody QuizProblem quizProblem
+			){
+		ResponseBase rb = new ResponseBase();
+		quizService.deleteQuestionFromTest(quizProblem);
+		rb.setState(1);
+		return rb;
+	}
 	
 
 }

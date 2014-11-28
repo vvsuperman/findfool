@@ -2,6 +2,7 @@ package zpl.oj.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -30,9 +31,15 @@ public interface QuizProblemDao {
 	
 	
   //若测试已发出，则不更新试题	
+  /*逻辑更改，不用这么做
   @Update("UPDATE QUIZPROBLEM SET PROBLEMID = #{problemId} WHERE"
   		+ "QUIZID NOT IN (SELECT TESTID FROM INVITE ) AND QUIZID=#{quizid} AND PROBLEMID=#{oldProblemId}")
   void updateByQuizproblem(int quizId, int oldProblemId,int problemId);
+  */
+  
+  @Delete("delete from quizproblem where  QUIZID=#{quizid} AND PROBLEMID=#{problemid}")
+  
+  void deleteQuestionFromTest(QuizProblem quizProblem);
 	
 	
   

@@ -1,67 +1,97 @@
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="Excel">
-    <div class="col-md-4" id="drop">直接将 Excel 2003 文件拖到这里吧</div>
-    <div class="col-md-2">下载模版，然后选择上传
-        <a class="btn btn-default" href="static/invite.xls">点我下载模版</a>
+	<div class="row">
+		<p class="col-md-2">请先<a href="resource/static/invite.xls">下载</a>模板 </p>
     </div>
-    <p><strong>邀请候选人</strong>
+	
+	<div class="row">
+    	<div class="col-md-12" id="drop">请把模板文件拖动到这里</div>
+  	</div>
+  	
+    <!--  p>
         <button class="btn btn-info pull-right" ng-click="refresh()">清理重复联系人</button>
-    </p>
-
-    <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
-        <ul class="nav nav-tabs list-group">
-            <li ng-repeat="tl in testlist track by $index"
-                ng-class="{true: 'active', false: 'inactive'}[tl==active]">
-                <a href data="{{tl}}" ng-click="selectTest($event.target)">
-                    {{tl}}</a>
-            </li>
-        </ul>
-        <table class="table form-inline">
-            <thead>
-            <tr>
-                <th>姓</th>
-                <th>名</th>
-                <th>Email</th>
-                <th>电话<a class="glyphicon glyphicon-plus aa pull-right" href="" ng-click="addOne(0)"></a></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="user in xlsusers|filterTest:active">
-
-                <td>
-                    <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
-                    <input class="form-control" type="text" value="{{userfname}}" ng-model="user.fname"
-                           style="width: 90%"/>
-                </td>
-                <td><input class="form-control" type="text" value="{{user.lname}}" ng-model="user.lname"/></td>
-                <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/></td>
-                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel"
-                           style="width: 80%"/>
-                    <a class="glyphicon glyphicon-plus aa" href="" ng-click="addOne(user)"></a>
-                </td>
-
-            </tr>
-
-            </tbody>
-        </table>
+    </p-->
+	<div class="row" style="margin-top: 20px">
+	    <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
+	        <ul class="nav nav-tabs list-group">
+	            <li ng-repeat="tl in testlist track by $index"
+	                ng-class="{true: 'active', false: 'inactive'}[tl==active]">
+	                <a href data="{{tl}}" ng-click="selectTest($event.target)">
+	                    {{tl}}</a>
+	            </li>
+	        </ul>
+	        <table class="table form-inline">
+	            <thead>
+	            <tr>
+	                <th>姓</th>
+	                <th>名</th>
+	                <th>Email</th>
+	                <th>电话</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <tr ng-repeat="user in xlsusers|filterTest:active">
+	
+	                <td>
+	                    <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
+	                    <input class="form-control" type="text" value="{{userfname}}" ng-model="user.fname"
+	                           style="width: 90%"/>
+	                </td>
+	                <td><input class="form-control" type="text" value="{{user.lname}}" ng-model="user.lname"/></td>
+	                <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/></td>
+	                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel"
+	                           style="width: 80%"/>
+	                    <a class="glyphicon glyphicon-plus aa" href="" ng-click="addOne(user)"></a>
+	                </td>
+	
+	            </tr>
+	
+	            </tbody>
+	        </table>
+	    </div>
     </div>
-    <div class="col-md-12">
-        <p><strong>Customize the invitation email to your candidates:</strong></p>
-
-        <p>From:</p>
-
-        <p>Reply To:<input class="form-control" type="text" ng-model="replyTo"/></p>
-
-        <p>Subject:<input class="form-control" type="text" ng-model="subject"/></p>
-        <!--<div ng-include src="'mdeditor.html'" ></div>-->
-        <textarea cleditor ng-model="content"></textarea>
-        <!--{{content}}-->
-        <div class="pull-right">
-            <button class="btn btn-default" ng-click="clean()">Clean</button>
-            <button class="btn btn-default">Preview</button>
-            <button class="btn btn-success" ng-click="sent()">Sent</button>
-        </div>
-    </div>
+    
+    <div class="row">
+	    <div class=" panel panel-default">
+	    <div class="panel-heading">
+	       <p><strong>自定义信息</strong></p>
+	    </div>
+	    
+	    <div class="panel-body">
+	    	<form class="form-horizontal">
+	    		<div class="form-group">
+	    			 <label  class="col-sm-2 control-label">成绩反馈邮箱</label>
+				     <div class="col-md-4">
+				       <input type="email" class="form-control"  ng-model="replyTo"  placeholder="Email">
+				     </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			 <label  class="col-sm-2 control-label">subject</label>
+				     <div class="col-md-4">
+				       <input type="email" class="form-control"   ng-model="subject" placeholder="subject">
+				     </div>
+	    		</div>
+	    		<div class="form-group">
+		    		<label class="col-sm-2 control-label"	>欢迎语</label>
+		    		<div class="col-md-9">
+		    		  <textarea ckeditor ng-model="content" class="form-control"></textarea>
+		    		 </div>
+	    		</div>
+	    	</form>	  
+	    	
+	    	 <div class="col-md-6 col-md-offset-8">
+	            <button class="btn btn-default" ng-click="clean()">重置</button>
+	            <button class="btn btn-primary">预览</button>
+	            <button class="btn btn-success" ng-click="sent()">发送</button>
+	        </div>
+	    	  
+	    </div>
+	      
+	        <!--{{content}}-->
+	       
+	    </div>
+	    </div>
     <!--<button ng-click="btntest()">btntest</button>-->
 </div>
-<script src="resource/js/xls/excle.js"></script>
+<!--  script src="resource/js/xls/excel.js"></script-->
 <!--<script src="js/xlsreader.js"></script>-->

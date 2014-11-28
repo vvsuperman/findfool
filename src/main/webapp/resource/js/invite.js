@@ -11,6 +11,7 @@ function Excel($scope, $http, Data) {
     $scope.xlsusers = [
         {fname: '', lname: '', email: '', tel: '', test: Data.tname()}
     ];
+    
     $scope.addOne = function (v) {
         var i = $scope.xlsusers.indexOf(v);
         if ($scope.active == 'notSelect') {
@@ -19,12 +20,14 @@ function Excel($scope, $http, Data) {
             $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: $scope.active});
         }
     };
+    
     $scope.removeOne = function (v) {
         var i = $scope.xlsusers.indexOf(v);
         if (i > -1) {
             $scope.xlsusers.splice(i, 1);
         }
     };
+    
     $scope.removeTest = function (v) {
         //等待增加功能
 //        var tmp = $scope.xlsusers;
@@ -34,9 +37,11 @@ function Excel($scope, $http, Data) {
 //        }
 //        $scope.xlsusers = tmp;
     };
+    
     $scope.clean = function () {
         $scope.content = ""
     };
+    
     $scope.refresh = function () {
         var tmp = $scope.xlsusers;
         var list = [];
@@ -80,8 +85,11 @@ function Excel($scope, $http, Data) {
         }
         $scope.xlsusers = tmpp;
     };
+    
     $scope.refresh();
+    
     $scope.tnamelist = {};
+    
     $scope.queryByName = function (tname) {
         $http({
             url: WEBROOT+"/test/queryByName",
@@ -101,7 +109,9 @@ function Excel($scope, $http, Data) {
         }).error(function (data) {
         });
     };
+    
     $scope.testlist.forEach($scope.queryByName);
+    
     $scope.upload = function (tname, userlist) {
         $http({
             url: WEBROOT+"/test/manage/invite",
@@ -122,6 +132,7 @@ function Excel($scope, $http, Data) {
         }).error(function (data) {
         });
     };
+    
     $scope.sent = function () {
         for (tid in $scope.testlist) {
             var tmp = [];
@@ -137,9 +148,10 @@ function Excel($scope, $http, Data) {
             $scope.upload($scope.testlist[tid], tmp);
         }
     };
+    
     var use_worker = true;
     function xlsworker(data, cb) {
-        var worker = new Worker('./js/xlsworker.js');
+        var worker = new Worker('resource/js/xlsworker.js');
         worker.onmessage = function (e) {
             switch (e.data.t) {
                 case 'ready':

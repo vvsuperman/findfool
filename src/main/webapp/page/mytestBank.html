@@ -36,51 +36,15 @@
 					           
 					            <td>
 					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-					                <a href="" ng-click="addQuestionToTest(q.qid,$event)">增加/</a>
 					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
-					                <a href="" ng-click="deleteQuestionFromTest(qs,q)">删除</a>
+					                <a href="" ng-click="addQuestionToTest(q.qid,$event)">增加</a>
+					                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
 					            </td>
 					        </tr>
 					        </tbody>
 					    </table>      
 		   </div>
-	<!-- 
-		 <accordion close-others="oneAtATime">
-		    
-		    <accordion-group  ng-repeat="q in reciveData.questions">
-		      <accordion-heading>
-			       <div class="row">
-			         <div class="col-md-6 accordinhead">
-			            {{q.name}} 
-			       	 </div>
-			       	 
-			       	 <div class="col-md-5 ">
-				         <button class="btn pull-right" href="" ng-click="addQuestionToTest(q.qid,$event)"><h6>增加</h6></button>
-			       	 </div>
-			       </div>
-		        </accordion-heading>
-		        
-		       <div class="row">
-		       	 <div class="col-md-10">
-		       	  <textarea ckeditor toolbar="none" footer="none" read="read" minheight="120" width="100%"   ng-model="q.context"></textarea>
-		       	 </div>
-		       	 <div class="col-md-2">
-		       	  <button class="btn btn-primary" data-target="#modifyModal" ng-click="modifyQuestionInTest('lg',q)"><h6>修改</h6></button>
-		       
-		       	 </div>
-		       	<div class="options list col-md-12 col-sm-12  col-xs-12" >
-		       	  <label customcheckbox  operation="view" class='optionlabel checkbox'  ng-repeat="option in q.answer">
-		       	    <textarea  class='optiontext'  ng-model="option.text"></textarea>
-		       	     <input type="checkbox">
-		       	  </label>
-		       </div>
-		       </div>
-		    </accordion-group>
-		    
-		    
-		  </accordion>
-    
-     -->	
+
      
         <ul class="pagination">
             <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)">&laquo;</a></li>
@@ -115,21 +79,23 @@
 		                <p style="padding: 20px">标签(以 英文,符号 区分)
 		                    <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
 		                </p>
-		                <button class="btn btn-default" ng-click="addOne()">新增选项</button>
-		                <ol style="margin-top: 30px">
+		                 <input type="text" style="width: 7%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
+		                <button class="btn btn-primary" ng-click="addOne()">新增选项</button>
+		             
+		                <ul style="margin-top: 30px;list-style-type:none">
 		                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-		                        <input type="text" style="width: 50%" class="form-control" ng-model="ans.text">
-		                        <input type="text" style="width: 7%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
+		                        <textarea ckeditor minheight="80" width="70%" toolbar="none" operation="edit" ng-model="ans.text"></textarea>
+		                       
 		                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
-		                           ng-click="removeOne($index)"></a>
-		                        <span class="pull-right"><input type="checkbox" ng-model="ans.isright">是否正确</span>
+		                           ng-click="removeOne($index)">删除</a>
+		                        <input style="width:5%" type="checkbox" ng-model="ans.isright">是否正确
 		
 		                    </li>
-		                </ol>
+		                </ul>
 		                <div  style="padding-top: 70px">
-		                    <button class="btn btn-default " ng-click="addQuestion()">保存</button>
-		                    <button class="btn btn-default" ng-click="resetQuestion()">重置</button>
-		                    <button class="btn btn-default" ng-click="cancel()">取消</button>
+		                    <button class="btn btn-primary " ng-click="addQuestion()">保存</button>
+		                    <button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
+		                    <button class="btn btn-primary" ng-click="cancel()">取消</button>
 		                </div>
 		            </form>
 	          </div>  

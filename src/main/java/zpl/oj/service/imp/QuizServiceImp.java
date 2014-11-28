@@ -139,4 +139,10 @@ public class QuizServiceImp implements QuizService {
 		return res;
 	}
 
+	@Override
+	public void deleteQuestionFromTest(QuizProblem quizProblem) {
+		// TODO Auto-generated method stub
+		 quizProblemDao.deleteQuestionFromTest(quizProblem);
+	}
+
 }

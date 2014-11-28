@@ -17,6 +17,7 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,
 		            data: sendData
 		        }).success(function (data) {
 		        	alert("试题修改成功");
+		        	location.reload(); 
 		        }).error(function (data) {
 		           console.log("获取数据错误");
 		        });

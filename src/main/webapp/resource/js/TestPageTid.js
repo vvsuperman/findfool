@@ -111,28 +111,8 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
     }
     
     //by fw 修改混乱逻辑，将方法从testpage移入
-    
-    $scope.checkOut = function (q,size) {
-    	 var modalInstance = $modal.open({
-		      templateUrl: 'page/myModalContent.html',
-		      controller: 'ModalInstanceCtrl',
-		      size: size,
-		      resolve: {
-		          params:function(){
-		        	  var obj ={};
-		        	  obj.read = "read";
-		        	  obj.operation = "edit";
-		        	  obj.title="查看试题";
-		        	  obj.question = q;
-		        	  return obj;
-		          }
-		      }
-		 });
-	};
-	
 	//查看和修改试题的通用方法
 	$scope.modifyQuestionInTest = function (size,q,params) {
-		
 	   	var question = jQuery.extend(true, {}, q);
 		 var modalInstance = $modal.open({
 		      templateUrl: 'page/myModalContent.html',
@@ -141,7 +121,6 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
 		      resolve: {
 		          params:function(){
 		        	  var obj ={};
-		        	
 		        	  obj.operation = params.operation;
 		        	  obj.title=params.title;
 		        	  obj.question = question;
@@ -150,6 +129,24 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
 		      }
 		 });
 	 };
+	 
+	 $scope.deleteQuestionFromTest = function(question){
+		 var sendData = {"quizid":$scope.tid,"problemid":question.qid};
+		 console.log("sendData..........",question);
+		 $http({
+	            url: WEBROOT+"/test/delquestion",
+	            method: 'POST',
+	            headers: {
+	                "Authorization": Data.token()
+	            },
+	            data: sendData
+	        }).success(function (data) {
+	            alert("试题已从测试中删除");
+	            location.reload();
+	        }).error(function (data) {
+	            alert("获取数据错误");
+	        });
+	 }
 	
 	
  

@@ -27,5 +27,7 @@ public interface QuizService {
 
 
 	String addQuestionToQuiz(QuizProblem quizProblem);
+
+	void deleteQuestionFromTest(QuizProblem quizProblem);
 	
 }

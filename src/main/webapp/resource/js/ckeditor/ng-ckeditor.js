@@ -81,6 +81,12 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                 }
                 options.removePlugins = removePlugin.join(",");
                 
+                if(attrs.toolbar=="none"){
+                	options.toolbarCanCollapse = true;
+                	options.toolbarStartupExpanded = false;
+                }
+                
+                
                 //最小高度
                 if(attrs.minheight != ""){
                 	options.autoGrow_minHeight = attrs.minheight;
