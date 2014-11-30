@@ -480,11 +480,11 @@ function addQuestion($scope) {
 
 function editor($scope, $http, $sce, $timeout) {
     $scope.language = [
-        {name: 'C', demo: './static/c.c', CodeType: 'c_cpp', lan: 0},
-        {name: 'C++', demo: './static/cpp.cpp', CodeType: 'c_cpp', lan: 1},
-        {name: 'Java', demo: './static/java.java', CodeType: 'java', lan: 3},
-        {name: 'python', demo: './static/python.py', CodeType: 'python', lan: 6},
-        {name: 'C#', demo: './static/csharp.cs', CodeType: 'csharp', lan: 9}
+        {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},
+        {name: 'C++', demo: 'resource/static/cpp.cpp', CodeType: 'c_cpp', lan: 1},
+        {name: 'Java', demo: 'resource/static/java.java', CodeType: 'java', lan: 3},
+        {name: 'python', demo: 'resource/static/python.py', CodeType: 'python', lan: 6},
+        {name: 'C#', demo: 'resource/static/csharp.cs', CodeType: 'csharp', lan: 9}
     ];
     $scope.selected = $scope.language[0];
 

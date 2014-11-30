@@ -25,9 +25,9 @@ public interface InviteDao {
 			+ " FINISHTIME = #{finishtime},  SCORE = #{score}  where IID = #{iid}")
 	  void updateInvite(Invite invite);
 	    
-	@Select("SELECT  IID,  TESTID,   HRID,   UID,  INVITETIME,  FINISHTIME,  SCORE   "
-			+ "  FROM INVITE WHERE testid=#{0}")
-	  List<Invite> getInvites(int testid);  
+	@Select("SELECT  t1.IID,  t1.TESTID,   t1.HRID,   t1.UID,  t1.INVITETIME,  t1.FINISHTIME,  t1.SCORE   "
+			+ "  FROM INVITE t1, testuser t2 WHERE t1.testid=#{0} and t1.uid = t2.tuid and t2.email=#{1}")
+	  Invite getInvites(int testid,String email);  
 	  
 //	  /**主要用于分页，可返回一页的记录*/
 //	  List<Invite> select(Invite invite);  

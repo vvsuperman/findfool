@@ -33,6 +33,11 @@ public class Invite implements Serializable {
 	private Date invitetime;
 	
 	/**
+	 * 邀请发出去的时间,
+	 */
+	private Date begintime;
+
+	/**
 	 * 用户完成的时间，如果是0表示没有完成,
 	 */
 	private Date finishtime;
@@ -82,7 +87,16 @@ public class Invite implements Serializable {
         this.invitetime = invitetime;
     }
     
-        public Date getFinishtime() {
+    
+    public Date getBegintime() {
+		return begintime;
+	}
+
+	public void setBegintime(Date begintime) {
+		this.begintime = begintime;
+	}
+    
+    public Date getFinishtime() {
         return finishtime;
     }
 
@@ -90,7 +104,7 @@ public class Invite implements Serializable {
         this.finishtime = finishtime;
     }
     
-        public String getScore() {
+    public String getScore() {
         return score;
     }
 

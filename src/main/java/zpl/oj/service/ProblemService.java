@@ -1,5 +1,8 @@
 package zpl.oj.service;
 
+import java.util.List;
+
+import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.requestjson.RequestAddQuestion;
 import zpl.oj.model.requestjson.RequestSearch;
@@ -25,4 +28,6 @@ public interface ProblemService {
 	ResponseSearchResult getQuestionByUser(RequestSearch s);
 
 	String modifyQuestion(Question question);
+	
+	
 }

@@ -2,6 +2,7 @@ package zpl.oj.model.requestjson;
 
 import java.util.List;
 
+import zpl.oj.model.common.Testuser;
 import zpl.oj.model.request.InviteUser;
 
 public class RequestTestInviteUser {
@@ -11,7 +12,7 @@ public class RequestTestInviteUser {
 	private String subject;
 	private String replyTo;
 	private String context;
-	private List<InviteUser> invite;
+	private List<Testuser> testusers;
 	public RequestUser getUser() {
 		return user;
 	}
@@ -36,11 +37,11 @@ public class RequestTestInviteUser {
 	public void setReplyTo(String replyTo) {
 		this.replyTo = replyTo;
 	}
-	public List<InviteUser> getInvite() {
-		return invite;
+	public List<Testuser> getInvite() {
+		return testusers;
 	}
-	public void setInvite(List<InviteUser> invite) {
-		this.invite = invite;
+	public void setInvite(List<Testuser> testusers) {
+		this.testusers = testusers;
 	}
 	public String getContext() {
 		return context;

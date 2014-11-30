@@ -3,8 +3,8 @@
  */
 function mchoice($scope, $sce, $http, Data, $routeParams) {
     $scope.url = '#/mchoice';
-    $scope.template = 'mchoice.html';
-    $scope.ContentUs = 'contentUs.html';
+    $scope.template = 'page/mchoice.html';
+    $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
     Data.setKey1("1");
     Data.setKey2("2");
@@ -19,6 +19,7 @@ function mchoice($scope, $sce, $http, Data, $routeParams) {
 //    ];
     $scope.main = 1;
     $scope.chapter = 0;
+    
     if (!$routeParams.r) {
         //$scope.main = 1;
         //$scope.chapter = 0;
@@ -28,8 +29,9 @@ function mchoice($scope, $sce, $http, Data, $routeParams) {
 
         //var a = $routeParams.qqid.split(",");
         //$scope.main = 0;
-        $scope.chapter = route[1];
-        $scope.section = route[2];
+     //   $scope.chapter = route[1];
+       
+    	$scope.section = route[2];
         if (!$scope.section) {
             $scope.section = -2;
         }
@@ -88,6 +90,7 @@ function mchoice($scope, $sce, $http, Data, $routeParams) {
             $scope.answer = "木有题目"
         }
     }
+    
     $scope.agree = function () {
         $scope.main = 0;
         $scope.chapter = 1;
@@ -95,22 +98,34 @@ function mchoice($scope, $sce, $http, Data, $routeParams) {
         $scope.getALL();
 
     };
+    
     $scope.selected = function () {
-        $scope.ans = Data.ans();
-        console.log(Data.ans());
+    	console.log(Data.ans());
+    	if(typeof(Data.ans())!="undefined"){
+    		 $scope.ans = Data.ans();
+    	}else{
+    		 $scope.ans={};
+    	}
+       
+        
         console.log($scope.answer);
         $scope.chosen = {};
-        for (i in $scope.ans[$scope.section]) {
-            for (j in $scope.answer) {
-                if ($scope.answer[j].caseId == $scope.ans[$scope.section][i]) {
-                    $scope.chosen[j] = j;
-                    break;
-                }
-            }
+        if($scope.ans != null){
+        	 for (i in $scope.ans[$scope.section]) {
+                 for (j in $scope.answer) {
+                     if ($scope.answer[j].caseId == $scope.ans[$scope.section][i]) {
+                         $scope.chosen[j] = j;
+                         break;
+                     }
+                 }
+             }
         }
+       
         console.log($scope.chosen)
     };
+    
     $scope.selected();
+    
     $scope.chose = function (an) {
         $scope.ans = Data.ans();
         if ($.inArray($scope.answer[an].caseId, $scope.ans[$scope.section]) == -1) {
@@ -126,6 +141,7 @@ function mchoice($scope, $sce, $http, Data, $routeParams) {
         Data.setAns($scope.ans);
         console.log(Data.ans());
     };
+    
     $scope.getALL = function () {
         $http({
             url: WEBROOT+"/test/manage",
@@ -164,14 +180,17 @@ function mchoice($scope, $sce, $http, Data, $routeParams) {
             ];
         });
     };
+    
     $scope.enter = function ($event) {
         if ($event.keyCode == 13) {
             $scope.start()
         }
     };
+    
     $scope.getUrl = function (target) {
         window.location.href = $scope.url + '/' + strEnc($scope.tid + "," + $scope.chapter + "," + target, Data.key1(), Data.key2(), Data.key3());
     }
+    
     $scope.getChar = function (target) {
         console.log(target)
         window.location.href = $scope.url + '/' + strEnc($scope.tid + "," + target + ",0", Data.key1(), Data.key2(), Data.key3());

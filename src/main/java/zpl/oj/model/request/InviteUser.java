@@ -2,8 +2,16 @@ package zpl.oj.model.request;
 
 public class InviteUser {
 
-	private String Fname;
-	private String Lname;
+	
+	private String username;
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	private String email;
 	private String tel;
 
@@ -16,18 +24,7 @@ public class InviteUser {
         return test;
     }
 
-	public String getFname() {
-		return Fname;
-	}
-	public void setFname(String fname) {
-		Fname = fname;
-	}
-	public String getLname() {
-		return Lname;
-	}
-	public void setLname(String lname) {
-		Lname = lname;
-	}
+	
 	public String getEmail() {
 		return email;
 	}

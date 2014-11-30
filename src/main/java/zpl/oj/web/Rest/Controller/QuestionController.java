@@ -28,11 +28,8 @@ public class QuestionController {
 	@RequestMapping(value="/query")
 	@ResponseBody
 	public ResponseBase queryQuestionById(@RequestBody RequestQuestion request){
-		ResponseBase rb = new ResponseBase();
-		
-		
-		Question p = problemService.getProblemById(request.getQid());
-		
+		ResponseBase rb = new ResponseBase();			
+		Question p = problemService.getProblemById(request.getQid());		
 		if(p == null){
 			ResponseMessage msg = new ResponseMessage();
 			msg.setMsg("no such question!!!");

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import zpl.oj.dao.InviteDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.Testuser;
 import zpl.oj.model.request.User;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.user.inter.UserService;
@@ -22,30 +23,31 @@ public class InviteServiceImp implements InviteService {
 	@Autowired 
 	private InviteDao inviteDao;
 	@Autowired 
-	private UserService userService;
+	private TestuserService testuserService;
 	
 	@Override
-	public String inviteUserToQuiz(User u, Quiz q) {
+	public String inviteUserToQuiz(Testuser u, Quiz q) {
 		
 		//等级
-		u.setPrivilege(1);
 		//设置密码,5位的
 		String pwd = RandomCode.randomString(5);
 		u.setPwd(MD5Util.stringMD5(pwd));
-		boolean res = userService.addUser(u);
-		if(res == false)
-			pwd = null;
-		u = userService.getUserByEmail(u.getEmail());
+		int tuid = testuserService.updateUser(u);
 		
 		Invite invite = new Invite();
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());
-		invite.setUid(u.getUid());
+		invite.setUid(tuid);
 		invite.setScore("0/0");
 		invite.setInvitetime(new Date());
 		invite.setFinishtime(new Date());
-		inviteDao.insertInvite(invite);
-		
+		//如果对同一个地址发送了同一份试题，则更新invite
+		Invite oldInvite = inviteDao.getInvites(q.getQuizid(), u.getEmail());
+		if(oldInvite!=null){
+			inviteDao.updateInvite(invite);
+		}else{
+			inviteDao.insertInvite(invite);
+		}
 		return pwd;
 	}
 

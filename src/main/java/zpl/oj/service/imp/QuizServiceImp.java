@@ -43,6 +43,12 @@ public class QuizServiceImp implements QuizService {
 			return null;
 		}	
 	}
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public ResponseQuizDetail getQuizDetail(int tid) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.Testuser;
 import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestDetail;
@@ -193,19 +194,12 @@ public class QuizController {
 			rb.setState(0);
 		} else {
 			// 发送邀请
-			for (InviteUser iu : request.getInvite()) {
-				User u = new User();
-				u.setFname(iu.getFname());
-				u.setLname(iu.getLname());
-				u.setTel(iu.getTel());
-				u.setEmail(iu.getEmail());
+			//by fangwei 重写发送邀请逻辑，新建testusr表
+			for (Testuser tu : request.getInvite()) {
 
 				// 邀请
-				String pwd = inviteService.inviteUserToQuiz(u, q);
-				if (pwd == null) {
-					pwd = "请使用网站账号密码登陆";
-				}
-				String url = desService.encode(""+q.getQuizid());
+				String pwd = inviteService.inviteUserToQuiz(tu, q);
+				String url = desService.encode(tu.getEmail()+"**"+q.getQuizid());
 				MailSenderInfo mailSenderInfo = new MailSenderInfo();
 				mailSenderInfo.setMailServerHost("smtp.163.com");   
 				mailSenderInfo.setMailServerPort("25");
@@ -213,12 +207,12 @@ public class QuizController {
 				mailSenderInfo.setPassword("fw820721");//您的邮箱密码  
 				
 				mailSenderInfo.setFromAddress("weifangscs@163.com");
-				mailSenderInfo.setToAddress(u.getEmail());
+				mailSenderInfo.setToAddress(tu.getEmail());
 				mailSenderInfo.setReplyToAddress(request.getReplyTo());
 				mailSenderInfo.setSubject(request.getSubject());
 				String context = request.getContext();
 				context += "<p>欢迎来xxoo做测试，请登录到"+"http://localhost:8080/oj/#/mchoice/"+url+",,"
-						+ "<br/>您的登录账号为：" + u.getEmail() + " <br/>您的密码为：" + pwd
+						+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
 						+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
 				mailSenderInfo.setContent(context);
 				try {

@@ -18,6 +18,12 @@ use ojsite;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for `testuser_problem`
+-- ----------------------------
+CREATE TABLE ojsite.testuser_problem (tuid INT(10) NOT NULL, problemid INT(10) NOT NULL, PRIMARY KEY (tuid, problemid)) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT = 'testuser和problem的关联表'
+
+
+-- ----------------------------
 -- Table structure for `api`
 -- ----------------------------
 DROP TABLE IF EXISTS `api`;
