@@ -46,6 +46,7 @@ import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
+import zpl.oj.util.timer.InviteReminder;
 
 @Controller
 @RequestMapping("/testing")
@@ -93,12 +94,7 @@ public class TestingController {
 			rtMap.put("msg", "试题已截至");
 			return rtMap;
 		}
-		//用户试题时间已截至
-		Date date = new Date();
-		if(df.format(date).compareTo(invite.getFinishtime())>0){
-			rtMap.put("msg", "试题已截至");
-			return rtMap;
-		}
+		
 		int tuid = invite.getUid();
 		rtMap.put("tuid", tuid);
 		return rtMap;
@@ -133,10 +129,13 @@ public class TestingController {
 			//用户还未开始做题
 			invite.setBegintime(df.format(date));
 			//生成完成时间
-			Calendar cal = Calendar.getInstance();
+			/*Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
 			cal.add(Calendar.MINUTE,Integer.parseInt(invite.getDuration()));
-			invite.setFinishtime(df.format(cal.getTime()));
+			invite.setFinishtime(df.format(cal.getTime()));*/
+			
+			//建立定时器，到时间后将邀请置为无效
+			InviteReminder itr = new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid());
 			Testuser testuser=tuserDao.findTestuserByName(email);
 			//返回用户信息供前台填写
 			rb.setMessage(testuser);
@@ -197,11 +196,31 @@ public class TestingController {
 		return rb;
 	}
 	
+
+	//提交用户信息
+	@RequestMapping(value = "/submituserinfo")
+	@ResponseBody
+	public ResponseBase submitUserInfo(@RequestBody Map<String, Object> params){
+		ResponseBase rb = new ResponseBase();
+		Map map = validateUser(params);
+		String tuid = (String) map.get("tuid");
+		if(tuid ==null){
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
+		
+		Testuser tuser = (Testuser) params.get("tuser");
+		tuserDao.updateTestuserById(tuser);
+		rb.setState(1);
+		return rb;
+	}
+	
+	
 	//提交试题答案
 	@RequestMapping(value = "/submit")
 	@ResponseBody
 	public ResponseBase submit(@RequestBody Map<String,Object> params){
-		
 		ResponseBase rb = new ResponseBase();
 		String msg = (String) validateUser(params).get("msg");
 		if(msg !=null){
@@ -221,21 +240,27 @@ public class TestingController {
 		return rb;
 	}
 	
-	//提交用户信息
-	@RequestMapping(value = "/submituserinfo")
+	/*
+	 * 完成测试
+	 * 用户完成测试，将invite状态置0
+	 * */
+	@RequestMapping(value = "/finishtest")
 	@ResponseBody
-	public ResponseBase submitUserInfo(@RequestBody Map<String, Object> params){
+	public ResponseBase finishTest(@RequestBody Map<String,Object> params){
+		
 		ResponseBase rb = new ResponseBase();
-		Map map = validateUser(params);
-		String tuid = (String) map.get("tuid");
-		if(tuid ==null){
-			rb.setMessage(map.get("msg"));
+		String msg = (String) validateUser(params).get("msg");
+		if(msg !=null){
+			rb.setMessage(msg);
 			rb.setState(0);
 			return rb;
 		}
 		
-		Testuser tuser = (Testuser) params.get("tuser");
-		tuserDao.updateTestuserById(tuser);
+		Invite invite  = new Invite();
+		int inviteId = (int)params.get("inviteid");
+		invite.setIid(inviteId);
+		invite.setState(0);
+		inviteDao.updateInvite(invite);
 		rb.setState(1);
 		return rb;
 	}
