@@ -45,12 +45,4 @@ public interface QuizDao {
   List<Quiz> getQuizs(int owner);
 
 
-  
-  
-//  /**主要用于分页，可返回一页的记录*/
-//  List<Quiz> select(Quiz quiz);  
-//  
-//  /**主要用于分页，可返回总记录数*/
-//  int selectCount(Quiz quiz);  
-    
 }

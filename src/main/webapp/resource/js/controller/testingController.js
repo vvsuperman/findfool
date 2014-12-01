@@ -19,6 +19,7 @@ OJApp.controller('testing',function ($scope,$http,Data,$routeParams) {
                  method: 'POST',
                  data: {"email": email, "testId": $scope.tid}
              }).success(function (data) {
+            	 //取出用户的测试和以做过题的记录
             	 
             	 
              }).error(function(){
@@ -28,5 +29,17 @@ OJApp.controller('testing',function ($scope,$http,Data,$routeParams) {
      }).error(function(){
     	 console.log("get data failed");
      })
+     
+     //开始测试
+     $scope.startTest = function(){
+		 
+	 }
+	 
+	 
+	 //做题
+	 $scope.submit = function(question){
+		 
+	 }
+	 
 	 
 });

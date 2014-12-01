@@ -221,6 +221,9 @@ public class QuizController {
 					e.printStackTrace();    
 				}
 			}
+			
+			
+			
 
 			ht.setInvited_left(ht.getInvited_left() - num);
 			ht.setInvitedNum(ht.getInvitedNum() + num);

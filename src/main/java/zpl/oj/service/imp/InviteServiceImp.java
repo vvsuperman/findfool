@@ -1,5 +1,6 @@
 package zpl.oj.service.imp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ public class InviteServiceImp implements InviteService {
 	@Autowired 
 	private InviteDao inviteDao;
 	@Autowired 
-	private TestuserService testuserService;
+	private TuserService testuserService;	
+	
+	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	@Override
 	public String inviteUserToQuiz(Testuser u, Quiz q) {
@@ -39,8 +42,9 @@ public class InviteServiceImp implements InviteService {
 		invite.setHrid(q.getOwner());
 		invite.setUid(tuid);
 		invite.setScore("0/0");
-		invite.setInvitetime(new Date());
-		invite.setFinishtime(new Date());
+		invite.setInvitetime(df.format(new Date()));
+		invite.setFinishtime(df.format(new Date()));
+		
 		//如果对同一个地址发送了同一份试题，则更新invite
 		Invite oldInvite = inviteDao.getInvites(q.getQuizid(), u.getEmail());
 		if(oldInvite!=null){

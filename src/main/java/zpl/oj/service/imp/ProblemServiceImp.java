@@ -126,12 +126,20 @@ public class ProblemServiceImp implements ProblemService{
 			problemTagDao.insertTagProblem(tagid, pid);
 		}
 		
+		String rightAnswer ="";
+		
 		if(q.getQuestion().getAnswer() != null){
 			for(QuestionTestCase qt:q.getQuestion().getAnswer()){
 				ProblemTestCase pt = new ProblemTestCase();
 				pt.setProblemId(pid);
 				pt.setArgs(qt.getText());
 				pt.setExceptedRes(qt.getIsright());
+				if(qt.getIsright()=="true"){
+					rightAnswer+="1";
+				}else{
+					rightAnswer+="0";
+				}
+				
 				pt.setScore(qt.getScore());
 				problemTestCaseDao.insertProblemTestCase(pt);
 			}		

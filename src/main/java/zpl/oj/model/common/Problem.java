@@ -8,6 +8,7 @@ public class Problem implements Serializable {
 
 	public Problem(){
 		uuid=-1;
+		rightAnswer ="0000";
 	}
 	
 	/**
@@ -51,6 +52,21 @@ public class Problem implements Serializable {
 	 */
 	private Integer belong;
 	
+	/*
+	 * 选择题的正确答案
+	 *
+	 */
+	
+	private String rightAnswer;
+	
+	public String getRightAnswer() {
+		return rightAnswer;
+	}
+
+	public void setRightAnswer(String rightAnswer) {
+		this.rightAnswer = rightAnswer;
+	}
+
 	public Integer getBelong() {
 		return belong;
 	}

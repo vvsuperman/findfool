@@ -30,17 +30,19 @@ public class Invite implements Serializable {
 	/**
 	 * 邀请发出去的时间,
 	 */
-	private Date invitetime;
+	private String invitetime;
 	
+	
+
 	/**
 	 * 邀请发出去的时间,
 	 */
-	private Date begintime;
+	private String begintime;
 
 	/**
 	 * 用户完成的时间，如果是0表示没有完成,
 	 */
-	private Date finishtime;
+	private String finishtime;
 	
 	/**
 	 * 存放的形式为
@@ -79,30 +81,7 @@ public class Invite implements Serializable {
         this.uid = uid;
     }
     
-        public Date getInvitetime() {
-        return invitetime;
-    }
-
-    public void setInvitetime(Date invitetime) {
-        this.invitetime = invitetime;
-    }
-    
-    
-    public Date getBegintime() {
-		return begintime;
-	}
-
-	public void setBegintime(Date begintime) {
-		this.begintime = begintime;
-	}
-    
-    public Date getFinishtime() {
-        return finishtime;
-    }
-
-    public void setFinishtime(Date finishtime) {
-        this.finishtime = finishtime;
-    }
+     
     
     public String getScore() {
         return score;
@@ -111,5 +90,30 @@ public class Invite implements Serializable {
     public void setScore(String score) {
         this.score = score;
     }
+    
+    
+    public String getInvitetime() {
+		return invitetime;
+	}
+
+	public void setInvitetime(String invitetime) {
+		this.invitetime = invitetime;
+	}
+
+	public String getBegintime() {
+		return begintime;
+	}
+
+	public void setBegintime(String begintime) {
+		this.begintime = begintime;
+	}
+
+	public String getFinishtime() {
+		return finishtime;
+	}
+
+	public void setFinishtime(String finishtime) {
+		this.finishtime = finishtime;
+	}
     
 }
