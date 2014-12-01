@@ -39,7 +39,7 @@ public class TuserService {
 		Testuser tuser =testuserDao.findTestuserByName(testuser.getEmail()); 
 		if(tuser!=null){
 			//该邮箱的用户曾经做过题，执行更新操作
-			testuserDao.updateTestuser(testuser);
+			testuserDao.updateTestuserById(testuser);
 			return tuser.getTuid(); 
 		}else{
 			testuserDao.insertTestuser(testuser);
@@ -48,42 +48,28 @@ public class TuserService {
 				
 	}
 	
-	public void insertProblem(TuserProblem testuserProblem){
-		testuserProblemDao.insertTuserProblem(testuserProblem);
-	}
-	
-	public void updateProblem(TuserProblem testuserProblem){
-		testuserProblemDao.insertTuserProblem(testuserProblem);
-	}
 
-	public List startTest(Map<String, Object> params) {
+
+	public  List<TuserProblem> fetchTProblems(int testid, int tuid) {
 		// TODO Auto-generated method stub
-		int testid = (int)params.get("testid");
-		int tuid = (int)params.get("tuid");
 		
-		Invite invite = inviteDao.getInvitesByIds(testid, tuid);
-		
-		
-		if(invite.getBegintime().equals("")){
-			//用户还未开始做题,生成tuserproblem
-			invite.setBegintime(df.format(new Date()));
-			return null;
-		/*	
-			List<Problem> listProblem = problemDao.getProblemByTestid(testid);
-			for(Problem problem:listProblem){
-				TuserProblem tuserProblem = new TuserProblem();
-				tuserProblem.setRightanswer(problem.getRightAnswer());
-				tuserProblem.setProblemid(problem.getProblemId());
-				tuserProblem.setTuid(tuid);
-				tuserProblemDao.insertTuserProblem(tuserProblem);
-			}*/
-		}else{
-			//用户已开始做题，直接返回tuserproblem的list
-			List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByTestid(testid);
-			return tuserProblems;
 			
+		List<Problem> listProblem = problemDao.getProblemByTestid(testid);
+		for(Problem problem:listProblem){
+			TuserProblem tuserProblem = new TuserProblem();
+			tuserProblem.setRightanswer(problem.getRightAnswer());
+			tuserProblem.setProblemid(problem.getProblemId());
+			tuserProblem.setTuid(tuid);
+			tuserProblem.setType(problem.getType());
+			tuserProblemDao.insertTuserProblem(tuserProblem);
 		}
 		
+		return tuserProblemDao.findProblemByTestid(testid);
+	}
+
+	public  List<TuserProblem> findProblemByTestid(int testid) {
+		// TODO Auto-generated method stub
+		return tuserProblemDao.findProblemByTestid(testid);
 	}
 	
 

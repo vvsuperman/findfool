@@ -6,5 +6,5 @@ import zpl.oj.model.request.User;
 
 public interface InviteService {
 
-	public String inviteUserToQuiz(Testuser u,Quiz q);
+	public String inviteUserToQuiz(Testuser u,Quiz q,String duration);
 }

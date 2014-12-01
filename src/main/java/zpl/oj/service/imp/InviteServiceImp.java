@@ -29,7 +29,7 @@ public class InviteServiceImp implements InviteService {
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	@Override
-	public String inviteUserToQuiz(Testuser u, Quiz q) {
+	public String inviteUserToQuiz(Testuser u, Quiz q, String duration) {
 		
 		//等级
 		//设置密码,5位的
@@ -42,9 +42,9 @@ public class InviteServiceImp implements InviteService {
 		invite.setHrid(q.getOwner());
 		invite.setUid(tuid);
 		invite.setScore("0/0");
+		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
-		invite.setFinishtime(df.format(new Date()));
-		
+		invite.setDuration(duration);
 		//如果对同一个地址发送了同一份试题，则更新invite
 		Invite oldInvite = inviteDao.getInvites(q.getQuizid(), u.getEmail());
 		if(oldInvite!=null){

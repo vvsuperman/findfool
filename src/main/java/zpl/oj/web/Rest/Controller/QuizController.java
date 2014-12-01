@@ -198,7 +198,7 @@ public class QuizController {
 			for (Testuser tu : request.getInvite()) {
 
 				// 邀请
-				String pwd = inviteService.inviteUserToQuiz(tu, q);
+				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
 				String url = desService.encode(tu.getEmail()+"**"+q.getQuizid());
 				MailSenderInfo mailSenderInfo = new MailSenderInfo();
 				mailSenderInfo.setMailServerHost("smtp.163.com");   

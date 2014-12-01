@@ -12,6 +12,13 @@ public class RequestTestInviteUser {
 	private String subject;
 	private String replyTo;
 	private String context;
+	private String duration;
+	public String getDuration() {
+		return duration;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
 	private List<Testuser> testusers;
 	public RequestUser getUser() {
 		return user;

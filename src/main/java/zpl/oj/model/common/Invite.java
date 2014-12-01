@@ -33,6 +33,11 @@ public class Invite implements Serializable {
 	private String invitetime;
 	
 	
+	/**
+	 * 做题时间,
+	 */
+	private String duration;
+	
 
 	/**
 	 * 邀请发出去的时间,
@@ -48,8 +53,20 @@ public class Invite implements Serializable {
 	 * 存放的形式为
 	 */
 	private String score;
+	
+	
+	private Integer state;
+	
 
-    public Integer getIid() {
+    public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public Integer getIid() {
         return iid;
     }
 
@@ -115,5 +132,15 @@ public class Invite implements Serializable {
 	public void setFinishtime(String finishtime) {
 		this.finishtime = finishtime;
 	}
+	
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
     
 }

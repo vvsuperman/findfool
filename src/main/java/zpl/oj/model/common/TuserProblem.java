@@ -7,8 +7,7 @@ public class TuserProblem {
 	private int tuid;
 	private int problemid;
 	private String useranswer;
-	
-
+	private int type;
 	private String rightanswer;
 	
 	public TuserProblem() {
@@ -48,6 +47,14 @@ public class TuserProblem {
 
 	public void setRightanswer(String rightanswer) {
 		this.rightanswer = rightanswer;
+	}
+	
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 

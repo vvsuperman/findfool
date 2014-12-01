@@ -17,10 +17,13 @@ public interface TestuserDao {
 			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{pwd},#{tel},#{registerdate},#{logindate},#{state})")
   void insertTestuser(Testuser testuser);
   
-  @Update("update testuser set username=#{username}, school=#{school},company=#{company},blog=#{blog},age=#{age},pwd=#{pwd},tel=#{tel} where ")
-  void updateTestuser(Testuser testuser);
+  @Update("update testuser set username=#{username},email=#{email} school=#{school},company=#{company},blog=#{blog},age=#{age},pwd=#{pwd},tel=#{tel} where tuid =#{tuid}")
+  void updateTestuserById(Testuser testuser);
   
-  @Select("select * from testuser where usermane = #{0}")
-  Testuser findTestuserByName(String username);
+  @Select("select * from testuser where email = #{0}")
+  Testuser findTestuserByName(String email);
+  
+  @Select("select * from testuser where tuid = #{0}")
+  Testuser findTestuserById(int tuid);
     
 }
