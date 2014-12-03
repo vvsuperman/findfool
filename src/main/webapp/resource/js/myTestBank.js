@@ -338,7 +338,7 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
     
     $scope.addQuestion = function () {
         $scope.newQuestion.type = parseInt($scope.active);
-        if($scope.newQuestion.answer==""){
+      if(($scope.newQuestion.answer=="") && ($scope.newQuestion.type ==1)){
         	alert("请输入至少一个选项");
         	return false;
         }
@@ -347,13 +347,20 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
                 a.isright = (a.isright == false ? "0" : "1");
             }
         }
+        var tags = $scope.newQuestion.tag;
         
-        $scope.newQuestion.tag = $scope.newQuestion.tag.split(",");
-        if( $scope.newQuestion.tag==""){
-        	  $scope.newQuestion.tag=[];
+        if(tags == ""){
+        	 $scope.newQuestion.tag=[];
         }
+        else if(tags.split(",").length >= tags.split("，")){
+        	$scope.newQuestion.tag = tags.split(",");
+        }else{
+        	$scope.newQuestion.tag = tags.split("，");
+        }
+     
         
-        console.log($scope.newQuestion+"  "+$scope.tid);
+        
+        console.log("newquestion.........",$scope.newQuestion);
         sendData = {"user": {"uid": Data.uid()}, "quizId":$scope.tid,"question": $scope.newQuestion};
         $scope.pushQuestion(sendData);
     };
@@ -384,7 +391,8 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
     };
 //    $scope.searchmy();
     $scope.addOne = function () {
-        var ans = new Answers();
+      //  var ans = new Answers();
+    	var ans ={};
         if ($scope.active == "1")
             ans.isright = false;
         else

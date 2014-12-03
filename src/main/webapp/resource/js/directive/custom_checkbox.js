@@ -26,6 +26,7 @@ OJApp.directive('customcheckbox', function() {
 				console.log("textarea stop propagation......");
 				event.stopPropagation();
 			})
+			
 			 
 			//若当前是编辑，则可以点击。否则不可编辑
 			console.log("operation.......",attrs.operation);

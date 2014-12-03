@@ -60,26 +60,28 @@
     </div>
 
     <!--<h1>{{active==1}}</h1>-->
-    <div ng-class="{0:'', 1: 'hedden'}[show]">
-
-        <div class="col-md-8" ng-class="{true:'', false: 'hedden'}[active==1]">
-        	<div class="row">
-             <p>标题 </p>
-                   <input  type="text" id="name" class="col-md-4" ng-model="newQuestion.name">
-             </div>
+    <div ng-class="{0:'', 1: 'hedden'}[show]">  
+    
+        <div class="col-md-8" ng-if="active==1">
+            
             <div class="row" style="margin-top: 30px">
                		<p>题干</p>
 		            <form class="form-inline" role="form">
 		                <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
 		                          <!--ng-model="newQuestion.context"></textarea>-->
 		                <!--<div ng-include src="'mdeditor.html'" ></div>-->
-						<textarea ckEditor="" ng-model="newQuestion.context"></textarea>
+						<textarea ckEditor ng-model="newQuestion.context"></textarea>
 						<!-- textarea ng-model="newQuestion.context"></textarea-->
 		                <div class="hedden" id="context" >{{context}}</div>
-		                <p style="padding: 20px">标签(以 英文,符号 区分)
-		                    <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
-		                </p>
-		                 <input type="text" style="width: 7%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
+		                <div>
+			                <p style="padding: 20px">标签(以 英文,符号 区分)
+			                    <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
+			                </p>
+			                <p style="padding: 20px">分数
+			                     <input type="text"  class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
+			                </p>
+		                </div>
+		                
 		                <button class="btn btn-primary" ng-click="addOne()">新增选项</button>
 		             
 		                <ul style="margin-top: 30px;list-style-type:none">
@@ -99,68 +101,88 @@
 		                </div>
 		            </form>
 	          </div>  
-	            
         </div>
+        
         <div ng-class="{true:'', false: 'hedden'}[active==2]">
-               <p>标题
-                   <input type="text" id="name" class="form-control" ng-model="newQuestion.name">
-               </p>
-            <p>提示信息：编程题主要考虑对基本概念及算法的理解程度，程序的默认入口为solution，为单一函数。若需要考察复杂的类或多个
-                方法，请选择无测试用例，并由出题人员手工判断是否正确</p>
+            
+            <form class="form-horizontal" role="form">
+               <div class="form-group">
+				    <label  class="col-sm-2 control-label">标题</label>
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" ng-model="newQuestion.name" placeholder="标题">
+				    </div>
+			   </div>
+			   
+			    <div class="form-group">
+				    <label  class="col-sm-2 control-label">题干</label>
+				    <div class="col-sm-10">
+				      <textarea ckeditor minheight="240" width="100%" operation={{operation}} ng-model="newQuestion.context"></textarea>
+				    </div>
+			   </div>
+			   
+			    <div class="form-group">
+				    <label  class="col-sm-2 control-label">标签(以 , 区分)</label>
+				    <div class="col-sm-4">
+				      <input type="text" class="form-control" ng-model="newQuestion.tag" placeholder="标签">
+				    </div>
+			   </div>
+	           
+                
+                <div class="form-group">
+				    <label  class="col-sm-2 control-label"></label>
+				    <div class="col-sm-4">
+				      <button class="btn btn-primary"  ng-click="addOne()">新增测试用例</button>
+				    </div>
+			   </div>
+                
+              
+                
+                <div style="list-style-type:upper-alpha;" ng-class="{true:'', false: 'hedden'}[newQuestion.show]"  ng-repeat="ans in newQuestion.answer">
+                    
+                     <div class="form-group">
+					    <label  class="col-sm-2 control-label">输入</label>
+					    <div class="col-sm-8"> 
+					     <input type="text"  class="form-control"  ng-model="ans.text">
+					    </div>
+			   		</div>
+			   		
+                     <div class="form-group">
+					    <label  class="col-sm-2 control-label">输出</label>
+					    <div class="col-sm-8">
+					       <input type="text"  class="form-control"  ng-model="ans.isright">
+					    </div>
+			   		</div>
+			   		
+			   		 <div class="form-group">
+					    <label  class="col-sm-2 control-label">分数</label>
+					    <div class="col-sm-1">
+					        <input type="text"   class="form-control col-sm-1" ng-model="ans.score" ng-change="isNum(ans.score)" />
+					    </div>
+					    <div class="col-sm-2">
+					      <button class="btn btn-outline"   ng-click="removeOne($index)">删除测试用例</button>  	
+					    </div>
+			   		</div>
+		           </div>
 
-            <p>题干</p>
+               
 
-            <form class="form-inline" role="form">
-                <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
-                <!--<div ng-include src="'mdeditor.html'" ></div>-->
-                <textarea   ng-model="context"></textarea>
-                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
-                </p>
-                <ul>
-                    <input type="radio" ng-model="progrma.show" ng-value="true" />测试用例
-                    <input type="radio" ng-model="progrma.show" ng-value="false" />无测试用例
-                </ul>
-                <button class="btn btn-default" ng-class="{true:'', false: 'hedden'}[progrma.show]" ng-click="addOne()">新增测试用例</button>
-                <div style="list-style-type:upper-alpha;width: 100% ;" ng-class="{true:'', false: 'hedden'}[newQuestion.show]">
-                    <li ng-repeat="ans in newQuestion.answer">
-                        <div class="col-md-12">		                 
-                        <div class="col-md-5">
-		                    <p>输入</p>
-		                   <input type="text" style="width: 100%" class="form-control" ng-model="ans.text">
-		                </div>
-		                <div class="col-md-4">
-		                    <p>输出</p>
-		                    <input type="text" style="width: 100%" class="form-control" ng-model="ans.isright">
-		                </div>
-		                <div class="col-md-3">
-		                	<p>分数</p>
-		                <input type="text"  style="width: 80%" class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)" />
-		                <button class="glyphicon glyphicon-remove aa"
-		                           ng-click="removeOne($index)"></button>  		                
-		                </div>
-
-		                </div>
-
-                    </li>
-                </div>
-
-				<div div class="btn-group-justified">
+				<!-- div class="btn-group-justified">
 					<p>语言选择</p>
 	                <ul>
 	                    <input type="radio">C
 	                    <input type="radio">Java
-	
 	                </ul>
-				</div>
+				</div-->
 
-
-                <div class="btn-group-justified" style="padding: 70px">
-                    <a class="btn btn-default " ng-click="addQuestion()">保存</a>
-                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
-                    <a class="btn btn-default" ng-click="cancel()">取消</a>
+                <div class="col-xs-6 col-xs-offset-2">
+                    <a class="btn btn-primary " ng-click="addQuestion()">保存</a>
+                    <a class="btn btn-primary" ng-click="resetQuestion()">重置</a>
+                    <a class="btn btn-primary" ng-click="cancel()">取消</a>
                 </div>
             </form>
         </div>
+        
+        
         <div ng-class="{true:'', false: 'hedden'}[active==3]">
                <p>标题
                    <input type="text" id="name" class="form-control" ng-model="newQuestion.name">

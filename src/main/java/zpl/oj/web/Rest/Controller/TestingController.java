@@ -213,8 +213,7 @@ public class TestingController {
 		Date date = new Date();
 		invite.setBegintime(df.format(date));
 		//建立定时器，到时间后将邀请置为无效
-		//new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid());
-		new InviteReminder(3, invite.getIid(),inviteDao);
+		new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid(),inviteDao);
 		inviteDao.updateInvite(invite);
 		
 		List<TuserProblem> tProblems = tuserService.initialProblems(testid,tuid);
