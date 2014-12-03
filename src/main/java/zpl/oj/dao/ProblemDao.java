@@ -21,7 +21,7 @@ public interface ProblemDao {
 	@Select("select * from problem t1, problem_test_case t2 where t1.problem_id = t2.problem_id and t1.problem_Id = #{id}")
 	  List<Map> getProblemAndCase(int id);
 	
-	@Select("select  t1.PROBLEM_ID as problemId, t2.rightanswer as rightAnswer FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
+	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type, t1.rightanswer as rightAnswer FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
 	List<Problem> getProblemByTestid(int testid);
 	
 	

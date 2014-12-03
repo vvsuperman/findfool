@@ -13,13 +13,14 @@ public class RequestTestInviteUser {
 	private String replyTo;
 	private String context;
 	private String duration;
+	private List<InviteUser> invite;	
 	public String getDuration() {
 		return duration;
 	}
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-	private List<Testuser> testusers;
+	
 	public RequestUser getUser() {
 		return user;
 	}
@@ -44,11 +45,11 @@ public class RequestTestInviteUser {
 	public void setReplyTo(String replyTo) {
 		this.replyTo = replyTo;
 	}
-	public List<Testuser> getInvite() {
-		return testusers;
+	public List<InviteUser> getInvite() {
+		return invite;
 	}
-	public void setInvite(List<Testuser> testusers) {
-		this.testusers = testusers;
+	public void setInvite(List<InviteUser> testusers) {
+		this.invite = testusers;
 	}
 	public String getContext() {
 		return context;

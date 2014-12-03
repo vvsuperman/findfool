@@ -2,6 +2,7 @@ package zpl.oj.service.imp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.*;
+import zpl.oj.util.Constant.Examconstant;
 
 @Service
 public class TuserService {
@@ -31,6 +33,9 @@ public class TuserService {
 	
 	@Autowired	
 	public TuserProblemDao tuserProblemDao;
+	
+	@Autowired
+	public ProblemTestCaseDao problemTestCaseDao;
 	
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
@@ -50,7 +55,7 @@ public class TuserService {
 	
 
 
-	public  List<TuserProblem> fetchTProblems(int testid, int tuid) {
+	public  List<TuserProblem> initialProblems(int testid, int tuid) {
 		// TODO Auto-generated method stub
 		
 			
@@ -61,15 +66,39 @@ public class TuserService {
 			tuserProblem.setProblemid(problem.getProblemId());
 			tuserProblem.setTuid(tuid);
 			tuserProblem.setType(problem.getType());
-			tuserProblemDao.insertTuserProblem(tuserProblem);
+			//tuserProblemDao.insertTuserProblem(tuserProblem);  测试测试测试测试
 		}
-		
 		return tuserProblemDao.findProblemByTestid(testid);
 	}
 
 	public  List<TuserProblem> findProblemByTestid(int testid) {
 		// TODO Auto-generated method stub
 		return tuserProblemDao.findProblemByTestid(testid);
+	}
+
+
+	//统计试题
+	public Map getTestInfo(int testid) {
+		// TODO Auto-generated method stub
+		List<Problem> problems = problemDao.getProblemByTestid(testid);
+		int option = 0;
+		int essay = 0;
+		int program = 0;
+		for(Problem problem: problems){
+			if(problem.getType() == Examconstant.OPTION){
+				option++;
+			}else if(problem.getType() == Examconstant.ESSAY){
+				essay++;
+			}else if(problem.getType() == Examconstant.PROGRAM){
+				program++;
+			}
+		}
+		Map rtMap = new HashMap<String, Integer>();
+		rtMap.put("optionNum", option);
+		rtMap.put("essayNum", essay);
+		rtMap.put("programNum", program);
+		
+		return rtMap;
 	}
 	
 

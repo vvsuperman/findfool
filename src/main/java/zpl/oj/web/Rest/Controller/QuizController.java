@@ -46,8 +46,7 @@ public class QuizController {
 	@Autowired
 	private InviteService inviteService;
 	
-	@Autowired
-	private DESService desService;
+	
 
 	@RequestMapping(value = "/queryByID")
 	@ResponseBody
@@ -195,33 +194,14 @@ public class QuizController {
 		} else {
 			// 发送邀请
 			//by fangwei 重写发送邀请逻辑，新建testusr表
-			for (Testuser tu : request.getInvite()) {
-
-				// 邀请
-				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
-				String url = desService.encode(tu.getEmail()+"**"+q.getQuizid());
-				MailSenderInfo mailSenderInfo = new MailSenderInfo();
-				mailSenderInfo.setMailServerHost("smtp.163.com");   
-				mailSenderInfo.setMailServerPort("25");
-				mailSenderInfo.setUserName("weifangscs@163.com");   
-				mailSenderInfo.setPassword("fw820721");//您的邮箱密码  
+			for (InviteUser tu : request.getInvite()) {
 				
-				mailSenderInfo.setFromAddress("weifangscs@163.com");
-				mailSenderInfo.setToAddress(tu.getEmail());
-				mailSenderInfo.setReplyToAddress(request.getReplyTo());
-				mailSenderInfo.setSubject(request.getSubject());
-				String context = request.getContext();
-				context += "<p>欢迎来xxoo做测试，请登录到"+"http://localhost:8080/oj/#/mchoice/"+url+",,"
-						+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
-						+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
-				mailSenderInfo.setContent(context);
-				try {
-					SimpleMailSender.sendHtmlMail(mailSenderInfo);
-				} catch (Exception e) {
-					e.printStackTrace();    
-				}
+				//由inviteuser生成testuser
+
+				// 生成invite、testuser
+				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
+				inviteService.sendmail(request, q, tu, pwd,ht);
 			}
-			
 			
 			
 
@@ -235,6 +215,8 @@ public class QuizController {
 		rb.setMessage(msg);
 		return rb;
 	}
+
+	
 
 	@RequestMapping(value = "/manage/submite")
 	@ResponseBody

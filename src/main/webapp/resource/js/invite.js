@@ -9,15 +9,15 @@ function invite($scope, $http, Data) {
 }
 function Excel($scope, $http, Data) {
     $scope.xlsusers = [
-        {fname: '', lname: '', email: '', tel: '', test: Data.tname()}
+        {username: '', email: '', tel: '', test: Data.tname()}
     ];
     
     $scope.addOne = function (v) {
         var i = $scope.xlsusers.indexOf(v);
         if ($scope.active == 'notSelect') {
-            $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: ''});
+            $scope.xlsusers.splice(i + 1, 0, {username: '', email: '', tel: '', test: ''});
         } else {
-            $scope.xlsusers.splice(i + 1, 0, {fname: '', lname: '', email: '', tel: '', test: $scope.active});
+            $scope.xlsusers.splice(i + 1, 0, {username: '', email: '', tel: '', test: $scope.active});
         }
     };
     
@@ -69,9 +69,9 @@ function Excel($scope, $http, Data) {
         $scope.xlsusers = tmpp;
         for (t in $scope.testlist) {
             if ($scope.testlist[t] == "notSelect") {
-                $scope.xlsusers.unshift({fname: '', lname: '', email: '', tel: '', test: ''});
+                $scope.xlsusers.unshift({username: '', email: '', tel: '', test: ''});
             } else {
-                $scope.xlsusers.unshift({fname: '', lname: '', email: '', tel: '', test: $scope.testlist[t]})
+                $scope.xlsusers.unshift({username: '', email: '', tel: '', test: $scope.testlist[t]})
             }
         }
         var tmp = $scope.xlsusers;
@@ -151,7 +151,7 @@ function Excel($scope, $http, Data) {
     
     var use_worker = true;
     function xlsworker(data, cb) {
-        var worker = new Worker('resource/js/xlsworker.js');
+        var worker = new Worker('resource/js/xls/xlsworker.js');
         worker.onmessage = function (e) {
             switch (e.data.t) {
                 case 'ready':

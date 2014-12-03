@@ -1,6 +1,10 @@
 package zpl.oj.model.common;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import zpl.oj.model.common.ProblemTestCase;
 
 public class TuserProblem {
 
@@ -9,12 +13,16 @@ public class TuserProblem {
 	private String useranswer;
 	private int type;
 	private String rightanswer;
+	private List<ProblemTestCase> options;
 	
+	
+
 	public TuserProblem() {
 		this.tuid = 0;
 		this.problemid = 0;
 		this.useranswer = "";
 		this.rightanswer ="";
+		this.options = new ArrayList();
 	}
 	
 	public int getTuid() {
@@ -55,6 +63,14 @@ public class TuserProblem {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+	
+	public List<ProblemTestCase> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<ProblemTestCase> options) {
+		this.options = options;
 	}
 
 

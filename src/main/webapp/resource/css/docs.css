@@ -69,9 +69,11 @@ body {
 
 /* Outline button for use within the docs */
 .btn-outline {
-  color: #563d7c;
+  /*color: #563d7c;*/
+  color: #2fe2bf;
   background-color: #fff;
-  border-color: #563d7c;
+/*   border-color: #563d7c; */
+  border-color: #2fe2bf;
   border-width: 1px;
   border-style: solid;
 }
@@ -79,8 +81,10 @@ body {
 .btn-outline:focus,
 .btn-outline:active {
   color: #fff;
-  background-color: #563d7c;
-  border-color: #563d7c;
+  /*background-color: #563d7c;
+  border-color: #563d7c;*/
+  background-color: #2fe2bf;
+  border-color: #2fe2bf;
 }
 
 /* Inverted outline button (white on dark) */

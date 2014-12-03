@@ -1,0 +1,111 @@
+<script src="resource/js/des.js"></script>
+
+<div>
+   <div class="container-fluid" ng-class="{true:'', false: 'hedden'}[show==1]">
+   	 <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" role="form">
+   	 	  <div class="row">
+	   	 	 <div class="col-md-6 col-md-offset-1" >
+	   	 	 	<h4>说明</h4>
+	   	 	 	<h4>这是编程测试</h4>
+	   	 	 	<h4>请输入邮件中的密码，以及你的邮箱地址</h4>
+	   	 	 </div>
+   	 	  </div>
+   	 	
+		  <div class="form-group row">
+		    <label  class="col-sm-2 control-label">Email</label>
+		    <div class="col-sm-4">
+		      <input type="email" class="form-control" ng-model="loginEmail" placeholder="Email">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label  class="col-sm-2 control-label">密码</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" ng-model="loginPwd" placeholder="密码">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label  class="col-sm-2 control-label"></label>
+		    <div class="col-sm-4">
+		      <p ng-bind="errMsg"></p>
+		    </div>
+		  </div>
+		  
+		  <div class="col-xs-2 col-md-2 col-md-offset-3">
+		  	<button class="btn btn-primary" ng-click="login()">提交</button>
+		  </div>
+   	  </form>
+   </div>
+   
+   
+    <div class="container-fluid" ng-class="{true:'', false: 'hedden'}[show==2]">
+   	 <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" role="form">
+   	 	  <div class="row">
+	   	 	 <div class="col-md-6 col-md-offset-1" >
+	   	 	 	<h4>个人信息</h4>
+	   	 	 </div>
+   	 	  </div>
+   	 	
+		  <div class="form-group row">
+		    <label  class="col-sm-2 control-label">姓名</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" ng-model="tuser.username" placeholder="姓名">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label  class="col-sm-2 control-label">学校</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" ng-model="tuser.school" placeholder="学校">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label  class="col-sm-2 control-label">博客</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" ng-model="tuser.blog" placeholder="博客，github等">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label  class="col-sm-2 control-label">电话</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" ng-model="tuser.tel" placeholder="电话">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label  class="col-sm-2 control-label"></label>
+		    <div class="col-sm-4">
+		      <p ng-bind="errMsg"></p>
+		    </div>
+		  </div>
+		 
+		  
+		  <div class="col-xs-2 col-md-2 col-md-offset-3">
+		  	<button class="btn btn-outline" ng-click="submitUserInfo()">提交</button>
+		  </div>
+   	  </form>
+   </div>
+   
+   
+    <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" ng-class="{true:'', false: 'hedden'}[show==3]">
+   	 	  <div class="row">
+	   	 	 <div class="col-md-6 col-md-offset-1" >
+	   	 	 	<h4>即将开始测试</h4>
+	   	 	 	<h4>请确保你处于一个无打扰，安静的环境</h4>
+	   	 	 	<h4>测试时间为70分钟</h4>
+	   	 	 	<h4>选择题：<p class="text-success" ng-bind="dealNull(testInfo.optionNum)"></p></h4>
+	   	 	 	<h4>编程：<p class="text-success" ng-bind="dealNull(testInfo.programNum)"></p></h4>
+	   	 	 	<h4>问答题：<p class="text-success" ng-bind="dealNull(testInfo.essayNum)"></p></h4>
+	   	 	 	<h4>请独立完成所有的试题，请不要尝试借助于其它任何手段，否则将被以作弊论处</h4>
+	   	 	 </div>
+   	 	  </div>
+		  
+		  <div class="col-xs-2 col-md-2 col-md-offset-3">
+		  	<button class="btn btn-primary" ng-click="startTest()">开始</button>
+		  </div>
+   	  </form>
+
+</div>

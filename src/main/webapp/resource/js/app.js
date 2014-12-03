@@ -76,6 +76,16 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page/admin/adminhome.html',
                 controller: 'adminController'
             }).
+            
+            when('/testt', {
+                templateUrl: 'page/testing.html',
+                controller: 'testingController'
+            }).
+            when('/testing/:url', {
+                templateUrl: 'page/preparetest.html',
+                controller: 'testingController'
+            }).
+            
             otherwise({
                 redirectTo: '/'
             });

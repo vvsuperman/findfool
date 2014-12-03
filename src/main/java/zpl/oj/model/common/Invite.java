@@ -5,8 +5,20 @@ import java.util.Date;
 
 
 public class Invite implements Serializable {
-
 	
+	public Invite() {
+		this.iid = 0;
+		this.testid = 0;
+		this.hrid = 0;
+		this.uid = 0;
+		this.invitetime = "";
+		this.duration = "";
+		this.begintime = "";
+		this.finishtime = "";
+		this.score = "";
+		this.state = 1;
+	}
+
 	/**
 	 * ${item.comment}
 	 */
