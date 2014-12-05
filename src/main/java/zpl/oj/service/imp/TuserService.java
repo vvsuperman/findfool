@@ -61,12 +61,19 @@ public class TuserService {
 			
 		List<Problem> listProblem = problemDao.getProblemByTestid(testid);
 		for(Problem problem:listProblem){
-			TuserProblem tuserProblem = new TuserProblem();
-			tuserProblem.setRightanswer(problem.getRightAnswer());
-			tuserProblem.setProblemid(problem.getProblemId());
-			tuserProblem.setTuid(tuid);
-			tuserProblem.setType(problem.getType());
-			//tuserProblemDao.insertTuserProblem(tuserProblem);  测试测试测试测试
+			TuserProblem tuserProblem = tuserProblemDao.findByPidAndUid(tuid, problem.getProblemId());
+			if(tuserProblem == null){
+				tuserProblem = new TuserProblem();
+				tuserProblem.setRightanswer(problem.getRightAnswer());
+				tuserProblem.setProblemid(problem.getProblemId());
+				tuserProblem.setTuid(tuid);
+				tuserProblem.setType(problem.getType());
+				tuserProblemDao.insertTuserProblem(tuserProblem); 
+			}else{
+				tuserProblem.setRightanswer(problem.getRightAnswer());
+				tuserProblem.setType(problem.getType());
+				tuserProblemDao.updateProblemByIds(tuserProblem); 
+			}
 		}
 		return tuserProblemDao.findProblemByTestid(testid);
 	}

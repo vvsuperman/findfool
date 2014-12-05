@@ -258,7 +258,7 @@ public class TestingController {
 			testuserProblem.setProblemid(problemid);
 			testuserProblem.setUseranswer(useranswer);
 			testuserProblem.setTuid(tuid);
-			tuserProblemDao.updateTProblemByEmail(testuserProblem);	
+			tuserProblemDao.updateAnswerByIds(testuserProblem);	
 		}
 		
 		

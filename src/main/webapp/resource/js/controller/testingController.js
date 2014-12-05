@@ -15,8 +15,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 	 //测试数据
 	 $scope.email ="693605668@qq.com";
 	 $scope.tid = "1";
-	
-	 
 	 
 	 //检查该url是否合法
 	 $http({
@@ -132,6 +130,13 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 	         method: 'POST',
 	         data: sendData
 	     }).success(function (data) {
+	    	 if(data.message.type ==1){
+	    		 $scope.questionType =1;
+	    	 }else if(data.message.type ==2){
+	    		 $scope.questionType =2;
+	    	 }else if(data.message.type ==3){
+	    		 $scope.questionType =3;
+	    	 }
 	    	$scope.question = data.message;
 	     }).error(function(){
 	    	 console.log("login failed");
@@ -158,7 +163,71 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
     	 }
     	 
      }
+   
      
+    
+     /*
+      * 编程题运行
+      * */
+    $scope.run = function () {
+       var solution = {};
+       solution.problem_id = $scope.question.pid;
+       solution.language = $scope.language.lan;
+
+       solution.solution = $scope.proSolution;
+       solution.user_id = $scope.tuser.tuid;
+      
+       console.log("solution......",solution);
+       $http({
+           url: WEBROOT+'/solution/run',
+           method: "POST",
+           data: solution
+       }).success(function (data) {
+           $scope.state = 'success';
+           $scope.solution_id = data.solution_id;
+           $timeout($scope.query, 2000);
+           $scope.RESULT = $sce.trustAsHtml($scope.result);
+       }).error(function () {
+           $scope.state = 'Try again';
+           $scope.result = 'fail'
+       });
+
+   };
+   
+   $scope.query = function () {
+       var solution = new Object();
+       solution.solution_id = $scope.solution_id;
+     
+       $http({
+           url: WEBROOT+"/solution/query",
+           method: "POST",
+           data: solution
+       }).success(function (data) {
+           if (data.length == 0) {
+               $timeout($scope.query, 1000);
+           } else {
+               for (var i = 0; i < data.length; i++) {
+                   $scope.result += '<br>';
+                   var res = data[i];
+                   $scope.result += "time:" + res.cost_time;
+                   $scope.result += " mem:" + res.cost_mem;
+                   if (res.test_case == null) {
+                       $scope.result += " error:" + res.test_case_result;
+                   } else {
+                       $scope.result += " testCase:" + res.test_case;
+                       $scope.result += " result:" + res.test_case_result;
+                   }
+               }
+           }
+           $scope.RESULT = $sce.trustAsHtml($scope.result)
+       }).error(function () {
+           $scope.result += '<br>Try again'
+       })
+   };
+     
+    /* 
+     * 完成所有测试
+     * */
      $scope.finishTest = function(){
     	 var sendData ={"email":$scope.email,"testid":$scope.tid};
     	 $http({
@@ -176,7 +245,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 	     })
      }
      
-     
 	 
 	 /*
 	  * 辅助类，用于处理空字符串
@@ -187,4 +255,44 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 		 }
 	 }
 	 
+     
+     $scope.proSolution='#include <stdio.h>\r\n' +
+ 			'int main(){\r\n'+			
+ 				' 	return 0;\r\n'+
+ 			'}';
+     
+     
+     $scope.lgs = [
+                   {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},
+                   {name: 'C++', demo: 'resource/static/cpp.cpp', CodeType: 'c_cpp', lan: 1},
+                   {name: 'Java', demo: 'resource/static/java.java', CodeType: 'java', lan: 3},
+                   {name: 'python', demo: 'resource/static/python.py', CodeType: 'python', lan: 6},
+                   {name: 'C#', demo: 'resource/static/csharp.cs', CodeType: 'csharp', lan: 9}
+               ];
+     $scope.lg ={};
+     
+     $scope.lg.context =$scope.lgs[1];
+     
+     
+     $scope.outSelected = function(){
+    	 console.log("language.....",$scope.lg.context.name);
+     } 
+    
 });
+
+
+OJApp.controller("selectController",function($scope){
+   
+	$scope.$watch("lg.context",function(){
+   	 console.log("i am watching......");
+   	 	$scope.questionType =1;
+//   	 $scope.questionType =2;
+    })
+     
+     
+     
+     
+  
+     
+    
+})

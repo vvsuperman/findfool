@@ -14,6 +14,9 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
     $scope.showCustom = false;
     $scope.showButton = true;
     
+    
+    
+    
     $scope.testManage = function () {
         //add by zpl
         var sendData = new Object();
