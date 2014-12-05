@@ -1,4 +1,4 @@
-OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
+OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	
 	/*
@@ -9,6 +9,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 	 $scope.tid = param[1];
 	 */
 	 $scope.tuser = {};
+	 $scope.tuser.tuid=1;
 	 $scope.question = {};
 	 
 	 
@@ -51,12 +52,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面
 	    	 }	 
-	         
 	     }).error(function(){
 	    	 console.log("login failed");
 	     })
 	 }
-	 
 	
 	 
 	 //提交用户信息
@@ -92,8 +91,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 	     }).success(function (data) {
 	    	if(data.state!=0){
 	    		$scope.tProblems = data.message;
-		    	$scope.question = $scope.tProblems[1];
-		    	$scope.submitAndFetch($scope.question);
+		    	$scope.submitAndFetch( $scope.tProblems[1]);
 	    	}else{
 	    		alert(data.message);
 	    	}
@@ -122,8 +120,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
         		 }
         	 }
     	 }
-    	 var sendData = {"testid":$scope.tid,"email":$scope.email,"problemid":$scope.question.qid,
-    			 		 "useranswer":useranswer,"nowProblemId":problem.problemid};
+    	 console.log("problemid2.......",problem.problemid);
+    	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
+    			 		 "useranswer":useranswer};
     	 
     	 $http({
 	         url: WEBROOT+"/testing/submit",
@@ -163,19 +162,18 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
     	 }
     	 
      }
-   
      
-    
      /*
       * 编程题运行
       * */
     $scope.run = function () {
        var solution = {};
-       solution.problem_id = $scope.question.pid;
-       solution.language = $scope.language.lan;
+       solution.problem_id = $scope.question.qid;
+       solution.language = $scope.lg.context.lan;
 
        solution.solution = $scope.proSolution;
        solution.user_id = $scope.tuser.tuid;
+       solution.testid = $scope.tid;
       
        console.log("solution......",solution);
        $http({
@@ -254,45 +252,35 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams) {
 			 return 0;
 		 }
 	 }
-	 
-     
-     $scope.proSolution='#include <stdio.h>\r\n' +
- 			'int main(){\r\n'+			
- 				' 	return 0;\r\n'+
- 			'}';
-     
      
      $scope.lgs = [
                    {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},
                    {name: 'C++', demo: 'resource/static/cpp.cpp', CodeType: 'c_cpp', lan: 1},
                    {name: 'Java', demo: 'resource/static/java.java', CodeType: 'java', lan: 3},
-                   {name: 'python', demo: 'resource/static/python.py', CodeType: 'python', lan: 6},
+//                   {name: 'python', demo: 'resource/static/python.py', CodeType: 'python', lan: 6},
                    {name: 'C#', demo: 'resource/static/csharp.cs', CodeType: 'csharp', lan: 9}
                ];
-     $scope.lg ={};
      
+     $scope.lg ={};
      $scope.lg.context =$scope.lgs[1];
      
+     var codeTemplete ={"C":"#include <stdio.h>\r\n int main(){\r\n 	return 0;\r\n}",
+				"C++":"#include <stdio.h>\r\n int main(){\r\n 	return 0;\r\n}",
+				"Java":"public class Solution {\r\n    public static void main(String[] args) {\r\n    }\r\n}",
+				'C#':'public void Solution() {\r\n    Console.WriteLine("Hello World");\r\n}'
+     }
      
-     $scope.outSelected = function(){
-    	 console.log("language.....",$scope.lg.context.name);
-     } 
-    
+    $scope.proSolution=codeTemplete["C"];
+
+ 	$scope.$watch("lg.context",function(){
+ 		 //重新加载内容
+    	 $scope.proSolution = codeTemplete[$scope.lg.context.name];
+     })
+     
+     
+   
 });
 
 
-OJApp.controller("selectController",function($scope){
-   
-	$scope.$watch("lg.context",function(){
-   	 console.log("i am watching......");
-   	 	$scope.questionType =1;
-//   	 $scope.questionType =2;
-    })
-     
-     
-     
-     
-  
-     
-    
-})
+
+

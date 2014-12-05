@@ -8,7 +8,7 @@ import zpl.oj.model.solution.SolutionRun;
 
 public interface SolutionRunDao {
 	//增加任务
-	@Insert(" 		INSERT	INTO solution_run(user_id,test_id,problem_id,solution,language,date,type)	VALUES(${user_id},${test_id},${problem_id},#{solution},${language},NOW(),${type})")
+	@Insert(" 		INSERT	INTO solution_run(user_id,test_id,problem_id,solution,language,date,type)	VALUES(${user_id},${testid},${problem_id},#{solution},${language},NOW(),${type})")
 	void addSolutionRun(SolutionRun u);
 	
 	@Update(" UPDATE solution_run set type=0 where solution_id=#{solution_id}")

@@ -13,11 +13,13 @@ OJApp.directive('aceeditor', ['$timeout', function ($timeout) {
         require: '?ngModel',
         scope: true,
         link: function (scope, elem, attrs, ngModel) {
-        	console.log("direc initial......");
             var node = elem[0];
             var editor = ace.edit(node);
             editor.setTheme('ace/theme/twilight');
-            console.log("language", attrs.language)
+            scope.$watch("lg.context", function(){
+            	editor.getSession().setMode("ace/mode/"+scope.lg.context.CodeType);
+            });
+            
             editor.getSession().setMode("ace/mode/"+attrs.language);
             // set editor options
             editor.setShowPrintMargin(false);
@@ -26,6 +28,7 @@ OJApp.directive('aceeditor', ['$timeout', function ($timeout) {
                 editor.setValue(ngModel.$viewValue);
                 resizeEditor(editor, elem);
             };
+            
 
             editor.on('change', function () {
                 $timeout(function () {

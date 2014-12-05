@@ -5,7 +5,7 @@ import java.util.Date;
 public class SolutionRun {
 	int solution_id;
 	int user_id;
-	int test_id;
+	int testid;
 	int problem_id;
 	String solution;
 	int language;
@@ -13,7 +13,7 @@ public class SolutionRun {
 	int type;
 	public SolutionRun(){
 		user_id = 0;
-		test_id = 0;
+		testid = 0;
 		problem_id = 0;
 		solution = null;
 		language = 0;
@@ -31,11 +31,11 @@ public class SolutionRun {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getTest_id() {
-		return test_id;
+	public int getTestid() {
+		return testid;
 	}
-	public void setTest_id(int test_id) {
-		this.test_id = test_id;
+	public void setTestid(int testid) {
+		this.testid = testid;
 	}
 	public int getProblem_id() {
 		return problem_id;

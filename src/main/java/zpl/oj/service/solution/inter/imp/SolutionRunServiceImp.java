@@ -46,6 +46,7 @@ public class SolutionRunServiceImp implements SolutionRunService{
 		sr.setLanguage(rv.getLanguage());
 		sr.setSolution(rv.getSolution());
 		sr.setProblem_id(rv.getProblem_id());
+		sr.setTestid(rv.getTestid());
 		sr.setType(20);
 		solutionRunDao.addSolutionRun(sr);
 		

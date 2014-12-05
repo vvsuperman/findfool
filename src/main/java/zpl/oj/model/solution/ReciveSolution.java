@@ -9,13 +9,20 @@ public class ReciveSolution {
 	String solution;
 	List<ReciveTestCases> user_test_cases;
 	int user_id;
+	int testid;
 	
-	public List<ReciveTestCases> getUser_test_cases() {
-		return user_test_cases;
+	public int getTestid() {
+		return testid;
+	}
+
+	public void setTestid(int testId) {
+		this.testid = testId;
 	}
 
 
-
+	public List<ReciveTestCases> getUser_test_cases() {
+		return user_test_cases;
+	}
 
 
 	public ReciveSolution(){
@@ -23,6 +30,7 @@ public class ReciveSolution {
 		language = 0;
 		solution = null;
 		problem_id = 0;
+		testid =0;
 	}
 	
 	

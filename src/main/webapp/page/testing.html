@@ -51,18 +51,15 @@
 		  
 		 <!-- program test --> 
 		  <div class="row" ng-if="questionType==2">
-		    <div style="margin-top: 30px">
+		    <div style="margin-top: 20px">
 		        <textarea ckeditor minheight="120" width="100%" operation="view" ng-model="question.context"></textarea>
 		    </div>
 		    
 		    <div>
-		    	<div class="col-xs-12 " style="margin-top: 20px;" ng-controller="selectController">
+		    	<div class="col-xs-12 " style="margin-top: 20px;">
 		    	   <p>选择编程语言
 		                <select ng-model="lg.context" ng-options="m.name for m in lgs">
 		                </select>
-		                <button class="btn btn-primary" ng-click="outSelected()">测试</button>
-		                <p>lg:{{lg.context}}</p>
-		                <p>questionType:{{questionType}}</p>
 		            </p>
 		    	</div>
 		        
