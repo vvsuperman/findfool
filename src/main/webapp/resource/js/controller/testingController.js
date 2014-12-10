@@ -10,6 +10,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 */
 	 $scope.tuser = {};
 	 $scope.tuser.tuid=1;
+	 $scope.tuser.email="693605668@qq.com";
 	 $scope.question = {};
 	 
 	 
@@ -181,8 +182,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
            method: "POST",
            data: solution
        }).success(function (data) {
+    	   console.log("data......",data);
            $scope.state = 'success';
-           $scope.solution_id = data.solution_id;
+           $scope.solution_id = data.message.msg;
            $timeout($scope.query, 2000);
            $scope.RESULT = $sce.trustAsHtml($scope.result);
        }).error(function () {
@@ -201,10 +203,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
            method: "POST",
            data: solution
        }).success(function (data) {
-           if (data.length == 0) {
-               $timeout($scope.query, 1000);
+           if (data.message.length == 0) {
+               $timeout($scope.query, 1000,5);
            } else {
-               for (var i = 0; i < data.length; i++) {
+               for (var i = 0; i < data.message.length; i++) {
                    $scope.result += '<br>';
                    var res = data[i];
                    $scope.result += "time:" + res.cost_time;

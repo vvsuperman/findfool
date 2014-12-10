@@ -14,20 +14,20 @@ import zpl.oj.model.common.Problem;
 public interface ProblemDao {
 
 	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER  FROM PROBLEM  WHERE isdelete=0 and problem_Id = #{id}")
+			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM  WHERE isdelete=0 and problem_Id = #{id}")
 	  Problem getProblem(int id);
 	
 	//查询答案
 	@Select("select * from problem t1, problem_test_case t2 where t1.problem_id = t2.problem_id and t1.problem_Id = #{id}")
 	  List<Map> getProblemAndCase(int id);
 	
-	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type, t1.rightanswer as rightAnswer FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
+	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type, t1.rightanswer as rightAnswer,t1.score as score FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
 	List<Problem> getProblemByTestid(int testid);
 	
 	
 	
 	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER"
+			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score"
 			+ "  FROM PROBLEM  "
 			+ "WHERE uuid=(select uuid from problem where isdelete=0 and PROBLEM_ID=#{0})"
 			+ " order by PROBLEM_ID DESC limit 1")
@@ -35,15 +35,16 @@ public interface ProblemDao {
 	  
 	@Insert("    INSERT INTO PROBLEM("
 			+ " UUID, belong,   TITLE,   DESCRIPTION,   DATE,   PROBLEM_SET_ID,  CREATOR,   TYPE,   LIMIT_TIME, "
-			+ "  LIMIT_MEM,   SUBMIT,   SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER )"
+			+ "  LIMIT_MEM,   SUBMIT,   SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER ,score)"
 			+ " VALUES( #{uuid},#{belong},  #{title},  #{description},  #{date},  #{problemSetId},  #{creator},  #{type},  "
-			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate},#{rightAnswer})")
+			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate},#{rightAnswer},#{score})")
 	  void insertProblem(Problem problem);	  
 	
 	//by fangwei 
 	@Update("    update PROBLEM set "
 			+ " UUID = #{uuid} , title=#{title},description=#{description},problem_set_id=#{problemSetId},limit_time=#{limitTime},"
-			+ "limit_mem=#{limitMem},submit=#{submit},sloved=#{sloved},modifier=#{modifier},modifydate=#{modifydate},rightanswer=#{rightAnswer} where problem_id=#{problemId}")
+			+ "limit_mem=#{limitMem},submit=#{submit},sloved=#{sloved},modifier=#{modifier},modifydate=#{modifydate},rightanswer=#{rightAnswer},score=#{score}"
+			+ " where problem_id=#{problemId}")
 	  void updateProblemInstance(Problem problem);	
 
 	
@@ -60,7 +61,7 @@ public interface ProblemDao {
 	
 	
 	@Select("    select  UUID,  PROBLEM_ID as problemId,  TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER  FROM PROBLEM"
+			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM"
 			+ " WHERE isdelete=0 creator=${uid} limit ${begin},${end}")
 	  List<Problem> getProblemsByCreator(int uid,int begin,int end);  
 

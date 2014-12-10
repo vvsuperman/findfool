@@ -14,16 +14,48 @@ public class TuserProblem {
 	private int type;
 	private String rightanswer;
 	private List<ProblemTestCase> options;
+	private int setid;
+	private int inviteId;
+	private int score;
 	
-	
-
 	public TuserProblem() {
 		this.tuid = 0;
 		this.problemid = 0;
 		this.useranswer = "";
 		this.rightanswer ="";
 		this.options = new ArrayList();
+		this.setid =0;
+		this.inviteId =0;
+		this.score =0;
 	}
+	
+	
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getInviteId() {
+		return inviteId;
+	}
+
+	public void setInviteId(int inviteId) {
+		this.inviteId = inviteId;
+	}
+
+	public int getSetid() {
+		return setid;
+	}
+
+	public void setSetid(int setid) {
+		this.setid = setid;
+	}
+
+	
 	
 	public int getTuid() {
 		return tuid;

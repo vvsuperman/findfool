@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/26.
  */
-function TestPageTid($scope, $routeParams, $http,$modal, Data) {
+OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data) {
     $scope.url = '#/test';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testlist.html';
@@ -14,7 +14,15 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
     $scope.showCustom = false;
     $scope.showButton = true;
     
-    
+    $scope.getTypeName = function(typeName){
+    	if(typeName == 1){
+    		return "选择题";
+    	}else if(typeName ==2){
+    		return "编程题";
+    	}else{
+    		return "no";
+    	}
+    }
     
     
     $scope.testManage = function () {
@@ -100,17 +108,19 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
 //        $scope.testManage();
     };
     
+    $scope.panel={};
+    $scope.panel.show="";
+    
+    
     $scope.showDefaultPanel = function(){
-    	$scope.showDefault = true;
-    	$scope.showCustom = false;
-    	$scope.showButton = false;
+    	console.log("show default panel");
+    	$scope.panel.show = "default";
     }
     
     
-    $scope.showCustomPanel = function(){
-    	$scope.showCustom = true;
-    	$scope.showDefault = false;
-    	$scope.showButton = false;
+   $scope.showCustomPanel = function(){
+    	console.log("show custom panel");
+    	$scope.panel.show = "custom";
     }
     
     //by fw 修改混乱逻辑，将方法从testpage移入
@@ -153,4 +163,4 @@ function TestPageTid($scope, $routeParams, $http,$modal, Data) {
 	
 	
  
-}
+});

@@ -9,6 +9,7 @@ public class Problem implements Serializable {
 	public Problem(){
 		uuid=-1;
 		rightAnswer ="0000";
+		score =0;
 	}
 	
 	/**
@@ -54,11 +55,19 @@ public class Problem implements Serializable {
 	
 	/*
 	 * 选择题的正确答案
-	 *
 	 */
-	
 	private String rightAnswer;
 	
+	private int score;
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public String getRightAnswer() {
 		return rightAnswer;
 	}

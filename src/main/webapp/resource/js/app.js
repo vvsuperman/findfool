@@ -18,7 +18,7 @@ OJApp.config(['$routeProvider',
         $routeProvider.
             when('/', {
                 templateUrl: 'page/main.html',
-                controller: 'Indexx'
+                controller: 'mainController'
             }).
             when('/user', {
                 templateUrl: 'page/page.html',

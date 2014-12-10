@@ -216,7 +216,8 @@ public class TestingController {
 		new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid(),inviteDao);
 		inviteDao.updateInvite(invite);
 		
-		List<TuserProblem> tProblems = tuserService.initialProblems(testid,tuid);
+		int inviteId = invite.getIid();
+		List<TuserProblem> tProblems = tuserService.initialProblems(testid,tuid,inviteId);
 		rb.setState(1);
 		rb.setMessage(tProblems);
 		return rb;

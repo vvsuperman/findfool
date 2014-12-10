@@ -1,3 +1,40 @@
+
+.blackFont{
+	color:#5a5a5a;
+}
+
+
+.nav-pills > li.active > a{
+	background-color: #2fe2bf;
+}
+
+
+.nav-pills > li.active > a:HOVER{
+	 background-color: #55d98d;
+}
+
+.nav-pills > li.active > a:focus{
+	background-color: #55d98d;
+}
+
+.customBar{
+	margin-top: 38px;
+	margin-left: -30px;
+	padding-left: -30px;
+	
+}
+
+
+.customSideNav{
+	padding-left: 30px;
+	background-color: #ffffff !important;
+}
+
+.mytesttab{
+	margin-top: 20px;
+}
+
+
 .hedden {
     display: none;
 }
@@ -18,10 +55,7 @@
     background: #374652;
 }
 
-.bg-success {
-    background-color: #26B363;
-    color: white;
-}
+
 
 #landing .eyemagnet {
     background: #e3f5ff url("../static/large-010101.png") top center no-repeat;

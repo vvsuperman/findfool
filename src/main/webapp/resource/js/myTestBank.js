@@ -6,16 +6,16 @@
 
 
 
-function MyTestBank($scope) {
+OJApp.controller('MyTestBank',function($scope) {
     $scope.url = '#/mybank';
     $scope.template = 'page/mytestBank.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = 'leftBar1.html';
     $scope.active = 1;
     $scope.show = 1;
-}
+});
 
-function mytestbank($scope, $http, Data,$sce,$modal) {
+OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	$scope.active = 1;
 	$scope.show = 1;
     
@@ -47,6 +47,7 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
     $scope.newQuestion = new QuestionMeta();
 	$scope.myu = 1;
 	$scope.reciveData.choosedQlist = new Array();
+	
 
 	$scope.editorOptions =
 	{
@@ -212,93 +213,18 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
         $scope.queryQuestions(1);
 //        $scope.template = $scope.templates[$scope.active - 1];
     };
-    $scope.AddPage = function (target) {
-        $scope.active = target.getAttribute('data');
+    
+    $scope.showAddPage = function (active) {
+        $scope.active = active;
         $scope.show = 0;
         $scope.context="";
         $scope.tag="";
-//        $scope.newQuestion = new Object();
-//        $scope.newQuestion.context = "";
-//        $scope.newQuestion.answer = new Array();
-//        $scope.newQuestion.tag = "";
-//        
-//        var ans = new Object();
-//        ans.text="";
-//        ans.score=0;
-//        if($scope.active == "1")
-//        	ans.isright=false;
-//        else
-//        	ans.isright = "";
-//        $scope.newQuestion.answer.push(ans);
-//        var tags = "";
-//        $scope.newQuestion.tag = tags;
-        console.log($scope.newQuestion);
     };
-    $scope.deleteQuestion = function () {
-		if($scope.reciveData.choosedQ == null){
-			alert("请选题一个题目")
-			return;
-		}
-        var res = confirm("确定删除吗？删除之后不可恢复");
-        if (res == true) {
-            $http({
-                url: WEBROOT+"/question/delete",
-                method: 'POST',
-                headers: {
-                    "Authorization": Data.token()
-                },
-                data: {"user": {"uid": Data.uid()}, "qid": $scope.reciveData.choosedQ.qid}
-            }).success(function (data) {
-                $scope.state = data["state"];//1 true or 0 false
-                if (data["token"] != "" && data["token"] != null)
-                    Data.setToken(data["token"]);
-                $scope.message = data["message"];
-                if ($scope.state) {
-                    alert('删除成功');
-                    $scope.show = "1";
-                    $scope.queryQuestions(1);
-                    $scope.newQuestion = new QuestionMeta();
-                } else {
-                    alert('添加失败');
-                }
-            }).error(function (data) {
-
-            });
-        }
-    }
-    $scope.modifyQuestion = function () {
-		if($scope.reciveData.choosedQ == null){
-			alert("请选题一个题目")
-			return;
-		}
-        $scope.show = "0";
-        console.log($scope.reciveData.choosedQ);
-        $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
-        $scope.newQuestion.type = $scope.active;
-       console.log($scope.active) ;
-
-        $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
-        $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
-        $scope.context=$scope.newQuestion.context;
-        var ans = $scope.reciveData.choosedQ.answer;
-        if ($scope.newQuestion.type == 1) {
-            for (a in ans) {
-                a.isright = (a.isright == "0" ? false : true);
-            }
-        }
-        $scope.newQuestion.answer = ans;
-        var tags = "";
-        for (var i = 0; i < $scope.reciveData.choosedQ.tag.length; i++) {
-            if (i == 0) {
-                tags += $scope.reciveData.choosedQ.tag[i];
-            } else {
-                tags += ",";
-                tags += $scope.reciveData.choosedQ.tag[i];
-            }
-        }
-        $scope.newQuestion.tag = tags;
-        console.log($scope.newQuestion);
-    };
+    
+   
+    
+    
+   
     $scope.isNum = function (q) {
         if (q == null || q == "")
             return;
@@ -457,4 +383,4 @@ function mytestbank($scope, $http, Data,$sce,$modal) {
 			  $scope.reciveData.choosedQlist.push(q);		
 		}		
 	}
-}
+});

@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-function TestPage($scope, $http, Data) {
+OJApp.controller('TestPage',function($scope, $http, Data) {
     $scope.url = '#/test';
     $scope.active = 1;
     $scope.template = 'page/testshow.html';
@@ -235,5 +235,5 @@ function TestPage($scope, $http, Data) {
 //        console.log(tid);
 //        $scope.template = 'mytestBank.html';
 //    }
-}
+})
 

@@ -55,7 +55,7 @@ public class TuserService {
 	
 
 
-	public  List<TuserProblem> initialProblems(int testid, int tuid) {
+	public  List<TuserProblem> initialProblems(int testid, int tuid,int inviteId) {
 		// TODO Auto-generated method stub
 		
 			
@@ -64,10 +64,12 @@ public class TuserService {
 			TuserProblem tuserProblem = tuserProblemDao.findByPidAndUid(tuid, problem.getProblemId());
 			if(tuserProblem == null){
 				tuserProblem = new TuserProblem();
+				tuserProblem.setInviteId(inviteId);
 				tuserProblem.setRightanswer(problem.getRightAnswer());
 				tuserProblem.setProblemid(problem.getProblemId());
 				tuserProblem.setTuid(tuid);
 				tuserProblem.setType(problem.getType());
+				tuserProblem.setScore(problem.getScore());
 				tuserProblemDao.insertTuserProblem(tuserProblem); 
 			}else{
 				tuserProblem.setRightanswer(problem.getRightAnswer());
@@ -75,13 +77,10 @@ public class TuserService {
 				tuserProblemDao.updateProblemByIds(tuserProblem); 
 			}
 		}
-		return tuserProblemDao.findProblemByTestid(testid);
+		return tuserProblemDao.findProblemByInviteId(inviteId);
 	}
 
-	public  List<TuserProblem> findProblemByTestid(int testid) {
-		// TODO Auto-generated method stub
-		return tuserProblemDao.findProblemByTestid(testid);
-	}
+	
 
 
 	//统计试题

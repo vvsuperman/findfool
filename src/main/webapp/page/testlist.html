@@ -1,11 +1,10 @@
+<link rel="stylesheet" type="text/css" href="resource/css/testbank.css"/>
 
-
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top: 80px" >
+<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" style="margin-top: 80px" >
 		
 	
 		
-		  <div class="col-md-8">
-		   <div class="panel panel-info">
+		   <div class="panel panel-default">
 			   <div class="panel-heading">
 			   	  已有试题
 			   </div>
@@ -23,12 +22,12 @@
 					        <tbody>
 					        <tr ng-repeat="q in qs">
 					            <td abstract context={{q.context}}></td>
-					            <td>{{q.type}}</td>
+					            <td ng-bind="getTypeName(q.type)"></td>
 					            <td>{{q.score}}</td>
 					            <td>
-					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
-					                <a href="" ng-click="deleteQuestionFromTest(q)">删除</a></td>
+					                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
+					                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
+					                <a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">删除</a></td>
 					        </tr>
 					        </tbody>
 					    </table>      
@@ -36,17 +35,14 @@
 				
 			
 		</div>
-	 </div> 
-	 <div class="col-md-8"  ng-if="showButton">
-        <button class="btn btn-default" data="{{tid}}" ng-click="showDefaultPanel()">添加库试题</button>
+        <button class="btn btn-outline" data="{{tid}}" ng-click="showDefaultPanel()">&nbsp;&nbsp;&nbsp;添加库试题&nbsp;&nbsp;&nbsp;</button>
         <button class="btn btn-outline" data="{{tid}}" ng-click="showCustomPanel()">添加自定义试题</button>
 
-    </div>
 </div>
 
 
 
-<div ng-include src="'page/testBank.html'" ng-controller="TestBank" ng-if="showDefault"></div>
-<div ng-include src="'page/mytestBank.html'"  ng-if="showCustom"></div>
+<div ng-include src="'page/testBank.html'" ng-controller="TestBank" ng-if="panel.show=='default'"></div>
+<div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"  ng-if="panel.show=='custom'"></div>
 
 

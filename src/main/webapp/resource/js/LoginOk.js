@@ -1,4 +1,4 @@
-function LoginOk($scope, $http,Data,$sce){
+OJApp.controller('LoginOk',function($scope, $http,Data,$sce){
 	$scope.url = '#/loginOk';
     $scope.template = 'loginOk.html';
     $scope.ContentUs = 'contentUs.html';
@@ -12,4 +12,4 @@ function LoginOk($scope, $http,Data,$sce){
 		Data.setFlag(0);		
 	}
 	window.location.href = '#/test';
-}
+})

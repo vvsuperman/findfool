@@ -8,19 +8,9 @@
 
 var WEBROOT = "/oj";
 
-function Indexx($scope, $http, Data) {	
+OJApp.controller('mainController',function($scope, $http, Data) {	
     $scope.url = '#';
-//    $scope.customers = [
-//        {name: "1公司", img: "./static/benefit-1.png", note: "待定"},
-//        {name: "2公司", img: "./static/benefit-2.png", note: "待定"},
-//        {name: "3公司", img: "./static/benefit-3.png", note: "待定"}
-//    ];
-    /*$http({
-     url: './data/indexGET.json',
-     method: 'GET'
-     }).success(function (data) {
-     $scope.customers = data.customers;
-     });*/
+
     $scope.confirm = function () {
         if ($scope.Lemail && $scope.Lpwd) {
             $http({
@@ -61,12 +51,6 @@ function Indexx($scope, $http, Data) {
                     window.location.href = '#/loginok';
                     $scope.name = "测试用户";
                 }
-                
-             
-                
-            
-               
-
             }).error(function () {
                     alert("网络错误");
                     window.location.reload(true);
@@ -218,7 +202,8 @@ function Indexx($scope, $http, Data) {
             $scope.confirm()
         }
     };
-}
+});
+
 function aceEditor($scope) {
     $scope.url = "#/editor";
     $scope.template = 'editor.html';
@@ -397,7 +382,7 @@ function TestShow($scope, $http, Data) {
  ];
 
  }*/
-function nav($scope, Data) {
+OJApp.controller('nav',function($scope, Data) {
     $scope.invitedleft = Data.invitedleft();
     $scope.name = Data.name();
 //    console.log(Data.name);
@@ -429,22 +414,23 @@ function nav($scope, Data) {
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
     };
-}
+});
 
 
-function Upgrade($scope) {
+OJApp.controller('Upgrade',function($scope) {
     $scope.url = '#/upgrade';
     $scope.template = 'upgrade.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
-}
-function RockRoll($scope, $routeParams) {
+});
+
+OJApp.controller('RockRoll',function($scope, $routeParams) {
     $scope.url = '#/upgrade';
     $scope.template = 'rrtest.html';
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
     $scope.rrid = $routeParams.rrid;
-}
+});
 
 
 //function TestBank($scope) {
@@ -457,7 +443,7 @@ function RockRoll($scope, $routeParams) {
 //    };
 //}
 
-function addQuestion($scope) {
+OJApp.controller('addQuestion',function($scope) {
     $scope.Qactive = 1;
     $scope.Tactive = 1;
     $scope.Qtype = [
@@ -475,226 +461,8 @@ function addQuestion($scope) {
     $scope.goQ = function (target) {
         $scope.Qactive = target.getAttribute('data');
     }
-}
+});
 
 
-function editor($scope, $http, $sce, $timeout) {
-    $scope.language = [
-        {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},
-        {name: 'C++', demo: 'resource/static/cpp.cpp', CodeType: 'c_cpp', lan: 1},
-        {name: 'Java', demo: 'resource/static/java.java', CodeType: 'java', lan: 3},
-        {name: 'python', demo: 'resource/static/python.py', CodeType: 'python', lan: 6},
-        {name: 'C#', demo: 'resource/static/csharp.cs', CodeType: 'csharp', lan: 9}
-    ];
-    $scope.selected = $scope.language[0];
-
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/twilight");
-
-    // add command to lazy-load keybinding_menu extension
-    editor.commands.addCommand({
-        name: "showKeyboardShortcuts",
-        bindKey: {win: "Ctrl-Alt-h", mac: "Command-Alt-h"},
-        exec: function (editor) {
-            ace.config.loadModule("ace/ext/keybinding_menu", function (module) {
-                module.init(editor);
-            })
-        }
-    });
-    editor.execCommand("showKeyboardShortcuts");
-
-    if (typeof ace == "undefined" && typeof require == "undefined") {
-        document.body.innerHTML = "<p style='padding: 20px 50px;'>couldn't find ace.js file, <br>"
-            + "to build it run <code>node Makefile.dryice.js full<code>"
-    } else if (typeof ace == "undefined" && typeof require != "undefined") {
-        require(["ace/ace"], setValue)
-    } else {
-        require = ace.require;
-    }
-    require("ace/lib/net").get($scope.selected.demo, function (t) {
-        var el = document.getElementById("editor");
-        el.env.editor.setValue(t, 1);
-        el.env.editor.getSession().setMode("ace/mode/" + $scope.selected.CodeType);
-
-        $scope.eCode = el.env.editor.getValue();
-    });
-//    $scope.CodeURL = './static/java.java';
-//    $scope.CodeType = 'java';
-    $scope.refresh = function () {
-        require("ace/lib/net").get($scope.selected.demo, function (t) {
-            var el = document.getElementById("editor");
-            el.env.editor.setValue(t, 1);
-            el.env.editor.getSession().setMode("ace/mode/" + $scope.selected.CodeType);
-
-            $scope.eCode = el.env.editor.getValue();
-        });
-    };
-    $scope.querry = function () {
-        var da = new Object();
-        da.solution_id = $scope.solution_id;
-        var url;
-        if ($scope.local) {
-            url = "./data/test.json";
-        } else {
-            url = "/solution/query";
-        }
-
-        $http({
-            url: WEBROOT+url,
-            method: "POST",
-            data: da
-        }).success(function (data) {
-//            var flag = 0;
-            if (data.length == 0) {
-//                $scope.result = '';
-                $timeout($scope.querry, 1000);
-            } else {
-                for (var i = 0; i < data.length; i++) {
-//                flag = 1;
-                    $scope.result += '<br>';
-                    var res = data[i];
-                    $scope.result += "time:" + res.cost_time;
-                    $scope.result += " mem:" + res.cost_mem;
-                    if (res.test_case == null) {
-//                    there has a bug need fix
-                        $scope.result += " error:" + res.test_case_result;
-                        //$scope.result += " error:"+res.test_case_result.strlen()>200?res.test_case_result.substr(0,200)+"[...]":res.test_case_result;
-                    } else {
-                        $scope.result += " testCase:" + res.test_case;
-                        $scope.result += " result:" + res.test_case_result;
-                    }
-                }
-
-//                if ($scope.flag > 0) {
-//                $scope.result = '<br>Try again';
-//                    $scope.flag -= 1;
-//                    $timeout($scope.querry, 1000);
-//                setTimeout($scope.querry(), 1000);
-//                }
-            }
-            $scope.RESULT = $sce.trustAsHtml($scope.result)
-        }).error(function () {
-            $scope.result += '<br>Try again'
-        })
-    };
-
-//    测试用例函数
-    $scope.cases = [
-        {'value': ''}
-    ];
-    $scope.addTestCase = function () {
-        $scope.cases.push({'value': ''});
-    };
-    $scope.showTestCase = function () {
-        $scope.all = '';
-        for (var ca = 0; ca < $scope.cases.length; ca++) {
-            $scope.all += $scope.cases[ca].value;
-        }
-    };
-    $scope.removeTestCase = function (v) {
-        var tmp = $scope.cases;
-        var i = tmp.indexOf(v);
-        if (i > -1) {
-            tmp.splice(i, 1);
-        }
-        $scope.cases = tmp;
-
-    };
-//    测试用例函数end
-
-    $scope.Run = function () {
-
-//        $scope.flag = 5;
-        var el = document.getElementById("editor");
-        $scope.code = el.env.editor.getValue();
-        $scope.pid = 0;
-        if ($scope.local) {
-            $scope.result = 'local!!! Judging...';
-        } else {
-            $scope.result = 'Judging...';
-        }
-        var da = new Object();
-        da.problem_id = $scope.pid;
-        da.language = $scope.selected.lan;
-//        $scope.hehe = ["1,2", "3,4"];
-//        da.user_test_cases = $scope.hehe;
-//        console.log(da.user_test_cases);
-        da.user_test_cases = $scope.cases;
-        console.log(da.user_test_cases);
-        da.solution = $scope.code;
-        da.user_id = 110;
-        var url;
-        if ($scope.local) {
-            url = ''
-        } else {
-            url = '/solution/run';
-        }
-        $http({
-            url: WEBROOT+url,
-            method: "POST",
-            data: da
-        }).success(function (data) {
-            $scope.zhuangtai = 'success';
-            $scope.solution_id = data.solution_id;
-//            setTimeout($scope.querry(), 2000);
-            $timeout($scope.querry, 2000);
-
-            $scope.RESULT = $sce.trustAsHtml($scope.result);
-        }).error(function () {
-            $scope.zhuangtai = 'Try again1';
-            $scope.result = 'fail'
-        });
-
-    };
-
-
-}
-//function mdeditor($scope) {
-//    $scope.text = "Hello [FIRST_NAME] [LAST_NAME],<br/>In order to assess your programming skills we've prepared a programming challenge that we would like you to complete. <br/>    The following link takes you to your test:<br/> [PRIVATE_TEST_LINK] <br/>  After clicking the link you will be able to choose to start the test, practice with a demo test or come back later.  <br/>  Best of luck!  <br/> Regards,<br/>  [COMPANY_NAME]";
-//    $scope.copyHTML = function () {
-//
-//        $scope.html = document.getElementById("wmd-output").innerText;
-//        console.log($scope.html);
-//    };
-//    $scope.clean = function () {
-//        $scope.text = "";
-//        document.getElementById("wmd-output").innerHTML = "<pre><code></code></pre>";
-//        document.getElementById("wmd-preview").innerHTML = "";
-//        document.getElementById("wmd-input").value = "";
-//        $scope.html = "";
-//    };
-//    function sign($scope) {
-//        $scope.active = 0;
-//        $scope.GoPage = function () {
-//            $scope.active = 1 - $scope.active;
-//        }
-//    }
-//}
-function personal($scope, $http) {
-    if ($scope.local == true) {
-        $scope.personal = {
-            "email": "cc@qq.com",
-            "name": "myname",
-            "company": "国际大企业",
-            "tel": "2344",
-            "old_pwd": "dsds23454df",
-            "new_pwd": "dsdsdsdswew3"
-        };
-//        $http({
-//            url: './data/personal.json',
-//            method: 'GET'
-//        }).success(function (data) {
-//            $scope.personal = data;
-//        });
-    } else {
-        $http({
-            url: WEBROOT+'./data/indexGET.json',
-            method: 'GET'
-        }).success(function (data) {
-            $scope.personal = data;
-        });
-    }
-
-}
 
 

@@ -1,61 +1,64 @@
-<link rel="stylesheet" type="text/css" href="resource/css/testbank.css"/>
+
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 
-<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" ng-controller="mytestbank">
-<h2 class="sub-header">未添加试题</h2>
-   <ul class="nav nav-tabs list-group">
-        <!--<ul class="nav nav-tabs" ng-model="template" ng-options="t.name for t in templates">-->
-        <li ng-repeat="tt in Qtype"
-            ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
-            <a href data="{{tt.data}}" ng-click="GoPage($event.target)">
-                {{tt.name}}</a>
-        </li>
-    </ul>
-    <div class="col-md-10" ng-class="{0:'hedden', 1: ''}[show]">
-        <p>搜索我的题目（标签）</p>
-
-        <form class="form-inline" role="form">
-            <input type="text" ng-model="reciveData.keyword" class="form-control">
-            <button class="btn btn-default" ng-click="queryQuestions(1)">搜索</button>
+<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 mytesttab" >
+<div class=" panel panel-default">
+<div class="panel-heading">
+  未添加试题
+</div>
+<div class="panel-body" style="padding-left: 0px;padding-right: 0px">
+ 	<div class="row" style="margin-left: 30px;margin-right: 30px">
+	   <ul class="nav nav-pills list-group col-md-3 col-xs-3"  >
+	        <li ng-repeat="tt in Qtype"
+	            ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
+	            <a href="" class='blackFont' ng-click="GoPage(tt.data)" ng-bind="tt.name"></a>
+	        </li>
+	    </ul>
+    
+    	<form class="form-inline col-md-5"  role="form" >
+            <input type="text" ng-model="reciveData.keyword" class=" col-md-8">
+            <button class="btn btn-default col-md-3"  ng-click="queryQuestions(1)" style="margin-left: 10px">搜索</button>
         
         </form>
-        <br>
+        
+         <button type="button" class="btn btn-outline pull-right col-md-2" style="margin-right: 20px" ng-click="showAddPage(active)">新增试题</button> 
+    </div>
+    
+    <div  ng-class="{0:'hedden', 1: ''}[show]">
+        
         
          <div class="table-responsive">
-					   <table class="table table-striped">
-					        <thead>
-					        <tr>
-					            <th>试题内容</th>
-					            
-					            <th></th>
-					        </tr>
-					        </thead>
-					        <tbody>
-					        <tr ng-repeat="q in reciveData.questions">
-					            <td abstract context={{q.context}}></td>
-					           
-					            <td>
-					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-					                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
-					                <a href="" ng-click="addQuestionToTest(q.qid,$event)">增加</a>
-					                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
-					            </td>
-					        </tr>
-					        </tbody>
-					    </table>      
+			   <table class="table table-striped">
+			        <thead>
+				        <tr>
+				            <th>试题内容</th>
+				            
+				            <th></th>
+				        </tr>
+			        </thead>
+			        <tbody>
+			        <tr ng-repeat="q in reciveData.questions">
+			            <td abstract context={{q.context}}></td>
+			           
+			            <td>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
+			                <a class="blackFont" href="" ng-click="addQuestionToTest(q.qid,$event)">增加</a>
+			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
+			            </td>
+			        </tr>
+			        </tbody>
+			    </table>      
 		   </div>
 
      
-        <ul class="pagination">
+        <ul class="pagination" style="margin-left: 20px">
             <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)">&laquo;</a></li>
             <li ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)">{{i.index}}</a></li>
             <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)">&raquo</a></li>
         </ul>
-        <div>
-            <button type="button" ng-class="{true:'btn btn-default',false:'hedden'}[myu==3]" ng-click="InsertQuestion()">加入</button>
-            <button type="button" class="btn btn-default" data="{{active}}" ng-click="AddPage($event.target)">新增</button>
-            <button type="button" class="btn btn-default" ng-click="modifyQuestion()">修改</button>
-            <button type="button" class="btn btn-default" ng-click="deleteQuestion()">删除</button>
+        <div style="margin-left: 20px">
+           
         </div>
     </div>
 
@@ -205,6 +208,8 @@
             </form>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 

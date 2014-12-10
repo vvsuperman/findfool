@@ -42,7 +42,7 @@ function QuestionMeta() {
     }
 }
 
-function TestBank($scope, $http,Data,$sce) {
+OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     $scope.url = '#/bank';
     $scope.template = 'page/testBank.html';
     $scope.ContentUs = 'contentUs.html';
@@ -478,4 +478,4 @@ function TestBank($scope, $http,Data,$sce) {
 			  $scope.reciveData.choosedQlist.push(q);		
 		}		
 	}
-}
+});
