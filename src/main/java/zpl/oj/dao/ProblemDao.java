@@ -17,10 +17,6 @@ public interface ProblemDao {
 			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM  WHERE isdelete=0 and problem_Id = #{id}")
 	  Problem getProblem(int id);
 	
-	//查询答案
-	@Select("select * from problem t1, problem_test_case t2 where t1.problem_id = t2.problem_id and t1.problem_Id = #{id}")
-	  List<Map> getProblemAndCase(int id);
-	
 	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type, t1.rightanswer as rightAnswer,t1.score as score FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
 	List<Problem> getProblemByTestid(int testid);
 	

@@ -15,7 +15,8 @@ public class Invite implements Serializable {
 		this.duration = "";
 		this.begintime = "";
 		this.finishtime = "";
-		this.score = "";
+		this.score = 0;
+		this.totalScore=0;
 		this.state = 1;
 	}
 
@@ -62,9 +63,26 @@ public class Invite implements Serializable {
 	private String finishtime;
 	
 	/**
-	 * 存放的形式为
+	 * 用户分数
 	 */
-	private String score;
+	private int score;
+	
+	public int getTotalScore() {
+		return totalScore;
+	}
+
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	/**
+	 * 用户分数
+	 */
+	private int totalScore;
 	
 	
 	private Integer state;
@@ -112,13 +130,10 @@ public class Invite implements Serializable {
     
      
     
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
-        this.score = score;
-    }
     
     
     public String getInvitetime() {

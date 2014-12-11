@@ -11,7 +11,7 @@ public interface SetDao {
 
 	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER "
 			+ "  FROM SETS  WHERE id = #{0}")
-	Set getSet(Long id);
+	Set getSet(int id);
 
 	@Insert("INSERT INTO SETS(NAME,  DATE, OWNER)"
 			+ "VALUES(#{name}, #{date},#{owner})")

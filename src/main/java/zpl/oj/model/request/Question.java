@@ -1,5 +1,6 @@
 package zpl.oj.model.request;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -11,6 +12,33 @@ public class Question {
 	private List<String> tag;
 	private String context;
 	private List<QuestionTestCase> answer;
+	private String useranswer;
+	private String rightanswer;
+	
+	public Question() {
+		this.qid = -1;
+		this.setid = -1;
+		this.name = "";
+		this.type = -1;
+		this.tag = new ArrayList<String>();
+		this.context = "";
+		this.answer = new ArrayList<QuestionTestCase>();
+		this.useranswer = "";
+		this.rightanswer = "";
+	}
+	public String getUseranswer() {
+		return useranswer;
+	}
+	public void setUseranswer(String useranswer) {
+		this.useranswer = useranswer;
+	}
+	public String getRightanswer() {
+		return rightanswer;
+	}
+	public void setRightanswer(String rightanswer) {
+		this.rightanswer = rightanswer;
+	}
+	
 	public Integer getQid() {
 		return qid;
 	}

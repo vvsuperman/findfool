@@ -51,18 +51,32 @@ public class ReportController {
 	private InviteService inviteService;
 	@Autowired
 	private ScoreService scoreService;
-	/*返回用户的得分和排名*/
-	@RequestMapping(value = "/getrank")
+	
+	
+	
+	/*
+	 * 返回总体的报告
+	 * 用户的得分、用户排名、及雷达图
+	 * */
+	@RequestMapping(value = "/getoverall")
 	@ResponseBody
-	public Map getrank(@RequestBody Invite invite) {
-		Map rtMap = new HashMap<String,String>();
-		int totalScore = scoreService.getTotalScore(invite.getIid());
-		int userTotalScore = scoreService.getUserScore(invite.getIid());
-		
-
+	public Map getOverall(@RequestBody Invite invite) {
+		Map rtMap = new HashMap<String,Object>();
+		rtMap.put("score", scoreService.getInviteScore(invite)); 
+		rtMap.put("rank", scoreService.getRank(invite));
+		rtMap.put("dimension", scoreService.getDimension(invite));
 		return rtMap;
 	}
 	
+	
+	/*
+	 * 返回用户报告细节
+	 * */
+	@RequestMapping(value = "/getdetail")
+	@ResponseBody
+	public Map getDetail(@RequestBody Invite invite) {
+		return null;
+	}
 	
 
 }

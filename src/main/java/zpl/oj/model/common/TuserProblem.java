@@ -9,7 +9,7 @@ import zpl.oj.model.common.ProblemTestCase;
 public class TuserProblem {
 
 	private int tuid;
-	private int problemid;
+	private Integer problemid;
 	private String useranswer;
 	private int type;
 	private String rightanswer;
@@ -65,11 +65,11 @@ public class TuserProblem {
 		this.tuid = tuid;
 	}
 
-	public int getProblemid() {
+	public Integer getProblemid() {
 		return problemid;
 	}
 
-	public void setProblemid(int problemid) {
+	public void setProblemid(Integer problemid) {
 		this.problemid = problemid;
 	}
 	
