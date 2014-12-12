@@ -1,4 +1,4 @@
-function importController($scope){
+OJApp.controller('importController',function($scope){
 	$scope.showImportForm = function(){
 		$scope.templete = "page/admin/batchimport.html";
 	}	
@@ -8,5 +8,4 @@ function importController($scope){
 		console.log("import....."+$scope.texttext);
 	}
 	
-	 
-}
+});

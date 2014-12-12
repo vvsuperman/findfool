@@ -15,7 +15,7 @@ import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.*;
-import zpl.oj.util.Constant.Examconstant;
+import zpl.oj.util.Constant.ExamConstant;
 
 @Service
 public class TuserService {
@@ -91,11 +91,11 @@ public class TuserService {
 		int essay = 0;
 		int program = 0;
 		for(Problem problem: problems){
-			if(problem.getType() == Examconstant.OPTION){
+			if(problem.getType() == ExamConstant.OPTION){
 				option++;
-			}else if(problem.getType() == Examconstant.ESSAY){
+			}else if(problem.getType() == ExamConstant.ESSAY){
 				essay++;
-			}else if(problem.getType() == Examconstant.PROGRAM){
+			}else if(problem.getType() == ExamConstant.PROGRAM){
 				program++;
 			}
 		}

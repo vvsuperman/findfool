@@ -15,6 +15,7 @@ import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestInviteUser;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
@@ -59,8 +60,8 @@ public class InviteServiceImp implements InviteService {
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());
 		invite.setUid(tuid);
-		invite.setScore("0/0");
-		invite.setState(1);
+		invite.setScore(0);
+		invite.setState(ExamConstant.INVITE_PUB);
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
 		invite.setDuration(duration);

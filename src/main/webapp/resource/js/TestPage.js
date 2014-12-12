@@ -30,16 +30,10 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
 
             }
         }).error(function (data) {
-            $scope.tests = [
-                {quizid: 5, name: '现在网络错误', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
-                {quizid: 5, name: '所以这只是一个', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3},
-                {quizid: 5, name: '样例展示', detail: 'i dont know', date: 1404284942000, emails: "524510356@qq.com", extraInfo: "1,2,3,4", owner: 29, time: 70, uuid: 3}
-            ];
-            for (var i = 0; i < $scope.tests.length; i++) {
-                $scope.tests[i].data = i;
-            }
+            console.log("服务器错误");
         });
     };
+    
     $scope.tshow();
 
     $scope.createNewTest = function () {
@@ -47,49 +41,27 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
     };
-//    $scope.Invite = function (target) {
-//        console.log('Invite');
-//        window.location.href = '#/invite';
-//    };
-//    $scope.MultInvite = function (target) {
-//        console.log('MultInvite');
-//        window.location.href = '#/invite';
-//        $scope.active = target.getAttribute('data');
-//        $scope.name = $scope.tests[$scope.active].name;
-//        $scope.tid = $scope.tests[$scope.active].quizid;
-//        Data.setTid($scope.tid);
-//        Data.setTname($scope.name);
-////        $scope.active = target.getAttribute('data');
-////        $scope.tid = target.getAttribute('data');
-////
-////        $scope.active = target.getAttribute('data');
-////        $scope.name = $scope.tests[$scope.active].name;
-////        $scope.template = 'MutleInvite.html';
-////        $scope.leftBar = 'leftBar.html';
-//    };
-    $scope.Report = function (target) {
-        console.log('Report');
-        $scope.leftBar = 'leftBar.html';
-        $scope.template = 'report.html';
-        $scope.active = target.getAttribute('data');
-        $scope.name = $scope.tests[$scope.active].name;
-        $scope.tid = $scope.tests[$scope.active].quizid;
-        Data.setTid($scope.tid);
-        Data.setTname($scope.name);
-//        $scope.testManage();
+
+/* 
+ *  跳转到测试报告页面
+ *   */
+    $scope.report = function (test) {
+        console.log("go to listreport",test);
+        Data.setTid(test.quizid);
+        Data.setTname(test.name);
+        window.location.href="#/report" 
     };
-//    $scope.testDetail = function (target) {
-//        console.log('testDetail');
-//        $scope.active = target.getAttribute('data');
-//        $scope.template = 'testlist.html';
-//        $scope.leftBar = 'leftBar.html';
-//        $scope.name = $scope.tests[$scope.active].name;
-//        $scope.tid = $scope.tests[$scope.active].quizid;
-//        Data.setTid($scope.tid);
-//        Data.setTname($scope.name);
-//        $scope.testManage();
-//
-//    };
+    
+/* 
+ *  跳转到邀请页面
+ *   */   
+    $scope.inviteUser = function(test){
+    	console.log("ivite user....",test);
+    	  Data.setTid(test.quizid);
+          Data.setTname(test.name);
+          window.location.href="#/invite" 
+    }
+
     $scope.pushTest = function(){
         //检查名字是否为空
         if($scope.addtest.name == ''){
@@ -139,49 +111,8 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
         });
 
     };
-    $scope.createNewTest = function () {
-        $scope.template = 'page/addtest.html';
-        $scope.ContentUs = 'page/contentUs.html';
-        $scope.leftBar = '';
-        //author zpl
-        //这个是处理增加一个测试的对象
-        $scope.addtest = new Object();
-        //增加测试的名字
-        $scope.addtest.name = '';
-        //是否自定义时间
-        $scope.addtest.selfTime = false;
-        //测试所需时间，默认为70
-        $scope.addtest.time = 70;
-        //额外信息
-        $scope.addtest.school = false;
-        $scope.addtest.prof = false;
-        $scope.addtest.project = false;
-        $scope.addtest.link = false;
-        //是否使用默认email
-        $scope.addtest.defaultEmail = true;
-        //邮件列表
-        $scope.addtest.eamils = '';
+   
 
-        //推向服务器
-        //$scope.pushTest()
-    };
-//    $scope.CommonSetting = function () {
-//        $scope.template = 'commonsetting.html';
-//        $scope.ContentUs = 'contentUs.html';
-////        $scope.active = target.getAttribute('data');
-//        $scope.tid = $scope.tests[$scope.active].uuid;
-//
-//        $scope.leftBar = 'leftBar.html';
-//        $scope.name = $scope.tests[$scope.active].name;
-//    };
-
-
-//    $scope.testPage = function (target) {
-//        console.log('testPage');
-//        $scope.template = 'testlist.html';
-//        $scope.leftBar = 'leftBar.html';
-//        $scope.testManage()
-//    };
 
     $scope.testManage = function () {
     	//add by zpl
@@ -223,17 +154,5 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
         });
     };
 
-	
-
-    
-
-//    $scope.addKUtest = function (tid) {
-//        console.log(tid);
-//        $scope.template = 'testBank.html';
-//    };
-//    $scope.addZItest = function (tid) {
-//        console.log(tid);
-//        $scope.template = 'mytestBank.html';
-//    }
 })
 

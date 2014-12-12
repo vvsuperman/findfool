@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 
@@ -25,13 +26,13 @@ public interface TuserProblemDao {
   @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type},set_id=#{setid} where problemid =#{problemid} and tuid = #{tuid}")
   void updateProblemByIds(TuserProblem testuserProblem);
   
-  @Select("select t1.problemid,t1.useranswer,t1.type,t1.set_id,t1.invitie_id from testuser_problem t1 where t1.invite=#{0} order by t1.type")
+  @Select("select t1.problemid,t1.useranswer,t1.invite_id from testuser_problem t1 where t1.invite_id=#{0} order by t1.type")
   List<TuserProblem> findProblemByInviteId(int inviteId);
   
   @Select("select t1.problemid,t1.useranswer,t1.type,t1.set_id,t1.invite_id from testuser_problem t1 where t1.tuid = #{0} and t1.problemid=#{1}")
   TuserProblem findByPidAndUid(int tuid,int problemid);
   
-  @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problmeid and t1.invite_id=#{0}")
+  @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0}")
   public int getTotalScore(int inviteId);
   
   
@@ -45,6 +46,10 @@ public interface TuserProblemDao {
 		+"where t.invite_id =#{iid} AND t.problemid = p.problem_id"
 		+"order by setId,qid;")
  public List<Question> getUserQuestion(Invite invite);
+ 
+ @Select("select tuid,username,email,company,degree,school,tel,blog from "
+			+ "testuser where tuid = #{0}")
+ public Testuser getTestUserById(int tuid);
 }
 
 

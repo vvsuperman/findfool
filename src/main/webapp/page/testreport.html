@@ -1,0 +1,97 @@
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport ==1">
+    <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn>
+    </p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>持续时间</th>
+            <th>状态</th>
+            <th>结果</th>
+            <th>查看详情</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat = "invite in invites">
+            <td ng-bind="invite.email"></td>
+            <td ng-bind="invite.duration"></td>
+            <td ng-bind="getState(invite)"></td>
+            <td ng-bind="getScore(invite)"></td>
+            <td ng-click="viewReport(invite)"><a href="">详情</a></td>
+        </tr>
+        
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport ==2">
+  <div class="panel panel-default">
+   <div class="panel-heading">
+      <ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" class="active"><a ng-click="viewReportSum" href="#">报告</a></li>
+		  <li role="presentation"><a ng-click="viewReportDetail()" href="#">详细报告</a></li>
+	  </ul>
+     
+   </div>
+   <div class="panel-body">
+        <div class="panel panel-default col-md-8" style="padding-left: 0px;padding-right: 0px">
+		   <div class="panel-heading">
+		     知识结构
+		   </div>
+		   <div class="panel-body">
+		      <canvas id="radar" class="chart chart-radar" data="data"  labels="labels" series＝"series"></canvas> 
+		   </div>
+		</div>
+		
+		<div class="col-md-4">
+			<div class="panel panel-default">
+			   <div class="panel-heading">
+			     用户信息
+			   </div>
+			   <div class="panel-body">
+			       <p>姓名：<span ng-bind="user.username"></span></p>
+			       <p>邮箱：<span ng-bind="user.email"></span></p>
+			       <p>毕业院校:<span ng-bind="user.school"></span></p>
+			       <p>最高学历:<span ng-bind="user.degree"></span></p>
+			       <p>个人博客：<span ng-bind="user.blog"></span></p>
+			   </div>
+			</div>
+			
+			<div class="panel panel-default">
+			   <div class="panel-heading">
+			     用户得分
+			   </div>
+			   <div class="panel-body">
+			       <p>得分:<span ng-bind="score"></span></p>
+			       <p>排名:<span ng-bind="rank"></span></p>
+			   </div>
+			</div>
+	  </div>	
+    </div>
+  </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport==3">
+   <div class="table-responsive">
+			   <table class="table table-striped">
+			        <thead>
+				        <tr>
+				        	<th>正确</th>
+				            <th>试题内容</th>
+				            
+				            <th></th>
+				        </tr>
+			        </thead>
+			        <tbody>
+			        <tr ng-repeat="q in questions">
+			        	<td ng-bind＝"judge(q)" ng-class="{1:text-success,2:text-danger}[color]"></td>
+			            <td abstract context={{q.context}}></td>
+			            <td>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
+			            </td>
+			        </tr>
+			        </tbody>
+			    </table>      
+		   </div>
+</div>

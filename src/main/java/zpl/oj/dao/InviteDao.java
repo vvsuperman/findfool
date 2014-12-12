@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.responsejson.ResponseInvite;
 
 public interface InviteDao {
 
@@ -22,7 +23,7 @@ public interface InviteDao {
 
 	@Update("UPDATE INVITE set  TESTID = #{testid},  "
 			+ " HRID = #{hrid},   UID = #{uid},   INVITETIME = #{invitetime},DURATION=#{duration},"
-			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalscore} STATE=#{state}  where IID = #{iid}")
+			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state}  where IID = #{iid}")
 	  void updateInvite(Invite invite);
 	    
 	@Select("SELECT  t1.IID,  t1.TESTID,   t1.HRID,   t1.UID,  t1.INVITETIME,  t1.FINISHTIME,  t1.SCORE,t1.totalscore,t1.STATE,t1.DURATION   "
@@ -37,7 +38,13 @@ public interface InviteDao {
 	@Select("select * from invite where testid =#{0}")
 	List<Invite> getInviteByTid(Integer testid);  
 	
-	@Select("select * from invite where testid =#{0} and state=#{1} order by finishtime,inviteTime desc")
-	List<Invite> getOrderInviteByTid(Integer testid,Integer state); 
+	
+	/*
+	 * 返回测试中和测试完成的测试，倒序排列
+	 * */
+	@Select("select t2.email,t1.iid,t1.testid,t1.uid ,t1.invitetime,t1.begintime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state "
+			+ "from invite t1,testuser t2 "
+			+ "where  t1.uid= t2.tuid and t1.testid =#{0} and (t1.state=1 or t1.state=0) order by t1.state,t1.finishtime,t1.inviteTime desc")
+	List<ResponseInvite> getOrderInviteByTid(Integer testid); 
 	  
 }

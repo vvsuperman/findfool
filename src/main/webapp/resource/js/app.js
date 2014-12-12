@@ -4,11 +4,13 @@
  */
 var OJApp = angular.module('OJApp', [
     'ui.bootstrap',
+    'chart.js',
     'ngRoute',
     'ngSanitize',
     'evgenyneu.markdown-preview',
     'webStorageModule',
     'ngCkeditor'
+   
     
 ]);
 
@@ -22,7 +24,7 @@ OJApp.config(['$routeProvider',
             }).
             when('/user', {
                 templateUrl: 'page/page.html',
-                controller: 'TestShow'
+                controller: 'testshow'
             }).
             when('/rock&roll/:rrid', {
                 templateUrl: 'page/page.html',
@@ -84,6 +86,18 @@ OJApp.config(['$routeProvider',
             when('/testing/:url', {
                 templateUrl: 'page/preparetest.html',
                 controller: 'testingController'
+            }).
+            when('/report', {
+                templateUrl: 'page/page.html',
+                controller: 'reportController'
+            }).
+            when('/report/list', {
+                templateUrl: 'page/page.html',
+                controller: 'reportListController'
+            }).
+            when('/report/detail', {
+                templateUrl: 'page/page.html',
+                controller: 'reportDetailController'
             }).
             
             otherwise({
@@ -321,6 +335,33 @@ OJApp.factory('Data', function (webStorage) {
             this._privi = to;
         };
         
+        this._inviteid="";
+        this.inviteid = function () {
+            if (this._inviteid == "" || this._inviteid == null) {
+                this._inviteid = webStorage.get("inviteid");
+            }
+            return this._inviteid;
+        };
+        this.setInviteid = function (to) {
+            webStorage.remove('inviteid');
+            webStorage.add('inviteid', to);
+            this._inviteid = to;
+        };
+        
+        
+        this._tuid="";
+        this.tuid = function () {
+            if (this._tuid == "" || this._tuid == null) {
+                this._tuid = webStorage.get("tuid");
+            }
+            return this._tuid;
+        };
+        this.setTuid = function (to) {
+            webStorage.remove('tuid');
+            webStorage.add('tuid', to);
+            this._tuid = to;
+        };
+        
         this.clear = function(){
         	webStorage.clear();
         	for (var p in this){
@@ -336,54 +377,3 @@ OJApp.factory('Data', function (webStorage) {
 });
 
 
-OJApp.directive('ckEditor', [function () {
-    return {
-        require: '?ngModel',
-        restrict: 'C',
-        link: function (scope, elm, attr, model) {
-            var isReady = false;
-            var data = [];
-            var ck = CKEDITOR.replace(elm[0]);
-            function setData() {
-                if (!data.length) {
-                    return;
-                }
-                var d = data.splice(0, 1);
-                ck.setData(d[0] || '<span></span>', function () {
-                    setData();
-                    isReady = true;
-                });
-            }
-            ck.on('instanceReady', function (e) {
-                if (model) {
-                    setData();
-                }
-            });
-            elm.bind('$destroy', function () {
-                ck.destroy(false);
-            });
-            if (model) {
-                ck.on('change', function () {
-                    scope.$apply(function () {
-                        var data = ck.getData();
-                        if (data == '<span></span>') {
-                            data = null;
-                        }
-                        model.$setViewValue(data);
-                    });
-                });
-                model.$render = function (value) {
-                    if (model.$viewValue === undefined) {
-                        model.$setViewValue(null);
-                        model.$viewValue = null;
-                    }
-                    data.push(model.$viewValue);
-                    if (isReady) {
-                        isReady = false;
-                        setData();
-                    }
-                };
-            }
-        }
-    };
-}]);

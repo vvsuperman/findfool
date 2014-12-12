@@ -16,7 +16,10 @@ public class Testuser {
 	private String lastLoginDate;
 	private String tel;
 	private int state;
+	private String degree;
 	
+	
+
 	public Testuser() {
 		this.tuid = 0;
 		this.username="";
@@ -30,6 +33,15 @@ public class Testuser {
 		this.lastLoginDate="";
 		this.tel="";
 		this.state=0;
+		this.degree="";
+	}
+	
+	public String getDegree() {
+		return degree;
+	}
+
+	public void setDegree(String degree) {
+		this.degree = degree;
 	}
 	
 	public int getTuid() {

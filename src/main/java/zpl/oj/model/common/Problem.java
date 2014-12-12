@@ -60,38 +60,6 @@ public class Problem implements Serializable {
 	
 	private int score;
 	
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-	public String getRightAnswer() {
-		return rightAnswer;
-	}
-
-	public void setRightAnswer(String rightAnswer) {
-		this.rightAnswer = rightAnswer;
-	}
-
-	public Integer getBelong() {
-		return belong;
-	}
-
-	public void setBelong(Integer belong) {
-		this.belong = belong;
-	}
-
-	public int getCreator() {
-		return creator;
-	}
-
-	public void setCreator(int creator) {
-		this.creator = creator;
-	}
-
 	/**
 	 * 1：选择题
 	 */
@@ -124,6 +92,40 @@ public class Problem implements Serializable {
 	private int modifier;
 	
 	private int creator;
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public String getRightAnswer() {
+		return rightAnswer;
+	}
+
+	public void setRightAnswer(String rightAnswer) {
+		this.rightAnswer = rightAnswer;
+	}
+
+	public Integer getBelong() {
+		return belong;
+	}
+
+	public void setBelong(Integer belong) {
+		this.belong = belong;
+	}
+
+	public int getCreator() {
+		return creator;
+	}
+
+	public void setCreator(int creator) {
+		this.creator = creator;
+	}
+
+	
 
     public int getModifier() {
 		return modifier;

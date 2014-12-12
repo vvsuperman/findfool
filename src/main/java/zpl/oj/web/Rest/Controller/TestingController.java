@@ -43,6 +43,7 @@ import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
@@ -87,7 +88,7 @@ public class TestingController {
 		if(invite==null){
 			rtMap.put("msg", "非法用户");
 			return rtMap;
-		}else if(invite.getState() == 0){
+		}else if(invite.getState() == ExamConstant.INVITE_FINISH){
 			rtMap.put("msg", "试题已截至");
 			return rtMap;
 		}

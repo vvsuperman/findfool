@@ -1,4 +1,4 @@
-package zpl.oj.service;
+package zpl.oj.service.imp;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,14 +19,16 @@ import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
+import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
+import zpl.oj.model.responsejson.ResponseInvite;
 import zpl.oj.util.Constant.ExamConstant;
 
 
 @Service
-public class ScoreService {
+public class ReportService {
 	
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
@@ -78,13 +80,19 @@ public class ScoreService {
 			scores.add(tmp.getScore());
 		}
 		Collections.sort(scores);
-		int i=scores.size();
-		for(;i>0;i--){
+		int i=scores.size()-1;
+		for(;i>=0;i--){
 			if(scores.get(i)==invite.getScore()){
+				i++;
 				break;
 			}
 		}
 		return i+"/"+scores.size();
+	}
+	
+	
+	public Testuser getUserById(int tuid){
+		return tuserProblemDao.getTestUserById(tuid);
 	}
 	
 	/*
@@ -140,7 +148,13 @@ public class ScoreService {
 		//生成返回数据
 		Map<String, Object> rtMap = new HashMap<String,Object>();
 		rtMap.put("name", new ArrayList<String>());
-		rtMap.put("val", new ArrayList<ArrayList<Integer>>());
+		
+		ArrayList parentList = new ArrayList<List<Integer>>();
+		ArrayList scoreList = new ArrayList<Integer>();
+		ArrayList userScoreList = new ArrayList<Integer>();
+		parentList.add(scoreList);
+		parentList.add(userScoreList);
+		rtMap.put("val", parentList);
 		
 		Iterator iter = setMap.entrySet().iterator();
 		while(iter.hasNext()){
@@ -153,8 +167,8 @@ public class ScoreService {
 			}
 			String setName = setDao.getSet(setid).getName();
 			((ArrayList)rtMap.get("name")).add(setName);
-			((ArrayList)((ArrayList)rtMap.get("val")).get(0)).add(val);
-			((ArrayList)((ArrayList)rtMap.get("val")).get(1)).add(userVal);
+			scoreList.add(val);
+			userScoreList.add(userVal);
 		}
 		return rtMap;
 	}
@@ -188,20 +202,13 @@ public class ScoreService {
 	}
 	
 	/*
-	 * 返回一个测试下所有已完成的报告
+	 * 返回一个测试下所有未完成和已完成的测试
 	 * 按完成时间倒序排列
 	 * */
-	public List getFinishedInvite(int testid){
-		return inviteDao.getOrderInviteByTid(testid,1);
+	public List<ResponseInvite> getInviteReport(int testid){
+		return inviteDao.getOrderInviteByTid(testid);
 	}
 	
-	/*
-	 * 返回测试下所有未完成的报告
-	 * 按完成时间倒序排列
-	 * */
-	public List getUnfinishedInvite(int testid){
-		return inviteDao.getOrderInviteByTid(testid,0);
-	}
 	
 	
 }

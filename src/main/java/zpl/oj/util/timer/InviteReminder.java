@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.InviteDao;
 import zpl.oj.model.common.Invite;
+import zpl.oj.util.Constant.ExamConstant;
 
 /*
  * 
@@ -31,7 +32,7 @@ public class InviteReminder {
     class RemindTask extends TimerTask {
         public void run() {
             Invite invite = inviteDao.getInviteById(inviteId);
-            invite.setState(0);
+            invite.setState(ExamConstant.INVITE_FINISH);
             inviteDao.updateInvite(invite);
             timer.cancel(); //Terminate the timer thread
         }

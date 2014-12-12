@@ -1,13 +1,14 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-function invite($scope, $http, Data) {
+OJApp.controller("invite",function($scope, $http, Data) {
     $scope.url = '#/invite';
     $scope.template = 'page/invite.html';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
-}
-function Excel($scope, $http, Data) {
+})
+
+OJApp.controller("Excel",function($scope, $http, Data) {
     $scope.xlsusers = [
         {username: '', email: '', tel: '', test: Data.tname()}
     ];
@@ -57,7 +58,7 @@ function Excel($scope, $http, Data) {
                     if ($.inArray('notSelect', $scope.testlist) == -1) {
                         $scope.testlist.push('notSelect');
                     }
-                    continue
+                    continue;
                 }
                 $scope.testlist.push(tmp[i].test);
             }
@@ -90,6 +91,9 @@ function Excel($scope, $http, Data) {
     
     $scope.tnamelist = {};
     
+    /*
+     * 该方法有问题，需通过testid来查，否则当同一个用户有相同测试会bug
+     * */
     $scope.queryByName = function (tname) {
         $http({
             url: WEBROOT+"/test/queryByName",
@@ -137,7 +141,7 @@ function Excel($scope, $http, Data) {
         for (tid in $scope.testlist) {
             var tmp = [];
             if ($scope.testlist[tid] == 'notSelect') {
-                continue
+                continue;
             }
             for (var user in $scope.xlsusers) {
                 if ($scope.xlsusers[user].test == $scope.testlist[tid]) {
@@ -215,7 +219,8 @@ function Excel($scope, $http, Data) {
         drop.addEventListener('dragover', handleDragover, false);
         drop.addEventListener('drop', handleDrop, false);
     }
-}
+});
+
 OJApp.filter('filterTest', function () {
     return function (items, v) {
         var r = [];
