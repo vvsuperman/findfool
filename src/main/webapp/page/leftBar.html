@@ -1,15 +1,15 @@
-    <div class="bs-sidebar hidden-print affix col-md-1 customBar" role="complementary" style="width: 180px!important;">
+    <div class="bs-sidebar hidden-print affix col-md-1 customBar" role="complementary" style="width: 180px!important;" ng-controller="leftBarController">
         <ul class="nav bs-sidenav customSideNav">
 
             <li >
-                <h4 style="margin-left: 10px">{{name}}</h4>
+                <h4 style="margin-left: 10px" ng-bind="tname"></h4>
             </li>
             <li class="">
                 <h5 style="margin-left: 10px"><strong>测试管理</strong></h5>
             </li>
 
             <li class="">
-                <a href=""  data="{{tid}}" ng-click="testManage($event.target)">所有试题</a>
+                <a href="#/test/{{tid}}" >所有试题</a>
             </li>
             <li>
                 <a href="" data="{{tid}}" ng-click="CommonSetting($event.target)">通用设置</a>
@@ -21,7 +21,7 @@
                 <a href="#/invite">邀请</a>
             </li>
             <li>
-                <a href="" data="{{tid}}" ng-click="Report($event.target)">测试报告</a>
+                <a href="#/report">测试报告</a>
             </li>
         </ul>
     </div>

@@ -29,8 +29,8 @@
   <div class="panel panel-default">
    <div class="panel-heading">
       <ul class="nav nav-pills" role="tablist">
-		  <li role="presentation" class="active"><a ng-click="viewReportSum" href="#">报告</a></li>
-		  <li role="presentation"><a ng-click="viewReportDetail()" href="#">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
 	  </ul>
      
    </div>
@@ -58,40 +58,57 @@
 			   </div>
 			</div>
 			
-			<div class="panel panel-default">
+	  </div>	
+	  
+	     <div class="col-md-6">
+			<div class="panel panel-default" >
 			   <div class="panel-heading">
-			     用户得分
+			     用户得分:<span ng-bind="score"></span>
 			   </div>
 			   <div class="panel-body">
-			       <p>得分:<span ng-bind="score"></span></p>
-			       <p>排名:<span ng-bind="rank"></span></p>
+			       <canvas id="doughnut" class="chart chart-doughnut" data="dataScore"  labels="labelsScore"></canvas> 
 			   </div>
 			</div>
-	  </div>	
+		</div>
+		<div class="col-md-6">	
+			<div class="panel panel-default" >
+			   <div class="panel-heading" >
+			     用户排名:<span ng-bind="rank"></span>
+			   </div>
+			   <div class="panel-body">
+			       <canvas id="doughnut" class="chart chart-doughnut" data="dataRank"  labels="labelsRank"></canvas> 
+			   </div>
+			</div>
+			</div>
     </div>
   </div>
 </div>
 
-<div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport==3">
-   <div class="table-responsive">
+<div class="col-md-10 col-md-offset-1" style="padding: 70px;" ng-if="showReport==3">
+ <div class="panel panel-default">
+   <div class="panel-heading">
+      <ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
+	  </ul>
+     
+   </div>
 			   <table class="table table-striped">
 			        <thead>
 				        <tr>
-				        	<th>正确</th>
+				        	<th>是否正确</th>
 				            <th>试题内容</th>
-				            
-				            <th></th>
+				            <th>查看详情</th>
 				        </tr>
 			        </thead>
 			        <tbody>
 			        <tr ng-repeat="q in questions">
-			        	<td ng-bind＝"judge(q)" ng-class="{1:text-success,2:text-danger}[color]"></td>
+			        	<td  ng-class="{1:'text-success',2:'text-danger'}[color]">{{judge(q)}}</td>
 			            <td abstract context={{q.context}}></td>
 			            <td>
-			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
+			                <a class="blackFont" href="" ng-click="viewQuestion('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
 			            </td>
 			        </tr>
 			        </tbody>
 			    </table>      
-		   </div>
 </div>

@@ -38,6 +38,8 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 
 OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams) {
 	$scope.showReport =2;
+	$scope.listNav=1;
+	$scope.detailNav=0;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/leftBar.html';
@@ -57,14 +59,24 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     	$scope.labels = data.dimension.name;
     	$scope.data = data.dimension.val;
     	$scope.series = ['总分', '用户成绩'];
-     	
+     	//得分
+     	var score = data.score.split("/");
+     	$scope.labelsScore =['用户成绩', '总分'];
+     	$scope.dataScore = [parseInt(score[0]),parseInt(score[1])];
+     	//排名
+     	var rank = data.rank.split("/");
+     	$scope.labelsRank =['用户排名', '总人数'];
+     	$scope.dataRank = [parseInt(rank[0]),parseInt(rank[1])];
+     		//data.score.split("/");
     }).error(function(){
    	 console.log("get data failed");
     })
 });
 
-OJApp.controller('reportDetailController',function ($scope,$http,Data,$routeParams) {
+OJApp.controller('reportDetailController',function ($scope,$http,Data,$routeParams,$modal) {
 	$scope.showReport =3;
+	$scope.listNav=0;
+	$scope.detailNav=1;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/leftBar.html';
@@ -93,4 +105,23 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
     		$scope.color=2;
     	}
     }
+    
+   //查看和修改试题的通用方法
+	$scope.viewQuestion = function (size,q,params) {
+	   	var question = jQuery.extend(true, {}, q);
+		 var modalInstance = $modal.open({
+		      templateUrl: 'page/myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      size: size,
+		      resolve: {
+		          params:function(){
+		        	  var obj ={};
+		        	  obj.operation = params.operation;
+		        	  obj.title=params.title;
+		        	  obj.question = question;
+		        	  return obj;
+		          }
+		      }
+		 });
+	 };
 });

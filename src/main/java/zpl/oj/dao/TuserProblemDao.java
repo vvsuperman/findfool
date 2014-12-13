@@ -41,9 +41,9 @@ public interface TuserProblemDao {
  public int getUserScore(Invite invite);
  
  @Select("select p.problem_id as qid, p.problem_set_id as setid,p.type as type,p.description as context,p.title as name,"
- 		+"p.rightanswer as  rightanswer,t.useranswer as useranswer"
-		+"from ojsite.problem p,ojsite.testuser_problem t"
-		+"where t.invite_id =#{iid} AND t.problemid = p.problem_id"
+ 		+"p.rightanswer as  rightanswer,t.useranswer as useranswer "
+		+"from ojsite.problem p,ojsite.testuser_problem t "
+		+"where t.invite_id =#{iid} AND t.problemid = p.problem_id "
 		+"order by setId,qid;")
  public List<Question> getUserQuestion(Invite invite);
  

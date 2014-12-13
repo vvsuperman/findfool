@@ -1,8 +1,12 @@
+.righticon{
+	position:relative!important;
+	background-position: -60px -30px!important;
+	display: inline !important;
+}
 
 .blackFont{
 	color:#5a5a5a;
 }
-
 
 .nav-pills > li.active > a{
 	background-color: #2fe2bf;
