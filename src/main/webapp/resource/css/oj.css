@@ -1,3 +1,18 @@
+.setImg{
+	height: 60px;
+	cursor: pointer;
+}
+
+.black-panel{
+	border-color: #374652 !important;
+}
+
+.black-panel .panel-heading{
+	background-color: #374652 !important;
+	color:#ffffff !important;
+	border-color: #374652 !important;
+}
+
 .righticon{
 	position:relative!important;
 	background-position: -60px -30px!important;

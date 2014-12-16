@@ -1,7 +1,10 @@
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 <!-- 接受read， -->
-<div class="modal-header">
-            <h3 class="modal-title" >{{title}}</h3>
+
+<div class="modal-header" style="background-color: #374652">
+<button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true" style="color:#1abc9c">&times;</span><span class="sr-only">Close</span></button>
+            <span class="modal-title" style="font-size:16px;color:#1abc9c">{{title}}</span>
+            
         </div>
 
         <div class="modal-body">
@@ -23,7 +26,7 @@
 			<div style="clear:both"></div>
         </div>
 
-        <div class="modal-footer">
+        <div class="modal-footer" >
             <button class="btn btn-primary" ng-if="operation=='edit'" ng-click="saveQustion()">保存</button>
             <button class="btn btn-warning" ng-click="cancel()">取消</button>
         </div>

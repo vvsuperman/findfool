@@ -9,7 +9,15 @@ public class Problem implements Serializable {
 	public Problem(){
 		uuid=-1;
 		rightAnswer ="0000";
-		score =0;
+		score =4;
+		isdelete =0;
+		belong =1;
+		date = new Date();
+		creator =0;
+		this.limitTime =0;
+		this.limitMem =0;
+		this.explain ="";
+		this.title ="";
 	}
 	
 	/**
@@ -93,6 +101,19 @@ public class Problem implements Serializable {
 	
 	private int creator;
 	
+	/*
+	 * 题目的参考答案或详细解答
+	 * */
+	private String explain;
+	
+	public String getExplain() {
+		return explain;
+	}
+
+	public void setExplain(String explain) {
+		this.explain = explain;
+	}
+
 	public int getScore() {
 		return score;
 	}

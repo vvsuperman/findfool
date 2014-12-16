@@ -50,7 +50,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     $scope.active = 1;
     $scope.show = 1;
     $scope.privi = Data.privi();
-    $scope.reciveData = new Object();
+    $scope.reciveData = {};
     $scope.reciveData.selectedSets = null;
     $scope.reciveData.totalPage = 1;
 	$scope.reciveData.pageNum = 10;//默认一页10个
@@ -75,6 +75,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
         { name: '编程题', data: '2'},
         { name: '问答题', data: '3'}
     ];
+    
     
     
     
@@ -134,6 +135,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     	$scope.reciveData.pagelist[$scope.reciveData.currentPage-1].current=true;
     }
     $scope.getSets = function(){
+    	
     	var user = new Object();
     	user.uid = Data.uid();
     	$http({
@@ -171,6 +173,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     	return $sce.trustAsHtml(trust);
     }
     $scope.getQuestions = function(sendData){
+    	
     	$http({
     	    url: WEBROOT+"/search/site",
     	    method: 'POST',
@@ -197,14 +200,18 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     		//error
     	});
     }
+    
+    /*
+     * 点击试题库后显示试题
+     * */
+    $scope.showQuestions = function(index){
+    	$scope.reciveData.selectedSets = $scope.reciveData.sets[index];
+    	$scope.queryQuestions(1);
+    	$scope.set.show=0;
+    }
+    
+    
     $scope.queryQuestions = function(index){
-        console.log("$scope.reciveData.type");
-        console.log($scope.reciveData.type);
-        console.log("$scope.reciveData.selectedSets");
-        console.log($scope.reciveData.selectedSets);
-//    	if($scope.reciveData.type != "2" &&$scope.reciveData.selectedSets == null)
-//    		return;
-
     	$scope.reciveData.currentPage = index;
     	for(i=0;i<$scope.reciveData.pagelist.length;i++){
     		$scope.reciveData.pagelist[i].current = false;
@@ -221,28 +228,31 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     	sendData.page = index;
     	sendData.pageNum = $scope.reciveData.pageNum;
     	$scope.getQuestions(sendData);
+    	$scope.showSet=0;
     }
+    
     //载入页面时候向服务器获取试题集
     $scope.getSets();
     $scope.computePage();
-    $scope.queryQuestions(1);
+    $scope.set={};
+    $scope.set.show =1;
+  //  $scope.queryQuestions(1);
     
     
     //end by zpl
    
-    $scope.GoPage = function (target) {
+    $scope.goPage = function (data) {
+    	console.log("data.............",data);
         $scope.show = 1;
         $scope.context = "";
         $scope.keyword = "";
-        $scope.active = target.getAttribute('data');
+        $scope.active = data;
         $scope.reciveData.type = $scope.active;
         $scope.tag = "";
         $scope.newQuestion.reset();
+        $scope.set.show=1;
+        $scope.reciveData.selectedSets ={};
         $scope.reciveData.setObj = null;
-        $scope.queryQuestions(1);
-//        console.log($scope.active);
-//        $scope.question = $scope.qs[$scope.active - 1];
-//        console.log($scope.question);
     };
 
     $scope.AddPage = function (target) {
@@ -252,72 +262,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
         $scope.reciveData.keyword = '';
     };
     
-    $scope.deleteQuestion = function () {
-		if($scope.reciveData.choosedQ == null){
-			alert("请选题一个题目")
-			return;
-		}
-        var res = confirm("确定删除吗？删除之后不可恢复");
-        if (res == true) {
-            $http({
-                url: WEBROOT+"/question/delete",
-                method: 'POST',
-                headers: {
-                    "Authorization": Data.token()
-                },
-                data: {"user": {"uid": Data.uid()}, "qid": $scope.reciveData.choosedQ.qid}
-            }).success(function (data) {
-                $scope.state = data["state"];//1 true or 0 false
-                if (data["token"] != "" && data["token"] != null)
-                    Data.setToken(data["token"]);
-                $scope.message = data["message"];
-                if ($scope.state) {
-                    alert('删除成功');
-                    $scope.show = "1";
-                    $scope.queryQuestions(1);
-                    $scope.newQuestion.reset();
-                    $scope.reciveData.setObj = null;
-                } else {
-                    alert('添加失败');
-                }
-            }).error(function (data) {
-
-            });
-        }
-    }
-    $scope.modifyQuestion = function () {
-		if($scope.reciveData.choosedQ == null){
-			alert("请选题一个题目")
-			return;
-		}
-        $scope.show = "0";
-        console.log($scope.reciveData.choosedQ);
-            $scope.newQuestion.qid = $scope.reciveData.choosedQ.qid;
-            $scope.newQuestion.type = $scope.reciveData.choosedQ.type;
-            $scope.newQuestion.name = $scope.reciveData.choosedQ.name;
-            $scope.newQuestion.context = $scope.reciveData.choosedQ.context;
-            $scope.newQuestion.setid =($scope.reciveData.setObj == null?null:$scope.reciveData.setObj.problemSetId);
-            //$scope.context=$scope.newQuestion.context;
-            var ans = $scope.reciveData.choosedQ.answer;
-            if ($scope.newQuestion.type == 1) {
-                for (a in ans) {
-                    a.isright = (a.isright == "0" ? false : true);
-                }
-            }
-            $scope.newQuestion.answer = ans;
-            var tags = "";
-            for (var i = 0; i < $scope.reciveData.choosedQ.tag.length; i++) {
-                if (i == 0) {
-                    tags += $scope.reciveData.choosedQ.tag[i];
-                } else {
-                    tags += ",";
-                    tags += $scope.reciveData.choosedQ.tag[i];
-                }
-            }
-            $scope.newQuestion.tag = tags;
-            console.log($scope.newQuestion);     	   	
-
-    }
+    
     $scope.isNum = function (q) {
         if (q == null || q == "")
             return;
@@ -353,61 +298,8 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
 
         });
     }
-    /*   $scope.$watch('context', function () {
-     var context = $scope.context;
-     $scope.newQuestion.context =context;
-     console.log(context)
-     })*/
-
-//    $scope.$apply();
-    $scope.addQuestion = function () {
-    	$scope.sendQuestion.copyObj($scope.newQuestion);
-        $scope.sendQuestion.type = parseInt($scope.active);
-        var ans = $scope.newQuestion.answer;
-        if ($scope.active == "1") {
-            for (a in ans) {
-                a.isright = (a.isright == false ? "0" : "1");
-            }
-        }
-//console.log($scope.newQuestion.tag)
-		var tags = [];
-		if($scope.newQuestion.tag)
-			tags= $scope.newQuestion.tag.split(",");
-        $scope.sendQuestion.tag = tags;
-
-        $scope.sendQuestion.answer = ans;
-        //var context = $scope.context;
-        //$scope.newQuestion.context = context;
-        $scope.sendQuestion.setid =($scope.reciveData.setObj == null?null:$scope.reciveData.setObj.problemSetId);
-
-        console.log($scope.sendQuestion);
-        sendData = {"user": {"uid": Data.uid()}, "question": $scope.sendQuestion};
-        $scope.pushQuestion(sendData);
-        $scope.reciveData.keyword = '';
-    };
-    $scope.cancel = function () {
-        $scope.show = "1";
-    };
-    
-    $scope.resetQuestion = function () {
-        $scope.newQuestion.name="";
-        $scope.newQuestion.context = "";
-        $scope.newQuestion.answer = null;
-        //       $scope.newQuestion.answer = new Array();
-        $scope.newQuestion.tag = "";
-//        var ans = new Object();
-//        ans.text="";
-//        ans.score=0;
-//        if($scope.active == "1")
-//        	ans.isright=false;
-//        else
-//        	ans.isright = "";
-//        $scope.newQuestion.answer.push(ans);
-        var tags = "";
-        $scope.newQuestion.tag = tags;
-        $scope.newQuestion.reset();
-    };
-    
+     
+   
     $scope.searchmy = function (keyword) {
 
     };

@@ -16,6 +16,10 @@ public interface QuizDao {
   Quiz getQuiz(int tid);
 	
   @Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS "
+			+ "FROM QUIZ WHERE name = #{0}")
+  Quiz getQuizByName(String name);
+	
+  @Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS "
 			+ "FROM QUIZ WHERE NAME=#{0} and OWNER = #{1} ORDER BY QUIZID DESC limit 1")
   Quiz getQuizByOwnerAndName(String name, int uid);  
 	  

@@ -1,10 +1,10 @@
-function adminController($scope,$http){
+OJApp.controller( "adminController",function($scope,$http,$upload){
 	$scope.showImport = false;
 	
 	$scope.showImportForm = function(){
 		$scope.showImport = true;
 	}	
-	
+	/*
 	$scope.uploadFile1 = function(files) {
 		console.log(files);
 	    var fd = new FormData();
@@ -21,19 +21,17 @@ function adminController($scope,$http){
 			    }).
 			    success().
 			    error();
-
-	};
-	
+	};*/
 	
 	
 	
 	$scope.uploadFile = function(){
-		
-		console.log("....."+$scope.texttest);
+		console.log("....."+$scope.myFile);
 	}
 	
 	 $scope.onFileSelect = function($files) {    //$files: an array of files selected, each file has name, size, and type.
 		 console.log("file upload............");   
+		 
 		 for (var i = 0; i < $files.length; i++) {     
 		      var file = $files[i];
 		      $scope.upload = $upload.upload({
@@ -55,4 +53,4 @@ function adminController($scope,$http){
 		    }    /* alternative way of uploading, send the file binary with the file's content-type.       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.        It could also be used to monitor the progress of a normal http post/put request with large data*/
 		    // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
 		  };
-}
+});

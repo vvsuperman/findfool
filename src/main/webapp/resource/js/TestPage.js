@@ -7,6 +7,9 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
     $scope.template = 'page/testshow.html';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
+    $scope.addtest ={};
+    $scope.addtest.user ={};
+    $scope.addtest.testtime=70;
    
     
     $scope.tshow = function () {
@@ -36,11 +39,7 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
     
     $scope.tshow();
 
-    $scope.createNewTest = function () {
-        $scope.template = 'addtest.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
+   
 
 /* 
  *  跳转到测试报告页面
@@ -68,17 +67,8 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
             alert("名字不允许为空");
             return;
         }
-        var senddata = new Object();
-        senddata.user = new Object();
-        senddata.user.uid=Data.uid();
-        senddata.name = $scope.addtest.name;
-        senddata.testtime = $scope.addtest.time;
-        senddata.extrainfo = ''+($scope.addtest.school == true?'1':'')+
-            ($scope.addtest.prof == true?',2':'')+
-            ($scope.addtest.project == true?',3':'')+
-            ($scope.addtest.link == true?',4':'');
-        senddata.emails = $scope.addtest.eamils+
-            ($scope.addtest.defaultEmail==true? Data.email():'');
+        
+        $scope.addtest.user.uid = Data.uid();
 
         //发送
         $http({
@@ -87,7 +77,7 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: senddata
+            data: $scope.addtest
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
@@ -95,10 +85,8 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
                 alert('添加成功');
                 //跳转到testdetail
                 console.log('testDetail');
-                $scope.name = senddata.name;
-                $scope.tid = $scope.message.msg;
-                Data.setTid($scope.tid);
-                Data.setTname($scope.name);
+                Data.setTid($scope.message.msg);
+                Data.setTname($scope.addtest.name);
                 $scope.testManage();
                 window.location.href = '#/test/'+$scope.tid ;
 //                $scope.template = 'testlist.html';

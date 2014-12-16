@@ -21,19 +21,16 @@ OJApp.directive('customcheckbox', function() {
 				elem.css("border-color","#2fe2bf");	
 			}*/
 			
-			console.log("useranswer......",attrs.useranswer);
-			console.log("rightanswer......",attrs.rightanswer);
-			
 			var index = attrs.index;
 			//若存在用户的选择
-			if(attrs.useranswer!=""||typeof(attrs.useranswer)!="undefined"){
+			if(attrs.useranswer!=""&&typeof(attrs.useranswer)!="undefined"){
 				//判断用户是否选择
 				if(attrs.useranswer.charAt(index)==1){
 					elem.addClass(checkBoxChecked);
 					elem.css("border-color","#2fe2bf");	
 				}
 				//判断选项是否正确
-				if(attrs.rightanswer.charAt(index)==1){
+				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
 					console.log("right option:",index);
 					//elem.append("<span class='icon righticon' >");
 					elem.append("<p>正确选项</p>")
@@ -41,7 +38,7 @@ OJApp.directive('customcheckbox', function() {
 				
 			}else{
 			//若用户的选择不存在，则为查看元数据，根据rightanswer来判断选项的正确
-				if(attrs.rightanswer.charAt(index)==1){
+				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
 					elem.addClass(checkBoxChecked);
 					elem.css("border-color","#2fe2bf");	
 				}

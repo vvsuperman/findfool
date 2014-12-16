@@ -2,11 +2,11 @@ package zpl.oj.service;
 
 import java.util.List;
 
-import zpl.oj.model.common.Set;
+import zpl.oj.model.common.ProblemSet;
 
 public interface SetService {
 
-	List<Set> getSets();
+	List<ProblemSet> getSets();
 	
-	boolean insertSet(Set s);
+	boolean insertSet(ProblemSet s);
 }

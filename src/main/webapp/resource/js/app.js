@@ -9,7 +9,8 @@ var OJApp = angular.module('OJApp', [
     'ngSanitize',
     'evgenyneu.markdown-preview',
     'webStorageModule',
-    'ngCkeditor'
+    'ngCkeditor',
+    'angularFileUpload'
 ]);
 
 
@@ -75,11 +76,6 @@ OJApp.config(['$routeProvider',
             when('/adminhome', {
                 templateUrl: 'page/admin/adminhome.html',
                 controller: 'adminController'
-            }).
-            
-            when('/testt', {
-                templateUrl: 'page/testing.html',
-                controller: 'testingController'
             }).
             when('/testing/:url', {
                 templateUrl: 'page/preparetest.html',

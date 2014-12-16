@@ -122,6 +122,38 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     	console.log("show custom panel");
     	$scope.panel.show = "custom";
     }
+   
+   
+   //将试题添加到测试
+   $scope.addQuestionToTest = function(qid,$event){
+		 var sendData={"quizid":$scope.tid,"problemid":qid};
+		 $http({
+	            url: WEBROOT+"/test/addquestion",
+	            method: 'POST',
+	            headers: {
+	                "Authorization": Data.token()
+	            },
+	            data: sendData
+	        }).success(function (data) {
+	        	if(data.message == "success"){
+	        		alert("添加试题成功");
+	        		//在我的试题列表中删除元素
+	        		for(i in $scope.reciveData.questions){
+	        			 if($scope.reciveData.questions[i].qid == qid){
+	        				$scope.qs.push($scope.reciveData.questions[i]);
+	        				$scope.reciveData.questions.splice(i,1);
+	        				break;
+	        			 }
+	        		}
+	        	}else{
+	        		alert(data.message);
+	        	}
+	        }).error(function (data) {
+	           console.log("获取数据错误");
+	        });
+		//阻止事件传播
+		// $event.stopPropagation();
+	}
     
     //by fw 修改混乱逻辑，将方法从testpage移入
 	//查看和修改试题的通用方法

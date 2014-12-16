@@ -2,38 +2,37 @@
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 mytesttab" >
-<div class=" panel panel-default">
+<div class=" panel panel-default black-panel">
 <div class="panel-heading">
-  未添加试题
+  <span >未添加试题</span>
+  <button type="button" class="btn btn-primary pull-right" style="margin-right: 20px" ng-click="showAddPage(active)">新增试题</button> 
+  <div style="clear: both;"></div>
 </div>
 <div class="panel-body" style="padding-left: 0px;padding-right: 0px">
  	<div class="row" style="margin-left: 30px;margin-right: 30px">
-	   <ul class="nav nav-pills list-group col-md-3 col-xs-3"  >
+	   <ul class="nav nav-pills list-group col-md-6 col-xs-6"  >
 	        <li ng-repeat="tt in Qtype"
 	            ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
 	            <a href="" class='blackFont' ng-click="GoPage(tt.data)" ng-bind="tt.name"></a>
 	        </li>
 	    </ul>
     
-    	<form class="form-inline col-md-5"  role="form" >
+    	<form class="form-inline col-md-6 pull-right"  role="form" >
             <input type="text" ng-model="reciveData.keyword" class=" col-md-8">
             <button class="btn btn-default col-md-3"  ng-click="queryQuestions(1)" style="margin-left: 10px">搜索</button>
         
         </form>
         
-         <button type="button" class="btn btn-outline pull-right col-md-2" style="margin-right: 20px" ng-click="showAddPage(active)">新增试题</button> 
+         
     </div>
     
     <div  ng-class="{0:'hedden', 1: ''}[show]">
-        
-        
          <div class="table-responsive">
 			   <table class="table table-striped">
 			        <thead>
 				        <tr>
 				            <th>试题内容</th>
-				            
-				            <th></th>
+				            <th>操作</th>
 				        </tr>
 			        </thead>
 			        <tbody>
@@ -41,7 +40,6 @@
 			            <td abstract context={{q.context}}></td>
 			            <td>
 			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
 			                <a class="blackFont" href="" ng-click="addQuestionToTest(q.qid,$event)">增加</a>
 			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
 			            </td>

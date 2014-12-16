@@ -16,9 +16,11 @@ OJApp.directive('aceeditor', ['$timeout', function ($timeout) {
             var node = elem[0];
             var editor = ace.edit(node);
             editor.setTheme('ace/theme/twilight');
+            /*
             scope.$watch("lg.context", function(){
             	editor.getSession().setMode("ace/mode/"+scope.lg.context.CodeType);
             });
+            */
             
             editor.getSession().setMode("ace/mode/"+attrs.language);
             // set editor options
@@ -35,6 +37,7 @@ OJApp.directive('aceeditor', ['$timeout', function ($timeout) {
                     scope.$apply(function () {
                         var value = editor.getValue();
                         ngModel.$setViewValue(value);
+                        console.log("ace change.......","value:"+ngModel);
                     });
                 });
 

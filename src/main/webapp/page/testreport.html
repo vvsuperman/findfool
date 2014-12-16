@@ -26,7 +26,7 @@
 </div>
 
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport ==2">
-  <div class="panel panel-default">
+  <div class="panel panel-default black-panel">
    <div class="panel-heading">
       <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
@@ -35,7 +35,7 @@
      
    </div>
    <div class="panel-body">
-        <div class="panel panel-default col-md-8" style="padding-left: 0px;padding-right: 0px">
+        <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
 		   <div class="panel-heading">
 		     知识结构
 		   </div>
@@ -45,7 +45,7 @@
 		</div>
 		
 		<div class="col-md-4">
-			<div class="panel panel-default">
+			<div class="panel panel-default black-panel">
 			   <div class="panel-heading">
 			     用户信息
 			   </div>
@@ -60,20 +60,20 @@
 			
 	  </div>	
 	  
-	     <div class="col-md-6">
-			<div class="panel panel-default" >
+	     <div class="col-md-6" style="padding-left:0px;">
+			<div class="panel panel-default black-panel" >
 			   <div class="panel-heading">
-			     用户得分:<span ng-bind="score"></span>
+			     用户得分:<span ng-bind="score" style="color: #1abc9c;font-size:20px" ></span>
 			   </div>
 			   <div class="panel-body">
 			       <canvas id="doughnut" class="chart chart-doughnut" data="dataScore"  labels="labelsScore"></canvas> 
 			   </div>
 			</div>
 		</div>
-		<div class="col-md-6">	
-			<div class="panel panel-default" >
+		<div class="col-md-6"  style="padding-right:0px;">	
+			<div class="panel panel-default black-panel" >
 			   <div class="panel-heading" >
-			     用户排名:<span ng-bind="rank"></span>
+			     用户排名:<span ng-bind="rank" style="color: #1abc9c;font-size:20px"></span>
 			   </div>
 			   <div class="panel-body">
 			       <canvas id="doughnut" class="chart chart-doughnut" data="dataRank"  labels="labelsRank"></canvas> 
@@ -85,7 +85,7 @@
 </div>
 
 <div class="col-md-10 col-md-offset-1" style="padding: 70px;" ng-if="showReport==3">
- <div class="panel panel-default">
+ <div class="panel panel-default black-panel">
    <div class="panel-heading">
       <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>

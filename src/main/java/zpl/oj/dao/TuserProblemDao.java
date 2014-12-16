@@ -15,7 +15,7 @@ import zpl.oj.model.request.Question;
 
 public interface TuserProblemDao {
   
-  @Insert("INSERT INTO testuser_problem(tuid,problemid,useranswer,rightanswer,type,set_id,invite_id)"
+  @Insert("INSERT INTO testuser_problem(tuid,problemid,useranswer,rightanswer,type,invite_id)"
 		+ " VALUES( #{tuid}, #{problemid}, #{useranswer}, #{rightanswer},#{type},#{setid},#{inviteId})")
   void insertTuserProblem(TuserProblem testuserProblem);
   
@@ -23,13 +23,13 @@ public interface TuserProblemDao {
   @Update("update testuser_problem  set useranswer=#{useranswer} where problemid =#{problemid} and tuid = #{tuid}")
   void updateAnswerByIds(TuserProblem testuserProblem);
   
-  @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type},set_id=#{setid} where problemid =#{problemid} and tuid = #{tuid}")
+  @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type} where problemid =#{problemid} and tuid = #{tuid}")
   void updateProblemByIds(TuserProblem testuserProblem);
   
   @Select("select t1.problemid,t1.useranswer,t1.invite_id from testuser_problem t1 where t1.invite_id=#{0} order by t1.type")
   List<TuserProblem> findProblemByInviteId(int inviteId);
   
-  @Select("select t1.problemid,t1.useranswer,t1.type,t1.set_id,t1.invite_id from testuser_problem t1 where t1.tuid = #{0} and t1.problemid=#{1}")
+  @Select("select t1.problemid,t1.useranswer,t1.type,t1.invite_id from testuser_problem t1 where t1.tuid = #{0} and t1.problemid=#{1}")
   TuserProblem findByPidAndUid(int tuid,int problemid);
   
   @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0}")

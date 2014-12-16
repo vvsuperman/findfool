@@ -1,7 +1,7 @@
 <div class="container-fluid" style="padding-top: 70px;">
     <!-- a href="#/invite">invite</a-->
     <div class="row">
-    	<button class="btn btn-outline col-md-offset-10" ng-click="createNewTest()">创建新测试</button>
+    	<button class="btn btn-outline col-md-offset-10" data-toggle="modal" data-target="#testCreateModal">创建新测试</button>
 	</div>
 	
     <div style="padding-top: 50px" ng-repeat="test in tests">
@@ -30,4 +30,47 @@
         </div>
     </div>
 
+</div>
+
+<div class="modal fade" id="testCreateModal" tabindex="0"
+     role="dialog" aria-labelledby="TryLabel"
+     aria-hidden="true">
+     <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="background-color: #374652">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel" style="font-size:16px;color:#1abc9c">新建测试</h4>
+	      </div>
+	      <div class="modal-body">
+	         <form class="form-horizontal" role="form">
+				  
+				  <div class="form-group">
+				    <label class="col-sm-2 control-label">测试名称</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" ng-model="addtest.name" placeholder="测试名称">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label  class="col-sm-2 control-label">时间</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" ng-model="addtest.testtime" >
+				    </div>
+				  </div>
+				  
+				   <div class="form-group">
+				    <label  class="col-sm-2 control-label">备注</label>
+				    <div class="col-sm-6">
+				      <textarea  class="form-control" ng-model="addtest.extrainfo"  placeholder="备注" style="width:100%;heght:200px"></textarea>
+				    </div>
+				  </div>
+			  </form>
+	      </div>
+	      <div class="modal-footer">
+	     	 <button type="button" class="btn btn-primary" ng-click="pushTest()">新建</button>
+	         <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
+	        
+	      </div>
+	    </div>
+  </div>
 </div>

@@ -138,23 +138,24 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}else{
-		/*	//判读用户是否已经开始做题，若已开始，直接给出题目列表
+			//判读用户是否已经开始做题，若已开始，直接给出题目列表
 			Invite invite = inviteDao.getInvites(testid, email);
 			String nowDate = df.format(new Date());
 			
 			if(nowDate.compareTo(invite.getBegintime())>0){
 					//用户已开始做题，直接返回tuserproblem的list
-					List<TuserProblem> tuserProblems = tuserService.findProblemByTestid(testid);
+					List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
 					rb.setState(1);
 					rb.setMessage(tuserProblems);
 					return rb;
-			}else{  */
+			}else{  
 			//未开始
 				rb.setState(2);
 				return rb;
 		//	}
 		}
 	}
+}
 	
 
 	//提交用户信息

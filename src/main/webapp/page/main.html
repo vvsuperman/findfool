@@ -181,16 +181,17 @@
                         <div class="col-md-4 col-md-offset-1">
                             <input type="text" class="form-control" id="RVerification" placeholder="请输入右框中的数字"
                                    ng-model="RVerification">
+                                    <a href="" ng-click="createCode()">
+                                {{Verification}}
+                            </a></div>
                         </div>
                         <div class="col-md-4 col-md-offset-1">
-                            <a href="" ng-click="createCode()">
-                                <img src="resource/static/logo.png" alt="验证问题" style="height: 40px;width: 200px">
-                            </a></div>
+                           
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                {{Verification}}
+                
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" ng-click="addhr()">注册</button>
             </div>
@@ -266,46 +267,46 @@
 			<img src="resource/static/chosen.png" class="img-responsive col-md-offset-4 mainimg"  alt="Responsive image">
 		</div>
 	</div>
+	
+	<div classs="contain-fluid" style="">
+		
+	</div>
 
 
       <!-- START THE FEATURETTES -->
 
-      <hr class="featurette-divider">
+      <!-- hr class="featurette-divider"-->
 
       <div class="row featurette">
-        <div class="col-md-7">
+        <div class="col-md-5 col-md-offset-1">
 			<img class="featurette-image img-responsive" src="resource/static/caton1.png" alt="Generic placeholder image"> 
 		  </div>
-        <div class="col-md-5">
-          <h2 class="featurette-heading">是的，你很难找到一个<span class="text-muted">天才程序员</span></h2>       
+        <div class="col-md-6">
+          <h6 class="featurette-heading" style="font-size: 24px">是的，你很难找到一个合适的程序员</h6>       
 		  </div>
       </div>
 
-      <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-5">
-		  <h2 class="featurette-heading"> 但现在，你只要简单的选择题目，<span class="text-muted">并发送给求职者.</span></h2>
-
+        <div class="col-md-5 col-md-offset-1">
+		  <h6 class="featurette-heading" style="font-size: 24px"> 但现在，你只要简单的选择题目，并发送给求职者.</h6>
 		</div>
-        <div class="col-md-7">
+        <div class="col-md-6">
 		  <img class="featurette-image img-responsive" src="resource/static/caton2.png" alt="Generic placeholder image">
                
 	   </div>
       </div>
 
-      <hr class="featurette-divider">
 
       <div class="row featurette">
-        <div class="col-md-7">
+        <div class="col-md-5 col-md-offset-1">
           <img class="featurette-image img-responsive" src="resource/static/caton3.png" alt="Generic placeholder image">
                   </div>
-        <div class="col-md-5">
-			<h2 class="featurette-heading">你就会知道<span class="text-muted">谁是最好的</.</span></h2>
+        <div class="col-md-6">
+			<h6 class="featurette-heading" style="font-size: 24px">你就会知道谁是最好的</h6>
         </div>
       </div>
 
-      <hr class="featurette-divider">
 
       <!-- /END THE FEATURETTES -->
 

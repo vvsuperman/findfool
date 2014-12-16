@@ -20,6 +20,9 @@ public interface ProblemDao {
 	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, t1.rightanswer as rightAnswer,t1.score as score FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
 	List<Problem> getProblemByTestid(int testid);
 	
+	@Select("select t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, t1.rightanswer as rightAnswer,t1.score as score FROM PROBLEM t1 WHERE t1.description=#{0}")
+	Problem getProblemByContent(String content);
+	
 	
 	
 	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "

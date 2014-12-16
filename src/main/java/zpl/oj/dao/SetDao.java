@@ -5,20 +5,25 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-import zpl.oj.model.common.Set;
+import zpl.oj.model.common.ProblemSet;
+
 
 public interface SetDao {
 
-	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER "
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,COMMENT"
 			+ "  FROM SETS  WHERE problem_set_id = #{0}")
-	Set getSet(int id);
-
-	@Insert("INSERT INTO SETS(NAME,  DATE, OWNER)"
-			+ "VALUES(#{name}, #{date},#{owner})")
-	void insertSet(Set set);
+	ProblemSet getSet(int id);
 	
-	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER "
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,COMMENT"
+			+ "  FROM SETS  WHERE name = #{0}")
+	ProblemSet getSetByName(String name);
+
+	@Insert("INSERT INTO SETS(NAME,  DATE, OWNER,COMMENT)"
+			+ "VALUES(#{name}, #{date},#{owner},#{comment})")
+	void insertSet(ProblemSet set);
+	
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,COMMENT"
 			+ "  FROM SETS")
-	List<Set> getSets();
+	List<ProblemSet> getSets();
 
 }

@@ -3,7 +3,7 @@ package zpl.oj.model.common;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Set implements Serializable {
+public class ProblemSet implements Serializable {
 
 	/**
 	 * ${item.comment}
@@ -24,6 +24,19 @@ public class Set implements Serializable {
 	 * ${item.comment}
 	 */
 	private Integer owner;
+	
+	/**
+	 * 描述
+	 */
+	private String comment;
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	public Integer getProblemSetId() {
 		return problemSetId;

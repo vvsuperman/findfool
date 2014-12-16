@@ -1,23 +1,24 @@
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	
-	/*
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
-	 console.log("param...........",param);
-	
 	 $scope.email = param[0];
 	 $scope.tid = param[1];
-	 */
 	 $scope.tuser = {};
+	 $scope.loginUser={};
+/*	
+	 //测试数据
 	 $scope.tuser.tuid=1;
 	 $scope.tuser.email="693605668@qq.com";
-	 $scope.question = {};
 	 
 	 
-	 //测试数据
+	
 	 $scope.email ="693605668@qq.com";
 	 $scope.tid = "1";
+*/
 	 
+	 $scope.question = {};
+	 $scope.programCode = {};
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -41,7 +42,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $http({
 	         url: WEBROOT+"/testing/login",
 	         method: 'POST',
-	         data: {"email":$scope.loginEmail, "pwd": $scope.loginPwd,"testid":$scope.tid}
+	         data: {"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
 	     }).success(function (data) {
 	    	 if( data.state == 0){
 	    		 //用户名或密码不匹配
@@ -52,6 +53,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 $scope.tuser.tuid = data.message;
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面
+	    		 $scope.tProblems = data.message;
+			     $scope.submitAndFetch($scope.tProblems[1]);
+	    		 $scope.show = 4;
 	    	 }	 
 	     }).error(function(){
 	    	 console.log("login failed");
@@ -92,7 +96,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	     }).success(function (data) {
 	    	if(data.state!=0){
 	    		$scope.tProblems = data.message;
-		    	$scope.submitAndFetch( $scope.tProblems[1]);
+		    	$scope.submitAndFetch($scope.tProblems[1]);
+		    	$scope.show =4;
 	    	}else{
 	    		alert(data.message);
 	    	}
@@ -103,7 +108,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 
 	 }
      
-     $scope.startTest();
+    	 
+    	 
      
      /*
       *获取试题信息
@@ -147,7 +153,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      /*
       * 用户直接点击获取下一道试题
       * */
-     
      $scope.getNext = function(question){
     	 var index=0;
     	 for( var i in $scope.tProblems){
@@ -165,17 +170,17 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }
      
      /*
-      * 编程题运行
+      * 编程题运行,而不提交，此时problem_id为0，若为0会执行测试用例
       * */
     $scope.run = function () {
        var solution = {};
-       solution.problem_id = $scope.question.qid;
+       solution.problem_id = 0;
        solution.language = $scope.lg.context.lan;
 
-       solution.solution = $scope.proSolution;
+       //solution.solution = $scope.proSolution;
        solution.user_id = $scope.tuser.tuid;
        solution.testid = $scope.tid;
-      
+       solution.solution = $scope.programCode.context;
        console.log("solution......",solution);
        $http({
            url: WEBROOT+'/solution/run',
@@ -185,7 +190,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	   console.log("data......",data);
            $scope.state = 'success';
            $scope.solution_id = data.message.msg;
-           $timeout($scope.query, 2000);
+           $timeout($scope.query, 2000,6);
+           
            $scope.RESULT = $sce.trustAsHtml($scope.result);
        }).error(function () {
            $scope.state = 'Try again';
@@ -207,15 +213,16 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
                $timeout($scope.query, 1000,5);
            } else {
                for (var i = 0; i < data.message.length; i++) {
-                   $scope.result += '<br>';
-                   var res = data[i];
-                   $scope.result += "time:" + res.cost_time;
-                   $scope.result += " mem:" + res.cost_mem;
+                  $scope.result ="";
+            	   // $scope.result += '<br>';
+                   var res = data.message[i];
+                  // $scope.result += "time:" + res.cost_time;
+                  // $scope.result += " mem:" + res.cost_mem;
                    if (res.test_case == null) {
                        $scope.result += " error:" + res.test_case_result;
                    } else {
-                       $scope.result += " testCase:" + res.test_case;
-                       $scope.result += " result:" + res.test_case_result;
+                      // $scope.result += " testCase:" + res.test_case;
+                       $scope.result += res.test_case_result;
                    }
                }
            }
@@ -246,14 +253,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }
      
 	 
-	 /*
-	  * 辅助类，用于处理空字符串
-	  * */
-     $scope.dealNull = function(data){
-		 if(data==""){
-			 return 0;
-		 }
-	 }
+	
      
      $scope.lgs = [
                    {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},
@@ -272,11 +272,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 				'C#':'public void Solution() {\r\n    Console.WriteLine("Hello World");\r\n}'
      }
      
-    $scope.proSolution=codeTemplete["C"];
+    $scope.programCode.context=codeTemplete["C"];
 
  	$scope.$watch("lg.context",function(){
  		 //重新加载内容
-    	 $scope.proSolution = codeTemplete[$scope.lg.context.name];
+    	 $scope.programCode.context = codeTemplete[$scope.lg.context.name];
      })
      
      
