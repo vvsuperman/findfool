@@ -10,7 +10,7 @@ var OJApp = angular.module('OJApp', [
     'evgenyneu.markdown-preview',
     'webStorageModule',
     'ngCkeditor',
-    'angularFileUpload'
+    'lr.upload'
 ]);
 
 

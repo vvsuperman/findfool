@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTagDao;
@@ -84,7 +85,6 @@ public class ProblemServiceImp implements ProblemService{
 		}
 		return res;
 	}
-	
 	
 	@Override
 	public int addProblem(RequestAddQuestion q) {

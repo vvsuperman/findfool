@@ -88,7 +88,7 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
                 Data.setTid($scope.message.msg);
                 Data.setTname($scope.addtest.name);
                 $scope.testManage();
-                window.location.href = '#/test/'+$scope.tid ;
+                window.location.href = '#/test/'+$scope.message.msg ;
 //                $scope.template = 'testlist.html';
 //                $scope.leftBar = 'leftBar.html';
             } else {
@@ -97,7 +97,7 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
         }).error(function (data) {
             //relogin
         });
-
+ 
     };
    
 
