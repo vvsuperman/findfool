@@ -10,3 +10,4 @@ oj.iml
 
 .idea/*
 /target/
+/src/main/resources/spring-config-dao.xml
