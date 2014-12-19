@@ -47,37 +47,5 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
        		<property name="basePackage" value="zpl.oj.dao" />  
     	</bean>
-		<!-- 这个是创建一个bean，他的名字叫做userTaskDao，也可以使用基于包的方式来自动装在 -->
-<!--
-		<bean id="solutionRunDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-			<property name="mapperInterface"  
-	           value="zpl.oj.dao.SolutionRunDao" />  
-	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-		</bean>
-		<bean id="userTestCaseDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-			<property name="mapperInterface"  
-	           value="zpl.oj.dao.UserTestCaseDao" />  
-	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-		</bean>
-		<bean id="resultInfoDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-			<property name="mapperInterface"  
-	           value="zpl.oj.dao.ResultInfoDao" />  
-	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-		</bean>
-		<bean id="privilegeDataDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-			<property name="mapperInterface"  
-	           value="zpl.oj.dao.security.PrivilegeDataDao" />  
-	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-		</bean>
-		<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-			<property name="mapperInterface"  
-	           value="zpl.oj.dao.user.UserDao" />  
-	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-		</bean>
-		<bean id="leftMessageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-			<property name="mapperInterface"  
-	           value="zpl.oj.dao.LeftMessageDao" />  
-	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
-		</bean>
--->
+	
 </beans> 

@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.stereotype.Service;
 
 /**
  * 自定义PropertiesUtil返回properties内容
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  * @author LHY 2012-02-24
  * 
  */
+@Service
 public class PropertiesUtil extends
 		PropertyPlaceholderConfigurer {
 
