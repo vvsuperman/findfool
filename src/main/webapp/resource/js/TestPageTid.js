@@ -125,8 +125,8 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
    
    
    //将试题添加到测试
-   $scope.addQuestionToTest = function(qid,$event){
-		 var sendData={"quizid":$scope.tid,"problemid":qid};
+   $scope.addQuestionToTest = function(q,$event){
+		 var sendData={"quizid":$scope.tid,"problemid":q.qid};
 		 $http({
 	            url: WEBROOT+"/test/addquestion",
 	            method: 'POST',
@@ -136,15 +136,8 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	            data: sendData
 	        }).success(function (data) {
 	        	if(data.message == "success"){
+	        		$scope.qs.push(q);
 	        		alert("添加试题成功");
-	        		//在我的试题列表中删除元素
-	        		for(i in $scope.reciveData.questions){
-	        			 if($scope.reciveData.questions[i].qid == qid){
-	        				$scope.qs.push($scope.reciveData.questions[i]);
-	        				$scope.reciveData.questions.splice(i,1);
-	        				break;
-	        			 }
-	        		}
 	        	}else{
 	        		alert(data.message);
 	        	}
@@ -186,7 +179,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	            },
 	            data: sendData
 	        }).success(function (data) {
-	            alert("试题已从测试中删除");
+	            alert("试题已从测试中删除");	            
 	            location.reload();
 	        }).error(function (data) {
 	            alert("获取数据错误");
