@@ -1,5 +1,6 @@
 package zpl.oj.web.Rest.Controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -10,15 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.imp.UpLoadService;
 
 @Controller
 public class UploadController {
+	@Resource
+	UpLoadService upLoadService;
+	
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseBase uploadInvite(@RequestParam MultipartFile file, HttpServletRequest request){
+	public ResponseBase uploadInvite(@RequestParam MultipartFile[] file) throws Exception{
+		upLoadService.batchImport(file);
 		ResponseBase rs = new ResponseBase();
+		rs.setState(1);
 		return rs;
-		
 	}
 
 }

@@ -20,7 +20,8 @@ public interface ProblemDao {
 	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, t1.rightanswer as rightAnswer,t1.score as score FROM PROBLEM t1,quizproblem t2  WHERE t1.isdelete=0 and t1.problem_Id = t2.problemid and t2.quizid=#{0}")
 	List<Problem> getProblemByTestid(int testid);
 	
-	@Select("select t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, t1.rightanswer as rightAnswer,t1.score as score FROM PROBLEM t1 WHERE t1.description=#{0}")
+	@Select("select t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, t1.rightanswer as rightAnswer,"
+			+ "t1.score as score FROM PROBLEM t1 WHERE t1.description=#{0} ORDER BY t1.PROBLEM_ID DESC")
 	Problem getProblemByContent(String content);
 	
 	
@@ -48,8 +49,8 @@ public interface ProblemDao {
 
 	
 	@Update("    update PROBLEM set "
-			+ " UUID = #{uuid} where problem_id=#{problemId}")
-	  void updateProblem(Problem problem);	
+			+ " rightanswer = #{rightAnswer} where problem_id=#{problemId}")
+	  void updateProblemRightAnswer(Problem problem);	
 	
 	@Update("update PROBLEM as a,(select uuid from PROBLEM where problem_Id=#{0}) as b "
 			+ "set a.isdelete = 1 where b.uuid=a.uuid")

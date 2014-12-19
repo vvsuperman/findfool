@@ -18,6 +18,7 @@ public class Problem implements Serializable {
 		this.limitMem =0;
 		this.explain ="";
 		this.title ="";
+		this.type =-1;
 	}
 	
 	/**

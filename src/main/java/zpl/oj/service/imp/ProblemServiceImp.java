@@ -17,6 +17,7 @@ import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTagDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.QuizProblemDao;
+import zpl.oj.dao.TagDao;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.common.QuizProblem;
@@ -43,9 +44,10 @@ public class ProblemServiceImp implements ProblemService{
 	private UserService userService;
 	@Autowired
 	private QuizService quizService;
-	
 	@Resource
 	private QuizProblemDao quizProblemDao;
+	@Resource
+	private TagDao tagDao;
 	
 
 
@@ -107,9 +109,10 @@ public class ProblemServiceImp implements ProblemService{
 			p.setBelong(1);
 		}
 		problemDao.insertProblem(p);
+		p = problemDao.getProblemByContent(content)
 		int pid = problemDao.getProblemId(p.getCreator());
 		p.setUuid(pid);
-		
+		//同时把试题加入到测试
 		if(q.getQuizId()!=0){
 			QuizProblem quizProblem = new QuizProblem();
 			quizProblem.setQuizid(q.getQuizId());
@@ -117,12 +120,13 @@ public class ProblemServiceImp implements ProblemService{
 			quizProblemDao.insertQuizproblem(quizProblem);
 		}
 		
-		
-		for(String tag:q.getQuestion().getTag()){
-			Integer tagid = problemTagDao.getTagId(tag);
+		//处理tag
+		for(String tagContext:q.getQuestion().getTag()){
+			
+			Integer tagid = tagDao.getTagByContext(tagContext).getTagId();
 			if(tagid == null){
-				problemTagDao.insertTag(tag);
-				tagid = problemTagDao.getTagId(tag);
+				tagDao.insertTag(tagContext);
+				tagid = tagDao.getTagByContext(tagContext).getTagId();
 			}
 			problemTagDao.insertTagProblem(tagid, pid);
 		}
