@@ -185,8 +185,24 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	            alert("获取数据错误");
 	        });
 	 }
-	
 
+	 $scope.displayQuestionDetails = function(qid){
+		 for(i in $scope.qs){
+			 $scope.qs[i].name="";
+			 if($scope.qs[i].qid == qid){
+				 $scope.qs[i].name="display";
+			 }
+		 }
+	 }
+
+	 $scope.hideQuestionDetails = function(qid){
+		 for(i in $scope.qs){
+			 if($scope.qs[i].qid == qid){
+				 $scope.qs[i].name="";
+			 }
+		 }
+	 }
+	 
     $scope.isAdded = function (qid){
     	for(i in $scope.qs){
     		if($scope.qs[i].qid == qid) return true;
