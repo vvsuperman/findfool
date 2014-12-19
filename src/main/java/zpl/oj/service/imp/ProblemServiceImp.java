@@ -109,9 +109,8 @@ public class ProblemServiceImp implements ProblemService{
 			p.setBelong(1);
 		}
 		problemDao.insertProblem(p);
-		p = problemDao.getProblemByContent(content)
-		int pid = problemDao.getProblemId(p.getCreator());
-		p.setUuid(pid);
+		p = problemDao.getProblemByContent(q.getQuestion().getContext());
+		int pid =p.getProblemId();
 		//同时把试题加入到测试
 		if(q.getQuizId()!=0){
 			QuizProblem quizProblem = new QuizProblem();
@@ -150,8 +149,6 @@ public class ProblemServiceImp implements ProblemService{
 			}		
 		}
 
-		p.setProblemId(pid);
-		problemDao.updateProblem(p);
 		return pid;
 	}
 
@@ -268,11 +265,11 @@ public class ProblemServiceImp implements ProblemService{
 		problemDao.updateProblemInstance(p);
 		int pid = p.getProblemId();
 		//更新tag
-		for(String tag:q.getQuestion().getTag()){
-			Integer tagid = problemTagDao.getTagId(tag);
+		for(String tagContext:q.getQuestion().getTag()){
+			Integer tagid = tagDao.getTagByContext(tagContext).getTagId();
 			if(tagid == null){
-				problemTagDao.insertTag(tag);
-				tagid = problemTagDao.getTagId(tag);
+				tagDao.insertTag(tagContext);
+				tagid = tagDao.getTagByContext(tagContext).getTagId();
 			}
 			problemTagDao.insertTagProblem(tagid, pid);
 		}
