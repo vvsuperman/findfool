@@ -273,12 +273,6 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
         }
     }
     
-    $scope.isAdded = function (qid){
-    	for(i in $scope.qs){
-    		if($scope.qs[i].qid == qid) return true;
-    	}
-    	return false;
-    }
     
     $scope.pushQuestion = function (sendData) {
         $http({

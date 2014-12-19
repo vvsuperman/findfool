@@ -186,6 +186,12 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        });
 	 }
 	
-	
+
+    $scope.isAdded = function (qid){
+    	for(i in $scope.qs){
+    		if($scope.qs[i].qid == qid) return true;
+    	}
+    	return false;
+    }
  
 });
