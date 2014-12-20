@@ -44,9 +44,9 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
             if ($scope.state) {
                 console.log($scope.message);
                 $scope.qs = $scope.message.qs;
-                $scope.isDisplay = new Array(qs.length);
-                for(i in isDisplay)
-                	isDisplay[i]=false;
+                $scope.isDisplay = new Array($scope.qs.length);
+                for(i in $scope.isDisplay)
+                	$scope.isDisplay[i]=false;
                 $scope.testtime = $scope.message.testtime;
                 $scope.extraInfo = $scope.message.extraInfo;
                 $scope.emails = $scope.message.emails;
@@ -199,7 +199,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 		 $scope.isDisplay[index]=false;
 	 }
 	 
-	 $scope.isDisplay = function(index){
+	 $scope.displayDetail = function(index){
 		 return $scope.isDisplay[index];
 	 }
 	 
@@ -208,6 +208,24 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     		if($scope.qs[i].qid == qid) return true;
     	}
     	return false;
+    }
+    
+    $scope.moveUp =  function(index){
+    	if(index == 0){
+    		alert("已是第一题，不可前移");
+    	}
+    	var q = $scope.qs[index];
+    	$scope.qs[index] = $scope.qs[index-1];
+    	$scope.qs[index-1] = q;
+    }
+    
+    $scope.moveDown =  function(index){
+    	if(index == $scope.qs.length){
+    		alert("已是最后一题，不可后移");
+    	}
+    	var q = $scope.qs[index];
+    	$scope.qs[index] = $scope.qs[index+1];
+    	$scope.qs[index+1] = q;
     }
  
 });

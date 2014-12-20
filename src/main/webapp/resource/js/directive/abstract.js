@@ -6,8 +6,13 @@ OJApp.directive('abstract', function() {
 		restrict: 'AE',
 		scope:{},
 		link: function(scope, elem, attrs) {
-			var context = attrs.context;
-			scope.tmpContext = context.substring(context.indexOf("<p>")+3,context.indexOf("</p>"));
+			if(typeof(attrs.context)!="undefined"){
+				var context = attrs.context;
+				scope.tmpContext = context.substring(context.indexOf("<p>")+3,context.indexOf("</p>"));
+			}else{
+				scope.tmpContext ="";
+			}
+			
 		},
 		replace: true,
 		template:"<td>{{tmpContext}}</td>"

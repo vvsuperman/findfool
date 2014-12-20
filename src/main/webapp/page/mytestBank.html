@@ -64,7 +64,7 @@
     
         <div class="col-md-8" ng-if="active==1">
             
-            <div class="row" style="margin-top: 30px">
+            <div class="row" style="margin-top: 30px;margin-left: 50px">
                		<p>题干</p>
 		            <form class="form-inline" role="form">
 		                <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
@@ -73,25 +73,27 @@
 						<textarea ckEditor ng-model="newQuestion.context"></textarea>
 						<!-- textarea ng-model="newQuestion.context"></textarea-->
 		                <div class="hedden" id="context" >{{context}}</div>
-		                <div>
-			                <p style="padding: 20px">标签(以 英文,符号 区分)
+		                <div class="row">
+			                <div class="col-md-4" style="padding: 20px">标签(以,区分)
 			                    <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
-			                </p>
-			                <p style="padding: 20px">分数
+			                </div>
+			                <div class="col-md-4" style="padding: 20px">分数
 			                     <input type="text"  class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
-			                </p>
+			                </div>
 		                </div>
-		                
-		                <button class="btn btn-primary" ng-click="addOne()">新增选项</button>
-		             
+		                <div class="row">
+			                <div class="col-md-6">
+			                	<button class="btn btn-outline" ng-click="addOne()">新增选项</button>
+			             	</div>
+		             	</div>
+		             	
 		                <ul style="margin-top: 30px;list-style-type:none">
 		                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-		                        <textarea ckeditor minheight="80" width="70%" toolbar="none" operation="edit" ng-model="ans.text"></textarea>
+		                        <textarea ckeditor minheight="80" width="100%" toolbar="none" operation="edit" ng-model="ans.text"></textarea>
 		                       
 		                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
 		                           ng-click="removeOne($index)">删除</a>
 		                        <input style="width:5%" type="checkbox" ng-model="ans.isright">是否正确
-		
 		                    </li>
 		                </ul>
 		                <div  style="padding-top: 70px">

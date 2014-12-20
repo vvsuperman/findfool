@@ -3,52 +3,79 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 80px">
 
-
-
 	<div class="panel panel-default black-panel">
 		<div class="panel-heading black-heading">已有试题</div>
 
-		<div class="table-responsive">
-
-			<div class="row">
-				<div class="col-md-2">试题内容</div>
+		<div>
+			<div class="row" style="padding-top:15px;padding-bottom:15px">
+				<div class="col-md-1"></div>
+				<div class="col-md-4">试题内容</div>
+				<div class="col-md-1"></div>
 				<div class="col-md-2">类型</div>
-				<div class="col-md-2">分数</div>
+				<div class="col-md-1">分数</div>
+				<div class="col-md-3">修改/删除/上移/下移</div>
 			</div>
-			<div class="row" ng-repeat="q in qs">
-				<div class="row">
-					<div class="col-md-2">
-						<input abstract context={{q.context}}>
+			<div class="question-list"  ng-repeat="q in qs">
+				    <div class="col-md-1">
+				    	
+				    	<span ng-bind="'Q'+($index+1)"></span>
+				    </div>
+					<div class="col-md-4">
+						 <input abstract context={{q.context}}> 
+					</div>
+					<div class="col-md-1">
+						<a class="blackFont" href=""
+							ng-click="displayQuestionDetails($index)"
+							ng-if="!displayDetail($index)">
+							<span class="glyphicon glyphicon-chevron-down"></span>	
+						</a>
+							 <a class="blackFont" href=""
+							ng-click="hideQuestionDetails($index)" ng-if="displayDetail($index)">
+							<span class="glyphicon glyphicon-chevron-up"></span>
+							</a>
+						
 					</div>
 					<div class="col-md-2">
 						<input abstract ng-bind="getTypeName(q.type)">
 					</div>
-					<div class="col-md-2">{{q.score}}</div>
-					<div class="col-md-2">
+					<div class="col-md-1">{{q.score}}</div>
+					<div class="col-md-3">
+						&nbsp;&nbsp;
 						<a class="blackFont" href=""
-							ng-click="displayQuestionDetails($index)"
-							ng-if="!isDisplay($index)">查看/</a> <a class="blackFont" href=""
-							ng-click="hideQuestionDetails($index)" ng-if="isDisplay($index)">隐藏/</a>
-						<a class="blackFont" href=""
-							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
-						<a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">删除</a>
+							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">
+							<span class="glyphicon glyphicon-pencil"></span>
+							</a>
+						&nbsp;&nbsp;&nbsp;
+						<a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</a>
+						&nbsp;&nbsp;&nbsp;
+						<a class="blackFont" href="" ng-click="moveUp($index)">
+							<span class="glyphicon glyphicon-circle-arrow-up"></span>
+						</a>
+						&nbsp;&nbsp;
+						<a class="blackFont" href="" ng-click="moveDown($index)">
+							<span class="glyphicon glyphicon-circle-arrow-down"></span>
+						</a>
+						
 					</div>
-				</div>
-				<div class="row" ng-if="isDisplay($index)">
-					<div class="col-md-12" style="margin-top: 20px">
+				 <div class="row" ng-if="displayDetail($index)">
+					<div class="col-md-10 col-md-offset-1" style="margin-top: 20px">
 						<textarea ckeditor minheight="120" width="100%" operation="view"
 							ng-model="q.context"></textarea>
 					</div>
-					<div class="options list col-md-12 col-sm-12  col-xs-12">
+					<div class="options col-md-offset-1 list col-md-10 col-sm-10  col-xs-10">
 						<label customcheckbox option={{option}}
 							class='optionlabel checkbox' ng-repeat="option in q.answer"
 							operation="view" index={{$index}} rightanswer={{q.rightanswer}}
 							useranswer={{q.useranswer}}> <textarea ckeditor
 								minheight="70" width="90%" operation="view" class='optiontext'
-								ng-model="option.text"></textarea> <!--  input type="checkbox"-->
+								ng-model="option.text"></textarea> 
 						</label>
 					</div>
-				</div>
+					<div style="clear: both;"></div>
+				</div> 
+				<div style="clear: both;"></div>
 			</div>
 		</div>
 	</div>
