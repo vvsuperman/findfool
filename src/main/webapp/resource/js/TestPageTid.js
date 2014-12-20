@@ -220,12 +220,14 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     }
     
     $scope.moveDown =  function(index){
-    	if(index == $scope.qs.length){
+    	if(index >= $scope.qs.length-1){
     		alert("已是最后一题，不可后移");
+    	}else{
+    		var q = $scope.qs[index];
+        	$scope.qs[index] = $scope.qs[index+1];
+        	$scope.qs[index+1] = q;
     	}
-    	var q = $scope.qs[index];
-    	$scope.qs[index] = $scope.qs[index+1];
-    	$scope.qs[index+1] = q;
+    	
     }
  
 });
