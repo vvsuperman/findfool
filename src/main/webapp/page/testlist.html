@@ -26,15 +26,15 @@
 					<div class="col-md-2">{{q.score}}</div>
 					<div class="col-md-2">
 						<a class="blackFont" href=""
-							ng-click="displayQuestionDetails(q.qid)"
-							ng-if="q.name!='display'">查看/</a> <a class="blackFont" href=""
-							ng-click="hideQuestionDetails(q.qid)" ng-if="q.name=='display'">隐藏/</a>
+							ng-click="displayQuestionDetails($index)"
+							ng-if="!isDisplay($index)">查看/</a> <a class="blackFont" href=""
+							ng-click="hideQuestionDetails($index)" ng-if="isDisplay($index)">隐藏/</a>
 						<a class="blackFont" href=""
 							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">修改/</a>
 						<a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">删除</a>
 					</div>
 				</div>
-				<div class="row" ng-if="q.name=='display'">
+				<div class="row" ng-if="isDisplay($index)">
 					<div class="col-md-12" style="margin-top: 20px">
 						<textarea ckeditor minheight="120" width="100%" operation="view"
 							ng-model="q.context"></textarea>

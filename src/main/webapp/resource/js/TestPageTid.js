@@ -44,6 +44,9 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
             if ($scope.state) {
                 console.log($scope.message);
                 $scope.qs = $scope.message.qs;
+                $scope.isDisplay = new Array(qs.length);
+                for(i in isDisplay)
+                	isDisplay[i]=false;
                 $scope.testtime = $scope.message.testtime;
                 $scope.extraInfo = $scope.message.extraInfo;
                 $scope.emails = $scope.message.emails;
@@ -186,21 +189,18 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        });
 	 }
 
-	 $scope.displayQuestionDetails = function(qid){
-		 for(i in $scope.qs){
-			 $scope.qs[i].name="";
-			 if($scope.qs[i].qid == qid){
-				 $scope.qs[i].name="display";
-			 }
-		 }
+	 $scope.displayQuestionDetails = function(index){
+		 for(i in $scope.qs)
+			 $scope.isDisplay[i]=false;
+		 $scope.isDisplay[index]=true;
 	 }
 
-	 $scope.hideQuestionDetails = function(qid){
-		 for(i in $scope.qs){
-			 if($scope.qs[i].qid == qid){
-				 $scope.qs[i].name="";
-			 }
-		 }
+	 $scope.hideQuestionDetails = function(index){
+		 $scope.isDisplay[index]=false;
+	 }
+	 
+	 $scope.isDisplay = function(index){
+		 return $scope.isDisplay[index];
 	 }
 	 
     $scope.isAdded = function (qid){
