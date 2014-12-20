@@ -121,11 +121,8 @@ public class UpLoadService{
 	      		Problem problem = new Problem();
 	      	    String questionContent = getValuebyCell(row.getCell(map.
 	      				get(ExamConstant.QUESTION_CONTENT)));
-	      	    
-	      	    //若试题内容相同，则不做处理,去下一行
-	      	    if(problemDao.getProblemByContent(questionContent)!=null){
-	      	    	continue;
-	      	    }
+	      	  questionContent = addPTag(questionContent);
+	      	   
 	      	    
 	      		problem.setProblemSetId(set.getProblemSetId());
 	      		problem.setDescription(questionContent);
@@ -134,6 +131,7 @@ public class UpLoadService{
 	      		problem.setType(Integer.parseInt(getValuebyCell(row.getCell(map.
 	      				get(ExamConstant.QUESTION_TYPE)))));
 	      		problem.setProblemSetId(set.getProblemSetId());
+	      		problem.setBelong(0);
 	      		
 	      	 	
 	        	//处理answer,题目的解答
@@ -142,9 +140,9 @@ public class UpLoadService{
 	      			problem.setExplain(getValuebyCell(cell));
 	      		}
 	      		
-	      		//保存问题，获取id
+	      		//保存问题，获取id,最好能insert的同事获取主键，否则太难看了
 	      		problemDao.insertProblem(problem);
-	      		problem = problemDao.getProblemByContent(questionContent);
+	      		problem = problemDao.getProblemByContent(questionContent).get(0);
 	      		
 	      		//处理tag
 	      		Set<Tag> tagSet = new HashSet<Tag>(); 
@@ -202,5 +200,11 @@ public class UpLoadService{
 	
 		is.close();
 	    return "sucess";
+	}
+	//给内容加上html<p>标签，以符合ckeditor的标准
+	private String addPTag(String questionContent) {
+		// TODO Auto-generated method stub
+		String rtStr = questionContent.replace("\n", "</p>\n<p>");
+		return "<p>"+rtStr+"</p>";
 	}
 }

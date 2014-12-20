@@ -30,7 +30,6 @@ public class ProblemDaoSQL {
 		if(para.get("setid") != null){
 			sql += " and problem_set_id="+para.get("setid");
 		}
-		sql += " GROUP BY uuid";
 		if(para.get("begin") != null &&para.get("end") != null){
 			sql += " limit "+para.get("begin")+","+para.get("end");
 		}

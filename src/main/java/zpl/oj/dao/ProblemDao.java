@@ -22,7 +22,7 @@ public interface ProblemDao {
 	
 	@Select("select t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, t1.rightanswer as rightAnswer,"
 			+ "t1.score as score FROM PROBLEM t1 WHERE t1.description=#{0} ORDER BY t1.PROBLEM_ID DESC")
-	Problem getProblemByContent(String content);
+	List<Problem> getProblemByContent(String content);
 	
 	
 	
