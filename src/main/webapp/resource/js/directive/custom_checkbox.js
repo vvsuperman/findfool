@@ -8,7 +8,7 @@ OJApp.directive('customcheckbox', function() {
 //		},
 		link: function(scope, elem, attrs, ctrl) {
 			
-			elem.prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
+			//elem.prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
 			 var checkBoxChecked = "checked";
 			 var checkBoxDisabled = "disabled";
 			//Radio

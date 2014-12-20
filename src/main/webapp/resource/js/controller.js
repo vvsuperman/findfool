@@ -125,19 +125,14 @@ OJApp.controller('mainController',function($scope, $http, Data) {
                         if ($scope.state) {
                             Data.setUid($scope.message.uid);
                             Data.setToken(data["token"]);
-                            console.log(Data.token());
-                            console.log(data["token"]);
-                            Data.setUid($scope.message.uid);
                             Data.setPrivi($scope.message.privilege);
                             Data.setTel($scope.message.tel);
                             Data.setCompany($scope.message.company);
-                            //add by zpl
-//                            Data.token = $scope.token;//ignore by lz,token 直接都在Data里的，不走$scope
-                            Data.setEmail($scope.Remail);
+                            Data.setInvitedleft($scope.message.invited_left);
                             //end bu zpl
+                            Data.setName($scope.message.email);
+                            //除去modal层的遮罩
                             var child = document.getElementsByClassName("modal-backdrop fade in");
-                            $scope.name = $scope.name;
-                            Data.setName($scope.name);
                             child[0].parentNode.removeChild(child[0]);
                             window.location.href = '#/test';
                         } else {
@@ -204,25 +199,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
     };
 });
 
-function aceEditor($scope) {
-    $scope.url = "#/editor";
-    $scope.template = 'editor.html';
-    $scope.ContentUs = 'contentUs.html';
-    $scope.leftBar = '';
-}
 
-
-/*function TestManage($scope, id) {
- $scope.n = id;
- console.log(id);
- $scope.questions = [
- {id: '1', name: 'hdh1', type: 'xzt', score: 4, detail: 'i dont know'},
- {id: '2', name: 'hdh2', type: 'xzt', score: 4, detail: 'i dont know'},
- {id: '3', name: 'hdh3', type: 'xzt', score: 4, detail: 'i dont know'},
- {id: '4', name: 'hdh4', type: 'xzt', score: 4, detail: 'i dont know'}
- ];
-
- }*/
 OJApp.controller('nav',function($scope, Data) {
     $scope.invitedleft = Data.invitedleft();
     $scope.name = Data.name();
