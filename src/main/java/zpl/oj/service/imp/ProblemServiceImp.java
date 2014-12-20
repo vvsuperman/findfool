@@ -109,7 +109,7 @@ public class ProblemServiceImp implements ProblemService{
 			p.setBelong(1);
 		}
 		problemDao.insertProblem(p);
-		p = problemDao.getProblemByContent(q.getQuestion().getContext());
+		p = problemDao.getProblemByContent(q.getQuestion().getContext()).get(0);
 		int pid =p.getProblemId();
 		//同时把试题加入到测试
 		if(q.getQuizId()!=0){
