@@ -127,7 +127,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
         		 }
         	 }
     	 }
-    	 console.log("problemid2.......",problem.problemid);
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
     			 		 "useranswer":useranswer};
     	 

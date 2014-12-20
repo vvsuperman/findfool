@@ -3,9 +3,5 @@ OJApp.controller('importController',function($scope){
 		$scope.templete = "page/admin/batchimport.html";
 	}	
 	
-	$scope.uploadFile1 = function(){
-		console.log("import......."+ $scope.myFile);
-		console.log("import....."+$scope.texttext);
-	}
 	
 });

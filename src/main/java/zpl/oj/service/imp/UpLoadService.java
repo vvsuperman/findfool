@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,17 +20,20 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import zpl.oj.dao.ProblemDao;
+import zpl.oj.dao.ProblemTagDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.SetDao;
+import zpl.oj.dao.TagDao;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.Tag;
 import zpl.oj.util.Constant.ExamConstant;
 
 
-
+@Service
 public class UpLoadService{
 	@Resource
 	private QuizDao quizDao; 
@@ -41,7 +45,13 @@ public class UpLoadService{
 	private SetDao setDao;
 	
 	@Resource
+	private TagDao tagDao;
+	
+	@Resource
 	private ProblemTestCaseDao problemTestCaseDao;
+	
+	@Resource
+	private ProblemTagDao problemTagDao;
 	
 	private String getValuebyCell(HSSFCell cell){
 		int cellType = cell.getCellType();
@@ -98,37 +108,43 @@ public class UpLoadService{
 		    		 }
 	    	}
 	    	
-	       //生成quiz,question及option对象，并存入数据库
+   	        //生成set,question及option对象，并存入数据库
 	    	
-	    	//quiz必须是先定义好的
-	    	Quiz quiz = quizDao.getQuizByName(sheetName);
-	    	if(quiz == null){
-	    		 return null;
-	    	}
-	    	
+	    	//set必须是先定义好的
 	        ProblemSet set = setDao.getSetByName(sheetName);
+	        if(set == null){
+	        	return null;
+	        }
 	    	
 	    	for(int j=1;j<sheet.getLastRowNum();j++){
 	      		HSSFRow row = sheet.getRow(j);
 	      		Problem problem = new Problem();
 	      	    String questionContent = getValuebyCell(row.getCell(map.
 	      				get(ExamConstant.QUESTION_CONTENT)));
+	      	  questionContent = addPTag(questionContent);
+	      	   
 	      	    
-	      	    //若试题内容相同，则不做处理,去下一行
-	      	    if(problemDao.getProblemByContent(questionContent)!=null){
-	      	    	continue;
-	      	    }
-	      	    
-	      		problem.setProblemSetId(quiz.getQuizid());
+	      		problem.setProblemSetId(set.getProblemSetId());
 	      		problem.setDescription(questionContent);
 	      		problem.setScore((int)Double.parseDouble(((getValuebyCell(row.getCell(map.
 	      				get(ExamConstant.QUESTION_SCORE)))))));
 	      		problem.setType(Integer.parseInt(getValuebyCell(row.getCell(map.
 	      				get(ExamConstant.QUESTION_TYPE)))));
-	      	
+	      		problem.setProblemSetId(set.getProblemSetId());
+	      		problem.setBelong(0);
 	      		
-	      	/*	赶时间，tag先略过
-	      	 * //处理tag
+	      	 	
+	        	//处理answer,题目的解答
+	      		HSSFCell cell = row.getCell(answerIndex);
+	      		if(getValuebyCell(cell).equals("") == false){
+	      			problem.setExplain(getValuebyCell(cell));
+	      		}
+	      		
+	      		//保存问题，获取id,最好能insert的同事获取主键，否则太难看了
+	      		problemDao.insertProblem(problem);
+	      		problem = problemDao.getProblemByContent(questionContent).get(0);
+	      		
+	      		//处理tag
 	      		Set<Tag> tagSet = new HashSet<Tag>(); 
 	      		HSSFCell tagCell = row.getCell(map.get(ExamConstant.QUESTION_TAG));
 	      		if(tagCell != null){
@@ -140,57 +156,55 @@ public class UpLoadService{
 			      		String[] tagList1 = tags.split(",");
 			      		String[] tagList2 = tags.split("，");
 			      		tagList = (tagList1.length>tagList2.length?tagList1:tagList2);
-			      		
 			      		for(String tagName:tagList){
-			      			Tag tag= tagDao.getTagByName(tagName);
+			      			Tag tag= tagDao.getTagByContext(tagName);
 			      			if(tag != null){
-			      				tagSet.add(tag);
+			      				problemTagDao.insertTagProblem(tag.getTagId(), problem.getProblemId());
 			      			}else{
 			      				tag = new Tag();
 			      				tag.setTagName(tagName);
-			      				tagDao.save(tag);
-			      				tagSet.add(tag);
+			      				tagDao.insertTag(tagName);;
+			      				tag = tagDao.getTagByContext(tagName);
+			      				problemTagDao.insertTagProblem(tag.getTagId(), problem.getProblemId());	
 			      			}
 			      		}
 		      		}
 	      		}
-	      		*/
+	      		
+	      		
+	      		
 	      		String rightAnswer ="";
 	      		
 	      		//处理option
 	      		for(int k=0;k<options.size();k++){
 	      			ProblemTestCase option = new ProblemTestCase();
-  	      			HSSFCell cell = row.getCell(options.get(k));
+  	      			HSSFCell optionCell = row.getCell(options.get(k));
   	      			//若该选项不为空
-	  	      	    if(getValuebyCell(cell).equals("") == false){
-	  	      		   option.setArgs(getValuebyCell(cell));
+	  	      	    if(getValuebyCell(optionCell).equals("") == false){
+	  	      		   option.setArgs(getValuebyCell(optionCell));
 	  	      		   if(getValuebyCell(row.getCell(rights.get(k))).equals("1")){
 	  	      			   rightAnswer+="1";
 	  	      		   }else{
 	  	      			   rightAnswer+="0";
 	  	      		   }
-	  	      		   option.setProblemId(quiz.getQuizid());
+	  	      		   option.setProblemId(problem.getProblemId());
 	  	      		   problemTestCaseDao.insertProblemTestCase(option);;
 	  	      		}
 	      		}
 	      		problem.setRightAnswer(rightAnswer);
 	      		
-	      		//处理answer,题目的解答
-	      		HSSFCell cell = row.getCell(answerIndex);
-	      		if(getValuebyCell(cell).equals("") == false){
-	      			problem.setExplain(getValuebyCell(cell));
-	      		}
-	      		
-	      		problem.setProblemSetId(quiz.getQuizid());
-	      /*		problem.setOptions(optionSet);
-	      		if(tagSet.size()!=0){
-	      			problem.setTags(tagSet);
-	      		}*/
-	      		problemDao.insertProblem(problem);
+	     
+	      		problemDao.updateProblemRightAnswer(problem);
 	      	}
 	    }
 	
 		is.close();
 	    return "sucess";
+	}
+	//给内容加上html<p>标签，以符合ckeditor的标准
+	private String addPTag(String questionContent) {
+		// TODO Auto-generated method stub
+		String rtStr = questionContent.replace("\n", "</p>\n<p>");
+		return "<p>"+rtStr+"</p>";
 	}
 }

@@ -37,7 +37,6 @@ OJApp.directive('aceeditor', ['$timeout', function ($timeout) {
                     scope.$apply(function () {
                         var value = editor.getValue();
                         ngModel.$setViewValue(value);
-                        console.log("ace change.......","value:"+ngModel);
                     });
                 });
 

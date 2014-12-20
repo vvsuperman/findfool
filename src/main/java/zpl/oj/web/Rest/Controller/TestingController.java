@@ -141,19 +141,19 @@ public class TestingController {
 			//判读用户是否已经开始做题，若已开始，直接给出题目列表
 			Invite invite = inviteDao.getInvites(testid, email);
 			String nowDate = df.format(new Date());
-			
-			if(nowDate.compareTo(invite.getBegintime())>0){
+			//逻辑有问题
+		/*	if(invite.getBegintime()!=null){
 					//用户已开始做题，直接返回tuserproblem的list
 					List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
 					rb.setState(1);
 					rb.setMessage(tuserProblems);
 					return rb;
-			}else{  
+			}else{  */
 			//未开始
 				rb.setState(2);
 				return rb;
 		//	}
-		}
+	//	}
 	}
 }
 	

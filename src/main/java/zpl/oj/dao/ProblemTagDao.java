@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
+import zpl.oj.model.common.Tag;
+
 public interface ProblemTagDao {
 
 	@Select("select b.context from tagproblem as a,tag as b"
@@ -32,10 +34,6 @@ public interface ProblemTagDao {
 	@Insert("insert tagproblem (tagid,problemid) values(#{0},#{1})")
 	void insertTagProblem(Integer tagid,Integer problemid);
 	
-	@Insert("insert tag (context) values(#{context})")
-	void insertTag(String context);
 	
-	@Select("select tagid from tag where context=#{context}")
-	Integer getTagId(String context);
 	
 }
