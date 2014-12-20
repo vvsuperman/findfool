@@ -213,10 +213,12 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     $scope.moveUp =  function(index){
     	if(index == 0){
     		alert("已是第一题，不可前移");
+    	}else{
+    		var q = $scope.qs[index];
+        	$scope.qs[index] = $scope.qs[index-1];
+        	$scope.qs[index-1] = q;
     	}
-    	var q = $scope.qs[index];
-    	$scope.qs[index] = $scope.qs[index-1];
-    	$scope.qs[index-1] = q;
+    	
     }
     
     $scope.moveDown =  function(index){
