@@ -8,7 +8,7 @@ public class Problem implements Serializable {
 
 	public Problem(){
 		uuid=-1;
-		rightAnswer ="0000";
+		rightanswer ="0000";
 		score =4;
 		isdelete =0;
 		belong =1;
@@ -65,7 +65,7 @@ public class Problem implements Serializable {
 	/*
 	 * 选择题的正确答案
 	 */
-	private String rightAnswer;
+	private String rightanswer;
 	
 	private int score;
 	
@@ -124,11 +124,11 @@ public class Problem implements Serializable {
 	}
 
 	public String getRightAnswer() {
-		return rightAnswer;
+		return rightanswer;
 	}
 
 	public void setRightAnswer(String rightAnswer) {
-		this.rightAnswer = rightAnswer;
+		this.rightanswer = rightAnswer;
 	}
 
 	public Integer getBelong() {
