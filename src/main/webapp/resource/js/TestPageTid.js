@@ -200,7 +200,12 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	 }
 	 
 	 $scope.displayDetail = function(index){
-		 return $scope.isDisplay[index];
+		 if(typeof($scope.isDisplay[index])!="undefined"){
+			 return $scope.isDisplay[index];
+		 }else{
+			 return false;
+		 }
+		
 	 }
 	 
     $scope.isAdded = function (qid){

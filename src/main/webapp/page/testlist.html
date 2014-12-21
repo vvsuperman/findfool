@@ -1,5 +1,8 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testbank.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 80px">
@@ -62,7 +65,9 @@
 					</div>
 				 <div class="row" ng-if="displayDetail($index)">
 					<div class="col-md-10 col-md-offset-1" style="margin-top: 20px">
-						<textarea ckeditor minheight="120" width="100%" operation="view"
+						<!-- <textarea ckeditor minheight="120" width="100%" operation="view"
+							ng-model="q.context"></textarea> -->
+							<textarea simditor minheight="60px"  operation="view"
 							ng-model="q.context"></textarea>
 					</div>
 					<div class="options col-md-offset-1 list col-md-10 col-sm-10  col-xs-10">
@@ -71,9 +76,12 @@
 							operation="view" index={{$index}} rightanswer={{q.rightanswer}}
 							useranswer={{q.useranswer}}> 
 							<span class='icon'></span><span class='icon-to-fade'></span>
-							<textarea ckeditor
+							<!-- <textarea ckeditor
 								minheight="70" width="90%" operation="view" class='optiontext'
-								ng-model="option.text"></textarea> 
+								ng-model="option.text"></textarea>  -->
+							<textarea simditor
+							minheight="30px" operation="view" class='optiontext' operation="view"
+							ng-model="option.text"></textarea> 
 						</label>
 					</div>
 					<div style="clear: both;"></div>
@@ -98,4 +106,7 @@
 <div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
 	ng-if="panel.show=='custom'"></div>
 
-
+<script src="resource/js/simditor/module.js"></script>
+<script src="resource/js/simditor/hotkeys.js"></script>
+<script src="resource/js/simditor/uploader.js"></script>
+<script src="resource/js/simditor/simditor.js"></script>

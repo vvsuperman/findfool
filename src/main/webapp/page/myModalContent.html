@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+
 <!-- 接受read， -->
 
 <div class="modal-header" style="background-color: #374652">
@@ -10,7 +11,8 @@
         <div class="modal-body">
 			
 				<div class="col-md-12" style="margin-top: 20px">
-		       	  	<textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea>
+		       	  	<!-- <textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea> -->
+		       	  	<textarea simditor minheight="30px" operation={{operation}} ng-model="question.context"></textarea>
 		       	</div>  
 		  
 		    
@@ -19,7 +21,8 @@
 		       	  <label  customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}} 
 		       	  	index={{$index}} rightanswer={{question.rightanswer}} useranswer={{question.useranswer}} >
 		       	  	<span class='icon'></span><span class='icon-to-fade'></span>
-		       	    <textarea ckeditor  minheight="70" width="90%" operation={{operation}} class='optiontext'   ng-model="option.text"></textarea>
+		       	    <!-- <textarea ckeditor  minheight="70" width="90%" operation={{operation}} class='optiontext'   ng-model="option.text"></textarea> -->
+		       	    <textarea simditor minheight="30px"  operation={{operation}} class='optiontext'  ng-model="option.text"></textarea>
 		       	     <!--  input type="checkbox"-->
 		       	  </label>
 		    </div>

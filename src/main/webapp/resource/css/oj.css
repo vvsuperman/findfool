@@ -1,3 +1,25 @@
+.simditor{
+	border-radius :3px;
+}
+
+.simditor-wrapper{
+	border-radius :3px;
+}
+
+.simditor-body{
+	padding-bottom: 15px !important;
+}
+
+.simditor .simditor-toolbar > ul > li > .toolbar-item{
+	width: 40px !important;
+	height: 40px !important;
+}
+
+.simditor .simditor-toolbar > ul > li > .toolbar-item span.fa {
+	line-height: 13px;
+	font-size: 13px !important;
+}
+
 .question-list{
 	border-top:1px solid #CCCCCC;
 /*	border-style:solid;*/
@@ -244,13 +266,13 @@ input.ng-valid {
     color: #333;
     font-size: 14px;
 }
-
+/*尼玛，这么底层的标签也能定义，艹
 ul li {
     list-style-image: none;
     list-style-position: outside;
     list-style-type: upper-alpha;
     /*padding: 10px;*/
-}
+/*}*/
 
 .bs-docs-sidebar.affix {
     position: static

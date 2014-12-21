@@ -49,7 +49,6 @@ public class InviteServiceImp implements InviteService {
 		tuser.setUsername(u.getUsername());
 		tuser.setEmail(u.getEmail());
 		
-		
 		//等级
 		//设置密码,5位的
 		String pwd = RandomCode.randomString(5);

@@ -31,13 +31,11 @@ OJApp.directive('customcheckbox', function() {
 				}
 				//判断选项是否正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
-					console.log("right option:",index);
 					//elem.append("<span class='icon righticon' >");
 					elem.append("<p>正确选项</p>")
 				}
 				
 			}else{
-				console.log("view meta info",attrs.rightanswer);
 			//若用户的选择不存在，则为查看元数据，根据rightanswer来判断选项的正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
 					elem.addClass(checkBoxChecked);
@@ -49,16 +47,13 @@ OJApp.directive('customcheckbox', function() {
 			
 			
 			elem.children("textarea").click(function(event){
-				console.log("textarea stop propagation......");
 				event.stopPropagation();
 			})
 			
 			 
 			//若当前是编辑，则可以点击。否则不可编辑
-			console.log("operation.......",attrs.operation);
 			 if(attrs.operation == "edit"){
 				 elem.click(function(event){	    	
-					 console.log("operation",attrs.operation);
 						 elem.toggleClass(checkBoxChecked);
 						    if(elem.hasClass(checkBoxChecked)){
 					        	elem.css("border-color","#2fe2bf");	
