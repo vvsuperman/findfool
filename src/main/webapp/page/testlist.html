@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testbank.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css" />
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 80px">
@@ -68,7 +69,9 @@
 						<label customcheckbox option={{option}}
 							class='optionlabel checkbox' ng-repeat="option in q.answer"
 							operation="view" index={{$index}} rightanswer={{q.rightanswer}}
-							useranswer={{q.useranswer}}> <textarea ckeditor
+							useranswer={{q.useranswer}}> 
+							<span class='icon'></span><span class='icon-to-fade'></span>
+							<textarea ckeditor
 								minheight="70" width="90%" operation="view" class='optiontext'
 								ng-model="option.text"></textarea> 
 						</label>

@@ -18,6 +18,7 @@
 			<div class="options list col-md-12 col-sm-12  col-xs-12" >
 		       	  <label  customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}} 
 		       	  	index={{$index}} rightanswer={{question.rightanswer}} useranswer={{question.useranswer}} >
+		       	  	<span class='icon'></span><span class='icon-to-fade'></span>
 		       	    <textarea ckeditor  minheight="70" width="90%" operation={{operation}} class='optiontext'   ng-model="option.text"></textarea>
 		       	     <!--  input type="checkbox"-->
 		       	  </label>
