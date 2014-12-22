@@ -57,7 +57,7 @@
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">学校</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.school" placeholder="学校">
+		      <input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">
 		    </div>
 		  </div>
 		  

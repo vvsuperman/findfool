@@ -1,3 +1,4 @@
+'use strict';
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	
@@ -61,7 +62,39 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	 console.log("login failed");
 	     })
 	 }
-	
+	 
+	 //学校字段的自动补全功能
+	 $scope.changeClass = function (options) {
+         var widget = options.methods.widget();
+         // remove default class, use bootstrap style
+         widget.removeClass('ui-menu ui-corner-all ui-widget-content').addClass('dropdown-menu');
+     };
+     
+		$scope.schoolOption = {
+		    options: {
+		        html: true,
+		        minLength: 1,
+		        onlySelect: true,
+		        outHeight: 20,
+		        source: function (request, response) {
+		            var data = [
+		                    "复旦大学",
+		                    "同济大学",
+		                    "清华大学",
+		            ];
+		            //data = $scope.myOption.methods.filter(data, request.term);
+		
+		            if (!data.length) {
+		                data.push({
+		                    label: '未发现',
+		                    value: null
+		                });
+		            }
+		            
+		            response(data);
+		        }
+		    }
+		};
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){
