@@ -56,7 +56,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 
             }
         }).error(function (data) {
-            alert("获取数据错误");
+            smoke.alert("获取数据错误");
         });
         $scope.template = 'page/testlist.html';
         $scope.myu = 1;
@@ -140,9 +140,9 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        }).success(function (data) {
 	        	if(data.message == "success"){
 	        		$scope.qs.push(q);
-	        		alert("添加试题成功");
+	        		smoke.alert("添加试题成功");
 	        	}else{
-	        		alert(data.message);
+	        		smoke.alert(data.message);
 	        	}
 	        }).error(function (data) {
 	           console.log("获取数据错误");
@@ -182,10 +182,10 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	            },
 	            data: sendData
 	        }).success(function (data) {
-	            alert("试题已从测试中删除");	            
+	            smoke.alert("试题已从测试中删除");	            
 	            location.reload();
 	        }).error(function (data) {
-	            alert("获取数据错误");
+	            smoke.alert("获取数据错误");
 	        });
 	 }
 
@@ -210,7 +210,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     
     $scope.moveUp =  function(index){
     	if(index == 0){
-    		alert("已是第一题，不可前移");
+    		smoke.alert("已是第一题，不可前移");
     	}else{
     		var q = $scope.qs[index];
         	$scope.qs[index] = $scope.qs[index-1];
@@ -221,7 +221,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     
     $scope.moveDown =  function(index){
     	if(index >= $scope.qs.length-1){
-    		alert("已是最后一题，不可后移");
+    		smoke.alert("已是最后一题，不可后移");
     	}else{
     		var q = $scope.qs[index];
         	$scope.qs[index] = $scope.qs[index+1];
