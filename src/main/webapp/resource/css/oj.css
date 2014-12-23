@@ -1,8 +1,17 @@
 
+body {
+  margin: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+  overflow:hidden;
+}
+
+.navbar-header{
+	margin-left: 50px!important;
+}
+
 .black-outline{
 	background-color: #374652 ;
 }
-
 
 .btn-transparent-outline {
   /*color: #563d7c;*/
@@ -41,7 +50,7 @@
 }
 
 .logoFont{
-	font-size:22px;
+	font-size:24px;
 }
 
 .navbar{
