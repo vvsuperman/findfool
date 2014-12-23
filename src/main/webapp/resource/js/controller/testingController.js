@@ -1,26 +1,20 @@
 'use strict';
-OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce) {
+OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
-	
+/*	
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
-	 $scope.tid = param[1];
+	 $scope.tid = param[1];*/
+	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
-/*	
-	 //测试数据
-	 $scope.tuser.tuid=1;
-	 $scope.tuser.email="693605668@qq.com";
-	 
-	 
 	
-	 $scope.email ="693605668@qq.com";
-	 $scope.tid = "1";
-*/
 
      $scope.schools = [];
 	 $scope.question = {};
 	 $scope.programCode = {};
+
+	 
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -70,6 +64,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	 console.log("login failed");
 	     })
 	 }
+	 
+	 
 	 
 	 //学校字段的自动补全功能
 	 $scope.changeClass = function (options) {

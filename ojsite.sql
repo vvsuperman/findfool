@@ -613,3 +613,28 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2014-12-18 22:43:55
+
+-- ----------------------------
+-- Table structure for `schools`
+-- ----------------------------
+DROP TABLE IF EXISTS `schools`;
+CREATE TABLE `schools` (
+  `id` int(10) NOT NULL,
+  `code` int(10) NOT NULL COMMENT '学校代码',
+  `name1` varchar(255) NOT NULL COMMENT '汉字名称',
+  `name2` varchar(255) DEFAULT NULL COMMENT '拼音名称',
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `schools` WRITE;
+-- ----------------------------
+-- Records of schools
+-- ----------------------------
+INSERT INTO `schools` VALUES ('1', '10001', '复旦大学', 'fudandaxue', '复旦大学');
+INSERT INTO `schools` VALUES ('2', '10002', '同济大学', 'tongjidaxue', '同济大学');
+INSERT INTO `schools` VALUES ('3', '20001', '清华大学', 'qinghuadaxue', '清华大学');
+INSERT INTO `schools` VALUES ('4', '20002', '北京大学', 'beijingdaxue', '北京大学');
+INSERT INTO `schools` VALUES ('5', '30001', '浙江大学', 'zhejiangdaxue', '浙江大学');
+INSERT INTO `schools` VALUES ('6', '40001', '南京大学', 'nanjingdaxue', '南京大学');
+UNLOCK TABLES;
