@@ -1,10 +1,10 @@
 'use strict';
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
-/*	
+	
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
-	 $scope.tid = param[1];*/
+	 $scope.tid = param[1];
 	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
