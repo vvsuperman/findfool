@@ -17,7 +17,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.email ="693605668@qq.com";
 	 $scope.tid = "1";
 */
-	 
+
+     $scope.schools = [];
 	 $scope.question = {};
 	 $scope.programCode = {};
 	 //检查该url是否合法
@@ -31,7 +32,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 //该url无效
     		 alert(data.message);
     	 }else{
-    		 $scope.show = 1;
+    		 $scope.show = 2;
+    		 $http({
+    	         url: WEBROOT+"/testing/getSchools",
+    	         method: 'POST',
+    	         data: {"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
+    	     }).success(function (data) {
+    	    	 $scope.schools=data.message;
+    	     });
     	 }	 
          
      }).error(function(){
@@ -69,7 +77,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
          // remove default class, use bootstrap style
          widget.removeClass('ui-menu ui-corner-all ui-widget-content').addClass('dropdown-menu');
      };
-     
+
 		$scope.schoolOption = {
 		    options: {
 		        html: true,
@@ -77,21 +85,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        onlySelect: true,
 		        outHeight: 20,
 		        source: function (request, response) {
-		            var data = [
-		                    "复旦大学",
-		                    "同济大学",
-		                    "清华大学",
-		            ];
 		            //data = $scope.myOption.methods.filter(data, request.term);
-		
-		            if (!data.length) {
-		                data.push({
+		            if (!$scope.schools.length) {
+		            	$scope.schools.push({
 		                    label: '未发现',
 		                    value: null
 		                });
-		            }
-		            
-		            response(data);
+		            }		            
+		            response($scope.schools);
 		        }
 		    }
 		};
