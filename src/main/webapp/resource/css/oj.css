@@ -16,11 +16,12 @@ body {
 .btn-transparent-outline {
   /*color: #563d7c;*/
   color: #2fe2bf;
-/*  background-color: #fff;*/
+  background-color: transparent;
 /*   border-color: #563d7c; */
   border-color: #2fe2bf;
   border-width: 1px;
   border-style: solid;
+ 
 }
 .btn-transparent-outline:hover,
 .btn-transparent-outline:focus,
@@ -58,6 +59,20 @@ body {
 	padding-bottom: 10px;
 	padding-top: 10px;
 	font-size:20px;
+}
+
+ul.navbar-nav li a{
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+ul.navbar-nav li a:focus,
+ul.navbar-nav li a:hover,
+ul.navbar-nav li a:active{
+	color: #ffffff!important;
+	background-color: #2fe2bf;
+	
 }
 
 .simditor{
@@ -180,6 +195,9 @@ body {
     background: #374652;
 }
 
+.navbar-transparent{
+	background: transparent;
+}
 
 
 #landing .eyemagnet {
