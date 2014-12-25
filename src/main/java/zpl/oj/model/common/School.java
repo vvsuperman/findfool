@@ -3,9 +3,9 @@ package zpl.oj.model.common;
 public class School {
 	private int id;
 	private int code;
-	private String name1;
-	private String name2;
-	private String value;
+	private String name;
+	private String pinyin;
+	private String alp;
 	public int getId() {
 		return id;
 	}
@@ -18,23 +18,23 @@ public class School {
 	public void setCode(int code) {
 		this.code = code;
 	}
-	public String getName1() {
-		return name1;
+	public String getName() {
+		return name;
 	}
-	public void setName1(String name1) {
-		this.name1 = name1;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getName2() {
-		return name2;
+	public String getPinyin() {
+		return pinyin;
 	}
-	public void setName2(String name2) {
-		this.name2 = name2;
+	public void setPinyin(String pinyin) {
+		this.pinyin = pinyin;
 	}
-	public String getValue() {
-		return value;
+	public String getAlp() {
+		return alp;
 	}
-	public void setValue(String value) {
-		this.value = value;
+	public void setAlp(String alp) {
+		this.alp = alp;
 	}
 	
 	

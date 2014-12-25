@@ -8,13 +8,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
-	
+	 //$scope.loginUser.email="apachee@qq.com";
 
      $scope.schools = [];
 	 $scope.question = {};
 	 $scope.programCode = {};
-
-	 
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -26,14 +24,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 //该url无效
     		 alert(data.message);
     	 }else{
-    		 $scope.show = 2;
-    		 $http({
-    	         url: WEBROOT+"/testing/getSchools",
-    	         method: 'POST',
-    	         data: {"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
-    	     }).success(function (data) {
-    	    	 $scope.schools=data.message;
-    	     });
+    		 $scope.show = 1;
     	 }	 
          
      }).error(function(){
@@ -51,9 +42,20 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 //用户名或密码不匹配
 	    		 $scope.errMsg = "用户名或密码不匹配";
 	    	 }else if(data.state == 2){
+	    		 $scope.errMsg = "";
 	    		 //填写用户信息
 	    		 $scope.show = 2;
 	    		 $scope.tuser.tuid = data.message;
+	    		 /*$http({
+	    	         url: WEBROOT+"/testing/getSchools",
+	    	         method: 'GET',
+	    	         data: {"name":'ss',"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
+	    	     }).success(function (data) {
+	    	    	 if(data.state==200)
+	    	    		 $scope.schools=data.message;
+	    	    	 else
+	    	    		 alert(data.message);
+	    	     });*/
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面
 	    		 $scope.tProblems = data.message;
@@ -64,8 +66,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	 console.log("login failed");
 	     })
 	 }
-	 
-	 
+
 	 
 	 //学校字段的自动补全功能
 	 $scope.changeClass = function (options) {

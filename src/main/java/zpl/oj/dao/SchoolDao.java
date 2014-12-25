@@ -11,7 +11,7 @@ public interface SchoolDao {
 	List<School> getAllSchools();
 
 	//根据汉字查找学校
-	@Select("select * from schools where name1 like #{name}")
-	List<School> getSchoolsByName1(String name);
+	@Select("select * from schools where name like concat('%',#{0},'%')")
+	List<School> getSchoolsByName(String name);
 	
 }

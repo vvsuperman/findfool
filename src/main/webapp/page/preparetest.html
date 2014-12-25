@@ -58,7 +58,17 @@
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">学校</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">
+		      <!--<input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">-->
+		      <angucomplete-alt id="schools"
+	              placeholder="学校"
+	              pause="400"
+	              selected-object="tuser.school"
+	              remote-url="/oj/testing/getSchools?email={{email}}&testid={{tid}}&name={{tuser.school}}"
+	              remote-url-data-field="message"
+	              title-field="name"
+	              search-field="name"
+	              match-class="highlight"
+	              input-class="form-control"/>
 		    </div>
 		  </div>
 		  

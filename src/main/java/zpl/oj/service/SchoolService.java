@@ -8,6 +8,6 @@ public interface SchoolService {
 	
 	public List<School> getAllSchools();
 	
-	public List<School> getSchoolsByName1(String name);
+	public List<School> getSchoolsByName(String name);
 	
 }

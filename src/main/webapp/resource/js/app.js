@@ -11,8 +11,7 @@ var OJApp = angular.module('OJApp', [
     'webStorageModule',
     'ngCkeditor',
     'lr.upload',
-    'ui.event', 
-    'ui.autocomplete'
+    'angucomplete-alt'
 ]);
 
 

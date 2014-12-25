@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.dao.InviteDao;
@@ -138,20 +140,51 @@ public class TestingController {
 	}
 
 	/*
-	 * 登陆，判断用户合法性 判断用户是否已经开始做题，返回试题列表 未开始，返回用户信息
+	 * 根据传递的参数获取学校信息
 	 */
 
+	@RequestMapping(value = "/getSchools",method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseBase getSchools(@RequestParam String name,String email,String testid) {
+		ResponseBase rb = new ResponseBase();
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("email", email);
+		params.put("testid", testid);
+		Map map = validateUser(params);
+		Integer tuid = (Integer) map.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
+		List<School> schools=schoolService.getSchoolsByName(name);
+		rb.setState(200);
+		rb.setMessage(schools);
+		return rb;
+	}
+
+	/*
+	 * 根据传递的参数获取学校信息
+	 */
+/*
 	@RequestMapping(value = "/getSchools")
 	@ResponseBody
 	public ResponseBase getSchools(@RequestBody Map<String, Object> params) {
 		ResponseBase rb = new ResponseBase();
+		Map map = validateUser(params);
+		Integer tuid = (Integer) map.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
 		String schoolName = (String) params.get("schoolName");
 		List<School> schools=schoolService.getAllSchools();
 		rb.setState(200);
 		rb.setMessage(schools);
 		return rb;
 	}
-
+*/
 	// 提交用户信息
 	@RequestMapping(value = "/submituserinfo")
 	@ResponseBody

@@ -22,8 +22,8 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
-	public List<School> getSchoolsByName1(String name) {
-		List<School> schools=schoolDao.getSchoolsByName1(name);
+	public List<School> getSchoolsByName(String name) {
+		List<School> schools=schoolDao.getSchoolsByName(name);
 		return schools;
 	}
 
