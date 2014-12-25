@@ -5,7 +5,7 @@
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
-	style="margin-top: 80px">
+	style="margin-top: 70px">
 
 	<div class="panel panel-default black-panel">
 		<div class="panel-heading black-heading">已有试题</div>
@@ -25,15 +25,24 @@
 				    	<span ng-bind="'Q'+($index+1)"></span>
 				    </div>
 					<div class="col-md-4">
-						 <input abstract context={{q.context}}> 
+					
+					   <a href=""
+							ng-click="displayQuestionDetails($index)"
+							ng-if="!isDisplay[$index]">
+							 <input abstract context={{q.context}}> 
+						</a>
+							 <a href=""
+							ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
+							 <input abstract context={{q.context}}> 
+							</a>
 					</div>
 					<div class="col-md-1">
-						<a class="blackFont" href=""
+						<a  href=""
 							ng-click="displayQuestionDetails($index)"
 							ng-if="!isDisplay[$index]">
 							<span class="glyphicon glyphicon-chevron-down"></span>	
 						</a>
-							 <a class="blackFont" href=""
+							 <a  href=""
 							ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
 							<span class="glyphicon glyphicon-chevron-up"></span>
 							</a>

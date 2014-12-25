@@ -1,4 +1,7 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" style="margin-top: 20px">
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+
+
+<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" style="margin-top: 30px">
 <div class="panel default-panel black-panel">
 	<div class="panel-heading">
 	   网站试题
@@ -62,9 +65,9 @@
 			        <tr ng-repeat="q in reciveData.questions">
 			            <td abstract context={{q.context}}></td>
 			            <td>
-			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)">增加</a>
-			                <a class="blackFont" href="" ng-if="isAdded(q.qid)">已添加</a>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
+			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>
+			                <a ng-if="isAdded(q.qid)">已添加</a>
 			            </td>
 			        </tr>
 			        </tbody>
@@ -83,3 +86,8 @@
     <!--<h1>{{active==1}}</h1>-->
 </div>
 </div>
+
+<script src="resource/js/simditor/module.js"></script>
+<script src="resource/js/simditor/hotkeys.js"></script>
+<script src="resource/js/simditor/uploader.js"></script>
+<script src="resource/js/simditor/simditor.js"></script>

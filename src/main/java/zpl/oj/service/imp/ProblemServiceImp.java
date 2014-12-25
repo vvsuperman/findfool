@@ -30,6 +30,7 @@ import zpl.oj.model.responsejson.ResponseSearchResult;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 
 @Service
 public class ProblemServiceImp implements ProblemService{
@@ -262,6 +263,7 @@ public class ProblemServiceImp implements ProblemService{
 		p.setModifydate(new Date());
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
+		p.setProblemSetId(ExamConstant.Set_CUSTOM);   //自定义的试题，set为0
 		User u = userService.getUserById(q.getUser().getUid());
 		problemDao.updateProblemInstance(p);
 		int pid = p.getProblemId();

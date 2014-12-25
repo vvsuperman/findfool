@@ -38,9 +38,9 @@
 			        <tr ng-repeat="q in reciveData.questions">
 			            <td abstract context={{q.context}}></td>
 			            <td>
-			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)">增加</a>
-			                <a class="blackFont" href="" ng-if="isAdded(q.qid)">已添加</a>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
+			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)">/增加</a>
+			                <a  ng-if="isAdded(q.qid)">已添加</a>
 			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
 			            </td>
 			        </tr>

@@ -22,7 +22,6 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	$scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
-        { name: '问答题', data: '3'}
     ];
     $scope.page = 1;
     $scope.keyword = "";
@@ -172,13 +171,13 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
     $scope.queryQuestions(1);
 
 //    $scope.template = $scope.Qtype[0];
-    $scope.GoPage = function (target) {
+    $scope.GoPage = function (data) {
 //        console.log($scope.context);
         $scope.show = 1;
         $scope.keyword = "";
         $scope.tag = "";
         $scope.context = "";
-        $scope.active = target.getAttribute('data');
+        $scope.active = data;
         $scope.reciveData.type = $scope.active;
 //        $scope.newQuestion.tag = "";
         $scope.newQuestion = new QuestionMeta();

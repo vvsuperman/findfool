@@ -14,6 +14,9 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     $scope.showCustom = false;
     $scope.showButton = true;
     
+    $scope.test ={};
+    $scope.test.addAction = true;
+    
     $scope.getTypeName = function(typeName){
     	if(typeName == 1){
     		return "选择题";

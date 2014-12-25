@@ -212,14 +212,20 @@ public class TestingController {
 		String email = (String)params.get("email");
 		Integer tuid = (Integer) map.get("tuid");
 		Invite invite = inviteDao.getInvites(testid, email);
+		//对某一test、用户对发送第一次测试
+		List<TuserProblem> tProblems=null;
+		if(invite.getBegintime().equals("")){
+			tProblems = tuserService.initialProblems(testid,tuid,invite.getIid());
+			
+		}else{//对某一test、
+			tProblems = tuserService.clearProblems(invite.getIid());
+		}
 		Date date = new Date();
 		invite.setBegintime(df.format(date));
 		//建立定时器，到时间后将邀请置为无效
 		new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid(),inviteDao);
 		inviteDao.updateInvite(invite);
 		
-		int inviteId = invite.getIid();
-		List<TuserProblem> tProblems = tuserService.initialProblems(testid,tuid,inviteId);
 		rb.setState(1);
 		rb.setMessage(tProblems);
 		return rb;

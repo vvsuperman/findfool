@@ -72,7 +72,6 @@ public class TuserService {
 				tuserProblem.setScore(problem.getScore());
 				tuserProblemDao.insertTuserProblem(tuserProblem); 
 			}else{
-				tuserProblem.setRightanswer(problem.getRightAnswer());
 				tuserProblem.setType(problem.getType());
 				tuserProblemDao.updateProblemByIds(tuserProblem); 
 			}
@@ -105,6 +104,16 @@ public class TuserService {
 		rtMap.put("programNum", program);
 		
 		return rtMap;
+	}
+
+
+	/*
+	 * 清除试题，将试题的useranswer置空
+	 * */
+	public List<TuserProblem> clearProblems(Integer iid) {
+		// TODO Auto-generated method stub
+		tuserProblemDao.clearProblem(iid);
+		return tuserProblemDao.findProblemByInviteId(iid);
 	}
 	
 
