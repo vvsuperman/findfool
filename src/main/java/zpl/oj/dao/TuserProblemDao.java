@@ -16,7 +16,7 @@ import zpl.oj.model.request.Question;
 public interface TuserProblemDao {
   
   @Insert("INSERT INTO testuser_problem(tuid,problemid,useranswer,rightanswer,type,invite_id)"
-		+ " VALUES( #{tuid}, #{problemid}, #{useranswer}, #{rightanswer},#{type},#{setid},#{inviteId})")
+		+ " VALUES( #{tuid}, #{problemid}, #{useranswer}, #{rightanswer},#{type},#{inviteId})")
   void insertTuserProblem(TuserProblem testuserProblem);
   
 

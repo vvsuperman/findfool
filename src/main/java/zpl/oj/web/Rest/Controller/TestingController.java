@@ -214,12 +214,9 @@ public class TestingController {
 		Invite invite = inviteDao.getInvites(testid, email);
 		//对某一test、用户对发送第一次测试
 		List<TuserProblem> tProblems=null;
-		if(invite.getBegintime().equals("")){
-			tProblems = tuserService.initialProblems(testid,tuid,invite.getIid());
+		tProblems = tuserService.initialProblems(testid,tuid,invite.getIid());
 			
-		}else{//对某一test、
-			tProblems = tuserService.clearProblems(invite.getIid());
-		}
+		
 		Date date = new Date();
 		invite.setBegintime(df.format(date));
 		//建立定时器，到时间后将邀请置为无效
@@ -248,9 +245,9 @@ public class TestingController {
 		ResponseBase rb = new ResponseBase();
 		Map map =  validateUser(params);
 		
-		String msg = (String)map.get("msg");
-		if(msg !=null){
-			rb.setMessage(msg);
+		Integer tuid = (Integer) map.get("tuid");
+		if(tuid ==null){
+			rb.setMessage(map.get("msg"));
 			rb.setState(0);
 			return rb;
 		}
@@ -259,9 +256,6 @@ public class TestingController {
 		if(params.get("problemid")!=null){
 			int problemid = (int)params.get("problemid");
 			String useranswer = (String)params.get("useranswer");
-			String email = (String)params.get("email");
-			int tuid = tuserDao.findTestuserByName(email).getTuid();
-			
 			
 			TuserProblem testuserProblem  = new TuserProblem();
 			testuserProblem.setProblemid(problemid);
@@ -274,10 +268,50 @@ public class TestingController {
 		//取下一道题，对选项排序，确保答案能够匹配上
 		int nowProblmeId = (int)params.get("nowProblemId");
 		Question question = problemService.getProblemById(nowProblmeId);
+		TuserProblem tProblem = tuserProblemDao.findByPidAndUid(tuid, nowProblmeId);
+		question.setUseranswer(tProblem.getUseranswer());
 		MyCompare comp = new MyCompare();  
         // 执行排序  
         Collections.sort(question.getAnswer(),comp); 
         //将正确选项置0
+		for(QuestionTestCase qs:question.getAnswer()){
+			qs.setIsright("");
+		}
+		rb.setState(1);
+		rb.setMessage(question);
+		return rb;
+	}
+	
+	
+	/*
+	 * 参数
+	 *获取一道题
+	 * */
+	@RequestMapping(value = "/fetchProblem")
+	@ResponseBody
+	public ResponseBase fetchQuestion(@RequestBody Map<String,Object> params){
+		ResponseBase rb = new ResponseBase();
+		Map map =  validateUser(params);
+		
+		
+		Integer tuid = (Integer) map.get("tuid");
+		if(tuid ==null){
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
+		
+		//取一道题，对选项排序，确保答案能够匹配上
+		int problmeId = (int)params.get("problemId");
+		Question question = problemService.getProblemById(problmeId);
+		TuserProblem tProblem = tuserProblemDao.findByPidAndUid(tuid, problmeId);
+		question.setUseranswer(tProblem.getUseranswer());
+		
+		MyCompare comp = new MyCompare();  
+        // 执行排序  
+        Collections.sort(question.getAnswer(),comp); 
+        //将正确选项置0
+        question.setRightanswer("");
 		for(QuestionTestCase qs:question.getAnswer()){
 			qs.setIsright("");
 		}

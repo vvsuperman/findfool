@@ -65,14 +65,11 @@ public class TuserService {
 			if(tuserProblem == null){
 				tuserProblem = new TuserProblem();
 				tuserProblem.setInviteId(inviteId);
-				tuserProblem.setRightanswer(problem.getRightAnswer());
 				tuserProblem.setProblemid(problem.getProblemId());
 				tuserProblem.setTuid(tuid);
-				tuserProblem.setType(problem.getType());
-				tuserProblem.setScore(problem.getScore());
 				tuserProblemDao.insertTuserProblem(tuserProblem); 
 			}else{
-				tuserProblem.setType(problem.getType());
+				tuserProblem.setUseranswer("");
 				tuserProblemDao.updateProblemByIds(tuserProblem); 
 			}
 		}

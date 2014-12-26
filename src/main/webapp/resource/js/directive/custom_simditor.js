@@ -39,6 +39,9 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
                 editor.setValue(ngModel.$viewValue);
             };
             
+            elem.click(function(event){
+            	 event.stopPropagation();
+            })
             
             editor.on('valuechanged', function () {
                 $timeout(function () {

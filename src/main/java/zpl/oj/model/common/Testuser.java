@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Testuser {
 
-	private int tuid;
+	private int tuid;    //testuser 的id，总觉得在统计中会有用，先保留
 	private String username;
 	private String email;
 	private String school;

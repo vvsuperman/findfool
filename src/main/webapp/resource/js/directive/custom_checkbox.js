@@ -44,16 +44,13 @@ OJApp.directive('customcheckbox', function() {
 			}
 			
 			
-			
-			
 			elem.children("textarea").click(function(event){
 				event.stopPropagation();
 			})
-			
 			 
 			//若当前是编辑，则可以点击。否则不可编辑
 			 if(attrs.operation == "edit"){
-				 elem.click(function(event){	    	
+				 elem.click(function(event){	
 						 elem.toggleClass(checkBoxChecked);
 						    if(elem.hasClass(checkBoxChecked)){
 					        	elem.css("border-color","#2fe2bf");	
