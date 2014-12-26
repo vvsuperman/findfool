@@ -618,23 +618,24 @@ UNLOCK TABLES;
 -- Table structure for `schools`
 -- ----------------------------
 DROP TABLE IF EXISTS `schools`;
-CREATE TABLE `schools` (
-  `id` int(10) NOT NULL,
-  `code` int(10) NOT NULL COMMENT '学校代码',
-  `name1` varchar(255) NOT NULL COMMENT '汉字名称',
-  `name2` varchar(255) DEFAULT NULL COMMENT '拼音名称',
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `schools`
+(
+   `id`       int(10)  NOT NULL AUTO_INCREMENT,
+   `code`     int(10) not null comment '学校代码',
+   `name`     varchar(255) not null comment '汉字名称',
+   `pinyin`   varchar(255) default null comment '拼音名称',
+   `alp`      varchar(255) not null,
+   primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `schools` WRITE;
 -- ----------------------------
 -- Records of schools
 -- ----------------------------
-INSERT INTO `schools` VALUES ('1', '10001', '复旦大学', 'fudandaxue', '复旦大学');
-INSERT INTO `schools` VALUES ('2', '10002', '同济大学', 'tongjidaxue', '同济大学');
-INSERT INTO `schools` VALUES ('3', '20001', '清华大学', 'qinghuadaxue', '清华大学');
-INSERT INTO `schools` VALUES ('4', '20002', '北京大学', 'beijingdaxue', '北京大学');
-INSERT INTO `schools` VALUES ('5', '30001', '浙江大学', 'zhejiangdaxue', '浙江大学');
-INSERT INTO `schools` VALUES ('6', '40001', '南京大学', 'nanjingdaxue', '南京大学');
+INSERT INTO `schools` VALUES ('1', '10001', '复旦大学', 'fudandaxue', 'fddx');
+INSERT INTO `schools` VALUES ('2', '10002', '同济大学', 'tongjidaxue', 'tjdx');
+INSERT INTO `schools` VALUES ('3', '20001', '清华大学', 'qinghuadaxue', 'qhdx');
+INSERT INTO `schools` VALUES ('4', '20002', '北京大学', 'beijingdaxue', 'bjdx');
+INSERT INTO `schools` VALUES ('5', '30001', '浙江大学', 'zhejiangdaxue', 'zjdx');
+INSERT INTO `schools` VALUES ('6', '40001', '南京大学', 'nanjingdaxue', 'njdx');
 UNLOCK TABLES;

@@ -2,9 +2,13 @@
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	
-	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
+	/* var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
-	 $scope.tid = param[1];
+	 $scope.tid = param[1];*/
+	
+	 $scope.email ="693605668@qq.com";
+	 $scope.tid = 1;
+	 $scope.show = 2;
 	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
@@ -14,7 +18,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.question = {};
 	 $scope.programCode = {};
 	 //检查该url是否合法
-	 $http({
+/*	 $http({
          url: WEBROOT+"/testing/checkurl",
          method: 'POST',
          data: {"email":$scope.email, "testid": $scope.tid}
@@ -30,7 +34,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }).error(function(){
     	 console.log("get data failed");
      })
-     
+*/     
      //登陆
 	 $scope.login = function(){
 		 $http({
