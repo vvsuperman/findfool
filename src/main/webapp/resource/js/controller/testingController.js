@@ -1,12 +1,12 @@
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	
-	/* var param = strDec($routeParams.url, "1", "2", "3").split("|");
+	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
 	 $scope.tid = param[1];
 	 $scope.tuser = {};
-	 $scope.loginUser={};*/
-	
+	 $scope.loginUser={};
+/*	
 	 //测试数据
 	 $scope.tuser ={};
 	 $scope.tuser.tuid=1;
@@ -15,13 +15,13 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.email ="693605668@qq.com";
 	 $scope.tid = "1";
 	 $scope.testid =1;
-	
+*/	
 	 
 	 $scope.question = {};
 	 $scope.programCode = {};
 	 
 	 //检查该url是否合法
-/*	 $http({
+	 $http({
          url: WEBROOT+"/testing/checkurl",
          method: 'POST',
          data: {"email":$scope.email, "testid": $scope.tid}
@@ -37,7 +37,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }).error(function(){
     	 console.log("get data failed");
      })
- */    
+     
      //登陆
 	 $scope.login = function(){
 		 $http({
@@ -97,7 +97,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	     }).success(function (data) {
 	    	if(data.state!=0){
 	    		$scope.tProblems = data.message;
-		    	$scope.submitAndFetch($scope.tProblems[1]);
+		    	$scope.submitAndFetch($scope.tProblems[0]);
 		    	$scope.show =4;
 	    	}else{
 	    		alert(data.message);
@@ -109,7 +109,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 
 	 }
      /*测试*/
-     $scope.startTest();
+  //   $scope.startTest();
      
     	 
     	 
@@ -195,7 +195,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 }else{
     		 alert("已到最后一题，请仔细检查");
     	 }
-    	 
      }
      
      /*

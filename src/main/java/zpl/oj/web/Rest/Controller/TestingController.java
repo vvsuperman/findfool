@@ -140,20 +140,18 @@ public class TestingController {
 		}else{
 			//判读用户是否已经开始做题，若已开始，直接给出题目列表
 			Invite invite = inviteDao.getInvites(testid, email);
-			String nowDate = df.format(new Date());
 			//逻辑有问题
-		/*	if(invite.getBegintime()!=null){
+			if(invite.getBegintime()!=null||invite.getBegintime().equals("")==false){
 					//用户已开始做题，直接返回tuserproblem的list
 					List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
 					rb.setState(1);
 					rb.setMessage(tuserProblems);
 					return rb;
-			}else{  */
+			}else{  
 			//未开始
 				rb.setState(2);
 				return rb;
-		//	}
-	//	}
+			}
 	}
 }
 	

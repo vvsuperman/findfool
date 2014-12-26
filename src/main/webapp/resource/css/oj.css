@@ -84,7 +84,8 @@ ul.navbar-nav li a:active{
 }
 
 .simditor-body{
-	padding-bottom: 15px !important;
+	padding-bottom: 5px !important;
+	font-size: 14px !important;
 }
 
 .simditor .simditor-toolbar > ul > li > .toolbar-item{
