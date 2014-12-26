@@ -61,13 +61,14 @@
 		      <!--<input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">-->
 		      <angucomplete-alt id="schools"
 	              placeholder="学校"
-	              pause="1000"
+	              minlength="1"
+	              pause="400"
 	              selected-object="tuser.school"
 	              remote-url="/oj/testing/getSchools?email={{email}}&testid={{tid}}&name={{tuser.school}}"
 	              remote-url-data-field="message"
 	              title-field="name"
 	              search-field="name"
-	              match-class="highlight"
+	              match-class="bg-info"
 	              input-class="form-control"/>
 		    </div>
 		  </div>

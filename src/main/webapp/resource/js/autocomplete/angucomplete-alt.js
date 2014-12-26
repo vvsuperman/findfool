@@ -192,9 +192,13 @@ angular.module('angucomplete-alt', [] )
         var result, matches, re = new RegExp(str, 'i');
         if (!target) { return; }
         matches = target.match(re);
+        console.log("target.......",target);
         if (matches) {
-          result = target.replace(re,
+          result = 
+        	  //'<span class="'+ scope.matchClass +'">'+target +'</span>'
+        	  target.replace(re,
               '<span class="'+ scope.matchClass +'">'+ matches[0] +'</span>');
+          
         }
         else {
           result = target;
@@ -221,6 +225,7 @@ angular.module('angucomplete-alt', [] )
         }
         else if (which === KEY_DW) {
           event.preventDefault();
+          console.log("searchstr.........",scope.searchStr,scope.searchStr.length);
           if (!scope.showDropdown && scope.searchStr && scope.searchStr.length >= minlength) {
             initResults();
             scope.searching = true;
