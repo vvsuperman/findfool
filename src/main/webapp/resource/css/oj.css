@@ -34,10 +34,11 @@ body {
 }
 
 .logohead{
-	 background: url("../static/large-background.png") no-repeat scroll center top;
-  	 height: 550px; 
-  	 margin-top: 70px;
+	 background: url("../static/gogogo.jpg") no-repeat scroll center top;
+  	 height: 600px; 
+  	 margin-top: 0px;
   	 background-size:100% 100%;	
+  	 color:#fff;
 }
 
 .logohead img{

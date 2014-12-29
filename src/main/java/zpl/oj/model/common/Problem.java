@@ -107,6 +107,21 @@ public class Problem implements Serializable {
 	 * */
 	private String explain;
 	
+	/*
+	 * 难度
+	 * */
+	private String level;
+	
+	
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 	public String getExplain() {
 		return explain;
 	}
