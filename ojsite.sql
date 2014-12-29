@@ -639,3 +639,24 @@ INSERT INTO `schools` VALUES ('4', '20002', '北京大学', 'beijingdaxue', 'bjd
 INSERT INTO `schools` VALUES ('5', '30001', '浙江大学', 'zhejiangdaxue', 'zjdx');
 INSERT INTO `schools` VALUES ('6', '40001', '南京大学', 'nanjingdaxue', 'njdx');
 UNLOCK TABLES;
+
+-- ----------------------------
+-- Table structure for `verify_question`
+-- ----------------------------
+DROP TABLE IF EXISTS `verify_question`;
+CREATE TABLE `verify_question` (
+  `id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL COMMENT '验证问题',
+  `answer` varchar(255) NOT NULL COMMENT '验证答案',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `verify_question` WRITE;
+-- ----------------------------
+-- Records of verify_question
+-- ----------------------------
+INSERT INTO `verify_question` VALUES ('1', '本站网址是？', 'www.findfool.com');
+INSERT INTO `verify_question` VALUES ('2', '本站中文名称是？', '余悦');
+INSERT INTO `verify_question` VALUES ('3', '圣诞节是几月几日？', '12.25');
+INSERT INTO `verify_question` VALUES ('4', '中国的英文名称是？', 'china');
+UNLOCK TABLES;
