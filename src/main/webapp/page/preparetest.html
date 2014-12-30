@@ -61,7 +61,7 @@
 		      <!--<input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">-->
 		      <angucomplete-alt id="schools"
 	              placeholder="学校"
-	              minlength="1"
+	              minlength="2"
 	              pause="400"
 	              selected-object="tuser.school"
 	              remote-url="/oj/testing/getSchools?email={{email}}&testid={{tid}}&name={{tuser.school}}"
