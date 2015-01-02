@@ -195,7 +195,6 @@ public class QuizController {
 			// 发送邀请
 			//by fangwei 重写发送邀请逻辑，新建testusr表
 			for (InviteUser tu : request.getInvite()) {
-				
 				//由inviteuser生成testuser
 
 				// 生成invite、testuser

@@ -1,3 +1,104 @@
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+  overflow-x:hidden;
+}
+
+.navbar-header{
+	margin-left: 50px!important;
+}
+
+.black-outline{
+	background-color: #374652 ;
+}
+
+.btn-transparent-outline {
+  /*color: #563d7c;*/
+  color: #2fe2bf;
+  background-color: transparent;
+/*   border-color: #563d7c; */
+  border-color: #2fe2bf;
+  border-width: 1px;
+  border-style: solid;
+ 
+}
+.btn-transparent-outline:hover,
+.btn-transparent-outline:focus,
+.btn-transparent-outline:active {
+  color: #fff;
+  /*background-color: #563d7c;
+  border-color: #563d7c;*/
+  background-color: #2fe2bf!important;
+  border-color: #2fe2bf;
+}
+
+.logohead{
+	 background: url("../static/gogogo.jpg") no-repeat scroll center top;
+  	 height: 600px; 
+  	 margin-top: 0px;
+  	 background-size:100% 100%;	
+  	 color:#fff;
+}
+
+.logohead img{
+	height:540px;
+}
+
+.mainimg{
+	position:absolute;
+	margin-top:10px;
+	
+}
+
+.logoFont{
+	font-size:24px;
+}
+
+.navbar{
+	border-radius:0px!important;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-size:20px;
+}
+
+ul.navbar-nav li a{
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+ul.navbar-nav li a:focus,
+ul.navbar-nav li a:hover,
+ul.navbar-nav li a:active{
+	color: #ffffff!important;
+	background-color: #2fe2bf;
+	
+}
+
+.simditor{
+	border-radius :3px;
+}
+
+.simditor-wrapper{
+	border-radius :3px;
+}
+
+.simditor-body{
+	padding-bottom: 5px !important;
+	font-size: 14px !important;
+}
+
+.simditor .simditor-toolbar > ul > li > .toolbar-item{
+	width: 40px !important;
+	height: 40px !important;
+}
+
+.simditor .simditor-toolbar > ul > li > .toolbar-item span.fa {
+	line-height: 13px;
+	font-size: 13px !important;
+}
+
 .question-list{
 	border-top:1px solid #CCCCCC;
 /*	border-style:solid;*/
@@ -41,6 +142,10 @@
 	color:#5a5a5a;
 }
 
+.greenFont{
+	color:#2fe2bf !important;
+}
+
 .nav-pills > li.active > a{
 	background-color: #2fe2bf;
 }
@@ -55,7 +160,7 @@
 }
 
 .customBar{
-	margin-top: 38px;
+	margin-top: 60px;
 	margin-left: -30px;
 	padding-left: -30px;
 	
@@ -92,6 +197,9 @@
     background: #374652;
 }
 
+.navbar-transparent{
+	background: transparent;
+}
 
 
 #landing .eyemagnet {
@@ -244,13 +352,13 @@ input.ng-valid {
     color: #333;
     font-size: 14px;
 }
-
+/*尼玛，这么底层的标签也能定义，艹
 ul li {
     list-style-image: none;
     list-style-position: outside;
     list-style-type: upper-alpha;
     /*padding: 10px;*/
-}
+/*}*/
 
 .bs-docs-sidebar.affix {
     position: static

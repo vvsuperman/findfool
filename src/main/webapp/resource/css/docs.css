@@ -43,22 +43,7 @@ body {
   position: relative; /* For scrollyspy */
  /* padding-top: 50px; /* Account for fixed navbar */
 }
-.logohead{
-	 background: url("../static/large-background.png") no-repeat scroll center top;
-  	 height: 550px; 
-  	 margin-top: -30px;
-  	 background-size:100% 100%;	
-}
 
-.logohead img{
-	height:540px;
-}
-
-.mainimg{
-	position:absolute;
-	margin-top:10px;
-	
-}
 
 
 /* Keep code small in tables on account of limited space */
@@ -83,7 +68,7 @@ body {
   color: #fff;
   /*background-color: #563d7c;
   border-color: #563d7c;*/
-  background-color: #2fe2bf;
+  background-color: #2fe2bf!important;
   border-color: #2fe2bf;
 }
 
