@@ -109,9 +109,9 @@ OJApp.controller('mainController',function($scope, $http, Data) {
         }
     };
     $scope.addhr = function () {
-        if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.RVerification) {
+        if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.verifyAns) {
             if ($scope.Rpwd == $scope.Rrepwd) {
-                if ($scope.RVerification = $scope.Verification) {
+                if ($scope.verifyAns == $scope.verifyQtn.answer) {
                     $http({
                         url: WEBROOT+"/user/add/hr",
                         method: 'POST',
@@ -145,8 +145,8 @@ OJApp.controller('mainController',function($scope, $http, Data) {
                         }
                     );
                 } else {
-                    alert("验证码错误");
-                    $scope.createCode();
+                    alert("验证问题答案错误");
+                    //$scope.createCode();
                 }
             } else {
                 alert("密码不相同")
@@ -175,7 +175,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
             }
         );
     };
-    $scope.createCode = function () {
+    /*$scope.createCode = function () {
         code = "";
         var codeLength = 4;//验证码的长度
         var checkCode = document.getElementById("code");
@@ -187,7 +187,27 @@ OJApp.controller('mainController',function($scope, $http, Data) {
         }
         $scope.Verification = code;//把code值赋给验证码
     };
-    $scope.createCode();
+    $scope.createCode();*/
+    $scope.changeQuestion = function(){
+    	$http({
+            url: WEBROOT+"/user/getVerifyQtn",
+            method: 'POST'
+        }).success(function (data) {
+            if (data.state == 200) {
+            	$scope.verifyQtn=data.message;
+            } else {
+            	alert("获取问题出错哦！");
+            }
+        }).error(function () {
+                alert("网络错误");
+                //window.location.reload(true);
+            }
+        );
+    }
+    $scope.changeQuestion();
+    $scope.Remail="zz@qq.com";
+    $scope.Rpwd="111111";
+    $scope.Rrepwd="111111";
     $scope.show = 1;
     $scope.btn = function () {
         $scope.show = -($scope.show - 1);

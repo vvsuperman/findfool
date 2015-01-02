@@ -1,27 +1,27 @@
-OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce) {
+'use strict';
+OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
+
 	 $scope.tid = param[1];
+	/*
+	 $scope.email ="693605668@qq.com";
+	 $scope.testid =1;
+	 $scope.tid = 1;
+	 $scope.show = 2;
+	 */
 	 $scope.tuser = {};
 	 $scope.loginUser={};
-/*	
-	 //测试数据
-	 $scope.tuser ={};
-	 $scope.tuser.tuid=1;
-	 $scope.tuser.email="693605668@qq.com";
-	
-	 $scope.email ="693605668@qq.com";
-	 $scope.tid = "1";
-	 $scope.testid =1;
-*/	
-	 
+	 //$scope.loginUser.email="apachee@qq.com";
+
+     $scope.schools = [];
 	 $scope.question = {};
 	 $scope.programCode = {};
 	 
 	 //检查该url是否合法
-	 $http({
+/*	 $http({
          url: WEBROOT+"/testing/checkurl",
          method: 'POST',
          data: {"email":$scope.email, "testid": $scope.tid}
@@ -37,7 +37,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }).error(function(){
     	 console.log("get data failed");
      })
-     
+*/     
      //登陆
 	 $scope.login = function(){
 		 $http({
@@ -49,9 +49,20 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 //用户名或密码不匹配
 	    		 $scope.errMsg = "用户名或密码不匹配";
 	    	 }else if(data.state == 2){
+	    		 $scope.errMsg = "";
 	    		 //填写用户信息
 	    		 $scope.show = 2;
 	    		 $scope.tuser.tuid = data.message;
+	    		 /*$http({
+	    	         url: WEBROOT+"/testing/getSchools",
+	    	         method: 'GET',
+	    	         data: {"name":'ss',"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
+	    	     }).success(function (data) {
+	    	    	 if(data.state==200)
+	    	    		 $scope.schools=data.message;
+	    	    	 else
+	    	    		 alert(data.message);
+	    	     });*/
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面
 	    		 $scope.tProblems = data.message;
@@ -62,7 +73,33 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	 console.log("login failed");
 	     })
 	 }
-	
+
+	 
+	 //学校字段的自动补全功能
+	 $scope.changeClass = function (options) {
+         var widget = options.methods.widget();
+         // remove default class, use bootstrap style
+         widget.removeClass('ui-menu ui-corner-all ui-widget-content').addClass('dropdown-menu');
+     };
+
+		$scope.schoolOption = {
+		    options: {
+		        html: true,
+		        minLength: 1,
+		        onlySelect: true,
+		        outHeight: 20,
+		        source: function (request, response) {
+		            //data = $scope.myOption.methods.filter(data, request.term);
+		            if (!$scope.schools.length) {
+		            	$scope.schools.push({
+		                    label: '未发现',
+		                    value: null
+		                });
+		            }		            
+		            response($scope.schools);
+		        }
+		    }
+		};
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){

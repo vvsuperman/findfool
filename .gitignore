@@ -5,7 +5,7 @@ target/*
 *.war
 
 *.class
-
+*.DS_Store
 oj.iml
 
 .idea/*

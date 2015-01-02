@@ -187,13 +187,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-4 col-md-offset-1">
-                            <input type="text" class="form-control" id="RVerification" placeholder="请输入右框中的数字"
-                                   ng-model="RVerification">
-                                    <a href="" ng-click="createCode()">
-                                {{Verification}}
-                            </a></div>
+                            <a href="" ng-click="changeQuestion()">
+                                {{verifyQtn.question}}
+                            </a>                            
+                            <input type="text" class="form-control" id="RVerification" placeholder="请输入问题的答案"
+                                   ng-model="verifyAns">
                         </div>
-                        <div class="col-md-4 col-md-offset-1">
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
                            
                     </div>
                 </form>

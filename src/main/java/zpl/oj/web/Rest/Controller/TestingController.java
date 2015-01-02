@@ -1,7 +1,6 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -21,34 +20,20 @@ import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
-import zpl.oj.model.common.Quiz;
-import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
-import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
-import zpl.oj.model.request.User;
-import zpl.oj.model.requestjson.RequestTestDetail;
-import zpl.oj.model.requestjson.RequestTestInviteUser;
-import zpl.oj.model.requestjson.RequestTestMeta;
-import zpl.oj.model.requestjson.RequestTestSubmit;
-import zpl.oj.model.requestjson.RequestUser;
 import zpl.oj.model.responsejson.ResponseBase;
-import zpl.oj.model.responsejson.ResponseMessage;
-import zpl.oj.model.responsejson.ResponseQuizDetail;
-import zpl.oj.model.responsejson.ResponseQuizs;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
+import zpl.oj.service.SchoolService;
 import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
-import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.des.DESService;
-import zpl.oj.util.mail.MailSenderInfo;
-import zpl.oj.util.mail.SimpleMailSender;
-import zpl.oj.util.randomCode.RandomCode;
 import zpl.oj.util.timer.InviteReminder;
 
 @Controller
@@ -63,9 +48,11 @@ public class TestingController {
 	private InviteService inviteService;
 	@Autowired
 	private ProblemService problemService;
-	
+	@Autowired
+	private SchoolService schoolService;
+
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	
+
 	@Autowired
 	private InviteDao inviteDao;
 	@Autowired
@@ -76,23 +63,23 @@ public class TestingController {
 	private TestuserDao tuserDao;
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
-	
-	public Map validateUser(Map params){
-		Map rtMap = new HashMap<String,Object>();
-		//需做合法性判断，异常等等
-		String email= (String) params.get("email");
-		int testid = Integer.parseInt((String)params.get("testid"));
+
+	public Map validateUser(Map params) {
+		Map rtMap = new HashMap<String, Object>();
+		// 需做合法性判断，异常等等
+		String email = (String) params.get("email");
+		int testid = Integer.parseInt((String) params.get("testid"));
 		Invite invite = inviteDao.getInvites(testid, email);
-		
-		//用户邀请不合法
-		if(invite==null){
+
+		// 用户邀请不合法
+		if (invite == null) {
 			rtMap.put("msg", "非法用户");
 			return rtMap;
-		}else if(invite.getState() == ExamConstant.INVITE_FINISH){
+		} else if (invite.getState() == ExamConstant.INVITE_FINISH) {
 			rtMap.put("msg", "试题已截至");
 			return rtMap;
 		}
-		
+
 		int tuid = invite.getUid();
 		rtMap.put("tuid", tuid);
 		return rtMap;
@@ -153,42 +140,67 @@ public class TestingController {
 				return rb;
 			}
 	}
-}
-	
+	}
+	/*
+	 * 根据传递的参数获取学校信息
+	 */
 
-	//提交用户信息
-	@RequestMapping(value = "/submituserinfo")
+	@RequestMapping(value = "/getSchools",method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseBase submitUserInfo(@RequestBody Map<String, Object> params){
+	public ResponseBase getSchools(@RequestParam String name,String email,String testid) {
 		ResponseBase rb = new ResponseBase();
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("email", email);
+		params.put("testid", testid);
 		Map map = validateUser(params);
 		Integer tuid = (Integer) map.get("tuid");
-		if(tuid ==null){
+		if (tuid == null) {
 			rb.setMessage(map.get("msg"));
 			rb.setState(0);
 			return rb;
 		}
-		int testid = Integer.parseInt((String)params.get("testid"));
-		String email = (String)params.get("email");
+		List<School> schools=schoolService.getSchoolsByName(name);
+		rb.setState(200);
+		rb.setMessage(schools);
+		return rb;
+	}
+
+	/*
+	 * 根据传递的参数获取学校信息
+	 */
+
+	// 提交用户信息
+	@RequestMapping(value = "/submituserinfo")
+	@ResponseBody
+	public ResponseBase submitUserInfo(@RequestBody Map<String, Object> params) {
+		ResponseBase rb = new ResponseBase();
+		Map map = validateUser(params);
+		Integer tuid = (Integer) map.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
+		int testid = Integer.parseInt((String) params.get("testid"));
+		String email = (String) params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
-		
-		
+
 		Map userMap = (Map) params.get("tuser");
 		Testuser tuser = tuserDao.findTestuserByName(email);
-		tuser.setUsername((String)userMap.get("username"));
-		tuser.setSchool((String)userMap.get("school"));
-		tuser.setBlog((String)userMap.get("blog"));
-		tuser.setTel((String)userMap.get("tel"));
+		tuser.setUsername((String) userMap.get("username"));
+		tuser.setSchool((String) userMap.get("school"));
+		tuser.setBlog((String) userMap.get("blog"));
+		tuser.setTel((String) userMap.get("tel"));
 		tuser.setTuid(tuid);
 		tuserDao.updateTestuserById(tuser);
-		//计算该试题的信息，选择题有X道，简答题有X道,时间为多长，等等
+		// 计算该试题的信息，选择题有X道，简答题有X道,时间为多长，等等
 		Map rtMap = tuserService.getTestInfo(testid);
 		rtMap.put("duration", invite.getDuration());
 		rb.setMessage(rtMap);
 		rb.setState(1);
 		return rb;
 	}
-	
+
 	/*
 	 *开始做题，初始化试题列表
 	 *
@@ -239,10 +251,10 @@ public class TestingController {
 	 * */
 	@RequestMapping(value = "/submit")
 	@ResponseBody
-	public ResponseBase submit(@RequestBody Map<String,Object> params){
+	public ResponseBase submit(@RequestBody Map<String, Object> params) {
 		ResponseBase rb = new ResponseBase();
-		Map map =  validateUser(params);
-		
+		Map map = validateUser(params);
+
 		Integer tuid = (Integer) map.get("tuid");
 		if(tuid ==null){
 			rb.setMessage(map.get("msg"));
@@ -339,18 +351,18 @@ public class TestingController {
 	 * */
 	@RequestMapping(value = "/finishtest")
 	@ResponseBody
-	public ResponseBase finishTest(@RequestBody Map<String,Object> params){
+	public ResponseBase finishTest(@RequestBody Map<String, Object> params) {
 		ResponseBase rb = new ResponseBase();
-		
-		String email= (String) params.get("email");
-		int testid = Integer.parseInt((String)params.get("testid"));
+
+		String email = (String) params.get("email");
+		int testid = Integer.parseInt((String) params.get("testid"));
 		Invite invite = inviteDao.getInvites(testid, email);
-		//用户邀请不合法
-		if(invite==null){
+		// 用户邀请不合法
+		if (invite == null) {
 			rb.setState(0);
 			rb.setMessage("非法访问");
 			return rb;
-		}else if(invite.getState() == 0){
+		} else if (invite.getState() == 0) {
 			rb.setState(0);
 			rb.setMessage("试题已截至");
 			return rb;

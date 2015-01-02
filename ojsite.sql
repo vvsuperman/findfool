@@ -613,3 +613,50 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2014-12-18 22:43:55
+
+-- ----------------------------
+-- Table structure for `schools`
+-- ----------------------------
+DROP TABLE IF EXISTS `schools`;
+CREATE TABLE `schools`
+(
+   `id`       int(10)  NOT NULL AUTO_INCREMENT,
+   `code`     int(10) not null comment '学校代码',
+   `name`     varchar(255) not null comment '汉字名称',
+   `pinyin`   varchar(255) default null comment '拼音名称',
+   `alp`      varchar(255) not null,
+   primary key (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `schools` WRITE;
+-- ----------------------------
+-- Records of schools
+-- ----------------------------
+INSERT INTO `schools` VALUES ('1', '10001', '复旦大学', 'fudandaxue', 'fddx');
+INSERT INTO `schools` VALUES ('2', '10002', '同济大学', 'tongjidaxue', 'tjdx');
+INSERT INTO `schools` VALUES ('3', '20001', '清华大学', 'qinghuadaxue', 'qhdx');
+INSERT INTO `schools` VALUES ('4', '20002', '北京大学', 'beijingdaxue', 'bjdx');
+INSERT INTO `schools` VALUES ('5', '30001', '浙江大学', 'zhejiangdaxue', 'zjdx');
+INSERT INTO `schools` VALUES ('6', '40001', '南京大学', 'nanjingdaxue', 'njdx');
+UNLOCK TABLES;
+
+-- ----------------------------
+-- Table structure for `verify_question`
+-- ----------------------------
+DROP TABLE IF EXISTS `verify_question`;
+CREATE TABLE `verify_question` (
+  `id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL COMMENT '验证问题',
+  `answer` varchar(255) NOT NULL COMMENT '验证答案',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `verify_question` WRITE;
+-- ----------------------------
+-- Records of verify_question
+-- ----------------------------
+INSERT INTO `verify_question` VALUES ('1', '本站网址是？', 'www.findfool.com');
+INSERT INTO `verify_question` VALUES ('2', '本站中文名称是？', '余悦');
+INSERT INTO `verify_question` VALUES ('3', '圣诞节是几月几日？', '12.25');
+INSERT INTO `verify_question` VALUES ('4', '中国的英文名称是？', 'china');
+UNLOCK TABLES;

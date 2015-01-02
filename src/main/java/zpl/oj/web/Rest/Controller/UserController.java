@@ -1,11 +1,14 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.model.common.VerifyQuestion;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestChangeUserInfo;
 import zpl.oj.model.requestjson.RequestUser;
@@ -13,6 +16,7 @@ import zpl.oj.model.requestjson.RequestUserLogin;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.responsejson.ResponseUserInfo;
+import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.mail.MailSenderInfo;
@@ -26,7 +30,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private SecurityService securityService;
-	
+	@Autowired
+	private VerifyQuestionService verifyQuestionService;
 
 	
 	@RequestMapping(value="/confirm")
@@ -126,6 +131,20 @@ public class UserController {
 		return rb;
 	}
 	
+	@RequestMapping(value="/getVerifyQtn")
+	@ResponseBody
+	public ResponseBase getVerifyQtn(){
+		ResponseBase rb = new ResponseBase();
+		int qtnCount=verifyQuestionService.getVerifyQuestionCount();
+		Random rand=new Random();
+		rand.setSeed(System.currentTimeMillis());
+		int index=rand.nextInt(qtnCount);
+		//获取第index个问题
+		VerifyQuestion vq=verifyQuestionService.getVerifyQuestion(index);
+		rb.setState(200);
+		rb.setMessage(vq);
+		return rb;
+	}
 	
 	//查询用户的基本信息
 	@RequestMapping(value="/setting/query")
