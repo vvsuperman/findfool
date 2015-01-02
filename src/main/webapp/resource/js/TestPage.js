@@ -10,7 +10,29 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
     $scope.addtest ={};
     $scope.addtest.user ={};
     $scope.addtest.testtime=70;
-   
+    $scope.panel={};
+    $scope.panel.isShow=true;
+    $scope.panel.isGuide=true;
+    $scope.panel.body=0;
+    $scope.panel.isBack=false;
+    $scope.panel.trace=[];
+    $scope.test={};
+    $scope.test.isNewTest=false;
+    
+    $scope.goNext = function (id) {	
+    	$scope.panel.trace.push($scope.panel.body);	
+    	$scope.panel.body=id;
+    	$scope.panel.isBack=true;
+    }
+    
+    $scope.goBack = function () {    	
+		var id= $scope.panel.trace.pop();
+		$scope.panel.body=id;
+    	if($scope.panel.trace.length!=0)
+    		$scope.panel.isBack=true;
+    	else
+    		$scope.panel.isBack=false;
+    }
     
     $scope.tshow = function () {
         $http({

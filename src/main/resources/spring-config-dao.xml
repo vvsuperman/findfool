@@ -14,8 +14,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<!-- 这个是一个数据源，专门连接数据库的 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-			<property name="url" value="jdbc:mysql://127.0.0.1:3306/ojsite?useUnicode=true&amp;characterEncoding=utf8"></property>
-			<property name="username" value="root"></property>
+			<property name="url" value="jdbc:mysql://121.40.206.117:3306/ojsite?useUnicode=true&amp;characterEncoding=utf8"></property>
+			<property name="username" value="findfool"></property>
+			<property name="password" value="findfoolFw123456"></property>
 	</bean>
 		
 	<!--by fangwei  dbcp有bug，换成c3p0的 -->
