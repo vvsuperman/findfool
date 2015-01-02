@@ -8,6 +8,8 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     $scope.leftBar = 'page/leftBar.html';
     console.log('testDetail');
     $scope.tid = $routeParams.tid;
+    
+    $scope.showContain =1;
     Data.setTid($scope.tid);
     
     $scope.showDefault = false;

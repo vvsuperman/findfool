@@ -1,17 +1,18 @@
 'use strict';
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
-	
+	/*
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
-
 	 $scope.tid = param[1];
-	/*
+	*/ 
+	 
+	
 	 $scope.email ="693605668@qq.com";
 	 $scope.testid =1;
 	 $scope.tid = 1;
 	 $scope.show = 2;
-	 */
+	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
 	 //$scope.loginUser.email="apachee@qq.com";
@@ -146,7 +147,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 
 	 }
      /*测试*/
-  //   $scope.startTest();
+     $scope.startTest();
      
     	 
     	 

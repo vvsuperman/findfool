@@ -8,8 +8,12 @@
 	style="margin-top: 70px">
 
 	<div class="panel panel-default black-panel">
-		<div class="panel-heading black-heading">已有试题</div>
-
+		<div class="panel-heading black-heading">
+		   已有试题
+		   <a href=""><span class="glyphicon glyphicon-chevron-up pull-right"  ng-if="showContain==2" ng-click="showContain=1"></span></a>	
+		   <a href=""><span class="glyphicon glyphicon-chevron-down pull-right" ng-if="showContain==1" ng-click="showContain=2"></span></a>	
+		</div>
+			
 		<div>
 			<div class="row" style="padding-top:15px;padding-bottom:15px">
 				<div class="col-md-1"></div>
@@ -93,7 +97,7 @@
 	ng-if="panel.show=='default'"></div>
 <div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
 	ng-if="panel.show=='custom'"></div>
-
+	
 <script src="resource/js/simditor/module.js"></script>
 <script src="resource/js/simditor/hotkeys.js"></script>
 <script src="resource/js/simditor/uploader.js"></script>
