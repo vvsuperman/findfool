@@ -25,5 +25,8 @@ public class ExamConstant{
 	public static final String QUESTION_TYPE_OPTION = "option";
 	public static final String QUESTION_TYPE_ESSAY ="essay";
 	public static final String QUESTION_TYPE_PROGRAM ="pragram";
+	
+	//自定义题库，不列入统计
+	public static final int Set_CUSTOM =0;
 }	
 

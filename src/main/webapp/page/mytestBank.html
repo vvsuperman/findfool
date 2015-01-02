@@ -38,9 +38,9 @@
 			        <tr ng-repeat="q in reciveData.questions">
 			            <td abstract context={{q.context}}></td>
 			            <td>
-			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看/</a>
-			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)">增加</a>
-			                <a class="blackFont" href="" ng-if="isAdded(q.qid)">已添加</a>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
+			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)">/增加</a>
+			                <a  ng-if="isAdded(q.qid)">已添加</a>
 			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
 			            </td>
 			        </tr>
@@ -62,7 +62,7 @@
     <!--<h1>{{active==1}}</h1>-->
     <div ng-class="{0:'', 1: 'hedden'}[show]">  
     
-        <div class="col-md-8" ng-if="active==1">
+        <div class="col-md-10" ng-if="active==1">
             
             <div class="row" style="margin-top: 30px;margin-left: 50px">
                		<p>题干</p>
@@ -70,7 +70,7 @@
 		                <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
 		                          <!--ng-model="newQuestion.context"></textarea>-->
 		                <!--<div ng-include src="'mdeditor.html'" ></div>-->
-						<textarea ckEditor ng-model="newQuestion.context"></textarea>
+						<textarea simditor minheight="60px" ng-model="newQuestion.context"></textarea>
 						<!-- textarea ng-model="newQuestion.context"></textarea-->
 		                <div class="hedden" id="context" >{{context}}</div>
 		                <div class="row">
@@ -89,7 +89,7 @@
 		             	
 		                <ul style="margin-top: 30px;list-style-type:none">
 		                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-		                        <textarea ckeditor minheight="80" width="100%" toolbar="none" operation="edit" ng-model="ans.text"></textarea>
+		                        <textarea simditor minheight="30px" ng-model="ans.text"></textarea>
 		                       
 		                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
 		                           ng-click="removeOne($index)">删除</a>

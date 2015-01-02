@@ -106,52 +106,40 @@ public class ReportService {
 	   ];
 	 * */
 	public Map getDimension(Invite invite){
-		List<Problem> problems = problemDao.getProblemByTestid(invite.getTestid());
 		List<TuserProblem> tProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
-		//排序，便于比较
-		Collections.sort(problems,new Comparator<Problem>() {
-			@Override
-			public int compare(Problem problem1,Problem problem2) {
-				// TODO Auto-generated method stub
-				return problem1.getProblemId().compareTo(problem2.getProblemId());
-			}
-		});
-		
-		Collections.sort(tProblems,new Comparator<TuserProblem>() {
-			@Override
-			public int compare(TuserProblem problem1,TuserProblem problem2) {
-				// TODO Auto-generated method stub
-				return problem1.getProblemid().compareTo(problem2.getProblemid());
-			}
-		});
 		
 		//按照setid进行划分，将总的答题数放入setMap，答对的题数放入rightmap
 		Map<Integer, Integer> setMap = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> rightMap = new HashMap<Integer,Integer>();
-		for(int i=0;i<problems.size();i++){
-			int setid = problems.get(i).getProblemSetId();
-			if(setMap.containsKey(setid)){
-				setMap.put(setid, setMap.get(setid)+1);
-			}else{
-				setMap.put(setid, 1);
-			}
-			
-			if(problems.get(i).getRightAnswer().equals(tProblems.get(i).getUseranswer())){
-				if(rightMap.containsKey(setid)){
-					rightMap.put(setid, setMap.get(setid)+1);
+		for(TuserProblem tProblem:tProblems){
+			int setid = tProblem.getSetid();
+			if(setid != ExamConstant.Set_CUSTOM && tProblem.getType() == ExamConstant.OPTION){  //选择题才比较。若为自定义试题，则不列入统计
+				if(setMap.containsKey(setid)){
+					setMap.put(setid, setMap.get(setid)+1); //若包含，则+1
 				}else{
-					rightMap.put(setid, 1);
+					setMap.put(setid, 1); 					//若还没有，则设为1
+				}
+				
+				if(tProblem.getRightanswer().equals(tProblem.getUseranswer())){
+					if(rightMap.containsKey(setid)){
+						rightMap.put(setid, setMap.get(setid)+1);
+					}else{
+						rightMap.put(setid, 1);
+					}
 				}
 			}
+			
 		}
 		
 		//生成返回数据
 		Map<String, Object> rtMap = new HashMap<String,Object>();
 		rtMap.put("name", new ArrayList<String>());
 		
+		
+		//构建二维数组，使用parentList二维数组来储存元素
 		ArrayList parentList = new ArrayList<List<Integer>>();
-		ArrayList scoreList = new ArrayList<Integer>();
-		ArrayList userScoreList = new ArrayList<Integer>();
+		ArrayList scoreList = new ArrayList<Integer>();      //总分
+		ArrayList userScoreList = new ArrayList<Integer>();  //用户得分
 		parentList.add(scoreList);
 		parentList.add(userScoreList);
 		rtMap.put("val", parentList);

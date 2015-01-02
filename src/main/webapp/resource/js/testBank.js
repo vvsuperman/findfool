@@ -42,11 +42,11 @@ function QuestionMeta() {
     }
 }
 
-OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
+OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
     $scope.url = '#/bank';
     $scope.template = 'page/testBank.html';
-    $scope.ContentUs = 'contentUs.html';
-    $scope.leftBar = 'leftBar1.html';
+    $scope.ContentUs = 'page/contentUs.html';
+    $scope.leftBar = 'page/libleftBar.html';
     $scope.active = 1;
     $scope.show = 1;
     $scope.privi = Data.privi();
@@ -73,10 +73,28 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce) {
     $scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
-        { name: '问答题', data: '3'}
     ];
     
     
+    
+	//查看和修改试题的通用方法
+	$scope.modifyQuestionInTest = function (size,q,params) {
+	   	var question = jQuery.extend(true, {}, q);
+		 var modalInstance = $modal.open({
+		      templateUrl: 'page/myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      size: size,
+		      resolve: {
+		          params:function(){
+		        	  var obj ={};
+		        	  obj.operation = params.operation;
+		        	  obj.title=params.title;
+		        	  obj.question = question;
+		        	  return obj;
+		          }
+		      }
+		 });
+	 };
     
     
     $scope.editorOptions =

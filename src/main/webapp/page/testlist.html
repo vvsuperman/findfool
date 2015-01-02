@@ -1,8 +1,11 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testbank.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
-	style="margin-top: 80px">
+	style="margin-top: 70px">
 
 	<div class="panel panel-default black-panel">
 		<div class="panel-heading black-heading">已有试题</div>
@@ -22,16 +25,25 @@
 				    	<span ng-bind="'Q'+($index+1)"></span>
 				    </div>
 					<div class="col-md-4">
-						 <input abstract context={{q.context}}> 
+					
+					   <a href=""
+							ng-click="displayQuestionDetails($index)"
+							ng-if="!isDisplay[$index]">
+							 <input abstract context={{q.context}}> 
+						</a>
+							 <a href=""
+							ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
+							 <input abstract context={{q.context}}> 
+							</a>
 					</div>
 					<div class="col-md-1">
-						<a class="blackFont" href=""
+						<a  href=""
 							ng-click="displayQuestionDetails($index)"
-							ng-if="!displayDetail($index)">
+							ng-if="!isDisplay[$index]">
 							<span class="glyphicon glyphicon-chevron-down"></span>	
 						</a>
-							 <a class="blackFont" href=""
-							ng-click="hideQuestionDetails($index)" ng-if="displayDetail($index)">
+							 <a  href=""
+							ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
 							<span class="glyphicon glyphicon-chevron-up"></span>
 							</a>
 						
@@ -60,24 +72,8 @@
 						</a>
 						
 					</div>
-				 <div class="row" ng-if="displayDetail($index)">
-					<div class="col-md-10 col-md-offset-1" style="margin-top: 20px">
-						<textarea ckeditor minheight="120" width="100%" operation="view"
-							ng-model="q.context"></textarea>
-					</div>
-					<div class="options col-md-offset-1 list col-md-10 col-sm-10  col-xs-10">
-						<label customcheckbox option={{option}}
-							class='optionlabel checkbox' ng-repeat="option in q.answer"
-							operation="view" index={{$index}} rightanswer={{q.rightanswer}}
-							useranswer={{q.useranswer}}> 
-							<span class='icon'></span><span class='icon-to-fade'></span>
-							<textarea ckeditor
-								minheight="70" width="90%" operation="view" class='optiontext'
-								ng-model="option.text"></textarea> 
-						</label>
-					</div>
-					<div style="clear: both;"></div>
-				</div> 
+				 <div ng-include src="'page/questiondetail.html'" ng-if="isDisplay[$index]">
+				 </div> 
 				<div style="clear: both;"></div>
 			</div>
 		</div>
@@ -98,4 +94,7 @@
 <div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
 	ng-if="panel.show=='custom'"></div>
 
-
+<script src="resource/js/simditor/module.js"></script>
+<script src="resource/js/simditor/hotkeys.js"></script>
+<script src="resource/js/simditor/uploader.js"></script>
+<script src="resource/js/simditor/simditor.js"></script>

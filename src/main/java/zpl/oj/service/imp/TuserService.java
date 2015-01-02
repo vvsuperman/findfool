@@ -65,15 +65,11 @@ public class TuserService {
 			if(tuserProblem == null){
 				tuserProblem = new TuserProblem();
 				tuserProblem.setInviteId(inviteId);
-				tuserProblem.setRightanswer(problem.getRightAnswer());
 				tuserProblem.setProblemid(problem.getProblemId());
 				tuserProblem.setTuid(tuid);
-				tuserProblem.setType(problem.getType());
-				tuserProblem.setScore(problem.getScore());
 				tuserProblemDao.insertTuserProblem(tuserProblem); 
 			}else{
-				tuserProblem.setRightanswer(problem.getRightAnswer());
-				tuserProblem.setType(problem.getType());
+				tuserProblem.setUseranswer("");
 				tuserProblemDao.updateProblemByIds(tuserProblem); 
 			}
 		}
@@ -105,6 +101,16 @@ public class TuserService {
 		rtMap.put("programNum", program);
 		
 		return rtMap;
+	}
+
+
+	/*
+	 * 清除试题，将试题的useranswer置空
+	 * */
+	public List<TuserProblem> clearProblems(Integer iid) {
+		// TODO Auto-generated method stub
+		tuserProblemDao.clearProblem(iid);
+		return tuserProblemDao.findProblemByInviteId(iid);
 	}
 	
 

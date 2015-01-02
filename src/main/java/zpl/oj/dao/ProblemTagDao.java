@@ -16,7 +16,7 @@ public interface ProblemTagDao {
 	List<String> getTagByProblemId(Integer problemId);
 	
 	@Select("select a.problemid form tagproblem as a,tag as b,problem as c"
-			+ " where a.tagid = b.tagid and c.isdelete=0 and b.context like %#{0}%")
+			+ " where a.tagid = b.tagid and c.isdelete=0 and b.context like concat('%',#{0},'%')")
 	List<Integer> getProblemIdbyTag(String tag);
 	
 	@SelectProvider(type = ProblemTagDaoSQL.class,method="getCountProblemIdbyTagSiteSQL")
