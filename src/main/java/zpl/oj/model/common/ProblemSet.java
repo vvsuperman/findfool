@@ -25,6 +25,9 @@ public class ProblemSet implements Serializable {
 	 */
 	private Integer owner;
 	
+	private String domainId;
+	
+
 	/**
 	 * 描述
 	 */
@@ -68,6 +71,15 @@ public class ProblemSet implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	
+	public String getDomainId() {
+		return domainId;
+	}
+
+	public void setDomainId(String domainId) {
+		this.domainId = domainId;
 	}
 
 }

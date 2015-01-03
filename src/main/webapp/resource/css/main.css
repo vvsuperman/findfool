@@ -1,0 +1,47 @@
+.myfooter{
+	border-top:1px solid #374652;
+	margin-top:80px;
+	height: 80px;
+	color:#374652;
+	padding-top: 20px;
+	/* background-color: #ffffff; */
+}
+
+.content-header{
+	border-top: 1px solid #e4e4e4;
+    color: #b6b6b6;
+    font-size: 18px;
+    margin: 50px 0 25px;
+    text-align: center;
+}
+
+
+.content-header span{
+	background: none repeat scroll 0 0 #fff;
+    display: inline-block;
+    padding: 0 16px;
+    position: relative;
+    top: -10px;
+}
+
+.logohead{
+	 background: url("../static/gogogo.jpg") no-repeat scroll center top;
+  	 height: 600px; 
+  	 margin-top: 0px;
+  	 background-size:100% 100%;	
+  	 color:#fff;
+}
+
+.logohead img{
+	height:540px;
+}
+
+.mainimg{
+	position:absolute;
+	margin-top:10px;
+	
+}
+
+.logoFont{
+	font-size:24px;
+}

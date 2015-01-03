@@ -23,7 +23,7 @@
 
 	        <div ng-class="{true:'hedden', false: 'col-md-4'}[active==2]"> 
 	           <p>试题库快速导航</p>
-	           <select class="form-control" ng-change="queryQuestions(1)" ng-model="reciveData.selectedSets" ng-options="m.name for m in reciveData.sets">
+	           <select class="form-control" ng-change="queryQuestions(1)" ng-model="reciveData.selectedSets" ng-options="m.name for m in problemSet">
                     <option value="">-- 请选择 --</option>
                 </select>
 	        </div>
@@ -36,14 +36,14 @@
         </div>
 
 		
-	     <div class="container-fluid"   ng-if="set.show==1" >
+	     <div class="container-fluid"   ng-if="set.show==1" ng-repeat="domainset in reciveData.sets"  >
 		     <div class="panel panel-default black-panel" style="margin-top: 30px;">
-				   <div class="panel-heading black-heading">
-				     WEB前端
+				   <div class="panel-heading black-heading" ng-bind="domainset.domainName">
+				     
 				   </div>
 				  <div class="panel-body">
-			      <div  class="col-md-3 col-md-offset-1 col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px" ng-repeat="set in reciveData.sets" ng-model="reciveData.selectedSets">
-			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg" ng-click="showQuestions($index)" ></img>
+			      <div  class="col-md-3 col-md-offset-1 col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
+			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg" ng-click="showQuestions(set)" ></img>
 			      </div>
 			   	 </div>
 			    </div>
@@ -51,8 +51,7 @@
 
         <div class="questionbox" ng-if="set.show==0" >
          <div class="panel panel-default black-panel" style="margin-top: 30px;">
-				   <div class="panel-heading black-heading">
-				      {{reciveData.selectedSets.name}}
+				   <div class="panel-heading black-heading" ng-bind="reciveData.selectedSets.name">
 				   </div>
 			   <table class="table table-striped">
 			        <thead>

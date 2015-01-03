@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" type="text/css" href="resource/css/main.css"/>
 <!-- NAVBAR
 ================================================== -->
     <div whenscrolled class="navbar navbar-transparent navbar-fixed-top" style="font-size:16px">
@@ -103,10 +103,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                &nbsp;
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body" style="min-height: 380px">
-                <div class="col-sm-3 col-xs-3">
+              <h1  class="col-md-offset-5" style="margin-top: 80px">免费！</h1>
+              <!--   <div class="col-sm-3 col-xs-3">
                     <img src="resource/static/logo.png" style="height: 300px;width: 100%;">
                 </div>
                 <div class="col-sm-3 col-xs-3">
@@ -120,7 +122,7 @@
                 </div>
                 <div class="col-xs-12">
                     <button class="btn btn-success center-block">确认购买</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -270,7 +272,7 @@
 		<div class="row">
 			<div class="col-md-5 col-md-offset-4 hidden-sm hidden-xs" style="padding-top: 150px;text-align: center;">
 			<h2>夜...已深</h2>
-			<h2>你还在看简历吗</h2>
+			<h2>你还在看“简历”吗</h2>
 			<h2></h2>
 			<button class="btn btn-primary" ><span class="col-md-3">解决方案</span></button>
 			</div>
@@ -283,9 +285,13 @@
       <!-- START THE FEATURETTES -->
 
       <!-- hr class="featurette-divider"-->
+     
 
       <div class="row featurette">
-        <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2">
+         	<div class="content-header">
+       			 <span>你很难招到一个合格的程序员</span>
+     	    </div>
 			<img class="featurette-image img-responsive" src="resource/static/caton1.png" alt="Generic placeholder image"> 
 		  </div>
       </div>
@@ -304,16 +310,51 @@
 
       <div class="row featurette">
         <div class="col-md-8 col-md-offset-2">
+        	<div class="content-header">
+       			 <span>但，只要使用我们的笔试系统</span>
+     	    </div>
           <img class="featurette-image img-responsive" src="resource/static/caton3.png" alt="Generic placeholder image">
         </div>
       </div>
 
+	 <div class="row featurette">
+        <div class="col-md-8 col-md-offset-2">
+        	<div class="content-header">
+       			 <span>你就知道谁是最好的</span>
+     	    </div>
+          <canvas id="radar" class="chart chart-radar" data="data"  labels="labels" series＝"series"></canvas>
+        </div>
+      </div>
+      
+       <div class="row featurette">
+        <div class="col-md-8 col-md-offset-2">
+        	<div class="content-header">
+       			 <span>详细的分析数据</span>
+     	    </div>
+     	  <div class="col-md-6" style="text-align: center;">
+     	  	 <h4>得分</h4>
+     	     <canvas id="doughnut1" class="chart chart-doughnut" data="dataScore1"  labels="labelsScore1"></canvas> 
+     	  </div>
+     	  
+          <div class="col-md-6" style="text-align: center;">
+           	 <h4>排名</h4>
+          	 <canvas id="doughnut2" class="chart chart-doughnut" data="dataScore2"  labels="labelsScore2"></canvas> 
+          </div>
+         
+          
+        </div>
+      </div>
+
+	  
+     <!-- <div class="finfool-logo">
+         <span>F</span>
+       </div> -->
 
 
-
-      <footer class="bs-docs-footer" >
-       <div class="col-md-6 col-md-offset-3">
-        <p>&copy; 2014 findfool Company, Inc. &middot;沪ICP备14039106号 </p>
+      <footer class="myfooter" >
+       
+       <div class="col-md-6 col-md-offset-1">
+        <p>&copy; 2014 findfool Company, Inc. &middot;沪ICP备14039106-3号 <a class="greenFont" href="mailto:findfool@163.com">findfool@163.com</a> </p>
        </div> 
       </footer>
 

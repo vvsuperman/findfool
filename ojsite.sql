@@ -332,7 +332,23 @@ CREATE TABLE `sets` (
 
 LOCK TABLES `sets` WRITE;
 /*!40000 ALTER TABLE `sets` DISABLE KEYS */;
-INSERT INTO `sets` VALUES (1,'HTML5','2014-07-14 15:52:56',1,'HTML知识'),(2,'CSS3','2014-07-14 15:53:18',1,'CSS知识'),(3,'JAVASCRIPT\n','2014-07-13 15:53:40',1,'javascript知识'),(5,'BOOTSTRAP',NULL,1,'先进的响应式框架'),(6,'ANGULARJS',NULL,1,'前段MVC框架');
+
+insert into  `sets` VALUES (1,'ali',now(),1,'阿里笔试题',1);
+insert into  `sets` VALUES (2,'baidu',now(),1,'百度笔试题',1);
+insert into  `sets` VALUES (3,'tenpay',now(),1,'腾讯笔试题',1);
+insert into  `sets` VALUES (4,'microsoft',now(),1,'微软笔试题',1);
+insert into  `sets` VALUES (5,'google',now(),1,'谷歌笔试题',1);
+insert into  `sets` VALUES (6,'html',now(),1,'html/css',2);
+insert into  `sets` VALUES (7,'javascript',now(),1,'javascript',2);
+insert into  `sets` VALUES (8,'jquery',now(),1,'jquery',2);
+insert into  `sets` VALUES (9,'bootstrap',now(),1,'bootstrap',2);
+insert into  `sets` VALUES (10,'angularjs',now(),1,'angularjs',2);
+insert into  `sets` VALUES (11,'java',now(),1,'java',3);
+insert into  `sets` VALUES (12,'php',now(),1,'php',4);
+insert into  `sets` VALUES (13,'c++',now(),1,'C/C++',5);
+insert into  `sets` VALUES (14,'linux',now(),1,'Linux/Shell',8);
+insert into  `sets` VALUES (15,'database',now(),1,'数据库',9);
+
 /*!40000 ALTER TABLE `sets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -660,3 +676,36 @@ INSERT INTO `verify_question` VALUES ('2', '本站中文名称是？', '余悦')
 INSERT INTO `verify_question` VALUES ('3', '圣诞节是几月几日？', '12.25');
 INSERT INTO `verify_question` VALUES ('4', '中国的英文名称是？', 'china');
 UNLOCK TABLES;
+
+
+-- ----------------------------
+-- Table structure for `domain`
+-- ----------------------------
+DROP TABLE IF EXISTS `domain`;
+
+CREATE TABLE `domain`
+(
+   `domain_id`  int(10) NOT NULL,
+   `domain_name`  varchar(50) NOT NULL COMMENT 'domain的名称',
+   PRIMARY KEY (`domain_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+LOCK TABLES `domain` WRITE;
+-- ----------------------------
+-- Records of domain
+-- ----------------------------
+insert into `domain` values (1,'数据结构与算法(各大公司笔试题)',1);
+insert into `domain` values (2,'web前端',1);
+insert into `domain` values (3,'java体系',1);
+insert into `domain` values (4,'php体系',1);
+insert into `domain` values (5,'C体系',1);
+insert into `domain` values (6,'IOS',0);
+insert into `domain` values (7,'Android',0);
+insert into `domain` values (8,'Linux',1);
+insert into `domain` values (9,'数据库',1);
+insert into `domain` values (10,'编程题',0);
+
+UNLOCK TABLES;
+
+

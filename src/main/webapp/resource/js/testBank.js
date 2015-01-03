@@ -167,9 +167,16 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
     	    $scope.state = data["state"];//1 true or 0 false
     	    $scope.message = data["message"];
     	    if ($scope.state) {
-    	//仅需要对message中的数据做处理
+    	    	//仅需要对message中的数据做处理
     	    	//total pageNum
     	    	$scope.reciveData.sets = $scope.message;
+    	    	$scope.problemSet =[];
+    	    	for(var i=0;i<$scope.reciveData.sets.length;i++){
+    	    		var sets = $scope.reciveData.sets[i].problemSets;
+    	    		for(var j=0;j<sets.length;j++){
+    	    			$scope.problemSet.push(sets[j]);
+    	    		}
+    	    	}
     	    } else {
 
     	    }
@@ -222,8 +229,8 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
     /*
      * 点击试题库后显示试题
      * */
-    $scope.showQuestions = function(index){
-    	$scope.reciveData.selectedSets = $scope.reciveData.sets[index];
+    $scope.showQuestions = function(set){
+    	$scope.reciveData.selectedSets = set; //一个problemset
     	$scope.queryQuestions(1);
     	$scope.set.show=0;
     }
