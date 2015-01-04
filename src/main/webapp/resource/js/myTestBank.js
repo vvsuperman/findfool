@@ -201,7 +201,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
             return;
         var r = /^\+?[0-9][0-9]*$/;
         if (!r.test(q)) {
-            alert("必须是数字！");
+            smoke.alert("必须是数字！");
             q = 0;
         }
     };
@@ -220,12 +220,12 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
                 Data.setToken(data["token"]);
             $scope.message = data["message"];
             if ($scope.state) {
-                alert('添加成功');
+                smoke.alert('添加成功');
                 $scope.show = "1";
                 $scope.queryQuestions(1);
                 $scope.newQuestion = new QuestionMeta();
             } else {
-                alert('添加失败');
+                smoke.alert('添加失败');
             }
         }).error(function (data) {
 
@@ -236,7 +236,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
     $scope.addQuestion = function () {
         $scope.newQuestion.type = parseInt($scope.active);
       if(($scope.newQuestion.answer=="") && ($scope.newQuestion.type ==1)){
-        	alert("请输入至少一个选项");
+        	smoke.alert("请输入至少一个选项");
         	return false;
         }
         if ($scope.active == "1") {
@@ -255,7 +255,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
         	$scope.newQuestion.tag = tags.split("，");
         }
      
-        
+        $scope.newQuestion.setid=-1;
         
         console.log("newquestion.........",$scope.newQuestion);
         sendData = {"user": {"uid": Data.uid()}, "quizId":$scope.tid,"question": $scope.newQuestion};

@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css" />
 <link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
-  <link rel="stylesheet" href="resource/css/smoke/smoke.css">
+ 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 70px">
@@ -62,7 +62,6 @@
 							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">
 							<span class="glyphicon glyphicon-pencil"></span>
 							</a>
-						<span ng-if＝"q.setid!=-1" style="height:1px;width:10px;margin-right:10px"></span>
 						&nbsp;&nbsp;&nbsp;
 						<a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">
 							<span class="glyphicon glyphicon-trash"></span>
@@ -99,7 +98,7 @@
 <div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
 	ng-if="panel.show=='custom'"></div>
 
-<script src="resource/js/smoke/smoke.js"></script>
+
 <script src="resource/js/simditor/module.js"></script>
 <script src="resource/js/simditor/hotkeys.js"></script>
 <script src="resource/js/simditor/uploader.js"></script>

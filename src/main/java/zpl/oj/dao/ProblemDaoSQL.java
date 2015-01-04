@@ -19,7 +19,7 @@ public class ProblemDaoSQL {
 	}
 	
 	public String getProblemIdbySetSiteSQL(Map<String,Object>  para){
-		String sql = "select  PROBLEM_ID as problemId, UUID,   belong, TITLE,  DESCRIPTION,  DATE, PROBLEM_SET_ID, "
+		String sql = "select  PROBLEM_ID as problemId, UUID,   belong, TITLE,  DESCRIPTION,  DATE, PROBLEM_SET_ID as problemSetId, "
 				+ "CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE  FROM "
 				+ "problem where isdelete=0 and belong=0";
 

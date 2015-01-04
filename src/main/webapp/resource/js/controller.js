@@ -218,9 +218,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
         );
     }
     $scope.changeQuestion();
-    $scope.Remail="zz@qq.com";
-    $scope.Rpwd="111111";
-    $scope.Rrepwd="111111";
+
     $scope.show = 1;
     $scope.btn = function () {
         $scope.show = -($scope.show - 1);
@@ -270,8 +268,8 @@ OJApp.controller('nav',function($scope, Data) {
 
 OJApp.controller('Upgrade',function($scope) {
     $scope.url = '#/upgrade';
-    $scope.template = 'upgrade.html';
-    $scope.ContentUs = 'contentUs.html';
+    $scope.template = 'page/upgrade.html';
+    $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
 });
 

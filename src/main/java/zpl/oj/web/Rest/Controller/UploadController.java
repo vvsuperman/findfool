@@ -26,9 +26,12 @@ public class UploadController {
 			upLoadService.batchImport(file);
 		} catch (Exception e) {
 			// TODO: handle exception
-			int num = e.getStackTrace()[0].getLineNumber();
+			//e.printStackTrace();
+			String msg = e.getStackTrace()[0].getFileName();
+			
 			rs.setState(0);
-			rs.setMessage(num);
+			rs.setMessage(msg);
+			return rs;
 		}
 		
 		rs.setState(1);

@@ -76,14 +76,21 @@ public class UpLoadService{
 		// TODO Auto-generated method stub
 		HSSFCell cell = row.getCell(map.get(colName));
 		if(cell == null){
-			Exception e = new Exception();
-			System.out.print("error in row..........................."+cell.getRow().getRowNum());
-			StackTraceElement ste = new StackTraceElement("UpLoadService", "getValuebyCell", "", cell.getRow().getRowNum());
-			StackTraceElement[] stes = {ste};
-			e.setStackTrace(stes);
-			throw e;
+			throw createException(row,colName);
 		}
 	    return getValue(cell);
+	}
+
+	/**
+	 * @param row
+	 * @return
+	 */
+	public Exception createException(HSSFRow row, String colName) {
+		Exception e = new Exception();
+		StackTraceElement ste = new StackTraceElement("UpLoadService", "getValuebyCell", "第"+(row.getRowNum()+1)+"行"+colName+"列出错",row.getRowNum() );
+		StackTraceElement[] stes = {ste};
+		e.setStackTrace(stes);
+		return e;
 	}
 	
 	private String getValuebyCell(HSSFRow row, int k) throws  Exception{
@@ -135,6 +142,8 @@ public class UpLoadService{
 	    	
 	    	for(int j=1;j<sheet.getLastRowNum();j++){
 	      		HSSFRow row = sheet.getRow(j);
+	      		
+	      		
 	      		Problem problem = new Problem();
 	      	    String questionContent = getValuebyCell(row,map,ExamConstant.QUESTION_CONTENT);
 	      	    questionContent = addPTag(questionContent);
@@ -142,20 +151,40 @@ public class UpLoadService{
 	      	    
 	      		problem.setProblemSetId(set.getProblemSetId());
 	      		problem.setDescription(questionContent);
-	      		problem.setScore((int)Double.parseDouble(((getValuebyCell(row,map,ExamConstant.QUESTION_SCORE)))));
-	      		problem.setType(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_TYPE)));
+	      		
+	      		try {
+	      			problem.setType(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_TYPE)));
+				} catch (Exception e) {
+					// TODO: handle exception
+					throw createException(row,ExamConstant.QUESTION_TYPE);
+				}
+	      		
+      			try {
+	      			problem.setScore((int)Double.parseDouble(((getValuebyCell(row,map,ExamConstant.QUESTION_SCORE)))));
+				} catch (Exception e) {
+					// TODO: handle exception
+					throw createException(row,ExamConstant.QUESTION_SCORE);
+				}
+	      		
+	      		
+	      		
 	      		problem.setProblemSetId(set.getProblemSetId());
 	      		problem.setBelong(0);
 	      		
 	      	 	
 	        	//处理answer,题目的解答,answer可能为空
-	      		if(row.getCell(map.get(ExamConstant.QUESTION_ANSWER))!=null){
+	      		if(row.getCell(map.get(ExamConstant.QUESTION_ANSWER))!=null&&row.getCell(map.get(ExamConstant.QUESTION_ANSWER)).equals("")==false){
 	      			problem.setExplain(getValuebyCell(row,map,ExamConstant.QUESTION_ANSWER));
 	      		}
 	      	
 	      		//处理level
 	      		if(row.getCell(map.get(ExamConstant.QUESTION_LEVEL))!=null){
-	      			problem.setLevel(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_LEVEL)));
+	      			try {
+	      				problem.setLevel(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_LEVEL)));
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+	      			
 	      		}
 	      		
 	      		//保存问题，获取id,最好能insert的同事获取主键，否则太难看了
