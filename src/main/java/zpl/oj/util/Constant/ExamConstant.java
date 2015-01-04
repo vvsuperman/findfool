@@ -20,6 +20,7 @@ public class ExamConstant{
 	public static final String QUESTION_TESTSCORE = "testscore";
 	public static final String QUESTION_REPONAME = "reponame";
 	public static final String QUESTION_ANSWER = "answer";
+	public static final String QUESTION_LEVEL = "level";
 	
 	//试题类型
 	public static final String QUESTION_TYPE_OPTION = "option";

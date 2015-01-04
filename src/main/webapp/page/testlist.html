@@ -58,10 +58,11 @@
 					<div class="col-md-1">{{q.score}}</div>
 					<div class="col-md-3">
 						&nbsp;&nbsp;
-						<a class="blackFont" href=""
+						<a class="blackFont" href="" ng-if="q.setid==-1"
 							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">
 							<span class="glyphicon glyphicon-pencil"></span>
 							</a>
+						<span ng-if＝"q.setid!=-1" style="height:1px;width:10px;margin-right:10px"></span>
 						&nbsp;&nbsp;&nbsp;
 						<a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">
 							<span class="glyphicon glyphicon-trash"></span>

@@ -63,6 +63,7 @@ public class ProblemServiceImp implements ProblemService{
 		q.setContext(p.getDescription());
 		q.setType(p.getType());
 		q.setRightanswer(p.getRightAnswer());
+		q.setSetid(p.getProblemSetId());
 		
 		List<ProblemTestCase> cases = problemTestCaseDao.getProblemTestCases(p.getProblemId());
 		List<QuestionTestCase> answer = new ArrayList<QuestionTestCase>();

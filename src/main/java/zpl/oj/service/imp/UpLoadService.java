@@ -53,25 +53,45 @@ public class UpLoadService{
 	@Resource
 	private ProblemTagDao problemTagDao;
 	
-	private String getValuebyCell(HSSFCell cell){
+	private String getValue(HSSFCell cell) throws Exception{
+		
 		int cellType = cell.getCellType();
 		switch (cellType){
-     		case HSSFCell.CELL_TYPE_NUMERIC:
-	    		return (int)cell.getNumericCellValue()+"";
-     		case HSSFCell.CELL_TYPE_BOOLEAN:
-     			if( cell.getBooleanCellValue() ){
-     				return "1";
-     			}else{
-     				return "0";
-     			}
-     		case HSSFCell.CELL_TYPE_BLANK:
-     			return "";
-     	    default:
-     	    	return cell.getStringCellValue();
-     	         
+ 		case HSSFCell.CELL_TYPE_NUMERIC:
+    		return (int)cell.getNumericCellValue()+"";
+ 		case HSSFCell.CELL_TYPE_BOOLEAN:
+ 			if( cell.getBooleanCellValue() ){
+ 				return "1";
+ 			}else{
+ 				return "0";
+ 			}
+ 		case HSSFCell.CELL_TYPE_BLANK:
+ 			return "";
+ 	    default:
+ 	    	return cell.getStringCellValue();
 		}
 	}
 	
+	private String getValuebyCell(HSSFRow row, Map<String, Integer> map,String colName) throws  Exception{
+		// TODO Auto-generated method stub
+		HSSFCell cell = row.getCell(map.get(colName));
+		if(cell == null){
+			Exception e = new Exception();
+			System.out.print("error in row..........................."+cell.getRow().getRowNum());
+			StackTraceElement ste = new StackTraceElement("UpLoadService", "getValuebyCell", "", cell.getRow().getRowNum());
+			StackTraceElement[] stes = {ste};
+			e.setStackTrace(stes);
+			throw e;
+		}
+	    return getValue(cell);
+	}
+	
+	private String getValuebyCell(HSSFRow row, int k) throws  Exception{
+		// TODO Auto-generated method stub
+		HSSFCell cell = row.getCell(k);
+		return getValue(cell);
+	}
+
 //批量导入试题，若有错误则回滚, throw exception to rollback
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public String batchImport(MultipartFile[] file)  throws  Exception  {
@@ -92,7 +112,6 @@ public class UpLoadService{
 	    	Map<String, Integer> map = new HashMap<String,Integer>();
 	    	List<Integer> options = new ArrayList<Integer>();
 	    	List<Integer> rights = new ArrayList<Integer>();
-	    	int answerIndex =0; //excel中answer所在的位置
 	    	//循环处理第一行，生成对应的列名、列号键值对。将option和right的列号分别存在一个list中
 	    	//20141026 question中添加answer
 	    	for(int j=0 ;j<rowName.getLastCellNum();j++){
@@ -101,9 +120,7 @@ public class UpLoadService{
 		    			 options.add(j);
 		    		 }else if(cellVal.equals(ExamConstant.QUESTION_RIGHT)){
 		    			 rights.add(j);
-		    		 }else if(cellVal.equals(ExamConstant.QUESTION_ANSWER)){
-		    			 answerIndex = j;
-		    		 }else {
+		    		 }else{
 		    			 map.put(cellVal, j);
 		    		 }
 	    	}
@@ -119,25 +136,26 @@ public class UpLoadService{
 	    	for(int j=1;j<sheet.getLastRowNum();j++){
 	      		HSSFRow row = sheet.getRow(j);
 	      		Problem problem = new Problem();
-	      	    String questionContent = getValuebyCell(row.getCell(map.
-	      				get(ExamConstant.QUESTION_CONTENT)));
-	      	  questionContent = addPTag(questionContent);
+	      	    String questionContent = getValuebyCell(row,map,ExamConstant.QUESTION_CONTENT);
+	      	    questionContent = addPTag(questionContent);
 	      	   
 	      	    
 	      		problem.setProblemSetId(set.getProblemSetId());
 	      		problem.setDescription(questionContent);
-	      		problem.setScore((int)Double.parseDouble(((getValuebyCell(row.getCell(map.
-	      				get(ExamConstant.QUESTION_SCORE)))))));
-	      		problem.setType(Integer.parseInt(getValuebyCell(row.getCell(map.
-	      				get(ExamConstant.QUESTION_TYPE)))));
+	      		problem.setScore((int)Double.parseDouble(((getValuebyCell(row,map,ExamConstant.QUESTION_SCORE)))));
+	      		problem.setType(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_TYPE)));
 	      		problem.setProblemSetId(set.getProblemSetId());
 	      		problem.setBelong(0);
 	      		
 	      	 	
-	        	//处理answer,题目的解答
-	      		HSSFCell cell = row.getCell(answerIndex);
-	      		if(getValuebyCell(cell).equals("") == false){
-	      			problem.setExplain(getValuebyCell(cell));
+	        	//处理answer,题目的解答,answer可能为空
+	      		if(row.getCell(map.get(ExamConstant.QUESTION_ANSWER))!=null){
+	      			problem.setExplain(getValuebyCell(row,map,ExamConstant.QUESTION_ANSWER));
+	      		}
+	      	
+	      		//处理level
+	      		if(row.getCell(map.get(ExamConstant.QUESTION_LEVEL))!=null){
+	      			problem.setLevel(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_LEVEL)));
 	      		}
 	      		
 	      		//保存问题，获取id,最好能insert的同事获取主键，否则太难看了
@@ -171,18 +189,16 @@ public class UpLoadService{
 		      		}
 	      		}
 	      		
-	      		
-	      		
 	      		String rightAnswer ="";
 	      		
 	      		//处理option
 	      		for(int k=0;k<options.size();k++){
 	      			ProblemTestCase option = new ProblemTestCase();
   	      			HSSFCell optionCell = row.getCell(options.get(k));
-  	      			//若该选项不为空
-	  	      	    if(getValuebyCell(optionCell).equals("") == false){
-	  	      		   option.setArgs(getValuebyCell(optionCell));
-	  	      		   if(getValuebyCell(row.getCell(rights.get(k))).equals("1")){
+  	      			//因为可能有5个选项的情况，因此需判断选项是否为空
+	  	      	    if(optionCell!=null && getValue(optionCell).equals("") == false){
+	  	      		   option.setArgs(getValue(optionCell));
+	  	      		   if(getValuebyCell(row,rights.get(k)).equals("1")){
 	  	      			   rightAnswer+="1";
 	  	      		   }else{
 	  	      			   rightAnswer+="0";
@@ -201,10 +217,12 @@ public class UpLoadService{
 		is.close();
 	    return "sucess";
 	}
-	//给内容加上html<p>标签，以符合ckeditor的标准
+	
+
+	//给内容加上html<p>标签，以符合simditor的标准
 	private String addPTag(String questionContent) {
 		// TODO Auto-generated method stub
 		String rtStr = questionContent.replace("\n", "</p>\n<p>");
-		return "<p>"+rtStr+"</p>";
+		return "<p>"+rtStr+"<br></p>";
 	}
 }

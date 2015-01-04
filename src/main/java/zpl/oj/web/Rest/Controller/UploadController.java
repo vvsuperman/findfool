@@ -20,9 +20,17 @@ public class UploadController {
 	
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseBase uploadInvite(@RequestParam MultipartFile[] file) throws Exception{
-		upLoadService.batchImport(file);
+	public ResponseBase uploadInvite(@RequestParam MultipartFile[] file) {
 		ResponseBase rs = new ResponseBase();
+		try {
+			upLoadService.batchImport(file);
+		} catch (Exception e) {
+			// TODO: handle exception
+			int num = e.getStackTrace()[0].getLineNumber();
+			rs.setState(0);
+			rs.setMessage(num);
+		}
+		
 		rs.setState(1);
 		return rs;
 	}

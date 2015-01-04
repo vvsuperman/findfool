@@ -334,7 +334,7 @@ LOCK TABLES `sets` WRITE;
 /*!40000 ALTER TABLE `sets` DISABLE KEYS */;
 
 insert into  `sets` VALUES (1,'ali',now(),1,'阿里笔试题',1);
-insert into  `sets` VALUES (2,'baidu',now(),1,'百度笔试题',1);
+insert into  `sets` VALUES (2,'baidu',now(),1,'百度笔试题',0);
 insert into  `sets` VALUES (3,'tenpay',now(),1,'腾讯笔试题',1);
 insert into  `sets` VALUES (4,'microsoft',now(),1,'微软笔试题',1);
 insert into  `sets` VALUES (5,'google',now(),1,'谷歌笔试题',1);
