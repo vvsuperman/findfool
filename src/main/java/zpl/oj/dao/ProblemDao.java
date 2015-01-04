@@ -14,7 +14,7 @@ import zpl.oj.model.common.Problem;
 public interface ProblemDao {
 
 	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM  WHERE isdelete=0 and problem_Id = #{id}")
+			+ "PROBLEM_SET_ID as problemSetId,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM  WHERE isdelete=0 and problem_Id = #{id}")
 	  Problem getProblem(int id);
 	
 	@Select("select  t1.PROBLEM_ID as problemId,t1.type as type,t1.problem_set_id as problemSetId, "
@@ -29,7 +29,7 @@ public interface ProblemDao {
 	
 	
 	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score"
+			+ "PROBLEM_SET_ID as problemId,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score"
 			+ "  FROM PROBLEM  "
 			+ "WHERE uuid=(select uuid from problem where isdelete=0 and PROBLEM_ID=#{0})"
 			+ " order by PROBLEM_ID DESC limit 1")
@@ -63,7 +63,7 @@ public interface ProblemDao {
 	
 	
 	@Select("    select  UUID,  PROBLEM_ID as problemId,  TITLE,  DESCRIPTION,  DATE,  "
-			+ "PROBLEM_SET_ID,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM"
+			+ "PROBLEM_SET_ID as problemSetId,  CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score  FROM PROBLEM"
 			+ " WHERE isdelete=0 creator=${uid} limit ${begin},${end}")
 	  List<Problem> getProblemsByCreator(int uid,int begin,int end);  
 

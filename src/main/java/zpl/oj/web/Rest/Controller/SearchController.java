@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.model.common.Domain;
 import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.requestjson.RequestSearch;
 import zpl.oj.model.requestjson.RequestUser;
@@ -29,7 +30,7 @@ public class SearchController {
 	@ResponseBody
 	public ResponseBase searchSite(@RequestBody RequestUser request){
 		ResponseBase rb = new ResponseBase();
-		List<ProblemSet> sets = setService.getSets();
+		List<Domain> sets = setService.getSets();
 		rb.setState(1);
 		rb.setMessage(sets);
 		return rb;

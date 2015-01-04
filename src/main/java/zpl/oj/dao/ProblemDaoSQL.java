@@ -19,7 +19,7 @@ public class ProblemDaoSQL {
 	}
 	
 	public String getProblemIdbySetSiteSQL(Map<String,Object>  para){
-		String sql = "select  PROBLEM_ID as problemId, UUID,   belong, TITLE,  DESCRIPTION,  DATE, PROBLEM_SET_ID, "
+		String sql = "select  PROBLEM_ID as problemId, UUID,   belong, TITLE,  DESCRIPTION,  DATE, PROBLEM_SET_ID as problemSetId, "
 				+ "CREATOR, TYPE,  LIMIT_TIME,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE  FROM "
 				+ "problem where isdelete=0 and belong=0";
 
@@ -43,42 +43,28 @@ public class ProblemDaoSQL {
 	
 	
 	public String getCountProblemIdbySetUserSQL(Map<String,Object>  para){
-		String sql = "select  *  FROM "
-				+ "(SELECT * FROM problem where isdelete=0 ORDER BY problem_id DESC) as b";
-		int flag = 0;
+		String sql = "select  count(*)  FROM problem where isdelete=0 ";
 		if(para.get("type") != null){
-			sql += " where type="+para.get("type");
-			flag = 1;
+			sql += " and type="+para.get("type");
 		}
 		if(para.get("uid") != null){
-			if(flag == 0)
-				sql += " where creator="+para.get("uid");
-			else{
-				sql += " and creator="+para.get("uid");
-			}
+			sql += " and creator="+para.get("uid");
+		
 		}
-		sql += " GROUP BY uuid";
-		sql = "select count(*) from ("+sql+") as a";
 		return sql;
 		
 	}
 	
 	public String getProblemIdbySetUserSQL(Map<String,Object>  para){
-		String sql = "select  PROBLEM_ID as problemId FROM "
-				+ "(SELECT * FROM problem where isdelete=0 ORDER BY problem_id DESC) as b";
-		int flag = 0;
+		String sql = "select  PROBLEM_ID as problemId FROM  problem where isdelete=0 ";
 		if(para.get("type") != null){
-			sql += " where type="+para.get("type");
-			flag = 1;
+			sql += " and type="+para.get("type");
 		}
 		if(para.get("uid") != null){
-			if(flag == 0)
-				sql += " where creator="+para.get("uid");
-			else{
+			
 				sql += " and creator="+para.get("uid");
-			}
 		}
-		sql += " GROUP BY uuid";
+		sql += " ORDER BY problem_id DESC";
 		if(para.get("begin") != null &&para.get("end") != null){
 			sql += " limit "+para.get("begin")+","+para.get("end");
 		}

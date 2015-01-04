@@ -4,6 +4,8 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
         require: '?ngModel',
         scope: true,
         link: function (scope, elem, attrs, ngModel) {
+        	
+        	console.log("initial simditor.......");
         	var option ={
             	  textarea: elem,
             	  toolbar:[

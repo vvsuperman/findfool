@@ -4,6 +4,29 @@ body {
   overflow-x:hidden;
 }
 
+
+.finfool-logo{
+	color: #05c3f9;
+    font-family: "icons";
+    font-size: 50px;
+    margin: 0 auto 42px;
+    position: relative;
+    width: 46px;
+    box-sizing: border-box;
+    outline: 0 none;
+    padding: 0;
+}
+
+.finfool-logo span{
+    color: white;
+    font-size: 22px;
+    left: 12px;
+    position: absolute;
+    top: 15px;
+    
+}
+
+
 .navbar-header{
 	margin-left: 50px!important;
 }
@@ -32,27 +55,6 @@ body {
   border-color: #2fe2bf;
 }
 
-.logohead{
-	 background: url("../static/gogogo.jpg") no-repeat scroll center top;
-  	 height: 600px; 
-  	 margin-top: 0px;
-  	 background-size:100% 100%;	
-  	 color:#fff;
-}
-
-.logohead img{
-	height:540px;
-}
-
-.mainimg{
-	position:absolute;
-	margin-top:10px;
-	
-}
-
-.logoFont{
-	font-size:24px;
-}
 
 .navbar{
 	border-radius:0px!important;

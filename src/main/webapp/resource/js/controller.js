@@ -9,8 +9,21 @@
 var WEBROOT = "/oj";
 
 OJApp.controller('mainController',function($scope, $http, Data) {	
-    $scope.url = '#';
+   // $scope.url = '#';
 
+	 $scope.labels =["html5", "css3", "javascript", "angularjs", "node.js", "object-c", "java"];
+
+	  $scope.data = [
+	    [65, 59, 90, 81, 56, 55, 100],
+	    [58, 48, 40, 19, 96, 27, 78]
+	  ];
+	  
+	  $scope.labelsScore1 = ["得分", "总分"];
+	  $scope.dataScore1 = [80, 100];
+	  
+	  $scope.labelsScore2 = ["我的排名", ""];
+	  $scope.dataScore2 = [90, 10];
+	
     $scope.confirm = function () {
         if ($scope.Lemail && $scope.Lpwd) {
             $http({
@@ -205,9 +218,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
         );
     }
     $scope.changeQuestion();
-    $scope.Remail="zz@qq.com";
-    $scope.Rpwd="111111";
-    $scope.Rrepwd="111111";
+
     $scope.show = 1;
     $scope.btn = function () {
         $scope.show = -($scope.show - 1);
@@ -257,8 +268,8 @@ OJApp.controller('nav',function($scope, Data) {
 
 OJApp.controller('Upgrade',function($scope) {
     $scope.url = '#/upgrade';
-    $scope.template = 'upgrade.html';
-    $scope.ContentUs = 'contentUs.html';
+    $scope.template = 'page/upgrade.html';
+    $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = '';
 });
 

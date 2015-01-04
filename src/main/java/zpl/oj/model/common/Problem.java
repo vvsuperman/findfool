@@ -19,6 +19,7 @@ public class Problem implements Serializable {
 		this.explain ="";
 		this.title ="";
 		this.type =-1;
+		this.level = -1;
 	}
 	
 	/**
@@ -110,15 +111,15 @@ public class Problem implements Serializable {
 	/*
 	 * 难度
 	 * */
-	private String level;
+	private Integer level;
 	
 	
 
-	public String getLevel() {
+	public Integer getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(Integer level) {
 		this.level = level;
 	}
 

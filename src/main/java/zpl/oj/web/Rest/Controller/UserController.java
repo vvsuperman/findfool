@@ -70,6 +70,8 @@ public class UserController {
 		u.setFname(request.getName());
 		u.setEmail(request.getEmail());
 		u.setPwd(request.getPwd());
+		//测试阶段先免费
+		u.setInvited_left(100);
 		//默认等级
 		u.setPrivilege(2);
 		ResponseMessage msg = new ResponseMessage();

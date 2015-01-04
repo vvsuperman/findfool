@@ -22,12 +22,12 @@
         <div class="container-fluid">
 
 	        <div ng-class="{true:'hedden', false: 'col-md-4'}[active==2]"> 
-	           <p>试题库快速导航</p>
-	           <select class="form-control" ng-change="queryQuestions(1)" ng-model="reciveData.selectedSets" ng-options="m.name for m in reciveData.sets">
+	           <p>试题库快速导航  <select class="form-control" ng-change="queryQuestions(1)" ng-model="reciveData.selectedSets" ng-options="m.comment for m in problemSet">
                     <option value="">-- 请选择 --</option>
-                </select>
+                </select></p>
+	         
 	        </div>
-	        <div ng-class="col-md-4" ng-if="showSet==0"> 
+	        <div ng-class="col-md-4" class="hedden" ng-if="showSet==0"> 
 		        <p>搜索试题（请用空格隔开多个关键词）</p>
 		        <input type="text" ng-model="reciveData.keyword" class="form-control">
 	            <button class="btn btn-default" ng-click="queryQuestions(1)">搜索</button>
@@ -36,14 +36,15 @@
         </div>
 
 		
-	     <div class="container-fluid"   ng-if="set.show==1" >
+	     <div class="container-fluid"   ng-if="set.show==1" ng-repeat="domainset in reciveData.sets"  >
 		     <div class="panel panel-default black-panel" style="margin-top: 30px;">
-				   <div class="panel-heading black-heading">
-				     WEB前端
+				   <div class="panel-heading black-heading" ng-bind="domainset.domainName">
+				     
 				   </div>
 				  <div class="panel-body">
-			      <div  class="col-md-3 col-md-offset-1 col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px" ng-repeat="set in reciveData.sets" ng-model="reciveData.selectedSets">
-			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg" ng-click="showQuestions($index)" ></img>
+			      <div  class="col-md-3  col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px;" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
+			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg center-block" ng-click="showQuestions(set)"  ></img>
+			      	<p class="text-center" ng-bind="set.comment" style="margin-top:5px"></p>
 			      </div>
 			   	 </div>
 			    </div>
@@ -51,10 +52,9 @@
 
         <div class="questionbox" ng-if="set.show==0" >
          <div class="panel panel-default black-panel" style="margin-top: 30px;">
-				   <div class="panel-heading black-heading">
-				      {{reciveData.selectedSets.name}}
+				   <div class="panel-heading black-heading" ng-bind="reciveData.selectedSets.name">
 				   </div>
-			   <table class="table table-striped">
+			   <table class="table table-striped table-hover">
 			        <thead>
 				        <tr>
 				            <th>试题内容</th>
@@ -62,8 +62,8 @@
 				        </tr>
 			        </thead>
 			        <tbody>
-			        <tr ng-repeat="q in reciveData.questions">
-			            <td abstract context={{q.context}}></td>
+			        <tr ng-repeat="q in reciveData.questions" style="padding-left: 10px">
+			            <td abstract context={{q.context}} style="width:85%;overflow-x:hidden;overflow-y:hidden;" ></td>
 			            <td>
 			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
 			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>
