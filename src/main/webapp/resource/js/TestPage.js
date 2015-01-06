@@ -18,6 +18,8 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
     $scope.panel.trace=[];
     $scope.test={};
     $scope.test.isNewTest=false;
+    $scope.guide={};
+    $scope.guide.show=0;
     
     $scope.goNext = function (id) {	
     	$scope.panel.trace.push($scope.panel.body);	
@@ -104,7 +106,7 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
             if ($scope.state) {
-                alert('添加成功');
+                smoke.alert('添加成功');
                 //跳转到testdetail
                 console.log('testDetail');
                 Data.setTid($scope.message.msg);
@@ -114,7 +116,7 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
 //                $scope.template = 'testlist.html';
 //                $scope.leftBar = 'leftBar.html';
             } else {
-                alert('error:'+$scope.message.msg);
+                smoke.alert('error:'+$scope.message.msg);
             }
         }).error(function (data) {
             //relogin

@@ -2782,7 +2782,7 @@ angular.module('ui.bootstrap.progressbar', [])
 })
 
 .controller('ProgressController', ['$scope', '$attrs', 'progressConfig', function($scope, $attrs, progressConfig) {
-    var self = this,
+	var self = this,
         animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
 
     this.bars = [];

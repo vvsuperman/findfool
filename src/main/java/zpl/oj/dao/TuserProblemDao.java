@@ -27,7 +27,7 @@ public interface TuserProblemDao {
   void updateProblemByIds(TuserProblem testuserProblem);
   
   @Select("select t1.problemid,t1.useranswer,t1.invite_id,t2.rightanswer,t2.problem_set_id as setid,t2.type "
-  		+ "from testuser_problem t1, problem t2 where t1.invite_id=#{0} and t1.problemid = t2.problem_id order by t1.type,t2.problem_set_id")
+  		+ "from testuser_problem t1, problem t2 where t1.invite_id=#{0} and t1.problemid = t2.problem_id order by t2.type,t2.problem_set_id")
   List<TuserProblem> findProblemByInviteId(int inviteId);
   
   @Select("select t1.problemid,t1.useranswer,t1.type,t1.invite_id from testuser_problem t1 where t1.tuid = #{0} and t1.problemid=#{1}")

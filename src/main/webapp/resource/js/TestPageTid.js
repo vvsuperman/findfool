@@ -21,6 +21,8 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     $scope.test ={};
     $scope.test.addAction = true;
     
+    $scope.set={};
+    
     $scope.getTypeName = function(typeName){
     	if(typeName == 1){
     		return "选择题";
@@ -125,6 +127,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     $scope.showDefaultPanel = function(){
     	console.log("show default panel");
     	$scope.panel.show = "default";
+    	$scope.set.show =1;
     }
     
     
@@ -147,7 +150,6 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        }).success(function (data) {
 	        	if(data.message == "success"){
 	        		$scope.qs.push(q);
-	        		smoke.alert("添加试题成功");
 	        	}else{
 	        		smoke.alert(data.message);
 	        	}

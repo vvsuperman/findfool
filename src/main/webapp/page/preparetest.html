@@ -15,7 +15,7 @@
 		  <div class="form-group row">
 		    <label  class="col-sm-2 control-label">Email</label>
 		    <div class="col-sm-4">
-		      <input type="email" class="form-control" ng-model="loginUser.email" placeholder="Email">
+		      <input type="text" class="form-control" ng-model="loginUser.email" placeholder="Email">
 		    </div>
 		  </div>
 		  
@@ -55,10 +55,10 @@
 		    </div>
 		  </div>
 		  
-		   <div class="form-group">
+		  <!--  <div class="form-group">
 		    <label  class="col-sm-2 control-label">学校</label>
 		    <div class="col-sm-4">
-		      <!--<input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">-->
+		      <input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">
 		      <angucomplete-alt id="schools"
 	              placeholder="学校"
 	              minlength="2"
@@ -71,7 +71,7 @@
 	              match-class="bg-info"
 	              input-class="form-control"/>
 		    </div>
-		  </div>
+		  </div> -->
 		  
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">博客</label>
@@ -121,5 +121,7 @@
    	  </form>
    	  
    	 <div ng-include src="'page/testing.html'"  ng-if="show==4"></div>
+   	 <!-- 测试完成 -->
+   	  <div ng-include src="'page/testend.html'"  ng-if="show==5"></div>
 
 </div>

@@ -56,6 +56,13 @@ public class InviteServiceImp implements InviteService {
 		int tuid = testuserService.updateUser(tuser);
 		
 		Invite invite = new Invite();
+		//如果对同一个地址发送了同一份试题，则更新invite
+		Invite oldInvite = inviteDao.getInvites(q.getQuizid(), u.getEmail());
+		if(oldInvite!=null){
+			invite = oldInvite;
+		}
+		
+		
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());
 		invite.setUid(tuid);
@@ -63,10 +70,15 @@ public class InviteServiceImp implements InviteService {
 		invite.setState(ExamConstant.INVITE_PUB);
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
-		invite.setDuration(duration);
-		//如果对同一个地址发送了同一份试题，则更新invite
-		Invite oldInvite = inviteDao.getInvites(q.getQuizid(), u.getEmail());
-		if(oldInvite!=null){
+		if(duration!=null&&duration.equals("")==false){
+			invite.setDuration(duration);
+		}else{
+			invite.setDuration(q.getTime().toString());
+		}
+		
+		
+	
+		if(invite.getIid()!=0){
 			inviteDao.updateInvite(invite);
 		}else{
 			inviteDao.insertInvite(invite);

@@ -4,7 +4,7 @@ OJApp.controller("testshow",function($scope, $http, Data) {
     $scope.ContentUs = 'contentUs.html';
     $scope.leftBar = '';
     $scope.name = Data.name();
-
+    
 
 
     if ($scope.local == true) {

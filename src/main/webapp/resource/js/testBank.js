@@ -75,6 +75,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
         { name: '编程题', data: '2'},
     ];
     
+    $scope.domainType =1;
     
     
 	//查看和修改试题的通用方法

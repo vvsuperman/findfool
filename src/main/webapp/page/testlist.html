@@ -5,7 +5,7 @@
  
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
-	style="margin-top: 70px">
+	style="margin-top: 20px">
 
 	<div class="panel panel-default black-panel">
 		<div class="panel-heading black-heading">
@@ -17,10 +17,10 @@
 		<div ng-if="contain.show==1">
 			<div class="row" style="padding-top:15px;padding-bottom:15px">
 				<div class="col-md-1"></div>
-				<div class="col-md-4">试题内容</div>
+				<div class="col-md-5">试题内容</div>
 				<div class="col-md-1"></div>
 				<div class="col-md-2">类型</div>
-				<div class="col-md-1">分数</div>
+				<!-- <div class="col-md-1">分数</div> -->
 				<div class="col-md-3">修改/删除/上移/下移</div>
 			</div>
 			<div class="question-list"  ng-repeat="q in qs">
@@ -28,7 +28,7 @@
 				    	
 				    	<span ng-bind="'Q'+($index+1)"></span>
 				    </div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 					
 					   <a href=""
 							ng-click="displayQuestionDetails($index)"
@@ -55,7 +55,7 @@
 					<div class="col-md-2">
 						<input abstract ng-bind="getTypeName(q.type)">
 					</div>
-					<div class="col-md-1">{{q.score}}</div>
+					<!-- <div class="col-md-1">{{q.score}}</div> -->
 					<div class="col-md-3">
 						&nbsp;&nbsp;
 						<a class="blackFont" href="" ng-if="q.setid==-1"

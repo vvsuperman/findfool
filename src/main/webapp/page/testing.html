@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/testing.css" />
 <div>
 		<nav class="navbar navbar-dafault" role="navigation">
 		  <div class="container-fluid">
@@ -17,22 +17,50 @@
 		    </div>
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    <div class="collapse navbar-collapse">
 		      
-		     
+		        
+		         <div class="col-md-2 col-md-offset-2">
+		           <progressbar class="progress-striped active" type=success value="answerCount.sum" max="answerCount.total">
+		           </progressbar>
+		          </div>
+		          <div class="col-md-1" style="margin-top: 12px">
+		          <span ng-bind="answerCount.sum"></span> / <span ng-bind="answerCount.total"></span>
+		         </div>
+		          
+		          <div timer class="col-md-3 col-md-offset-1 timer">
+                          <div class="hours-wrapper">
+                              <span class="hours"></span> <br>hours
+                          </div>
+                          <div class="minutes-wrapper">
+                              <span class="minutes"></span> <br>minutes
+                          </div>
+                          <div class="seconds-wrapper">
+                              <span class="seconds"></span> <br>seconds
+                          </div>
+                   </div>
+		          
+		          
+		          <!-- progressbar class="progress-striped active" value="22" type="success"><i>40%</i> </progressbar> -->
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#" ng-bind="tuser.email"></a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav><!-- /navbar -->
+ 
+ 
 
 	  <div class="container-fluid">
 	  <div class="row">
 	   <!-- 左侧选项条 -->
 	   <div class="col-md-1">
 	   	 <ul class="nav nav-pills nav-stacked" role="tablist">
-			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem)"><a href="" >{{$index+1}}</a></li >
+			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem)">
+			   <a  href=""   class="dotA">
+			  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
+			   </a>
+			 </li >
 		 </ul>
 	   </div>
 	   
@@ -46,7 +74,7 @@
 	
 				<div class="options list col-md-12 col-sm-12  col-xs-12" >
 			       	  <label customcheckbox option={{option}} class='optionlabel checkbox' useranswer={{question.useranswer}} 
-			       	   ng-repeat="option in question.answer" operation="edit">
+			       	   ng-repeat="option in question.answer" index={{$index}} operation="edit">
 			       	  <span class='icon'></span><span class='icon-to-fade'></span>
 			       	  <!--   <textarea ckeditor  minheight="70" width="90%" operation="view" class='optiontext'   ng-model="option.text"></textarea> -->
 			       	  <textarea  simditor 	minheight="30px" operation="view" class='optiontext'  width="100%"	ng-model="option.text"></textarea>

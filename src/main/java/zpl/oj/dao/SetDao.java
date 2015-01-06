@@ -10,7 +10,7 @@ import zpl.oj.model.common.ProblemSet;
 
 public interface SetDao {
 
-	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE,DOMAIN_ID AS domainId OWNER,COMMENT"
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE,DOMAIN_ID AS domainId, OWNER,COMMENT"
 			+ "  FROM SETS  WHERE problem_set_id = #{0} and state=1")
 	ProblemSet getSet(int id);
 	

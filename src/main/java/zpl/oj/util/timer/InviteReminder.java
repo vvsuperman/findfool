@@ -24,6 +24,7 @@ public class InviteReminder {
 	
     public InviteReminder(int minutes,int inviteId,InviteDao invDao) {
         timer = new Timer();
+        System.out.println("minutes........"+minutes);
         timer.schedule(new RemindTask(), minutes*60000);
         this.inviteId = inviteId;
         this.inviteDao = invDao;

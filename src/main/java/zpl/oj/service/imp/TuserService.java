@@ -44,7 +44,9 @@ public class TuserService {
 		Testuser tuser =testuserDao.findTestuserByName(testuser.getEmail()); 
 		if(tuser!=null){
 			//该邮箱的用户曾经做过题，执行更新操作
-			testuserDao.updateTestuserById(testuser);
+			tuser.setEmail(testuser.getEmail());
+			tuser.setPwd(testuser.getPwd());
+			testuserDao.updateTestuserById(tuser);
 			return tuser.getTuid(); 
 		}else{
 			testuserDao.insertTestuser(testuser);

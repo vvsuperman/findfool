@@ -76,7 +76,7 @@ public class TestingController {
 			rtMap.put("msg", "非法用户");
 			return rtMap;
 		} else if (invite.getState() == ExamConstant.INVITE_FINISH) {
-			rtMap.put("msg", "试题已截至");
+			rtMap.put("msg", "1");
 			return rtMap;
 		}
 
@@ -101,6 +101,12 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
+		
+		int testid = Integer.parseInt((String)params.get("testid"));
+		String email = (String)params.get("email");
+		
+		
+		
 		rb.setState(1);
 		return rb;
 	}
@@ -116,19 +122,30 @@ public class TestingController {
 	@ResponseBody
 	public ResponseBase login(@RequestBody Map<String,Object> params){
 		ResponseBase rb = new ResponseBase();
-		int testid = Integer.parseInt((String)params.get("testid"));
-		String email = (String)params.get("email");
 		
-		Testuser tmpuser = tuserDao.findTestuserByName(email);
-		//无此用户
-		if(tmpuser==null){
+		Map map = validateUser(params);
+		Integer tuid = (Integer) map.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(map.get("msg"));
 			rb.setState(0);
 			return rb;
+		}
+		
+		int testid = Integer.parseInt((String)params.get("testid"));
+		String email = (String)params.get("email");
+		Testuser tmpuser = tuserDao.findTestuserByName(email);
+		String pwd = (String)params.get("pwd");
+		//用户名、密码不匹配
+		if(tmpuser.getPwd().equals(pwd)==false){
+			rb.setState(0);
+			rb.setMessage(2);
+			return rb;
 		}else{
+		
 			//判读用户是否已经开始做题，若已开始，直接给出题目列表
 			Invite invite = inviteDao.getInvites(testid, email);
-			//逻辑有问题
-			if(invite.getBegintime()!=null||invite.getBegintime().equals("")==false){
+			
+			if(invite.getBegintime().equals("")==false){
 					//用户已开始做题，直接返回tuserproblem的list
 					List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
 					rb.setState(1);
@@ -139,7 +156,7 @@ public class TestingController {
 				rb.setState(2);
 				return rb;
 			}
-	}
+		}
 	}
 	/*
 	 * 根据传递的参数获取学校信息
@@ -218,23 +235,32 @@ public class TestingController {
 			return rb;
 		}
 		
+		
+		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		Integer tuid = (Integer) map.get("tuid");
 		Invite invite = inviteDao.getInvites(testid, email);
+		
 		//对某一test、用户对发送第一次测试
 		List<TuserProblem> tProblems=null;
+		//初始化试题列表
 		tProblems = tuserService.initialProblems(testid,tuid,invite.getIid());
-			
 		
-		Date date = new Date();
-		invite.setBegintime(df.format(date));
-		//建立定时器，到时间后将邀请置为无效
-		new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid(),inviteDao);
-		inviteDao.updateInvite(invite);
+		//初始化开始时间
+		if(invite.getBegintime().equals("")==true){
+			Date date = new Date();
+			invite.setBegintime(df.format(date));
+			//建立定时器，到时间后将邀请置为无效
+			new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid(),inviteDao);
+			inviteDao.updateInvite(invite);
+		}
 		
+		Map rtMap = new HashMap<String, Object>();
+		rtMap.put("invite", invite);
+		rtMap.put("problems", tProblems);
 		rb.setState(1);
-		rb.setMessage(tProblems);
+		rb.setMessage(rtMap);
 		return rb;
 	
 	}
@@ -359,17 +385,19 @@ public class TestingController {
 		Invite invite = inviteDao.getInvites(testid, email);
 		// 用户邀请不合法
 		if (invite == null) {
-			rb.setState(0);
+			rb.setState(1);
 			rb.setMessage("非法访问");
 			return rb;
-		} else if (invite.getState() == 0) {
-			rb.setState(0);
+		} else if (invite.getState() == 1) {
+			
+			
+			rb.setState(1);
 			rb.setMessage("试题已截至");
 			return rb;
 		}
-		invite.setState(0);
+		invite.setState(1);
 		inviteDao.updateInvite(invite);
-		rb.setState(1);
+		rb.setState(0);
 		return rb;
 	}
 }

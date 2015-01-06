@@ -11,7 +11,7 @@ import zpl.oj.model.common.ProblemSet;
 
 public interface DomainDao {
 
-	@Select("select domain_id as domainId,domain_name as domainName from domain where state=1")
+	@Select("select domain_id as domainId,domain_name as domainName,type from domain where state=1")
 	List<Domain> getAllDomain();
 	
 

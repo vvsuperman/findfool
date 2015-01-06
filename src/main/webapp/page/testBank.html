@@ -35,8 +35,8 @@
 
         </div>
 
-		
-	     <div class="container-fluid"   ng-if="set.show==1" ng-repeat="domainset in reciveData.sets"  >
+		  <!-- 选择题 -->
+	     <div class="container-fluid"   ng-if="set.show==1 && active ==1" ng-repeat="domainset in reciveData.sets|filter:{type:1}"  >
 		     <div class="panel panel-default black-panel" style="margin-top: 30px;">
 				   <div class="panel-heading black-heading" ng-bind="domainset.domainName">
 				     
@@ -49,6 +49,20 @@
 			   	 </div>
 			    </div>
 			  </div>  
+			  <!-- 编程题 -->
+			 <div class="container-fluid"   ng-if="set.show==1 && active ==2" ng-repeat="domainset in reciveData.sets|filter:{type:3}"  >
+		     	<div class="panel panel-default black-panel" style="margin-top: 30px;">
+				   <div class="panel-heading black-heading" ng-bind="domainset.domainName">
+				     
+				   </div>
+				  <div class="panel-body">
+			      <div  class="col-md-3  col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px;" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
+			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg center-block" ng-click="showQuestions(set)"  ></img>
+			      	<p class="text-center" ng-bind="set.comment" style="margin-top:5px"></p>
+			      </div>
+			   	 </div>
+			    </div>
+			  </div>    
 
         <div class="questionbox" ng-if="set.show==0" >
          <div class="panel panel-default black-panel" style="margin-top: 30px;">
