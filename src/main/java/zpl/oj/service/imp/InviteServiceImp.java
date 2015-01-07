@@ -21,6 +21,7 @@ import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 @Service
 public class InviteServiceImp implements InviteService {
@@ -95,6 +96,7 @@ public class InviteServiceImp implements InviteService {
 	 */
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
 			String pwd, User hrUser) {
+		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
 		String url = desService.encode(tu.getEmail()+"|"+q.getQuizid());
 		final MailSenderInfo mailSenderInfo = new MailSenderInfo();
 		mailSenderInfo.setMailServerHost("smtp.163.com");   
@@ -108,7 +110,7 @@ public class InviteServiceImp implements InviteService {
 		mailSenderInfo.setSubject(request.getSubject());
 		String context = request.getContext();
 		context += "<p>这是来自findfool的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到"
-				+"</br>http://localhost:8080/oj/#/testing/"+url+"</br>"
+				+"<a>"+baseurl+"/#/testing/"+url+"</a>"
 				+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
 				+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
 		mailSenderInfo.setContent(context);
