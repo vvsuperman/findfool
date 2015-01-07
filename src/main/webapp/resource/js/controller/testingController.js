@@ -22,7 +22,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.programCode = {};
 	 $scope.answerCount ={total:0,sum:0};
 	 $scope.timeremain = 0;
-	  $scope.queryNum =5;
+	 
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -284,7 +284,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
        var solution = {};
        solution.problem_id = 0;
        solution.language = $scope.lg.context.lan;
-
+       $scope.queryNum =5;
        //solution.solution = $scope.proSolution;
        solution.user_id = $scope.tuser.tuid;
        solution.testid = $scope.tid;
