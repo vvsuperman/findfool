@@ -1,0 +1,85 @@
+.timer {
+    text-shadow: 0 1px 5px rgba(0,0,0,.1);
+    color:#666666;
+    text-align: center;
+    padding-left: 80px;
+}
+
+.timer .days-wrapper,
+.timer .hours-wrapper,
+.timer .minutes-wrapper,
+.timer .seconds-wrapper {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+    padding-top: 15px;
+   /*  background: #2d2d2d; browsers that don't support rgba
+    background: rgba(45,45,45,.7); */
+    font-size: 18px;
+    text-align:center;
+    -moz-border-radius: 80px;
+    -webkit-border-radius: 80px;
+    border: 1px solid #666666;
+    border-radius: 80px;
+    font-size: 8px;
+}
+
+.timer .days-wrapper:hover,
+.timer .hours-wrapper:hover,
+.timer .minutes-wrapper:hover,
+.timer .seconds-wrapper:hover {
+    text-shadow: none;
+}
+
+.timer .days,
+.timer .hours,
+.timer .minutes,
+.timer .seconds {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+
+
+
+a.dotA:hover{
+	background: #ffffff!important;
+}
+
+.dot{
+	margin-left:-5px;
+	width:20px !important;
+    height:20px; 
+    background-color:#1abc9c; 
+    border-radius:10px !important;
+    /* width:20px; height:20px; background-color:#F00; border-radius:10px; */
+}
+
+
+
+.dot span{
+	/* margin-left: 10px !important; */
+	/* margin-right: 15px !important; */
+	height:20px; 
+	line-height:20px; 
+	display:block; 
+	color:#FFF; 
+	text-align:center
+}
+
+.progress{
+	margin-top: 10px!important;
+	height: 30px !important;
+	
+}
+
+
+
+.progress i{
+	margin-top:20px!important;
+}
+
+.progress-bar-success{
+	background-color: #1abc9c!important;
+}

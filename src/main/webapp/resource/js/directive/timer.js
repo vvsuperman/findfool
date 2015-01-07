@@ -1,0 +1,32 @@
+//辅助指令，用于处理列表的显示数据
+OJApp.directive('timer', function() {
+	return {
+		restrict: 'AE',
+		scope:true,
+		link: function(scope, elem, attrs) {
+			console.log("initial timer.......",scope.timeremain);
+		//	scope.$on("timeremain",function(event,timeremain){
+				var time = 1*60*60*1000 + (new Date()).valueOf();
+				elem.countdown(scope.timeremain, function(event) {
+			        var $this = $(this);
+			        switch(event.type) {
+			            case "seconds":
+			            case "minutes":
+			            case "hours":
+			            case "days":
+			            case "weeks":
+			            case "daysLeft":
+			                $this.find('span.'+event.type).html(event.value);
+			                break;
+			            case "finished":
+			                $this.hide();
+			                break;
+			        }
+			    });
+//			});
+			
+			//scope.$emit("initialed");
+		}
+	};
+
+});
