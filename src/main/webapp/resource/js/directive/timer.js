@@ -4,10 +4,8 @@ OJApp.directive('timer', function() {
 		restrict: 'AE',
 		scope:true,
 		link: function(scope, elem, attrs) {
-			console.log("initial timer.......",scope.timeremain);
-		//	scope.$on("timeremain",function(event,timeremain){
-				var time = 1*60*60*1000 + (new Date()).valueOf();
-				elem.countdown(scope.timeremain, function(event) {
+			console.log("initial timer.......",scope.time.remain);
+				elem.countdown(scope.time.remain, function(event) {
 			        var $this = $(this);
 			        switch(event.type) {
 			            case "seconds":
@@ -23,9 +21,7 @@ OJApp.directive('timer', function() {
 			                break;
 			        }
 			    });
-//			});
 			
-			//scope.$emit("initialed");
 		}
 	};
 

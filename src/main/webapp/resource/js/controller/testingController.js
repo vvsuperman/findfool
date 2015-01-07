@@ -21,7 +21,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.question = {};
 	 $scope.programCode = {};
 	 $scope.answerCount ={total:0,sum:0};
-	 $scope.timeremain = 0;
+	 $scope.time={};
+	 $scope.time.remain = 1;
 	 
 	 //检查该url是否合法
 	 $http({
@@ -149,8 +150,17 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	var beginTime =data.message.invite.begintime;
 	    	beginTime = (new Date(beginTime.replace(/\-/g,"/"))).getTime();
 	    	var duration =data.message.invite.duration*60*1000;
-	    	$scope.timeremain = beginTime+duration;
+	    	$scope.time.remain = beginTime+duration;
+	    	//定时器提醒
+	    	$timeout($scope.stop,$scope.time.remain);
 	 }
+	 
+	 
+	 $scope.stop = function(){
+			 smoke.alert("测试已结束");
+			 $scope.show = 5;
+		 }
+		
 	 
 	 $scope.startTest = function(){
     	 var sendData ={"email":$scope.email,"testid":$scope.tid}
@@ -280,9 +290,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      /*
       * 编程题运行,而不提交，此时problem_id为0，若为0会执行测试用例
       * */
-    $scope.run = function () {
+    $scope.run = function (data) {
        var solution = {};
-       solution.problem_id = 0;
+       if(data=="test"){
+    	   solution.problem_id = 0;
+       }else if(data == "submit"){
+    	   solution.problem_id = $scope.question.qid;
+       }
+      
        solution.language = $scope.lg.context.lan;
        $scope.queryNum =5;
        //solution.solution = $scope.proSolution;

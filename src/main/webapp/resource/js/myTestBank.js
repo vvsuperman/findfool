@@ -186,7 +186,9 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
     };
     
     $scope.showAddPage = function (active) {
-        $scope.active = active;
+       //初期只允许新增选择题
+    	$scope.active =1;
+       // $scope.active = active;
         $scope.show = 0;
         $scope.context="";
         $scope.tag="";

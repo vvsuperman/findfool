@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport ==1">
-    <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn>
+    <!-- <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn> -->
     </p>
     <table class="table table-striped">
         <thead>
@@ -19,8 +19,8 @@
             <td ng-bind="invite.email"></td>
             <td ng-bind="invite.duration"></td>
             <td ng-bind="getState(invite)"></td>
-            <td ng-bind="getScore(invite)"></td>
-            <td ng-click="viewReport(invite)"><a href="">详情</a></td>
+            <td ><span ng-bind="getScore(invite)" ng-if="invite.state==1"></span> </td>
+            <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==1">详情</a></td>
         </tr>
         
         </tbody>
