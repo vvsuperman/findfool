@@ -14,10 +14,10 @@ import zpl.oj.model.common.Testuser;
 public interface TestuserDao {
 	 
   @Insert("INSERT INTO testuser( username,email,school,company,blog,age,pwd,tel,registerdate,lastlogindate,state)"
-			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{pwd},#{tel},#{registerDate},#{lastLoginDate},#{state})")
+			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{tel},#{registerDate},#{lastLoginDate},#{state})")
   void insertTestuser(Testuser testuser);
   
-  @Update("update testuser set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},pwd=#{pwd},tel=#{tel},"
+  @Update("update testuser set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},tel=#{tel},"
   		+ "registerdate = #{registerDate},lastlogindate=#{lastLoginDate}  where tuid =#{tuid}")
   void updateTestuserById(Testuser testuser);
   

@@ -9,7 +9,7 @@ public class Testuser {
 	private String email;
 	private String school;
 	private String company;
-	private String pwd;
+	
 	private String blog;
 	private int age;
 	private String registerDate;
@@ -26,7 +26,6 @@ public class Testuser {
 		this.email ="";
 		this.school="";
 		this.company="";
-		this.pwd="";
 		this.blog="";
 		this.age= 0;
 		this.registerDate="";
@@ -84,14 +83,7 @@ public class Testuser {
 		this.company = company;
 	}
 
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
+	
 	public String getBlog() {
 		return blog;
 	}

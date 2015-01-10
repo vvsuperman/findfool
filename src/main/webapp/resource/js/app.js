@@ -7,9 +7,9 @@ var OJApp = angular.module('OJApp', [
     'chart.js',
     'ngRoute',
     'ngSanitize',
-    'evgenyneu.markdown-preview',
+//    'evgenyneu.markdown-preview',
     'webStorageModule',
-    'ngCkeditor',
+//    'ngCkeditor',
     'lr.upload',
     'angucomplete-alt'
 ]);

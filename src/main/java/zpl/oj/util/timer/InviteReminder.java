@@ -33,7 +33,9 @@ public class InviteReminder {
     class RemindTask extends TimerTask {
         public void run() {
             Invite invite = inviteDao.getInviteById(inviteId);
+            //将标志位置成结束
             invite.setState(ExamConstant.INVITE_FINISH);
+            
             inviteDao.updateInvite(invite);
             timer.cancel(); //Terminate the timer thread
         }

@@ -17,7 +17,7 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
      })
      
      $scope.getScore = function(invite){
-		 return invite.score+"/"+invite.totalscore
+		 return invite.score+"/"+invite.totalScore;
 	 }
 	 
 	 $scope.getState = function(invite){
@@ -108,20 +108,38 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
     
    //查看和修改试题的通用方法
 	$scope.viewQuestion = function (size,q,params) {
-	   	var question = jQuery.extend(true, {}, q);
-		 var modalInstance = $modal.open({
-		      templateUrl: 'page/myModalContent.html',
-		      controller: 'ModalInstanceCtrl',
-		      size: size,
-		      resolve: {
-		          params:function(){
-		        	  var obj ={};
-		        	  obj.operation = params.operation;
-		        	  obj.title=params.title;
-		        	  obj.question = question;
-		        	  return obj;
-		          }
-		      }
-		 });
+		//选择题
+		if(q.type ==1 ){
+			var question = jQuery.extend(true, {}, q);
+			 var modalInstance = $modal.open({
+			      templateUrl: 'page/myModalContent.html',
+			      controller: 'ModalInstanceCtrl',
+			      size: size,
+			      resolve: {
+			          params:function(){
+			        	  var obj ={};
+			        	  obj.operation = params.operation;
+			        	  obj.title=params.title;
+			        	  obj.question = question;
+			        	  obj.report = 1;      //表示是查看报告
+			        	  return obj;
+			          }
+			      }
+			 });
+		//编程题
+		}else if(q.type ==2 ){
+			 $http({
+			        url: WEBROOT+"/report/getprodetail",
+			        method: 'POST',
+			        data: {"problemId":q.qid ,"inviteId":Data.inviteid()}
+			    }).success(function (data) {
+			    	console.log("q..........",q);
+			    	q.answer = data;
+			    	console.log("q......",q);
+			    }).error(function(){
+			   	 console.log("get data failed");
+			    })
+		}
+	   
 	 };
 });

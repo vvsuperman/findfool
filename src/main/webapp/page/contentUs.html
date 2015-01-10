@@ -1,16 +1,8 @@
-<div class="highlight col-md-2" ng-class="{0: '', 1: 'dropup'}[show]" style="bottom: -5px;right:2px;position: fixed " ng-controller="mainController">
+<div class="highlight col-md-2" ng-class="{0: '', 1: 'dropup'}[show]" style="bottom: -5px;right:2px;position: fixed " ng-controller="contactController">
     <!--<div class="highlight col-md-2  " style="display: none;">-->
-     <a href=""><span class="glyphicon glyphicon-chevron-down pull-right"  ng-if="show==0" ng-click="btn()"></span></a>	
-	 <a href=""><span class="glyphicon glyphicon-chevron-up pull-right" ng-if="show==1" ng-click="btn()"></span></a>	
-    <a href="" class="text-center" ng-click="btn()">请给我们提出宝贵的建议</a>
-    <textarea rows="8" id="yr" style="width: 100% ;resize: none;" ng-class="{0: '', 1: 'hedden'}[show]" ng-model="msg"></textarea>
-    <button ng-class="{0: 'btn btn-success btn-xs center-block', 1: 'hedden'}[show]" ng-click="contactus()" style="margin-top:5px">提交</button>
+     <a href=""><span class="glyphicon glyphicon-chevron-down pull-right"  ng-if="contact.show==0" ng-click="contact.show=1"></span></a>	
+	 <a href=""><span class="glyphicon glyphicon-chevron-up pull-right" ng-if="contact.show==1" ng-click="contact.show=0"></span></a>	
+    <a href="" class="text-center" ng-click="contact.show=1-contact.show">请给我们提出宝贵的建议</a>
+    <textarea rows="8" id="yr" style="width: 100% ;resize: none;" ng-class="{0: '', 1: 'hedden'}[contact.show]" ng-model="suggest.content"></textarea>
+    <button ng-class="{0: 'btn btn-success btn-xs center-block', 1: 'hedden'}[contact.show]" ng-click="addSuggest()" style="margin-top:5px">提交</button>
 </div>
-<script>
-    function Ctrl($scope) {
-        $scope.show = 1;
-        $scope.btn = function () {
-            $scope.show = -($scope.show - 1);
-        }
-    }
-</script>

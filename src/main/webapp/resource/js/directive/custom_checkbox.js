@@ -21,18 +21,23 @@ OJApp.directive('customcheckbox', function() {
 				elem.css("border-color","#2fe2bf");	
 			}*/
 			
+			console.log("report................",attrs.report);
+			 
 			var index = attrs.index;
 			//若存在用户的选择
-			if(attrs.useranswer!=""&&typeof(attrs.useranswer)!="undefined"){
-				//判断用户是否选择
-				if(attrs.useranswer.charAt(index)==1){
-					elem.addClass(checkBoxChecked);
-					elem.css("border-color","#2fe2bf");	
-				}
+			if(attrs.report == 1){
+				if(attrs.useranswer!=""&&typeof(attrs.useranswer)!="undefined"){
+					//判断用户是否选择
+					if(attrs.useranswer.charAt(index)==1){
+						elem.addClass(checkBoxChecked);
+						elem.css("border-color","#2fe2bf");	
+					}
+		     	}
+			
 				//判断选项是否正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
 					//elem.append("<span class='icon righticon' >");
-					elem.append("<p>正确选项</p>")
+					elem.append("<p class='greenFont'><label class='glyphicon glyphicon-ok'></label>正确答案</p>")
 				}
 				
 			}else{

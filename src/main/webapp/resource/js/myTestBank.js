@@ -55,7 +55,13 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	};
 	
 	
-	
+	$scope.onSuccess = function(data){
+		if(data.state == 0){
+			smoke.alert(data.msg)
+		}else{
+			smoke.alert("恭喜你，导入成功");
+		}
+	}
 
 
     //add by zpl

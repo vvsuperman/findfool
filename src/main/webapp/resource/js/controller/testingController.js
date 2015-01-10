@@ -139,7 +139,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 };
 	 
 	 $scope.genExtraInfo = function(data){
-		//生成用户的得分情况
+		//生成用户的完成题目
 	    	$scope.answerCount.total = $scope.tProblems.length;
 	    	for(var i=0;i<$scope.tProblems.length;i++){
 	    		if(typeof($scope.tProblems[i].useranswer)!=null && $scope.tProblems[i].useranswer!=""){
@@ -152,7 +152,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	var duration =data.message.invite.duration*60*1000;
 	    	$scope.time.remain = beginTime+duration;
 	    	//定时器提醒
-	    	$timeout($scope.stop,$scope.time.remain);
+//	    	$timeout($scope.stop,$scope.time.remain);
 	 }
 	 
 	 
@@ -287,7 +287,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 
      }
      
-     /*
+     /* 
       * 编程题运行,而不提交，此时problem_id为0，若为0会执行测试用例
       * */
     $scope.run = function (data) {
@@ -301,7 +301,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
        solution.language = $scope.lg.context.lan;
        $scope.queryNum =5;
        //solution.solution = $scope.proSolution;
-       solution.user_id = $scope.tuser.tuid;
+       solution.email =$scope.email
        solution.testid = $scope.tid;
        solution.solution = $scope.programCode.context;
        console.log("solution......",solution);

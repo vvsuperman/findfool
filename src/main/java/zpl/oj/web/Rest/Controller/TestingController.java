@@ -82,6 +82,7 @@ public class TestingController {
 
 		int tuid = invite.getUid();
 		rtMap.put("tuid", tuid);
+		rtMap.put("invite", invite);
 		return rtMap;
 	}
 	
@@ -133,29 +134,30 @@ public class TestingController {
 		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
-		Testuser tmpuser = tuserDao.findTestuserByName(email);
 		String pwd = (String)params.get("pwd");
+		
+		
+		
+		Invite invite = inviteDao.getInvites(testid, email);
+
 		//用户名、密码不匹配
-		if(tmpuser.getPwd().equals(pwd)==false){
+		if(invite.getPwd().equals(pwd)==false){
 			rb.setState(0);
 			rb.setMessage(2);
 			return rb;
-		}else{
+		}
 		
-			//判读用户是否已经开始做题，若已开始，直接给出题目列表
-			Invite invite = inviteDao.getInvites(testid, email);
-			
-			if(invite.getBegintime().equals("")==false){
-					//用户已开始做题，直接返回tuserproblem的list
-					List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
-					rb.setState(1);
-					rb.setMessage(tuserProblems);
-					return rb;
-			}else{  
-			//未开始
-				rb.setState(2);
-				return rb;
-			}
+		//判读用户是否已经开始做题，若已开始，直接给出题目列表
+		if(invite.getBegintime().equals("")==false){
+			//用户已开始做题，直接返回tuserproblem的list
+			List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
+			rb.setState(1);
+			rb.setMessage(tuserProblems);
+			return rb;
+		}else{  
+		//未开始
+			rb.setState(2);
+			return rb;
 		}
 	}
 	/*
@@ -288,6 +290,8 @@ public class TestingController {
 			return rb;
 		}
 		
+		Invite invite = (Invite)map.get("invite");
+		
 		//提交用户的答案
 		if(params.get("problemid")!=null){
 			int problemid = (int)params.get("problemid");
@@ -296,7 +300,7 @@ public class TestingController {
 			TuserProblem testuserProblem  = new TuserProblem();
 			testuserProblem.setProblemid(problemid);
 			testuserProblem.setUseranswer(useranswer);
-			testuserProblem.setTuid(tuid);
+			testuserProblem.setInviteId(invite.getIid());
 			tuserProblemDao.updateAnswerByIds(testuserProblem);	
 		}
 		
@@ -304,7 +308,7 @@ public class TestingController {
 		//取下一道题，对选项排序，确保答案能够匹配上
 		int nowProblmeId = (int)params.get("nowProblemId");
 		Question question = problemService.getProblemById(nowProblmeId);
-		TuserProblem tProblem = tuserProblemDao.findByPidAndUid(tuid, nowProblmeId);
+		TuserProblem tProblem = tuserProblemDao.findByPidAndIid(invite.getIid(), nowProblmeId);
 		question.setUseranswer(tProblem.getUseranswer());
 		MyCompare comp = new MyCompare();  
         // 执行排序  
@@ -338,9 +342,10 @@ public class TestingController {
 		}
 		
 		//取一道题，对选项排序，确保答案能够匹配上
+		Invite invite = (Invite)map.get("invite");
 		int problmeId = (int)params.get("problemId");
 		Question question = problemService.getProblemById(problmeId);
-		TuserProblem tProblem = tuserProblemDao.findByPidAndUid(tuid, problmeId);
+		TuserProblem tProblem = tuserProblemDao.findByPidAndIid(invite.getIid(), problmeId);
 		question.setUseranswer(tProblem.getUseranswer());
 		
 		MyCompare comp = new MyCompare();  

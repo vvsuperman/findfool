@@ -53,7 +53,6 @@ public class InviteServiceImp implements InviteService {
 		//等级
 		//设置密码,5位的
 		String pwd = RandomCode.randomString(5);
-		tuser.setPwd(pwd);
 		int tuid = testuserService.updateUser(tuser);
 		
 		Invite invite = new Invite();
@@ -63,7 +62,7 @@ public class InviteServiceImp implements InviteService {
 			invite = oldInvite;
 		}
 		
-		
+		invite.setPwd(pwd);
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());
 		invite.setUid(tuid);

@@ -9,7 +9,7 @@
             <th>用户名</th>
             <th>持续时间</th>
             <th>状态</th>
-            <th>结果</th>
+           <!--  <th>结果</th> -->
             <th>查看详情</th>
             
         </tr>
@@ -19,7 +19,7 @@
             <td ng-bind="invite.email"></td>
             <td ng-bind="invite.duration"></td>
             <td ng-bind="getState(invite)"></td>
-            <td ><span ng-bind="getScore(invite)" ng-if="invite.state==1"></span> </td>
+           <!--  <td ><span ng-bind="getScore(invite)" ng-if="invite.state==1"></span> </td> -->
             <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==1">详情</a></td>
         </tr>
         

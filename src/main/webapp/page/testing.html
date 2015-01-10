@@ -86,7 +86,7 @@
 		 <!-- program test --> 
 		  <div class="row" ng-if="questionType==2">
 		    <div style="margin-top: 20px">
-		        <textarea ckeditor minheight="120" width="100%" operation="view" ng-model="question.context"></textarea>
+		        <textarea simditor minheight="50px" width="100%" operation="view" ng-model="question.context"></textarea>
 		    </div>
 		    
 		    <div>
@@ -107,8 +107,8 @@
 		        
 		     
 		        <div class="col-md-12" style="margin-top: 20px;">
-		            <button class="btn btn-primary" ng-click="run()">运行</button>
-		             <button class="btn btn-primary" ng-click="run()">提交</button>
+		            <button class="btn btn-primary" ng-click="run('test')">运行</button>
+		             <button class="btn btn-primary" ng-click="run('submit')">提交</button>
 		        </div>
 		        
 		        <div class="col-md-12" style="margin-top: 20px;" >

@@ -10,7 +10,16 @@ public class ReciveSolution {
 	List<ReciveTestCases> user_test_cases;
 	int user_id;
 	int testid;
+	String email;
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public int getTestid() {
 		return testid;
 	}

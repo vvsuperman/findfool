@@ -18,6 +18,20 @@ public class Invite implements Serializable {
 		this.score = 0;
 		this.totalScore=0;
 		this.state = 1;
+		this.pwd ="";
+	}
+	
+	/**
+	 * ${item.pwd}
+	 */
+	private String pwd;
+	
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	/**

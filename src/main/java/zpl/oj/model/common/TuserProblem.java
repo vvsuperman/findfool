@@ -17,7 +17,11 @@ public class TuserProblem {
 	private int setid;
 	private int inviteId;
 	private int score;
+	private int solutionId;   //编程题的运行ID
 	
+	
+
+
 	public TuserProblem() {
 		this.tuid = 0;
 		this.problemid = 0;
@@ -30,7 +34,18 @@ public class TuserProblem {
 	}
 	
 	
+	
+	public int getSolutionId() {
+		return solutionId;
+	}
 
+
+
+	public void setSolutionId(int solutionId) {
+		this.solutionId = solutionId;
+	}
+
+	
 	public int getScore() {
 		return score;
 	}

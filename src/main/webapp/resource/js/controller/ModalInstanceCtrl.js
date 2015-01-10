@@ -4,6 +4,7 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,
 	$scope.question = params.question;
 	$scope.operation = params.operation;
 	$scope.title = params.title;
+	$scope.report = params.report;
 	
 	$scope.saveQustion = function () {
 			 var sendData={"quizid":$scope.tid,"user":{"uid": Data.uid()},"question":$scope.question};

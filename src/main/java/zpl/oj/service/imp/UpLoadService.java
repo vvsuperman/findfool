@@ -134,13 +134,23 @@ public class UpLoadService{
 	    	
    	        //生成set,question及option对象，并存入数据库
 	    	
-	    	//set必须是先定义好的
-	        ProblemSet set = setDao.getSetByName(sheetName);
-	        if(set == null){
-	        	return null;
-	        }
+	    	//用户自定义试题
+	    	ProblemSet set = new ProblemSet();
+	    	if(sheetName.equals(ExamConstant.CUSTOM_SET_NAME)){
+	    		set.setProblemSetId(ExamConstant.CUSTOM_SET_ID);
+	    	}else{
+	    		//set为库试题
+	    	    set = setDao.getSetByName(sheetName);
+	  	        if(set == null){
+	  	        	return null;
+	  	        }
+	    	}
 	    	
-	    	for(int j=1;j<sheet.getLastRowNum();j++){
+	    	
+	    	
+	      
+	    	
+	    	for(int j=1;j<sheet.getLastRowNum()+1;j++){
 	      		HSSFRow row = sheet.getRow(j);
 	      		
 	      		

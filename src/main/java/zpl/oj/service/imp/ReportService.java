@@ -19,6 +19,7 @@ import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
+import zpl.oj.model.common.ResultInfo;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
@@ -48,15 +49,35 @@ public class ReportService {
 	public String countUserAndTotalScore(Invite invite) {
 		// TODO Auto-generated method stub
 		int totalScore = tuserProblemDao.getTotalScore(invite.getIid());
-		int userScore = tuserProblemDao.getUserScore(invite);
+		//选择题得分
+		int mScore = tuserProblemDao.getUserScore(invite);
+		Integer pScore = getProblemScore(invite);
+		int userScore=0;
+		if(pScore!=null){
+			 userScore = mScore + pScore;
+		}
+		
 		Invite myInvite = inviteDao.getInviteById(invite.getIid());
 		myInvite.setTotalScore(totalScore);
 		myInvite.setScore(userScore);
-		inviteDao.updateInvite(invite);
+		inviteDao.updateInvite(myInvite);
 		return userScore+"/"+totalScore;
 	}
 	
 	
+	private Integer getProblemScore(Invite invite) {
+		// 循环处理编程题并生成得分
+		List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
+		int sum = 0;
+		for(TuserProblem tuserProblem: tuserProblems){
+			if(tuserProblem.getType() == ExamConstant.PROGRAM){
+				Integer tempSum= tuserProblemDao.sumProblemScore(tuserProblem.getSolutionId());
+			}
+		}
+		return sum;
+	}
+
+
 	/*
 	 * 获取用户分数。若还未生成则生成，若已生成则直接获取
 	 * */
@@ -113,7 +134,8 @@ public class ReportService {
 		Map<Integer, Integer> rightMap = new HashMap<Integer,Integer>();
 		for(TuserProblem tProblem:tProblems){
 			int setid = tProblem.getSetid();
-			if(setid != ExamConstant.Set_CUSTOM && tProblem.getType() == ExamConstant.OPTION){  //选择题才比较。若为自定义试题，则不列入统计
+			//选择题
+			if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.OPTION){  //选择题才比较。若为自定义试题，则不列入统计
 				if(setMap.containsKey(setid)){
 					setMap.put(setid, setMap.get(setid)+1); //若包含，则+1
 				}else{
@@ -127,6 +149,9 @@ public class ReportService {
 						rightMap.put(setid, 1);
 					}
 				}
+			//编程题
+			}else if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.PROGRAM){
+				//编程题得分统计
 			}
 			
 		}
@@ -195,6 +220,24 @@ public class ReportService {
 	 * */
 	public List<ResponseInvite> getInviteReport(int testid){
 		return inviteDao.getOrderInviteByTid(testid);
+	}
+
+	//生成编程题的用户答案
+	public List getProDetail(TuserProblem tProblem) {
+		// TODO Auto-generated method stub
+		TuserProblem problem = tuserProblemDao.findByPidAndIid(tProblem.getInviteId(), tProblem.getProblemid());
+		
+		List<ResultInfo> resultInfos = tuserProblemDao.getProResult(problem.getSolutionId());
+		List<ProblemTestCase> rtSet = new ArrayList<ProblemTestCase>();
+		for(ResultInfo rs: resultInfos){
+			ProblemTestCase pt = new ProblemTestCase();
+		   	String input = ExamConstant.INPUT_STR + rs.getTestCase() + ExamConstant.BR;
+		   	String output = ExamConstant.OUTPUT_STR + rs.getTestCaseExpected() + ExamConstant.BR;
+		   	pt.setArgs(input+output);
+		   	pt.setScore(rs.getScore());
+		   	rtSet.add(pt);
+		}
+		return rtSet;
 	}
 	
 	

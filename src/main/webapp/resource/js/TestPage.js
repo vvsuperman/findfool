@@ -106,9 +106,8 @@ OJApp.controller('TestPage',function($scope, $http, Data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
             if ($scope.state) {
-                smoke.alert('添加成功');
+             
                 //跳转到testdetail
-                console.log('testDetail');
                 Data.setTid($scope.message.msg);
                 Data.setTname($scope.addtest.name);
                 $scope.testManage();

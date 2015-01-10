@@ -44,9 +44,6 @@ public class TuserService {
 		Testuser tuser =testuserDao.findTestuserByName(testuser.getEmail()); 
 		if(tuser!=null){
 			//该邮箱的用户曾经做过题，执行更新操作
-			tuser.setEmail(testuser.getEmail());
-			tuser.setPwd(testuser.getPwd());
-			testuserDao.updateTestuserById(tuser);
 			return tuser.getTuid(); 
 		}else{
 			testuserDao.insertTestuser(testuser);
@@ -60,10 +57,10 @@ public class TuserService {
 	public  List<TuserProblem> initialProblems(int testid, int tuid,int inviteId) {
 		// TODO Auto-generated method stub
 		
-			
+		//若对同一个用户发送了同一套测试，则试题不能插入，必须更新	
 		List<Problem> listProblem = problemDao.getProblemByTestid(testid);
 		for(Problem problem:listProblem){
-			TuserProblem tuserProblem = tuserProblemDao.findByPidAndUid(tuid, problem.getProblemId());
+			TuserProblem tuserProblem = tuserProblemDao.findByPidAndIid(inviteId, problem.getProblemId());
 			if(tuserProblem == null){
 				tuserProblem = new TuserProblem();
 				tuserProblem.setInviteId(inviteId);
