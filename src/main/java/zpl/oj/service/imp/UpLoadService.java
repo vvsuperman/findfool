@@ -1,4 +1,4 @@
-package zpl.oj.service.imp;
+	package zpl.oj.service.imp;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -96,12 +96,13 @@ public class UpLoadService{
 	private String getValuebyCell(HSSFRow row, int k) throws  Exception{
 		// TODO Auto-generated method stub
 		HSSFCell cell = row.getCell(k);
+		
 		return getValue(cell);
 	}
 
 //批量导入试题，若有错误则回滚, throw exception to rollback
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public String batchImport(MultipartFile[] file)  throws  Exception  {
+	public String batchImport(MultipartFile[] file, int uid)  throws  Exception  {
 		// TODO Auto-generated method stub
 		InputStream is = null;
 		HSSFWorkbook workbook =null;  
@@ -115,28 +116,10 @@ public class UpLoadService{
 	    	String sheetName = workbook.getSheetName(i);
 	    	HSSFRow rowName = sheet.getRow(0);
 	    	
-	    	//生成辅助对象，map中为对应列名的列号
-	    	Map<String, Integer> map = new HashMap<String,Integer>();
-	    	List<Integer> options = new ArrayList<Integer>();
-	    	List<Integer> rights = new ArrayList<Integer>();
-	    	//循环处理第一行，生成对应的列名、列号键值对。将option和right的列号分别存在一个list中
-	    	//20141026 question中添加answer
-	    	for(int j=0 ;j<rowName.getLastCellNum();j++){
-	    		 String cellVal = rowName.getCell(j).getStringCellValue();
-		    		 if(cellVal.equals(ExamConstant.QUESTION_OPTION)){
-		    			 options.add(j);
-		    		 }else if(cellVal.equals(ExamConstant.QUESTION_RIGHT)){
-		    			 rights.add(j);
-		    		 }else{
-		    			 map.put(cellVal, j);
-		    		 }
-	    	}
-	    	
-   	        //生成set,question及option对象，并存入数据库
-	    	
-	    	//用户自定义试题
+	    	  //生成set,question及option对象，并存入数据库
 	    	ProblemSet set = new ProblemSet();
-	    	if(sheetName.equals(ExamConstant.CUSTOM_SET_NAME)){
+	    	if(uid != -1){
+	    		//用户自定义试题
 	    		set.setProblemSetId(ExamConstant.CUSTOM_SET_ID);
 	    	}else{
 	    		//set为库试题
@@ -146,16 +129,44 @@ public class UpLoadService{
 	  	        }
 	    	}
 	    	
+	    	//生成辅助对象，map中为对应列名的列号
+	    	Map<String, Integer> map = new HashMap<String,Integer>();
+	    	List<Integer> options = new ArrayList<Integer>();
+	    	List<Integer> rights = new ArrayList<Integer>();
+	    	List<Integer> optionScore = new ArrayList<Integer>();
+	    	//循环处理第一行，生成对应的列名、列号键值对。将option和right的列号分别存在一个list中
+	    	//20141026 question中添加answer
+	    	for(int j=0 ;j<rowName.getLastCellNum();j++){
+	    		 String cellVal = rowName.getCell(j).getStringCellValue();
+		    		 if(cellVal.equals(ExamConstant.QUESTION_OPTION)){  //选项
+		    			 options.add(j);
+		    		 }else if(cellVal.equals(ExamConstant.QUESTION_RIGHT)){//答案
+		    			 rights.add(j);
+		    		 }else if(cellVal.equals(ExamConstant.QUESTION_TSCORE)){//分数
+		    			 optionScore.add(j);
+		    		 }
+		    		 else{
+		    			 map.put(cellVal, j);
+		    		 }
+	    	}
+	    	
+   	      
+	    	
 	    	
 	    	
 	      
 	    	
 	    	for(int j=1;j<sheet.getLastRowNum()+1;j++){
+	    		int type =0;//问题类型
 	      		HSSFRow row = sheet.getRow(j);
 	      		
 	      		
 	      		Problem problem = new Problem();
+	      	 
 	      	    String questionContent = getValuebyCell(row,map,ExamConstant.QUESTION_CONTENT);
+	      	    if(questionContent.equals("")){
+	      	    	continue;
+	      	    }
 	      	    questionContent = addPTag(questionContent);
 	      	   
 	      	    
@@ -163,7 +174,8 @@ public class UpLoadService{
 	      		problem.setDescription(questionContent);
 	      		
 	      		try {
-	      			problem.setType(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_TYPE)));
+	      			type = Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_TYPE));
+	      			problem.setType(type);
 				} catch (Exception e) {
 					// TODO: handle exception
 					throw createException(row,ExamConstant.QUESTION_TYPE);
@@ -179,7 +191,19 @@ public class UpLoadService{
 	      		
 	      		
 	      		problem.setProblemSetId(set.getProblemSetId());
-	      		problem.setBelong(0);
+	      		if(uid!=-1){
+	      			problem.setCreator(uid);
+	      			problem.setBelong(uid);
+	      		}else{
+	      			problem.setCreator(0);
+	      			problem.setBelong(0);
+	      		}
+	      		
+	      		//编程题的时间和内存
+	      		if(type == ExamConstant.PROGRAM){
+	      		   problem.setLimitMem(ExamConstant.PROGRAM_MEM);
+	      		   problem.setLimitTime(ExamConstant.PROGRAM_TIME);
+	      		}
 	      		
 	      	 	
 	        	//处理answer,题目的解答,answer可能为空
@@ -197,8 +221,9 @@ public class UpLoadService{
 	      			
 	      		}
 	      		
-	      		//保存问题，获取id,最好能insert的同事获取主键，否则太难看了
+	      		//保存问题，获取id,最好能insert的同时获取主键，否则太难看了
 	      		problemDao.insertProblem(problem);
+	      		//questionContent可能相同，取id最大的那个
 	      		problem = problemDao.getProblemByContent(questionContent).get(0);
 	      		
 	      		//处理tag
@@ -233,21 +258,37 @@ public class UpLoadService{
 	      		//处理option
 	      		for(int k=0;k<options.size();k++){
 	      			ProblemTestCase option = new ProblemTestCase();
+	      			
   	      			HSSFCell optionCell = row.getCell(options.get(k));
   	      			//因为可能有5个选项的情况，因此需判断选项是否为空
+  	      		
 	  	      	    if(optionCell!=null && getValue(optionCell).equals("") == false){
-	  	      		   option.setArgs(getValue(optionCell));
-	  	      		   if(getValuebyCell(row,rights.get(k)).equals("1")){
-	  	      			   rightAnswer+="1";
-	  	      		   }else{
-	  	      			   rightAnswer+="0";
-	  	      		   }
-	  	      		   option.setProblemId(problem.getProblemId());
-	  	      		   problemTestCaseDao.insertProblemTestCase(option);;
+	  	      		   option.setArgs(addPTag(getValue(optionCell)));
+		  	      		if(type == ExamConstant.OPTION){  //选择
+			  	      		 if(getValuebyCell(row,rights.get(k)).equals("1")){
+			  	      			   rightAnswer+="1";
+			  	      		   }else{
+			  	      			   rightAnswer+="0";
+			  	      		   }
+			  	      		  
+		  	      		}else if(type == ExamConstant.PROGRAM){	//编程
+		  	      			//测试用例输出
+			  	      		if( getValuebyCell(row,rights.get(k))!= null ){
+			  	      		   option.setExceptedRes( addPTag(getValuebyCell(row,rights.get(k))));	
+			  	      		}
+			  	      		if( getValuebyCell(row,optionScore.get(k))!= null ){
+			  	      		   option.setExceptedRes( addPTag(getValuebyCell(row,optionScore.get(k))));	
+			  	      		}
+		  	      		}
+		  	      		
+		  	      	   option.setProblemId(problem.getProblemId());
+	  	      		   problemTestCaseDao.insertProblemTestCase(option);
+	  	      		  
 	  	      		}
 	      		}
-	      		problem.setRightAnswer(rightAnswer);
-	      		
+	      		if(type == ExamConstant.OPTION){
+	      			problem.setRightAnswer(rightAnswer);
+	      		}
 	     
 	      		problemDao.updateProblemRightAnswer(problem);
 	      	}
@@ -261,7 +302,9 @@ public class UpLoadService{
 	//给内容加上html<p>标签，以符合simditor的标准
 	private String addPTag(String questionContent) {
 		// TODO Auto-generated method stub
-		String rtStr = questionContent.replace("\n", "</p>\n<p>");
-		return "<p>"+rtStr+"<br></p>";
+//		String rtStr = questionContent.replace("\n", "</p>\n<p>");
+//		return "<p>"+rtStr+"<br></p>";
+		String rtStr = questionContent.replace("\n", "<br>");
+		return rtStr;
 	}
 }

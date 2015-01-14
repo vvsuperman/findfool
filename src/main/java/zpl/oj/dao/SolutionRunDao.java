@@ -16,4 +16,7 @@ public interface SolutionRunDao {
 	//get newest solutionrun id
 	@Select("select solution_id from solution_run where user_id=${user_id} order by date DESC limit 1")
 	Integer getSolutionRunId(SolutionRun u);
+	
+	@Select("select solution,language from solution_run where solution_id = #{0}")
+	SolutionRun getSolutionById(int solutionId);
 }

@@ -18,6 +18,7 @@ public class TuserProblem {
 	private int inviteId;
 	private int score;
 	private int solutionId;   //编程题的运行ID
+	private int level;        //题目的等级
 	
 	
 
@@ -31,10 +32,23 @@ public class TuserProblem {
 		this.setid =0;
 		this.inviteId =0;
 		this.score =0;
+		this.level =0;
 	}
 	
 	
 	
+	public int getLevel() {
+		return level;
+	}
+
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+
+
 	public int getSolutionId() {
 		return solutionId;
 	}

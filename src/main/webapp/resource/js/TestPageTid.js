@@ -139,6 +139,20 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
    
    //将试题添加到测试
    $scope.addQuestionToTest = function(q,$event){
+	     //保证只有一道编程题
+	     var proSum =0;
+	     for(var i=0;i<$scope.qs.length;i++){
+	    	 if($scope.qs[i].type ==2){
+	    		proSum++ 
+	    	 }
+	     }
+	     
+	     console.log("prosum.......",proSum);
+	     if(q.type==2 && proSum>0){
+	    	 smoke.alert("为保证考试时间，只能添加一道编程题");
+	    	 return false;
+	     }
+	     
 		 var sendData={"quizid":$scope.tid,"problemid":q.qid};
 		 $http({
 	            url: WEBROOT+"/test/addquestion",

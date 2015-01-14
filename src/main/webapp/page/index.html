@@ -6,18 +6,18 @@
     <meta name="viewpoint" content="width=device-width,initial-scale=1"></meta>
     <!--<link rel="stylesheet" type="text/css" href="css/screen.css">-->
     <!--<link rel="stylesheet" type="text/css" href="css/signin.css">-->
-    <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="resource/css/flatui/css/flat-ui.css"/>
     <link rel="stylesheet" type="text/css" href="resource/css/oj.css"/>
     <!--<link rel="stylesheet" type="text/css" href="http://v3.bootcss.com/examples/carousel/carousel.css"/>-->
     <link rel="stylesheet" type="text/css" href="resource/css/carousel.css"/>
     <!--<link href="http://v3.bootcss.com/docs-assets/css/docs.css" rel="stylesheet">-->
-    <link rel="stylesheet" type="text/css" href="resource/css/docs.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="resource/css/docs.css"/> -->
     <link rel="stylesheet" href="resource/css/angular-chart.css">
     <link rel="stylesheet" href="resource/js/autocomplete/angucomplete-alt.css">
      <link rel="stylesheet" href="resource/css/smoke/smoke.css">
   
-    <link href="resource/css/jquery.cleditor.css" rel="stylesheet" media="screen">
+   <!--  <link href="resource/css/jquery.cleditor.css" rel="stylesheet" media="screen"> -->
     <!-- <link rel="stylesheet" type="text/css" href="resource/css/ng-ckeditor.css"/>-->
     <!-- <link rel="stylesheet" type="text/css" href="resource/css/mdeditor.css"/> -->
 </head>
@@ -26,28 +26,63 @@
 <!--<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>-->
 <script src="resource/js/smoke/smoke.js"></script>
 <script src="resource/js/initial.js"></script>
-<script src="resource/js/jquery/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+!window.jQuery && document.write('<script src=resource/js/jquery/jquery.min.js><\/script>');
+</script>
+
+
+<script type="text/javascript" src="http://cdn.bootcss.com/angular.js/1.3.8/angular.min.js"></script>
+<script type="text/javascript">
+!window.angular && document.write('<script src=resource/js/anuglarjs/angular.min.js><\/script>');
+</script> 
+<!-- <script src="resource/js/jquery/jquery.min.js"></script> -->
 <script src="resource/js/jquery/jquery.countdown.js"></script>
 
-<script src="resource/js/jquery/jquery-ui-1.11.2/jquery-ui.min.js"></script>
-<script src="resource/js/angularjs/angular.js"></script>
+<!-- <script src="resource/js/jquery/jquery-ui-1.11.2/jquery-ui.min.js"></script> -->
+<!-- <script src="resource/js/angularjs/angular.js"></script> -->
 
 
 <!-- <script src="resource/js/ckeditor/ckeditor.js"></script> -->
-<script src="resource/js/ace/ace.js"></script>
-<script src="resource/js/bootstrap/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/ace/1.1.3/ace.js"></script>
+
+
+
+
+<script type="text/javascript" src="http://cdn.bootcss.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 <script src="resource/js/holder.min.js"></script>
 
 <script src="resource/js/app.js"></script>
-<script src="resource/js/angularjs/angular-sanitize.min.js"></script>
-<script src="resource/js/angularjs/angular-route.min.js"></script>
+
+
+<script type="text/javascript" src="http://cdn.bootcss.com/angular.js/1.3.8/angular-sanitize.min.js"></script>
+<!-- <script type="text/javascript">
+!window.angular.angular-sanitize && document.write('<script src=resource/js/anuglarjs/angular-sanitize.min.js><\/script>');
+</script>  -->
+
+<script type="text/javascript" src="http://cdn.bootcss.com/angular.js/1.3.8/angular-route.min.js"></script>
+<!-- <script type="text/javascript">
+!window.angular.angular-route && document.write('<script src=resource/js/anuglarjs/angular-route.min.js><\/script>');
+</script>  -->
+
 <script src="resource/js/angularjs/angular-webstorage.js"></script>
+
+
+
 <script src="resource/js/angularjs/angular-upload.js"></script>
 
 <!-- <script src="resource/js/ckeditor/ng-ckeditor.js"></script> -->
-<script src="resource/js/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
+<script src="http://cdn.bootcss.com/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
 <!-- <script src="resource/js/ckeditor/plugins/plugin.js"></script> -->
-<script src="resource/js/ngchart/Chart.js"></script>
+<!-- <script src="resource/js/ngchart/Chart.js"></script> -->
+<script type="text/javascript" src="http://cdn.bootcss.com/Chart.js/1.0.1-beta.4/Chart.js"></script>
+<script type="text/javascript">
+!window.Chart && document.write('<script src=resource/js/ngchart/Chart.js><\/script>');
+</script> 
+
+
 <script src="resource/js/ngchart/angular-chart.js"></script>
 
 
@@ -63,6 +98,7 @@
 <script src="resource/js/directive/custom_simditor.js"></script>
 <script src="resource/js/directive/adddot.js"></script>
 <script src="resource/js/directive/timer.js"></script>
+<script src="resource/js/directive/solutionbtn.js"></script>
 
 <script src="resource/js/controller/testshowController.js"></script>
 <script src="resource/js/controller/reportController.js"></script>
@@ -72,6 +108,7 @@
 <script src="resource/js/controller/leftBarController.js"></script>
 <script src="resource/js/controller/adminController.js"></script>
 <script src="resource/js/controller/contactController.js"></script>
+<script src="resource/js/controller/proModalInstanceCtrl.js"></script>
 
 
 
@@ -96,7 +133,7 @@
 <!--<script src="js/md5.js"></script>-->
 <!--<script src="js/xls.js"></script>-->
 <!--<script src="js/libs.js"></script>-->
-<script src="resource/js/zeit/zeit.js"></script>
+ <script src="resource/js/md5.js"></script> 
 
 </body>
 </html>

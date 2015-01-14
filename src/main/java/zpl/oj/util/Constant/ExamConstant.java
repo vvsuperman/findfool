@@ -1,6 +1,13 @@
 package zpl.oj.util.Constant;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ExamConstant{
+	public final static int PROGRAM_MEM = 128;
+	public final static int PROGRAM_TIME = 128;
+	
+	
 	public final static int OPTION = 1;
 	public final static int PROGRAM = 2;
 	public final static int ESSAY =3;
@@ -15,6 +22,7 @@ public class ExamConstant{
 	public static final String QUESTION_CONTENT = "questioncontent";
 	public static final String QUESTION_OPTION = "option";
 	public static final String QUESTION_RIGHT = "right";
+	public static final String QUESTION_TSCORE = "optionscore";
 	public static final String QUESTION_TESTCASE = "testcase";
 	public static final String QUESTION_RESULT = "result";
 	public static final String QUESTION_TESTSCORE = "testscore";
@@ -35,6 +43,9 @@ public class ExamConstant{
 	public static final String INPUT_STR = "输入";
 	public static final String OUTPUT_STR = "输出";
 	public static final String BR = "<br>";
+	
+	public static final Map LEVEL_MAP = new HashMap<Integer,String>(){{put(1,"简单");put(2,"普通");put(3,"困难");}};
+	
 	
 }	
 

@@ -67,7 +67,9 @@ public class InviteServiceImp implements InviteService {
 		invite.setHrid(q.getOwner());
 		invite.setUid(tuid);
 		invite.setScore(0);
+		invite.setTotalScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
+		invite.setBegintime("");
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
 		if(duration!=null&&duration.equals("")==false){
@@ -111,7 +113,7 @@ public class InviteServiceImp implements InviteService {
 		context += "<p>这是来自findfool的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到"
 				+"<a>"+baseurl+"/#/testing/"+url+"</a>"
 				+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
-				+ "<br/>您的测试时间为：" + q.getTime()+"</p>";
+				+ "<br/>您的测试时间为：" + request.getDuration()+"</p>";
 		mailSenderInfo.setContent(context);
 		
 		//使用线程，避免长时间等候

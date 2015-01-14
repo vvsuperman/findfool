@@ -5,6 +5,13 @@ public class RequestUserLogin {
 	private String name;
 	private String email;
 	private String pwd;
+	private String company;
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
 	public String getName() {
 		return name;
 	}

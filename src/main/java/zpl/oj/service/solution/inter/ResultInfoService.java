@@ -2,7 +2,7 @@ package zpl.oj.service.solution.inter;
 
 import java.util.List;
 
-import zpl.oj.model.solution.ResultInfo;
+import zpl.oj.model.common.ResultInfo;
 
 public interface ResultInfoService {
 

@@ -2,6 +2,7 @@ package zpl.oj.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -31,11 +32,11 @@ public interface TuserProblemDao {
   @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type} where problemid =#{problemid} and invite_id = #{inviteId}")
   void updateProblemByIds(TuserProblem testuserProblem);
   
-  @Select("select t1.problemid,t1.useranswer,t1.invite_id,t2.rightanswer,t2.problem_set_id as setid,t2.type "
+  @Select("select t1.problemid,t1.useranswer,t1.invite_id,t2.rightanswer,t2.problem_set_id as setid,t2.type,t1.solution_id as solutionId,t2.level "
   		+ "from testuser_problem t1, problem t2 where t1.invite_id=#{0} and t1.problemid = t2.problem_id order by t2.type,t2.problem_set_id")
   List<TuserProblem> findProblemByInviteId(int inviteId);
   
-  @Select("select t1.problemid,t1.useranswer,t1.type,t1.invite_id from testuser_problem t1 where t1.invite_id = #{0} and t1.problemid=#{1}")
+  @Select("select t1.problemid,t1.useranswer,t1.type,t1.invite_id,t1.solution_id as solutionId from testuser_problem t1 where t1.invite_id = #{0} and t1.problemid=#{1}")
   TuserProblem findByPidAndIid(int inviteId,int problemid);
   
   @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0}")
@@ -64,10 +65,13 @@ public interface TuserProblemDao {
  +"where r.solution_id = #{0} and  p.test_case_id = r.test_case_id;")
  Integer sumProblemScore(int solutionId);
  
- @Select("select r.test_case_id,r.test_case,p.test_case_result as testCaseExpected, r.score "+ 
-		 " from ojsite.problem_test_case p,ojsite.resultinfo r "+ 
+ @Select("select r.test_case_id,r.test_case as testCase,p.excepted_res as testCaseExpected, r.score "+ 
+		 " from problem_test_case p,resultinfo r "+ 
 		 " where  r.solution_id =#{0} and p.test_case_id = r.test_case_id;")
  List<ResultInfo> getProResult(int solutionId);
+
+@Delete("delete from testuser_problem where  invite_id =#{0} AND problemid = #{1}")
+void deleteByIds(int inviteId, Integer problemid);
  
 }
 

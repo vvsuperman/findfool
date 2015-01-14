@@ -16,6 +16,7 @@ angular.module('lr.upload.directives').directive('uploadButton', [
         url: '@',
         param: '@',
         method: '@',
+        header:'@',
         onUpload: '&',
         onSuccess: '&',
         onError: '&',
@@ -29,9 +30,14 @@ angular.module('lr.upload.directives').directive('uploadButton', [
           if (fileInput[0].files && fileInput[0].files.length === 0) {
             return;
           }
+          
+         var headertoken= {
+              "Authorization": scope.header
+          };
           var options = {
               url: scope.url,
               method: scope.method || 'POST',
+              headers:headertoken,
               forceIFrameUpload: scope.$eval(attr.forceIframeUpload) || false,
               data: scope.data || {}
             };

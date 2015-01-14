@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.responsejson.ResponseInvite;
+import zpl.oj.model.responsejson.ResponseProDetail;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.imp.ReportService;
@@ -48,8 +50,9 @@ public class ReportController {
 		Map rtMap = new HashMap<String,Object>();
 		rtMap.put("score", reportService.getInviteScore(invite)); 
 		rtMap.put("rank", reportService.getRank(invite));
-		rtMap.put("dimension", reportService.getDimension(invite));
+		rtMap.put("dimension", reportService.getDimension(invite).get("setRadar"));
 		rtMap.put("user", reportService.getUserById(invite.getUid()));
+		rtMap.put("levelDimension", reportService.getDimension(invite).get("levelRadar"));
 		return rtMap;
 	}
 	
@@ -77,9 +80,10 @@ public class ReportController {
 	 * */
 	@RequestMapping(value = "/getprodetail")
 	@ResponseBody
-	public List getProDetail(@RequestBody  TuserProblem tProblem) {
+	public ResponseProDetail getProDetail(@RequestBody  TuserProblem tProblem) {
 		return reportService.getProDetail(tProblem);
 	}
+	
 	
 
 }

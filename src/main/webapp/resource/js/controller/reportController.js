@@ -59,6 +59,11 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     	$scope.labels = data.dimension.name;
     	$scope.data = data.dimension.val;
     	$scope.series = ['总分', '用户成绩'];
+    	//level的雷达图
+    	$scope.levelLabels = data.levelDimension.name;
+    	$scope.levelData = data.levelDimension.val;
+    	
+    	
      	//得分
      	var score = data.score.split("/");
      	$scope.labelsScore =['用户成绩', '总分'];
@@ -97,13 +102,18 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
     
     
     $scope.judge = function(question){
-    	if(question.useranswer == question.rightanswer){
-    		return "正确";
-    		$scope.color=1;
-    	}else{
-    		return "错误";
-    		$scope.color=2;
+    	if(question.type==1){
+    		if(question.useranswer == question.rightanswer){
+        		return "正确";
+        		$scope.color=1;
+        	}else{
+        		return "错误";
+        		$scope.color=2;
+        	}
+    	}else if(question.type==2){
+    		
     	}
+    	
     }
     
    //查看和修改试题的通用方法
@@ -111,7 +121,7 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
 		//选择题
 		if(q.type ==1 ){
 			var question = jQuery.extend(true, {}, q);
-			 var modalInstance = $modal.open({
+			  var modalInstance = $modal.open({
 			      templateUrl: 'page/myModalContent.html',
 			      controller: 'ModalInstanceCtrl',
 			      size: size,
@@ -128,18 +138,40 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
 			 });
 		//编程题
 		}else if(q.type ==2 ){
+			 var senddata ={"problemid":q.qid ,"inviteId":Data.inviteid()};
 			 $http({
 			        url: WEBROOT+"/report/getprodetail",
 			        method: 'POST',
-			        data: {"problemId":q.qid ,"inviteId":Data.inviteid()}
+			        data: senddata
 			    }).success(function (data) {
-			    	console.log("q..........",q);
-			    	q.answer = data;
-			    	console.log("q......",q);
+			    	
+			    	q.answer = data.resultInfos;
+			    	q.useranswer = data.useranswer;
+			    	q.language = $scope.lgs[data.language];
+			    	  var modalInstance = $modal.open({
+					      templateUrl: 'page/proModalContent.html',
+					      controller: 'proModalInstanceCtrl',
+					      size: size,
+					      resolve: {
+					          params:function(){
+					        	  var obj ={};
+					        	  obj.operation = params.operation;
+					        	  obj.title=params.title;
+					        	  obj.question = q;
+					        	  obj.report = 1;      //表示是查看报告
+					        	  return obj;
+					          }
+					      }
+					 });
 			    }).error(function(){
 			   	 console.log("get data failed");
 			    })
 		}
 	   
 	 };
+	 
+	 $scope.lgs ={0:'c_cpp',1:'c_cpp',3:'java',9:'csharp'}; 
+		
+	 
+	 
 });

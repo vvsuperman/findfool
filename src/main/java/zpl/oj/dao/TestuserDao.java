@@ -13,7 +13,7 @@ import zpl.oj.model.common.Testuser;
 
 public interface TestuserDao {
 	 
-  @Insert("INSERT INTO testuser( username,email,school,company,blog,age,pwd,tel,registerdate,lastlogindate,state)"
+  @Insert("INSERT INTO testuser( username,email,school,company,blog,age,tel,registerdate,lastlogindate,state)"
 			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{tel},#{registerDate},#{lastLoginDate},#{state})")
   void insertTestuser(Testuser testuser);
   

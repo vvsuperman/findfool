@@ -54,15 +54,12 @@ OJApp.controller('mainController',function($scope, $http, Data) {
                     Data.setCompany($scope.message.company);
                     Data.setInvitedleft($scope.message.invited_left);
                     $scope.invitedleft = $scope.message.invited_left;
-                    var child = document.getElementsByClassName("modal-backdrop fade in");
-                    child[0].parentNode.removeChild(child[0]);
+                   
                     window.location.href = '#/loginok';
-                    $scope.name = $scope.message.handler_url;
+//                    $scope.name = $scope.message.handler_url;
                 } else {
-                    var child = document.getElementsByClassName("modal-backdrop fade in");
-                    child[0].parentNode.removeChild(child[0]);
+                    
                     window.location.href = '#/loginok';
-                    $scope.name = "测试用户";
                 }
             }).error(function () {
                     alert("网络错误");
@@ -131,7 +128,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
                         headers: {
                             "Authorization": Data.token()
                         },
-                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name}
+                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name,"company":$scope.company}
                     }).success(function (data) {
                         $scope.state = data["state"];//1 true or 0 false
                         $scope.message = data["message"];
@@ -145,8 +142,8 @@ OJApp.controller('mainController',function($scope, $http, Data) {
                             //end bu zpl
                             Data.setName($scope.message.email);
                             //除去modal层的遮罩
-                            var child = document.getElementsByClassName("modal-backdrop fade in");
-                            child[0].parentNode.removeChild(child[0]);
+//                            var child = document.getElementsByClassName("modal-backdrop fade in");
+//                            child[0].parentNode.removeChild(child[0]);
                             window.location.href = '#/test';
                         } else {
                             alert($scope.message.msg);

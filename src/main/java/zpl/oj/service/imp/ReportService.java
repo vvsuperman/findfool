@@ -15,6 +15,7 @@ import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.SetDao;
+import zpl.oj.dao.SolutionRunDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Problem;
@@ -25,6 +26,8 @@ import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.model.responsejson.ResponseInvite;
+import zpl.oj.model.responsejson.ResponseProDetail;
+import zpl.oj.model.solution.SolutionRun;
 import zpl.oj.util.Constant.ExamConstant;
 
 
@@ -41,6 +44,8 @@ public class ReportService {
 	private SetDao setDao;
 	@Autowired
 	private ProblemTestCaseDao problemTestCaseDao;
+	@Autowired
+	private SolutionRunDao solutionRunDao;
 	
 	
 	/*
@@ -116,6 +121,14 @@ public class ReportService {
 		return tuserProblemDao.getTestUserById(tuid);
 	}
 	
+	
+	private void sumMap(Map<Integer,Integer> map, int id){
+		if(map.containsKey(id)){
+			map.put(id, map.get(id)+1); //若包含，则+1
+		}else{
+			map.put(id, 1); 					//若还没有，则设为1
+		}
+	}
 	/*
 	 * 根据试题集计算用户的做题维度
 	 * 返回Radar chart
@@ -132,30 +145,58 @@ public class ReportService {
 		//按照setid进行划分，将总的答题数放入setMap，答对的题数放入rightmap
 		Map<Integer, Integer> setMap = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> rightMap = new HashMap<Integer,Integer>();
+		//难度划分的set
+		Map<Integer, Integer> levelMap = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> rightLevelMap = new HashMap<Integer,Integer>();
+		
 		for(TuserProblem tProblem:tProblems){
 			int setid = tProblem.getSetid();
 			//选择题
+			int level = tProblem.getLevel();
 			if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.OPTION){  //选择题才比较。若为自定义试题，则不列入统计
-				if(setMap.containsKey(setid)){
-					setMap.put(setid, setMap.get(setid)+1); //若包含，则+1
-				}else{
-					setMap.put(setid, 1); 					//若还没有，则设为1
-				}
-				
+				sumMap(setMap,setid);
+				sumMap(levelMap,level);
 				if(tProblem.getRightanswer().equals(tProblem.getUseranswer())){
-					if(rightMap.containsKey(setid)){
-						rightMap.put(setid, setMap.get(setid)+1);
-					}else{
-						rightMap.put(setid, 1);
-					}
+					sumMap(rightMap,setid);
+					sumMap(rightLevelMap,level);
 				}
 			//编程题
 			}else if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.PROGRAM){
 				//编程题得分统计
+				int solutionId = tProblem.getSolutionId();
+				List<ResultInfo> results = tuserProblemDao.getProResult(solutionId);
+				for(ResultInfo result: results){
+					//总题目累加
+					sumMap(setMap,setid);
+					//正确的测试用例累加
+					if(result.getScore()>0){
+						sumMap(rightMap,setid);
+					}
+				}
 			}
+			
+			
+			
 			
 		}
 		
+		Map<String, Object> rtSetMap = genResultMap(setMap, rightMap,1);
+		Map<String, Object> rtLevelMap = genResultMap(levelMap, rightLevelMap, 2);
+		Map<String, Object> rtMap = new HashMap<String, Object>();
+		rtMap.put("setRadar", rtSetMap);
+		rtMap.put("levelRadar", rtLevelMap);
+		
+		return rtMap;
+	}
+
+
+	/**
+	 * @param setMap
+	 * @param rightMap
+	 * @return
+	 */
+	private Map<String, Object> genResultMap(Map<Integer, Integer> setMap,
+			Map<Integer, Integer> rightMap, int flag) {
 		//生成返回数据
 		Map<String, Object> rtMap = new HashMap<String,Object>();
 		rtMap.put("name", new ArrayList<String>());
@@ -170,19 +211,38 @@ public class ReportService {
 		rtMap.put("val", parentList);
 		
 		Iterator iter = setMap.entrySet().iterator();
-		while(iter.hasNext()){
-			Map.Entry entry = (Map.Entry) iter.next();
-			int setid = (Integer)entry.getKey();
-			int val = (Integer)entry.getValue();
-			int userVal =0;
-			if(rightMap.get(setid)!=null){
-				userVal = rightMap.get(setid);
+		//处理set名字的雷达图
+		if(flag == 1){
+			while(iter.hasNext()){
+				Map.Entry entry = (Map.Entry) iter.next();
+				int setid = (Integer)entry.getKey();
+				int val = (Integer)entry.getValue();
+				int userVal =0;
+				if(rightMap.get(setid)!=null){
+					userVal = rightMap.get(setid);
+				}
+				String setName = setDao.getSet(setid).getName();
+				((ArrayList)rtMap.get("name")).add(setName);
+				scoreList.add(val);
+				userScoreList.add(userVal);
 			}
-			String setName = setDao.getSet(setid).getName();
-			((ArrayList)rtMap.get("name")).add(setName);
-			scoreList.add(val);
-			userScoreList.add(userVal);
+		//处理level名字的雷达图
+		}else if(flag == 2){
+			while(iter.hasNext()){
+				Map.Entry entry = (Map.Entry) iter.next();
+				int level = (Integer)entry.getKey();
+				int val = (Integer)entry.getValue();
+				int userVal =0;
+				if(rightMap.get(level)!=null){
+					userVal = rightMap.get(level);
+				}
+				String levelName =(String) ExamConstant.LEVEL_MAP.get(level); 
+				((ArrayList)rtMap.get("name")).add(levelName);
+				scoreList.add(val);
+				userScoreList.add(userVal);
+			}
 		}
+		
 		return rtMap;
 	}
 	
@@ -223,21 +283,31 @@ public class ReportService {
 	}
 
 	//生成编程题的用户答案
-	public List getProDetail(TuserProblem tProblem) {
+	public ResponseProDetail getProDetail(TuserProblem tProblem) {
+		ResponseProDetail proDetail = new ResponseProDetail();
 		// TODO Auto-generated method stub
 		TuserProblem problem = tuserProblemDao.findByPidAndIid(tProblem.getInviteId(), tProblem.getProblemid());
 		
 		List<ResultInfo> resultInfos = tuserProblemDao.getProResult(problem.getSolutionId());
 		List<ProblemTestCase> rtSet = new ArrayList<ProblemTestCase>();
-		for(ResultInfo rs: resultInfos){
-			ProblemTestCase pt = new ProblemTestCase();
-		   	String input = ExamConstant.INPUT_STR + rs.getTestCase() + ExamConstant.BR;
-		   	String output = ExamConstant.OUTPUT_STR + rs.getTestCaseExpected() + ExamConstant.BR;
-		   	pt.setArgs(input+output);
-		   	pt.setScore(rs.getScore());
-		   	rtSet.add(pt);
+		if(resultInfos!=null){
+			for(ResultInfo rs: resultInfos){
+				ProblemTestCase pt = new ProblemTestCase();
+			   	String input = ExamConstant.INPUT_STR + rs.getTestCase() + ExamConstant.BR;
+			   	String output = ExamConstant.OUTPUT_STR + rs.getTestCaseExpected() + ExamConstant.BR;
+			   	pt.setArgs(input+output);
+			   	pt.setScore(rs.getScore());
+			   	rtSet.add(pt);
+			}
 		}
-		return rtSet;
+		
+		SolutionRun solution =  solutionRunDao.getSolutionById(problem.getSolutionId());
+		
+		proDetail.setUseranswer(solution.getSolution());
+		proDetail.setLanguage(solution.getLanguage());
+		proDetail.setResultInfos(rtSet);
+		
+		return proDetail;
 	}
 	
 	

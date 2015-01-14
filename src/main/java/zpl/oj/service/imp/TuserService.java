@@ -3,8 +3,10 @@ package zpl.oj.service.imp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +61,10 @@ public class TuserService {
 		
 		//若对同一个用户发送了同一套测试，则试题不能插入，必须更新	
 		List<Problem> listProblem = problemDao.getProblemByTestid(testid);
+		Set idSet = new HashSet<Integer>();
 		for(Problem problem:listProblem){
+			//要将试题中删除了的试题从用户需要做的试题中删除
+			idSet.add(problem.getProblemId());
 			TuserProblem tuserProblem = tuserProblemDao.findByPidAndIid(inviteId, problem.getProblemId());
 			if(tuserProblem == null){
 				tuserProblem = new TuserProblem();
@@ -72,7 +77,15 @@ public class TuserService {
 				tuserProblemDao.updateProblemByIds(tuserProblem); 
 			}
 		}
-		return tuserProblemDao.findProblemByInviteId(inviteId);
+		
+		List<TuserProblem> tProblems =  tuserProblemDao.findProblemByInviteId(inviteId);
+		//若该用户试题已被删除
+		for(TuserProblem tProblem:tProblems){
+			if(idSet.contains(tProblem.getProblemid())==false){
+				tuserProblemDao.deleteByIds(inviteId,tProblem.getProblemid());
+			}
+		}
+		return tProblems;
 	}
 
 	

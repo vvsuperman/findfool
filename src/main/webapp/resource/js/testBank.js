@@ -1,3 +1,11 @@
+!window.Simditor && 
+document.write('<script src=resource/js/simditor/module.js><\/script>');
+document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
+document.write('<script src=resource/js/simditor/uploader.js><\/script>');
+document.write('<script src=resource/js/simditor/simditor.js><\/script>');
+
+
+
 /**
  * Created by liuzheng on 2014/7/11.
  */
@@ -233,11 +241,11 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
     $scope.showQuestions = function(set){
     	$scope.reciveData.selectedSets = set; //一个problemset
     	$scope.queryQuestions(1);
-    	$scope.set.show=0;
     }
     
     
     $scope.queryQuestions = function(index){
+    	$scope.set.show=0;
     	$scope.reciveData.currentPage = index;
     	for(i=0;i<$scope.reciveData.pagelist.length;i++){
     		$scope.reciveData.pagelist[i].current = false;

@@ -21,7 +21,6 @@ OJApp.directive('customcheckbox', function() {
 				elem.css("border-color","#2fe2bf");	
 			}*/
 			
-			console.log("report................",attrs.report);
 			 
 			var index = attrs.index;
 			//若存在用户的选择
@@ -40,6 +39,14 @@ OJApp.directive('customcheckbox', function() {
 					elem.append("<p class='greenFont'><label class='glyphicon glyphicon-ok'></label>正确答案</p>")
 				}
 				
+				//编程题通过测试用例的得分来判断
+				if(typeof(attrs.score)!="undefined"){
+					//elem.append("<span class='icon righticon' >");
+					if(attrs.score!=0){
+						console.log("score.....",attrs.score);
+						elem.append("<p class='greenFont'><label class='glyphicon glyphicon-ok'></label>用例通过</p>")
+					}
+				}
 			}else{
 			//若用户的选择不存在，则为查看元数据，根据rightanswer来判断选项的正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){

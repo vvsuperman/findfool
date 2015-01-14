@@ -4,13 +4,17 @@
  * created by zpl on 2014/7/18
  */
 
-
+!window.Simditor && 
+document.write('<script src=resource/js/simditor/module.js><\/script>');
+document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
+document.write('<script src=resource/js/simditor/uploader.js><\/script>');
+document.write('<script src=resource/js/simditor/simditor.js><\/script>');
 
 OJApp.controller('MyTestBank',function($scope) {
     $scope.url = '#/mybank';
     $scope.template = 'page/mytestBank.html';
-    $scope.ContentUs = 'contentUs.html';
-    $scope.leftBar = 'leftBar1.html';
+    $scope.ContentUs = 'page/contentUs.html';
+    $scope.leftBar = 'page/libleftBar.html';
     $scope.active = 1;
     $scope.show = 1;
 });
@@ -19,6 +23,9 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	$scope.active = 1;
 	$scope.show = 1;
     
+	$scope.token = {};
+	$scope.token.data = Data.token();
+	
 	$scope.Qtype = [
         { name: '选择题', data: '1'},
         { name: '编程题', data: '2'},
@@ -59,7 +66,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 		if(data.state == 0){
 			smoke.alert(data.msg)
 		}else{
-			smoke.alert("恭喜你，导入成功");
+			
 		}
 	}
 
@@ -195,6 +202,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
        //初期只允许新增选择题
     	$scope.active =1;
        // $scope.active = active;
+    	console.log("show add page........");
         $scope.show = 0;
         $scope.context="";
         $scope.tag="";

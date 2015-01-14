@@ -37,17 +37,32 @@ public class ResultInfo implements Serializable {
 	public void setScore(int score) {
 		this.score = score;
 	}
+	
+	
+	public String getTest_case_result() {
+		return test_case_result;
+	}
+
+	public void setTest_case_result(String test_case_result) {
+		this.test_case_result = test_case_result;
+	}
 
 	private int testCaseId;
     private String testCase;
     private String testCaseExpected;
     private int score;
+    private String test_case_result;
+    
 	
+
+
 	public ResultInfo(){
 		this.testCaseId = -1;
 		this.testCase = "";
 		this.testCaseExpected ="";
 		this.score =0;
+		this.test_case_result ="";
+		
 	}
 	
 	

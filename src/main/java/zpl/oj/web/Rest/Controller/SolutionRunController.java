@@ -20,7 +20,7 @@ import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.solution.ReciveOK;
 import zpl.oj.model.solution.ReciveSolution;
-import zpl.oj.model.solution.ResultInfo;
+import zpl.oj.model.common.ResultInfo;
 import zpl.oj.service.solution.inter.ResultInfoService;
 import zpl.oj.service.solution.inter.SolutionRunService;
 import zpl.oj.util.Constant.ExamConstant;

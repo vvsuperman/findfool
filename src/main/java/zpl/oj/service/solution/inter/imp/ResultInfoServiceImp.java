@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.ResultInfoDao;
-import zpl.oj.model.solution.ResultInfo;
+import zpl.oj.model.common.ResultInfo;
 import zpl.oj.service.solution.inter.ResultInfoService;
 
 @Service

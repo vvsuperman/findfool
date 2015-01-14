@@ -70,6 +70,7 @@ public class UserController {
 		u.setFname(request.getName());
 		u.setEmail(request.getEmail());
 		u.setPwd(request.getPwd());
+		u.setCompany(request.getCompany());
 		//测试阶段先免费
 		u.setInvited_left(100);
 		//默认等级
@@ -78,7 +79,7 @@ public class UserController {
 		boolean res = userService.addUser(u);
 		
 		if(res == false){
-			msg.setMsg("failed register! because this email has been registed!");
+			msg.setMsg("注册失败，邮箱已被注册");
 			msg.setHandler_url("/error");
 			rb.setMessage(msg);
 			rb.setState(0);			
@@ -90,12 +91,12 @@ public class UserController {
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(u);
 			//发送邮件
-			MailSenderInfo mailSenderInfo = new MailSenderInfo();
-			mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
-			mailSenderInfo.setToAddress(u.getEmail());
-			mailSenderInfo.setSubject("欢迎新用户");
-			mailSenderInfo.setContent("欢迎你们彩笔们~");
-			SimpleMailSender.sendHtmlMail(mailSenderInfo);
+//			MailSenderInfo mailSenderInfo = new MailSenderInfo();
+//			mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
+//			mailSenderInfo.setToAddress(u.getEmail());
+//			mailSenderInfo.setSubject("欢迎新用户");
+//			mailSenderInfo.setContent("欢迎你们彩笔们~");
+//			SimpleMailSender.sendHtmlMail(mailSenderInfo);
 		}
 		
 		

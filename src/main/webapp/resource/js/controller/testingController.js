@@ -288,7 +288,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }
      
      /* 
-      * 编程题运行,而不提交，此时problem_id为0，若为0会执行测试用例
+      * 编程题运行,而不提交，此时problem_id为0，若不为0会执行测试用例
       * */
     $scope.run = function (data) {
        var solution = {};
@@ -345,7 +345,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
                    var res = data.message[i];
                   // $scope.result += "time:" + res.cost_time;
                   // $scope.result += " mem:" + res.cost_mem;
-                   if (res.test_case == null) {
+                   if (res.test_case_result == null) {
                        $scope.result += " error:" + res.test_case_result;
                    } else {
                       // $scope.result += " testCase:" + res.test_case;
@@ -363,6 +363,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      * 完成所有测试
      * */
      $scope.finishTest = function(){
+    	 $scope.run('submit');
     	 var sendData ={"email":$scope.email,"testid":$scope.tid};
     	 $http({
 	         url: WEBROOT+"/testing/finishtest",

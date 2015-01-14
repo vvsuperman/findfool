@@ -11,19 +11,22 @@
         <div class="modal-body">
 			
 				<div class="col-md-12" style="margin-top: 20px">
-		       	  	<!-- <textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea> -->
 		       	  	<textarea simditor minheight="30px" operation={{operation}} ng-model="question.context"></textarea>
 		       	</div>  
-		  
-		    
+		    	
+		    	
+		    	 <div class="col-xs-12 clearUl" style="margin-top: 20px;min-height:500px;overflow: auto" >
+		    	 <p>用户答案</p>
+		            <div class="col-xs-11 editor" style="min-height:500px; line-height: 1.7;position:absolute;" 
+		            		aceeditor data-language={{question.language}} data-ng-model="question.useranswer"></div>
+		            <div style="clear:both"></div>
+		        </div>
 
 			<div class="options list col-md-12 col-sm-12  col-xs-12" >
 		       	  <label  customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}} 
-		       	  	index={{$index}} rightanswer={{question.rightanswer}} useranswer={{question.useranswer}} report={{report}}>
-		       	  	<span class='icon'></span><span class='icon-to-fade'></span>
-		       	    <!-- <textarea ckeditor  minheight="70" width="90%" operation={{operation}} class='optiontext'   ng-model="option.text"></textarea> -->
-		       	    <textarea simditor minheight="20px"  operation={{operation}} class='optiontext'  ng-model="option.text"></textarea>
-		       	     <!--  input type="checkbox"-->
+		       	  	score={{option.score}} report={{report}}>
+		       	  	
+		       	    <textarea simditor minheight="30px"  operation={{operation}} class='optiontext'  ng-model="option.args"></textarea>
 		       	  </label>
 		    </div>
 
