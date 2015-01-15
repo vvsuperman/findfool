@@ -34,7 +34,6 @@ public class UploadController {
 			@RequestHeader (value="Authorization",required=false) String token
 	       ) throws Exception {
 		
-		System.out.print("token...."+token);
 		ResponseBase rs = new ResponseBase();
 	    int uid =-1;
 	    String regEx = "@,@,@,@";

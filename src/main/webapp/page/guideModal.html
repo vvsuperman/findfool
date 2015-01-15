@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+
+<!-- 接受read， -->
+
+<div class="modal-header" style="background-color: #374652">
+<button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true" style="color:#1abc9c">&times;</span><span class="sr-only">Close</span></button>
+            <span class="modal-title" style="font-size:16px;color:#1abc9c">{{title}}</span>
+            
+        </div>
+
+        <div class="modal-body">
+			<div style="font-size: 18px;line-height: 1.8" ng-bind="content"></div>
+			<button class="btn btn-outline" ng-click="genQuiz()" style="margin-top: 20px" >自动生成试题</button>
+			<div style="clear:both"></div>
+        </div>
+
+        <div class="modal-footer" >
+            <button class="btn btn-primary" ng-if="operation=='edit'" ng-click="saveQustion()">保存</button>
+            <button class="btn btn-warning" ng-click="cancel()">取消</button>
+        </div>
+        

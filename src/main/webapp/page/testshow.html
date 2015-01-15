@@ -14,100 +14,25 @@
 	      <a href=""  ng-click="guide.show=0"><span class="glyphicon glyphicon-remove pull-right"></span></a>
 	  </div>
 	  <div class="panel-body skill-board" >
-	    <div class="col-md-offset-10" style="margin-top: 10px">
-	    	<button class="btn btn-primary " ng-if="panel.isBack" ng-click="goBack()">返回</button>
-	    </div>
-	  
-	    <div class="col-md-offset-4" ng-if="panel.isGuide">
-	    	<h4 style="margin-top: 60px;margin-bottom: 20px">不知道怎么用？</h4>
-	    	<button class="btn btn-outline" ng-click="panel.isGuide=false;panel.body=1;">招聘程序员</button>
-	    </div>
-	    <div class=col-md-offset-3 ng-if="panel.body==1">
-	    	<h4 style="margin-top: 10px;margin-bottom: 30px">你想招聘什么样的开发人员？</h4>
-	    	<button class="btn btn-outline" ng-click="goNext(2);">web开发</button>
-	    	<button class="btn btn-outline" ng-click="goNext(3);">IOS开发</button>
-	    	<button class="btn btn-outline" ng-click="goNext(4);">Android开发</button>
-	    </div>
-	    <div class="col-md-offset-3" ng-if="panel.body==2">
-	       <div style="margin-top: 10px;margin-bottom: 30px">
-	         <h4>web开发分为3类，分别是前端工程师、服务端工程师</h4>
-	         <h4>以及全栈工程师</h4>
-	       </div>
-	    	<button class="btn btn-outline" ng-click="goNext(5);">前端工程师</button>
-	    	<button class="btn btn-outline" ng-click="goNext(6);">服务端工程师</button>
-	    	<button class="btn btn-outline" ng-click="goNext(7);">全栈工程师</button>
-	    </div>
-	    <div class="col-md-offset-3" ng-if="panel.body==3">
-	       <div style="margin-top: 10px;margin-bottom: 30px">
-	         <h4>可使用IOS的原生语言，Object-C、Swift开发</h4>
-	         <h4>也可使用HTML5借助第三方工具封装</h4>
-	       </div>
-	    	<button class="btn btn-outline" ng-click="goNext(8);">原生态IOS开发</button>
-	    	<button class="btn btn-outline" ng-click="goNext(9);">网页封装式IOS开发</button>
-	    </div>
-	    <div class="col-md-offset-3" ng-if="panel.body==4">
-	    <div style="margin-top: 10px;margin-bottom: 30px">
-	         <h4>可使用Android的原生API开发</h4>
-	         <h4>也可使用HTML5借助第三方工具封装</h4>
-	       </div>
-	    	<button class="btn btn-outline" ng-click="goNext(10);">原生态Android开发</button>
-	    	<button class="btn btn-outline" ng-click="goNext(11);">网页封装式Android开发</button>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px" ng-if="panel.body==5">
-	    	<p>前端介绍： 最新流行的热门职业。需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    	传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    	等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    	以及一些javascript类库，包括jQuery， Anuglarjs等等。</p>
-	    	<p>知识体系：</p>
-	    	<p>基础：理论基础，html，css，javascript，jquery。</p>
-	    	<p>扩展：html5，css3，bootstrap，angularjs等。</p>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px" ng-if="panel.body==6">
-	    	<p>后端介绍:服务端工程师，相对于前端，编写服务接口供前端使用。常用的服务端语言包括, PHP, Java, C#。
-	    	以及目前最新兴起的Node.js。服务端工程师不仅需要掌握语言基础，还必须还必须掌握必要的框架，比如spring，
-	    	thinkphp等等。</p>
-	    	<p>知识体系：</p>
-	    	<p>基础：php，数据库，linux。</p>
-	    	<p>扩展：thinkphp,zend等。</p>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px"  ng-if="panel.body==7">
-	    	<p>Full Stack developer。是指掌握多种技能，并能利用多种技能独立完成产品的人。互联网项目，需要用到
-	    	后端开发、前端开发、界面设计、产品设计、数据库、各种移动客户端、三屏兼容、restFul API设计和OAuth等等，
-	    	比较前卫的项目，还会用到Single Page Application、Web Socket、HTML5/CSS3这些技术以及像第
-	    	三方开发像微信公众号微博应用等等。</p>
-	    	<p>知识体系：</p>
-	    	<p>web基础：html，css，javascript，数据库，linux。</p>
-	    	<p>java类：java，spring，hibernate等。</p>
-	    	<p>php类：php，thinkphp，zend等。</p>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px"  ng-if="panel.body==8">
-	    	<p>知识体系：</p>
-	    	<p>基础：object-c，swift。</p>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px"  ng-if="panel.body==9">
-	    	<p>需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    	传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    	等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    	以及一些javascript类库，包括jQuery， Anuglarjs等等。</p>
-	    	<p>知识体系：</p>
-	    	<p>基础：理论基础，html，css，javascript，jquery。</p>
-	    	<p>扩展：html5，css3，bootstrap，angularjs等。</p>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px"  ng-if="panel.body==10">
-	    	<p>知识体系：</p>
-	    	<p>基础：android，linux。</p>
-	    </div>
-	    <div class="col-md-offset-1 col-md-10" style="margin-top: 10px"  ng-if="panel.body==11">
-	    	<p>需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    	传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    	等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    	以及一些javascript类库，包括jQuery， Anuglarjs等等。</p>
-	    	<p>知识体系：</p>
-	    	<p>基础：理论基础，html，css，javascript，jquery。</p>
-	    	<p>扩展：html5，css3，bootstrap，angularjs等。</p>
-	    </div>
-	   
+	      <a  class="blackFont" href="" ng-click="viewGuideModal('webFront')" style=" position: absolute;top:17%;left: 60%"> WEB前端</a>
+	         
+	      <span  tooltip-placement="bottom" tooltip="{{guideTxt.webDevelope}}"  style=" position: absolute;top:28%;left: 40%"> WEB开发</span>
+	      <span  tooltip-placement="bottom" tooltip="{{guideTxt.webBase}}" 
+	         style=" position: absolute;top:28%;left: 60%"> WEB后台</span>
+	      <a href=""  class="blackFont" style=" position: absolute;top:22%;left: 80%" ng-click="viewGuideModal('java')"> JAVA </a>
+	      <a href="" class="blackFont" style=" position: absolute;top:34%;left: 80%"  ng-click="viewGuideModal('php')"> PHP </a>
+	      <a href="" class="blackFont" style=" position: absolute;top:39%;left: 60%" ng-click="viewGuideModal('allStack')"> 全栈程序员 </a>
+	      <span  tooltip-placement="top" tooltip="{{guideTxt.IOS}}" 
+	        style=" position: absolute;top:53%;left: 40%"> IOS开发</span>
+	      <a href="" class="blackFont" style=" position: absolute;top:48%;left: 60%" ng-click="viewGuideModal('object_c')"> Object_C</a>
+		  <a href="" class="blackFont" style=" position: absolute;top:59%;left: 60%"  ng-click="viewGuideModal('webFront')"> 网页式IOS开发</a>	  
+		  
+		  <span   tooltip-placement="top" tooltip="{{guideTxt.Android}}"  
+		    style=" position: absolute;top:76%;left: 40%"> Android开发</span>	  	
+		  <a href="" class="blackFont" style=" position: absolute;top:71%;left: 60%" ng-click="viewGuideModal('android')"> 原生Android开发</a>	
+		  <a href="" class="blackFont" style=" position: absolute;top:83%;left: 60%" ng-click="viewGuideModal('webFront')"> 网页式Android开发</a>		
 	  </div>
+	  
 	</div>
   </div>
   

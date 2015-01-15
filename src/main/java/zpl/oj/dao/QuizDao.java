@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.QuizTemplete;
 
 
 public interface QuizDao {
@@ -47,6 +48,9 @@ public interface QuizDao {
   @Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS  "
   		+ " FROM (select * from Quiz order by quizid DESC) as b WHERE OWNER=#{0} group by uuid")
   List<Quiz> getQuizs(int owner);
+
+  @Select("select * from quiz_templete where quizTName = quizName")
+  QuizTemplete getQuizTByName(String quizName);
 
 
 }

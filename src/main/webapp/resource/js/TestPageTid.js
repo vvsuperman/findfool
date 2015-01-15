@@ -188,6 +188,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 		        	  obj.operation = params.operation;
 		        	  obj.title=params.title;
 		        	  obj.question = question;
+		        	  obj.type = q.type;
 		        	  return obj;
 		          }
 		      }

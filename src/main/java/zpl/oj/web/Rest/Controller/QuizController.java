@@ -1,12 +1,15 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +33,7 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.MD5.MD5Util;
+import zpl.oj.util.base64.BASE64;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
@@ -266,6 +270,32 @@ public class QuizController {
 		quizService.deleteQuestionFromTest(quizProblem);
 		rb.setState(1);
 		return rb;
+	}
+	
+	//
+	@RequestMapping(value = "/genquiz",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase genQuizFromTemplete(
+			@RequestBody Map<String,String> param,
+			@RequestHeader (value="Authorization",required=true) String token
+			) throws Exception{
+		 //获取用户id
+		  int uid =-1;
+		    String regEx = "@,@,@,@";
+			if(token != null){
+				String tokenUid = new String(BASE64.decodeBASE64(token));
+				Pattern pat = Pattern.compile(regEx);
+				String[] strs = pat.split(tokenUid);
+				if(strs.length >2)
+					return null;
+				uid= Integer.parseInt(strs[1]);
+			}
+			
+			String quizName = param.get("quizName");
+			
+			
+		return null;
+		
 	}
 	
 

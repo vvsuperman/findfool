@@ -1,6 +1,7 @@
 OJApp.controller('ModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,params) {
 	//绑定变量到服务
 	
+	$scope.type = params.type;
 	$scope.question = params.question;
 	$scope.operation = params.operation;
 	$scope.title = params.title;

@@ -14,7 +14,7 @@
 		   <a class="pull-right" href="" ng-if="contain.show==1" ng-click="contain.show=2">收起<span class="glyphicon glyphicon-chevron-up pull-right"  ></span></a>	
 		</div>
 			
-		<div ng-if="contain.show==1">
+		<div ng-if="contain.show==1" style="height: 600px;overflow-y: scroll;overflow-x:hidden">
 			<div class="row" style="padding-top:15px;padding-bottom:15px">
 				<div class="col-md-1"></div>
 				<div class="col-md-5">试题内容</div>
@@ -23,7 +23,7 @@
 				<!-- <div class="col-md-1">分数</div> -->
 				<div class="col-md-3">修改/删除/上移/下移</div>
 			</div>
-			<div class="question-list"  ng-repeat="q in qs">
+			<div class="question-list"  ng-repeat="q in qs" >
 				    <div class="col-md-1">
 				    	
 				    	<span ng-bind="'Q'+($index+1)"></span>

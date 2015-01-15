@@ -3,5 +3,25 @@
   	 height: 700px; 
   	 margin-top: 0px;	
   	 background-size:100% 100%;	
-  	 color:#fff;
+}
+
+.tooltip-inner{
+	 background-color:#fff !important;
+	 color:#000;
+	 border: 1px solid #000;
+	 width: auto！important;
+	
+}
+
+.tooltip.bottom .tooltip-arrow{
+	 border-bottom-color: #000  !important;
+}
+.tooltip.top .tooltip-arrow{
+	 border-top-color: #000  !important;
+}
+.tooltip.left .tooltip-arrow{
+	 border-left-color: #000  !important;
+}
+.tooltip.right .tooltip-arrow   {
+	 border-right-color: #000  !important;
 }

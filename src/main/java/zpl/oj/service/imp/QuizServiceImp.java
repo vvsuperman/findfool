@@ -11,6 +11,7 @@ import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.QuizProblemDao;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.requestjson.RequestTestMeta;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
@@ -149,6 +150,27 @@ public class QuizServiceImp implements QuizService {
 	public void deleteQuestionFromTest(QuizProblem quizProblem) {
 		// TODO Auto-generated method stub
 		 quizProblemDao.deleteQuestionFromTest(quizProblem);
+	}
+
+	@Override
+	public void genQuiz(String quizName, int uid) {
+		// TODO Auto-generated method stub
+		QuizTemplete quizT = quizDao.getQuizTByName(quizName);
+		Quiz quiz = new Quiz();
+		quiz.setDate(new Date());
+		quiz.setOwner(uid);
+		quiz.setName(quizT.getQuizTDesc());
+		quiz.setTime(quizT.getTime());
+		quizDao.insertQuiz(quiz);
+		int quizId = quizDao.getNewestQuizByOwner(uid).getQuizid();
+		
+		
+		List<QuizProblem> quizProbs = quizProblemDao.getQuizProblemsByProblemId(quizT.getQtId());
+		for(QuizProblem quizProblem:quizProbs){
+			 quizProblem.setQuizid(quizId);
+			 quizProblemDao.insertQuizproblem(quizProblem);
+		}
+		
 	}
 
 }
