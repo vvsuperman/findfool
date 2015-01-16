@@ -96,7 +96,9 @@ public class UpLoadService{
 	private String getValuebyCell(HSSFRow row, int k) throws  Exception{
 		// TODO Auto-generated method stub
 		HSSFCell cell = row.getCell(k);
-		
+		if(cell == null){
+			return null;
+		}
 		return getValue(cell);
 	}
 
@@ -164,6 +166,7 @@ public class UpLoadService{
 	      		Problem problem = new Problem();
 	      	 
 	      	    String questionContent = getValuebyCell(row,map,ExamConstant.QUESTION_CONTENT);
+	      	    //若试题内容为空，则不合规范，跳过
 	      	    if(questionContent.equals("")){
 	      	    	continue;
 	      	    }
@@ -276,8 +279,9 @@ public class UpLoadService{
 			  	      		if( getValuebyCell(row,rights.get(k))!= null ){
 			  	      		   option.setExceptedRes( addPTag(getValuebyCell(row,rights.get(k))));	
 			  	      		}
-			  	      		if( getValuebyCell(row,optionScore.get(k))!= null ){
-			  	      		   option.setExceptedRes( addPTag(getValuebyCell(row,optionScore.get(k))));	
+			  	      		if( getValuebyCell(row,optionScore.get(k))!= null && getValuebyCell(row,optionScore.get(k)).equals("") == false ){
+			  	      		   System.out.printf("score..........",getValuebyCell(row,optionScore.get(k)));
+			  	      		   option.setScore( Integer.parseInt((getValuebyCell(row,optionScore.get(k)))));	
 			  	      		}
 		  	      		}
 		  	      		

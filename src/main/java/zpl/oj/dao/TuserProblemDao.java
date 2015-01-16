@@ -29,7 +29,7 @@ public interface TuserProblemDao {
   @Update("update testuser_problem  set solution_id=#{1} where invite_id =#{0}")
   void updateSolutionByIids(int inviteId,int solutionId);
   
-  @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type} where problemid =#{problemid} and invite_id = #{inviteId}")
+  @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type},useranswer = #{useranswer}  where problemid =#{problemid} and invite_id = #{inviteId}")
   void updateProblemByIds(TuserProblem testuserProblem);
   
   @Select("select t1.problemid,t1.useranswer,t1.invite_id,t2.rightanswer,t2.problem_set_id as setid,t2.type,t1.solution_id as solutionId,t2.level "
