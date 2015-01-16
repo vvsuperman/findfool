@@ -98,20 +98,28 @@ public class InviteServiceImp implements InviteService {
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
 			String pwd, User hrUser) {
 		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+		
+		String host = (String) PropertiesUtil.getContextProperty("mailServerHost");
+		String port = (String) PropertiesUtil.getContextProperty("mailServerPort");
+		String userName = (String) PropertiesUtil.getContextProperty("userName");
+		String password = (String) PropertiesUtil.getContextProperty("password");
+		String fromAddress = (String) PropertiesUtil.getContextProperty("fromAddress");
+		
 		String url = desService.encode(tu.getEmail()+"|"+q.getQuizid());
 		final MailSenderInfo mailSenderInfo = new MailSenderInfo();
-		mailSenderInfo.setMailServerHost("smtp.163.com");   
-		mailSenderInfo.setMailServerPort("25");
-		mailSenderInfo.setUserName("weifangscs@163.com");   
-		mailSenderInfo.setPassword("fw820721");//您的邮箱密码  
+		mailSenderInfo.setMailServerHost(host);   
+		mailSenderInfo.setMailServerPort(port);
+		mailSenderInfo.setUserName(userName);   
+		mailSenderInfo.setPassword(password);//您的邮箱密码  
+		mailSenderInfo.setFromAddress(fromAddress);
 		
-		mailSenderInfo.setFromAddress("weifangscs@163.com");
+		
 		mailSenderInfo.setToAddress(tu.getEmail());
 		mailSenderInfo.setReplyToAddress(request.getReplyTo());
 		mailSenderInfo.setSubject(request.getSubject());
 		String context = request.getContext();
-		context += "<p>这是来自findfool的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到"
-				+"<a>"+baseurl+"/#/testing/"+url+"</a>"
+		context += "<p>这是来自findfool公司的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到"
+				+"<p>"+baseurl+"/#/testing/"+url+"</p>"
 				+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
 				+ "<br/>您的测试时间为：" + request.getDuration()+"</p>";
 		mailSenderInfo.setContent(context);
