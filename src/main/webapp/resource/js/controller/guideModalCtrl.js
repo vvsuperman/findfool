@@ -7,6 +7,19 @@ OJApp.controller('guideModalCtrl',function ($scope,$http,$modalInstance,Data,par
 	
 	
 	$scope.genQuiz = function(){
+		$http({
+            url: WEBROOT+"/test/genquiz",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {quizName:$scope.data}
+        }).success(function (data) {
+        	console.log("genQuizSuccess");
+        }).error(function (data) {
+            //error
+        	console.log("genQuizFailed");
+        });
 		
 	}
 	

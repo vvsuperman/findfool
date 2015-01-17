@@ -56,7 +56,7 @@ OJApp.config(['$routeProvider',
             }).
             when('/mybank', {
                 templateUrl: 'page/page.html',
-                controller: 'MyTestBank'
+                controller: 'mytestbank'
             }).
             when('/profile', {
                 templateUrl: 'page/page.html',

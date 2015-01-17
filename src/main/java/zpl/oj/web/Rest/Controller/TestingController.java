@@ -247,15 +247,18 @@ public class TestingController {
 		//对某一test、用户对发送第一次测试
 		List<TuserProblem> tProblems=null;
 		//初始化试题列表
-		tProblems = tuserService.initialProblems(testid,tuid,invite.getIid());
+		
 		
 		//初始化开始时间
 		if(invite.getBegintime().equals("")==true){
+			tProblems = tuserService.initialProblems(testid,tuid,invite.getIid());
 			Date date = new Date();
 			invite.setBegintime(df.format(date));
 			//建立定时器，到时间后将邀请置为无效
 			new InviteReminder(Integer.parseInt(invite.getDuration()), invite.getIid(),inviteDao);
 			inviteDao.updateInvite(invite);
+		}else{
+			tProblems =  tuserProblemDao.findProblemByInviteId(invite.getIid());
 		}
 		
 		Map rtMap = new HashMap<String, Object>();

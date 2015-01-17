@@ -100,6 +100,7 @@ public class ReportService {
 	 * */
 	public String getRank(Invite invite){
 		int testid = invite.getTestid();
+		Invite socreInvite = inviteDao.getInvitesByIds(invite.getTestid(), invite.getUid());
 		List<Invite> invites = inviteDao.getInviteByTid(invite.getTestid());
 		List<Integer> scores = new ArrayList<Integer>();
 		for(Invite tmp:invites){
@@ -108,7 +109,7 @@ public class ReportService {
 		Collections.sort(scores);
 		int i=scores.size()-1;
 		for(;i>=0;i--){
-			if(scores.get(i)==invite.getScore()){
+			if(scores.get(i)==socreInvite.getScore()){
 				i++;
 				break;
 			}

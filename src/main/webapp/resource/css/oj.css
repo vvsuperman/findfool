@@ -238,7 +238,7 @@ ul.navbar-nav li a:active{
 
 .simditor{
 	border-radius :3px;
-	border-width: 0px!important;
+	border-width: 1px!important;
 }
 
 .simditor-wrapper{

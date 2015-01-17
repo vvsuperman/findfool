@@ -279,8 +279,8 @@ public class QuizController {
 			@RequestBody Map<String,String> param,
 			@RequestHeader (value="Authorization",required=true) String token
 			) throws Exception{
-		 //获取用户id
-		  int uid =-1;
+		    //获取用户id
+		    int uid =-1;
 		    String regEx = "@,@,@,@";
 			if(token != null){
 				String tokenUid = new String(BASE64.decodeBASE64(token));
@@ -292,6 +292,7 @@ public class QuizController {
 			}
 			
 			String quizName = param.get("quizName");
+			quizService.genQuiz(quizName, uid);
 			
 			
 		return null;

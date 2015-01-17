@@ -114,12 +114,12 @@ public class ProblemServiceImp implements ProblemService{
 		p = problemDao.getProblemByContent(q.getQuestion().getContext()).get(0);
 		int pid =p.getProblemId();
 		//同时把试题加入到测试
-		if(q.getQuizId()!=0){
-			QuizProblem quizProblem = new QuizProblem();
-			quizProblem.setQuizid(q.getQuizId());
-			quizProblem.setProblemid(pid);
-			quizProblemDao.insertQuizproblem(quizProblem);
-		}
+//		if(q.getQuizId()!=0){
+//			QuizProblem quizProblem = new QuizProblem();
+//			quizProblem.setQuizid(q.getQuizId());
+//			quizProblem.setProblemid(pid);
+//			quizProblemDao.insertQuizproblem(quizProblem);
+//		}
 		
 		//处理tag
 		for(String tagContext:q.getQuestion().getTag()){

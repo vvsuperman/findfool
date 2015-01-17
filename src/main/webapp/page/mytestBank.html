@@ -1,5 +1,7 @@
-<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+
 
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 mytesttab"  >
 <div class=" panel panel-default black-panel">
@@ -18,7 +20,7 @@
 	        </li>
 	    </ul>
     
-    	<form class="form-inline col-md-6 pull-right"  role="form" >
+    	<form class="form-inline col-md-6 pull-right"  role="form" ng-if="0" >
             <input type="text" ng-model="reciveData.keyword" class=" col-md-8">
             <button class="btn btn-default col-md-3"  ng-click="queryQuestions(1)" style="margin-left: 10px">搜索</button>
         
@@ -229,6 +231,4 @@
         </div>
     </div>
 </div>
-
-
 

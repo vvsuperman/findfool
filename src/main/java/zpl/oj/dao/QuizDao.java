@@ -49,7 +49,7 @@ public interface QuizDao {
   		+ " FROM (select * from Quiz order by quizid DESC) as b WHERE OWNER=#{0} group by uuid")
   List<Quiz> getQuizs(int owner);
 
-  @Select("select * from quiz_templete where quizTName = quizName")
+  @Select("select * from quiz_templete where quizTName = #{quizName}")
   QuizTemplete getQuizTByName(String quizName);
 
 

@@ -4,11 +4,11 @@
  * created by zpl on 2014/7/18
  */
 
-!window.Simditor && 
-document.write('<script src=resource/js/simditor/module.js><\/script>');
-document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
-document.write('<script src=resource/js/simditor/uploader.js><\/script>');
-document.write('<script src=resource/js/simditor/simditor.js><\/script>');
+//!window.Simditor && 
+//document.write('<script src=resource/js/simditor/module.js><\/script>');
+//document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
+//document.write('<script src=resource/js/simditor/uploader.js><\/script>');
+//document.write('<script src=resource/js/simditor/simditor.js><\/script>');
 
 OJApp.controller('MyTestBank',function($scope) {
     $scope.url = '#/mybank';
@@ -20,6 +20,14 @@ OJApp.controller('MyTestBank',function($scope) {
 });
 
 OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
+	
+    $scope.url = '#/mybank';
+    $scope.template = 'page/mytestBank.html';
+    $scope.ContentUs = 'page/contentUs.html';
+    $scope.leftBar = 'page/libleftBar.html';
+    $scope.active = 1;
+    $scope.show = 1;
+
 	$scope.active = 1;
 	$scope.show = 1;
     

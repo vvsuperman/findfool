@@ -11,6 +11,10 @@ OJApp.controller("invite",function($scope, $http, Data) {
 OJApp.controller("Excel",function($scope, $http, Data) {
 	$scope.duration=70;
 	
+	$scope.subject = "笔试邀请"
+	
+	$scope.content = "     我们非常荣幸能收到您的简历，做为优秀的候选人之一，我们诚挚的邀请您参加测试，使我们能进一步了解您的能力。";
+	
     $scope.xlsusers = [
         {username: '', email: '', tel: '', test: Data.tname()}
     ];

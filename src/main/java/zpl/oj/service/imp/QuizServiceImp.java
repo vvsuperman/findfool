@@ -165,7 +165,7 @@ public class QuizServiceImp implements QuizService {
 		int quizId = quizDao.getNewestQuizByOwner(uid).getQuizid();
 		
 		
-		List<QuizProblem> quizProbs = quizProblemDao.getQuizProblemsByProblemId(quizT.getQtId());
+		List<QuizProblem> quizProbs = quizProblemDao.getQuizProblemsByQuizId(quizT.getQuizId());
 		for(QuizProblem quizProblem:quizProbs){
 			 quizProblem.setQuizid(quizId);
 			 quizProblemDao.insertQuizproblem(quizProblem);

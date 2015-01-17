@@ -24,18 +24,18 @@ OJApp.directive('customcheckbox', function() {
 			 
 			var index = attrs.index;
 			//若存在用户的选择
-			if(attrs.report == 1){
-				if(attrs.useranswer!=""&&typeof(attrs.useranswer)!="undefined"){
-					//判断用户是否选择
-					if(attrs.useranswer.charAt(index)==1){
-						elem.addClass(checkBoxChecked);
-						elem.css("border-color","#2fe2bf");	
-					}
-		     	}
+			if(attrs.useranswer!=""&&typeof(attrs.useranswer)!="undefined"){
+				//判断用户是否选择
+				if(attrs.useranswer.charAt(index)==1){
+					elem.addClass(checkBoxChecked);
+//					elem.css("border-color","#2fe2bf");	
+				}
+	     	}
 			
+			if(attrs.report == 1){
 				//判断选项是否正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
-					//elem.append("<span class='icon righticon' >");
+					elem.append("<span class='icon righticon' >");
 					elem.append("<p class='greenFont'><label class='glyphicon glyphicon-ok'></label>正确答案</p>")
 				}
 				
@@ -43,7 +43,6 @@ OJApp.directive('customcheckbox', function() {
 				if(typeof(attrs.score)!="undefined"){
 					//elem.append("<span class='icon righticon' >");
 					if(attrs.score!=0){
-						console.log("score.....",attrs.score);
 						elem.append("<p class='greenFont'><label class='glyphicon glyphicon-ok'></label>用例通过</p>")
 					}
 				}
@@ -51,7 +50,7 @@ OJApp.directive('customcheckbox', function() {
 			//若用户的选择不存在，则为查看元数据，根据rightanswer来判断选项的正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
 					elem.addClass(checkBoxChecked);
-					elem.css("border-color","#2fe2bf");	
+//					elem.css("border-color","#2fe2bf");	
 				}
 			}
 			
@@ -65,10 +64,10 @@ OJApp.directive('customcheckbox', function() {
 				 elem.click(function(event){	
 						 elem.toggleClass(checkBoxChecked);
 						    if(elem.hasClass(checkBoxChecked)){
-					        	elem.css("border-color","#2fe2bf");	
+//					        	elem.css("border-color","#2fe2bf");	
 					        	scope.option.isright = true;
 					        }else{
-					        	elem.css("border-color","#f2f2f2");
+//					        	elem.css("border-color","#f2f2f2");
 					        	scope.option.isright = false;
 					        }
 					    event.stopPropagation();

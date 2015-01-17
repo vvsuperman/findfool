@@ -7,12 +7,12 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.tid = param[1];
 	
 	
-	/*
+	
 	 $scope.email ="693605668@qq.com";
-	 $scope.testid ="1";
-	 $scope.tid = "12";
+	 $scope.testid ="23";
+	 $scope.tid = "23";
 	 $scope.show = 2;
-	 */
+	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
 	 //$scope.loginUser.email="apachee@qq.com";
@@ -25,27 +25,27 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.time.remain = 1;
 	 
 	 //检查该url是否合法
-	 $http({
-         url: WEBROOT+"/testing/checkurl",
-         method: 'POST',
-         data: {"email":$scope.email, "testid": $scope.tid}
-     }).success(function (data) {
-         //测试未开始
-    	 if( data.state == 0){
-    		 //试题已截至
-    		 if(data.message ==1){
-    			 $scope.show =5;
-    		 }else{
-    			 smoke.alert(data.message);
-    		 }
-    	 }
-    	 else{
-    		 $scope.show = 1;
-    	 }	 
-         
-     }).error(function(){
-    	 console.log("get data failed");
-     })
+//	 $http({
+//         url: WEBROOT+"/testing/checkurl",
+//         method: 'POST',
+//	     data: {"email":$scope.email, "testid": $scope.tid}
+//     }).success(function (data) {
+//         //测试未开始
+//    	 if( data.state == 0){
+//    		 //试题已截至
+//    		 if(data.message ==1){
+//    			 $scope.show =5;
+//    		 }else{
+//    			 smoke.alert(data.message);
+//    		 }
+//    	 }
+//    	 else{
+//    		 $scope.show = 1;
+//    	 }	 
+//         
+//     }).error(function(){
+//    	 console.log("get data failed");
+//     })
      
      //登陆
 	 $scope.login = function(){
@@ -192,7 +192,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 };
 	
      
-//	 $scope.$startTest();
+	 $scope.$startTest();
  	
      
     	 
@@ -363,21 +363,33 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      * 完成所有测试
      * */
      $scope.finishTest = function(){
-    	 $scope.run('submit');
-    	 var sendData ={"email":$scope.email,"testid":$scope.tid};
-    	 $http({
-	         url: WEBROOT+"/testing/finishtest",
-	         method: 'POST',
-	         data: sendData
-	     }).success(function (data) {
-	    	if(data.state==0){
-	    		//跳转到完成页面
-	    		$scope.show = 5;
-	    	}else{
-	    		alert(data.message);
-	    	}
-	     }).error(function(){
-	     })
+    	 smoke.confirm("你确定完成测试吗？",function(e){
+    		 if(e){
+    			 $scope.run('submit');
+    	    	 var sendData ={"email":$scope.email,"testid":$scope.tid};
+    	    	 $http({
+    		         url: WEBROOT+"/testing/finishtest",
+    		         method: 'POST',
+    		         data: sendData
+    		     }).success(function (data) {
+    		    	if(data.state==0){
+    		    		//跳转到完成页面
+    		    		$scope.show = 5;
+    		    	}else{
+    		    		alert(data.message);
+    		    	}
+    		     }).error(function(){
+    		     })
+    		 }else{
+    			 
+    		 }
+    	 },{
+    		 ok:"是",
+    		 cancel:"否",
+    		 reverseButtons: true
+    		 
+    	 })
+    	 
      };
      
 	 

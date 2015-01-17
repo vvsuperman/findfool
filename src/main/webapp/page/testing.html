@@ -20,7 +20,7 @@
 		    <div class="collapse navbar-collapse">
 		      
 		        
-		         <div class="col-md-2 col-md-offset-2">
+		         <div class="col-md-2 col-md-offset-2 hidden-sm hidden-xs">
 		           <progressbar class="progress-striped active" type=success value="answerCount.sum" max="answerCount.total">
 		           </progressbar>
 		          </div>
@@ -28,7 +28,7 @@
 		          <span ng-bind="answerCount.sum"></span> / <span ng-bind="answerCount.total"></span>
 		         </div>
 		          
-		          <div timer class="col-md-3 col-md-offset-1 timer">
+		          <div timer class="col-md-3  timer">
                           <div class="hours-wrapper">
                               <span class="hours"></span> <br>hours
                           </div>
@@ -45,6 +45,8 @@
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#" ng-bind="tuser.email"></a></li>
 		      </ul>
+		      
+		       
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav><!-- /navbar -->
@@ -54,8 +56,8 @@
 	  <div class="container-fluid">
 	  <div class="row">
 	   <!-- 左侧选项条 -->
-	   <div class="col-md-1">
-	   	 <ul class="nav nav-pills nav-stacked" role="tablist">
+	   <div class="col-md-12">
+	   	 <ul class="nav nav-pills" role="tablist" style="height: 30px">
 			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem)">
 			   <a  href=""   class="dotA">
 			  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
@@ -124,17 +126,13 @@
 		    </div>
 		</div>
 		<!-- program test -->
-		  
-		  <div class="row" style="margin-top: 10px">
-		  	  <div class="col-md-2 col-md-offset-4">
-		  	   <button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
-		  	  </div>
-		  </div>
-		  
+		  <div class="col-md-2 col-md-offset-4" >
+		            <button class="btn btn-outline"  ng-click="finishTest()">完成测试</button>
+	        	  </div>
 	   </div>
 	   
 	    <div class="col-md-2">
-		    <button class="btn btn-outline" style="margin-top: 20px" ng-click="finishTest()">完成测试</button>
+		     <button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
 		</div>
 	  </div>
  </div>
