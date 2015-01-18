@@ -27,7 +27,6 @@ public interface ProblemService {
 	
 	ResponseSearchResult getQuestionByUser(RequestSearch s);
 
-	String modifyQuestion(Question question);
 	
 	
 }

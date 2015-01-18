@@ -104,6 +104,7 @@ public class ProblemServiceImp implements ProblemService{
 		p.setSubmit(0);
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
+		p.setScore(q.getQuestion().getScore());
 		User u = userService.getUserById(q.getUser().getUid());
 		if(u.getPrivilege() >=3)
 			p.setBelong(0);
@@ -379,11 +380,5 @@ public class ProblemServiceImp implements ProblemService{
 	}
 
 	
-	//by fw, add simple modify
-	@Override
-	public String modifyQuestion(Question question) {
-		// TODO Auto-generated method stub
 	
-		return null;
-	}
 }

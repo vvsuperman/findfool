@@ -7,7 +7,18 @@
 <div class=" panel panel-default black-panel">
 <div class="panel-heading">
   <span >我的试题</span>
-  <button type="button" class="btn btn-primary pull-right" style="margin-right: 20px" ng-click="showAddPage(active)">新增试题</button> 
+  <!-- <button type="button" class="btn btn-primary pull-right" style="margin-right: 20px" ng-click="showAddPage(active)">新增试题</button>  -->
+ 
+  <div class="btn-group pull-right" style="margin-right: 20px">
+	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+	    新增试题 <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a href="" ng-click="showAddPage(1)">选择题</a></li>
+	    <li><a href="" ng-click="showAddPage(3)">简答题</a></li>
+	  </ul>
+ </div>
+  
   <button type="button" class="btn btn-outline pull-right" style="margin-right: 20px"  data-toggle="modal" data-target="#importModal" ng-click="showImportPage()">导入试题</button>
   <div style="clear: both;"></div>
 </div>
@@ -43,7 +54,7 @@
 			            <td abstract context={{q.context}}></td>
 			            <td>
 			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
-			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)">/增加</a>
+			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>
 			                <a  ng-if="isAdded(q.qid)">已添加</a>
 			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
 			            </td>
@@ -190,25 +201,37 @@
         
         
         <div ng-if="active==3">
-               <p>标题
-                   <input type="text" id="name" class="form-control" ng-model="newQuestion.name">
-               </p>
-            <p>题干</p>
-
-            <form class="form-inline" role="form">
-                <!--<textarea ng-model="newQuestion.context" class="form-control" type="text" rows=9 style="width: 100% ;resize: none"></textarea>-->
-                <!--<div ng-include src="'mdeditor.html'" ></div>-->
-                <textarea ng-model="context"></textarea>
-                <p style="padding: 20px">标签(以 , 区分)<input type="text" class="form-control" ng-model="newQuestion.tag">
-                </p>
-
-
-                <div class="btn-group-justified" style="padding: 70px">
-                    <a class="btn btn-default " ng-click="addQuestion()">保存</a>
-                    <a class="btn btn-default" ng-click="resetQuestion()">重置</a>
-                    <a class="btn btn-default" ng-click="cancel()">取消</a>
-                </div>
-            </form>
+        
+            <form class="form-horizontal" role="form">
+				  <div class="form-group">
+				    <label  class="col-sm-2 control-label">试题内容</label>
+				    <div class="col-sm-8">
+				      	<textarea class="form-control" simditor minheight="150px" ng-model="newQuestion.context"></textarea>
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label  class="col-sm-2 control-label">标签(以 , 区分)</label>
+				    <div class="col-sm-6">
+				      	<input class="form-control" ng-model="newQuestion.tag"></input>
+				    </div>
+				  </div>
+				  
+				   <div class="form-group">
+				    <label  class="col-sm-2 control-label">分数</label>
+				    <div class="col-sm-4">
+				      	<input class="form-control" ng-model="newQuestion.score"></input>
+				    </div>
+				  </div>
+				  
+				  <div class="col-md-offset-1"  style="padding-top: 70px">
+                    <button class="btn btn-primary " ng-click="addQuestion()">保存</button>
+                    <button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
+                    <button class="btn btn-primary" ng-click="cancel()">取消</button>
+		          </div>
+			</form>
+        
+            
         </div>
     </div>
 </div>

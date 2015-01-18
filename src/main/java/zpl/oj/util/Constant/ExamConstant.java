@@ -36,7 +36,7 @@ public class ExamConstant{
 	public static final String QUESTION_TYPE_PROGRAM ="pragram";
 	
 	//自定义题库，不列入统计
-	public static final int CUSTOM_SET_ID =0;
+	public static final int CUSTOM_SET_ID =-1;
 	public static final String CUSTOM_SET_NAME = "custom";
 	
 	//输入和输出

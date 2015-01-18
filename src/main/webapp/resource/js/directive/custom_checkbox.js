@@ -29,6 +29,7 @@ OJApp.directive('customcheckbox', function() {
 				if(attrs.useranswer.charAt(index)==1){
 					elem.addClass(checkBoxChecked);
 //					elem.css("border-color","#2fe2bf");	
+					scope.option.isright = true;
 				}
 	     	}
 			

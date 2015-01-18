@@ -53,13 +53,22 @@ public class ReportService {
 	 * */
 	public String countUserAndTotalScore(Invite invite) {
 		// TODO Auto-generated method stub
+		//选择题总分
 		int totalScore = tuserProblemDao.getTotalScore(invite.getIid());
 		//选择题得分
 		int mScore = tuserProblemDao.getUserScore(invite);
-		Integer pScore = getProblemScore(invite);
+		//编程题总分
+		
+		//编程题得分
+		 Map<String,Integer> map= getProblemScore(invite);
+		Integer pScore = map.get("pScore");
+		Integer pTotalScore = map.get("pTotalScore");
 		int userScore=0;
 		if(pScore!=null){
 			 userScore = mScore + pScore;
+		}
+		if(pTotalScore != null){
+			 totalScore +=pTotalScore;
 		}
 		
 		Invite myInvite = inviteDao.getInviteById(invite.getIid());
@@ -70,16 +79,21 @@ public class ReportService {
 	}
 	
 	
-	private Integer getProblemScore(Invite invite) {
+	private Map getProblemScore(Invite invite) {
 		// 循环处理编程题并生成得分
 		List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
-		int sum = 0;
+		int pScore = 0;
+		int pTotalScore = 0;
 		for(TuserProblem tuserProblem: tuserProblems){
 			if(tuserProblem.getType() == ExamConstant.PROGRAM){
-				Integer tempSum= tuserProblemDao.sumProblemScore(tuserProblem.getSolutionId());
+				pScore+= tuserProblemDao.sumProblemScore(tuserProblem.getSolutionId());
+				pTotalScore+=tuserProblemDao.sumProTotalScore(tuserProblem.getProblemid());
 			}
 		}
-		return sum;
+		Map<String,Integer> rtMap = new HashMap<String, Integer>();
+		rtMap.put("pScore", pScore);
+		rtMap.put("pTotalScore", pTotalScore);
+		return rtMap;
 	}
 
 

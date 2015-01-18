@@ -14,6 +14,7 @@ public class Question {
 	private List<QuestionTestCase> answer;
 	private String useranswer;
 	private String rightanswer;
+	private int score;
 	
 	public Question() {
 		this.qid = -1;
@@ -25,6 +26,13 @@ public class Question {
 		this.answer = new ArrayList<QuestionTestCase>();
 		this.useranswer = "";
 		this.rightanswer = "";
+		this.score =0;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 	public String getUseranswer() {
 		return useranswer;

@@ -2206,7 +2206,7 @@ angular.module('ui.bootstrap.pagination', [])
     ngModelCtrl.$render = function() {
       self.render();
     };
-
+    console.log("ItemsPerPage...........",$attrs.itemsPerPage);
     if ($attrs.itemsPerPage) {
       $scope.$parent.$watch($parse($attrs.itemsPerPage), function(value) {
         self.itemsPerPage = parseInt(value, 10);
@@ -2216,12 +2216,13 @@ angular.module('ui.bootstrap.pagination', [])
       this.itemsPerPage = config.itemsPerPage;
     }
   };
-
+  console.log("totalItems1...........",$scope.totalItems);
+  console.log("totalItems2...........",$attrs.totalItems);
   this.calculateTotalPages = function() {
     var totalPages = this.itemsPerPage < 1 ? 1 : Math.ceil($scope.totalItems / this.itemsPerPage);
     return Math.max(totalPages || 0, 1);
   };
-
+ 
   this.render = function() {
     $scope.page = parseInt(ngModelCtrl.$viewValue, 10) || 1;
   };

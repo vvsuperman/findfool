@@ -55,9 +55,9 @@
 
 	  <div class="container-fluid">
 	  <div class="row">
-	   <!-- 左侧选项条 -->
+	   <!-- 上方选项条 -->
 	   <div class="col-md-12">
-	   	 <ul class="nav nav-pills" role="tablist" style="height: 30px">
+	   	  <ul class="pagination">
 			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem)">
 			   <a  href=""   class="dotA">
 			  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
@@ -108,9 +108,9 @@
 		        
 		        
 		     
-		        <div class="col-md-12" style="margin-top: 20px;">
+		     <!--    <div class="col-md-12" style="margin-top: 20px;">
 		            <button class="btn btn-primary" ng-click="run('test')">运行</button>
-		        </div>
+		        </div> -->
 		        
 		        <div class="col-md-12" style="margin-top: 20px;">
 		            <button class="btn btn-primary" ng-click="run('submit')">运行</button>
@@ -126,6 +126,20 @@
 		    </div>
 		</div>
 		<!-- program test -->
+		
+		 <!-- essay --> 
+		  <div class="row" ng-if="questionType==3">
+		    <div style="margin-top: 20px">
+		        <textarea simditor minheight="50px" width="100%" operation="view" ng-model="question.context"></textarea>
+		    </div>
+		    
+		    <div>
+		       <textarea simditor minheight="50px" width="100%" operation="editor" ng-model="question.useranswer"></textarea>
+		    </div>
+		</div>
+		<!-- essay -->
+		
+		
 		  <div class="col-md-2 col-md-offset-4" >
 		            <button class="btn btn-outline"  ng-click="finishTest()">完成测试</button>
 	        	  </div>

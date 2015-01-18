@@ -26,8 +26,8 @@ public interface TuserProblemDao {
   void updateAnswerByIds(TuserProblem testuserProblem);
   
   
-  @Update("update testuser_problem  set solution_id=#{1} where invite_id =#{0}")
-  void updateSolutionByIids(int inviteId,int solutionId);
+  @Update("update testuser_problem  set solution_id=#{2} where invite_id =#{0} and problemid=#{1}")
+  void updateSolutionByIids(int inviteId,int probemId,int solutionId);
   
   @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type},useranswer = #{useranswer}  where problemid =#{problemid} and invite_id = #{inviteId}")
   void updateProblemByIds(TuserProblem testuserProblem);
@@ -39,11 +39,11 @@ public interface TuserProblemDao {
   @Select("select t1.problemid,t1.useranswer,t1.type,t1.invite_id,t1.solution_id as solutionId from testuser_problem t1 where t1.invite_id = #{0} and t1.problemid=#{1}")
   TuserProblem findByPidAndIid(int inviteId,int problemid);
   
-  @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0}")
+  @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0} where t2.type=1")
   public int getTotalScore(int inviteId);
   
   
- @Select(" select sum( case  when p.rightanswer =  t.useranswer then p.score else 0 end) as score from ojsite.problem p,ojsite.testuser_problem t" 
+ @Select(" select sum( case  when p.rightanswer =  t.useranswer then p.score else 0 end) as score from problem p,testuser_problem t" 
   +" where  t.invite_id = #{iid} AND t.problemid = p.problem_id AND p.type=1")
  public int getUserScore(Invite invite);
  
@@ -72,6 +72,9 @@ public interface TuserProblemDao {
 
 @Delete("delete from testuser_problem where  invite_id =#{0} AND problemid = #{1}")
 void deleteByIds(int inviteId, Integer problemid);
+
+@Select("select sum(score) from problem_test_case where problem_id=#{0}")
+Integer sumProTotalScore(Integer problemid);
  
 }
 

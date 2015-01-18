@@ -36,7 +36,8 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	
 	$scope.Qtype = [
         { name: '选择题', data: '1'},
-        { name: '编程题', data: '2'},
+//        { name: '编程题', data: '2'},
+        { name: '简答题', data: '3'}
     ];
     $scope.page = 1;
     $scope.keyword = "";
@@ -78,6 +79,25 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 		}
 	}
 
+	
+	//查看和修改试题的通用方法
+	$scope.modifyQuestionInTest = function (size,q,params) {
+	   	var question = jQuery.extend(true, {}, q);
+		 var modalInstance = $modal.open({
+		      templateUrl: 'page/myModalContent.html',
+		      controller: 'ModalInstanceCtrl',
+		      size: size,
+		      resolve: {
+		          params:function(){
+		        	  var obj ={};
+		        	  obj.operation = params.operation;
+		        	  obj.title=params.title;
+		        	  obj.question = question;
+		        	  return obj;
+		          }
+		      }
+		 });
+	 };
 
     //add by zpl
     $scope.computePage = function () {
@@ -207,10 +227,9 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
     };
     
     $scope.showAddPage = function (active) {
-       //初期只允许新增选择题
-    	$scope.active =1;
+       //初期只允许新增选择题和简答题
+    	$scope.active =active;
        // $scope.active = active;
-    	console.log("show add page........");
         $scope.show = 0;
         $scope.context="";
         $scope.tag="";

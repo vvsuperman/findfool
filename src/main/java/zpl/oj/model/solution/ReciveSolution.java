@@ -11,7 +11,16 @@ public class ReciveSolution {
 	int user_id;
 	int testid;
 	String email;
+	int submit;  //表明是运行还是提交
 	
+	public int getSubmit() {
+		return submit;
+	}
+
+	public void setSubmit(int submit) {
+		this.submit = submit;
+	}
+
 	public String getEmail() {
 		return email;
 	}

@@ -28,6 +28,8 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     		return "选择题";
     	}else if(typeName ==2){
     		return "编程题";
+    	}else if(typeName ==3){
+    		return "简答题";
     	}else{
     		return "no";
     	}
@@ -147,7 +149,6 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	    	 }
 	     }
 	     
-	     console.log("prosum.......",proSum);
 	     if(q.type==2 && proSum>0){
 	    	 smoke.alert("为保证考试时间，只能添加一道编程题");
 	    	 return false;

@@ -74,15 +74,19 @@ public class SolutionRunController {
 			rb.setState(0);
 			return rb;
 		}
+		//submit＝＝0表示为运行状态，并不执行测试用例
+		int problemId =request.getProblem_id();
+		if(request.getSubmit() == 0){
+			request.setProblem_id(0);
+		}
 		
 		ResponseMessage msg = new ResponseMessage();
 		int solution_id = solutionRunService.addSolutionRun(request);
 		
 		//将solution_id加入到test_user_problem
-	    TuserProblem tuserProblem = new TuserProblem();
 	    Invite invite = (Invite)map.get("invite");
 	    //将solutionid更新到problem
-		tuserProblemDao.updateSolutionByIids(invite.getIid(),solution_id);
+		tuserProblemDao.updateSolutionByIids(invite.getIid(),problemId,solution_id);
 	    
 		
 		msg.setMsg(""+solution_id);
