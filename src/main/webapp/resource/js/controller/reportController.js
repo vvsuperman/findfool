@@ -64,13 +64,20 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     	$scope.user = data.user;
     	$scope.labels = data.dimension.name;
     	$scope.data = data.dimension.val;
-    	$scope.series = ['总分', '用户成绩'];
+        
     	//level的雷达图
     	$scope.levelLabels = data.levelDimension.name;
     	$scope.levelData = data.levelDimension.val;
     	
+    	var totalScores = $scope.data[0];
+    	var userScores = $scope.data[1];
+    	$scope.descStr =[];
+    	for(var i=0; i< totalScores.length; i++){
+    		var tmpStr = $scope.labels[i]+":"+(userScores[i]/totalScores[i])*100+"%";
+    		$scope.descStr.push(tmpStr);
+    	}
     	
-     	//得分
+     	//得分	
      	var score = data.score.split("/");
      	$scope.labelsScore =['用户成绩', '总分'];
      	$scope.dataScore = [parseInt(score[0]),parseInt(score[1])];

@@ -1,30 +1,29 @@
-    <div class="bs-sidebar hidden-print affix col-md-1 customBar" role="complementary" style="width: 180px!important;" ng-controller="leftBarController">
+    <div class="bs-sidebar hidden-print affix col-md-2 customBar" role="complementary" style="width: 180px!important;" ng-controller="leftBarController">
         <ul class="nav bs-sidenav customSideNav">
 
             <li >
-                <h4 style="margin-left: 10px" ng-bind="tname"></h4>
+                <h6 style="margin-left: 10px" class="greenFont" ng-bind="tname"></h6>
             </li>
             <li class="">
-                <h5 style="margin-left: 10px"><strong>测试管理</strong></h5>
+                <h6 style="margin-left: 10px"><strong>测试管理</strong></h6>
             </li>
 
             <li class="">
-                
-                <a href="#/test/{{tid}}" ><span style="margin-right: 5px" class="glyphicon glyphicon-th-list"></span>试题</a>
+                <a href="#/test/{{tid}}" ><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-th-list"></span>试题</a>
             </li>
             
             <li>
                 <!--http://bootstrap.kinghack.com/components.html-->
-                <a href="#/invite"><span style="margin-right: 5px" class="glyphicon glyphicon-envelope"></span>邀请</a>
+                <a href="#/invite"><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-envelope"></span>邀请</a>
             </li>
             <!-- <li>
                 <a href="" data="{{tid}}" ng-click="CommonSetting($event.target)">通用设置</a>
             </li> -->
-            <li><h5 style="margin-left: 10px"><strong>测试报告</strong></h5>
+            <li><h6  style="margin-left: 10px"><strong>测试报告</strong></h6>
             </li>
             
             <li>
-                <a href="#/report"><span style="margin-right: 5px" class="glyphicon glyphicon-eye-open"></span>报告</a>
+                <a href="#/report"><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-eye-open"></span>报告</a>
             </li>
         </ul>
     </div>

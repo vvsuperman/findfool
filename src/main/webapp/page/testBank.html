@@ -87,10 +87,10 @@
 			        </tbody>
 			    </table>   
 			    
-			    <ul class="pagination">
-		            <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)">&laquo;</a></li>
-		            <li ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)">{{i.index}}</a></li>
-		            <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)">&raquo</a></li>
+			    <ul style="margin-left: 20px;margin-top: 20px" class="pagination-plain">
+		            <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)" class="previous" href="">← 第一页</a></li>
+		            <li ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)" href="">{{i.index}}</a></li>
+		            <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)" class="next" href="">最后一页 →</a></li>
 		        </ul>
         </div>
        </div> 

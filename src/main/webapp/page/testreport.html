@@ -38,29 +38,21 @@
      
    </div>
    <div class="panel-body">
-        <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
+        <div class="panel panel-default black-panel col-md-12" style="padding-left: 0px;padding-right: 0px">
 		   <div class="panel-heading">
 		     知识结构
 		   </div>
-		   <div class="panel-body">
-		      <canvas id="radar" class="chart chart-radar" data="data"  labels="labels" series＝"series"></canvas> 
-		   </div>
+			   <div class="col-md-8">
+			      <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
+			   </div>  
+		       <div class="col-md-4" style="margin-top: 20px">
+		         <p>得分情况</p>
+		         <p ng-repeat="str in descStr">{{str}}</p>
+		       </div>
+		   
 		</div>
 		
-		<div class="col-md-4">
-			<div class="panel panel-default black-panel">
-			   <div class="panel-heading">
-			     用户信息
-			   </div>
-			   <div class="panel-body">
-			       <p>姓名：<span ng-bind="user.username"></span></p>
-			       <p>邮箱：<span ng-bind="user.email"></span></p>
-			       <p>毕业院校:<span ng-bind="user.school"></span></p>
-			       <p>最高学历:<span ng-bind="user.degree"></span></p>
-			       <p>个人博客：<span ng-bind="user.blog"></span></p>
-			   </div>
-			</div>
-	  </div>	
+		
 	  
 	     <div class="col-md-6" style="padding-left:0px;">
 			<div class="panel panel-default black-panel" >
@@ -68,7 +60,7 @@
 			     用户得分:<span ng-bind="score" style="color: #1abc9c;font-size:20px" ></span>
 			   </div>
 			   <div class="panel-body">
-			       <canvas id="doughnut" class="chart chart-doughnut" data="dataScore"  labels="labelsScore"></canvas> 
+			       <canvas id="doughnut"  class="chart chart-doughnut" data="dataScore"  labels="labelsScore"></canvas> 
 			   </div>
 			</div>
 		</div>
@@ -83,6 +75,21 @@
 			   </div>
 			</div>
 		</div>
+		
+		<div class="col-md-6" style="padding-left:0px;">
+			<div class="panel panel-default black-panel">
+			   <div class="panel-heading">
+			     用户信息
+			   </div>
+			   <div class="panel-body">
+			       <p>姓名：<span ng-bind="user.username"></span></p>
+			       <p>邮箱：<span ng-bind="user.email"></span></p>
+			       <p>毕业院校:<span ng-bind="user.school"></span></p>
+			       <p>最高学历:<span ng-bind="user.degree"></span></p>
+			       <p>个人博客：<span ng-bind="user.blog"></span></p>
+			   </div>
+			</div>
+	  </div>	
 		
 		<!-- <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
 		   <div class="panel-heading">

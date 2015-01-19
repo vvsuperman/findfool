@@ -411,22 +411,19 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 
      };
      
-	 
-	
-     
      $scope.lgs = [
                    {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},
                    {name: 'C++', demo: 'resource/static/cpp.cpp', CodeType: 'c_cpp', lan: 1},
                    {name: 'Java', demo: 'resource/static/java.java', CodeType: 'java', lan: 3},
 //                   {name: 'python', demo: 'resource/static/python.py', CodeType: 'python', lan: 6},
-                   {name: 'C#', demo: 'resource/static/csharp.cs', CodeType: 'csharp', lan: 9}
+//                   {name: 'C#', demo: 'resource/static/csharp.cs', CodeType: 'csharp', lan: 9}
                ];
      
      $scope.lg ={};
-     $scope.lg.context =$scope.lgs[1];
+     $scope.lg.context =$scope.lgs[0];
      
      var codeTemplete ={"C":"#include <stdio.h>\r\n int main(){\r\n 	return 0;\r\n}",
-				"C++":"#include <stdio.h>\r\n int main(){\r\n 	return 0;\r\n}",
+				"C++":"using namespace std; \r\n #include <iostream>\r\n int main(){\r\n 	return 0;\r\n}",
 				"Java":"public class Solution {\r\n    public static void main(String[] args) {\r\n    }\r\n}",
 				'C#':'public void Solution() {\r\n    Console.WriteLine("Hello World");\r\n}'
      }

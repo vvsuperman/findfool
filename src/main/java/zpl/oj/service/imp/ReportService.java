@@ -322,10 +322,16 @@ public class ReportService {
 		}
 		
 		SolutionRun solution =  solutionRunDao.getSolutionById(problem.getSolutionId());
+		if(solution!=null){
+			proDetail.setUseranswer(solution.getSolution());
+			proDetail.setLanguage(solution.getLanguage());
+			proDetail.setResultInfos(rtSet);
+		}else{
+			proDetail.setUseranswer("");
+			proDetail.setLanguage(1);
+			proDetail.setResultInfos(null);
+		}
 		
-		proDetail.setUseranswer(solution.getSolution());
-		proDetail.setLanguage(solution.getLanguage());
-		proDetail.setResultInfos(rtSet);
 		
 		return proDetail;
 	}
