@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/testing.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 <div>
 		<nav class="navbar navbar-dafault" role="navigation">
 		  <div class="container-fluid">
@@ -28,7 +29,7 @@
 		          <span ng-bind="answerCount.sum"></span> / <span ng-bind="answerCount.total"></span>
 		         </div>
 		          
-		          <div timer class="col-md-3  timer">
+		          <div timer class="col-md-4  timer">
                           <div class="hours-wrapper">
                               <span class="hours"></span> <br>hours
                           </div>
@@ -86,7 +87,7 @@
 		  </div>
 		  
 		 <!-- program test --> 
-		  <div class="row" ng-if="questionType==2">
+		  <div class="row" ng-if="questionType==2" style="margin-left: 20px">
 		    <div style="margin-top: 20px">
 		        <textarea simditor minheight="50px" width="100%" operation="view" ng-model="question.context"></textarea>
 		    </div>
@@ -128,24 +129,25 @@
 		<!-- program test -->
 		
 		 <!-- essay --> 
-		  <div class="row" ng-if="questionType==3">
+		  <div class="row" ng-if="questionType==3" style="margin-left: 20px">
 		    <div style="margin-top: 20px">
 		        <textarea simditor minheight="50px" width="100%" operation="view" ng-model="question.context"></textarea>
 		    </div>
 		    
-		    <div>
-		       <textarea simditor minheight="50px" width="100%" operation="editor" ng-model="question.useranswer"></textarea>
+		    <div style="margin-top: 20px">
+		       <h4 class="greenFont">回答</h4>
+		       <textarea simditor minheight="200px" width="100%" operation="editor" ng-model="question.useranswer"></textarea>
 		    </div>
 		</div>
 		<!-- essay -->
 		
 		
-		  <div class="col-md-2 col-md-offset-4" >
+		  <div class="col-md-2 col-md-offset-4" style="margin-top: 20px" >
 		            <button class="btn btn-outline"  ng-click="finishTest()">完成测试</button>
 	        	  </div>
 	   </div>
 	   
-	    <div class="col-md-2">
+	    <div class="col-md-2" style="margin-top: 20px">
 		     <button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
 		</div>
 	  </div>

@@ -1,16 +1,14 @@
 'use strict';
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
-	console.log("initial totalItems..................");
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
 	 $scope.tid = param[1];
-	 $scope.totalItems = 41;
 	
 	
 	 $scope.email ="693605668@qq.com";
-	 $scope.testid ="23";
-	 $scope.tid = "23";
+	 $scope.testid ="11";
+	 $scope.tid = "11";
 	 $scope.show = 2;
 	 
 	 $scope.tuser = {};
@@ -141,7 +139,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.genExtraInfo = function(data){
 		//生成用户的完成题目
 	    	$scope.answerCount.total = $scope.tProblems.length;
-	    	console.log("tProblems.....",$scope.tProblems);
 	    	for(var i=0;i<$scope.tProblems.length;i++){
 	    		if(typeof($scope.tProblems[i].useranswer)!=null && $scope.tProblems[i].useranswer!="" 
 	    			&& $scope.tProblems[i].useranswer!="0000" && $scope.tProblems[i].useranswer!="00000"){
@@ -172,15 +169,19 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         data: sendData
 	     }).success(function (data) {
 	    	if(data.state!=0){
-	    		
 	    		$scope.tProblems = data.message.problems;
 		    	$scope.submitAndFetch($scope.tProblems[0]);
 		    	$scope.genExtraInfo(data);
 		    	$scope.show =4;
-		    	
+		    	//铺助数组，存储已完成的试题，用来判断已完成题数是否需要加一
 		    	 $scope.sumArry=[];
 		         for(var i=0;i<$scope.tProblems.length;i++){
-		        	 $scope.sumArry[i] =0;
+		        	 if($scope.tProblems[i].useranswer!="" && $scope.tProblems[i].useranswer!="0000"){
+		        		 $scope.sumArry[i] =1;
+		        	 }else{
+		        		 $scope.sumArry[i] =0;
+		        	 }
+		        	
 		         }
 		    	
 	    	}
@@ -211,23 +212,25 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      */
      $scope.submitAndFetch= function(problem){
     	 //判断是否是第一道题，提交目前的试题
-    	 if(typeof($scope.question.answer)!="undefined"){
-    		 var useranswer ="";
-    	
-    		 console.log("question..........",$scope.question);
-        	 for(var i in $scope.question.answer){
-        		 if($scope.question.answer[i].isright ==true){
-        			 useranswer+=1;
-        		 }else{
-        			 useranswer+=0;
-        		 }
+    	 var useranswer ="";
+    	 if($scope.question.type ==1){
+    		 if(typeof($scope.question.answer)!="undefined"){
+            	 for(var i in $scope.question.answer){
+            		 if($scope.question.answer[i].isright ==true){
+            			 useranswer+=1;
+            		 }else{
+            			 useranswer+=0;
+            		 }
+            	 }
         	 }
+    	 }else if($scope.question.type == 3){
+    		 useranswer = $scope.question.useranswer;
     	 }
+    	
     	 
     	 
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
     			 		 "useranswer":useranswer};
-    	 console.log("sendData.........",sendData);
     	 
     	 $http({
 	         url: WEBROOT+"/testing/submit",
@@ -270,7 +273,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 $scope.questionType =3;
 	    	 }
 	    	$scope.question = data.message;
-	    	console.log("fetch question..........",$scope.question);
 	     }).error(function(){
 	    	 console.log("login failed");
 	     })
@@ -284,9 +286,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      
      $scope.getNext = function(question){
     	 var index=0;
-    	 for( var i in $scope.tProblems){
+    	 for( var i=0;i< $scope.tProblems.length;i++){
     		 if($scope.tProblems[i].problemid == question.qid){
-    			index = ++i;
+    			index = i+1;
+    			
     			if($scope.sumArry[i]==0){
     				$scope.sumArry[i]=1;
     				$scope.answerCount.sum++;
@@ -295,12 +298,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     			break;
     		 }
     	 }
-    	
-    	 
     	 if(index<$scope.tProblems.length){
     		 $scope.submitAndFetch($scope.tProblems[index])
     	 }else{
-    		 smoke.alert("已到最后一题，请仔细检查");
+    		 $scope.submitAndFetch($scope.tProblems[index-1]);
+    		 smoke.alert("以至最后一题，请仔细检查");
     	 }
     	 
      }
@@ -323,13 +325,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
        solution.email =$scope.email
        solution.testid = $scope.tid;
        solution.solution = $scope.programCode.context;
-       console.log("solution......",solution);
        $http({
            url: WEBROOT+'/solution/run',
            method: "POST",
            data: solution
        }).success(function (data) {
-    	   console.log("data......",data);
            $scope.state = 'success';
            $scope.solution_id = data.message.msg;         
            $scope.query();

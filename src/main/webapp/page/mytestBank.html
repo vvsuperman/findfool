@@ -55,6 +55,8 @@
 			            <td>
 			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
 			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">/修改</a>
+			                
 			                <a  ng-if="isAdded(q.qid)">已添加</a>
 			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
 			            </td>

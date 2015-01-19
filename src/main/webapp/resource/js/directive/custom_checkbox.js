@@ -36,7 +36,7 @@ OJApp.directive('customcheckbox', function() {
 			if(attrs.report == 1){
 				//判断选项是否正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
-					elem.append("<span class='icon righticon' >");
+//					elem.append("<span class='icon righticon' >");
 					elem.append("<p class='greenFont'><label class='glyphicon glyphicon-ok'></label>正确答案</p>")
 				}
 				

@@ -58,22 +58,34 @@ public class TuserService {
 
 	public  List<TuserProblem> initialProblems(int testid, int tuid,int inviteId) {
 		// TODO Auto-generated method stub
+		//若对同一个用户发送了同一套测试，则试题不能插入，必须更新	
+				List<Problem> listProblem = problemDao.getProblemByTestid(testid);
+				Set idSet = new HashSet<Integer>();
+				for(Problem problem:listProblem){
+					//要将试题中删除了的试题从用户需要做的试题中删除
+					idSet.add(problem.getProblemId());
+					TuserProblem tuserProblem = tuserProblemDao.findByPidAndIid(inviteId, problem.getProblemId());
+					if(tuserProblem == null){
+						tuserProblem = new TuserProblem();
+						tuserProblem.setInviteId(inviteId);
+						tuserProblem.setProblemid(problem.getProblemId());
+						tuserProblem.setTuid(tuid);
+						tuserProblemDao.insertTuserProblem(tuserProblem); 
+					}else{
+						tuserProblem.setUseranswer("");
+						tuserProblemDao.updateProblemByIds(tuserProblem); 
+					}
+				}
 		
 		
-		List<Problem> listProblem = problemDao.getProblemByTestid(testid);
-		for(Problem problem:listProblem){
-			//要将试题中删除了的试题从用户需要做的试题中删除
-				TuserProblem tuserProblem = new TuserProblem();
-				tuserProblem.setInviteId(inviteId);
-				tuserProblem.setProblemid(problem.getProblemId());
-				tuserProblem.setTuid(tuid);
-				tuserProblemDao.insertTuserProblem(tuserProblem); 
-			
-		}
 		
 		List<TuserProblem> tProblems =  tuserProblemDao.findProblemByInviteId(inviteId);
 		//若该用户试题已被删除
-		
+				for(TuserProblem tProblem:tProblems){
+					if(idSet.contains(tProblem.getProblemid())==false){
+						tuserProblemDao.deleteByIds(inviteId,tProblem.getProblemid());
+					}
+				}
 		return tProblems;
 	}
 

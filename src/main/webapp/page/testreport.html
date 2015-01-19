@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-if="showReport ==1">
     <!-- <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn> -->
@@ -105,7 +106,10 @@
 	  </ul>
      
    </div>
-			   <table class="table table-striped">
+			   <table class="table table-striped" style="table-layout:fixed;">
+			   	<col style="width: 10%" />
+				<col style="width: 80%" />
+				<col style="width: 10%" />
 			        <thead>
 				        <tr>
 				        	<th>是否正确</th>
@@ -116,7 +120,7 @@
 			        <tbody>
 			        <tr ng-repeat="q in questions">
 			        	<td  ng-class="{1:'text-success',2:'text-danger'}[color]">{{judge(q)}}</td>
-			            <td abstract context={{q.context}}></td>
+			            <td abstract context={{q.context}} style="overflow:hidden;white-space:nowrap;"></td>
 			            <td>
 			                <a class="blackFont" href="" ng-click="viewQuestion('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
 			            </td>
@@ -125,8 +129,5 @@
 			    </table>      
 </div>
 
-<script src="resource/js/simditor/module.js"></script>
-<script src="resource/js/simditor/hotkeys.js"></script>
-<script src="resource/js/simditor/uploader.js"></script>
-<script src="resource/js/simditor/simditor.js"></script>
+
 

@@ -313,6 +313,7 @@ public class TestingController {
 		Question question = problemService.getProblemById(nowProblmeId);
 		TuserProblem tProblem = tuserProblemDao.findByPidAndIid(invite.getIid(), nowProblmeId);
 		question.setUseranswer(tProblem.getUseranswer());
+		question.setRightanswer("");
 		MyCompare comp = new MyCompare();  
         // 执行排序  
         Collections.sort(question.getAnswer(),comp); 

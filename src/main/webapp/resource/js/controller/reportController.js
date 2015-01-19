@@ -1,3 +1,9 @@
+!window.Simditor && 
+document.write('<script src=resource/js/simditor/module.js><\/script>');
+document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
+document.write('<script src=resource/js/simditor/uploader.js><\/script>');
+document.write('<script src=resource/js/simditor/simditor.js><\/script>');
+
 OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 	$scope.showReport =1;
     $scope.ContentUs = 'page/contentUs.html';
@@ -166,6 +172,22 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
 			    }).error(function(){
 			   	 console.log("get data failed");
 			    })
+		}else if(q.type == 3){
+			var modalInstance = $modal.open({
+			      templateUrl: 'page/proModalContent.html',
+			      controller: 'proModalInstanceCtrl',
+			      size: size,
+			      resolve: {
+			          params:function(){
+			        	  var obj ={};
+			        	  obj.operation = params.operation;
+			        	  obj.title=params.title;
+			        	  obj.question = q;
+			        	  obj.report = 1;      //表示是查看报告
+			        	  return obj;
+			          }
+			      }
+			 });
 		}
 	   
 	 };

@@ -86,8 +86,13 @@ public class ReportService {
 		int pTotalScore = 0;
 		for(TuserProblem tuserProblem: tuserProblems){
 			if(tuserProblem.getType() == ExamConstant.PROGRAM){
-				pScore+= tuserProblemDao.sumProblemScore(tuserProblem.getSolutionId());
-				pTotalScore+=tuserProblemDao.sumProTotalScore(tuserProblem.getProblemid());
+				if(tuserProblemDao.sumProblemScore(tuserProblem.getSolutionId())!=null){
+					pScore+=tuserProblemDao.sumProblemScore(tuserProblem.getSolutionId());
+				}
+				if(tuserProblemDao.sumProTotalScore(tuserProblem.getProblemid())!=null){
+					pTotalScore+=tuserProblemDao.sumProTotalScore(tuserProblem.getProblemid());
+				}
+				
 			}
 		}
 		Map<String,Integer> rtMap = new HashMap<String, Integer>();

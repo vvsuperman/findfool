@@ -39,7 +39,7 @@ public interface TuserProblemDao {
   @Select("select t1.problemid,t1.useranswer,t1.type,t1.invite_id,t1.solution_id as solutionId from testuser_problem t1 where t1.invite_id = #{0} and t1.problemid=#{1}")
   TuserProblem findByPidAndIid(int inviteId,int problemid);
   
-  @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0} where t2.type=1")
+  @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0} and t2.type=1")
   public int getTotalScore(int inviteId);
   
   
@@ -51,7 +51,7 @@ public interface TuserProblemDao {
  		+"p.rightanswer as  rightanswer,t.useranswer as useranswer "
 		+"from ojsite.problem p,ojsite.testuser_problem t "
 		+"where t.invite_id =#{iid} AND t.problemid = p.problem_id "
-		+"order by setId")
+		+"order by p.type")
  public List<Question> getUserQuestion(Invite invite);
  
  @Select("select tuid,username,email,company,degree,school,tel,blog from "

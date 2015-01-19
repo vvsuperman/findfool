@@ -28,9 +28,9 @@
 				    	
 				    	<span ng-bind="'Q'+($index+1)"></span>
 				    </div>
-					<div class="col-md-5">
+					<div class="col-md-5" style="overflow:hidden;white-space:nowrap;">
 					
-					   <a href=""
+					   <a href="" 
 							ng-click="displayQuestionDetails($index)"
 							ng-if="!isDisplay[$index]">
 							 <input abstract context={{q.context}} > 
