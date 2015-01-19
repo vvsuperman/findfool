@@ -1,4 +1,6 @@
-
+//常量
+var WEBROOT = "/oj";
+var CUSTOM_SET = 0;
 	
 var u = navigator.userAgent, app = navigator.appVersion;          
               

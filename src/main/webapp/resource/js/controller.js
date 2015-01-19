@@ -6,7 +6,7 @@
 //    'evgenyneu.markdown-preview'
 //]);
 
-var WEBROOT = "/oj";
+
 
 OJApp.controller('mainController',function($scope, $http, Data) {	
    // $scope.url = '#';
