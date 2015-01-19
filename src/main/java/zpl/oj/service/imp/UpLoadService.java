@@ -277,10 +277,9 @@ public class UpLoadService{
 		  	      		}else if(type == ExamConstant.PROGRAM){	//编程
 		  	      			//测试用例输出
 			  	      		if( getValuebyCell(row,rights.get(k))!= null ){
-			  	      		   option.setExceptedRes( addPTag(getValuebyCell(row,rights.get(k))));	
+			  	      		   option.setExceptedRes( getValuebyCell(row,rights.get(k)));	
 			  	      		}
 			  	      		if( getValuebyCell(row,optionScore.get(k))!= null && getValuebyCell(row,optionScore.get(k)).equals("") == false ){
-			  	      		   System.out.printf("score..........",getValuebyCell(row,optionScore.get(k)));
 			  	      		   option.setScore( Integer.parseInt((getValuebyCell(row,optionScore.get(k)))));	
 			  	      		}
 		  	      		}

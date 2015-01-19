@@ -332,7 +332,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
        }).success(function (data) {
            $scope.state = 'success';
            $scope.solution_id = data.message.msg;         
-           $scope.query();
+          $timeout($scope.query,2000);
            $scope.RESULT = $sce.trustAsHtml($scope.result);
 
        }).error(function () {
@@ -355,26 +355,26 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
        }).success(function (data) {
        	   var end;
            if (data.message.length == 0 && $scope.queryNum>0 ) {
-           		end = $timeout($scope.query,3000);
+           	   end = $timeout($scope.query,2000);
            }else{
-          		$timeout.cancel(end);
-               for (var i = 0; i < data.message.length; i++) {
-                  $scope.result ="";
-            	   // $scope.result += '<br>';
-                   var res = data.message[i];
-                  // $scope.result += "time:" + res.cost_time;
-                  // $scope.result += " mem:" + res.cost_mem;
-                   if (res.test_case_result == null) {
-                       $scope.result += " error:" + res.test_case_result;
-                   } else {
-                      // $scope.result += " testCase:" + res.test_case;
-                       $scope.result += res.test_case_result;
-                   }
+          	   $timeout.cancel(end);
+          	   $scope.result={}
+          	   $scope.result.content = "";
+          	   var resultInfos = data.message;
+          	   //编译错误
+          	   if(resultInfos.length ==1){
+          		   $scope.result.content = resultInfos[0].test_case_result;
+          	   }
+          	   //运行了测试用例，循环输出结果和测试用例
+               for (var i = 0; i < resultInfos.length; i++) {
+            	   $scope.result.content += "测试用例"+i+":期望输出:"+resultInfos[i].testCaseExpected+
+            	   ";实际输出:"+resultInfos[i].test_case_result+"\n";
                }
+               $scope.result.display = $sce.trustAsHtml($scope.result.content)
            }
-           $scope.RESULT = $sce.trustAsHtml($scope.result)
+        
        }).error(function () {
-           $scope.result += '<br>Try again'
+    	   $scope.result.content += '<br>Try again'
        })
    };
      

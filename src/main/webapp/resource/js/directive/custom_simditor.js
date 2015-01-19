@@ -29,7 +29,7 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             var editor = new Simditor(option);
             
         	if(typeof(attrs.minheight)!="undefined"){
-        		elem.prev().children("div.simditor-body").css("min-height",attrs.minheight	);
+        		elem.prev().children("div.simditor-body").css("min-height",attrs.minheight);
         	}
         	
         	if(attrs.operation=="view"){

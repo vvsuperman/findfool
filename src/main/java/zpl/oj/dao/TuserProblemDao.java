@@ -65,7 +65,7 @@ public interface TuserProblemDao {
  +"where r.solution_id = #{0} and  p.test_case_id = r.test_case_id;")
  Integer sumProblemScore(int solutionId);
  
- @Select("select r.test_case_id,r.test_case as testCase,p.excepted_res as testCaseExpected, r.score "+ 
+ @Select("select r.test_case_id,r.test_case as testCase,p.excepted_res as testCaseExpected, r.score,r.test_case_result "+ 
 		 " from problem_test_case p,resultinfo r "+ 
 		 " where  r.solution_id =#{0} and p.test_case_id = r.test_case_id;")
  List<ResultInfo> getProResult(int solutionId);
