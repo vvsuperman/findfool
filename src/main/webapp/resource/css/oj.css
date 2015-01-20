@@ -328,6 +328,53 @@ ul.navbar-nav li a:active{
 	
 }
 
+.pagination-plain {
+  height: 57px;
+  padding: 0;
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 400;
+  list-style-type: none;
+  }
+.pagination-plain > li {
+  display: inline;
+  }
+.pagination-plain > li.previous {
+  padding-right: 23px;
+  }
+.pagination-plain > li.next {
+  padding-left: 20px;
+  }
+.pagination-plain > li.active > a {
+  color: #d3d7da;
+  }
+.pagination-plain > li > a {
+  padding: 0 5px;
+  }
+@media (max-width: 480px) {
+  .pagination-plain {
+    overflow: hidden;
+    text-align: center;
+    }
+  .pagination-plain > li.previous {
+    display: block;
+    width: 50%;
+    margin-bottom: 10px;
+    text-align: left;
+    }
+  .pagination-plain > li.next {
+    float: right;
+    width: 50%;
+    margin-top: -64px;
+    text-align: right;
+    }
+  }
+@media (min-width: 768px) {
+  .pagination-plain {
+    height: auto;
+    }
+  }
+
 
 .customSideNav{
 	padding-left: 30px;
