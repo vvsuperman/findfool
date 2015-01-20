@@ -15,7 +15,7 @@ OJApp.directive('solutionbtn', function() {
 			elem.parent().animate({
 				height:'-=600'
 			})
-			elem.parent().hide();
+			elem.parents("div.logohead").hide();
 			
 				
 				
