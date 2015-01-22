@@ -265,6 +265,8 @@ public class ProblemServiceImp implements ProblemService{
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
 		p.setProblemSetId(ExamConstant.CUSTOM_SET_ID);   //自定义的试题，set为0
+		p.setRightAnswer(q.getQuestion().getRightanswer());
+	
 		User u = userService.getUserById(q.getUser().getUid());
 		problemDao.updateProblemInstance(p);
 		int pid = p.getProblemId();

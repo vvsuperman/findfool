@@ -15,7 +15,8 @@ OJApp.controller('guideModalCtrl',function ($scope,$http,$modalInstance,Data,par
             },
             data: {quizName:$scope.data}
         }).success(function (data) {
-        	console.log("genQuizSuccess");
+        	smoke.alert("创建测试成功");
+        	location.reload();
         }).error(function (data) {
             //error
         	console.log("genQuizFailed");

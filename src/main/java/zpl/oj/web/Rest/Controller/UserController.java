@@ -48,7 +48,7 @@ public class UserController {
 			rb.setMessage(msg);
 		}
 		else if(!u.getPwd().equals(request.getPwd())){
-			msg.setMsg("failed login!  user:"+request.getEmail()+" error user or password");
+			msg.setMsg("错误的用户名或密码");
 			msg.setHandler_url("/error");
 			rb.setState(0);		
 			rb.setMessage(msg);

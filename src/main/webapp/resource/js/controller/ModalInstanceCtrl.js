@@ -8,8 +8,19 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,
 	$scope.report = params.report;
 	
 	$scope.saveQustion = function () {
-			 var sendData={"quizid":$scope.tid,"user":{"uid": Data.uid()},"question":$scope.question};
 			
+			 var answers = $scope.question.answer;
+			 var rightanswer =""
+			 for(var i =0;i<answers.length;i++){
+				  	if(answers[i].isright == true  || answers[i].isright =="true"){
+				  		rightanswer+=1;
+				  	}else{
+				  		rightanswer+=0;
+				  	}
+			 }
+			 $scope.question.rightanswer = rightanswer;
+			 var sendData={"quizid":$scope.tid,"user":{"uid": Data.uid()},"question":$scope.question};
+			 
 			 console.log("question..........",$scope.question);
 			 $http({
 		            url: WEBROOT+"/question/add",

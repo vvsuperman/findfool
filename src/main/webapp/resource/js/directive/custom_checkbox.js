@@ -33,6 +33,7 @@ OJApp.directive('customcheckbox', function() {
 				}
 	     	}
 			
+			
 			if(attrs.report == 1){
 				//判断选项是否正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
@@ -51,6 +52,7 @@ OJApp.directive('customcheckbox', function() {
 			//若用户的选择不存在，则为查看元数据，根据rightanswer来判断选项的正确
 				if(typeof(attrs.rightanswer)!="undefined"&&attrs.rightanswer.charAt(index)==1){
 					elem.addClass(checkBoxChecked);
+					
 //					elem.css("border-color","#2fe2bf");	
 				}
 			}

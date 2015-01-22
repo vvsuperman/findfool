@@ -19,7 +19,7 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
     $scope.test={};
     $scope.test.isNewTest=false;
     $scope.guide={};
-    $scope.guide.show=1; //测试
+    $scope.guide.show=0; //测试
     
     $scope.guideTxt ={};
     $scope.guideTxt.webDevelope="web开发即网站开发，从技术上分为前端和后端，前端为展示给用户的界面，后端为业务逻辑，用于处理业务动作。前端的技术包括HTML，" +

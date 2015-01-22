@@ -10,7 +10,8 @@
 
         <div class="modal-body">
 			<div style="font-size: 18px;line-height: 1.8" ng-bind="content"></div>
-			<button class="btn btn-outline" ng-click="genQuiz()" style="margin-top: 20px" >自动生成试题</button>
+			<button class="btn btn-outline" ng-click="genQuiz()" style="margin-top: 20px" ng-if="data!='allStack'" >自动生成试题</button>
+			<button class="btn btn-outline" ng-click="cancel()" style="margin-top: 20px" ng-if="data=='allStack'" >全栈程序员试题请手工生成</button>
 			<div style="clear:both"></div>
         </div>
 

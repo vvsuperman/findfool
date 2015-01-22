@@ -59,11 +59,12 @@ OJApp.controller('mainController',function($scope, $http, Data) {
 //                    $scope.name = $scope.message.handler_url;
                 } else {
                     
-                    window.location.href = '#/loginok';
+//                    window.location.href = '#/loginok';
+                	$scope.errmsg = data.message.msg;
                 }
             }).error(function () {
-                    alert("网络错误");
-                    window.location.reload(true);
+//                    alert("网络错误");
+//                    window.location.reload(true);
                 }
             )
         }

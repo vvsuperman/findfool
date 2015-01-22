@@ -3,8 +3,8 @@
 <div class="container-fluid" >
     <!-- a href="#/invite">invite</a-->
     <div class="col-md-offset-8" style="padding-left:-20px;margin-top:20px;margin-bottom: 20px;pad" ng-if="guide.show==0">
-      不知道怎么用？
-      <button class="btn btn-outline" ng-click="panel.isGuide=false;panel.body=1;guide.show=1"  >我要招聘</button>
+      
+      <button class="btn btn-outline" ng-click="panel.isGuide=false;panel.body=1;guide.show=1"  >我是HR 我要招聘</button>
     </div>
     
     <div class="col-md-9 col-md-offset-1" ng-if="guide.show==1">
@@ -13,7 +13,8 @@
 	  	  用户引导
 	      <a href=""  ng-click="guide.show=0"><span class="glyphicon glyphicon-remove pull-right"></span></a>
 	  </div>
-	  <div class="panel-body skill-board" >
+	  <div class="panel-body skill-board" style="font-size: 18px" >
+	   <a  class="blackFont"  style=" position: absolute;top:55%;left: 15%"> 程序员</a>
 	      <a  class="blackFont" href="" ng-click="viewGuideModal('webFront')" style=" position: absolute;top:17%;left: 60%"> WEB前端</a>
 	         
 	      <span  tooltip-placement="bottom" tooltip="{{guideTxt.webDevelope}}"  style=" position: absolute;top:28%;left: 40%"> WEB开发</span>
@@ -52,7 +53,7 @@
 			            <pre>
 			                <ul style="list-style:none;">
 			                    <li style="float:left;list-style-type: none;margin-top: 10px">
-			                        <a class="aa blackFont" href="#/test/{{test.quizid}}" style="font-size: 15px" ><p>{{test.name}}</p></a>
+			                        <a class="" href="#/test/{{test.quizid}}" style="font-size: 15px" ><p>{{test.name}}</p></a>
 			                    </li>
 			                    
 			                    <li class="pull-right" style="list-style-type: none;margin-left: 10px">

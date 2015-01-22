@@ -219,12 +219,12 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
     }
-    var drop = document.getElementById('drop');
-    if (drop.addEventListener) {
-        drop.addEventListener('dragenter', handleDragover, false);
-        drop.addEventListener('dragover', handleDragover, false);
-        drop.addEventListener('drop', handleDrop, false);
-    }
+//    var drop = document.getElementById('drop');
+//    if (drop.addEventListener) {
+//        drop.addEventListener('dragenter', handleDragover, false);
+//        drop.addEventListener('dragover', handleDragover, false);
+//        drop.addEventListener('drop', handleDrop, false);
+//    }
 });
 
 OJApp.filter('filterTest', function () {

@@ -6,11 +6,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.tid = param[1];
 	
 	
-	 $scope.email ="693605668@qq.com";
-	 $scope.testid ="11";
-	 $scope.tid = "11";
-	 $scope.show = 2;
-	 
+//	 $scope.email ="693605668@qq.com";
+//	 $scope.testid ="11";
+//	 $scope.tid = "11";
+//	 $scope.show = 2;
+//	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
 	 //$scope.loginUser.email="apachee@qq.com";
@@ -23,27 +23,27 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.time.remain = 1;
 	 
 	 //检查该url是否合法
-//	 $http({
-//         url: WEBROOT+"/testing/checkurl",
-//         method: 'POST',
-//	     data: {"email":$scope.email, "testid": $scope.tid}
-//     }).success(function (data) {
-//         //测试未开始
-//    	 if( data.state == 0){
-//    		 //试题已截至
-//    		 if(data.message ==1){
-//    			 $scope.show =5;
-//    		 }else{
-//    			 smoke.alert(data.message);
-//    		 }
-//    	 }
-//    	 else{
-//    		 $scope.show = 1;
-//    	 }	 
-//         
-//     }).error(function(){
-//    	 console.log("get data failed");
-//     })
+	 $http({
+         url: WEBROOT+"/testing/checkurl",
+         method: 'POST',
+	     data: {"email":$scope.email, "testid": $scope.tid}
+     }).success(function (data) {
+         //测试未开始
+    	 if( data.state == 0){
+    		 //试题已截至
+    		 if(data.message ==1){
+    			 $scope.show =5;
+    		 }else{
+    			 smoke.alert(data.message);
+    		 }
+    	 }
+    	 else{
+    		 $scope.show = 1;
+    	 }	 
+         
+     }).error(function(){
+    	 console.log("get data failed");
+     })
      
      //登陆
 	 $scope.login = function(){
@@ -126,6 +126,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	 if( data.state == 0){
 	    		 //用户名或密码不匹配
 	    		 $scope.errMsg = "错误";
+	    		 
 	    	 }else{
 	    		 $scope.show = 3;
 	    		 $scope.testInfo = data.message;
@@ -151,7 +152,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	var duration =data.message.invite.duration*60*1000;
 	    	$scope.time.remain = beginTime+duration;
 	    	//定时器提醒
-//	    	$timeout($scope.stop,$scope.time.remain);
+	    	var nowTime = (new Date()).getTime();
+	    	var remain = $scope.time.remain - nowTime;
+	    
+	    	$timeout($scope.endTest,remain);
 	 }
 	 
 	 
@@ -168,6 +172,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         method: 'POST',
 	         data: sendData
 	     }).success(function (data) {
+	    	 if(data.state == 0){
+	    		 $scope.show = 5;
+	    		 return false;
+	    	 }
+	    	 
 	    	if(data.state!=0){
 	    		$scope.tProblems = data.message.problems;
 		    	$scope.submitAndFetch($scope.tProblems[0]);
@@ -199,13 +208,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	     })
 	 };
 	
-     
-	 $scope.startTest();
- 	
-     
-    	 
-    	 
-     
+  	   	      
      /*
       *获取试题信息
       *自动提交上一道试题答案
@@ -237,6 +240,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         method: 'POST',
 	         data: sendData
 	     }).success(function (data) {
+	    	 if(data.state == 0){
+	    			$scope.show = 5
+	    			 return false;
+	    	 }
 	    	 if(data.message.type ==1){
 	    		 $scope.questionType =1;
 	    	 }else if(data.message.type ==2){
@@ -265,6 +272,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         method: 'POST',
 	         data: sendData
 	     }).success(function (data) {
+	    	 if(data.state == 0){
+	    		 $scope.show = 5;
+	    		 return false;
+	    	 }
 	    	 if(data.message.type ==1){
 	    		 $scope.questionType =1;
 	    	 }else if(data.message.type ==2){
@@ -330,6 +341,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
            method: "POST",
            data: solution
        }).success(function (data) {
+    	   if($scope.state == 0){
+    		   $scope.show = 5;
+    		   return false;
+    	   }
+    	   
            $scope.state = 'success';
            $scope.solution_id = data.message.msg;         
           $timeout($scope.query,2000);
@@ -385,31 +401,31 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 smoke.confirm("你确定完成测试吗？",function(e){
     		 if(e){
     			 $scope.run('submit');
-    	    	 var sendData ={"email":$scope.email,"testid":$scope.tid};
-    	    	 $http({
-    		         url: WEBROOT+"/testing/finishtest",
-    		         method: 'POST',
-    		         data: sendData
-    		     }).success(function (data) {
-    		    	if(data.state==0){
-    		    		//跳转到完成页面
-    		    		$scope.show = 5;
-    		    	}else{
-    		    		alert(data.message);
-    		    	}
-    		     }).error(function(){
-    		     })
-    		 }else{
-    			 
-    		 }
+    	    	 $scope.endTest();
+    		 }else{}
     	 },{
     		 ok:"是",
     		 cancel:"否",
     		 reverseButtons: true
-    		 
     	 })
-    	 
      };
+     
+     $scope.endTest = function(){
+    	 var sendData ={"email":$scope.email,"testid":$scope.tid};
+    	 $http({
+	         url: WEBROOT+"/testing/finishtest",
+	         method: 'POST',
+	         data: sendData
+	     }).success(function (data) {
+	    	if(data.state==0){
+	    		//跳转到完成页面
+	    		$scope.show = 5;
+	    	}else{
+	    		alert(data.message);
+	    	}
+	     }).error(function(){
+	     })
+     }
      
      $scope.lgs = [
                    {name: 'C', demo: 'resource/static/c.c', CodeType: 'c_cpp', lan: 0},

@@ -4,7 +4,6 @@ OJApp.directive('timer', function() {
 		restrict: 'AE',
 		scope:true,
 		link: function(scope, elem, attrs) {
-			console.log("initial timer.......",scope.time.remain);
 				elem.countdown(scope.time.remain, function(event) {
 			        var $this = $(this);
 			        switch(event.type) {
