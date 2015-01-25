@@ -2,64 +2,69 @@
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label class="col-sm-2 control-label">邮箱</label>
-            <div class="col-md-6">
-                <input class="form-control" type="email" ng-model="email"  readonly>
+            <div class="col-sm-2 control-label">
+                <label class="pull-left" style="font-size: 16px;"  ng-bind="user.email"></label>
             </div>
         </div>
         
          <div class="form-group">
-            <label class="col-sm-2 control-label">公司</label>
-            <div class="col-md-6">
-                <input class="form-control" type="text" ng-model="company"  readonly>
+            <label class="col-sm-2 control-label">剩余邀请数</label>
+            <div class="col-sm-2 control-label">
+                <p class="pull-left"   style="font-size: 16px;"  ng-bind="user.invited_left"></p>
             </div>
         </div>
         
          <div class="form-group">
-            <label class="col-sm-2 control-label">联系电话</label>
-            <div class="col-md-6">
-                <input class="form-control" type="tel" ng-model="tel"  readonly>
+            <label class="col-sm-2 control-label">公司名称</label>
+            <div class="col-md-3 ">
+                <p class="pull-left control-label" ng-bind="user.company"  style="font-size: 16px;" ng-if="assist==0"></p>
+                <input class="form-control" type="text" ng-model="tempUser.company" ng-if="assist==1">
             </div>
         </div>
       
-        <div class="form-group">
+       <div class="form-group" ng-if="assist ==0">
             <label class="col-sm-2 control-label"></label>
-            <div class="col-md-2">
-               <button class="btn btn-primary" ng-click="showPwd()">修改密码</button>
+            <div class="col-md-5">
+               <button class="btn btn-primary pull-left" ng-click="modifyProfile()">修改基本信息</button>
+               <button class="btn btn-outline pull-left" style="margin-left: 10px" ng-click="pwd.show =1">修改密码</button>
             </div>
         </div>
         
-        <div class="form-group" >
+        <div class="form-group" ng-if="assist ==1">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-md-5 ">
+               <button class="btn btn-primary pull-left" ng-click="saveProfile()">保存</button>
+               <button class="btn btn-default pull-left" style="margin-left: 10px" ng-click="cancelProfile()">取消</button>
+              
+            </div>
+        </div>
+      
+        
+        
+        <div class="form-group" ng-if="pwd.show==1" >
             <label class="col-sm-2 control-label">旧密码</label>
-            <div class="col-md-6">
-                <input class="form-control" type="password" ng-model="oldPwd"  ng-maxlength=20 ng-minlength=6 >
+            <div class="col-md-3">
+                <input class="form-control" type="password" ng-model="pwd.old" required  ng-maxlength=20 ng-minlength=6 >
             </div>
         </div>
         
-        
-        <div class="form-group" >
+        <div class="form-group" ng-if="pwd.show==1" >
             <label class="col-sm-2 control-label">新密码</label>
-            <div class="col-md-6">
-                <input class="form-control" type="password" ng-model="newPwd"  ng-maxlength=20 ng-minlength=6 >
+            <div class="col-md-3">
+                <input class="form-control" type="password" ng-model="pwd.now" required ng-maxlength=20 ng-minlength=6 >
             </div>
         </div>
         
         
-         <div class="form-group">
+         <div class="form-group" ng-if="pwd.show==1">
             <label class="col-sm-2 control-label"></label>
             <div class="col-md-6">
-               <button class="btn btn-primary" ng-click="showPwd()">保存</button>
-               <button class="btn btn-primary" ng-click="showPwd()">取消</button>
+               <button class="btn btn-primary pull-left" ng-click="modifyPwd()">保存</button>
+               <button class="btn btn-default pull-left" style="margin-left: 10px"  ng-click="pwd.show=0">取消</button>
+             
+               
             </div>
         </div>
-        
-        
-       
 
-        <div class="col-md-12 text-center" style="padding: 30px">
-            <button class="btn btn-default" ng-click="sendInfo(name,company,tel,pwd,newpwd)">保存</button>
-            <button  ng-class="{true:'btn btn-default', false: 'hedden'}[renewpasswd==0]" ng-click="renewPWD()">修改密码</button>
-            <button  ng-class="{true:'btn btn-default', false: 'hedden'}[renewpasswd==1]" ng-click="renewPWD()">不修改密码</button>
-
-        </div>
     </form>
 </div>

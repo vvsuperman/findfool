@@ -3,9 +3,9 @@
  */
 function pInfo($scope, $http, Data) {
     $scope.url = '#/profile';
-    $scope.template = 'profile.html';
-    $scope.ContentUs = 'contentUs.html';
-    $scope.leftBar = '';
+    $scope.template = 'page/profile.html';
+    $scope.ContentUs = 'page/contentUs.html';
+    $scope.leftBar = 'page/leftbar.html';
     $scope.company = "";
     $scope.name = "";
     $scope.tel = "";
@@ -38,12 +38,7 @@ function pInfo($scope, $http, Data) {
             } else {
             }
         }).error(function (data) {
-            alert("测试数据");
-            $scope.email = "liuzheng@ss.ss";
-            $scope.company = "";
-            $scope.name = "";
-            $scope.tel = "";
-
+           console.log("获取用户信息错误");
         });
     };
     $scope.getInfo();

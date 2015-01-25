@@ -1,5 +1,6 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,7 @@ public class UserController {
 		boolean res = userService.addUser(u);
 		
 		if(res == false){
-			msg.setMsg("failed register! because this email has been registed!");
+			msg.setMsg("注册失败，邮箱已被注册");
 			msg.setHandler_url("/error");
 			rb.setState(0);			
 			rb.setMessage(msg);
@@ -156,7 +157,6 @@ public class UserController {
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
 		
-		
 		u = userService.getUserById(request.getUid());
 		if(u == null ){
 			ResponseMessage msg = new ResponseMessage();
@@ -166,48 +166,70 @@ public class UserController {
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(msg);
 		}else{
-			ResponseUserInfo uinfo = new ResponseUserInfo();
-			uinfo.setEmail(u.getEmail());
-			uinfo.setCompany(u.getCompany());
-			uinfo.setName(u.getFname());
-			uinfo.setTel(u.getTel());
+			User rtUser  = new User();
+			rtUser.setEmail(u.getEmail());
+			rtUser.setCompany(u.getCompany());
+			rtUser.setFname(u.getFname());
+			rtUser.setTel(u.getTel());
+			rtUser.setInvited_left(u.getInvited_left());
+			
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
-			rb.setMessage(uinfo);
+			rb.setMessage(rtUser);
 		}		
 		return rb;
 	}
 	
-	//查询用户的基本信息
+	//修改用户的基本信息
 	@RequestMapping(value="/setting/set")
 	@ResponseBody
-	public ResponseBase setUserInfo(@RequestBody RequestChangeUserInfo request){
+	public ResponseBase setUserInfo(@RequestBody User user){
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
 		
-		
-		u = userService.getUserById(request.getUser().getUid());
+		u = userService.getUserById(user.getUid());
 		ResponseMessage msg = new ResponseMessage();
 		if(u == null ){
-			msg.setMsg("failed login!  not found user:"+request.getUser().getUid());
+			msg.setMsg("用户名不存在");
 			msg.setHandler_url("/error");
-			rb.setState(0);		
-
+			rb.setState(0);	
+			rb.setMessage(msg);
+			return rb;
 		}else{
-			u.setEmail(request.getEmail());
-			u.setCompany(request.getCompany());
-			u.setFname(request.getName());
-			u.setTel(request.getTel());
-			if(request.getPwd().equals(request.getNewPWD())){
-				u.setPwd(request.getPwd());
-			}
-			rb.setState(1);
+			u.setCompany(user.getCompany());
+			u.setTel(user.getTel());
 			userService.updateUser(u);
-			msg.setMsg("update ok");
-			msg.setHandler_url("#");
+			rb.setState(1);
+			rb.setMessage(u);
+			rb.setToken(securityService.computeToken(u));
+			return rb;
 		}
-		rb.setToken(securityService.computeToken(u));
-		rb.setMessage(msg);
-		return rb;
+		
 	}
+	
+	//修改用户的基本信息
+		@RequestMapping(value="/setting/setpwd")
+		@ResponseBody
+		public ResponseBase setPwd(@RequestBody Map map){
+			String oldPwd = (String)map.get("oldPwd");
+			String newPwd = (String)map.get("newPwd");
+			int uid = (Integer)map.get("uid");
+			User u = userService.getUserById(uid);
+			ResponseBase rb = new ResponseBase();
+			
+			if(u.getPwd().equals(oldPwd)==false){
+				rb.setState(0);
+				return rb;
+			}else{
+				u.setPwd(newPwd);
+			    userService.updateUser(u);
+			    rb.setState(1);
+			    return rb;
+			}
+			
+			
+		}
+	
+	
+	//修改用户的密码
 }
