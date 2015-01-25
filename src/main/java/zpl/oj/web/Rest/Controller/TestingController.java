@@ -221,6 +221,34 @@ public class TestingController {
 	}
 
 	/*
+	 * 根据传递的参数获取学校信息
+	 */
+
+	// 提交用户信息
+	@RequestMapping(value = "/addSchool")
+	@ResponseBody
+	public ResponseBase addSchool(@RequestBody Map<String, Object> params) {
+		ResponseBase rb = new ResponseBase();
+		Map map = validateUser(params);
+		Integer tuid = (Integer) map.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
+		School school=schoolService.getSchoolByName((String)params.get("school"));
+		if(school!=null){
+			rb.setMessage("学校已存在！");
+			rb.setState(0);
+			return rb;
+		}
+		schoolService.addSchoolByName((String)params.get("school"));
+		rb.setMessage("添加成功！");
+		rb.setState(1);
+		return rb;
+	}
+	
+	/*
 	 *开始做题，初始化试题列表
 	 *
 	 * */

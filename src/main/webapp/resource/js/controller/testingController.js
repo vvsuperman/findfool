@@ -13,7 +13,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 //	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
-	 //$scope.loginUser.email="apachee@qq.com";
+	 //$scope.loginUser.email="the2th@qq.com";
+	 //$scope.loginUser.pwd="e6eFi";
 
      $scope.schools = [];
 	 $scope.question = {};
@@ -21,6 +22,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.answerCount ={total:0,sum:0};
 	 $scope.time={};
 	 $scope.time.remain = 1;
+	 $scope.school={};
+	 $scope.school.add="";
+	 $scope.showAddSchool=false;
 	 
 	 //检查该url是否合法
 	 $http({
@@ -114,29 +118,47 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        }
 		    }
 		};
-	 
-	 //提交用户信息
-	 $scope.submitUserInfo = function(){
-		 var sendData ={"email":$scope.email,"testid":$scope.tid,"tuser":$scope.tuser}
-		 $http({
-	         url: WEBROOT+"/testing/submituserinfo",
-	         method: 'POST',
-	         data: sendData
-	     }).success(function (data) {
-	    	 if( data.state == 0){
-	    		 //用户名或密码不匹配
-	    		 $scope.errMsg = "错误";
-	    		 
-	    	 }else{
-	    		 $scope.show = 3;
-	    		 $scope.testInfo = data.message;
-	    	 }	 
-	         
-	     }).error(function(){
-	    	 console.log("login failed");
-	     })
-	 };
-	 
+
+		 //提交用户信息
+		 $scope.submitUserInfo = function(){
+			 var sendData ={"email":$scope.email,"testid":$scope.tid,"tuser":$scope.tuser}
+			 $http({
+		         url: WEBROOT+"/testing/submituserinfo",
+		         method: 'POST',
+		         data: sendData
+		     }).success(function (data) {
+		    	 if( data.state == 0){
+		    		 //用户名或密码不匹配
+		    		 $scope.errMsg = "错误";
+		    		 
+		    	 }else{
+		    		 $scope.show = 3;
+		    		 $scope.testInfo = data.message;
+		    	 }	 
+		         
+		     }).error(function(){
+		    	 console.log("login failed");
+		     })
+		 };
+
+		 //添加新的学校
+		 $scope.addSchool = function(){
+			 var sendData ={"email":$scope.email,"testid":$scope.tid,"school":$scope.school.add}
+			 $http({
+		         url: WEBROOT+"/testing/addSchool",
+		         method: 'POST',
+		         data: sendData
+		     }).success(function (data) {
+		    	 alert(data.message);
+		     }).error(function(){
+		    	 console.log("login failed");
+		     })
+		 };
+
+		 $scope.toggleSchool = function(){
+			 $scope.showAddSchool=!$scope.showAddSchool;
+		 };
+		 
 	 $scope.genExtraInfo = function(data){
 		//生成用户的完成题目
 	    	$scope.answerCount.total = $scope.tProblems.length;
