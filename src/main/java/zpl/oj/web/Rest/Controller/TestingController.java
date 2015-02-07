@@ -30,6 +30,7 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.SchoolService;
+//import zpl.oj.service.imp.LogService;
 import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
@@ -63,6 +64,8 @@ public class TestingController {
 	private TestuserDao tuserDao;
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
+//	@Autowired
+//	private LogService logService;
 
 	public Map validateUser(Map params) {
 		Map rtMap = new HashMap<String, Object>();
@@ -294,6 +297,7 @@ public class TestingController {
 		}
 		
 		Invite invite = (Invite)map.get("invite");
+		int index = (Integer)map.get("index");
 		
 		//提交用户的答案
 		if(params.get("problemid")!=null){
@@ -305,6 +309,7 @@ public class TestingController {
 			testuserProblem.setUseranswer(useranswer);
 			testuserProblem.setInviteId(invite.getIid());
 			tuserProblemDao.updateAnswerByIds(testuserProblem);	
+//			logService.updateTuserAction(invite, index);
 		}
 		
 		

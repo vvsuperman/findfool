@@ -1,0 +1,61 @@
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+                <h4 class="modal-title">注册</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+				     <div class="form-group">
+				      	<label  class="col-sm-2 control-label">Email</label>
+				      	<div class="col-md-8">
+				      	     <input type="email" class="form-control"  placeholder="Email" ng-model="Remail" required>
+				      	</div>
+				     </div>
+				      <div class="form-group">
+				      	<label  class="col-sm-2 control-label">公司名称</label>
+				      	<div class="col-md-8">
+				      	     <input type="text" class="form-control"  placeholder="company name" ng-model="company" required>
+				      	</div>
+				     </div>
+				     
+				     <div class="form-group">
+				   	  <label class="col-sm-2 control-label">密码</label>
+				   	    <div class="col-md-8">
+				        		 <input type="password" class="form-control" placeholder="密码6~20位" ng-model="Rpwd"
+				             	   ng-maxlength=20 ng-minlength=6 required>
+				         </div>
+				     </div>
+				     <div class="form-group">
+				        <label class="col-sm-2 control-label">重复密码</label>
+				        <div class="col-md-8">
+				               <input type="password" class="form-control" placeholder="重复密码" ng-model="Rrepwd"
+				                ng-maxlength=20 ng-minlength=6 required>
+				        </div>
+				     </div>
+				     
+				      <div class="form-group">
+                       <label class="col-sm-2 control-label">验证问题</label>
+                       <div class="col-md-8">
+                            <a href="" ng-click="changeQuestion()">
+                                {{verifyQtn.question}}
+                            </a>   
+                            <a href="" class="blackFont" ng-click="changeQuestion()">更换问题</a>
+                       </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    	<label class="col-sm-2 control-label">答案</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="请输入问题的答案"
+                                   ng-model="verifyAns" required>
+                        </div>
+                    </div>
+                    
+  				 </form>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-default" ng-click="cancel()">关闭</button>
+                <button type="button" class="btn btn-primary" ng-click="addhr()">注册</button>
+            </div>
+        

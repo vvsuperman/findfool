@@ -8,9 +8,66 @@
 
 
 
-OJApp.controller('mainController',function($scope, $http, Data) {	
+OJApp.controller('mainController',function($scope, $http,$routeParams,$location, Data,$modal) {	
    // $scope.url = '#';
+     var code = $routeParams.code;
+     if(typeof(code)!="undefined"){
+    	 $http({
+             url: WEBROOT+"/user/oauthorlogin",
+             method: 'POST',
+             data:{"source":"mingdao","code":code}
+         }).success(function (data) {
+              console.log("data................",data);
+              //用户已注册，登陆
+              if(data.state == 1){
+            	  $scope.Lemail = data.message.user.email;
+            	  $scope.Lpwd = data.message.user.pwd;
+            	  Data.setMdToken(data.message.token);
+            	  $scope.confirm(2);
+              }
+              //用户还未注册，注册，转到注册页面
+              else if(data.state == 2){
+            	  Data.setMdToken(data.message.token);
+            	  $scope.register( data.message.user.email, data.message.user.company);
+              }else if(data.state == 3){
+            	  
+            	  smoke.confirm("非常抱歉，访问明道api超时，请稍后重试",function(e){
+             		 if(e){
+             			window.location.href='http://findfool.com/#/';
+             		 }else{
+             			window.location.href='http://findfool.com/#/';
+             		 }
+             	 },{
+             		 ok:"确定",
+             		 reverseButtons: true
+             	 })
+            	  
+            	  
+              }
+              
+         }).error(function () {
+              console.log("error.......");
+         });
+     }
+     
+     $scope.register = function (email, company) {
+ 		 var modalInstance = $modal.open({
+ 		      templateUrl: 'page/registerModal.html',
+ 		      controller: 'registerInstanceCtrl',
+ 		      size: "lg",
+ 		      resolve: {
+ 		    	 params:function(){
+		        	  var obj ={};
+		        	  obj.email = email;
+		        	  obj.company = company;
+		        	  return obj;
+		          }
+ 		      }
+ 		 });
+ 	 };
 
+    
+	
 	 $scope.labels =["html5", "css3", "javascript", "angularjs", "node.js", "object-c", "java"];
 
 	  $scope.data = [
@@ -23,19 +80,30 @@ OJApp.controller('mainController',function($scope, $http, Data) {
 	  
 	  $scope.labelsScore2 = ["我的排名", ""];
 	  $scope.dataScore2 = [90, 10];
+	  
+	 $scope.mdLogin = function(){
+		 window.location.href='https://api.mingdao.com/oauth2/authorize?app_key=EB56F580B240&redirect_uri=http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F';
+	 } 
 	
-    $scope.confirm = function () {
+    $scope.confirm = function (data) {
         if ($scope.Lemail && $scope.Lpwd) {
+        	if(data==1){
+        		var pwd = md5($scope.Lpwd);
+        	}else{
+        		var pwd = $scope.Lpwd;
+        	}
+        	
+        	
             $http({
                 url: WEBROOT+"/user/confirm",
                 method: 'POST',
                 headers: {
                     "Authorization": Data.token()
                 },
-                data: {"email": $scope.Lemail, "pwd": md5($scope.Lpwd), "name": $scope.Lname}
+                data: {"email": $scope.Lemail, "pwd": pwd, "name": $scope.Lname}
             }).success(function (data) {
                 $scope.state = data["state"];//1 true or 0 false
-
+                Data.clear();//清空缓存
                 var name = $scope.Lemail;
                 $scope.message = data["message"];
                 if (data["message"].handler_url != null && data["message"].handler_url !== "") {
@@ -46,8 +114,6 @@ OJApp.controller('mainController',function($scope, $http, Data) {
 
                 if ($scope.state) {
                     Data.setToken(data["token"]);
-                    console.log(Data.token());
-                    console.log(data["token"]);
                     Data.setUid($scope.message.uid);
                     Data.setPrivi($scope.message.privilege);
                     Data.setTel($scope.message.tel);
@@ -119,51 +185,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
             }
         }
     };
-    $scope.addhr = function () {
-        if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.verifyAns) {
-            if ($scope.Rpwd == $scope.Rrepwd) {
-                if ($scope.verifyAns == $scope.verifyQtn.answer) {
-                    $http({
-                        url: WEBROOT+"/user/add/hr",
-                        method: 'POST',
-                        headers: {
-                            "Authorization": Data.token()
-                        },
-                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name,"company":$scope.company}
-                    }).success(function (data) {
-                        $scope.state = data["state"];//1 true or 0 false
-                        $scope.message = data["message"];
-                        if ($scope.state) {
-                            Data.setUid($scope.message.uid);
-                            Data.setToken(data["token"]);
-                            Data.setPrivi($scope.message.privilege);
-                            Data.setTel($scope.message.tel);
-                            Data.setCompany($scope.message.company);
-                            Data.setInvitedleft($scope.message.invited_left);
-                            //end bu zpl
-                            Data.setName($scope.message.email);
-                            //除去modal层的遮罩
-//                            var child = document.getElementsByClassName("modal-backdrop fade in");
-//                            child[0].parentNode.removeChild(child[0]);
-                            window.location.href = '#/test';
-                        } else {
-                            alert($scope.message.msg);
-                            window.location.reload(true);
-                        }
-                    }).error(function () {
-                            alert("网络错误");
-                            window.location.reload(true);
-                        }
-                    );
-                } else {
-                    alert("验证问题答案错误");
-                    //$scope.createCode();
-                }
-            } else {
-                alert("密码不相同")
-            }
-        }
-    };
+    
     $scope.addadmin = function () {
         $http({
             url: WEBROOT+"/user/add/admin",
@@ -199,23 +221,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
         $scope.Verification = code;//把code值赋给验证码
     };
     $scope.createCode();*/
-    $scope.changeQuestion = function(){
-    	$http({
-            url: WEBROOT+"/user/getVerifyQtn",
-            method: 'POST'
-        }).success(function (data) {
-            if (data.state == 200) {
-            	$scope.verifyQtn=data.message;
-            } else {
-            	alert("获取问题出错哦！");
-            }
-        }).error(function () {
-                alert("网络错误");
-                //window.location.reload(true);
-            }
-        );
-    }
-    $scope.changeQuestion();
+  
 
     $scope.show = 1;
     $scope.btn = function () {
@@ -231,7 +237,7 @@ OJApp.controller('mainController',function($scope, $http, Data) {
 
 OJApp.controller('nav',function($scope, Data) {
     $scope.invitedleft = Data.invitedleft();
-    $scope.name = Data.name();
+    $scope.name = Data.email();
 //    console.log(Data.name);
     $scope.navTest = function () {
         $scope.template = 'testshow.html';

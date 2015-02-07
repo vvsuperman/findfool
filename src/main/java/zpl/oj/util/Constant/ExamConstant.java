@@ -4,6 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExamConstant{
+	
+	
+	
+	//统一登陆来源
+	
+	 public final static String SOURCE_MD = "mingdao";
+	
+	
+	
 	public final static int PROGRAM_MEM = 128;
 	public final static int PROGRAM_TIME = 128;
 	

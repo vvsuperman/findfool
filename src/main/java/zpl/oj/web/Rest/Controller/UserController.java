@@ -1,13 +1,22 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.*;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.mingdao.sdk.Config;
 
 import zpl.oj.model.common.VerifyQuestion;
 import zpl.oj.model.request.User;
@@ -20,6 +29,7 @@ import zpl.oj.model.responsejson.ResponseUserInfo;
 import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 
@@ -34,6 +44,67 @@ public class UserController {
 	@Autowired
 	private VerifyQuestionService verifyQuestionService;
 
+	
+	@RequestMapping(value="/oauthorlogin")
+	@ResponseBody
+	public ResponseBase oauthorLogin(@RequestBody Map map){
+		ResponseBase rb = new ResponseBase();
+		String source = (String)map.get("source");
+		
+		
+		if(ExamConstant.SOURCE_MD.equals(source)){
+			String code =(String)map.get("code");
+			String token = Config.getAccessTokenByCode(code);
+			//访问api出错，直接返回
+			if(token == null){
+				rb.setState(3);
+				return rb;
+			}
+			ObjectMapper mapper = new ObjectMapper(); 
+			Map<String,Object> tokenMap = new HashMap<String, Object>();
+			try {
+				tokenMap= mapper.readValue(token, Map.class);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			token = (String)tokenMap.get("access_token");
+			
+			String user = Config.getUserInfo(token);
+			if(user == null){
+				rb.setState(3);
+				return rb;
+			}
+			Map<String,Object> userMap = new HashMap<String, Object>();
+			try {
+				userMap= mapper.readValue(user, Map.class);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			userMap = (Map)userMap.get("user");
+			User u = userService.getUserByEmail((String)userMap.get("email"));
+			//用户已存在，登陆
+			Map rtMap = new HashMap<String, Object>();
+			if(u != null){
+				rb.setState(1);
+				rtMap.put("user", u);
+				rtMap.put("token", token);
+				rb.setMessage(rtMap);
+			}else{
+				u = new User();
+				u.setEmail((String)userMap.get("email"));
+				u.setCompany((String)userMap.get("company"));
+				rtMap.put("user", u);
+				rtMap.put("token", token);
+				rb.setState(2);
+				rb.setMessage(rtMap);
+			}
+		}
+		return rb;
+	}
+	
 	
 	@RequestMapping(value="/confirm")
 	@ResponseBody

@@ -15,7 +15,7 @@
 		</div>
         <div class="collapse navbar-collapse ">
             <ul class="nav navbar-nav">
-                <li>
+                <!-- <li>
                 	<a href="" data-toggle="modal" data-target="#Registration">
 	                	<span class="glyphicon glyphicon-eye-open"></span>
 	                	<span>免费试用</span>
@@ -25,11 +25,11 @@
                 	<span class="glyphicon glyphicon-registration-mark"></span>
                 	<span>价格</span>
                 	</a>
-                </li>
+                </li> -->
             </ul>
            <ul id="preparelogin" class="nav navbar-nav navbar-right">
                 <li><button type="button" class="btn btn-transparent-outline navbar-btn" style="margin-right: 10px"
-                 data-toggle="modal" data-target="#Registration">注册</button></li>
+                 ng-click="register('','')">注册</button></li>
                 <li><button type="button" class="btn btn-transparent-outline navbar-btn" style="margin-right: 50px"
                 data-toggle="modal" data-target="#Login">登陆</button></li>
             </ul>
@@ -152,71 +152,7 @@
 
 
 <!-- Modal Registration-->
-<div class="modal" id="Registration" tabindex="0" role="dialog" aria-labelledby="RegistrationLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="RegistrationLabel">请注册以享受更多服务</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                     	<label  class="col-sm-2 control-label">Email</label>
-                     	<div class="col-md-8">
-                     	     <input type="email" class="form-control"  placeholder="Email" ng-model="Remail" required>
-                     	</div>
-                    </div>
-                     <div class="form-group">
-                     	<label  class="col-sm-2 control-label">公司名称</label>
-                     	<div class="col-md-8">
-                     	     <input type="text" class="form-control"  placeholder="company name" ng-model="company" required>
-                     	</div>
-                    </div>
-                    
-                    <div class="form-group">
-                  	  <label class="col-sm-2 control-label">密码</label>
-                  	    <div class="col-md-8">
-                       		 <input type="password" class="form-control" placeholder="密码6~20位" ng-model="Rpwd"
-                            	   ng-maxlength=20 ng-minlength=6 required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-2 control-label">重复密码</label>
-                       <div class="col-md-8">
-                              <input type="password" class="form-control" placeholder="重复密码" ng-model="Rrepwd"
-                               ng-maxlength=20 ng-minlength=6 required>
-                       </div>
-                    </div>
-                    
-                      <div class="form-group">
-                       <label class="col-sm-2 control-label">验证问题</label>
-                       <div class="col-md-8">
-                               <a href="" ng-click="changeQuestion()">
-                                {{verifyQtn.question}}
-                            </a>   
-                       </div>
-                    </div>
-                    
-                    <div class="form-group">
-                    	<label class="col-sm-2 control-label">答案</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" placeholder="请输入问题的答案"
-                                   ng-model="verifyAns" required>
-                        </div>
-                    </div>
-                   
-                </form>
-            </div>
-            <div class="modal-footer">
-                
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" ng-click="addhr()">注册</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Modal Login -->
 <div class="modal" id="Login" tabindex="0" role="dialog"
@@ -251,6 +187,11 @@
                         <p class="text-danger"  ng-bind="errmsg"></p>
                               
                     </div>
+                    <div class="form-group">
+                        <!--<label for="exampleInputPassword1">Password</label>-->
+                       <img class="img-responsive" ng-click="mdLogin()"
+                        style="cursor: pointer" ng-src="resource/static/mingdao.png">
+                    </div>
                     <div>
                         <!-- <label>
                             <input type="checkbox" ng-keyup="enter($event)">记住我
@@ -263,7 +204,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <a type="button" class="btn btn-primary" ng-click="confirm()">登录</a>
+                <a type="button" class="btn btn-primary" ng-click="confirm(1)">登录</a>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -370,7 +311,7 @@
       <footer class="myfooter" >
        
        <div class="col-md-6">
-        <p>&copy; 2014 findfool Company, Inc. &middot;沪ICP备14039106-3号 <a class="greenFont" href="mailto:service@findfool.com">findfool@163.com</a> </p>
+        <p>&copy; 2014 findfool Company, Inc. &middot;沪ICP备14039106-3号 <a class="greenFont" href="mailto:service@findfool.com">service@findfool.com</a> </p>
        </div> 
       </footer>
 

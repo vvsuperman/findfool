@@ -15,8 +15,8 @@ var OJApp = angular.module('OJApp', [
 ]);
 
 
-OJApp.config(['$routeProvider',
-    function ($routeProvider) {
+OJApp.config(['$routeProvider','$locationProvider',
+    function ($routeProvider,$locationProvider) {
         $routeProvider.
             when('/', {
                 templateUrl: 'page/main.html',
@@ -94,10 +94,15 @@ OJApp.config(['$routeProvider',
                 templateUrl: 'page/page.html',
                 controller: 'reportDetailController'
             }).
-            
+            when('/md', {
+                templateUrl: 'page/page.html',
+                controller: 'oauthor2Controller'
+            }).
             otherwise({
                 redirectTo: '/'
             });
+        
+//        $locationProvider.html5Mode(true);
     }]);
 
 
@@ -171,6 +176,17 @@ OJApp.factory('Data', function (webStorage) {
         	webStorage.remove('token');
         	this._token = '';
         };
+        //明道的token
+        this.setMdToken = function (to) {
+            webStorage.remove('mdToken');
+            webStorage.add('mdToken', to);
+            this._mdToken = to;
+        };
+        this.removeMdToken = function(){
+        	webStorage.remove('mdToken');
+        	this._mdToken = '';
+        };
+        
         
         
         this._invitedleft = "";
