@@ -19,6 +19,7 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
          }).success(function (data) {
               console.log("data................",data);
               //用户已注册，登陆
+              
               if(data.state == 1){
             	  $scope.Lemail = data.message.user.email;
             	  $scope.Lpwd = data.message.user.pwd;
@@ -28,8 +29,10 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
               //用户还未注册，注册，转到注册页面
               else if(data.state == 2){
             	  Data.setMdToken(data.message.token);
-            	  $scope.register( data.message.user.email, data.message.user.company);
-              }else if(data.state == 3){
+            	  Data.setEmail(data.message.user.email);
+            	  Data.setCompany(data.message.user.company);
+            	  window.location.href=MD_REDIRECT+'oauthor?title=请创建一个新账号来与明道账号绑定';
+              }else {
             	  
             	  smoke.confirm("非常抱歉，访问明道api超时，请稍后重试",function(e){
              		 if(e){
@@ -48,7 +51,30 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
          }).error(function () {
               console.log("error.......");
          });
+    	 
+//    	 $modal.open({
+//		      templateUrl: 'page/waitModal.html',
+//		      controller: 'waitModalInstance',
+////		      size: "lg",
+//		      resolve: {}
+//		 });
+    	 
+    	 
      }
+     
+     //用户已登陆
+     if(typeof(Data.lastActive())!="undefined"&&typeof(Data.email())!="undefined"){
+    	 var nowTime = new Date().getTime();
+    	 var lastActiveTime = Data.lastActive();
+    	 //半小时之内
+    	 console.log("duration",nowTime,lastActiveTime,nowTime-lastActiveTime);
+    	 if(nowTime - lastActiveTime < 30*60*1000){
+    		 window.location.href= "#/loginok"
+    	 }
+     }
+     
+     
+     
      
      $scope.register = function (email, company) {
  		 var modalInstance = $modal.open({
@@ -82,7 +108,8 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
 	  $scope.dataScore2 = [90, 10];
 	  
 	 $scope.mdLogin = function(){
-		 window.location.href='https://api.mingdao.com/oauth2/authorize?app_key=EB56F580B240&redirect_uri=http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F';
+		 var url = 'https://api.mingdao.com/oauth2/authorize?app_key=EB56F580B240&redirect_uri='+MD_REDIRECT
+		 window.location.href= url;
 	 } 
 	
     $scope.confirm = function (data) {
@@ -111,6 +138,7 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
                 }
                 Data.setName(name);
                 Data.setEmail($scope.Lemail);
+                
 
                 if ($scope.state) {
                     Data.setToken(data["token"]);
@@ -119,6 +147,7 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
                     Data.setTel($scope.message.tel);
                     Data.setCompany($scope.message.company);
                     Data.setInvitedleft($scope.message.invited_left);
+                    Data.setLastActive((new Date()).getTime());
                     $scope.invitedleft = $scope.message.invited_left;
                    
                     window.location.href = '#/loginok';
@@ -229,7 +258,7 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
     };
     $scope.enter = function ($event) {
         if ($event.keyCode == 13) {
-            $scope.confirm()
+            $scope.confirm(1)
         }
     };
 });
@@ -267,6 +296,11 @@ OJApp.controller('nav',function($scope, Data) {
         $scope.ContentUs = 'contentUs.html';
         $scope.leftBar = '';
     };
+    
+    $scope.logout = function(){
+    	Data.clear();
+    	window.location.href = '#/';
+    }
 });
 
 
@@ -315,6 +349,10 @@ OJApp.controller('addQuestion',function($scope) {
         $scope.Qactive = target.getAttribute('data');
     }
 });
+
+OJApp.controller('waitModalInstance',function($scope) {
+	
+})
 
 
 

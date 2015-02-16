@@ -94,9 +94,9 @@ OJApp.config(['$routeProvider','$locationProvider',
                 templateUrl: 'page/page.html',
                 controller: 'reportDetailController'
             }).
-            when('/md', {
-                templateUrl: 'page/page.html',
-                controller: 'oauthor2Controller'
+            when('/oauthor', {
+                templateUrl: 'page/oauthor.html',
+                controller: 'oauthorController'
             }).
             otherwise({
                 redirectTo: '/'
@@ -297,6 +297,20 @@ OJApp.factory('Data', function (webStorage) {
             webStorage.add('answer', to);
             this._answer = to;
         };
+        
+        this._lastActive = "";
+        this.lastActive = function () {
+            if (this._lastActive == "" || this._lastActive == null) {
+                this._lastActive = webStorage.get("lastActive");
+            }
+            return this._lastActive;
+        };
+        this.setLastActive = function (to) {
+            webStorage.remove('lastActive');
+            webStorage.add('lastActive', to);
+            this._lastActive = to;
+        };
+        
         this._qs = "";
         this.qs = function () {
             if (this._qs == "" || this._qs == null) {

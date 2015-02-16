@@ -4,6 +4,14 @@
  * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
  */
 
+.wait{
+	background: url('../static/wait.gif')
+}
+
+.modal-dialog{
+	margin-top: 80px;
+}
+
 .highlight {
   display: none; /* hidden by default, until >480px */
   padding: 9px 14px;

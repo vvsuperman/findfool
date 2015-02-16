@@ -1,8 +1,65 @@
-<div class="col-md-10 col-md-offset-1" style="padding: 70px">
-    <p>justtest</p>
-
-
-    <button class="btn btn-default">提交</button>
-    <button class="btn btn-default">取消</button>
-
+<div class="navbar navbar-transparent" role="navigation" ng-controller="nav" style="font-size: 16px">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="modal"
+                    data-target="#miniNav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="logo" class="navbar-brand greenFont" style="font-size: 24px" href="http://findfool.com/#/">
+                findFool
+               </a>
+             
+               
+               </div>
+       
+    </div>
 </div>
+
+
+
+<div class="row">
+	 <div class="col-md-6 col-md-offset-3">
+	  <form class="form-horizontal">
+	  
+	   <div class="form-group">
+	     	<label  class="col-sm-6 col-sm-offset-2 greenFont" ng-bind="title" style="font-size: 16px" ></label>
+	     	
+	    </div>
+	    
+	    <div class="form-group">
+	     	<label  class="col-sm-2 control-label">Email</label>
+	     	<div class="col-md-8 control-label ">	
+	     	     <lable class="pull-left"  ng-bind="Remail" ></lable>
+	     	</div>
+	    </div>
+	     <div class="form-group">
+	     	<label  class="col-sm-2 control-label">公司名称</label>
+	     	<div class="col-md-8 control-label ">
+	     	     <label class="pull-left" ng-bind="company"></label>
+	     	</div>
+	    </div>
+	    
+	    
+	     <div class="form-group">
+	   	  <label class="col-sm-2 control-label">密码</label>
+	   	    <div class="col-md-8">
+	        		 <input type="password" class="form-control" placeholder="密码6~20位" ng-model="Rpwd"
+	             	   ng-maxlength=20 ng-minlength=6>
+	         </div>
+	     </div>
+	   
+	    
+		 </form>
+       </div>
+     </div>
+       
+       <div class="row">
+           <div class="col-md-6 col-md-offset-4">
+           
+           
+           	  <button type="button" class="btn btn-primary" ng-click="addhr()">创建并绑定</button>
+           	  <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+           </div>
+       </div>

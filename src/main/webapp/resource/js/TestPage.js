@@ -41,10 +41,29 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
 	    	"allStack":"Full Stack developer：是指掌握多种技能，并能利用多种技能独立完成产品的人。互联网项目，需要用到后端开发、前端开发、界面设计、" +
 	    	"产品设计、数据库、各种移动客户端、三屏兼容、restFul API设计和OAuth等等，比较前卫的项目，还会用到Single Page Application、Web Socket、" +
 	    	"HTML5/CSS3这些技术以及像第三方开发像微信公众号微博应用等等",
-	    	"object_c":"IOS的原生开发语言",
+	    	"object_c":"	",
 	    	"android":"Android的原生开发语言，主要使用google的API"
     }
     
+    
+    $scope.genQuiz = function(data){
+		$http({
+            url: WEBROOT+"/test/genquiz",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: {quizName:data}
+        }).success(function (data) {
+        	smoke.alert("创建测试成功");
+        	location.reload();
+        }).error(function (data) {
+            //error
+        	console.log("genQuizFailed");
+        });
+		
+	}
+	
     
     $scope.viewGuideModal = function(data){
     	console.log("view guide modal.........",data);

@@ -1,6 +1,6 @@
 .skill-board{
-	 background: url("../static/skill_tree.png") no-repeat scroll center top;
-  	 height: 700px; 
+	 /* background: url("../static/skill_tree.png") no-repeat scroll center top; */
+  	 height: 300px; 
   	 margin-top: 0px;	
   	 background-size:100% 100%;	
 }
