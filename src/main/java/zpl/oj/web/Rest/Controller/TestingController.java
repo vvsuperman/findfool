@@ -297,7 +297,6 @@ public class TestingController {
 		}
 		
 		Invite invite = (Invite)map.get("invite");
-		int index = (Integer)map.get("index");
 		
 		//提交用户的答案
 		if(params.get("problemid")!=null){
