@@ -11,20 +11,19 @@ OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Da
                 	var re = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;	
  					
  				    if(!re.test($scope.Remail)){
- 						$("#emailInfo").text("请输入正确的email格式");
+ 						$scope.errorEmail = "请输入正确的email格式";
  						return false;
  					}
- 					else{
- 						var company_part=regemail.split("@")[1];
- 						var common_email=["126.com","163.com","sina.com","21cn.com","sohu.com","yahoo.com.cn","yahoo.com","tom.com","qq.com","etang.com","eyou.com","56.com","x.cn","chinaren.com","sogou.com","citiz.com","hotmail.com","msn.com","gmail.com","aim.com","aol.com","mail.com","walla.com","inbox.com","live.com","googlemail.com","ask.com","163.net","263.net","3721.net","yeah.net"];
- 						//数组中不包含被查元素则返回-1，否则返回元素位置坐标
- 						if($.inArray(company_part, common_email)>-1){
- 							$("#emailInfo").text("请使用公司邮箱注册！");
- 							return false;
- 						}
- 						alert("前端处理完成，转到后端处理");
- 					}
-                	
+ 					 	
+					var company_part=$scope.Remail.split("@")[1];
+					var common_email=["126.com","163.com","sina.com","21cn.com","sohu.com","yahoo.com.cn","yahoo.com","tom.com","qq.com","etang.com","eyou.com",
+					                  "56.com","x.cn","chinaren.com","sogou.com","citiz.com","hotmail.com","msn.com","gmail.com","aim.com","aol.com","mail.com",
+					                  "walla.com","inbox.com","live.com","googlemail.com","ask.com","163.net","263.net","3721.net","yeah.net","aliyun.com"];
+					//数组中不包含被查元素则返回-1，否则返回元素位置坐标
+					if($.inArray(company_part, common_email)>-1){
+						$scope.errorEmail = "请使用公司邮箱注册！";
+						return false;
+					}
                 	
                     $http({
                         url: WEBROOT+"/user/add/hr",
