@@ -67,7 +67,6 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
     	 var nowTime = new Date().getTime();
     	 var lastActiveTime = Data.lastActive();
     	 //半小时之内
-    	 console.log("duration",nowTime,lastActiveTime,nowTime-lastActiveTime);
     	 if(nowTime - lastActiveTime < 30*60*1000){
     		 window.location.href= "#/loginok"
     	 }

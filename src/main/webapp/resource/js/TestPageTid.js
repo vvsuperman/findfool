@@ -6,7 +6,6 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testlist.html';
     $scope.leftBar = 'page/leftBar.html';
-    console.log('testDetail');
     $scope.tid = $routeParams.tid;
     
     $scope.contain ={};

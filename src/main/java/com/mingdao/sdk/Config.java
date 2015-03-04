@@ -9,8 +9,8 @@ public class Config {
 	public static final  String APPKEY="EB56F580B240";//需要换成您的应用的appkey
 	public static final  String APPSECRET="9CF8EA795C925E4C43285942232E5D";//需要换成您的应用的appSecret
 	public static final  String RESPONSE_TYPE="token";//token或者code
-//	public static final  String REDIRECT_URI="http://localhost:8080/oj/#/";//需要换成您的应用设置的回调地址
-	public static final  String REDIRECT_URI="http://findfool.com/#/";//需要换成您的应用设置的回调地址
+	public static final  String REDIRECT_URI="http://localhost:8080/oj/#/";//需要换成您的应用设置的回调地址
+//	public static final  String REDIRECT_URI="http://findfool.com/#/";//需要换成您的应用设置的回调地址
 	
 	public static String getAuthorizeUrl(){
 		String url=AUTHURL
