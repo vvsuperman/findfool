@@ -20,6 +20,7 @@ import zpl.oj.dao.TagDao;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.Tag;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.model.request.User;
@@ -124,9 +125,9 @@ public class ProblemServiceImp implements ProblemService{
 		
 		//处理tag
 		for(String tagContext:q.getQuestion().getTag()){
-			
-			Integer tagid = tagDao.getTagByContext(tagContext).getTagId();
-			if(tagid == null){
+			Tag tag = tagDao.getTagByContext(tagContext);
+			Integer tagid = 0;
+			if(tag != null){
 				tagDao.insertTag(tagContext);
 				tagid = tagDao.getTagByContext(tagContext).getTagId();
 			}
