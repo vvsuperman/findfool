@@ -21,8 +21,17 @@ public class User {
 	private int invitedNum;
 	private int state;
 	private String tel;
+	private String mdUid;//明道的uid
 	
-	
+	public String getMdUid() {
+		return mdUid;
+	}
+
+	public void setMdUid(String mdUid) {
+		this.mdUid = mdUid;
+	}
+
+
 	public User() {
 		this.fname = "no value";
 		this.lname = "no value";

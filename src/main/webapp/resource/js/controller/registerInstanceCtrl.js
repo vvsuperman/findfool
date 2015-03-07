@@ -2,6 +2,24 @@ OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Da
 	
 	$scope.Remail = params.email;
 	$scope.company = params.company;
+	//手机的错误信息
+	$scope.errorMsg={};
+	$scope.verifyQtn ={};
+	
+	$scope.$on("mobileError",function(event,data){
+		$scope.$apply(function(){
+			$scope.errorMsg.mobile = data;
+		});
+		
+	});
+	
+	$scope.$on("vertifycode",function(event,data){
+		$scope.$apply(function(){
+			$scope.verifyQtn.answer = data;
+		});
+	})
+
+	
 	//绑定变量到服务
 	$scope.addhr = function () {
         if ($scope.Remail && $scope.Rpwd && $scope.Rrepwd && $scope.verifyAns) {
@@ -31,7 +49,7 @@ OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Da
                         headers: {
                             "Authorization": Data.token()
                         },
-                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name,"company":$scope.company}
+                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name,"company":$scope.company,"tel":$scope.mobile}
                     }).success(function (data) {
                         $scope.state = data["state"];//1 true or 0 false
                         $scope.message = data["message"];
@@ -59,14 +77,14 @@ OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Da
                         }
                     );
                 } else {
-                    alert("验证问题答案错误");
+                	$scope.errorMsg.general = "验证问题答案错误";
                     //$scope.createCode();
                 }
             } else {
-                alert("密码不相同")
+            	$scope.errorMsg.general ="密码不相同";
             }
         }else{
-        	
+        	$scope.errorMsg.general = "所有选项均不可为空";
         }
     };
 	
@@ -75,23 +93,6 @@ OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Da
 		$modalInstance.dismiss('cancel');
 	}
 	
-	  $scope.changeQuestion = function(){
-	    	$http({
-	            url: WEBROOT+"/user/getVerifyQtn",
-	            method: 'POST'
-	        }).success(function (data) {
-	            if (data.state == 200) {
-	            	$scope.verifyQtn=data.message;
-	            } else {
-	            	console.log("获取问题出错哦！");
-	            }
-	        }).error(function () {
-	                console.log("网络错误");
-	                //window.location.reload(true);
-	            }
-	        );
-	    }
-	    $scope.changeQuestion();
 	
 	
 });

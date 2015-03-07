@@ -45,9 +45,11 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             })
             
             editor.on('valuechanged', function () {
+            	console.log("editor's value.....",editor.getValue());
                 $timeout(function () {
                     scope.$apply(function () {
                         var value = editor.getValue();
+//                        console.log("value......",value);
                         ngModel.$setViewValue(value);
                     });
                 });

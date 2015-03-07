@@ -31,6 +31,7 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
             	  Data.setMdToken(data.message.token);
             	  Data.setEmail(data.message.user.email);
             	  Data.setCompany(data.message.user.company);
+            	  Data.setMdUid(data.message.user.mdUid);
             	  window.location.href=MD_REDIRECT+'oauthor?title=请创建一个新账号来与明道账号绑定';
               }else {
             	  

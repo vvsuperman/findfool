@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class ExamConstant{
 	
+	//短信模板
+	public final static String SMS_USERNAME = "XFTB702047";
+	public final static String SMS_PWD ="fw123456";
+	public final static String SMS_TEMPID = "MB-2015030640";
 	
 	
 	//统一登陆来源

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mingdao.sdk.Config;
@@ -32,6 +33,7 @@ import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
+import zpl.oj.util.sms.HttpPost;
 
 @Controller
 @RequestMapping("/user") 
@@ -44,6 +46,29 @@ public class UserController {
 	@Autowired
 	private VerifyQuestionService verifyQuestionService;
 
+	
+	
+	@RequestMapping(value="/getvertifycode",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase getVertifyCode(@RequestBody Map map1){
+		ResponseBase rb = new ResponseBase();
+		String mobile = (String)map1.get("mobile");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", ExamConstant.SMS_USERNAME);//此处填写用户账号
+		map.put("scode", ExamConstant.SMS_PWD);//此处填写用户密码
+		map.put("mobile",mobile);//此处填写发送号码
+		map.put("tempid",ExamConstant.SMS_TEMPID);//此处填写模板短信编号
+		//map.put("extcode","1234");
+		int max=9999;
+        int min=1000;
+        Random random = new Random();
+        int s = random.nextInt(max)%(max-min+1) + min;
+		map.put("content","@1@="+s);//此处填写模板短信内容
+		String temp = HttpPost.doPost("http://mssms.cn:8000/msm/sdk/http/sendsms.jsp",map, "UTF-8");
+		rb.setMessage(s);
+		return rb;
+	}
+	
 	
 	@RequestMapping(value="/oauthorlogin")
 	@ResponseBody
@@ -71,6 +96,7 @@ public class UserController {
 			token = (String)tokenMap.get("access_token");
 			
 			String user = Config.getUserInfo(token);
+		    System.out.println("user....................."+user);
 			if(user == null){
 				rb.setState(3);
 				return rb;
@@ -96,6 +122,7 @@ public class UserController {
 				u = new User();
 				u.setEmail((String)userMap.get("email"));
 				u.setCompany((String)userMap.get("company"));
+				u.setMdUid((String)userMap.get("id"));
 				rtMap.put("user", u);
 				rtMap.put("token", token);
 				rb.setState(2);
@@ -143,6 +170,8 @@ public class UserController {
 		u.setEmail(request.getEmail());
 		u.setPwd(request.getPwd());
 		u.setCompany(request.getCompany());
+		u.setTel(request.getTel());       //用户联系方式
+		u.setMdUid(request.getMdUid());   //明道id
 		//测试阶段先免费
 		u.setInvited_left(100);
 		//默认等级

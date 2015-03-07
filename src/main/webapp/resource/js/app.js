@@ -187,6 +187,18 @@ OJApp.factory('Data', function (webStorage) {
         	this._mdToken = '';
         };
         
+        //明道的uid
+        this.setMdUid = function (to) {
+            webStorage.remove('mdUid');
+            webStorage.add('mdUid', to);
+            this._mdUid = to;
+        };
+        this.removeMdToken = function(){
+        	webStorage.remove('mdUid');
+        	this._mdUid = '';
+        };
+        
+        
         
         
         this._invitedleft = "";

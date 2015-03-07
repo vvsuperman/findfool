@@ -6,6 +6,24 @@ public class RequestUserLogin {
 	private String email;
 	private String pwd;
 	private String company;
+	private String tel;
+	
+	private String mdUid; //明道的用户ID
+	
+	
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getMdUid() {
+		return mdUid;
+	}
+	public void setMdUid(String mdUid) {
+		this.mdUid = mdUid;
+	}
+	
 	public String getCompany() {
 		return company;
 	}
