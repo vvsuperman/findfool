@@ -160,6 +160,7 @@ OJApp.factory('Data', function (webStorage) {
             webStorage.add('key3', to);
             this._key3 = to;
         };
+        
         this._token = "";
         this.token = function () {
             if (this._token == "" || this._token == null) {
@@ -177,6 +178,14 @@ OJApp.factory('Data', function (webStorage) {
         	this._token = '';
         };
         //明道的token
+        this._mdToken = "";
+        this.mdToken = function () {
+            if (this._mdToken == "" || this._mdToken == null) {
+                this._mdToken = webStorage.get("mdToken");
+            }
+            return this._mdToken;
+        };
+        
         this.setMdToken = function (to) {
             webStorage.remove('mdToken');
             webStorage.add('mdToken', to);
@@ -188,12 +197,20 @@ OJApp.factory('Data', function (webStorage) {
         };
         
         //明道的uid
+        this._mdUid = "";
+        this.mdUid = function () {
+            if (this._mdUid == "" || this._mdUid == null) {
+                this._mdUid = webStorage.get("mdUid");
+            }
+            return this._mdUid;
+        };
+        
         this.setMdUid = function (to) {
             webStorage.remove('mdUid');
             webStorage.add('mdUid', to);
             this._mdUid = to;
         };
-        this.removeMdToken = function(){
+        this.removeMdUid = function(){
         	webStorage.remove('mdUid');
         	this._mdUid = '';
         };

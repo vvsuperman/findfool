@@ -3,6 +3,8 @@ OJApp.controller("oauthorController",function($scope, $http, Data,$routeParams) 
 	$scope.template = 'page/oauthor.html';
     $scope.ContentUs = '';
     $scope.leftBar = '';
+    $scope.errorMsg ={};
+    $scope.verifyQtn ={};
     
     console.log("title", $routeParams.title);
     
@@ -28,6 +30,8 @@ OJApp.controller("oauthorController",function($scope, $http, Data,$routeParams) 
     $scope.addhr = function () {
         if ($scope.Rpwd  && $scope.verifyAns && $scope.mobile) {
 		    	if ($scope.verifyAns == $scope.verifyQtn.answer) {
+		    		    console.log("create success..............");
+		    		    return false;
 		                $http({
 		                    url: WEBROOT+"/user/add/hr",
 		                    method: 'POST',

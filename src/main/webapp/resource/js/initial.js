@@ -1,7 +1,8 @@
 //常量
 var WEBROOT = "/oj";
 var CUSTOM_SET = 0;
-var MD_REDIRECT = "http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F";
+//var MD_REDIRECT = "http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F";
+var MD_REDIRECT = "http://127.0.0.1:8080/oj/#/";
 //var MD_REDIRECT = "http%3A%2F%2Ffindfool.com%2F%23%2F" 
 	
 var u = navigator.userAgent, app = navigator.appVersion;          

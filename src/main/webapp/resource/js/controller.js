@@ -32,7 +32,8 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
             	  Data.setEmail(data.message.user.email);
             	  Data.setCompany(data.message.user.company);
             	  Data.setMdUid(data.message.user.mdUid);
-            	  window.location.href=MD_REDIRECT+'oauthor?title=请创建一个新账号来与明道账号绑定';
+            	  var url = MD_REDIRECT+'oauthor?title=请创建一个新账号来与明道账号绑定';
+            	  window.location.href=url;
               }else {
             	  
             	  smoke.confirm("非常抱歉，访问明道api超时，请稍后重试",function(e){
