@@ -29,11 +29,11 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             var editor = new Simditor(option);
             
         	if(typeof(attrs.minheight)!="undefined"){
-        		elem.prev().children("div.simditor-body").css("min-height",attrs.minheight);
+        		elem.prev().css("min-height",attrs.minheight);
         	}
         	
         	if(attrs.operation=="view"){
-        		elem.prev().children("div.simditor-body").attr("contenteditable",false);
+        		elem.prev().attr("contenteditable",false);
         	}
             
             ngModel.$render = function () {
@@ -45,7 +45,6 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             })
             
             editor.on('valuechanged', function () {
-            	console.log("editor's value.....",editor.getValue());
                 $timeout(function () {
                     scope.$apply(function () {
                         var value = editor.getValue();

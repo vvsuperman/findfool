@@ -107,7 +107,7 @@
 		             	
 		                <ul style="margin-top: 30px;list-style-type:none">
 		                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-		                        <textarea simditor minheight="30px" ng-model="ans.text"></textarea>
+		                        <textarea simditor minheight="60px" style="height: 60px"  ng-model="ans.text"></textarea>
 		                       
 		                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
 		                           ng-click="removeOne($index)">删除</a>
