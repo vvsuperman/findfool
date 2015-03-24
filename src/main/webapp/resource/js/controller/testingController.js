@@ -1,16 +1,17 @@
 'use strict';
+
 OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
 	 $scope.tid = param[1];
 	
-	
-//	 $scope.email ="693605668@qq.com";
-//	 $scope.testid ="11";
-//	 $scope.tid = "11";
-//	 $scope.show = 2;
-//	 
+//测试数据	
+	 $scope.email ="693605668@qq.com";
+	 $scope.testid ="11";
+	 $scope.tid = "11";
+	 $scope.show = 2;
+//测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
 	 //$scope.loginUser.email="apachee@qq.com";
@@ -21,6 +22,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.answerCount ={total:0,sum:0};
 	 $scope.time={};
 	 $scope.time.remain = 1;
+	 
+	 $scope.btnShow =1;
 	 
 	 //检查该url是否合法
 	 $http({
@@ -39,11 +42,30 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 }
     	 else{
     		 $scope.show = 1;
+    		//测试数据
+    	     $scope.show = 2;
     	 }	 
          
      }).error(function(){
     	 console.log("get data failed");
      })
+     
+     
+     //拍照
+     $scope.takePicture = function(){
+		 $scope.$broadcast("takePicture");
+		 $scope.btnShow =2;
+	 }
+	 
+	 $scope.updatePicture = function(){
+		 $scope.$broadcast("updatePicture");
+	 }
+	 
+	 $scope.cancelPicture = function(){
+		 $scope.$broadcast("cancelPicture");
+		 $scope.btnShow = 1;
+	 }
+     
      
      //登陆
 	 $scope.login = function(){
@@ -154,7 +176,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	//定时器提醒
 	    	var nowTime = (new Date()).getTime();
 	    	var remain = $scope.time.remain - nowTime;
-	    
+	        
 	    	$timeout($scope.endTest,remain);
 	 }
 	 
@@ -208,7 +230,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	     })
 	 };
 	
-  	   	      
+	 
      /*
       *获取试题信息
       *自动提交上一道试题答案

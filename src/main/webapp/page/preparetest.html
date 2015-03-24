@@ -41,7 +41,26 @@
    
    
     <div class="container-fluid" ng-if="show==2">
-   	 <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" role="form">
+     <div class="col-md-5 col-md-offset-4" style="margin-top: 50px">       
+		  <video id="video" width="320" height="240" autoplay>
+		  </video>       
+		  <canvas camera style="display:none"  id="canvas" width="320" height="240">
+		  </canvas>
+		  <img id="testImg"  class="img-responsive" alt="Responsive image">
+		  <div ng-if="btnShow==1">
+		     <span class="text-success">请先拍照</span>
+		     <button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>  
+		  </div>
+		  
+		   <div ng-if="btnShow==2">
+		     <button class="btn btn-primary" style="margin-left: 15px" ng-click="updatePicture()">使用该照片</button>  
+		     <button class="btn btn-primary" style="margin-left: 15px" ng-click="cancelPicture()">重新拍摄</button>  
+		  </div>
+		 
+		   
+     </div>
+    
+   	 <form class="form-horizontal col-md-8 col-md-offset-3"  role="form">
    	 	  <div class="row">
 	   	 	 <div class="col-md-6 col-md-offset-1" >
 	   	 	 	<h4>个人信息</h4>
@@ -125,3 +144,5 @@
    	  <div ng-include src="'page/testend.html'"  ng-if="show==5"></div>
 
 </div>
+
+<script src="resource/js/controller/cameraController.js"></script>
