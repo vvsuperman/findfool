@@ -149,7 +149,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	     }
 	     
 	     if(q.type==2 && proSum>0){
-	    	 smoke.alert("为保证考试时间，只能添加一道编程题");
+	    	 flashTip("为保证考试时间，只能添加一道编程题");
 	    	 return false;
 	     }
 	     
@@ -206,7 +206,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	            },
 	            data: sendData
 	        }).success(function (data) {
-	            smoke.alert("试题已从测试中删除");	            
+	        	flashTip("试题已从测试中删除");
 	            location.reload();
 	        }).error(function (data) {
 	            smoke.alert("获取数据错误");
@@ -234,7 +234,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     
     $scope.moveUp =  function(index){
     	if(index == 0){
-    		smoke.alert("已是第一题，不可前移");
+    		flashTip("已是第一题，不可前移");
     	}else{
     		var q = $scope.qs[index];
         	$scope.qs[index] = $scope.qs[index-1];
@@ -245,7 +245,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     
     $scope.moveDown =  function(index){
     	if(index >= $scope.qs.length-1){
-    		smoke.alert("已是最后一题，不可后移");
+    		flashTip("已是最后一题，不可后移");
     	}else{
     		var q = $scope.qs[index];
         	$scope.qs[index] = $scope.qs[index+1];

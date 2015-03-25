@@ -668,3 +668,15 @@ ul li {
     }
 }
 
+.tipBox{
+	position: fixed;
+    width:100%;
+    height: 40px;
+    top:50px;
+    text-align: center;
+}
+
+.tipContent{
+    background-color: yellow;
+    border-radius: 4px;
+}
