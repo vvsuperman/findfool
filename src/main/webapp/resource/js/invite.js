@@ -135,9 +135,9 @@ OJApp.controller("Excel",function($scope, $http, Data) {
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
-                smoke.alert("邀请成功")
+            	flashTip("邀请成功")
             } else {
-                smoke.alert($scope.message.msg)
+            	flashTip($scope.message.msg)
             }
         }).error(function (data) {
         });

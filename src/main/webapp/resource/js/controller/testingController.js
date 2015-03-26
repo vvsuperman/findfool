@@ -37,7 +37,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 if(data.message ==1){
     			 $scope.show =5;
     		 }else{
-    			 smoke.alert(data.message);
+    			 flashTip(data.message);
     		 }
     	 }
     	 else{
@@ -79,10 +79,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 if(data.message ==1){
 	    			 $scope.show = 5;
 	    		 }else if(data.message ==2){
-	    		     smoke.alert("用户名、密码不匹配");
+	    			 flashTip("用户名、密码不匹配");
 	    		     return false;
 	    		 }else{
-	    			 smoke.alert("用户不存在");
+	    			 flashTip("用户不存在");
 	    			 return false;
 	    		 }
 	    		 
@@ -182,7 +182,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 
 	 $scope.stop = function(){
-			 smoke.alert("测试已结束");
+		     flashTip("测试已结束");
 			 $scope.show = 5;
 		 }
 		
@@ -335,7 +335,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 $scope.submitAndFetch($scope.tProblems[index])
     	 }else{
     		 $scope.submitAndFetch($scope.tProblems[index-1]);
-    		 smoke.alert("以至最后一题，请仔细检查");
+    		 flashTip("以至最后一题，请仔细检查");
     	 }
     	 
      }
@@ -420,7 +420,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      * 完成所有测试
      * */
      $scope.finishTest = function(){
-    	 smoke.confirm("你确定完成测试吗？",function(e){
+    	 flashTip("你确定完成测试吗？",function(e){
     		 if(e){
     			 $scope.run('submit');
     	    	 $scope.endTest();

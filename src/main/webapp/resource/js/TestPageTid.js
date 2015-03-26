@@ -66,7 +66,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 
             }
         }).error(function (data) {
-            smoke.alert("获取数据错误");
+        	flashTip("获取数据错误");
         });
         $scope.template = 'page/testlist.html';
         $scope.myu = 1;
@@ -165,7 +165,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        	if(data.message == "success"){
 	        		$scope.qs.push(q);
 	        	}else{
-	        		smoke.alert(data.message);
+	        		flashTip(data.message);
 	        	}
 	        }).error(function (data) {
 	           console.log("获取数据错误");
@@ -209,7 +209,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        	flashTip("试题已从测试中删除");
 	            location.reload();
 	        }).error(function (data) {
-	            smoke.alert("获取数据错误");
+	        	flashTip("获取数据错误");
 	        });
 	 }
 

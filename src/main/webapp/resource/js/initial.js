@@ -8,7 +8,7 @@ var MD_REDIRECT = "http://127.0.0.1:8080/oj/#/";
 var u = navigator.userAgent, app = navigator.appVersion;          
               
 if( u.indexOf('Trident') > -1){
-	smoke.alert("支持ie 10 以上浏览器");
+	console.log("支持ie 10以上浏览器");
 } //IE内核   
 
 /*

@@ -14,11 +14,11 @@ OJApp.controller('contactController',function($scope,$http,Data){
 	            },
 	            data: $scope.suggest
 	        }).success(function (data) {
-	        	smoke.alert("感谢您宝贵的建议!");
+	        	flashTip("感谢您宝贵的建议!");
 	        	$scope.contact.show =1;
 	        
 			}).error(function (data) {
-		        smoke.alert("获取数据错误");
+				flashTip("获取数据错误");
 		    });
 	};
 });
