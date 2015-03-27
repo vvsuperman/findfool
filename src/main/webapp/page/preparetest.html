@@ -40,17 +40,23 @@
    </div>
    
    
-    <div class="container-fluid" ng-if="show==2">
-     <div class="col-md-5 col-md-offset-4" style="margin-top: 50px">       
-		  <video id="video" width="320" height="240" autoplay>
+    <div class="container-fluid" style="margin-top: 100px" ng-if="show==2">
+     
+     <button class="greenFont col-md-3 col-md-offset-2" ng-show="showCamera==1" style="font-size:24px; height: 200px;margin-top: 50px">
+        点击摄像头来进行考试
+     </button>
+    
+     <div class="col-md-5 col-md-offset-1" ng-show="showCamera==2" style="margin-top: 50px">
+       	  
+		  <video ng-show="monitor==1" id="video" width="320" height="240" autoplay>
 		  </video>       
-		  <canvas camera style="display:none"  id="canvas" width="320" height="240">
+		  <canvas ng-show="monitor==2" camera id="canvas" width="320" height="240">
 		  </canvas>
 		 
-		  <div>请打开摄像头，开始考试，作为IT从业者，如何打开摄像头应该知道的吧</div>
+		 
 		  
 		 
-		  <div ng-if="btnShow==1">
+		  <div ng-if="btnShow==1" style="margin-top: 20px">
 		     <span class="text-success">请先拍照</span>
 		     <button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>  
 		  </div>
@@ -62,8 +68,8 @@
 		 
 		   
      </div>
-    
-   	 <form class="form-horizontal col-md-8 col-md-offset-3"  role="form">
+    <div class=" col-md-6" style= "margin-top: 50px">
+   	 <form class="form-horizontal"  role="form">
    	 	  <div class="row">
 	   	 	 <div class="col-md-6 col-md-offset-1" >
 	   	 	 	<h4>个人信息</h4>
@@ -121,6 +127,7 @@
 		  	<button class="btn btn-outline" ng-click="submitUserInfo()">提交</button>
 		  </div>
    	  </form>
+   </div>
    </div>
    
    

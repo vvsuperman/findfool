@@ -23,7 +23,12 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.time={};
 	 $scope.time.remain = 1;
 	 
+	 $scope.monitor =1;
+	 
+	 
 	 $scope.btnShow =1;
+	 
+	 $scope.showCamera = 1;
 	 
 	 //检查该url是否合法
 	 $http({
@@ -55,6 +60,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      $scope.takePicture = function(){
 		 $scope.$broadcast("takePicture");
 		 $scope.btnShow =2;
+		 $scope.monitor = 2;
+		 
 	 }
 	 
 	 $scope.updatePicture = function(){
@@ -62,8 +69,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 }
 	 
 	 $scope.cancelPicture = function(){
-		 $scope.$broadcast("cancelPicture");
-		 $scope.btnShow = 1;
+		 $scope.btnShow =1;
+		 $scope.monitor = 1;
 	 }
      
      

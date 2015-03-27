@@ -6,30 +6,32 @@ OJApp.directive('camera', function() {
 		restrict: 'AE',
 		scope:{},
 		link: function(scope, elem, attrs) {
-			isSupportH5Video();
-			try {                  
-				//动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持                
-				document.createElement("canvas").getContext("2d");        
-		        console.log( "浏览器支持HTML5 CANVAS");         
-		    }         
-		    catch (e) {           
-		        console.log("浏览器不支持HTML5 CANVAS");      
-		    }   
-		    
-		    var canvas = document.getElementById("canvas");
-			var context = canvas.getContext("2d");               
-			var video = document.getElementById("video");         
-			setupCamera(video);
-			
 			var width = 320, height = 240;
+			$scope.$on("takeVideo",function(){
+				isSupportH5Video();
+				try {                  
+					//动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持                
+					document.createElement("canvas").getContext("2d");        
+			        console.log( "浏览器支持HTML5 CANVAS");         
+			    }         
+			    catch (e) {           
+			        console.log("浏览器不支持HTML5 CANVAS");      
+			    }   
+			    
+				var context = elem.get(0).getContext("2d");               
+				var video = document.getElementById("video");      
+				setupCamera(video);
+			});
+			
+			
+			
+			scope.$on("takePicture",function(event){
+				context.drawImage(video, 0, 0, width, height);
+			})
 			
 			//拍照
 			scope.$on("takePicture",function(event){
-				elem.show();
-				$("#video").hide();
 				context.drawImage(video, 0, 0, width, height);
-				
-		    	
 			})
 		    
 		    scope.$on("updatePicture",function(event){
@@ -51,11 +53,6 @@ OJApp.directive('camera', function() {
 		    	
 		    });
 			
-			scope.$on("cancelPicture",function(event){
-				elem.hide();
-				$("#video").show();
-			});
-			
 		}
 	};
 
@@ -71,7 +68,6 @@ var setupCamera = function(video)
 	// Normalizes window.URL
 	
 	var  successsCallback = function(stream) {
-		  console.log("video success");
 	      video.src = (window.URL && window.URL.createObjectURL) ? window.URL.createObjectURL(stream) : stream;
 	      video.play();
 	}
@@ -84,7 +80,7 @@ var setupCamera = function(video)
 	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
 	                        || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-
+	
 	try {
      // Tries it with spec syntax
 		console.dir(navigator.getUserMedia);
