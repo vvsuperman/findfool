@@ -42,31 +42,29 @@
    
     <div class="container-fluid" style="margin-top: 100px" ng-if="show==2">
      
-     <button class="greenFont col-md-3 col-md-offset-2" ng-show="showCamera==1" style="font-size:24px; height: 200px;margin-top: 50px">
-        点击摄像头来进行考试
-     </button>
+     <div class="col-md-3 col-md-offset-2">
+	     <button id="showBtn" class="btn btn-primary" ng-click="showVideo()"  style="font-size:24px;margin-top: 50px;height: 200px">
+	        开启摄像头来进行考试
+	     </button>
     
-     <div class="col-md-5 col-md-offset-1" ng-show="showCamera==2" style="margin-top: 50px">
-       	  
-		  <video ng-show="monitor==1" id="video" width="320" height="240" autoplay>
-		  </video>       
-		  <canvas ng-show="monitor==2" camera id="canvas" width="320" height="240">
-		  </canvas>
-		 
-		 
+       	  <div id="cameraZone" style="display: none" style="margin-top:50px">
+			  <video  ng-show="monitor==1" id="video" width="320" height="240" autoplay>
+			  </video>       
+			  <canvas ng-show="monitor==2" camera id="canvas" width="320" height="240">
+			  </canvas>
+		  </div>
 		  
-		 
-		  <div ng-if="btnShow==1" style="margin-top: 20px">
+		  <div ng-show="btnShow==1" style="margin-top: 20px">
 		     <span class="text-success">请先拍照</span>
 		     <button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>  
 		  </div>
 		  
-		   <div ng-if="btnShow==2">
+		   <div ng-show="btnShow==2" style="margin-top: 20px">
 		     <button class="btn btn-primary" style="margin-left: 15px" ng-click="updatePicture()">使用该照片</button>  
 		     <button class="btn btn-primary" style="margin-left: 15px" ng-click="cancelPicture()">重新拍摄</button>  
 		  </div>
 		 
-		   
+		  
      </div>
     <div class=" col-md-6" style= "margin-top: 50px">
    	 <form class="form-horizontal"  role="form">

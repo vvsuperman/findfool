@@ -4,10 +4,13 @@
 OJApp.directive('camera', function() {
 	return {
 		restrict: 'AE',
-		scope:{},
+		scope:true,
 		link: function(scope, elem, attrs) {
 			var width = 320, height = 240;
-			$scope.$on("takeVideo",function(){
+			var context = elem.get(0).getContext("2d");               
+			var video = document.getElementById("video");  
+			
+			scope.$on("takeVideo",function(){
 				isSupportH5Video();
 				try {                  
 					//动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持                
@@ -18,22 +21,16 @@ OJApp.directive('camera', function() {
 			        console.log("浏览器不支持HTML5 CANVAS");      
 			    }   
 			    
-				var context = elem.get(0).getContext("2d");               
-				var video = document.getElementById("video");      
-				setupCamera(video);
+				    
+				setupCamera(video,scope);
 			});
-			
-			
-			
-			scope.$on("takePicture",function(event){
-				context.drawImage(video, 0, 0, width, height);
-			})
 			
 			//拍照
 			scope.$on("takePicture",function(event){
 				context.drawImage(video, 0, 0, width, height);
 			})
 		    
+			//使用照片
 		    scope.$on("updatePicture",function(event){
 		    	//get BitmapData object
 		    	var imageData = context.getImageData(0, 0, width, height);
@@ -43,10 +40,11 @@ OJApp.directive('camera', function() {
 			    		url :WEBROOT+"/upload/img",
 			    		type : "POST",
 			    		contentType : "application/json",
-			    		data:  JSON.stringify({ "imgData": imgsrc,"email":"693605668@qq.com","imgName":"0001img"}),
+			    		data:  JSON.stringify({ "imgData": imgsrc,"email":scope.email,"imgName":"0001img"}),
 			    		method:"POST",
 			    		dataType : "json",
 			    		success : function(result) {
+			    			flashTip("照片已上传成功");
 		    		}
 		    	});
 		    	
@@ -59,17 +57,28 @@ OJApp.directive('camera', function() {
 });
 
 
-var setupCamera = function(video)
+var setupCamera = function(video,scope)
 {
 	var errorCallback = function (error) {           
-	       console.log("Video capture error: ", error.code);   
+	      console.log("Video capture error: ", error.code);  
+	      if (error.name == "PermissionDeniedError"
+				|| error.code == "PermissionDeniedError") {
+	    	  console.log("cameraerr open failed");
+	    	  flashTip("不小心点拒绝了吧。请清除缓冲或重启浏览器来重新开启摄像头。");
+	    	  scope.$emit("cameraErr");
+	      }
+	     
 	};               
 	    //navigator.getUserMedia这个写法在Opera中是navigator.getUserMedianow      
 	// Normalizes window.URL
 	
 	var  successsCallback = function(stream) {
+//		 scope.camera.video =true;
+//		 scope.camera.show = false;
 	      video.src = (window.URL && window.URL.createObjectURL) ? window.URL.createObjectURL(stream) : stream;
 	      video.play();
+	      console.log("cameraerr open success");
+	      scope.$emit("cameraOK");
 	}
 	
 	
@@ -85,10 +94,12 @@ var setupCamera = function(video)
      // Tries it with spec syntax
 		console.dir(navigator.getUserMedia);
         navigator.getUserMedia({ video: true }, successsCallback, errorCallback);
+        
    } catch (err) {
      console.log(err);
      // Tries it with old spec of string syntax
      navigator.getUserMedia('video', successsCallback, errorCallback);
+    
    }
 }
 

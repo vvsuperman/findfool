@@ -27,8 +27,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 
 	 $scope.btnShow =1;
+	 $scope.btnZone =0;
 	 
 	 $scope.showCamera = 1;
+	 
 	 
 	 //检查该url是否合法
 	 $http({
@@ -72,7 +74,29 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $scope.btnShow =1;
 		 $scope.monitor = 1;
 	 }
+	 
+	 $scope.showCamera =1;
+	 
+	 //尝试开启摄像头
+	 $scope.showVideo = function(){
+		 $scope.$broadcast("takeVideo");
+	 }
+	 
+	
+	 
      
+	 //开启摄像头失败
+	 $scope.$on("cameraErr",function(){
+		 console.log("show camera");
+	 });
+	 
+	 //开启摄像头成功，开始捕捉视频
+	 $scope.$on("cameraOK",function(){
+		 //ng-if ng-show都无效，只好用jauery
+		 $("#showBtn").hide();
+		 $("#cameraZone").show();
+		 $scope.btnZone = 1;
+	 });
      
      //登陆
 	 $scope.login = function(){
@@ -221,6 +245,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        	 }
 		        	
 		         }
+		         
+		         var duration = data.message.invite.duration*60*1000;
+		         
+		         $timeout(function(){})
 		    	
 	    	}
 	    	else{
