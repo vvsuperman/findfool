@@ -18,6 +18,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<!-- <property name="username" value="findfool"></property>
 			<property name="password" value="findfoolFw123456"></property> -->
 			<property name="username" value="root"></property>
+			<property name="password" value="123456"></property>
 	</bean>
 		
 	<!--by fangwei  dbcp有bug，换成c3p0的 -->
