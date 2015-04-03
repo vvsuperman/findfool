@@ -1,0 +1,52 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true" ng-click="cancel()">&times;</button>
+	<h4 class="modal-title" id="LoginLabel">登录</h4>
+</div>
+<div class="modal-body">
+	<form role="form">
+		<div class="form-group">
+			<!--<label for="exampleInputEmail1"><span class="glyphicon glyphicon-envelope"></span>Email</label>-->
+			<!--<input name="uemail" type="email" class="form-control" id="email1" placeholder="Email" ng-model="email" required />&lt;!&ndash;http://jsfiddle.net/adamdbradley/Qdk5M/&ndash;&gt;
+   -->
+			<!--<span ng-show="!myForm.uemail.$valid">输入的Email格式不对</span>-->
+			<!--<span ng-show="myForm.uemail.$error.required">必填</span>-->
+			<!--<span ng-show="myform.uemail.$error.email">email 地址不对</span>-->
+
+			<input type="email" class="form-control" id="email"
+				placeholder="Email" ng-model="Lemail">
+		</div>
+		<!--<div class="form-group">-->
+		<!--<input type="username" class="form-control" id="usernam" placeholder="User Name">-->
+		<!--</div>-->
+		<div class="form-group">
+			<!--<label for="exampleInputPassword1">Password</label>-->
+			<input type="password" class="form-control" id="passwd"
+				placeholder="Password" ng-model="Lpwd" ng-maxlength=20
+				ng-minlength=6 ng-keyup="enter($event)" />
+		</div>
+		<div>
+			<!--<label for="exampleInputPassword1">Password</label>-->
+			<p class="text-danger" ng-bind="errmsg"></p>
+
+		</div>
+		<div class="form-group">
+			<!--<label for="exampleInputPassword1">Password</label>-->
+			<img class="img-responsive" ng-click="mdLogin()"
+				style="cursor: pointer" ng-src="resource/static/mingdao.png">
+		</div>
+		<div>
+			<!-- <label>
+       <input type="checkbox" ng-keyup="enter($event)">记住我
+   </label> -->
+			<!-- <button class="btn btn-default pull-right" ng-click="login()">忘记密码</button> -->
+		</div>
+		<!--<div class="btn">-->
+		<!--</div>-->
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" ng-click="cancel()">关闭</button>
+	<button type="button" class="btn btn-primary" ng-click="confirm(1)">登录</button>
+</div>
