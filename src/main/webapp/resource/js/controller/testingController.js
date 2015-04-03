@@ -10,7 +10,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.email ="693605668@qq.com";
 	 $scope.testid ="11";
 	 $scope.tid = "11";
-	 $scope.show = 2;
+	 //$scope.show = 2;
 //测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
@@ -50,7 +50,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 else{
     		 $scope.show = 1;
     		//测试数据
-    	     $scope.show = 2;
+    	     //$scope.show = 2;
     	 }	 
          
      }).error(function(){
@@ -98,12 +98,13 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $scope.btnZone = 1;
 	 });
      
-     //登陆
+     //检测测试密码
 	 $scope.login = function(){
 		 $http({
-	         url: WEBROOT+"/testing/login",
+	         url: WEBROOT+"/testing/checkpwd",
 	         method: 'POST',
-	         data: {"email":($scope.loginUser.email).replace(/(^\s*)|(\s*$)/g,''), "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
+	         //data: {"email":($scope.loginUser.email).replace(/(^\s*)|(\s*$)/g,''), "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
+         	 data: {"email":$scope.email,"pwd": $scope.loginUser.pwd,"testid":$scope.tid}
 	     }).success(function (data) {
 	    	 if( data.state == 0){
 	    		 //用户名或密码不匹配
@@ -118,10 +119,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 }
 	    		 
 	    	 }else if(data.state == 2){
+	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.errMsg = "";
 	    		 //填写用户信息
 	    		 $scope.show = 2;
-	    		 $scope.tuser.tuid = data.message;
+	    		 //$scope.tuser.tuid = data.message;
 	    		 /*$http({
 	    	         url: WEBROOT+"/testing/getSchools",
 	    	         method: 'GET',

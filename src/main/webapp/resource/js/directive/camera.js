@@ -40,7 +40,7 @@ OJApp.directive('camera', function() {
 			    		url :WEBROOT+"/upload/img",
 			    		type : "POST",
 			    		contentType : "application/json",
-			    		data:  JSON.stringify({ "imgData": imgsrc,"email":scope.email,"imgName":"0001img"}),
+			    		data:  JSON.stringify({ "imgData": imgsrc,"email":scope.email,"invitedid":scope.invitedid}),
 			    		method:"POST",
 			    		dataType : "json",
 			    		success : function(result) {

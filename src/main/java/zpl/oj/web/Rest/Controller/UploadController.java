@@ -3,6 +3,9 @@ package zpl.oj.web.Rest.Controller;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -22,10 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sun.mail.util.BASE64DecoderStream;
 
 import zpl.oj.model.common.Img;
+import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.UpLoadService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.base64.BASE64;
 
 @Controller
@@ -35,6 +41,9 @@ public class UploadController {
 	
 	@Resource
 	private UserService userService;
+	
+	@Resource
+	private ImgUploadService imgUploadService;
 	
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
 	@ResponseBody
@@ -79,39 +88,15 @@ public class UploadController {
 	@ResponseBody
 	public ResponseBase uploadImg(
 			@RequestBody Img img
-	       ) {
-		
+	       ) {		
 		ResponseBase rs = new ResponseBase();
-	    
-	    byte[] imgBytes=null;
-		try {
-			imgBytes = BASE64.decodeBASE64(img.getImgData());
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	    
-	    FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream("/Users/fw/Desktop/"+img.getImgName()+".jpg");
-			fos.write(imgBytes);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			
-		    try {
-				fos.flush();
-				fos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		   
-		}
-	    
-
-	    
+		String location = imgUploadService.saveImg(img);
+		ImgForDao imgForDao=new ImgForDao();
+	    imgForDao.setInvitedid(img.getInvitedid());
+	    imgForDao.setLocation(location);
+	    Date time = new Date();
+	    imgForDao.setTime(time);	    
+	    imgUploadService.insertImg(imgForDao);
 		rs.setState(1);
 		return rs;
 	}

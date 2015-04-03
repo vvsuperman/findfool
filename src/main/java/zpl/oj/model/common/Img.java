@@ -7,8 +7,7 @@ import java.util.List;
 public class Img implements Serializable {
 	private String imgData;
 	private String email;
-	private String imgName;
-	
+	private Integer invitedid;
 	
 	public String getImgData() {
 		return imgData;
@@ -22,13 +21,12 @@ public class Img implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getImgName() {
-		return imgName;
+	public Integer getInvitedid() {
+		return invitedid;
 	}
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public void setInvitedid(Integer invitedid) {
+		this.invitedid = invitedid;
 	}
-	
 	
 }
 

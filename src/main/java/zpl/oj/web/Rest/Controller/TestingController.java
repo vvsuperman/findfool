@@ -122,7 +122,7 @@ public class TestingController {
 	 * 
 	 * */
 	
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/checkpwd")
 	@ResponseBody
 	public ResponseBase login(@RequestBody Map<String,Object> params){
 		ResponseBase rb = new ResponseBase();
@@ -138,8 +138,6 @@ public class TestingController {
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		String pwd = (String)params.get("pwd");
-		
-		
 		
 		Invite invite = inviteDao.getInvites(testid, email);
 
@@ -160,6 +158,9 @@ public class TestingController {
 		}else{  
 		//未开始
 			rb.setState(2);
+			Map<String, Integer> message=new HashMap<String, Integer>();
+			message.put("invitedid", invite.getIid());
+			rb.setMessage(message);
 			return rb;
 		}
 	}
