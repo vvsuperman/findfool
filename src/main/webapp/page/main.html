@@ -6,10 +6,11 @@
 
 <!-- NAVBAR
 ================================================== -->
-    <div  class="navbar navbar-transparent navbar-fixed-top" style="font-size:16px">
+<nav class="navbar navbar-default">
+    <div  class="navbar navbar-inverse navbar-fixed-top" style="font-size:16px">
          <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="modal"
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#miniNav">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -18,7 +19,7 @@
            <!--  <a id="logo" class="navbar-brand greenFont logoFont" href="http://findfool.com/#/" title="微聘">微聘</a> -->
 			<a class="navbar-brand hidden-sm hidden-xs" style="color: white;" href="http://findfool.com/#/"> findFool</a>
 		</div>
-        <div class="collapse navbar-collapse ">
+        <div class="collapse navbar-collapse" id="miniNav">
             <ul class="nav navbar-nav">
                 <!-- <li>
                 	<a href="" data-toggle="modal" data-target="#Registration">
@@ -33,17 +34,21 @@
                 </li> -->
             </ul>
            <ul id="preparelogin" class="nav navbar-nav navbar-right">
-                <li><button type="button" class="btn btn-transparent-outline navbar-btn" style="margin-right: 10px"
+                <!-- <li><button type="button" class="btn btn-transparent-outline navbar-btn" style="margin-right: 10px"
                  ng-click="register('','')">注册</button></li>
                 <li><button type="button" class="btn btn-transparent-outline navbar-btn" style="margin-right: 50px"
-                data-toggle="modal" data-target="#Login">登陆</button></li>
+                data-toggle="modal" data-target="#Login">登陆</button></li> -->
+                
+                <li><a href="" data-toggle="modal" ng-click="register('','')">注册</a></li>
+                <li><a href="" data-toggle="modal" ng-click="login()">登录</a></li>
+                
             </ul>
         </div>		  
 		  	
           </div>
     </div>
-
-<!-- Modal miniNav -->
+</nav>
+<!-- Modal miniNav
 <div class="modal" id="miniNav" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"
      aria-hidden="true">
@@ -60,8 +65,8 @@
             </div>
         </div>
     </div>
-</div>
-
+</div>-->
+ 
 <!-- Modal Try -->
 <div class="modal" id="Try" tabindex="0" role="dialog" aria-labelledby="TryLabel"
      aria-hidden="true">
