@@ -55,11 +55,11 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
             },
             data: {quizName:data}
         }).success(function (data) {
-        	smoke.alert("创建测试成功");
+        	flashTip("创建测试成功");
         	location.reload();
         }).error(function (data) {
             //error
-        	console.log("genQuizFailed");
+        	flashTip("genQuizFailed");
         });
 		
 	}
@@ -176,7 +176,7 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
 //                $scope.template = 'testlist.html';
 //                $scope.leftBar = 'leftBar.html';
             } else {
-                smoke.alert('error:'+$scope.message.msg);
+            	flashTip('error:'+$scope.message.msg);
             }
         }).error(function (data) {
             //relogin

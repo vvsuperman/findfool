@@ -23,7 +23,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.time={};
 	 $scope.time.remain = 1;
 	 
+	 $scope.monitor =1;
+	 
+	 
 	 $scope.btnShow =1;
+	 $scope.btnZone =0;
+	 
+	 $scope.showCamera = 1;
+	 
 	 
 	 //检查该url是否合法
 	 $http({
@@ -37,7 +44,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 if(data.message ==1){
     			 $scope.show =5;
     		 }else{
-    			 smoke.alert(data.message);
+    			 flashTip(data.message);
     		 }
     	 }
     	 else{
@@ -55,6 +62,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      $scope.takePicture = function(){
 		 $scope.$broadcast("takePicture");
 		 $scope.btnShow =2;
+		 $scope.monitor = 2;
+		 
 	 }
 	 
 	 $scope.updatePicture = function(){
@@ -62,10 +71,32 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 }
 	 
 	 $scope.cancelPicture = function(){
-		 $scope.$broadcast("cancelPicture");
-		 $scope.btnShow = 1;
+		 $scope.btnShow =1;
+		 $scope.monitor = 1;
 	 }
+	 
+	 $scope.showCamera =1;
+	 
+	 //尝试开启摄像头
+	 $scope.showVideo = function(){
+		 $scope.$broadcast("takeVideo");
+	 }
+	 
+	
+	 
      
+	 //开启摄像头失败
+	 $scope.$on("cameraErr",function(){
+		 console.log("show camera");
+	 });
+	 
+	 //开启摄像头成功，开始捕捉视频
+	 $scope.$on("cameraOK",function(){
+		 //ng-if ng-show都无效，只好用jauery
+		 $("#showBtn").hide();
+		 $("#cameraZone").show();
+		 $scope.btnZone = 1;
+	 });
      
      //登陆
 	 $scope.login = function(){
@@ -79,10 +110,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 if(data.message ==1){
 	    			 $scope.show = 5;
 	    		 }else if(data.message ==2){
-	    		     smoke.alert("用户名、密码不匹配");
+	    			 flashTip("用户名、密码不匹配");
 	    		     return false;
 	    		 }else{
-	    			 smoke.alert("用户不存在");
+	    			 flashTip("用户不存在");
 	    			 return false;
 	    		 }
 	    		 
@@ -182,7 +213,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 
 	 $scope.stop = function(){
-			 smoke.alert("测试已结束");
+		     flashTip("测试已结束");
 			 $scope.show = 5;
 		 }
 		
@@ -214,6 +245,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        	 }
 		        	
 		         }
+		         
+		         var duration = data.message.invite.duration*60*1000;
+		         
+		         $timeout(function(){})
 		    	
 	    	}
 	    	else{
@@ -335,7 +370,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 $scope.submitAndFetch($scope.tProblems[index])
     	 }else{
     		 $scope.submitAndFetch($scope.tProblems[index-1]);
-    		 smoke.alert("以至最后一题，请仔细检查");
+    		 flashTip("以至最后一题，请仔细检查");
     	 }
     	 
      }
@@ -420,7 +455,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      * 完成所有测试
      * */
      $scope.finishTest = function(){
-    	 smoke.confirm("你确定完成测试吗？",function(e){
+    	 flashTip("你确定完成测试吗？",function(e){
     		 if(e){
     			 $scope.run('submit');
     	    	 $scope.endTest();

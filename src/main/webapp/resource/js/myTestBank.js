@@ -73,7 +73,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	
 	$scope.onSuccess = function(data){
 		if(data.state == 0){
-			smoke.alert(data.msg)
+			flashTip(data.msg)
 		}else{
 			
 		}
@@ -244,7 +244,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
             return;
         var r = /^\+?[0-9][0-9]*$/;
         if (!r.test(q)) {
-            smoke.alert("必须是数字！");
+        	flashTip("必须是数字！");
             q = 0;
         }
     };
@@ -263,12 +263,12 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
                 Data.setToken(data["token"]);
             $scope.message = data["message"];
             if ($scope.state) {
-                smoke.alert('添加成功');
+            	flashTip('添加成功');
                 $scope.show = "1";
                 $scope.queryQuestions(1);
                 $scope.newQuestion = new QuestionMeta();
             } else {
-                smoke.alert('添加失败');
+            	flashTip('添加失败');
             }
         }).error(function (data) {
 
@@ -279,7 +279,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
     $scope.addQuestion = function () {
         $scope.newQuestion.type = parseInt($scope.active);
       if(($scope.newQuestion.answer=="") && ($scope.newQuestion.type ==1)){
-        	smoke.alert("请输入至少一个选项");
+    	  flashTip("请输入至少一个选项");
         	return false;
         }
         if ($scope.active == "1") {

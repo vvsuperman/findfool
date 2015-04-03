@@ -36,7 +36,7 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
             	  window.location.href=url;
               }else {
             	  
-            	  smoke.confirm("非常抱歉，访问明道api超时，请稍后重试",function(e){
+            	  flashTip("非常抱歉，访问明道api超时，请稍后重试",function(e){
              		 if(e){
              			window.location.href='http://findfool.com/#/';
              		 }else{

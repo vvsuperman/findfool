@@ -11,7 +11,7 @@ OJApp.directive('countbutton', function() {
 				if(typeof(scope.mobile) == "undefined" || scope.mobile ==""){
 					scope.$emit("mobileError", "手机号不得为空");
 					return false;
-				}else if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(scope.mobile))){
+				}else if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(scope.mobile))){
 					scope.$emit("mobileError", "手机号格式不正确");
 					return false
 				}

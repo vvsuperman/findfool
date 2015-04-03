@@ -96,11 +96,11 @@ OJApp.controller("pInfo",function($scope, $http, Data) {
     	            $scope.state = data["state"];//1 true or 0 false
     	            if ($scope.state) {
     	               $scope.pwd.show = 0;
-    	               smoke.alert("修改成功");
+    	               flashTip("修改成功");
     	               $scope.pwd.old ="";
     	               $scope.pwd.now ="";
     	            } else {
-    	               smoke.alert("密码错误");
+    	            	flashTip("密码错误");
     	            }
     	        }).error(function (data) {
 
