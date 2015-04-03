@@ -681,3 +681,32 @@ ul li {
     border-radius: 4px;
     font-size:30px;
 }
+
+/* 加载特效 */
+.loadingTip-container{
+    position: fixed;
+    width: 100%;
+    height: 1000px;
+    z-index: 1000;
+    top: 0px;
+    background:rgba(51, 51, 51, 0.4);
+}
+.loadingTip-content{
+    width: 400px;
+    height: 100px;
+    margin: 200px auto;
+    border-radius: 5px;
+    text-align: center;
+}
+.loadingTip-content p{
+    margin: 0 0 0 20px;
+    font-size: 22px;
+    color: white;
+}
+.loadingTip-content img{
+	width: 60px;
+	height: 60px;
+}
+
+
+

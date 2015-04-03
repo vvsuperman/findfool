@@ -38,6 +38,11 @@ OJApp.config(['$routeProvider','$locationProvider',
                 templateUrl: 'page/page.html',
                 controller: 'TestPage'
             }).
+//            内置测试
+            when('/innertest', {
+            	templateUrl: 'page/page.html',
+            	controller: 'InnerTest'
+            }).
             when('/test/:tid', {
                 templateUrl: 'page/page.html',
                 controller: 'TestPageTid'

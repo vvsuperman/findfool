@@ -6,10 +6,18 @@ var MD_REDIRECT = "http://127.0.0.1:8080/oj/#/";
 //var MD_REDIRECT = "http%3A%2F%2Ffindfool.com%2F%23%2F" 
 	
 var u = navigator.userAgent, app = navigator.appVersion;          
-              
-if( u.indexOf('Trident') > -1){
-	console.log("支持ie 10以上浏览器");
-} //IE内核   
+
+if(navigator.userAgent.indexOf("MSIE")>0){   
+  if(navigator.userAgent.indexOf("MSIE 6.0")>0){   
+    alert("不支持IE8及以下版本，请更换其它浏览器");    
+  }   
+  if(navigator.userAgent.indexOf("MSIE 7.0")>0){  
+    alert("不支持IE8及以下版本，请更换其它浏览器");   
+  }   
+  if(navigator.userAgent.indexOf("MSIE 8.0")>0 && !window.innerWidth){//这里是重点，你懂的
+    alert("不支持IE8及以下版本，请更换其它浏览器");  
+  }   
+} 
 
 /*
 if(u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1){

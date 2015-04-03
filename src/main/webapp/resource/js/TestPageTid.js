@@ -207,7 +207,11 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	            data: sendData
 	        }).success(function (data) {
 	        	flashTip("试题已从测试中删除");
-	            location.reload();
+	        	for(var i=0;i<$scope.qs.length;i++){
+	        		if($scope.qs[i].qid==question.qid){
+	        			$scope.qs.splice(i,1);
+	        		}
+	        	}
 	        }).error(function (data) {
 	        	flashTip("获取数据错误");
 	        });
