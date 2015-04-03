@@ -98,7 +98,24 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
  		      resolve: {}
  		 });
  	 };
-
+ 	 
+ 	 //carousel
+ 	 $scope.myInterval = 3000;
+ 	 var slideText=[
+ 	                "只为企业寻找真正合适的人才",
+ 	                "抛弃传统无效率的招聘方式，在线笔试为您快速寻找千里马",
+ 	                "在这里展现自我，不在担心怀才不遇"
+ 	                ]
+ 	  var slides = $scope.slides = [];
+ 	  $scope.addSlide = function(i) {
+ 	    slides.push({
+ 	      image: 'resource/static/carousel.png',
+ 	      text: slideText[i-1]
+ 	    });
+ 	  };
+ 	  for (var i=1; i<4; i++) {
+ 	    $scope.addSlide(i);
+ 	  }
     
 	
 	 $scope.labels =["html5", "css3", "javascript", "angularjs", "node.js", "object-c", "java"];
