@@ -194,9 +194,9 @@ body {
 }
 
 
-.navbar-header{
+/* .navbar-header{
 	margin-left: 50px!important;
-}
+} */
 
 .black-outline{
 	background-color: #374652 ;
@@ -223,18 +223,18 @@ body {
 }
 
 
-.navbar{
+/* .navbar{
 	border-radius:0px!important;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	font-size:20px;
-}
+} */
 
-ul.navbar-nav li a{
+/* ul.navbar-nav li a{
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
-}
+} */
 
 ul.navbar-nav li a:focus,
 ul.navbar-nav li a:hover,
@@ -707,6 +707,20 @@ ul li {
 	width: 60px;
 	height: 60px;
 }
+
+.carousel .item{
+	height: 300px !important;
+}
+
+.carousel{
+	height: 300px !important;
+	margin:40px -15px 0px -15px !important;
+}
+
+#bs-example-navbar-collapse-1 a:hover{
+	color: blue !important;
+}
+
 
 
 
