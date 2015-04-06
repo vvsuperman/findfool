@@ -724,6 +724,28 @@ ul li {
 	color: #1abc9c !important;
 }
 
-
+/* login样式 */
+.txt-large{
+        height: 45px;
+    }
+.form-login{
+    margin-top: 150px;
+}
+.anim-blue-login{
+    background-color: #03a9f4;
+}
+.anim-blue{
+    background-color: #fff;
+    border: 1px solid #03a9f4;
+    position: relative;
+}
+.anim-grey{
+    background-color: #fff;
+    border: 1px solid #aaa;
+    position: relative;
+}
+.anim-grey:hover{
+    background: none repeat scroll 0 0 #aaa;
+}
 
 

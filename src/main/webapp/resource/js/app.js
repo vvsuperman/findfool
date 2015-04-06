@@ -103,6 +103,7 @@ OJApp.config(['$routeProvider','$locationProvider',
                 templateUrl: 'page/oauthor.html',
                 controller: 'oauthorController'
             }).
+            
             otherwise({
                 redirectTo: '/'
             });
