@@ -110,11 +110,11 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
  	 };
  	 
  	 //carousel
- 	 $scope.myInterval = 3000;
+ 	 $scope.myInterval = 2000;
  	 var slideText=[
- 	                "只为企业寻找真正合适的人才",
- 	                "抛弃传统无效率的招聘方式，在线笔试为您快速寻找千里马",
- 	                "在这里展现自我，不在担心怀才不遇"
+ 	                "自从用了findFool，腰不酸了，脖子不疼了，再也不用熬夜刷简历了",
+ 	                "findFool大法好，退其它招聘平台保平安",
+ 	                "程序猿再也不用每个平台填简历了"
  	                ]
  	  var slides = $scope.slides = [];
  	  $scope.addSlide = function(i) {
