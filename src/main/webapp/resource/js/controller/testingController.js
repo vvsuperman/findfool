@@ -7,9 +7,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.tid = param[1];
 	
 //测试数据	
-	 $scope.email ="693605668@qq.com";
+	/* $scope.email ="693605668@qq.com";
 	 $scope.testid ="11";
-	 $scope.tid = "11";
+	 $scope.tid = "11";*/
 	 //$scope.show = 2;
 //测试数据	 
 	 $scope.tuser = {};
@@ -63,6 +63,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $scope.$broadcast("takePicture");
 		 $scope.btnShow =2;
 		 $scope.monitor = 2;
+		 console.log("takePicture");
 		 
 	 }
 	 
@@ -80,8 +81,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 //尝试开启摄像头
 	 $scope.showVideo = function(){
 		 $scope.$broadcast("takeVideo");
+		 console.log("showVideo");
 	 }
-	 
 	
 	 
      
@@ -97,6 +98,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $("#cameraZone").show();
 		 $scope.btnZone = 1;
 	 });
+	 
+//	 //自动启动摄像头
+//	 $scope.$on("video",function(){
+//		 $scope.showVideo();
+//	 })
      
      //检测测试密码
 	 $scope.login = function(){
@@ -202,7 +208,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		}
 	    	}
 	    	//生成用户的剩余时间
-	    	var beginTime =data.message.invite.begintime;
+	    	var beginTime =data.message.invite.begintime;	
 	    	beginTime = (new Date(beginTime.replace(/\-/g,"/"))).getTime();
 	    	var duration =data.message.invite.duration*60*1000;
 	    	$scope.time.remain = beginTime+duration;
@@ -211,6 +217,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	var remain = $scope.time.remain - nowTime;
 	        
 	    	$timeout($scope.endTest,remain);
+	    	
 	 }
 	 
 	 
@@ -227,12 +234,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         method: 'POST',
 	         data: sendData
 	     }).success(function (data) {
+	    	
 	    	 if(data.state == 0){
 	    		 $scope.show = 5;
 	    		 return false;
 	    	 }
 	    	 
 	    	if(data.state!=0){
+	    		$timeout($scope.takePicture,1*5*1000);
 	    		$scope.tProblems = data.message.problems;
 		    	$scope.submitAndFetch($scope.tProblems[0]);
 		    	$scope.genExtraInfo(data);
@@ -249,9 +258,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		         }
 		         
 		         var duration = data.message.invite.duration*60*1000;
-		         
-		         $timeout(function(){})
-		    	
 	    	}
 	    	else{
 	    		if(data.message ==1){
@@ -265,6 +271,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	     }).error(function(){
 	    	 console.log("login failed");
 	     })
+	  
 	 };
 	
 	 

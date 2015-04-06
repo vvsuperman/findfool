@@ -144,13 +144,36 @@
 		<!-- essay -->
 		
 		
-		  <div class="col-md-2 col-md-offset-4" style="margin-top: 20px" >
-		            <button class="btn btn-outline"  ng-click="finishTest()">完成测试</button>
-	        	  </div>
+		  <div class="col-md-2 col-md-offset-5" style="margin-top: 20px" >
+		  	<button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
+	      </div>
 	   </div>
 	   
 	    <div class="col-md-2" style="margin-top: 20px">
-		     <button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
+	    	 <button id="showBtn" class="btn btn-primary" ng-click="showVideo()"  style="font-size:24px;margin-top: 50px;height: 200px">
+	        开启摄像头来进行考试
+	     	</button>
+       	    <div id="cameraZone" style="margin-top:50px;display:none;">
+			  <video  ng-show="monitor==1" id="video" width="240" height="188" style="margin-top: 50px;margin-left:10px;padding: 6px 12px;" autoplay>
+			  </video>       
+			  <canvas ng-show="monitor==2" camera id="canvas" width="240" height="188">
+			  </canvas>
+		    </div>
+		    <br/>
+		    <br/>
+		      
+		    <div class=row>
+		    	<div class="col-md-offset-4 col-md-4">
+		    		<button class="btn btn-outline"  ng-click="finishTest()">完成测试</button>
+		    	</div>
+		    </div>
+		    <div class=row>
+		    	<div class="col-md-offset-4 col-md-4">
+		    		<button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>
+		    	</div>
+		    </div>
+		    
+		   
 		</div>
 	  </div>
  </div>

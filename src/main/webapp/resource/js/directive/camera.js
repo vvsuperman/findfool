@@ -9,8 +9,9 @@ OJApp.directive('camera', function() {
 			var width = 320, height = 240;
 			var context = elem.get(0).getContext("2d");               
 			var video = document.getElementById("video");  
-			
+			//开启摄像头
 			scope.$on("takeVideo",function(){
+				console.log("initial video.......................");
 				isSupportH5Video();
 				try {                  
 					//动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持                

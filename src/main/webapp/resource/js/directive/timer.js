@@ -19,8 +19,10 @@ OJApp.directive('timer', function() {
 			                $this.hide();
 			                break;
 			        }
+			       
 			    });
-			
+				
+//				scope.$emit("video");
 		}
 	};
 
