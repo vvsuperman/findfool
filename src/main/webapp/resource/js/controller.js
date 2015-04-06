@@ -242,96 +242,98 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
 });
 
 
-OJApp.controller('nav',function($scope, Data) {
-    $scope.invitedleft = Data.invitedleft();
-    $scope.name = Data.email();
-//    console.log(Data.name);
-    $scope.navTest = function () {
-        $scope.template = 'testshow.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
-    $scope.navTestBank = function () {
-        $scope.template = 'page/testBank.html';
-        /*need update*/
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = 'leftBar1.html';
-    };
-    $scope.navmyTestBank = function () {
-        $scope.template = 'page/mytestBank.html';
-        /*need update*/
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = 'leftBar1.html';
-    };
-//    $scope.navUpgrade = function () {
-//        $scope.template = 'upgrade.html';
-//        $scope.ContentUs = 'contentUs.html';
-//        $scope.leftBar = '';
-//    };
+OJApp.controller('nav', function($scope, Data) {
+	$scope.invitedleft = Data.invitedleft();
+	$scope.name = Data.email();
+	// console.log(Data.name);
+	$scope.navTest = function() {
+		$scope.template = 'testshow.html';
+		$scope.ContentUs = 'contentUs.html';
+		$scope.leftBar = '';
+	};
+	$scope.navTestBank = function() {
+		$scope.template = 'page/testBank.html';
+		/* need update */
+		$scope.ContentUs = 'contentUs.html';
+		$scope.leftBar = 'leftBar1.html';
+	};
+	$scope.navmyTestBank = function() {
+		$scope.template = 'page/mytestBank.html';
+		/* need update */
+		$scope.ContentUs = 'contentUs.html';
+		$scope.leftBar = 'leftBar1.html';
+	};
+	// $scope.navUpgrade = function () {
+	// $scope.template = 'upgrade.html';
+	// $scope.ContentUs = 'contentUs.html';
+	// $scope.leftBar = '';
+	// };
 
-    $scope.navPersonal = function () {
-        $scope.template = 'user.html';
-        $scope.ContentUs = 'contentUs.html';
-        $scope.leftBar = '';
-    };
-    
-    $scope.logout = function(){
-    	Data.clear();
-    	window.location.href = '#/';
-    }
+	$scope.navPersonal = function() {
+		$scope.template = 'user.html';
+		$scope.ContentUs = 'contentUs.html';
+		$scope.leftBar = '';
+	};
+
+	$scope.logout = function() {
+		Data.clear();
+		window.location.href = '#/';
+	}
 });
 
-
-OJApp.controller('Upgrade',function($scope) {
-    $scope.url = '#/upgrade';
-    $scope.template = 'page/upgrade.html';
-    $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = '';
+OJApp.controller('Upgrade', function($scope) {
+	$scope.url = '#/upgrade';
+	$scope.template = 'page/upgrade.html';
+	$scope.ContentUs = 'page/contentUs.html';
+	$scope.leftBar = '';
 });
 
-OJApp.controller('RockRoll',function($scope, $routeParams) {
-    $scope.url = '#/upgrade';
-    $scope.template = 'rrtest.html';
-    $scope.ContentUs = 'contentUs.html';
-    $scope.leftBar = '';
-    $scope.rrid = $routeParams.rrid;
+OJApp.controller('RockRoll', function($scope, $routeParams) {
+	$scope.url = '#/upgrade';
+	$scope.template = 'rrtest.html';
+	$scope.ContentUs = 'contentUs.html';
+	$scope.leftBar = '';
+	$scope.rrid = $routeParams.rrid;
 });
 
+// function TestBank($scope) {
+// $scope.active = 1;
+// $scope.template = $scope.Qtype[0];
+// $scope.GoPage = function (target) {
+// $scope.show = 1;
+// $scope.active = target.getAttribute('data');
+// $scope.question = $scope.questionss[target.getAttribute('data') - 1];
+// };
+// }
 
-//function TestBank($scope) {
-//    $scope.active = 1;
-//    $scope.template = $scope.Qtype[0];
-//    $scope.GoPage = function (target) {
-//        $scope.show = 1;
-//        $scope.active = target.getAttribute('data');
-//        $scope.question = $scope.questionss[target.getAttribute('data') - 1];
-//    };
-//}
-
-OJApp.controller('addQuestion',function($scope) {
-    $scope.Qactive = 1;
-    $scope.Tactive = 1;
-    $scope.Qtype = [
-        { name: '选择题', data: '1'},
-        { name: '编程题', data: '2'},
-        { name: '问答题', data: '3'}
-    ];
-    $scope.TYPE = [
-        {name: '网站题库', data: '1'},
-        {name: '自定义试题', data: '2'}
-    ];
-    $scope.goT = function (target) {
-        $scope.Tactive = target.getAttribute('data');
-    };
-    $scope.goQ = function (target) {
-        $scope.Qactive = target.getAttribute('data');
-    }
+OJApp.controller('addQuestion', function($scope) {
+	$scope.Qactive = 1;
+	$scope.Tactive = 1;
+	$scope.Qtype = [ {
+		name : '选择题',
+		data : '1'
+	}, {
+		name : '编程题',
+		data : '2'
+	}, {
+		name : '问答题',
+		data : '3'
+	} ];
+	$scope.TYPE = [ {
+		name : '网站题库',
+		data : '1'
+	}, {
+		name : '自定义试题',
+		data : '2'
+	} ];
+	$scope.goT = function(target) {
+		$scope.Tactive = target.getAttribute('data');
+	};
+	$scope.goQ = function(target) {
+		$scope.Qactive = target.getAttribute('data');
+	}
 });
 
-OJApp.controller('waitModalInstance',function($scope) {
-	
+OJApp.controller('waitModalInstance', function($scope) {
+
 })
-
-
-
-

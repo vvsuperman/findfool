@@ -1,4 +1,4 @@
-OJApp.controller('loginInstanceCtrl',function ($scope,$http,$modalInstance,Data) {
+OJApp.controller('loginCtrl',function ($scope,$http,Data) {
 	
 	//手机的错误信息
 	$scope.errorMsg={};
@@ -25,6 +25,7 @@ OJApp.controller('loginInstanceCtrl',function ($scope,$http,$modalInstance,Data)
                 },
                 data: {"email": $scope.Lemail, "pwd": pwd, "name": $scope.Lname}
             }).success(function (data) {
+            	console.log("success");
                 $scope.state = data["state"];//1 true or 0 false
                 Data.clear();//清空缓存
                 var name = $scope.Lemail;
@@ -54,16 +55,11 @@ OJApp.controller('loginInstanceCtrl',function ($scope,$http,$modalInstance,Data)
                 	$scope.errmsg = data.message.msg;
                 }
             }).error(function () {
+            	console.log("err");
 //                    alert("网络错误");
 //                    window.location.reload(true);
                 }
             )
         }
     };
-	$scope.cancel = function(){
-		$modalInstance.dismiss('cancel');
-	}
-	
-	
-	
 });

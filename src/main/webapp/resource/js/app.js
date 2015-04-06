@@ -103,6 +103,14 @@ OJApp.config(['$routeProvider','$locationProvider',
                 templateUrl: 'page/oauthor.html',
                 controller: 'oauthorController'
             }).
+            when('/login',{
+            	templateUrl: 'page/login.html',
+            	controller: 'loginCtrl'
+            }).
+            when('/signup',{
+            	templateUrl: 'page/signup.html',
+            	controller: 'signupCtrl'
+            }).
             otherwise({
                 redirectTo: '/'
             });

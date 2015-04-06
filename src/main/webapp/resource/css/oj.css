@@ -729,6 +729,15 @@ ul li {
 	color: #1abc9c !important;
 }
 
+/* login singup样式 */
+.txt-large{
+   height: 45px;
+}
+.form-login{
+    margin-top: 40px;
+}
 
-
+.form-signup{
+    margin-top: 40px;
+}
 
