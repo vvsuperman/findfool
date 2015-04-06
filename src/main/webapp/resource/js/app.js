@@ -19,7 +19,7 @@ OJApp.config(['$routeProvider','$locationProvider',
     function ($routeProvider,$locationProvider) {
         $routeProvider.
             when('/', {
-                templateUrl: 'page/main2.html',
+                templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
             when('/user', {

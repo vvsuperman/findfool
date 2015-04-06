@@ -717,8 +717,11 @@ ul li {
 	margin:40px -15px 0px -15px !important;
 }
 
-#bs-example-navbar-collapse-1 a:hover{
-	color: blue !important;
+
+.navbar-nav li a:hover,
+.navbar-nav li a:focus,
+.navbar-nav li a:active{
+	color: #1abc9c !important;
 }
 
 

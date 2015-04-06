@@ -99,6 +99,16 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
  		 });
  	 };
  	 
+ 	 
+ 	 $scope.showVideo = function () {
+ 		 var modalInstance = $modal.open({
+ 		      templateUrl: 'page/videoModal.html',
+ 		      controller: 'videoInstanceCtrl',
+ 		      size: "lg",
+ 		      resolve: {}
+ 		 });
+ 	 };
+ 	 
  	 //carousel
  	 $scope.myInterval = 3000;
  	 var slideText=[
