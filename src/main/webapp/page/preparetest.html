@@ -6,11 +6,19 @@
    	 <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" role="form">
    	 	  <div class="row">
 	   	 	 <div class="col-md-6 col-md-offset-1" >
-	   	 	 	<h4>说明</h4>
-	   	 	 	<h4>这是编程测试</h4>
-	   	 	 	<h4>请输入邮件中的测试密码</h4>
+	   	 	 	<h5>您好</h5>
+	   	 	 	<h5>非常荣幸邀请您参加这次测试</h5>
+	   	 	 	<h5>请输入邮件中的测试密码</h5>
 	   	 	 </div>
    	 	  </div>
+   	 	  
+   	 	  
+   	 	   <div class="form-group" style="margin-top: 20px">
+		    <label  class="col-sm-2 control-label">用户名</label>
+		    <div class="col-sm-4 control-label">
+		      <p ng-bind="email" class="pull-left"></p>
+		    </div>
+		  </div>
    	 	
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">测试密码</label>
@@ -40,19 +48,19 @@
 	        开启摄像头来进行考试
 	     </button>
     
-       	  <div id="cameraZone" style="display: none" style="margin-top:50px">
+       	  <div id="cameraZone" ng-show="showCZone ==2" style="margin-top:50px">
 			  <video  ng-show="monitor==1" id="video" width="320" height="240" autoplay>
 			  </video>       
 			  <canvas ng-show="monitor==2" camera id="canvas" width="320" height="240">
 			  </canvas>
 		  </div>
 		  
-		  <div ng-show="btnShow==1" style="margin-top: 20px">
+		  <div ng-show="btn.Show==1" style="margin-top: 20px">
 		     <span class="text-success">请先拍照</span>
 		     <button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>  
 		  </div>
 		  
-		   <div ng-show="btnShow==2" style="margin-top: 20px">
+		   <div ng-show="btn.Show==2" style="margin-top: 20px">
 		     <button class="btn btn-primary" style="margin-left: 15px" ng-click="updatePicture()">使用该照片</button>  
 		     <button class="btn btn-primary" style="margin-left: 15px" ng-click="cancelPicture()">重新拍摄</button>  
 		  </div>
@@ -63,14 +71,14 @@
    	 <form class="form-horizontal"  role="form">
    	 	  <div class="row">
 	   	 	 <div class="col-md-6 col-md-offset-1" >
-	   	 	 	<h4>个人信息</h4>
+	   	 	 	<h4>个人信息（选填，让面试官更好的了解自己吧）</h4>
 	   	 	 </div>
    	 	  </div>
    	 	
 		  <div class="form-group row">
 		    <label  class="col-sm-2 control-label">姓名</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.username" placeholder="姓名" required>
+		      <input type="text" class="form-control" ng-model="tuser.username" placeholder="姓名" >
 		    </div>
 		  </div>
 		  
@@ -95,14 +103,14 @@
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">博客</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.blog" placeholder="博客，github等" required>
+		      <input type="text" class="form-control" ng-model="tuser.blog" placeholder="博客，github等" >
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">电话</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.tel" placeholder="电话" required>
+		      <input type="text" class="form-control" ng-model="tuser.tel" placeholder="电话">
 		    </div>
 		  </div>
 		  

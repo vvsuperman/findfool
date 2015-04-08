@@ -26,29 +26,31 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	
 	@Override
 	public String saveImg(Img img) {
+		
+		String url ="/";
 		PrintStream out=System.out;
 		String imgHome=(String)PropertiesUtil.getContextProperty("ImgUploadHome");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();
 		String today=sdf.format(date);
 		//first level directory
-		String firstDir=imgHome+"\\"+today;
+		String firstDir=imgHome+url+today;
 		File file =new File(firstDir);
 		if  (!file .exists())      
 		{    
-		    file.mkdir();    
+		    file.mkdir();    		
 		} 
 		//second level directory
-		String secondDir=firstDir+"\\"+img.getEmail().replace(".", "_");
+		String secondDir=firstDir+url+img.getEmail().replace(".", "_");
 		file =new File(secondDir);
-		if  (!file .exists())      
+		if  (!file.exists())      
 		{    
 		    file.mkdir();    
 		} 
 		sdf = new SimpleDateFormat("HH_mm_ss");
 		date=new Date();
 		String time=sdf.format(date);
-		String filename=secondDir+"\\"+time+".jpg";
+		String filename=secondDir+url+time+".jpg";
 		byte[] imgBytes=null;
 		try {
 			imgBytes = BASE64.decodeBASE64(img.getImgData());

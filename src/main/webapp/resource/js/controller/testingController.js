@@ -25,11 +25,15 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.monitor =1;
 	 
-	 
-	 $scope.btnShow =1;
+	 $scope.btn ={};
+	 $scope.btn.Show =1;
 	 $scope.btnZone =0;
 	 
 	 $scope.showCamera = 1;
+	 
+	 $scope.showCZone = 1;//控制是否显示视频区域
+	 
+	 $scope.pictureOK = 0;//用户是否上传好照片
 	 
 	 
 	 //检查该url是否合法
@@ -61,17 +65,33 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      //拍照
      $scope.takePicture = function(){
 		 $scope.$broadcast("takePicture");
-		 $scope.btnShow =2;
+		 $scope.btn.Show =2;
 		 $scope.monitor = 2;
 		 
 	 }
 	 
 	 $scope.updatePicture = function(){
-		 $scope.$broadcast("updatePicture");
+		
+		 smoke.confirm("你确定要提交该照片？提交后将不可修改", function(e){
+				if (e){
+					$scope.$apply(
+							function(){
+							  $scope.btn.Show=3
+							 });
+					 $scope.$broadcast("updatePicture");
+					 $scope.pictureOK =1;
+					 
+				}
+			}, {
+				ok: "是",
+				cancel: "否",
+				classname: "custom-class",
+				reverseButtons: true
+			});
 	 }
 	 
 	 $scope.cancelPicture = function(){
-		 $scope.btnShow =1;
+		 $scope.btn.Show =1;
 		 $scope.monitor = 1;
 	 }
 	 
@@ -79,7 +99,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 //尝试开启摄像头
 	 $scope.showVideo = function(){
+		 $scope.showCZone =2;
 		 $scope.$broadcast("takeVideo");
+		 
 	 }
 	 
 	
@@ -172,6 +194,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){
+		 if($scope.pictureOK!=1){
+			 smoke.alert("请先拍照");
+			 return false;
+		 }
+		 
 		 var sendData ={"email":$scope.email,"testid":$scope.tid,"tuser":$scope.tuser}
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",
