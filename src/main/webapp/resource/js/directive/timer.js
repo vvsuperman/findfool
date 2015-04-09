@@ -21,8 +21,6 @@ OJApp.directive('timer', function() {
 			        }
 			       
 			    });
-				
-//				scope.$emit("video");
 		}
 	};
 

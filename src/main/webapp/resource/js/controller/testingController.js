@@ -1,10 +1,12 @@
 'use strict';
 
-OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile) {
+OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
 	 $scope.tid = param[1];
+	 //takePicture广播轮训的promise变量
+	 var pictureTimer;
 	
 //测试数据	
 	/* $scope.email ="693605668@qq.com";
@@ -27,11 +29,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 
 	 $scope.btnShow =1;
-	 $scope.btnZone =0;
 	 
-	 $scope.showCamera = 1;
-	 
-	 
+	 $scope.isCameraOk={};
+	 $scope.isCameraOk.ok=0;	 
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -63,8 +63,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $scope.$broadcast("takePicture");
 		 $scope.btnShow =2;
 		 $scope.monitor = 2;
-		 console.log("takePicture");
-		 
+		 console.log("广播takePicture");
 	 }
 	 
 	 $scope.updatePicture = function(){
@@ -76,12 +75,12 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $scope.monitor = 1;
 	 }
 	 
-	 $scope.showCamera =1;
 	 
 	 //尝试开启摄像头
 	 $scope.showVideo = function(){
 		 $scope.$broadcast("takeVideo");
-		 console.log("showVideo");
+		 console.log("执行showVideo()，广播takeVideo");
+		 /*$("#hideDiv").hide();*/
 	 }
 	
 	 
@@ -91,18 +90,26 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 console.log("show camera");
 	 });
 	 
+	 //定义控件是否显示变量
+	 $scope.btnZone={};
+	 $scope.btnZone.hide=0;
+	 $scope.cameraZone={};
+	 $scope.cameraZone.show=0;
 	 //开启摄像头成功，开始捕捉视频
 	 $scope.$on("cameraOK",function(){
-		 //ng-if ng-show都无效，只好用jauery
-		 $("#showBtn").hide();
-		 $("#cameraZone").show();
-		 $scope.btnZone = 1;
+		 $scope.$apply(function(){
+			 $scope.isCameraOk.ok=1;
+			 $scope.btnZone.hide = 1;
+			 $scope.cameraZone.show=1;
+		 });
+		 console.log("cameraOk");
 	 });
 	 
-//	 //自动启动摄像头
-//	 $scope.$on("video",function(){
-//		 $scope.showVideo();
-//	 })
+	 //自动启动摄像头
+	 $scope.$on("video",function(){
+		 $scope.showVideo();
+		 console.log("捕获video,调用showVideo()");
+	 })
      
      //检测测试密码
 	 $scope.login = function(){
@@ -215,9 +222,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	//定时器提醒
 	    	var nowTime = (new Date()).getTime();
 	    	var remain = $scope.time.remain - nowTime;
-	        
+	    	//随机拍照
+	         $scope.randomTakePicture(remain/60/1000);
+	         //结束测试
 	    	$timeout($scope.endTest,remain);
-	    	
 	 }
 	 
 	 
@@ -239,9 +247,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 $scope.show = 5;
 	    		 return false;
 	    	 }
-	    	 
 	    	if(data.state!=0){
-	    		$timeout($scope.takePicture,1*5*1000);
 	    		$scope.tProblems = data.message.problems;
 		    	$scope.submitAndFetch($scope.tProblems[0]);
 		    	$scope.genExtraInfo(data);
@@ -256,8 +262,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        	 }
 		        	
 		         }
-		         
-		         var duration = data.message.invite.duration*60*1000;
+
+		         var duration = data.message.invite.duration*60*1000;	         
 	    	}
 	    	else{
 	    		if(data.message ==1){
@@ -273,6 +279,22 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	     })
 	  
 	 };
+	 
+	 //周期性随机拍照
+	 $scope.randomTakePicture=function(duration){
+		 //拍照间隔周期 (分钟)
+		 var takePictureDuration=10;
+		 var IntervalTime=takePictureDuration*60; //秒
+		 console.log("intervalTime="+IntervalTime);
+		 $interval(function(){
+			 var randomTime=Math.floor(Math.random()*IntervalTime);	//秒
+			 console.log("randomTime="+randomTime);	
+			 $timeout(function(){
+				$scope.$broadcast("takePicture");
+				$scope.$broadcast("updatePicture");
+			 },randomTime*1000);
+		 },IntervalTime*1000);
+	 }
 	
 	 
      /*

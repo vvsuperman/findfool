@@ -11,7 +11,7 @@ OJApp.directive('camera', function() {
 			var video = document.getElementById("video");  
 			//开启摄像头
 			scope.$on("takeVideo",function(){
-				console.log("initial video.......................");
+				console.log("执行takeVideo()");
 				isSupportH5Video();
 				try {                  
 					//动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持                
@@ -29,6 +29,7 @@ OJApp.directive('camera', function() {
 			//拍照
 			scope.$on("takePicture",function(event){
 				context.drawImage(video, 0, 0, width, height);
+				console.log("执行takePicture");
 			})
 		    
 			//使用照片
@@ -45,7 +46,6 @@ OJApp.directive('camera', function() {
 			    		method:"POST",
 			    		dataType : "json",
 			    		success : function(result) {
-			    			flashTip("照片已上传成功");
 		    		}
 		    	});
 		    	
@@ -122,7 +122,6 @@ var isSupportH5Video = function()
 	else {
 	    return true;
 	}
-
 }
 
 

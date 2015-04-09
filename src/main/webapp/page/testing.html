@@ -3,7 +3,13 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testing.css" />
 <link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 
-
+<div id="hideDiv" style="width:100%;height:2000px;background:rgba(51, 51, 51, 0.8);position:fixed;top:0px; z-index:1000" ng-show="isCameraOk.ok==0">
+	<div style="margin-top:200px;" class="row">
+		<div class="col-md-offset-5 col-md-2">
+			<button class="btn btn-primary btn-lg" style="margin:0 auto;" ng-click="showVideo()">启动摄像头</button>
+		</div>
+	</div>
+</div>
 
 <div>
 		<nav class="navbar navbar-dafault" role="navigation">
@@ -149,31 +155,18 @@
 	      </div>
 	   </div>
 	   
-	    <div class="col-md-2" style="margin-top: 20px">
-	    	 <button id="showBtn" class="btn btn-primary" ng-click="showVideo()"  style="font-size:24px;margin-top: 50px;height: 200px">
-	        开启摄像头来进行考试
-	     	</button>
-       	    <div id="cameraZone" style="margin-top:50px;display:none;">
-			  <video  ng-show="monitor==1" id="video" width="240" height="188" style="margin-top: 50px;margin-left:10px;padding: 6px 12px;" autoplay>
+	    <div class="col-md-3">
+       	    <div id="cameraZone" >
+			  <video id="video" width="280" height="280" autoplay>
 			  </video>       
-			  <canvas ng-show="monitor==2" camera id="canvas" width="240" height="188">
-			  </canvas>
+			  <!-- <canvas camera id="canvas" width="280" height="280">
+			  </canvas> -->
 		    </div>
 		    <br/>
 		    <br/>
-		      
-		    <div class=row>
-		    	<div class="col-md-offset-4 col-md-4">
-		    		<button class="btn btn-outline"  ng-click="finishTest()">完成测试</button>
-		    	</div>
-		    </div>
-		    <div class=row>
-		    	<div class="col-md-offset-4 col-md-4">
-		    		<button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>
-		    	</div>
-		    </div>
-		    
-		   
+		    <!-- <button class="btn btn-outline" ng-click="showVideo()">开启摄像</button> -->
+	    	<!-- <button class="btn btn-outline" ng-click="takePicture()">拍照</button> -->
+	    	<button class="btn btn-outline" ng-click="finishTest()" style="margin-left:90px;">完成测试</button>
 		</div>
 	  </div>
  </div>

@@ -33,14 +33,14 @@
    </div>
    
    
-    <div class="container-fluid" style="margin-top: 100px" ng-if="show==2">
+    <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
      
      <div class="col-md-3 col-md-offset-2">
-	     <button id="showBtn" class="btn btn-primary" ng-click="showVideo()"  style="font-size:24px;margin-top: 50px;height: 200px">
+	     <button id="showBtn" class="btn btn-primary" ng-click="showVideo()"  style="font-size:24px;margin-top: 50px;height: 200px" ng-hide="btnZone.hide==1">
 	        开启摄像头来进行考试
 	     </button>
     
-       	  <div id="cameraZone" style="display: none" style="margin-top:50px">
+       	  <div id="cameraZone"  style="margin-top:50px" ng-show="cameraZone.show==1">
 			  <video  ng-show="monitor==1" id="video" width="320" height="240" autoplay>
 			  </video>       
 			  <canvas ng-show="monitor==2" camera id="canvas" width="320" height="240">
