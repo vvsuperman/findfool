@@ -23,7 +23,7 @@
 	            <thead>
 	            <tr>
 	                <th>姓名</th>
-	                <th>Email</th>
+	                <th>Email(必填)</th>
 	                <th>电话</th>
 	            </tr>
 	            </thead>
@@ -34,7 +34,7 @@
 	                    <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
 	                    <input class="form-control" type="text"  ng-model="user.username"/>
 	                </td>
-	                <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/></td>
+	                <td><input class="form-control" type="text" value="{{user.email}}" ng-model="user.email"/><span style="color: red;font-size: 20px">&nbsp;*</span></td>
 	                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel" />
 	                    <a class="glyphicon glyphicon-plus aa" href="" ng-click="addOne(user)"></a>
 	                </td>
