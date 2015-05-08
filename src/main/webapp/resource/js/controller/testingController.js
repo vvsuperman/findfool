@@ -7,9 +7,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.tid = param[1];
 	
 //测试数据	
-	 $scope.email ="693605668@qq.com";
-	 $scope.testid ="11";
-	 $scope.tid = "11";
+//	 $scope.email ="693605668@qq.com";
+//	 $scope.testid ="11";
+//	 $scope.tid = "11";
 	 //$scope.show = 2;
 //测试数据	 
 	 $scope.tuser = {};
@@ -277,8 +277,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		         
 		         var duration = data.message.invite.duration*60*1000;
 		         
-		         $timeout(function(){})
-		    	
 	    	}
 	    	else{
 	    		if(data.message ==1){
@@ -484,8 +482,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      * 完成所有测试
      * */
      $scope.finishTest = function(){
-    	 flashTip("你确定完成测试吗？",function(e){
+    	 smoke.confirm("你确定完成测试吗？",function(e){
     		 if(e){
+    			 
     			 $scope.run('submit');
     	    	 $scope.endTest();
     		 }else{}
