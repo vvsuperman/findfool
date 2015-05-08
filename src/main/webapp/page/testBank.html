@@ -42,7 +42,7 @@
 				     
 				   </div>
 				  <div class="panel-body">
-			      <div  class="col-md-3  col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px;" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
+			      <div  class="col-md-3  col-ms-4 col-xs-6" style="margin-top: 30px;margin-bottom: 30px;" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
 			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg center-block" ng-click="showQuestions(set)"  ></img>
 			      	<p class="text-center" ng-bind="set.comment" style="margin-top:5px"></p>
 			      </div>
@@ -56,7 +56,7 @@
 				     
 				   </div>
 				  <div class="panel-body">
-			      <div  class="col-md-3  col-ms-4 col-xs-4" style="margin-top: 30px;margin-bottom: 30px;" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
+			      <div  class="col-md-3  col-ms-4 col-xs-6" style="margin-top: 30px;margin-bottom: 30px;" ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
 			      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg center-block" ng-click="showQuestions(set)"  ></img>
 			      	<p class="text-center" ng-bind="set.comment" style="margin-top:5px"></p>
 			      </div>
@@ -94,7 +94,6 @@
 		        </ul>
         </div>
        </div> 
-      
         </form>
     </div>
     <!--<h1>{{active==1}}</h1>-->
