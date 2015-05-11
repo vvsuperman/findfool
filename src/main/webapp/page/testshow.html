@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testshow.css" />
 
-<div class="container-fluid" > 
-  <div class="col-md-9 col-md-offset-1">
+ 
+ <div class="col-md-12" style="margin: 0px -15px;">
   <div class="panel panel-default black-panel ">
 	  <div class="panel-heading">
 	  	  <span>我的测试</span> 
@@ -10,33 +10,21 @@
 	  </div>
    
 	 <div class="panel-body">
-	    <div  style="padding-top: 20px" ng-repeat="test in tests">
-	        <div class="starter-template">
-	                <div class="highlight">
-			            <pre>
-			                <ul style="list-style:none;">
-			                    <li style="float:left;list-style-type: none;margin-top: 10px">
-			                        <a class="" href="#/test/{{test.quizid}}" style="font-size: 15px" ><p>{{test.name}}</p></a>
-			                    </li>
-			                    
-			                    <li class="pull-right" style="list-style-type: none;margin-left: 10px">
-			                        <button class="btn btn-outline"  href="#/report" ng-click="report(test)">报告</button>
-			                    </li>
-			                    
-			                    
-			                    <li class="pull-right" style="list-style-type: none;margin-left: 10px">
-			                        <button class="btn btn-primary" ng-click="inviteUser(test)">邀请</button>
-			                    </li>
-			                    
-			                </ul>
-			            </pre>
-	                </div>
-	        </div>
-	    </div>
+       <div ng-repeat="test in tests">
+           <div style='background-color:#f7f7f9;height:54px;line-height: 44px;padding:5px;border-radius:5px;margin:10px 2%;'>
+               <a style="display: inline-block;margin-left: 5%;font-size:1em;" href="#/test/{{test.quizid}}">{{test.name}}</a>
+               <div class="btn-group pull-right" style="padding:0;margin:5px 2%;font-size:22px;">
+               		<!-- <button class="btn btn-primary" ng-click="inviteUser(test)">邀请</button>
+               		<button class="btn btn-success" href="#/report" ng-click="report(test)">报告</button> -->
+               		<a  ng-click="inviteUser(test)" href="">邀请</a>
+               		<a  href="#/report" ng-click="report(test)">报告</a>
+               </div>
+           </div>
+       </div>
      </div>
+  </div>
 </div>
-</div>
-</div>
+
 
 <div class="modal" id="testCreateModal" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"
