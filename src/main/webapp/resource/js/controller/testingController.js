@@ -9,9 +9,15 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 var pictureTimer;
 	
 //测试数据	
+<<<<<<< HEAD
 	/* $scope.email ="693605668@qq.com";
 	 $scope.testid ="11";
 	 $scope.tid = "11";*/
+=======
+//	 $scope.email ="693605668@qq.com";
+//	 $scope.testid ="11";
+//	 $scope.tid = "11";
+>>>>>>> master
 	 //$scope.show = 2;
 //测试数据	 
 	 $scope.tuser = {};
@@ -27,8 +33,21 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.monitor =1;
 	 
+<<<<<<< HEAD
 	 
 	 $scope.btnShow =1;
+=======
+	 $scope.btn ={};
+	 $scope.btn.Show =1;
+	 $scope.btnZone =0;
+	 
+	 $scope.showCamera = 1;
+	 
+	 $scope.showCZone = 1;//控制是否显示视频区域
+	 
+	 $scope.pictureOK = 0;//用户是否上传好照片
+	 
+>>>>>>> master
 	 
 	 $scope.isCameraOk={};
 	 $scope.isCameraOk.ok=0;	 
@@ -61,26 +80,47 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      //拍照
      $scope.takePicture = function(){
 		 $scope.$broadcast("takePicture");
-		 $scope.btnShow =2;
+		 $scope.btn.Show =2;
 		 $scope.monitor = 2;
 		 console.log("广播takePicture");
 	 }
 	 
 	 $scope.updatePicture = function(){
-		 $scope.$broadcast("updatePicture");
+		
+		 smoke.confirm("你确定要提交该照片？提交后将不可修改", function(e){
+				if (e){
+					$scope.$apply(
+							function(){
+							  $scope.btn.Show=3
+							 });
+					 $scope.$broadcast("updatePicture");
+					 $scope.pictureOK =1;
+					 
+				}
+			}, {
+				ok: "是",
+				cancel: "否",
+				classname: "custom-class",
+				reverseButtons: true
+			});
 	 }
 	 
 	 $scope.cancelPicture = function(){
-		 $scope.btnShow =1;
+		 $scope.btn.Show =1;
 		 $scope.monitor = 1;
 	 }
 	 
 	 
 	 //尝试开启摄像头
 	 $scope.showVideo = function(){
+		 $scope.showCZone =2;
 		 $scope.$broadcast("takeVideo");
+<<<<<<< HEAD
 		 console.log("执行showVideo()，广播takeVideo");
 		 /*$("#hideDiv").hide();*/
+=======
+		 
+>>>>>>> master
 	 }
 	
 	 
@@ -185,6 +225,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){
+		 if($scope.pictureOK!=1){
+			 smoke.alert("请先拍照");
+			 return false;
+		 }
+		 
 		 var sendData ={"email":$scope.email,"testid":$scope.tid,"tuser":$scope.tuser}
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",
@@ -262,8 +307,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        	 }
 		        	
 		         }
+<<<<<<< HEAD
 
 		         var duration = data.message.invite.duration*60*1000;	         
+=======
+		         
+		         var duration = data.message.invite.duration*60*1000;
+		         
+>>>>>>> master
 	    	}
 	    	else{
 	    		if(data.message ==1){
@@ -486,8 +537,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      * 完成所有测试
      * */
      $scope.finishTest = function(){
-    	 flashTip("你确定完成测试吗？",function(e){
+    	 smoke.confirm("你确定完成测试吗？",function(e){
     		 if(e){
+    			 
     			 $scope.run('submit');
     	    	 $scope.endTest();
     		 }else{}

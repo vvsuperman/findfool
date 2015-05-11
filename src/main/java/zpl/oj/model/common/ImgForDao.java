@@ -8,6 +8,14 @@ public class ImgForDao {
 	private String location;
 	private Date time;
 	
+	
+	public ImgForDao(){
+		id = 0;
+		invitedid = 0;
+		location = "";
+		time = new Date();
+	}
+	
 	public Integer getId() {
 		return id;
 	}
