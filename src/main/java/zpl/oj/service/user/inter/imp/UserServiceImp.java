@@ -1,19 +1,27 @@
 package zpl.oj.service.user.inter.imp;
 
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.user.UserDao;
 import zpl.oj.model.request.User;
+import zpl.oj.service.InviteService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
+import zpl.oj.util.mail.MailSenderInfo;
+import zpl.oj.util.mail.SimpleMailSender;
 
 @Service
 public class UserServiceImp implements UserService{
 
 	@Autowired
 	private UserDao userDao;
+    @Autowired
+    private InviteService inviteService;
+    
 	@Override
 	public boolean addUser(User u) {
 		//检查邮箱是否存在，
@@ -68,6 +76,33 @@ public class UserServiceImp implements UserService{
 	public User userLogin(int uid) {
 		userDao.updateLoginDateByUid(uid);
 		return getUserById(uid);
+	}
+
+	@Override
+	public void resetPwd(String email,User user) {
+		// TODO Auto-generated method stub
+		//生成随机字符串
+		String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<12;i++){
+         int number=random.nextInt(62);
+         sb.append(str.charAt(number));
+        }
+        //保持到数据库
+        user.setResetUrl(sb.toString());
+        userDao.updateUser(user);
+        //发送邮件
+        MailSenderInfo mailSenderInfo = inviteService.initialEmail(); 
+        mailSenderInfo.setToAddress(email);
+        mailSenderInfo.setSubject("重置密码");
+        
+        String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+        String content ="您好，这是一封重置密码的邮件，请到"+baseurl+"/#/"+str+"重置密码";
+        mailSenderInfo.setContent(content);
+      //发送邮件
+      	SimpleMailSender.sendHtmlMail(mailSenderInfo);
+        
 	}
 
 }

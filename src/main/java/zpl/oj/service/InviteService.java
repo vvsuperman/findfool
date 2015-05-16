@@ -5,6 +5,7 @@ import zpl.oj.model.common.Testuser;
 import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestInviteUser;
+import zpl.oj.util.mail.MailSenderInfo;
 
 public interface InviteService {
 
@@ -12,4 +13,7 @@ public interface InviteService {
 	
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
 			String pwd,User hrUser);
+	
+	public MailSenderInfo initialEmail();
+	
 }

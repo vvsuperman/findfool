@@ -22,7 +22,16 @@ public class User {
 	private int state;
 	private String tel;
 	private String mdUid;//明道的uid
+	private String resetUrl;
 	
+	public String getResetUrl() {
+		return resetUrl;
+	}
+
+	public void setResetUrl(String resetUrl) {
+		this.resetUrl = resetUrl;
+	}
+
 	public String getMdUid() {
 		return mdUid;
 	}

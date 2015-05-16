@@ -24,4 +24,6 @@ public interface UserService {
 	
 	//user login service 刷新登陆时间并且返回user对象
 	User userLogin(int uid);
+
+	void resetPwd(String email,User user);
 }

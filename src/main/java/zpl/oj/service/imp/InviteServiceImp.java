@@ -88,6 +88,24 @@ public class InviteServiceImp implements InviteService {
 		return pwd;
 	}
 	
+	//初始化邮件类
+	public MailSenderInfo initialEmail(){
+		MailSenderInfo mailSenderInfo = new MailSenderInfo();
+		String host = (String) PropertiesUtil.getContextProperty("mailServerHost");
+		String port = (String) PropertiesUtil.getContextProperty("mailServerPort");
+		String userName = (String) PropertiesUtil.getContextProperty("userName");
+		String password = (String) PropertiesUtil.getContextProperty("password");
+		String fromAddress = (String) PropertiesUtil.getContextProperty("fromAddress");
+		
+		mailSenderInfo.setMailServerHost(host);   
+		mailSenderInfo.setMailServerPort(port);
+		mailSenderInfo.setUserName(userName);   
+		mailSenderInfo.setPassword(password);//您的邮箱密码  
+		mailSenderInfo.setFromAddress(fromAddress);
+		return mailSenderInfo;
+	}
+	
+	
 	/**
 	 * @param request
 	 * @param q
@@ -97,21 +115,11 @@ public class InviteServiceImp implements InviteService {
 	 */
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
 			String pwd, User hrUser) {
-		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
-		
-		String host = (String) PropertiesUtil.getContextProperty("mailServerHost");
-		String port = (String) PropertiesUtil.getContextProperty("mailServerPort");
-		String userName = (String) PropertiesUtil.getContextProperty("userName");
-		String password = (String) PropertiesUtil.getContextProperty("password");
-		String fromAddress = (String) PropertiesUtil.getContextProperty("fromAddress");
+		 String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
 		
 		String url = desService.encode(tu.getEmail()+"|"+q.getQuizid());
-		final MailSenderInfo mailSenderInfo = new MailSenderInfo();
-		mailSenderInfo.setMailServerHost(host);   
-		mailSenderInfo.setMailServerPort(port);
-		mailSenderInfo.setUserName(userName);   
-		mailSenderInfo.setPassword(password);//您的邮箱密码  
-		mailSenderInfo.setFromAddress(fromAddress);
+		
+		final MailSenderInfo mailSenderInfo = initialEmail();
 		
 		
 		mailSenderInfo.setToAddress(tu.getEmail());
@@ -124,16 +132,10 @@ public class InviteServiceImp implements InviteService {
 				+ "<br/>您的测试时间为：" + request.getDuration()+"</p>";
 		mailSenderInfo.setContent(context);
 		
-		//使用线程，避免长时间等候
-		new Thread(new  Runnable() {
-			public void run() {
-				try {
-					SimpleMailSender.sendHtmlMail(mailSenderInfo);
-				} catch (Exception e) {
-					e.printStackTrace();    
-				}
-			}
-		}).start();
+		//发送邮件
+		SimpleMailSender.sendHtmlMail(mailSenderInfo);
+		
+		
 		
 	}
 

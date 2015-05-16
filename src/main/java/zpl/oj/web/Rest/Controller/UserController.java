@@ -1,6 +1,7 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mingdao.sdk.Config;
 
+import zpl.oj.dao.user.UserDao;
 import zpl.oj.model.common.VerifyQuestion;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestChangeUserInfo;
@@ -41,6 +43,10 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserDao userDao;
+	
 	@Autowired
 	private SecurityService securityService;
 	@Autowired
@@ -326,10 +332,26 @@ public class UserController {
 			    rb.setState(1);
 			    return rb;
 			}
-			
-			
 		}
 	
 	
-	//修改用户的密码
+		//重置密码
+		@RequestMapping(value="/setting/setpwd")
+		@ResponseBody
+		public ResponseBase reSetPwd(@RequestBody Map map){
+			ResponseBase rb = new ResponseBase();
+			String email = (String)map.get("email");
+			if(email == null){
+				rb.setState(1);
+				rb.setMessage("email为空");
+			};
+			User user = userDao.getUserIdByEmail(email);
+			if(user ==null){
+				rb.setState(1);
+				rb.setMessage("email错误，用户不存在");
+			}
+			userService.resetPwd(email,user);
+			rb.setState(0);
+			return rb;
+		}
 }
