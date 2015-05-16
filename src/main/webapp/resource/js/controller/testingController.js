@@ -9,15 +9,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 var pictureTimer;
 	
 //测试数据	
-<<<<<<< HEAD
-	/* $scope.email ="693605668@qq.com";
-	 $scope.testid ="11";
-	 $scope.tid = "11";*/
-=======
+
 //	 $scope.email ="693605668@qq.com";
 //	 $scope.testid ="11";
 //	 $scope.tid = "11";
->>>>>>> master
+
 	 //$scope.show = 2;
 //测试数据	 
 	 $scope.tuser = {};
@@ -33,10 +29,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.monitor =1;
 	 
-<<<<<<< HEAD
+
 	 
 	 $scope.btnShow =1;
-=======
+
 	 $scope.btn ={};
 	 $scope.btn.Show =1;
 	 $scope.btnZone =0;
@@ -47,7 +43,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.pictureOK = 0;//用户是否上传好照片
 	 
->>>>>>> master
+
 	 
 	 $scope.isCameraOk={};
 	 $scope.isCameraOk.ok=0;	 
@@ -115,12 +111,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.showVideo = function(){
 		 $scope.showCZone =2;
 		 $scope.$broadcast("takeVideo");
-<<<<<<< HEAD
-		 console.log("执行showVideo()，广播takeVideo");
-		 /*$("#hideDiv").hide();*/
-=======
-		 
->>>>>>> master
+
 	 }
 	
 	 
@@ -307,14 +298,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        	 }
 		        	
 		         }
-<<<<<<< HEAD
 
-		         var duration = data.message.invite.duration*60*1000;	         
-=======
 		         
 		         var duration = data.message.invite.duration*60*1000;
 		         
->>>>>>> master
+
 	    	}
 	    	else{
 	    		if(data.message ==1){

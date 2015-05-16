@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid">
     <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
         <div class="container-fluid">
@@ -37,9 +35,11 @@
         </div>
     </nav>
     
+     
+    
     <div class="row clearfix" >
         <div class="col-md-12">
-            <div style="text-align: center;height: 400px;">
+             <div style="text-align: center;height: 400px;" ng-if="video.show==0">
                 <h1 style="font-size: 64px;margin-top: 300px">
                     最好用的IT人才评测系统
                 </h1>
@@ -47,12 +47,22 @@
                     帮助您大量、精准的发现最合适的人才
                 </p>
                 <div style="margin-top: 20px">
-                    <a href="#/signup" class="btn btn-primary btn-lg">免费注册findFool</a>
-                    <a class="btn btn-outline btn-lg" href=""  style="margin-left: 20px" ng-click="showVideo()" >
+                    <a href="#/signup" class="btn btn-primary btn-lg" >免费注册findFool</a>
+                    <a class="btn btn-outline btn-lg" href=""  ng-click="showVideo()" >
                     <span class="glyphicon glyphicon-play-circle"></span>
                     观看视频介绍</a>
+                     
                 </div>
-            </div>
+            </div> 
+           <div class="col-md-12"  style="text-align: center;margin-top: 50px" ng-show="video.show==1">
+               <a href="" style="position: fixed;height: 40px; top:10px;left:45%;width:10%;text-align: center;font-size: 18px;color:red;z-index: 10000; ">关闭视频</a>
+	            <video style="width: 100%;height: 500px"  class="col-md-12" customvideo   controls> 
+				   <source src="http://7xj2gx.com1.z0.glb.clouddn.com/findfool.mp4" />
+			    </video>
+			  
+		    </div>  
+		    
+		    
         </div>
     </div>
 
@@ -63,40 +73,73 @@
                 平台特点
             </h1>
             <br/>
-            <p style="font-size:x-large; color: #58666e">
-                选择我们的理由
-            </p>
+           
         </div>
         <br/>
+        <div class="row">
         <div class="col-md-4 column" style="text-align: center">
-            <img src="resource/static/character1.png" alt=""/>
+            <img src="resource/static/flow.png" alt=""/>
             <h2>
-                广泛
+                在线笔试，精简流程
             </h2>
             <br/>
             <p>
-                不用再刷简历，做份测试先
+                在线题库，自动批改完成笔试
             </p>
         </div>
         <div class="col-md-4 column" style="text-align: center">
-            <img src="resource/static/character2.png" alt=""/>
+            <img src="resource/static/notech.png" alt=""/>
             <h2>
-                精准
+                非技术也能进行技术招聘
             </h2>
             <br/>
             <p>
-                根据公司需求，匹配最合适的人才
+                集成的测试、自动判分功能以及评价体系让非技术人才也能进行技术招聘
             </p>
+            
         </div>
         <div class="col-md-4 column" style="text-align: center">
-            <img src="resource/static/character3.png" alt=""/>
+            <img src="resource/static/zoomdown.png" alt=""/>
             <h2>
-                安全
+                降低招到不合格人才的概率
             </h2>
             <br/>
             <p>
-                全程摄像头监控保证无作弊
+                客观的评价体系让夸夸其谈的人无处可逃
             </p>
+        </div>
+        </div>
+        <div class="row" style="margin-top: 50px">
+	         <div class="col-md-4 column" style="text-align: center;">
+	            <img src="resource/static/character1.png" alt=""/>
+	            <h2>
+	                同时进行大量笔试
+	            </h2>
+	            <br/>
+	            <p>
+	                能同时进行大量的并发笔试并保持良好的用户体验
+	            </p>
+	        </div>
+	        <div class="col-md-4 column" style="text-align: center">
+	            <img src="resource/static/character2.png" alt=""/>
+	            <h2>
+	                精准
+	            </h2>
+	            <br/>
+	            <p>
+	                根据公司需求，匹配最合适的人才
+	            </p>
+	        </div>
+	        <div class="col-md-4 column" style="text-align: center">
+	            <img src="resource/static/character3.png" alt=""/>
+	            <h2>
+	                安全监控
+	            </h2>
+	            <br/>
+	            <p>
+	                全程摄像头监控保证无作弊
+	            </p>
+	        </div>
         </div>
         <div class="col-md-12" style="text-align: center">
             <br/>
@@ -222,6 +265,25 @@
 </div>
 
 
+<!-- <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">&nbsp</h4>
+      </div>
+      <div class="modal-body">
+         <video height="500" controls autoplay="autoplay" > 
+			  <source src="resource/static/findfool.mp4">
+		 </video> 
+      </div>
+      
+    </div>
+  </div>
+</div> -->
+
+ 
 
 
 

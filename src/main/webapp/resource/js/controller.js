@@ -11,6 +11,10 @@
 OJApp.controller('mainController',function($scope, $http,$routeParams,$location, Data,$modal) {	
    // $scope.url = '#';
      var code = $routeParams.code;
+     $scope.video={};
+     $scope.video.show = 0;
+     
+     
      if(typeof(code)!="undefined"){
     	 $http({
              url: WEBROOT+"/user/oauthorlogin",
@@ -101,15 +105,21 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
  	 
  	 
  	 $scope.showVideo = function () {
+// 		 $scope.video.show =1; 
+ 		 //展示视频后直接播放
+ 		
  		 var modalInstance = $modal.open({
- 		      templateUrl: 'page/videoModal.html',
- 		      controller: 'videoInstanceCtrl',
- 		      size: "lg",
- 		      resolve: {}
- 		 });
+		      templateUrl: 'page/videoModal.html',
+		      controller: 'videoInstanceCtrl',
+		      size: "lg",
+		      resolve: {}
+		 });
+ 		 
+
+ 		
  	 };
  	 
- 	 //carousel
+ 	 //carouse
  	 $scope.myInterval = 2000;
  	 var slideText=[
  	                "自从用了findFool，腰不酸了，脖子不疼了，再也不用熬夜刷简历了",

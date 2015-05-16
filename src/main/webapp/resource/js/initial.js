@@ -1,3 +1,4 @@
+
 //常量
 var WEBROOT = "/oj";
 //var WEBROOT = "";
