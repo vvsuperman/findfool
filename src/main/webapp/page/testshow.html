@@ -9,7 +9,7 @@
 	  	  <div style="clear: both;"></div>
 	  </div>
    
-	 <div class="panel-body">
+	 <div class="panel-body row">
        <div ng-repeat="test in tests">
            <!-- <div style='background-color:#f7f7f9;height:54px;line-height: 44px;padding:5px;border-radius:5px;margin:10px 2%;'>
                <a style="display: inline-block;margin-left: 5%;font-size:1em;" href="#/test/{{test.quizid}}">{{test.name}}</a>
@@ -20,7 +20,30 @@
                		<a  href="#/report" ng-click="report(test)">报告</a>
                </div>
            </div> -->
-           <div class="col-md-2 col-md-offset-1 col-xs-4 col-xs-offset-2 testblock">
+           
+           
+           <div class="col-md-4 col-sm-6 col-xs-12 test-block">
+           		<div class="panel panel-default" style="padding:0;margin:5px;">
+				  <div class="panel-heading" style="background-color:#1abc9c;color:black;border:none;">
+				    <h3 class="panel-title">
+				    	<a href="#/test/{{test.quizid}}">{{test.name}}</a>
+				    </h3>
+				  </div>
+				  <div class="panel-body row">
+				    <div class="col-md-12 test-tag" style="float:left">
+                  		<span class="glyphicon glyphicon-user" ></span>
+                  		<a ng-click="inviteUser(test)" class="blackFont" href="">邀请</a>
+                	</div>
+                	<div class="col-md-12 test-tag" style="float:left">
+                  		<span class="glyphicon glyphicon-stats" ></span>
+                  		<a href="#/report"  class="blackFont" ng-click="report(test)">报告</a>
+                	</div>
+				  </div>
+				</div>
+           </div>
+           
+           
+          <!--  <div class="col-md-2 col-md-offset-1 col-xs-4 col-xs-offset-2 testblock">
                 <div class="col-md-12 testtitle ">
                   <a href="#/test/{{test.quizid}}">{{test.name}}</a>
                 </div>
@@ -36,7 +59,7 @@
                   <a  href="#/report"  class="blackFont" ng-click="report(test)">报告</a>
                 </div>
    				        
-           </div>
+           </div> -->
            
            
        </div>

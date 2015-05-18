@@ -301,9 +301,9 @@ ul.navbar-nav li a:active{
 }
 
 .black-panel .panel-heading{
-	background-color: #374652 !important;
-	color:#ffffff !important;
-	border-color: #374652 !important;
+	background-color: #374652;
+	color:#ffffff;
+	border-color: #374652;
 }
 
 .righticon{
