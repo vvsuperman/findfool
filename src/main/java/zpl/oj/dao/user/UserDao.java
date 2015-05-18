@@ -30,6 +30,11 @@ public interface UserDao {
 			+ "user where uid = #{uid}")
 	User getUserIdByUid(int  uid);
 	
+	@Select("select uid,fname,lname,email,company,privilege,pwd,link,age,degree,school,register_date as registerDate,last_login_date as lastLoginDate,invited_left,invited_num,state,tel from "
+			+ "user where resetUrl = #{url}")
+	User getUserByUrl(String  url);
+	
+	
 	@Update("update user set last_login_date=now() where email = #{email}")
 	void updateLoginDateByEmail(String email);
 	@Update("update user set last_login_date=now() where uid = #{uid}")

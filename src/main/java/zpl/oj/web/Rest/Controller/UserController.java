@@ -356,6 +356,28 @@ public class UserController {
 		}
 		
 		
+		//验证url是否合法
+		@RequestMapping(value="/setting/checkurl")
+		@ResponseBody
+		public ResponseBase checkUrl(@RequestBody Map map){
+			ResponseBase rb = new ResponseBase();
+			String url = (String)map.get("url");
+			if(url == null){
+				rb.setState(1);
+				rb.setMessage("param为空");
+			};
+			User user = userDao.getUserByUrl(url);
+			if(user ==null){
+				rb.setState(1);
+				rb.setMessage("错误的url地址");
+			}
+			rb.setState(0);
+			return rb;
+		}
+		
+		
+		
+		
 		//重置密码
 		@RequestMapping(value="/setting/resetpwd")
 		@ResponseBody
