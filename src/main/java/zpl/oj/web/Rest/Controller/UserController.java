@@ -38,97 +38,94 @@ import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.sms.HttpPost;
 
 @Controller
-@RequestMapping("/user") 
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private SecurityService securityService;
 	@Autowired
 	private VerifyQuestionService verifyQuestionService;
 
-	
-	
-	@RequestMapping(value="/getvertifycode",method=RequestMethod.POST)
+	@RequestMapping(value = "/getvertifycode", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseBase getVertifyCode(@RequestBody Map map1){
+	public ResponseBase getVertifyCode(@RequestBody Map map1) {
 		ResponseBase rb = new ResponseBase();
-		String mobile = (String)map1.get("mobile");
+		String mobile = (String) map1.get("mobile");
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("username", ExamConstant.SMS_USERNAME);//此处填写用户账号
-		map.put("scode", ExamConstant.SMS_PWD);//此处填写用户密码
-		map.put("mobile",mobile);//此处填写发送号码
-		map.put("tempid",ExamConstant.SMS_TEMPID);//此处填写模板短信编号
-		//map.put("extcode","1234");
-		int max=9999;
-        int min=1000;
-        Random random = new Random();
-        int s = random.nextInt(max)%(max-min+1) + min;
-		map.put("content","@1@="+s);//此处填写模板短信内容
-		String temp = HttpPost.doPost("http://mssms.cn:8000/msm/sdk/http/sendsms.jsp",map, "UTF-8");
+		map.put("username", ExamConstant.SMS_USERNAME);// 此处填写用户账号
+		map.put("scode", ExamConstant.SMS_PWD);// 此处填写用户密码
+		map.put("mobile", mobile);// 此处填写发送号码
+		map.put("tempid", ExamConstant.SMS_TEMPID);// 此处填写模板短信编号
+		// map.put("extcode","1234");
+		int max = 9999;
+		int min = 1000;
+		Random random = new Random();
+		int s = random.nextInt(max) % (max - min + 1) + min;
+		map.put("content", "@1@=" + s);// 此处填写模板短信内容
+		String temp = HttpPost.doPost(
+				"http://mssms.cn:8000/msm/sdk/http/sendsms.jsp", map, "UTF-8");
 		rb.setMessage(s);
 		return rb;
 	}
-	
-	
-	@RequestMapping(value="/oauthorlogin")
+
+	@RequestMapping(value = "/oauthorlogin")
 	@ResponseBody
-	public ResponseBase oauthorLogin(@RequestBody Map map){
+	public ResponseBase oauthorLogin(@RequestBody Map map) {
 		ResponseBase rb = new ResponseBase();
-		String source = (String)map.get("source");
-		
-		
-		if(ExamConstant.SOURCE_MD.equals(source)){
-			String code =(String)map.get("code");
+		String source = (String) map.get("source");
+
+		if (ExamConstant.SOURCE_MD.equals(source)) {
+			String code = (String) map.get("code");
 			String token = Config.getAccessTokenByCode(code);
-			//访问api出错，直接返回
-			if(token == null){
+			// 访问api出错，直接返回
+			if (token == null) {
 				rb.setState(3);
 				return rb;
 			}
-			ObjectMapper mapper = new ObjectMapper(); 
-			Map<String,Object> tokenMap = new HashMap<String, Object>();
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String, Object> tokenMap = new HashMap<String, Object>();
 			try {
-				tokenMap= mapper.readValue(token, Map.class);
+				tokenMap = mapper.readValue(token, Map.class);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			token = (String)tokenMap.get("access_token");
-			
+			token = (String) tokenMap.get("access_token");
+
 			String user = Config.getUserInfo(token);
-		    System.out.println("user....................."+user);
-			if(user == null){
+			System.out.println("user....................." + user);
+			if (user == null) {
 				rb.setState(3);
 				return rb;
 			}
-			Map<String,Object> userMap = new HashMap<String, Object>();
+			Map<String, Object> userMap = new HashMap<String, Object>();
 			try {
-				userMap= mapper.readValue(user, Map.class);
+				userMap = mapper.readValue(user, Map.class);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			userMap = (Map)userMap.get("user");
-			User u = userService.getUserByEmail((String)userMap.get("email"));
-			//用户已存在，登陆
+
+			userMap = (Map) userMap.get("user");
+			User u = userService.getUserByEmail((String) userMap.get("email"));
+			// 用户已存在，登陆
 			Map rtMap = new HashMap<String, Object>();
-			if(u != null){
+			if (u != null) {
 				rb.setState(1);
 				rtMap.put("user", u);
 				rtMap.put("token", token);
 				rb.setMessage(rtMap);
-			}else{
+			} else {
 				u = new User();
-				u.setEmail((String)userMap.get("email"));
-				u.setCompany((String)userMap.get("company"));
-				u.setMdUid((String)userMap.get("id"));
+				u.setEmail((String) userMap.get("email"));
+				u.setCompany((String) userMap.get("company"));
+				u.setMdUid((String) userMap.get("id"));
 				rtMap.put("user", u);
 				rtMap.put("token", token);
 				rb.setState(2);
@@ -137,27 +134,25 @@ public class UserController {
 		}
 		return rb;
 	}
-	
-	
-	@RequestMapping(value="/confirm")
+
+	@RequestMapping(value = "/confirm")
 	@ResponseBody
-	public ResponseBase userLogin(@RequestBody RequestUserLogin request){
+	public ResponseBase userLogin(@RequestBody RequestUserLogin request) {
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
 
 		ResponseMessage msg = new ResponseMessage();
 		u = userService.getUserByEmail(request.getEmail());
-		if(u== null){		
+		if (u == null) {
 			msg.setMsg("usernotexist");
 			rb.setState(0);
 			rb.setMessage(msg);
-		}
-		else if(!u.getPwd().equals(request.getPwd())){
+		} else if (!u.getPwd().equals(request.getPwd())) {
 			msg.setMsg("错误的用户名或密码");
 			msg.setHandler_url("/error");
-			rb.setState(0);		
+			rb.setState(0);
 			rb.setMessage(msg);
-		}else{
+		} else {
 			u = userService.userLogin(u.getUid());
 			rb.setMessage(u);
 			rb.setState(1);
@@ -165,143 +160,140 @@ public class UserController {
 		}
 		return rb;
 	}
-	
-	
-	@RequestMapping(value="/add/hr")
+
+	@RequestMapping(value = "/add/hr")
 	@ResponseBody
-	public ResponseBase addHrUser(@RequestBody RequestUserLogin request){
+	public ResponseBase addHrUser(@RequestBody RequestUserLogin request) {
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
 		u.setFname(request.getName());
 		u.setEmail(request.getEmail());
 		u.setPwd(request.getPwd());
 		u.setCompany(request.getCompany());
-		u.setTel(request.getTel());       //用户联系方式
-		u.setMdUid(request.getMdUid());   //明道id
-		//测试阶段先免费
+		u.setTel(request.getTel()); // 用户联系方式
+		u.setMdUid(request.getMdUid()); // 明道id
+		// 测试阶段先免费
 		u.setInvited_left(100);
-		//默认等级
+		// 默认等级
 		u.setPrivilege(2);
 		ResponseMessage msg = new ResponseMessage();
 		boolean res = userService.addUser(u);
-		
-		if(res == false){
+
+		if (res == false) {
 			msg.setMsg("注册失败，邮箱已被注册");
 			msg.setHandler_url("/error");
 			rb.setMessage(msg);
-			rb.setState(0);			
-		}else{
+			rb.setState(0);
+		} else {
 			u = userService.getUserByEmail(u.getEmail());
 			userService.userLogin(u.getUid());
-			msg.setMsg(new String()+u.getUid());
+			msg.setMsg(new String() + u.getUid());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(u);
-			//发送邮件
-//			MailSenderInfo mailSenderInfo = new MailSenderInfo();
-//			mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
-//			mailSenderInfo.setToAddress(u.getEmail());
-//			mailSenderInfo.setSubject("欢迎新用户");
-//			mailSenderInfo.setContent("欢迎你们彩笔们~");
-//			SimpleMailSender.sendHtmlMail(mailSenderInfo);
+			// 发送邮件
+			// MailSenderInfo mailSenderInfo = new MailSenderInfo();
+			// mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
+			// mailSenderInfo.setToAddress(u.getEmail());
+			// mailSenderInfo.setSubject("欢迎新用户");
+			// mailSenderInfo.setContent("欢迎你们彩笔们~");
+			// SimpleMailSender.sendHtmlMail(mailSenderInfo);
 		}
-		
-		
+
 		return rb;
 	}
-	
-	@RequestMapping(value="/add/admin")
+
+	@RequestMapping(value = "/add/admin")
 	@ResponseBody
-	public ResponseBase addAdminUser(@RequestBody RequestUserLogin request){
+	public ResponseBase addAdminUser(@RequestBody RequestUserLogin request) {
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
 		u.setFname(request.getName());
 		u.setEmail(request.getEmail());
 		u.setPwd(request.getPwd());
-		//默认等级
+		// 默认等级
 		u.setPrivilege(3);
 		ResponseMessage msg = new ResponseMessage();
 		boolean res = userService.addUser(u);
-		
-		if(res == false){
+
+		if (res == false) {
 			msg.setMsg("注册失败，邮箱已被注册");
 			msg.setHandler_url("/error");
-			rb.setState(0);			
+			rb.setState(0);
 			rb.setMessage(msg);
-		}else{
+		} else {
 			u = userService.getUserByEmail(u.getEmail());
 			userService.userLogin(u.getUid());
-			msg.setMsg(new String()+u.getUid());
+			msg.setMsg(new String() + u.getUid());
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(u);
 		}
-		
-		
+
 		return rb;
 	}
-	
-	@RequestMapping(value="/getVerifyQtn")
+
+	@RequestMapping(value = "/getVerifyQtn")
 	@ResponseBody
-	public ResponseBase getVerifyQtn(){
+	public ResponseBase getVerifyQtn() {
 		ResponseBase rb = new ResponseBase();
-		int qtnCount=verifyQuestionService.getVerifyQuestionCount();
-		Random rand=new Random();
+		int qtnCount = verifyQuestionService.getVerifyQuestionCount();
+		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
-		int index=rand.nextInt(qtnCount);
-		//获取第index个问题
-		VerifyQuestion vq=verifyQuestionService.getVerifyQuestion(index);
+		int index = rand.nextInt(qtnCount);
+		// 获取第index个问题
+		VerifyQuestion vq = verifyQuestionService.getVerifyQuestion(index);
 		rb.setState(200);
 		rb.setMessage(vq);
 		return rb;
 	}
-	
-	//查询用户的基本信息
-	@RequestMapping(value="/setting/query")
+
+	// 查询用户的基本信息
+	@RequestMapping(value = "/setting/query")
 	@ResponseBody
-	public ResponseBase queryUserInfo(@RequestBody RequestUser request){
+	public ResponseBase queryUserInfo(@RequestBody RequestUser request) {
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
-		
+
 		u = userService.getUserById(request.getUid());
-		if(u == null ){
+		if (u == null) {
 			ResponseMessage msg = new ResponseMessage();
-			msg.setMsg("failed login!  not found user:"+request.getUid());
+			msg.setMsg("failed login!  not found user:" + request.getUid());
 			msg.setHandler_url("/error");
-			rb.setState(0);		
+			rb.setState(0);
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(msg);
-		}else{
-			User rtUser  = new User();
+		} else {
+			User rtUser = new User();
 			rtUser.setEmail(u.getEmail());
 			rtUser.setCompany(u.getCompany());
 			rtUser.setFname(u.getFname());
 			rtUser.setTel(u.getTel());
 			rtUser.setInvited_left(u.getInvited_left());
-			
+
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(rtUser);
-		}		
+		}
 		return rb;
 	}
-	
-	//修改用户的基本信息
-	@RequestMapping(value="/setting/set")
+
+	// 修改用户的基本信息
+	@RequestMapping(value = "/setting/set")
 	@ResponseBody
-	public ResponseBase setUserInfo(@RequestBody User user){
+	public ResponseBase setUserInfo(@RequestBody User user) {
 		ResponseBase rb = new ResponseBase();
 		User u = new User();
-		
+
 		u = userService.getUserById(user.getUid());
 		ResponseMessage msg = new ResponseMessage();
-		if(u == null ){
+		if (u == null) {
 			msg.setMsg("用户名不存在");
 			msg.setHandler_url("/error");
-			rb.setState(0);	
+			rb.setState(0);
 			rb.setMessage(msg);
 			return rb;
-		}else{
+		} else {
 			u.setCompany(user.getCompany());
 			u.setTel(user.getTel());
 			userService.updateUser(u);
@@ -310,98 +302,97 @@ public class UserController {
 			rb.setToken(securityService.computeToken(u));
 			return rb;
 		}
-		
+
 	}
-	
-	//修改用户的基本信息
-		@RequestMapping(value="/setting/setpwd")
-		@ResponseBody
-		public ResponseBase setPwd(@RequestBody Map map){
-			String oldPwd = (String)map.get("oldPwd");
-			String newPwd = (String)map.get("newPwd");
-			int uid = (Integer)map.get("uid");
-			User u = userService.getUserById(uid);
-			ResponseBase rb = new ResponseBase();
-			
-			if(u.getPwd().equals(oldPwd)==false){
-				rb.setState(0);
-				return rb;
-			}else{
-				u.setPwd(newPwd);
-			    userService.updateUser(u);
-			    rb.setState(1);
-			    return rb;
-			}
-		}
-	
-	
-		//重置密码申请,发送用户邮件
-		@RequestMapping(value="/setting/resetpwdapply")
-		@ResponseBody
-		public ResponseBase reSetPwdApply(@RequestBody Map map){
-			ResponseBase rb = new ResponseBase();
-			String email = (String)map.get("email");
-			if(email == null){
-				rb.setState(1);
-				rb.setMessage("email为空");
-				return rb;
-			};
-			User user = userDao.getUserIdByEmail(email);
-			if(user ==null){
-				rb.setState(1);
-				rb.setMessage("email错误，用户不存在");
-				return rb;
-			}
-			userService.resetPwdApply(email,user);
+
+	// 修改用户的基本信息
+	@RequestMapping(value = "/setting/setpwd")
+	@ResponseBody
+	public ResponseBase setPwd(@RequestBody Map map) {
+		String oldPwd = (String) map.get("oldPwd");
+		String newPwd = (String) map.get("newPwd");
+		int uid = (Integer) map.get("uid");
+		User u = userService.getUserById(uid);
+		ResponseBase rb = new ResponseBase();
+
+		if (u.getPwd().equals(oldPwd) == false) {
 			rb.setState(0);
 			return rb;
-		}
-		
-		
-		//验证url是否合法
-		@RequestMapping(value="/setting/checkurl")
-		@ResponseBody
-		public ResponseBase checkUrl(@RequestBody Map map){
-			ResponseBase rb = new ResponseBase();
-			String url = (String)map.get("url");
-			if(url == null){
-				rb.setState(1);
-				rb.setMessage("param为空");
-			};
-			User user = userDao.getUserByUrl(url);
-			if(user ==null){
-				rb.setState(1);
-				rb.setMessage("错误的url地址");
-				return rb;
-			}
-			rb.setState(0);
+		} else {
+			u.setPwd(newPwd);
+			userService.updateUser(u);
+			rb.setState(1);
 			return rb;
 		}
-		
-		
-		
-		
-		//重置密码
-		@RequestMapping(value="/setting/resetpwd")
-		@ResponseBody
-		public ResponseBase reSetPwd(@RequestBody Map map){
-			ResponseBase rb = new ResponseBase();
-			String email = (String)map.get("email");
-			String pwd = (String)map.get("password");
-			String confirmpwd = (String)map.get("confirmPassword");
-			
-			if(pwd == null || pwd.equals("")==true){
-				rb.setState(1);
-				rb.setMessage("密码为空");
-				return rb;
-			};
-			if(pwd.equals(confirmpwd)==false){
-				rb.setState(1);
-				rb.setMessage("两次密码不相同");
-				return rb;
-			}
-			userDao.updatePwd(pwd, email);
-			rb.setState(0);
+	}
+
+	// 重置密码申请,发送用户邮件
+	@RequestMapping(value = "/setting/resetpwdapply")
+	@ResponseBody
+	public ResponseBase reSetPwdApply(@RequestBody Map map) {
+		ResponseBase rb = new ResponseBase();
+		String email = (String) map.get("email");
+		if (email == null) {
+			rb.setState(1);
+			rb.setMessage("email为空");
 			return rb;
 		}
+		;
+		User user = userDao.getUserIdByEmail(email);
+		if (user == null) {
+			rb.setState(1);
+			rb.setMessage("email错误，用户不存在");
+			return rb;
+		}
+		userService.resetPwdApply(email, user);
+		rb.setState(0);
+		return rb;
+	}
+
+	// 验证url是否合法
+	@RequestMapping(value = "/setting/checkurl")
+	@ResponseBody
+	public ResponseBase checkUrl(@RequestBody Map map) {
+		ResponseBase rb = new ResponseBase();
+		String url = (String) map.get("url");
+		if (url == null) {
+			rb.setState(1);
+			rb.setMessage("param为空");
+		}
+		;
+		User user = userDao.getUserByUrl(url);
+		if (user == null) {
+			rb.setState(1);
+			rb.setMessage("错误的url地址");
+			return rb;
+		}
+		rb.setState(0);
+		rb.setMessage(user.getEmail());
+		return rb;
+	}
+
+	// 重置密码
+	@RequestMapping(value = "/setting/resetpwd")
+	@ResponseBody
+	public ResponseBase reSetPwd(@RequestBody Map map) {
+		ResponseBase rb = new ResponseBase();
+		String email = (String) map.get("email");
+		String pwd = (String) map.get("password");
+		String confirmpwd = (String) map.get("confirmPassword");
+
+		if (pwd == null || pwd.equals("") == true) {
+			rb.setState(1);
+			rb.setMessage("密码为空");
+			return rb;
+		}
+		;
+		if (pwd.equals(confirmpwd) == false) {
+			rb.setState(1);
+			rb.setMessage("两次密码不相同");
+			return rb;
+		}
+		userDao.updatePwd(pwd, email);
+		rb.setState(0);
+		return rb;
+	}
 }

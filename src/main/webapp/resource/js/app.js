@@ -115,6 +115,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'page/findPwd.html',
             	controller: 'findPwdCtrl'
             }).
+            when('/:auth',{
+            	templateUrl: 'page/findPwd.html',
+            	controller: 'findPwdCtrl'
+            }).
             otherwise({
                 redirectTo: '/'
             });
