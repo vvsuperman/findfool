@@ -111,6 +111,10 @@ OJApp.config(['$routeProvider','$locationProvider',
             	templateUrl: 'page/signup.html',
             	controller: 'signupCtrl'
             }).
+            when('/findPwd',{
+            	templateUrl: 'page/findPwd.html',
+            	controller: 'findPwdCtrl'
+            }).
             otherwise({
                 redirectTo: '/'
             });
