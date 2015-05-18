@@ -6,7 +6,7 @@ OJApp.controller('findPwdCtrl',function ($scope,$http,Data) {
 	$scope.request=function(){
 		if($scope.email){
 			$http({
-				url: WEBROOT+"/user/setting/resetpwdapply",
+				url: WEBROOT + "/user/setting/resetpwdapply",
 				method: 'POST',
 				data: {'email': $scope.email}
 			}).success(function(data){

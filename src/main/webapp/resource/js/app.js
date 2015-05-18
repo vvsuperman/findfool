@@ -15,7 +15,7 @@ var OJApp = angular.module('OJApp', [
 ]);
 
 
-OJApp.config(['$routeProvider','$locationProvider',
+OJApp.config(['$routeProvider' , '$locationProvider',
     function ($routeProvider,$locationProvider) {
         $routeProvider.
             when('/', {
