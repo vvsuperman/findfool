@@ -22,7 +22,8 @@ OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window)
 				data: {'email': $scope.email,'password': pwd,'confirmPassword': pwd}
 			}).success(function(){
 				flashTip('重置密码成功');
-				$window.location.href="#/login";
+				$scope.successStage=1;
+				$scope.submitStage=0;
 			}).error(function(){
 				flashTip('重置密码失败');
 			});
@@ -49,6 +50,7 @@ OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window)
 	}
 	
 	$scope.isMessage=0;
+	$scope.successStage==0;
 	if($routeParams.auth){
 		$scope.checkUrl();
 	}
