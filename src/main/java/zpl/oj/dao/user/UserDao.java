@@ -14,7 +14,7 @@ public interface UserDao {
 	
 	@Update("update user set "
 			+ "fname=#{fname},lname=#{lname},company=#{company},tel=#{tel},privilege=${privilege},"
-			+ "pwd=#{pwd},invited_left=${invited_left},invited_num=${invitedNum} "
+			+ "pwd=#{pwd},invited_left=${invited_left},resetUrl=#{resetUrl},invited_num=${invitedNum} "
 			+ "where uid=${uid}")
 	void updateUser(User u);
 	
@@ -40,7 +40,7 @@ public interface UserDao {
 	@Update("update user set last_login_date=now() where uid = #{uid}")
 	void updateLoginDateByUid(int uid);
 	
-	@Update("update user set pwd=#{pwd} where email = #{email}")
+	@Update("update user set pwd=#{0} where email = #{1}")
 	void updatePwd(String pwd,String email);
 	
 	

@@ -344,11 +344,13 @@ public class UserController {
 			if(email == null){
 				rb.setState(1);
 				rb.setMessage("email为空");
+				return rb;
 			};
 			User user = userDao.getUserIdByEmail(email);
 			if(user ==null){
 				rb.setState(1);
 				rb.setMessage("email错误，用户不存在");
+				return rb;
 			}
 			userService.resetPwdApply(email,user);
 			rb.setState(0);
@@ -370,6 +372,7 @@ public class UserController {
 			if(user ==null){
 				rb.setState(1);
 				rb.setMessage("错误的url地址");
+				return rb;
 			}
 			rb.setState(0);
 			return rb;
@@ -384,18 +387,20 @@ public class UserController {
 		public ResponseBase reSetPwd(@RequestBody Map map){
 			ResponseBase rb = new ResponseBase();
 			String email = (String)map.get("email");
-			String password = (String)map.get("password");
-			String confirmPassword = (String)map.get("confirmPassword");
+			String pwd = (String)map.get("password");
+			String confirmpwd = (String)map.get("confirmPassword");
 			
-			if(password == null){
+			if(pwd == null || pwd.equals("")==true){
 				rb.setState(1);
 				rb.setMessage("密码为空");
+				return rb;
 			};
-			if(password != confirmPassword){
+			if(pwd.equals(confirmpwd)==false){
 				rb.setState(1);
 				rb.setMessage("两次密码不相同");
+				return rb;
 			}
-			userDao.updatePwd(password, email);
+			userDao.updatePwd(pwd, email);
 			rb.setState(0);
 			return rb;
 		}
