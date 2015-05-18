@@ -85,7 +85,7 @@ public class UserServiceImp implements UserService{
 		String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random=new Random();
         StringBuffer sb=new StringBuffer();
-        for(int i=0;i<12;i++){
+        for(int i=0;i<24;i++){
          int number=random.nextInt(62);
          sb.append(str.charAt(number));
         }
@@ -98,7 +98,7 @@ public class UserServiceImp implements UserService{
         mailSenderInfo.setSubject("重置密码");
         
         String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
-        String content ="您好，这是一封重置密码的邮件，请到"+baseurl+"/#/"+str+"重置密码";
+        String content ="<p>您好，这是一封重置密码的邮件，请到</p><a href='"+baseurl+"/#/"+sb.toString()+"'>"+baseurl+"/#/"+sb.toString()+"</a><p>重置密码</p>";
         mailSenderInfo.setContent(content);
       //发送邮件
       	SimpleMailSender.sendHtmlMail(mailSenderInfo);

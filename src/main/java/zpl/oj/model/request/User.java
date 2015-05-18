@@ -22,7 +22,7 @@ public class User {
 	private int state;
 	private String tel;
 	private String mdUid;//明道的uid
-	private String resetUrl;
+	private String resetUrl; //重置密码时随机生成的url
 	
 	public String getResetUrl() {
 		return resetUrl;
