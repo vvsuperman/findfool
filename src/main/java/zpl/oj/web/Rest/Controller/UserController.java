@@ -336,7 +336,7 @@ public class UserController {
 	
 	
 		//重置密码
-		@RequestMapping(value="/setting/setpwd")
+		@RequestMapping(value="/setting/resetpwd")
 		@ResponseBody
 		public ResponseBase reSetPwd(@RequestBody Map map){
 			ResponseBase rb = new ResponseBase();

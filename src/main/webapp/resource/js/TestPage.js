@@ -113,7 +113,6 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
                 for (var i = 0; i < $scope.tests.length; i++) {
                     $scope.tests[i].data = i;
                 }
-                console.log($scope.tests);
             } else {
 
             }

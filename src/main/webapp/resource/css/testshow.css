@@ -1,3 +1,25 @@
+.testblock{
+	height: 100px;
+	margin-top:30px;
+    border: 1px solid #000;
+    border-radius:3px;
+}
+
+.testblock .testtitle{
+	font-size: 18px;
+	margin-top: 10px
+}
+
+.testblock .testinvite{
+	margin-top: 10px;
+}
+
+.testblock .testreport{
+	color:black;
+	margin-top: 5px;
+}
+
+
 .skill-board{
 	 /* background: url("../static/skill_tree.png") no-repeat scroll center top; */
   	 height: 300px; 
