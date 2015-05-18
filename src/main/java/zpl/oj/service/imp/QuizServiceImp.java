@@ -29,6 +29,14 @@ public class QuizServiceImp implements QuizService {
 	@Autowired
 	private ProblemService problemService;
 	
+	
+	/*
+	 *根据拥有者返回quiz 
+	 * 返回：
+	 * 1 题数，做题时间
+	 * 2 已邀请数
+	 * 3 已回答数
+	 * */
 	@Override
 	public List<Quiz> getQuizByOwner(int owner) {
 		return quizDao.getQuizs(owner);

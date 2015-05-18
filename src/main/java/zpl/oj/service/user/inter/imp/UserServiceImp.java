@@ -79,7 +79,7 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public void resetPwd(String email,User user) {
+	public void resetPwdApply(String email,User user) {
 		// TODO Auto-generated method stub
 		//生成随机字符串
 		String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

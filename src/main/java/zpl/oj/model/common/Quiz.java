@@ -45,6 +45,41 @@ public class Quiz implements Serializable {
 	 * 这个里面是测试报告发送地址的邮件，使用逗号隔开,
 	 */
 	private String emails;
+	
+	//统计数据：题量
+	private int questionNum;
+	//统计数据：邀请数
+	private int invitedNum;
+	//统计数据：完成数
+	private int finishedNum;
+	
+	
+	public int getQuestionNum() {
+		return questionNum;
+	}
+
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+
+	public int getInvitedNum() {
+		return invitedNum;
+	}
+
+	public void setInvitedNum(int invitedNum) {
+		this.invitedNum = invitedNum;
+	}
+
+	public int getFinishedNum() {
+		return finishedNum;
+	}
+
+	public void setFinishedNum(int finishedNum) {
+		this.finishedNum = finishedNum;
+	}
+
+
+	
 
     public Integer getQuizid() {
         return quizid;

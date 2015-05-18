@@ -35,5 +35,8 @@ public interface UserDao {
 	@Update("update user set last_login_date=now() where uid = #{uid}")
 	void updateLoginDateByUid(int uid);
 	
+	@Update("update user set pwd=#{pwd} where email = #{email}")
+	void updatePwd(String pwd,String email);
+	
 	
 }

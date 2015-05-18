@@ -335,10 +335,10 @@ public class UserController {
 		}
 	
 	
-		//重置密码
-		@RequestMapping(value="/setting/resetpwd")
+		//重置密码申请,发送用户邮件
+		@RequestMapping(value="/setting/resetpwdapply")
 		@ResponseBody
-		public ResponseBase reSetPwd(@RequestBody Map map){
+		public ResponseBase reSetPwdApply(@RequestBody Map map){
 			ResponseBase rb = new ResponseBase();
 			String email = (String)map.get("email");
 			if(email == null){
@@ -350,7 +350,30 @@ public class UserController {
 				rb.setState(1);
 				rb.setMessage("email错误，用户不存在");
 			}
-			userService.resetPwd(email,user);
+			userService.resetPwdApply(email,user);
+			rb.setState(0);
+			return rb;
+		}
+		
+		
+		//重置密码
+		@RequestMapping(value="/setting/resetpwd")
+		@ResponseBody
+		public ResponseBase reSetPwd(@RequestBody Map map){
+			ResponseBase rb = new ResponseBase();
+			String email = (String)map.get("email");
+			String password = (String)map.get("password");
+			String confirmPassword = (String)map.get("confirmPassword");
+			
+			if(password == null){
+				rb.setState(1);
+				rb.setMessage("密码为空");
+			};
+			if(password != confirmPassword){
+				rb.setState(1);
+				rb.setMessage("两次密码不相同");
+			}
+			userDao.updatePwd(password, email);
 			rb.setState(0);
 			return rb;
 		}
