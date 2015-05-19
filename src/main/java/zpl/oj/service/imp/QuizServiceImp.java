@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.QuizProblemDao;
 import zpl.oj.model.common.Quiz;
@@ -29,6 +30,9 @@ public class QuizServiceImp implements QuizService {
 	@Autowired
 	private ProblemService problemService;
 	
+	@Autowired
+	private InviteDao inviteDao;
+	
 	
 	/*
 	 *根据拥有者返回quiz 
@@ -39,7 +43,18 @@ public class QuizServiceImp implements QuizService {
 	 * */
 	@Override
 	public List<Quiz> getQuizByOwner(int owner) {
-		return quizDao.getQuizs(owner);
+		List<Quiz> quizList = quizDao.getQuizs(owner);
+		for(Quiz quiz:quizList){
+			int pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
+			int invited = inviteDao.countInvites(quiz.getQuizid());
+			int finished = inviteDao.countInviteFinished(quiz.getQuizid());
+			quiz.setQuestionNum(pNum);
+			quiz.setInvitedNum(invited);
+			quiz.setFinishedNum(finished);
+		}
+		
+		return quizList;
+		
 	}
 	
 	@Override

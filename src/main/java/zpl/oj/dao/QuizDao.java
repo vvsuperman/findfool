@@ -46,11 +46,13 @@ public interface QuizDao {
   void updateQuiz(Quiz quiz);
     
   @Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS  "
-  		+ " FROM quiz WHERE OWNER=#{0} ")
+  		+ " FROM quiz WHERE OWNER=#{0} order by date desc ")
   List<Quiz> getQuizs(int owner);
 
   @Select("select * from quiz_templete where quizTName = #{quizName}")
   QuizTemplete getQuizTByName(String quizName);
+  
+  
 
 
 }

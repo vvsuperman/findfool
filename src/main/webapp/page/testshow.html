@@ -29,13 +29,26 @@
 				    </h3>
 				  </div>
 				  <div class="panel-body row">
+				    <div class="col-md-12">
+				       <span style="margin-left: 10px" ng-bind="test.questionNum"></span>道题，<span ng-bind="test.time"></span>分钟
+				    </div>
 				    <div class="col-md-12 test-tag" style="float:left">
-                  		<span class="glyphicon glyphicon-user" ></span>
-                  		<a ng-click="inviteUser(test)" class="blackFont" href="">邀请</a>
+				        <div class="col-md-4 ">
+	                  		<span class="glyphicon glyphicon-user" ></span>
+	                  		<a ng-click="inviteUser(test)"  href="">邀请</a>
+                  		</div>
+                  		<div class="col-md-4 col-md-offset-2">
+	                  		<span ng-bind="test.invitedNum" ></span><span>&nbsp;已邀请</span>
+                  		</div>
                 	</div>
                 	<div class="col-md-12 test-tag" style="float:left">
-                  		<span class="glyphicon glyphicon-stats" ></span>
-                  		<a href="#/report"  class="blackFont" ng-click="report(test)">报告</a>
+                	   <div class="col-md-4">
+	                  		<span class="glyphicon glyphicon-stats" ></span>
+	                  		<a href="#/report"   ng-click="report(test)">报告</a>
+                  		</div>
+                  		<div class="col-md-4 col-md-offset-2">
+	                  		<span ng-bind="test.finishedNum" ></span><span>&nbsp;已完成</span>
+                  		</div>
                 	</div>
 				  </div>
 				</div>

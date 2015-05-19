@@ -46,5 +46,15 @@ public interface InviteDao {
 			+ "from invite t1,testuser t2 "
 			+ "where  t1.uid= t2.tuid and t1.testid =#{0} and (t1.state=1 or t1.state=0) order by t1.state,t1.finishtime,t1.inviteTime desc")
 	List<ResponseInvite> getOrderInviteByTid(Integer testid); 
-	  
+	
+	//某一个测试的发送人数
+	@Select("select count(*) from invite where testid=#{0}")
+	int countInvites(Integer testid);	
+	
+	//某一个测试的完成人数
+	@Select("select count(*) from invite where testid=#{0} and state=1") 
+	int countInviteFinished(Integer testid);
+	
+	
+	
 }

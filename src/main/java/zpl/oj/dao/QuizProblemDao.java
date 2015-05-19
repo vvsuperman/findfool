@@ -41,7 +41,9 @@ public interface QuizProblemDao {
   
   void deleteQuestionFromTest(QuizProblem quizProblem);
 	
-	
+  @Select("select count(*) from quizproblem where quizid = #{0}")
+  int countPnumInQuiz(int quizId);
+  
   
  // void deleteQuizproblem();
   

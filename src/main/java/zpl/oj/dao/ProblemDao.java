@@ -83,8 +83,13 @@ public interface ProblemDao {
 	@Select("    select  COUNT(*) FROM PROBLEM"
 			+ " WHERE creator=${uid}")
 	  Integer selectCount(int uid);  
+	
+	
+	
 	    
 	}
+
+
 
 /**主要用于分页，可返回总记录数*/
 //	@Select("    select  COUNT(*) FROM PROBLEM"
