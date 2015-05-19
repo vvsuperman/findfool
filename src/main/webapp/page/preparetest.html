@@ -44,9 +44,17 @@
     <div class="container-fluid" style="margin-top: 100px" ng-if="show==2">
      
      <div class="col-md-3 col-md-offset-2">
-	     <button id="showBtn" class="btn btn-primary" ng-click="showVideo()"  style="font-size:24px;margin-top: 50px;height: 200px">
-	        开启摄像头来进行考试
-	     </button>
+     
+		 <div style="margin-top: 50px;"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div>   
+		 <div style="margin-top: 10px" class="cameraIcon">  
+		     <p style="margin-top: 10%">点击以开启摄像头</p>    
+		     <img id="showBtn" class="img-responsive cameraBtn" ng-click="showVideo()" style="height: 100px;text-align: center;"  src="resource/static/cameraicon.png">
+		        
+	     </div>
+	     <div style="margin-top: 10px">
+	        <p>为什么要拍照片</p>
+	        <p>拍照遇到问题怎么办</p>
+	     </div>
     
        	  <div id="cameraZone" ng-show="showCZone ==2" style="margin-top:50px">
 			  <video  ng-show="monitor==1" id="video" width="320" height="240" autoplay>

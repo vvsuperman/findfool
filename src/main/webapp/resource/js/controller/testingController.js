@@ -14,7 +14,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 //	 $scope.testid ="11";
 //	 $scope.tid = "11";
 
-	 //$scope.show = 2;
+	
 //测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
@@ -63,9 +63,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 }
     	 }
     	 else{
-    		 $scope.show = 1;
+    		 //$scope.show = 1;
     		//测试数据
-    	     //$scope.show = 2;
+    	     $scope.show = 2;
     	 }	 
          
      }).error(function(){
