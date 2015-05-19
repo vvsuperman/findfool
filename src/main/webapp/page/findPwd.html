@@ -11,18 +11,7 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                   <!--  <li class="active">
-                        <a href="http://findfool.com/# /">首页</a>
-                    </li>
-                    <li>
-                        <a href="#">在线题库</a>
-                    </li>
-                    <li>
-                        <a href="#">平台特点</a>
-                    </li>
-                    <li>
-                        <a href="#">联系方式</a>
-                    </li> -->
+                  
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -46,15 +35,20 @@
         </p>
 	</div>
     <div class="row" ng-show="requestStage==1">
+        
         <div class="col-md-offset-4 col-md-4">
+        <p style="font-size:30px;text-align: center;margin-top: 50px" class="greenFont">
+           找回密码
+        </p>
             <form class="form-horizontal form-login">
                 <div class="form-group">
                     <input type="email" class="form-control txt-large" id="email" placeholder="注册邮箱" ng-model="email">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control txt-large" id="authCode" placeholder="验证码" ng-model="authCode">
+                     <label class="form-label" ng-bind="content"></label> <a  href="" ng-click="refreshQuestion()">刷新题目</a>
+                    <input type="text" class="form-control txt-large" id="authCode" placeholder="验证码" ng-model="answer">
                     </br>
-                    <button countbutton class="btn btn-success pull-right">验证码</button>
+                    
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="request()">

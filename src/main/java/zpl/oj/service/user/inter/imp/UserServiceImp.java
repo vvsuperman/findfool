@@ -1,18 +1,21 @@
 package zpl.oj.service.user.inter.imp;
 
-import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.common.VerifyQuestion;
 import zpl.oj.model.request.User;
 import zpl.oj.service.InviteService;
+import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
+import zpl.oj.util.randomCode.ValidateCode;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -21,6 +24,9 @@ public class UserServiceImp implements UserService{
 	private UserDao userDao;
     @Autowired
     private InviteService inviteService;
+    @Autowired
+    private VerifyQuestionService vfQuestion;
+    
     
 	@Override
 	public boolean addUser(User u) {
@@ -102,6 +108,10 @@ public class UserServiceImp implements UserService{
         mailSenderInfo.setContent(content);
       //发送邮件
       	SimpleMailSender.sendHtmlMail(mailSenderInfo);
+      	
+      	
+      	
+      	
         
 	}
 

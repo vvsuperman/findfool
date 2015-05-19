@@ -11,4 +11,7 @@ public interface VerifyQuestionDao {
 	
 	@Select("select count(*) from verify_question")
 	int getVerifyQuestionCount();
+	
+	@Select("select * from verify_question where question = #{0}")
+	VerifyQuestion getVQuestByContent(String content);
 }

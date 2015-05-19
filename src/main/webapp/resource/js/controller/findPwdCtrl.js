@@ -1,14 +1,32 @@
 OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window) {
 	
+	//获取验证码
+	$scope.refreshQuestion = function(){
+		$http({
+			url: WEBROOT + "/user/getVerifyQtn",
+			method: 'POST',
+		}).success(function(data){
+			$scope.content = data.message;
+		});
+	}
+	$scope.refreshQuestion();
+	
 	$scope.request=function(){
-		if($scope.email){
+		console.log($scope.email,$scope.answer);
+		if($scope.email && $scope.answer){
 			$http({
 				url: WEBROOT + "/user/setting/resetpwdapply",
 				method: 'POST',
-				data: {'email': $scope.email}
+				data: {'email': $scope.email,'content':$scope.content,'answer':$scope.answer}
 			}).success(function(data){
-				flashTip('已向您邮箱发送重置密码信息');
-				$scope.isMessage=1;
+				if(data.state !=0){
+					flashTip(data.message);
+					return false;
+				}else{
+					flashTip('已向您邮箱发送重置密码信息');
+					$scope.isMessage=1;
+				}
+				
 			});
 		}
 	};

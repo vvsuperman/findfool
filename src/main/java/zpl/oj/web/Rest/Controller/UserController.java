@@ -99,7 +99,6 @@ public class UserController {
 			token = (String) tokenMap.get("access_token");
 
 			String user = Config.getUserInfo(token);
-			System.out.println("user....................." + user);
 			if (user == null) {
 				rb.setState(3);
 				return rb;
@@ -244,7 +243,7 @@ public class UserController {
 		// 获取第index个问题
 		VerifyQuestion vq = verifyQuestionService.getVerifyQuestion(index);
 		rb.setState(200);
-		rb.setMessage(vq);
+		rb.setMessage(vq.getQuestion());
 		return rb;
 	}
 
@@ -325,6 +324,9 @@ public class UserController {
 			return rb;
 		}
 	}
+	
+	
+	
 
 	// 重置密码申请,发送用户邮件
 	@RequestMapping(value = "/setting/resetpwdapply")
@@ -332,19 +334,34 @@ public class UserController {
 	public ResponseBase reSetPwdApply(@RequestBody Map map) {
 		ResponseBase rb = new ResponseBase();
 		String email = (String) map.get("email");
+		String content = (String)map.get("content");
+		String answer = (String)map.get("answer");
+		
+		VerifyQuestion vQuestion = verifyQuestionService.getVQuestByContent(content);
+		if(vQuestion == null){
+			rb.setState(1);
+			rb.setMessage("验证问题不存在");
+			return rb;
+		}
+		if(answer.equals(vQuestion.getAnswer()) == false){
+			rb.setState(1);
+			rb.setMessage("验证码错误");
+			return rb;
+		}
+		
+		
 		if (email == null) {
 			rb.setState(1);
 			rb.setMessage("email为空");
 			return rb;
-		}
-		;
+		};
 		User user = userDao.getUserIdByEmail(email);
 		if (user == null) {
 			rb.setState(1);
 			rb.setMessage("email错误，用户不存在");
 			return rb;
 		}
-		userService.resetPwdApply(email, user);
+	    userService.resetPwdApply(email, user);
 		rb.setState(0);
 		return rb;
 	}

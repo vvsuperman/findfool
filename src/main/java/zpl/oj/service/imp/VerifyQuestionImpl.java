@@ -22,5 +22,11 @@ public class VerifyQuestionImpl implements VerifyQuestionService {
 	public int getVerifyQuestionCount() {		
 		return verifyQuestionDao.getVerifyQuestionCount();
 	}
+	
+	@Override
+	public
+	VerifyQuestion getVQuestByContent(String content){
+		return verifyQuestionDao.getVQuestByContent(content);
+	}
 
 }
