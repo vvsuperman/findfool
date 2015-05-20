@@ -51,3 +51,39 @@
 .tooltip.right .tooltip-arrow   {
 	 border-right-color: #000  !important;
 }
+
+ .panel.quize-block .panel-heading {
+	background-color: white;
+    border-color: #d7d4f0;
+    color: #1abc9c;
+    font-weight: bold;
+    font-size: 16px;
+ }
+ .panel.quize-block.nopadding .panel-body{
+ 	padding: 0;
+ 	overflow:hidden;
+ }
+ .panel.quize-block .panel-body img{
+ 	width: 100%;
+ }
+ .panel.quize-block .panel-body p{
+ 	text-indent: 2em;
+ }
+ .panel.quize-block .panel-footer{
+ 	height: 55px;
+ 	padding: 10px 5px;
+ }
+  .panel.quize-block .panel-footer p{
+  	display: inline-block;
+  	height: 25px;
+  	line-height: 25px;
+  }
+  .panel.quize-block .panel-body{
+  	height:140px;
+  }
+  .panel.quize-block button{
+  	font-size: 14px;
+  }
+  
+  
+  

@@ -741,3 +741,8 @@ ul li {
     margin-top: 40px;
 }
 
+ .black-panel .panel-heading.quize-block {
+	background-color: white;
+    border-color: #d7d4f0;
+    color: #1abc9c;
+ }

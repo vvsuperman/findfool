@@ -135,6 +135,7 @@ OJApp.controller("Excel",function($scope, $http, Data) {
             //Data.token = data["token"];
             $scope.message = data["message"];
             if ($scope.state) {
+            	removeTip();
             	flashTip("邀请成功")
             } else {
             	flashTip($scope.message.msg)
@@ -155,6 +156,7 @@ OJApp.controller("Excel",function($scope, $http, Data) {
                         tmp.push($scope.xlsusers[user]);
                 }
             }
+            loadingTip();
             $scope.upload($scope.testlist[tid], tmp);
         }
     };
