@@ -2,6 +2,8 @@
  * Created by gilbert on 2015/3/31.
  */
 OJApp.controller('InnerTest',function($scope, $http, Data, $modal) {
+	//控制图片及信息显示
+	
     $scope.url = '#/innertest';
     $scope.active = 1;
     $scope.template = 'page/innerTest.html';

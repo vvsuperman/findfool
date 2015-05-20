@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testshow.css" />
 
 		<!-- 用户引导页面内容 -->
- <div div class="col-md-12" ng-if="guide.show==1">
+ <div div class="col-md-12" ng-if="guide.show==1" style="margin: 0px -15px;">
  	<div class="panel panel-default black-panel ">
 	  <div class="panel-heading">
 	  	  <span>用户引导</span> 
@@ -18,241 +18,166 @@
     	  </div>
     	  
     	   <!-- panel.body=1 -->
-   		   <div class="col-md-offset-1 col-md-10" ng-if="panel.body==1">
+   		   <div class="col-md-12" ng-if="panel.body==1">
 	    	 <h5>您需要招聘什么样的开发人员？</h5>
 	    	 <div style="margin:20px 0">
 	    		<h4>Web开发</h4>
-		    	<button class="btn btn-sm btn-success" ng-click="goNext(5);" style="margin:5px 20px 5px 0; height:40px">前端工程师</button>
-		    	<button class="btn btn-sm btn-warning" ng-click="goNext(6);" style="margin:5px 20px 5px 0; 20px;height:40px">服务端工程师</button>
-		    	<button class="btn btn-sm btn-info" ng-click="goNext(7);" style="margin:5px 20px 5px 0; height:40px">全栈工程师</button>
-	    	 </div>
-	    	 <div style="margin:20px 0">
-	    		<h4>移动开发</h4>
-	    		<button class="btn btn-sm btn-success" ng-click="goNext(10);" style="margin:5px 20px 5px 0; height:40px">原生态Android开发</button>
-	    		<button class="btn btn-sm btn-warning" ng-click="goNext(11);" style="margin:5px 20px 5px 0; height:40px">网页封装式Android开发</button>
-	    		<br/>
-	    		<button class="btn btn-sm btn-success" ng-click="goNext(8);" style="margin:5px 20px 5px 0; height:40px">原生态IOS开发</button>
-	    		<button class="btn btn-sm btn-warning" ng-click="goNext(9);" style="margin:5px 20px 5px 0; height:40px">网页封装式IOS开发</button>
-	    	 </div>
-    	    </div>
-    	  
-	    	<div class="col-md-offset-1 col-md-8" ng-if="panel.body==4">
-	    		<div style="margin-top: 10px;margin-bottom: 30px">
-	        		<p>Android开发一般采用java语言，采用google提供的Android API。但目前也流行
-	        			采取开发网页的形式，然后通过第三方工具将网页封装成Android应用，因为网页同时
-    					也可以封装成IOS应用，所以这种方式正越来越流行
-    				</p>
-	       		</div>
-	    		<button class="btn btn-success" ng-click="goNext(10);" style="margin-left: 20px;height:100px">原生态Android开发</button>
-	    		<button class="btn btn-warning" ng-click="goNext(11);" style="margin-left: 20px;height:100px">网页封装式Android开发</button>
-	    	</div>
-    	
-    		<div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==5">
-    	   		<p>前端介绍： 最新流行的热门职业。需要具备良好的沟通能力，需要与产品经理、UI设计师、
-    	   			项目经理、最终用户的沟通。传统意义上的前端开发需掌握HTML, Css, Javascript, 
-    	   			Jquery。而随着移动端网页封装开发及angularjs等MVC框架的兴起，前端开发正处于越
-    	   			来越重要的位置。需掌握的基本技能包括html,css,javascript。以及一些javascript
-    	   			类库，包括jQuery， Anuglarjs等等。
-    	   		</p>
-	      		<button class="btn btn-outline" ng-click="genQuiz('webFront')" style="margin-top: 20px" >自动生成试题</button>	
-	    	</div>	    
-    	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==6">
-	    		<p>web后台功能主要是响应用户的访问，为用户提供网络服务，一般使用Java、PHP等技术。此外，
-	    			还必须还必须掌握必要的框架，比如spring，thinkphp等等。为了操作数据库还需掌握数据库
-	    			知识，如果没有专业的运维人员，还需掌握Linux等技术"
-	    		</p>
-	    		<br/><br/>
-	    		<button class="btn btn-sm btn-success" ng-click="goNext(12);" style="margin:5px 20px 5px 0; height:40px">java服务端开发</button>
-	    		<button class="btn btn-sm btn-warning" ng-click="goNext(13);" style="margin:5px 20px 5px 0; height:40px"">php服务端开发</button>
-	    	</div>
-    	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==7">
-	    		<p>Full Stack developer。是指掌握多种技能，并能利用多种技能独立完成产品的人。
-		    		互联网项目，需要用到后端开发、前端开发、界面设计、产品设计、数据库、各种移动客
-		    		户端、三屏兼容、restFul API设计和OAuth等等，比较前卫的项目，还会用到Single 
-		    		Page Application、Web Socket、HTML5/CSS3这些技术以及像第三方开发像微信
-		    		公众号微博应用等等。
-		    	</p>
-	        	<button class="btn btn-sm btn-outline"   style="margin:5px 20px 5px 0; height:40px">请手工生成试题</button>	
-	    	</div>
-    	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==8">
-	    		<p>需掌握object-c，swift等知识。</p>
-	    	 	<button class="btn btn-outline" ng-click="genQuiz('object_c')" style="margin-top: 20px" >自动生成试题</button>	
-	    	
-	    	</div>
-	    	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==9">
-	    		<p>需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    			传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    			等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    			以及一些javascript类库，包括jQuery， Anuglarjs等等。</p>
-	         	<button class="btn btn-outline" ng-click="genQuiz('webFront')" style="margin-top: 20px" >自动生成试题</button>	
-	   	 	</div>
-   	 	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==10">
-	    		<p>需掌握android sdk，linux等知识。</p>
-	    	 	<button class="btn btn-outline" ng-click="genQuiz('android')" style="margin-top: 20px" >自动生成试题</button>	
-	    	</div>
-    	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==11">
-	    		<p>需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    			传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    			等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    			以及一些javascript类库，包括jQuery， Anuglarjs等等。
-	    		</p>
-	    		<button class="btn btn-outline" ng-click="genQuiz('webFront')" style="margin-top: 20px" >自动生成试题</button>	
-	    	</div>
-    	
-	    	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==12">
-	    		<p>java服务端开发，需掌握java, spring, hibernate等知识</p>
-	        	<button class="btn btn-outline" ng-click="genQuiz('java')" style="margin-top: 20px" >自动生成试题</button>	
-	    	</div>
-    
-	     	<div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==13">
-	    		<p>php服务端开发，需掌握php,thinkphp等知识</p>
-	    	 	<button class="btn btn-outline" ng-click="genQuiz('php')" style="margin-top: 20px">自动生成试题</button>	
-	    	</div>
-    	</div>
-  </div>
+	    		<div class="row">
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block" 
+			    			ng-mouseover="testFrontEndShow=0"  
+			    			ng-mouseleave="testFrontEndShow=1" 
+			    			ng-init="testFrontEndShow=1"
+			    			ng-class="{'nopadding': testFrontEndShow}">
+				    		<div class="panel-heading" >
+				    			<span>WEB前端试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testFrontEnd.png" ng-show="testFrontEndShow==1">
+				    			<p ng-show="testFrontEndShow==0">考察对html、css、javascript及常用框架Jquery、Bootstrap等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>	  
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block"
+		    				ng-mouseover="testJavaShow=0"  
+			    			ng-mouseleave="testJavaShow=1" 
+			    			ng-init="testJavaShow=1"
+			    			ng-class="{'nopadding': testJavaShow}">
+				    		<div class="panel-heading" >
+				    			<span>Java后端试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testJava.jpg" ng-show="testJavaShow==1">
+				    			<p ng-show="testJavaShow==0">考察Java服务端开发相关java, spring, hibernate等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('java')">自动生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>	 
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block"
+		    			ng-mouseover="testPhpShow=0"  
+			    		ng-mouseleave="testPhpShow=1" 
+			    		ng-init="testPhpShow=1"
+			    		ng-class="{'nopadding': testPhpShow}">
+				    		<div class="panel-heading">
+				    			<span>PHP后端试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testPhp.png" ng-show="testPhpShow==1">
+				    			<p ng-show="testPhpShow==0">考察php服务端开发相关php,thinkphp等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right"  ng-click="genQuiz('php')">自动生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>	 
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block"
+		    			ng-mouseover="testWebShow=0"  
+			    		ng-mouseleave="testWebShow=1" 
+			    		ng-init="testWebShow=1"
+			    		ng-class="{'nopadding': testWebShow}">
+				    		<div class="panel-heading" >
+				    			<span>全栈开发试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testWeb.png" ng-show="testWebShow==1">
+				    			<p ng-show="testWebShow==0">考察包括前端和后端相关知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right">手工生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>				
+	    		</div>
+		    	<h4>移动开发</h4>
+	    		<div class="row">
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block"
+		    			ng-mouseover="testAndroidShow=0"  
+			    		ng-mouseleave="testAndroidShow=1" 
+			    		ng-init="testAndroidShow=1"
+			    		ng-class="{'nopadding': testAndroidShow}">
+				    		<div class="panel-heading" >
+				    			<span>Android开发试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testAndroid.jpg" ng-show="testAndroidShow==1">
+				    			<p ng-show="testAndroidShow==0">考察Android相关android sdk，linux等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('android')">自动生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>	
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block"
+		    			ng-mouseover="testIosShow=0"  
+			    		ng-mouseleave="testIosShow=1" 
+			    		ng-init="testIosShow=1"
+			    		ng-class="{'nopadding': testIosShow}">
+				    		<div class="panel-heading" >
+				    			<span>IOS开发试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testIos.jpg" ng-show="testIosShow==1">
+				    			<p ng-show="testIosShow==0">考察IOS相关object-c，swift等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('object_c')">自动生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>	   	
+	    			<div class="col-md-3 col-sm-6 col-xs-12">
+		    			<div class="panel panel-default quize-block"
+		    			ng-mouseover="testH5Show=0"  
+			    		ng-mouseleave="testH5Show=1" 
+			    		ng-init="testH5Show=1"
+			    		ng-class="{'nopadding': testH5Show}">
+				    		<div class="panel-heading" >
+				    			<span>Web App开发试题</span>
+				    		</div>
+				    		<div class="panel-body">
+				    			<img src="resource/static/testH5.png" ng-show="testH5Show==1">
+				    			<p ng-show="testH5Show==0">考察Web App开发相关基本技能包括html,css,javascript。 以及一些javascript类库，包括jQuery， Anuglarjs等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+		    					</p>
+				    		</div>
+				    		<div class="panel-footer">
+				    			<p>建议用时:90分钟</p>
+				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
+				    		</div>
+			    		</div>
+	    			</div>	
+	    		</div>
+    		</div>
+   		</div>
+ 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="container-fluid" >
-    a href="#/invite">invite</a
-    
-    用户引导页面内容
-   <div class="col-md-10 col-md-offset-1" ng-if="guide.show==1">
-    <div class="panel panel-default black-panel" >
-	  <div class="panel-heading">
-	  	  用户引导
-	  </div>
-	  <div class="panel-body">
-	    <div class="col-md-offset-1" ng-if="panel.isBack" >
-	    	<a href="" ng-click="goBack()">
-	    	  <span class="glyphicon glyphicon-share-alt"></span>
-	    	  返回
-	    	</a>
-	    </div>
-	  
-	    <div class="col-md-offset-1 col-md-8" ng-if="panel.isGuide">
-	    	<h4 style="margin-top: 30px;margin-bottom: 20px">不知道怎么用？</h4>
-	    	<button class="btn btn-outline" ng-click="panel.isGuide=false;panel.body=1;">招聘程序员</button>
-	    </div>
-	    panel.body=1
-	    <div class="col-md-offset-1 col-md-8" ng-if="panel.body==1">
-	    	<h5>您需要招聘什么样的开发人员？</h5>
-	    	<div style="margin:20px">
-	    		<h4>Web开发</h4>
-		    	<button class="btn btn-sm btn-success" ng-click="goNext(5);" style="margin-left: 20px;height:40px">前端工程师</button>
-		    	<button class="btn btn-sm btn-warning" ng-click="goNext(6);" style="margin-left: 20px;height:40px">服务端工程师</button>
-		    	<button class="btn btn-sm btn-info" ng-click="goNext(7);" style="margin-left: 20px;height:40px">全栈工程师</button>
-	    	</div>
-	    	<div style="margin:20px">
-	    		<h4>移动开发</h4>
-	    		<button class="btn btn-sm btn-success" ng-click="goNext(10);" style="margin-left: 20px;height:40px">原生态Android开发</button>
-	    		<button class="btn btn-sm btn-warning" ng-click="goNext(11);" style="margin-left: 20px;height:40px">网页封装式Android开发</button>
-	    		<br/><br/>
-	    		<button class="btn btn-sm btn-success" ng-click="goNext(8);" style="margin-left: 20px;height:40px">原生态IOS开发</button>
-	    		<button class="btn btn-sm btn-warning" ng-click="goNext(9);" style="margin-left: 20px;height:40px">网页封装式IOS开发</button>
-	    	</div>
-	    </div>
-	    <div class="col-md-offset-1 col-md-8" ng-if="panel.body==4">
-	    <div style="margin-top: 10px;margin-bottom: 30px">
-	        <p>Android开发一般采用java语言，采用google提供的Android API。但目前也流行
-	        采取开发网页的形式，然后通过第三方工具将网页封装成Android应用，因为网页同时
-    		也可以封装成IOS应用，所以这种方式正越来越流行</p>
-	       </div>
-	    	<button class="btn btn-success" ng-click="goNext(10);" style="margin-left: 20px;height:100px">原生态Android开发</button>
-	    	<button class="btn btn-warning" ng-click="goNext(11);" style="margin-left: 20px;height:100px">网页封装式Android开发</button>
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==5">
-    	   <p>前端介绍： 最新流行的热门职业。需要具备良好的沟通能力，需要与产品经理、UI设计师、
-    	   项目经理、最终用户的沟通。传统意义上的前端开发需掌握HTML, Css, Javascript, 
-    	   Jquery。而随着移动端网页封装开发及angularjs等MVC框架的兴起，前端开发正处于越
-    	   来越重要的位置。需掌握的基本技能包括html,css,javascript。以及一些javascript
-    	   类库，包括jQuery， Anuglarjs等等。</p>
-	      <button class="btn btn-outline" ng-click="genQuiz('webFront')" style="margin-top: 20px" >自动生成试题</button>	
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==6">
-	    	<p>web后台功能主要是响应用户的访问，为用户提供网络服务，一般使用Java、PHP等技术。此外，
-	    	还必须还必须掌握必要的框架，比如spring，thinkphp等等。为了操作数据库还需掌握数据库
-	    	知识，如果没有专业的运维人员，还需掌握Linux等技术"</p>
-	    	<br/><br/>
-	    	<button class="btn btn-success" ng-click="goNext(12);" style="height:50px">java服务端开发</button>
-	    	<button class="btn btn-warning" ng-click="goNext(13);" style="margin-left: 20px;height:50px">php服务端开发</button>
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==7">
-	    	<p>Full Stack developer。是指掌握多种技能，并能利用多种技能独立完成产品的人。
-	    	互联网项目，需要用到后端开发、前端开发、界面设计、产品设计、数据库、各种移动客
-	    	户端、三屏兼容、restFul API设计和OAuth等等，比较前卫的项目，还会用到Single 
-	    	Page Application、Web Socket、HTML5/CSS3这些技术以及像第三方开发像微信
-	    	公众号微博应用等等。</p>
-	        <button class="btn btn-outline"  style="margin-top: 20px" >全栈程序员请手工生成试题</button>	
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==8">
-	    	<p>需掌握object-c，swift等知识。</p>
-	    	 <button class="btn btn-outline" ng-click="genQuiz('object_c')" style="margin-top: 20px" >自动生成试题</button>	
-	    	
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==9">
-	    	<p>需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    	传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    	等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    	以及一些javascript类库，包括jQuery， Anuglarjs等等。</p>
-	         <button class="btn btn-outline" ng-click="genQuiz('webFront')" style="margin-top: 20px" >自动生成试题</button>	
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==10">
-	    	<p>需掌握android sdk，linux等知识。</p>
-	    	 <button class="btn btn-outline" ng-click="genQuiz('android')" style="margin-top: 20px" >自动生成试题</button>	
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px"  ng-if="panel.body==11">
-	    	<p>需要具备良好的沟通能力，需要与产品经理、UI设计师、项目经理、最终用户的沟通。
-	    	传统意义上的前端开发需掌握HTML, Css, Javascript, Jquery。而随着移动端网页封装开发及angularjs
-	    	等MVC框架的兴起，前端开发正处于越来越重要的位置。需掌握的基本技能包括html,css,javascript。
-	    	以及一些javascript类库，包括jQuery， Anuglarjs等等。</p>
-	    	 <button class="btn btn-outline" ng-click="genQuiz('webFront')" style="margin-top: 20px" >自动生成试题</button>	
-	    </div>
-	    <div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==12">
-	    	<p>java服务端开发，需掌握java, spring, hibernate等知识</p>
-	        <button class="btn btn-outline" ng-click="genQuiz('java')" style="margin-top: 20px" >自动生成试题</button>	
-	    </div>
-	    
-	     <div class="col-md-offset-2 col-md-8" style="margin-top: 10px" ng-if="panel.body==13">
-	    	<p>php服务端开发，需掌握php,thinkphp等知识</p>
-	    	 <button class="btn btn-outline" ng-click="genQuiz('php')" style="margin-top: 20px">自动生成试题</button>	
-	    </div>
-	   
-	  </div>
-	</div>
-  </div> -->
-    
-
 <div class="modal" id="testCreateModal" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"
      aria-hidden="true">
@@ -290,7 +215,6 @@
 	      <div class="modal-footer">
 	     	 <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="pushTest()">新建</button>
 	         <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
-	        
 	      </div>
 	    </div>
   </div>
