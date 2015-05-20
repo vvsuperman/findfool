@@ -241,7 +241,7 @@ public class ReportService {
 				if(rightMap.get(setid)!=null){
 					userVal = rightMap.get(setid);
 				}
-				String setName = setDao.getSet(setid).getName();
+				String setName = setDao.getSet(setid).getComment();
 				((ArrayList)rtMap.get("name")).add(setName);
 				scoreList.add(val);
 				userScoreList.add(userVal);
