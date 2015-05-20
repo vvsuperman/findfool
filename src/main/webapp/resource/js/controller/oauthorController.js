@@ -69,7 +69,7 @@ OJApp.controller("oauthorController",function($scope, $http, Data,$routeParams) 
     };
     
     $scope.cancel = function(){
-    	 window.location.href = 'http://findfool.com';
+    	 window.location.href = 'http://foolrank.com';
     }
 
     

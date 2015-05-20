@@ -122,8 +122,8 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
  	 //carouse
  	 $scope.myInterval = 2000;
  	 var slideText=[
- 	                "自从用了findFool，腰不酸了，脖子不疼了，再也不用熬夜刷简历了",
- 	                "findFool大法好，退其它招聘平台保平安",
+ 	                "自从用了FoolRank，腰不酸了，脖子不疼了，再也不用熬夜刷简历了",
+ 	                "FoolRank大法好，退其它招聘平台保平安",
  	                "程序猿再也不用每个平台填简历了"
  	                ]
  	  var slides = $scope.slides = [];

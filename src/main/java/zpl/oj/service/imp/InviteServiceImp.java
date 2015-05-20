@@ -126,7 +126,7 @@ public class InviteServiceImp implements InviteService {
 		mailSenderInfo.setReplyToAddress(request.getReplyTo());
 		mailSenderInfo.setSubject(request.getSubject());
 		String context = request.getContext();
-		context += "<p>这是来自findfool公司的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到:</p>"
+		context += "<p>这是来自foolrank公司的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到:</p>"
 				+"<a href="+baseurl+"/#/testing/"+url+">"+baseurl+"/#/testing/"+url+"</a>"
 				+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
 				+ "<br/>您的测试时间为：" + request.getDuration()+"</p>";

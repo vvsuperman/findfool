@@ -11,16 +11,6 @@
    
 	 <div class="panel-body row">
        <div ng-repeat="test in tests">
-           <!-- <div style='background-color:#f7f7f9;height:54px;line-height: 44px;padding:5px;border-radius:5px;margin:10px 2%;'>
-               <a style="display: inline-block;margin-left: 5%;font-size:1em;" href="#/test/{{test.quizid}}">{{test.name}}</a>
-               <div class="btn-group pull-right" style="padding:0;margin:5px 2%;font-size:22px;">
-               		<button class="btn btn-primary" ng-click="inviteUser(test)">邀请</button>
-               		<button class="btn btn-success" href="#/report" ng-click="report(test)">报告</button>
-               		<a  ng-click="inviteUser(test)" href="">邀请</a>
-               		<a  href="#/report" ng-click="report(test)">报告</a>
-               </div>
-           </div> -->
-           
            <div class="col-md-3 col-sm-6 col-xs-12 test-block">
            		<div class="panel panel-default" style="padding:0;margin:5px;">
 				  <div class="panel-heading" style="background-color:white;color:#1abc9c;border-color:#D7D4F0">
@@ -33,22 +23,22 @@
 				       <span style="margin-left: 10px" ng-bind="test.questionNum"></span>道题，<span ng-bind="test.time"></span>分钟
 				    </div>
 				    <div class="col-md-12 test-tag" style="float:left">
-				       <div class="col-md-4 ">
+				       <div class="col-md-5">
 	                  		<span ng-bind="test.invitedNum" ></span><span>&nbsp;已邀请</span>
                   		</div>
 				    
-				        <div class="col-md-4 ">
+				        <div class="col-md-5 ">
 	                  		<span class="glyphicon glyphicon-user" ></span>
 	                  		<a ng-click="inviteUser(test)"  href="">邀请</a>
                   		</div>
                   		
                 	</div>
                 	<div class="col-md-12 test-tag" style="float:left">
-                	   <div class="col-md-4">
+                	   <div class="col-md-5">
 	                  		<span ng-bind="test.finishedNum" ></span><span>&nbsp;已完成</span>
                   		</div>
                 	  
-                	   <div class="col-md-4">
+                	   <div class="col-md-5">
 	                  		<span class="glyphicon glyphicon-stats" ></span>
 	                  		<a href="#/report"   ng-click="report(test)">报告</a>
                   		</div>
