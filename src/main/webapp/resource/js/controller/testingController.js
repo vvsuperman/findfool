@@ -384,7 +384,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      }
      
      
- 
      
      /*
       *获取一道试题信息

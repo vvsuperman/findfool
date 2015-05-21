@@ -70,7 +70,7 @@ OJApp.directive('camera', function() {
 		                return;
 		            }
 		            //获取face_id
-		            var faceId=result.face[0].face_id;
+		            var faceId=result.po;io9face[0].face_id;
 		          //存储第一张照片路径到firstImageData
 		            if(firstFaceId==null){
 		            	firstFaceId=faceId;
