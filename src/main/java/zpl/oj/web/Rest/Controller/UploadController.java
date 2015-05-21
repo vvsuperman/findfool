@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+//import com.facepp.error.FaceppParseException;
 import com.sun.mail.util.BASE64DecoderStream;
 
 import zpl.oj.model.common.Img;
@@ -33,6 +34,7 @@ import zpl.oj.service.imp.UpLoadService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.base64.BASE64;
+//import zpl.oj.util.face.FaceUtil;
 
 @Controller
 public class UploadController {
@@ -88,9 +90,13 @@ public class UploadController {
 	@ResponseBody
 	public ResponseBase uploadImg(
 			@RequestBody Img img
-	       ) {		
+	       ) {	
+//		   ) throws FaceppParseException {	
 		ResponseBase rs = new ResponseBase();
 		String location = imgUploadService.saveImg(img);
+		
+//		FaceUtil faceUtil = new FaceUtil();
+//		faceUtil.faceDetect(location);
 		ImgForDao imgForDao=new ImgForDao();
 	    imgForDao.setInvitedid(img.getInvitedid());
 	    imgForDao.setLocation(location);
