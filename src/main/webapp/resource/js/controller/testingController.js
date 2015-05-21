@@ -82,8 +82,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 }
 	 
 	 $scope.updatePicture = function(){
-		
-		 smoke.confirm("你确定要提交该照片？提交后将不可修改", function(e){
+		 smoke.confirm("你确定要提交该照片？提交后不可修改！", function(e){
 				if (e){
 					$scope.$apply(
 							function(){
@@ -91,7 +90,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 							 });
 					 $scope.$broadcast("updatePicture");
 					 $scope.pictureOK =1;
-					 
 				}
 			}, {
 				ok: "是",
