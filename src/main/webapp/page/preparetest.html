@@ -45,14 +45,15 @@
      
      <div class="col-md-3 col-md-offset-2">
      
-		 <div style="margin-top: 50px;"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div>   
-		 <div style="margin-top: 10px" class="cameraIcon">  
+		 <div style="margin-top: 50px;"  ng-show="showCZone ==1"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div>   
+		 <div  style="margin-top: 10px" class="cameraIcon"  ng-show="showCZone ==1">  
 		     <p style="margin-top: 10%">点击以开启摄像头</p>    
 		     <img id="showBtn" class="img-responsive cameraBtn" ng-click="showVideo()" style="height: 100px;text-align: center;"  src="resource/static/cameraicon.png">
 		        
 	     </div>
-	     <div style="margin-top: 10px">
-	        <p>为什么要拍照片</p>
+	     <div style="margin-top: 10px"  ng-show="showCZone ==1">
+	        <p></p>
+	        <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Tooltip on right">为什么要拍照片</button>
 	        <p>拍照遇到问题怎么办</p>
 	     </div>
     
@@ -63,7 +64,7 @@
 			  </canvas>
 		  </div>
 		  
-		  <div ng-show="btn.Show==1" style="margin-top: 20px">
+		  <div ng-show="btn.Show==1&&showCZone==2" style="margin-top: 20px">
 		     <span class="text-success">请先拍照</span>
 		     <button class="btn btn-primary" style="margin-left: 5px" ng-click="takePicture()">拍照</button>  
 		  </div>
