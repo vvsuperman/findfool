@@ -44,7 +44,9 @@ public JSONObject faceDetect(File filename) throws FaceppParseException{
 		FaceUtil face = new FaceUtil();
 	//	String file = "F:\\Temp\\ImgUploadHome\\16_17_55.jpg";
 		File imgFile = new File( "F:\\Temp\\ImgUploadHome\\16_17_55.jpg");
-		System.out.println(face.faceDetect( imgFile));
+//		System.out.println(face.faceDetect( imgFile));
+		System.out.println(imgFile
+				);
 	}
 	
 
