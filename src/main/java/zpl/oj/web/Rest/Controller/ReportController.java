@@ -53,6 +53,7 @@ public class ReportController {
 		rtMap.put("dimension", reportService.getDimension(invite).get("setRadar"));
 		rtMap.put("user", reportService.getUserById(invite.getUid()));
 		rtMap.put("levelDimension", reportService.getDimension(invite).get("levelRadar"));
+		rtMap.put("imgs", reportService.getUserPhotos(invite));
 		return rtMap;
 	}
 	

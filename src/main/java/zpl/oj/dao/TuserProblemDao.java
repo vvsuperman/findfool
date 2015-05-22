@@ -32,7 +32,7 @@ public interface TuserProblemDao {
   @Update("update testuser_problem  set rightanswer= #{rightanswer},type=#{type},useranswer = #{useranswer}  where problemid =#{problemid} and invite_id = #{inviteId}")
   void updateProblemByIds(TuserProblem testuserProblem);
   
-  @Select("select t1.problemid,t1.useranswer,t1.invite_id,t2.rightanswer,t2.problem_set_id as setid,t2.type,t1.solution_id as solutionId,t2.level "
+  @Select("select t1.problemid,t1.useranswer,t1.invite_id as inviteId,t2.rightanswer,t2.problem_set_id as setid,t2.type,t1.solution_id as solutionId,t2.level "
   		+ "from testuser_problem t1, problem t2 where t1.invite_id=#{0} and t1.problemid = t2.problem_id order by t2.type,t2.problem_set_id")
   List<TuserProblem> findProblemByInviteId(int inviteId);
   

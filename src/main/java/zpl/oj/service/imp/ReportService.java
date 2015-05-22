@@ -11,12 +11,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.SetDao;
 import zpl.oj.dao.SolutionRunDao;
 import zpl.oj.dao.TuserProblemDao;
+import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
@@ -47,6 +49,15 @@ public class ReportService {
 	@Autowired
 	private SolutionRunDao solutionRunDao;
 	
+	@Autowired
+	private ImgUploadDao imgUploadDao;
+	
+	/*
+	 * 返回用户的图片
+	 * */
+	public List<ImgForDao> getUserPhotos(Invite invite){
+		return imgUploadDao.getImgsByIid(invite.getIid());
+	}
 	
 	/*
 	 * 计算用户的分数，包括试题分数和用户的得分，并存入invite表

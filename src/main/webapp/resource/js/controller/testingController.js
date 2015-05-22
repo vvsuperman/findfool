@@ -64,6 +64,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 }
     	 else{
     		 $scope.show = 1;
+    		
     		//测试数据
     	     //$scope.show = 2;
     	 }	 
@@ -210,8 +211,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	     });*/
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
-	    		 
+	    		 flashTip("务必开启摄像头已开始考试");
 	    		 $scope.$broadcast("takeVideo");
+	    		 //保存inviteid
+	    		 $scope.invitedid = data.message[0].inviteId;
+	    		 console.log("inviteid.......",$scope.invitedid);
 	    		 //再次打开摄像头
 	    		 $scope.cameraAgain = "again";
 	    		
