@@ -85,5 +85,17 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		// TODO Auto-generated method stub
 		imgStoreDao.insertImg(img);
 	}
+	
+	@Override
+	public void upDateInsertImg(Img img){
+		String location = saveImg(img);
+		ImgForDao imgForDao=new ImgForDao();
+	    imgForDao.setInvitedid(img.getInvitedid());
+	    imgForDao.setLocation(location);
+	    Date time = new Date();
+	    imgForDao.setTime(time);	    
+	    insertImg(imgForDao);
+		
+	}
 
 }

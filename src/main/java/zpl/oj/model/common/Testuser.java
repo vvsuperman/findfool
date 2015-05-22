@@ -17,7 +17,10 @@ public class Testuser {
 	private String tel;
 	private int state;
 	private String degree;
+	private String faceid;
 	
+	
+
 	
 
 	public Testuser() {
@@ -33,6 +36,15 @@ public class Testuser {
 		this.tel="";
 		this.state=0;
 		this.degree="";
+	}
+	
+	
+	public String getFaceid() {
+		return faceid;
+	}
+
+	public void setFaceid(String faceid) {
+		this.faceid = faceid;
 	}
 	
 	public String getDegree() {

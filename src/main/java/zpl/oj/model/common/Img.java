@@ -8,7 +8,14 @@ public class Img implements Serializable {
 	private String imgData;
 	private String email;
 	private Integer invitedid;
+	private String state;
 	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getImgData() {
 		return imgData;
 	}

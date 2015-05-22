@@ -18,7 +18,7 @@ public interface TestuserDao {
   void insertTestuser(Testuser testuser);
   
   @Update("update testuser set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},tel=#{tel},"
-  		+ "registerdate = #{registerDate},lastlogindate=#{lastLoginDate}  where tuid =#{tuid}")
+  		+ "registerdate = #{registerDate},lastlogindate=#{lastLoginDate},faceid=#{faceid}  where tuid =#{tuid}")
   void updateTestuserById(Testuser testuser);
   
   @Select("select * from testuser where email = #{0}")

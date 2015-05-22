@@ -78,7 +78,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		 $scope.$broadcast("takePicture");
 		 $scope.btn.Show =2;
 		 $scope.monitor = 2;
-		 console.log("广播takePicture");
 	 }
 	 
 	 $scope.updatePicture = function(){
@@ -88,7 +87,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 							function(){
 							  $scope.btn.Show=3
 							 });
-					 $scope.$broadcast("updatePicture");
+					 $scope.$broadcast("updatePicture","1");
 					 $scope.pictureOK =1;
 				}
 			}, {
@@ -98,6 +97,15 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 				reverseButtons: true
 			});
 	 }
+	 
+	 //基准照片需要重新拍摄
+	 $scope.$on("baseImgRecapture",function(){
+		 smoke.alert("照片不清晰，人脸无法识别，请重新拍摄清晰的照片");
+		 $scope.$apply(
+					function(){
+					  $scope.cancelPicture();
+					 });
+	 })
 	 
 	 $scope.cancelPicture = function(){
 		 $scope.btn.Show =1;
@@ -118,6 +126,24 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.$on("cameraErr",function(){
 		 console.log("show camera");
 	 });
+	 
+	 
+	 //周期性随机拍照
+	 $scope.randomTakePicture=function(duration){
+		 //拍照间隔周期 (分钟)
+		 var takePictureDuration=1;
+		 var IntervalTime=takePictureDuration*60; //秒
+		 console.log("intervalTime="+IntervalTime);
+		 $interval(function(){
+			 var randomTime=Math.floor(Math.random()*IntervalTime);	//秒
+			 console.log("randomTime="+randomTime);	
+			 $timeout(function(){
+				console.log("take picture");
+				$scope.$broadcast("takePicture");
+				$scope.$broadcast("updatePicture","0");
+			 },randomTime*1000);
+		 },IntervalTime*1000);
+	 }
 	 
 	 //定义控件是否显示变量
 	 $scope.btnZone={};
@@ -258,6 +284,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	var remain = $scope.time.remain - nowTime;
 	    	//随机拍照
 	         $scope.randomTakePicture(remain/60/1000);
+//	    	 $scope.intervalTakePicture();
 	         //结束测试
 	    	$timeout($scope.endTest,remain);
 	 }
@@ -296,11 +323,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 		        	 }
 		        	
 		         }
-
-		         
 		         var duration = data.message.invite.duration*60*1000;
-		         
-
 	    	}
 	    	else{
 	    		if(data.message ==1){
@@ -317,21 +340,17 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	  
 	 };
 	 
-	 //周期性随机拍照
-	 $scope.randomTakePicture=function(duration){
-		 //拍照间隔周期 (分钟)
-		 var takePictureDuration=10;
-		 var IntervalTime=takePictureDuration*60; //秒
-		 console.log("intervalTime="+IntervalTime);
+	
+	 
+	 //规律的周期性拍摄，每30秒拍一次
+	 $scope.intervalTakePicture=function(){
 		 $interval(function(){
-			 var randomTime=Math.floor(Math.random()*IntervalTime);	//秒
-			 console.log("randomTime="+randomTime);	
-			 $timeout(function(){
 				$scope.$broadcast("takePicture");
-				$scope.$broadcast("updatePicture");
-			 },randomTime*1000);
-		 },IntervalTime*1000);
+				$scope.$broadcast("updatePicture","0");
+		 },30*1000);
 	 }
+	 
+	 
 	
 	 
      /*

@@ -18,7 +18,8 @@
         apiURL: 'https://apicn.faceplusplus.com/v2',
         sessionInterval: 500,
         requestTimeout: 10 * 1000,
-        ajaxAdapter: 'FormData' in window ? 'XMLHttpRequest' : 'jQuery',
+       // ajaxAdapter: 'FormData' in window ? 'XMLHttpRequest' : 'jQuery',
+        ajaxAdapter: 'FormData' in window ? 'jQuery' : 'jQuery',
         concurrency: 2
       };
       for (k in defaults) {
