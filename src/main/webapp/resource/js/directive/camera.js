@@ -65,7 +65,7 @@ OJApp.directive('camera', function() {
 		    		}
 		    	});
 		    	//face++
-	
+
 		    });
 			
 		}}});
