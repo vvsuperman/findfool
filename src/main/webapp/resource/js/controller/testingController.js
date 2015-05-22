@@ -63,9 +63,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 }
     	 }
     	 else{
-    		 //$scope.show = 1;
+    		 $scope.show = 1;
     		//测试数据
-    	     $scope.show = 2;
+    	     //$scope.show = 2;
     	 }	 
          
      }).error(function(){
@@ -150,8 +150,15 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.btnZone.hide=0;
 	 $scope.cameraZone={};
 	 $scope.cameraZone.show=0;
+	 
 	 //开启摄像头成功，开始捕捉视频
 	 $scope.$on("cameraOK",function(){
+		 //如果再次打开摄像头，并成功了
+		 if($scope.cameraAgain == "again"){
+			 $scope.startTest();
+			 return false;
+		 }
+		 
 		 $scope.$apply(function(){
 			 $scope.isCameraOk.ok=1;
 			 $scope.btnZone.hide = 1;
@@ -163,7 +170,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 //自动启动摄像头
 	 $scope.$on("video",function(){
 		 $scope.showVideo();
-		 console.log("捕获video,调用showVideo()");
 	 })
      
      //检测测试密码
@@ -203,8 +209,12 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	    		 alert(data.message);
 	    	     });*/
 	    	 }else{
-	    		 //用户已开始做题了，跳转到做题页面
-	    		 $scope.startTest();
+	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
+	    		 
+	    		 $scope.$broadcast("takeVideo");
+	    		 //再次打开摄像头
+	    		 $scope.cameraAgain = "again";
+	    		
 	    	 }	 
 	     }).error(function(){
 	    	 console.log("login failed");

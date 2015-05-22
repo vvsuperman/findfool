@@ -11,8 +11,7 @@ OJApp.directive('camera', function() {
 			var video = document.getElementById("video"); 
 			var firstFaceId=null;
 			//开启摄像头
-			scope.$on("takeVideo",function(){
-				console.log("执行takeVideo()");
+			scope.$on("takeVideo",function(event,data){
 				isSupportH5Video();
 				try {                  
 					//动态创建一个canvas元 ，并获取他2Dcontext。如果出现异常则表示不支持                
@@ -76,8 +75,7 @@ var setupCamera = function(video,scope)
 	      console.log("Video capture error: ", error.code);  
 	      if (error.name == "PermissionDeniedError"
 				|| error.code == "PermissionDeniedError") {
-	    	  console.log("cameraerr open failed");
-	    	  flashTip("不小心点拒绝了吧。请清除缓冲或重启浏览器来重新开启摄像头。");
+	    	  smoke.alert("不小心点拒绝了吧。请重启浏览器或重启机器来重新开启摄像头。")
 	    	  scope.$emit("cameraErr");
 	      }
 	     
