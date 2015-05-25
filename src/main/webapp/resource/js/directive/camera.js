@@ -43,7 +43,7 @@ OJApp.directive('camera', function() {
 		    	//state为是否第一次传递照片
 		    	console.log("state",state);
 		    	$.ajax({
-			    		url :WEBROOT+"/upload/img",
+			    		url :WEBROOT+"/uploadimg",
 			    		type : "POST",
 			    		contentType : "application/json",
 			    		data:  JSON.stringify({ "imgData": imgsrc,"email":scope.email,"invitedid":scope.invitedid,"state":state}),

@@ -37,23 +37,70 @@
      
    </div>
    <div class="panel-body">
-        <div class="panel panel-default black-panel col-md-12" style="padding-left: 0px;padding-right: 0px">
+        <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
 		   <div class="panel-heading">
 		     知识结构
 		   </div>
-			   <div class="col-md-8" style="margin-top: 20px;margin-bottom: 10px">
+			   <!-- <div class="col-md-8" style="margin-top: 20px;margin-bottom: 10px">
 			      <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
-			   </div>  
-		       <div class="col-md-4" style="margin-top: 20px">
+			   </div>   -->
+		       <!-- <div class="col-md-4" style="margin-top: 20px">
 		         <p>得分情况</p>
 		         <p ng-repeat="str in descStr">{{str}}</p>
+		       </div> -->
+		      <!--  <div star num=4 size=4></div> -->
+		       
+		       <div class="col-md-12" style="margin-top: 15px;margin-bottom: 15px" ng-repeat="namenum in namenums">
+		          <div class="col-md-12">
+		          	  <div class="col-md-2 col-xs-4 greenFont" style="font-size: 20px;" ng-bind="namenum.name"></div>
+		          	   <div star num={{namenum.num}} size=3></div>
+		          	  
+		          </div>
+		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px" ng-bind="contents[{{$index}}]">
+				            
+		          </div>
 		       </div>
+		       
+		      <!--    <div class="col-md-12"  style="margin-top: 15px;margin-bottom: 15px">
+		          <div class="col-md-12">
+		          	 <div class="col-md-2 greenFont" style="font-size: 20px">开发语言:</div>
+		          	 <img src="resource/static/5star.png" class="col-md-3 img-response" style="margin-top: -5px">
+		          </div>
+		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px">
+				    开发语言掌握能力反映了候选者对某一开发语言的掌握程度，表明候选者对某一语言掌握程度较高。
+				    语言能力是一个基础能力，会涉及到的语法、函数、执行效率等语言特性，在工作中能进行有效的编码，
+				    降低bug几率，是程序员的一项基本能力。         
+		          </div>
+		       </div>
+		       
+		        <div class="col-md-12"  style="margin-top: 15px;margin-bottom: 15px">
+		          <div class="col-md-12">
+		          	 <div class="col-md-2 greenFont" style="font-size: 20px">开发平台:</div>
+		          	 <img src="resource/static/5star.png" class="col-md-3 img-response" style="margin-top: -5px">
+		          </div>
+		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px">
+				    开发语言掌握能力反映了候选者对某一领域平台的掌握能力，就如Android开发者必须掌握andorid的Api，
+				    服务端的开发者必须理解HTTP协议。对于某一岗位，除了开发语言之外还必须掌握的特定领域开发能力。
+				    反映了候选者的项目熟练度以及领域熟练度。得分较高者能够较好的适应实际的工作需求，有着较高的编程熟练度，
+				    对该领域的知识有一个系统的认识，能够较快的参与到实际项目中。       
+		          </div>
+		       </div>
+		       
+		        <div class="col-md-12"  style="margin-top: 15px;margin-bottom: 15px">
+		          <div class="col-md-12">
+		          	 <div class="col-md-2 greenFont" style="font-size: 20px">算法:</div>
+		          	 <img src="resource/static/5star.png" class="col-md-3 img-response" style="margin-top: -5px">
+		          </div>
+		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px">
+				    在一些面向底层的开发中，算法是非常重要的一个环节。优异的程序员也会不断磨练自己算法的掌握能力。       
+		          </div>
+		       </div> -->
 		   
 		</div>
 		
 		
 	  
-	     <div class="col-md-6" style="padding-left:0px;">
+	     <div class="col-md-4" >
 			<div class="panel panel-default black-panel" >
 			   <div class="panel-heading">
 			     用户得分:<span ng-bind="score" style="color: #1abc9c;font-size:20px" ></span>
@@ -64,7 +111,7 @@
 			</div>
 		</div>
 		
-		<div class="col-md-6"  style="padding-right:0px;">	
+		<div class="col-md-4" >	
 			<div class="panel panel-default black-panel" >
 			   <div class="panel-heading" >
 			     用户排名:<span ng-bind="rank" style="color: #1abc9c;font-size:20px"></span>
@@ -89,6 +136,14 @@
 			   </div>
 			</div>
 	  </div>	
+	  
+	  <div style="clear: both;"></div>
+	  
+	  <div class="row"  >
+	     <div class="col-md-3" ng-repeat="img in imgs">
+	    	<img ng-src="resource/userphotos{{img.location}}"  class="img-responsive  center-block"></img>
+	     </div>
+	  </div>
 		
 		<!-- <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
 		   <div class="panel-heading">

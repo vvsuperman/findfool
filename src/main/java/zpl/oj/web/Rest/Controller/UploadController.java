@@ -87,7 +87,7 @@ public class UploadController {
 	}
 	
 	
-	@RequestMapping(value="/upload/img",method=RequestMethod.POST)
+	@RequestMapping(value="/uploadimg",method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase uploadImg(
 			@RequestBody Img img

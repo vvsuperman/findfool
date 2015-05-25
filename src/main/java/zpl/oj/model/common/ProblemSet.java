@@ -32,6 +32,17 @@ public class ProblemSet implements Serializable {
 	 * 描述
 	 */
 	private String comment;
+	
+	//详细描述
+	private String content;
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	public String getComment() {
 		return comment;

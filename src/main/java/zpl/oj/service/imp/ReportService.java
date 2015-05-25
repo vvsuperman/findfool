@@ -21,6 +21,7 @@ import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Problem;
+import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.common.ResultInfo;
 import zpl.oj.model.common.Testuser;
@@ -231,6 +232,7 @@ public class ReportService {
 		//生成返回数据
 		Map<String, Object> rtMap = new HashMap<String,Object>();
 		rtMap.put("name", new ArrayList<String>());
+		rtMap.put("content", new ArrayList<String>());
 		
 		
 		//构建二维数组，使用parentList二维数组来储存元素
@@ -252,8 +254,12 @@ public class ReportService {
 				if(rightMap.get(setid)!=null){
 					userVal = rightMap.get(setid);
 				}
-				String setName = setDao.getSet(setid).getComment();
+				ProblemSet set = setDao.getSet(setid);
+				String setName = set.getComment();
+				String setContent = set.getContent();
+				
 				((ArrayList)rtMap.get("name")).add(setName);
+				((ArrayList)rtMap.get("content")).add(setContent);
 				scoreList.add(val);
 				userScoreList.add(userVal);
 			}
