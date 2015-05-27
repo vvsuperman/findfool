@@ -57,7 +57,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		} 
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream(filename);

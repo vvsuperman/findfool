@@ -34,6 +34,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/fw/Downloads/faceppsdk.jar"/>
+	<classpathentry kind="lib" path="src/faceppsdk.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
