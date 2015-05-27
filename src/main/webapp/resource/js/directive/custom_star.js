@@ -20,10 +20,11 @@ OJApp.directive('star', function() {
 			}
 			
 			scope.context="resource/static/"+ starNum +"star.png";
-			scope.size ="col-md-"+attrs.size;
+			scope.size ="col-md-"+attrs.size+" col-xs-"+(parseInt(attrs.size)+2);
+			console.log(scope.size);
 		},
 		replace: true,
-		template:"<img class='{{size}}' ng-src={{context}}  style='margin-top: -5px;'>"
+		template:"<img class='{{size}}' ng-src={{context}} >"
 	};
 
 });
