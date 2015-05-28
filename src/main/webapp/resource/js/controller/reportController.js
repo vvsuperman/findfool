@@ -53,6 +53,13 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     var testid = Data.tid();
     var inviteid = Data.inviteid();
     var tuid = Data.tuid();
+    
+    $scope.printPDF=function(){
+    	var pdf = new jsPDF('p','pt','a4');
+        pdf.addHTML(document.getElementById('pdf'),function() {
+            pdf.save('report.pdf');
+        });
+    };
 	 
     $http({
         url: WEBROOT+"/report/overall",
@@ -139,7 +146,6 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
     }).error(function(){
    	 console.log("get data failed");
     })
-    
     
     $scope.judge = function(question){
     	if(question.type==1){

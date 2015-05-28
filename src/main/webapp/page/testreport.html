@@ -33,10 +33,11 @@
       <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" class="pull-right" ng-class="{1: 'active', 0: ''}[detailNav]"><button class="btn btn-primary" ng-click="printPDF()">打印报告</button></li>
 	  </ul>
      
    </div>
-   <div class="panel-body">
+   <div class="panel-body" id="pdf" style="background:#FFF;">
         <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
 		   <div class="panel-heading">
 		     知识结构
