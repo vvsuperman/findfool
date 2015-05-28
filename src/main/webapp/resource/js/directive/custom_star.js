@@ -24,7 +24,7 @@ OJApp.directive('star', function() {
 			console.log(scope.size);
 		},
 		replace: true,
-		template:"<img class='{{size}}' ng-src={{context}} >"
+		template:"<img class='{{size}}' ng-src={{context}} style='margin-bottom=5px;'>"
 	};
 
 });

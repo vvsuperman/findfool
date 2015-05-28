@@ -248,9 +248,13 @@ ul.navbar-nav li a:active{
 	
 }
 
+.skill .simditor{
+	border-width: 0px;!important;
+}
+
 .simditor{
 	border-radius :3px;
-	border-width: 1px!important;
+/* 	border-width: 1px!important; */
 }
 
 .simditor-wrapper{
