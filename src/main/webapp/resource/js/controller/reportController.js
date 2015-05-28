@@ -54,12 +54,12 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     var inviteid = Data.inviteid();
     var tuid = Data.tuid();
     
-    $scope.printPDF=function(){
-    	var pdf = new jsPDF('p','pt','a4');
-        pdf.addHTML(document.getElementById('pdf'),function() {
-            pdf.save('report.pdf');
-        });
-    };
+//    $scope.printPDF=function(){
+//    	var pdf = new jsPDF('p','pt','a4');
+//        pdf.addHTML(document.getElementById('pdf'),function() {
+//            pdf.save('report.pdf');
+//        });
+//    };
 	 
     $http({
         url: WEBROOT+"/report/overall",
@@ -77,11 +77,13 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     	$scope.names = data.dimension.name;
     	
     	$scope.namenums=[]
+    	$scope.showFacePro =[];
     	for(var i=0;i<$scope.data[0].length;i++){
     		var namenum={};
     		namenum.name = $scope.names[i];
     		namenum.num = $scope.data[1][i]/$scope.data[0][i]
     		$scope.namenums.push(namenum);
+    		$scope.showFacePro[i]=0;//控制面试题的显示
     	}
         
     	//level的雷达图

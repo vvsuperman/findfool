@@ -33,7 +33,7 @@
       <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
-		  <li role="presentation" class="pull-right" ng-class="{1: 'active', 0: ''}[detailNav]"><button class="btn btn-primary" ng-click="printPDF()">打印报告</button></li>
+		<!--  <li role="presentation" class="pull-right" ng-class="{1: 'active', 0: ''}[detailNav]"><button class="btn btn-primary" ng-click="printPDF()"><span class="glyphicon glyphicon-save"></span>&nbsp;导出为pdf</button></li> -->
 	  </ul>
      
    </div>
@@ -42,21 +42,24 @@
 		   <div class="panel-heading">
 		     知识结构
 		   </div>
-			   <!-- <div class="col-md-8" style="margin-top: 20px;margin-bottom: 10px">
-			      <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
-			   </div>   -->
-		       <!-- <div class="col-md-4" style="margin-top: 20px">
-		         <p>得分情况</p>
+		    <div class="col-md-4 col-md-offset-1" style="margin-top: 20px" >
+		         <p><strong>得分:</strong></p>
 		         <p ng-repeat="str in descStr">{{str}}</p>
-		       </div> -->
-		      <!--  <div star num=4 size=4></div> -->
+		        
+		         
+		       </div> 
+			      <div class="col-md-5" style="margin-top: 20px;margin-bottom: 10px">
+			      <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
+			   </div>  
+		      
+		  
 		       
 		       <div class="panel-body"  ng-repeat="namenum in namenums">
 		         
 		          
 		          <div class="col-md-12">
 		          	  <div class="col-md-3 col-xs-4 greenFont" style="font-size: 18px;" ng-bind="namenum.name"></div>
-		          	   <div star num={{namenum.num}} size=3></div>
+		          	   <div star num={{namenum.num}} size=2></div>
 		          	  
 		          </div>
 		           <div style="clear:both"></div>
@@ -67,8 +70,18 @@
 							ng-model="contents[$index]"></div>
 		          </div>
 		          
-		          <div >
+		          <div class="col-md-12" >
+		            <a href="" ng-click="showFacePro[$index]==1?showFacePro[$index]=0:showFacePro[$index]=1" style="margin-left: 15px">
+		            <span class="glyphicon glyphicon-plus" ng-if="showFacePro[$index]==0"></span>
+		            <span class="glyphicon glyphicon-minus" ng-if="showFacePro[$index]==1"></span>
+		            &nbsp;可能的面试题
+		            </a>
+		          </div>
 		          
+		           <div class="col-md-12 skill" ng-if="showFacePro[$index]==1">
+		           <div simditor
+							minheight="30px" operation="view" class='optiontext' 
+							ng-model="contents[$index]"></div>
 		          </div>
 		         
 		       </div>
