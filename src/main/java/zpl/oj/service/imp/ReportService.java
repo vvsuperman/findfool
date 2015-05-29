@@ -233,6 +233,7 @@ public class ReportService {
 		Map<String, Object> rtMap = new HashMap<String,Object>();
 		rtMap.put("name", new ArrayList<String>());
 		rtMap.put("content", new ArrayList<String>());
+		rtMap.put("faceproblem",  new ArrayList<String>());
 		
 		
 		//构建二维数组，使用parentList二维数组来储存元素
@@ -257,9 +258,11 @@ public class ReportService {
 				ProblemSet set = setDao.getSet(setid);
 				String setName = set.getComment();
 				String setContent = set.getContent();
+				String faceproblem = set.getFaceproblem();
 				
 				((ArrayList)rtMap.get("name")).add(setName);
 				((ArrayList)rtMap.get("content")).add(setContent);
+				((ArrayList)rtMap.get("faceproblem")).add(faceproblem);
 				scoreList.add(val);
 				userScoreList.add(userVal);
 			}

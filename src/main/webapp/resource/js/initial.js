@@ -1,7 +1,7 @@
 
 //常量
-var WEBROOT = "/oj";
-//var WEBROOT = "";
+//var WEBROOT = "/oj";
+var WEBROOT = "";
 var CUSTOM_SET = 0;
 //var MD_REDIRECT = "http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F";
 var MD_REDIRECT = "http://127.0.0.1:8080/oj/#/";

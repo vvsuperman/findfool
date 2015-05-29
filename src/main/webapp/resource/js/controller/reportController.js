@@ -74,6 +74,7 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     	//生成说明文字
     	$scope.setNum = $scope.labels.length;
     	$scope.contents = data.dimension.content;
+    	$scope.faceproblmes = data.dimension.faceproblem;
     	$scope.names = data.dimension.name;
     	
     	$scope.namenums=[]
@@ -82,6 +83,7 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     		var namenum={};
     		namenum.name = $scope.names[i];
     		namenum.num = $scope.data[1][i]/$scope.data[0][i]
+    		namenum.faceproblem = $scope.faceproblmes[i];
     		$scope.namenums.push(namenum);
     		$scope.showFacePro[i]=0;//控制面试题的显示
     	}

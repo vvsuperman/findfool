@@ -77,11 +77,12 @@
 		            &nbsp;可能的面试题
 		            </a>
 		          </div>
+		          <p ng-bind="faceproblems[$index]">123</p>
 		          
-		           <div class="col-md-12 skill" ng-if="showFacePro[$index]==1">
+		           <div class="col-md-12 skill" ng-show="showFacePro[$index]==1">
 		           <div simditor
 							minheight="30px" operation="view" class='optiontext' 
-							ng-model="contents[$index]"></div>
+							ng-model="namenum.faceproblem"></div>
 		          </div>
 		         
 		       </div>

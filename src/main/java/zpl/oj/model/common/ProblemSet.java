@@ -5,6 +5,9 @@ import java.util.Date;
 
 public class ProblemSet implements Serializable {
 
+	
+	//面试问题
+	private String faceproblem;
 	/**
 	 * ${item.comment}
 	 */
@@ -35,6 +38,16 @@ public class ProblemSet implements Serializable {
 	
 	//详细描述
 	private String content;
+	
+
+
+	public String getFaceproblem() {
+		return faceproblem;
+	}
+
+	public void setFaceproblem(String faceproblem) {
+		this.faceproblem = faceproblem;
+	}
 
 	public String getContent() {
 		return content;
