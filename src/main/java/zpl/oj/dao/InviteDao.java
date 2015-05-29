@@ -23,7 +23,7 @@ public interface InviteDao {
 
 	@Update("UPDATE INVITE set  TESTID = #{testid},  "
 			+ " HRID = #{hrid},   UID = #{uid},begintime=#{begintime},   INVITETIME = #{invitetime},DURATION=#{duration},"
-			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd}  where IID = #{iid}")
+			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd},openCamera=#{openCamera}  where IID = #{iid}")
 	  void updateInvite(Invite invite);
 	    
 	@Select("SELECT  t1.IID,  t1.TESTID, t1.begintime,  t1.HRID,   t1.UID,  t1.INVITETIME,  t1.FINISHTIME,  t1.SCORE,t1.totalscore,t1.STATE,t1.DURATION,t1.pwd   "

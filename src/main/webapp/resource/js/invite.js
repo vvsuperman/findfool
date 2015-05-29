@@ -11,12 +11,15 @@ OJApp.controller("invite",function($scope, $http, Data) {
 OJApp.controller("Excel",function($scope, $http, Data) {
 	$scope.duration=70;
 	
-	$scope.subject = "笔试邀请"
+	$scope.camera={};
+	$scope.camera.selected=0;
+	$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"},{id:2,content:"可以开启可以不开启"}];
+	$scope.subject = "笔试邀请";
 	
 	$scope.content = "     我们非常荣幸能收到您的简历，做为优秀的候选人之一，我们诚挚的邀请您参加测试，使我们能进一步了解您的能力。";
 	
     $scope.xlsusers = [
-        {username: '', email: '', tel: '', test: Data.tname()}
+        {username: '', email: '', tel: '', test: Data.tname(),openCamera:''}
     ];
     
     $scope.addOne = function (v) {
@@ -152,8 +155,10 @@ OJApp.controller("Excel",function($scope, $http, Data) {
             }
             for (var user in $scope.xlsusers) {
                 if ($scope.xlsusers[user].test == $scope.testlist[tid]) {
-                    if ($scope.xlsusers[user].email != "")
+                    if ($scope.xlsusers[user].email != ""){
+                    	$scope.xlsusers[user].openCamera=$scope.camera.selected;
                         tmp.push($scope.xlsusers[user]);
+                    }
                 }
             }
             loadingTip();

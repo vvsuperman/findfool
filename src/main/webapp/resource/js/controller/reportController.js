@@ -117,13 +117,14 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
      	$scope.imgs = data.imgs;
      	//保留从倒数第三个"/"后的字符串
      	
-     	for(var i = 0;i< $scope.imgs.length;i++){
-     		var location = $scope.imgs[i].location;
-     		var j = location.lastIndexOf("/");
-     		j = location.lastIndexOf("/",j-1);
-     		j = location.lastIndexOf("/",j-1);
-     		$scope.imgs[i].location =location.slice(j,location.length);
-     	}
+//     	for(var i = 0;i< $scope.imgs.length;i++){
+//     		var location = $scope.imgs[i].location;
+//     		var j = location.lastIndexOf("/");
+//     		j = location.lastIndexOf("/",j-1);
+//     		j = location.lastIndexOf("/",j-1);
+//     		$scope.imgs[i].location =location.slice(j,location.length);
+//     	}
+     	
     }).error(function(){
    	 console.log("get data failed");
     })

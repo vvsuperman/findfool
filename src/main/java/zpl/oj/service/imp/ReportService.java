@@ -11,6 +11,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qiniu.util.Auth;
+
 import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.ProblemDao;
@@ -32,6 +34,7 @@ import zpl.oj.model.responsejson.ResponseInvite;
 import zpl.oj.model.responsejson.ResponseProDetail;
 import zpl.oj.model.solution.SolutionRun;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 
 @Service
@@ -57,7 +60,18 @@ public class ReportService {
 	 * 返回用户的图片
 	 * */
 	public List<ImgForDao> getUserPhotos(Invite invite){
-		return imgUploadDao.getImgsByIid(invite.getIid());
+		List<ImgForDao> imgList=imgUploadDao.getImgsByIid(invite.getIid());
+		for(ImgForDao img:imgList){
+			String location=img.getLocation();
+			String imgHome=(String)PropertiesUtil.getContextProperty("ImgUploadHome");
+			location=imgHome+location;
+			String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
+			String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");
+			Auth auth=Auth.create(accessKey, secretKey);
+			location=auth.privateDownloadUrl(location);
+			img.setLocation(location);
+		}
+		return imgList;
 	}
 	
 	/*
@@ -66,7 +80,10 @@ public class ReportService {
 	public String countUserAndTotalScore(Invite invite) {
 		// TODO Auto-generated method stub
 		//选择题总分
-		int totalScore = tuserProblemDao.getTotalScore(invite.getIid());
+		//tuserProblemDao.getTotalScore(invite.getIid())可能返回空
+		Object o=tuserProblemDao.getTotalScore(invite.getIid());
+		if(o==null) return "0";
+		int totalScore = (int)o;
 		//选择题得分
 		int mScore = tuserProblemDao.getUserScore(invite);
 		//编程题总分

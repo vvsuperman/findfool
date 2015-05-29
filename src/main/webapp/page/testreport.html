@@ -167,19 +167,11 @@
 	  
 	  <div style="clear: both;"></div>
 	  
-	  <div class="row">
-	  <div class="col-md-12"  >
-	 	 <div class="panel panel-default black-panel " >
-			   <div class="panel-heading" >
-			     监控照片
-			   </div>
-			   <div class="panel-body">
-			       <div class="col-md-3" ng-repeat="img in imgs">
-			    	<img ng-src="resource/userphotos{{img.location}}"  class="img-responsive  center-block"></img>
-			     </div>
-			   </div>
-			</div>
-	    </div>
+
+	  <div class="row"  >
+	     <div class="col-md-3" ng-repeat="img in imgs">
+	    	<img src="{{img.location}}"  class="img-responsive  center-block"></img>
+	     </div>
 	  </div>
 		
 		<!-- <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">

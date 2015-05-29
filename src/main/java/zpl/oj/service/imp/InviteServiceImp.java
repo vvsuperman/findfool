@@ -77,7 +77,7 @@ public class InviteServiceImp implements InviteService {
 		}else{
 			invite.setDuration(q.getTime().toString());
 		}
-		
+		invite.setOpenCamera(u.getOpenCamera());
 		
 	
 		if(invite.getIid()!=0){
