@@ -54,12 +54,12 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     var inviteid = Data.inviteid();
     var tuid = Data.tuid();
     
-//    $scope.printPDF=function(){
-//    	var pdf = new jsPDF('p','pt','a4');
-//        pdf.addHTML(document.getElementById('pdf'),function() {
-//            pdf.save('report.pdf');
-//        });
-//    };
+    $scope.printPDF=function(){
+    	var pdf = new jsPDF('p','pt','a4');
+        pdf.addHTML(document.getElementById('pdf'),function() {
+            pdf.save('report.pdf');
+        });
+    };
 	 
     $http({
         url: WEBROOT+"/report/overall",
