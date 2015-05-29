@@ -19,20 +19,13 @@ public class Invite implements Serializable {
 		this.totalScore=0;
 		this.state = 1;
 		this.pwd ="";
+		this.openCamera=0;
 	}
 	
 	/**
 	 * ${item.pwd}
 	 */
 	private String pwd;
-	
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
 
 	/**
 	 * ${item.comment}
@@ -80,19 +73,7 @@ public class Invite implements Serializable {
 	 * 用户分数
 	 */
 	private int score;
-	
-	public int getTotalScore() {
-		return totalScore;
-	}
-
-	public void setTotalScore(int totalScore) {
-		this.totalScore = totalScore;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
+		
 	/**
 	 * 用户分数
 	 */
@@ -101,61 +82,62 @@ public class Invite implements Serializable {
 	
 	private Integer state;
 	
+	private int openCamera;
 
-    public Integer getState() {
-		return state;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setState(Integer state) {
-		this.state = state;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 	public Integer getIid() {
-        return iid;
-    }
+		return iid;
+	}
 
-    public void setIid(Integer iid) {
-        this.iid = iid;
-    }
-    
-        public Integer getTestid() {
-        return testid;
-    }
+	public void setIid(Integer iid) {
+		this.iid = iid;
+	}
 
-    public void setTestid(Integer testid) {
-        this.testid = testid;
-    }
-    
-        public Integer getHrid() {
-        return hrid;
-    }
+	public Integer getTestid() {
+		return testid;
+	}
 
-    public void setHrid(Integer hrid) {
-        this.hrid = hrid;
-    }
-    
-        public Integer getUid() {
-        return uid;
-    }
+	public void setTestid(Integer testid) {
+		this.testid = testid;
+	}
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-    
-     
-    
-    public int getScore() {
-        return score;
-    }
+	public Integer getHrid() {
+		return hrid;
+	}
 
-    
-    
-    public String getInvitetime() {
+	public void setHrid(Integer hrid) {
+		this.hrid = hrid;
+	}
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public String getInvitetime() {
 		return invitetime;
 	}
 
 	public void setInvitetime(String invitetime) {
 		this.invitetime = invitetime;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	public String getBegintime() {
@@ -173,15 +155,37 @@ public class Invite implements Serializable {
 	public void setFinishtime(String finishtime) {
 		this.finishtime = finishtime;
 	}
-	
 
-	public String getDuration() {
-		return duration;
+	public int getScore() {
+		return score;
 	}
 
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
-    
+	public int getTotalScore() {
+		return totalScore;
+	}
+
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public int getOpenCamera() {
+		return openCamera;
+	}
+
+	public void setOpenCamera(int openCamera) {
+		this.openCamera = openCamera;
+	}
+     
 }

@@ -9,6 +9,8 @@ import java.util.Map;
 
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +46,7 @@ public class ReportController {
 	 * 返回总体的报告
 	 * 用户的得分、用户排名、及雷达图
 	 * */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/overall")
 	@ResponseBody
 	public Map getOverall(@RequestBody Invite invite) {

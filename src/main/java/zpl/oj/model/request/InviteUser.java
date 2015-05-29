@@ -5,6 +5,11 @@ public class InviteUser {
 	
 	private String username;
 	
+	private String email;
+	private String tel;
+
+    private String test;
+    private int openCamera;
 	public String getUsername() {
 		return username;
 	}
@@ -12,10 +17,6 @@ public class InviteUser {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	private String email;
-	private String tel;
-
-    private String test;
     public void setTest(String test) {
         this.test = test;
     }
@@ -36,6 +37,14 @@ public class InviteUser {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	public int getOpenCamera() {
+		return openCamera;
+	}
+
+	public void setOpenCamera(int openCamera) {
+		this.openCamera = openCamera;
 	}
 	
 }

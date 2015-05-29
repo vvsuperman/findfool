@@ -11,6 +11,12 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qiniu.common.QiniuException;
+import com.qiniu.http.Response;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
+
 import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
@@ -33,24 +39,13 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();
 		String today=sdf.format(date);
-		//first level directory
-		String firstDir=imgHome+url+today;
-		File file =new File(firstDir);
-		if  (!file .exists())      
-		{    
-		    file.mkdir();    		
-		} 
-		//second level directory
-		String secondDir=firstDir+url+img.getEmail().replace(".", "_");
-		file =new File(secondDir);
-		if  (!file.exists())      
-		{    
-		    file.mkdir();    
-		} 
+		String filename=today;
+		filename+=url+img.getEmail().replace(".", "_");
 		sdf = new SimpleDateFormat("HH_mm_ss");
 		date=new Date();
 		String time=sdf.format(date);
-		String filename=secondDir+url+time+".jpg";
+		//fileKey+=url+time+".jpg";
+		filename+=url+time+".jpg";
 		byte[] imgBytes=null;
 		try {
 			imgBytes = BASE64.decodeBASE64(img.getImgData());
@@ -58,24 +53,20 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		FileOutputStream fos = null;
+		
+		String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
+		String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");
+		Auth auth=Auth.create(accessKey, secretKey);
+		String upToken=auth.uploadToken("foolrank");
+		UploadManager uploadManager=new UploadManager();
 		try {
-			fos = new FileOutputStream(filename);
-			fos.write(imgBytes);
-		} catch (Exception e) {
+			//file =new File(filename);
+			Response response=uploadManager.put(imgBytes, filename, upToken);
+		} catch (QiniuException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			if(fos!=null){
-				try {
-					fos.flush();
-					fos.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 		}
+		out.println(filename);		
 		
 		return filename;
 	}
@@ -94,8 +85,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	    imgForDao.setLocation(location);
 	    Date time = new Date();
 	    imgForDao.setTime(time);	    
-	    insertImg(imgForDao);
-		
+	    insertImg(imgForDao);		
 	}
 
 }

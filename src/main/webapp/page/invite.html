@@ -69,10 +69,18 @@
 				     </div>
 	    		</div>
 	    		<div class="form-group">
-		    		<label class="col-sm-2 control-label">欢迎语</label>
+		    		<label class="col-sm-2 control-label">欢迎语1</label>
 		    		<div class="col-md-9">
 		    		  <label style="width: 80%;height: 250px" ng-bind="content" class="form-control" ></label>
 		    		 </div>
+	    		</div>
+	    		<div class="form-group">
+		    		<label class="col-sm-2 control-label">是否开启摄像头</label>
+		    		<div class="col-md-2">
+		    			<select class="form-control" ng-model="camera.selected" 
+		    				ng-options="o.id as o.content for o in options">
+		    			</select>
+		    		</div>
 	    		</div>
 	    	</form>	  
 	    	

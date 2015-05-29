@@ -43,7 +43,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.pictureOK = 0;//用户是否上传好照片
 	 
-
+	 $scope.openCamera=0;//该用户是否必须打开摄像头才能进行考试，0：必须开启，1：不开启，2：可以开启可以不开启
 	 
 	 $scope.isCameraOk={};
 	 $scope.isCameraOk.ok=0;	 
@@ -195,6 +195,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 
 	    	 }else if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
+	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.errMsg = "";
 	    		 //填写用户信息
 	    		 $scope.show = 2;
@@ -254,7 +255,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){
-		 if($scope.pictureOK!=1){
+		 if($scope.pictureOK!=1 && $scope.openCamera==0){
 			 smoke.alert("请先拍照");
 			 return false;
 		 }

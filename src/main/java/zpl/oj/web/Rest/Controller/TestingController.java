@@ -160,6 +160,7 @@ public class TestingController {
 			rb.setState(2);
 			Map<String, Integer> message=new HashMap<String, Integer>();
 			message.put("invitedid", invite.getIid());
+			message.put("openCamera", invite.getOpenCamera());
 			rb.setMessage(message);
 			return rb;
 		}
