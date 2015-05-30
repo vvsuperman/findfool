@@ -11,7 +11,7 @@ import zpl.oj.model.responsejson.ResponseInvite;
 
 public interface InviteDao {
 
-	@Select("select IID,  TESTID,  HRID,  UID, begintime,  INVITETIME,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd"
+	@Select("select IID,  TESTID,  HRID,  UID, begintime,  INVITETIME,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,openCamera"
 			+ " FROM INVITE WHERE IID = #{0}")
 	  Invite getInviteById(int iid);
 	  
@@ -26,12 +26,12 @@ public interface InviteDao {
 			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd},openCamera=#{openCamera}  where IID = #{iid}")
 	  void updateInvite(Invite invite);
 	    
-	@Select("SELECT  t1.IID,  t1.TESTID, t1.begintime,  t1.HRID,   t1.UID,  t1.INVITETIME,  t1.FINISHTIME,  t1.SCORE,t1.totalscore,t1.STATE,t1.DURATION,t1.pwd   "
+	@Select("SELECT  t1.IID,  t1.TESTID, t1.begintime,  t1.HRID,   t1.UID,  t1.INVITETIME,  t1.FINISHTIME,  t1.SCORE,t1.totalscore,t1.STATE,t1.DURATION,t1.pwd,t1.openCamera   "
 			+ "  FROM INVITE t1, testuser t2 WHERE t1.testid=#{0} and t1.uid = t2.tuid and t2.email=#{1}")
 	  Invite getInvites(int testid,String email);  
 	
 	
-	@Select("SELECT  t1.IID,  t1.TESTID,   t1.HRID,   t1.UID,  t1.INVITETIME,t1.begintime,  t1.FINISHTIME,  t1.SCORE ,t1.STATE,t1.totalscore,t1.DURATION,t1.pwd  "
+	@Select("SELECT  t1.IID,  t1.TESTID,   t1.HRID,   t1.UID,  t1.INVITETIME,t1.begintime,  t1.FINISHTIME,  t1.SCORE ,t1.STATE,t1.totalscore,t1.DURATION,t1.pwd,t1.openCamera  "
 			+ "  FROM INVITE t1 WHERE t1.testid=#{0} and t1.uid =#{1}")
 	  Invite getInvitesByIds(int testid,int tuid);
 
