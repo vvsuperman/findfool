@@ -103,27 +103,26 @@ OJApp.controller("Excel",function($scope, $http, Data) {
     /*
      * 该方法有问题，需通过testid来查，否则当同一个用户有相同测试会bug
      * */
-    $scope.queryByName = function (tname) {
-        $http({
-            url: WEBROOT+"/test/queryByName",
-            method: 'POST',
-            headers: {
-                "Authorization": Data.token()
-            },
-            data: {"user": {"uid": Data.uid()}, "name": tname}
-        }).success(function (data) {
-            $scope.state = data["state"];//1 true or 0 false
-            $scope.message = data["message"];
-            if ($scope.state) {
-                $scope.tnamelist[tname] = $scope.message.quizid;
-                console.log($scope.tnamelist)
-            } else {
-            }
-        }).error(function (data) {
-        });
-    };
+//    $scope.queryByName = function (tname) {
+//        $http({
+//            url: WEBROOT+"/test/queryByName",
+//            method: 'POST',
+//            headers: {
+//                "Authorization": Data.token()
+//            },
+//            data: {"user": {"uid": Data.uid()}, "name": tname}
+//        }).success(function (data) {
+//            $scope.state = data["state"];//1 true or 0 false
+//            $scope.message = data["message"];
+//            if ($scope.state) {
+//                $scope.tnamelist[tname] = $scope.message.quizid;
+//            } else {
+//            }
+//        }).error(function (data) {
+//        });
+//    };
     
-    $scope.testlist.forEach($scope.queryByName);
+//    $scope.testlist.forEach($scope.queryByName);
     
     $scope.upload = function (tname, userlist) {
         $http({
@@ -132,7 +131,9 @@ OJApp.controller("Excel",function($scope, $http, Data) {
             headers: {
                 "Authorization": Data.token()
             },
-            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
+            
+//          data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];

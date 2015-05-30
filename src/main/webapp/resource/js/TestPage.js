@@ -139,7 +139,6 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
  *  跳转到邀请页面
  *   */   
     $scope.inviteUser = function(test){
-    	console.log("ivite user....",test);
     	  Data.setTid(test.quizid);
           Data.setTname(test.name);
           window.location.href="#/invite" 
