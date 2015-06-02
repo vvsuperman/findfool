@@ -30,6 +30,7 @@ import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
 import zpl.oj.model.responsejson.ResponseQuizs;
 import zpl.oj.service.InviteService;
+import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.MD5.MD5Util;
@@ -49,6 +50,8 @@ public class QuizController {
 	private UserService userService;
 	@Autowired
 	private InviteService inviteService;
+	@Autowired
+	private LabelService labelService;
 	
 	
 
@@ -138,6 +141,10 @@ public class QuizController {
 		ResponseBase rb = new ResponseBase();
 
 		Quiz q = quizService.addQuiz(request);
+		List<Integer> labelIds=labelService.getSystemLabels();
+		for(int id:labelIds){
+			labelService.insertLabelToLabelTest(q.getQuizid(), id, 0);
+		}
 		ResponseMessage msg = new ResponseMessage();
 		if (q == null) {
 			msg.setMsg("add failed!!");
