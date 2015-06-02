@@ -61,12 +61,17 @@ public class ReportService {
 	 * */
 	public List<ImgForDao> getUserPhotos(Invite invite){
 		List<ImgForDao> imgList=imgUploadDao.getImgsByIid(invite.getIid());
+		
+		String imgHome=(String)PropertiesUtil.getContextProperty("ImgUploadHome");
+		String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
+		String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");
+		
+		
 		for(ImgForDao img:imgList){
 			String location=img.getLocation();
-			String imgHome=(String)PropertiesUtil.getContextProperty("ImgUploadHome");
+			
 			location=imgHome+location;
-			String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
-			String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");
+			
 			Auth auth=Auth.create(accessKey, secretKey);
 			location=auth.privateDownloadUrl(location);
 			img.setLocation(location);

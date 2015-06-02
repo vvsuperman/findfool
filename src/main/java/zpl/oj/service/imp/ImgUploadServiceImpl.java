@@ -33,7 +33,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	@Override
 	public String saveImg(Img img) {
 		
-		String url ="/";
+		String url ="-";
 		PrintStream out=System.out;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();
