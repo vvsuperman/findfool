@@ -8,18 +8,28 @@
         <thead>
         <tr>
             <th>用户名</th>
-            <th>持续时间</th>
             <th>状态</th>
-           <!--  <th>结果</th> -->
+            <th>完成时间&nbsp;&nbsp;
+            	<span class="glyphicon" style="cursor:;" 
+	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isTimeDown]" 
+	            	ng-click="reversalTimeSort()">
+            	</span>
+            </th>
+            <th>总分&nbsp;&nbsp;
+            	<span class="glyphicon" 
+	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
+	            	ng-click="reversalScoreSort()">
+            	</span>
+            </th>
             <th>查看详情</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat = "invite in invites">
             <td ng-bind="invite.email"></td>
-            <td ng-bind="invite.duration"></td>
             <td ng-bind="getState(invite)"></td>
-           <!--  <td ><span ng-bind="getScore(invite)" ng-if="invite.state==1"></span> </td> -->
+            <td ng-bind="invite.finishtime"></td>
+            <td ng-bind="getScore(invite)"></td>
             <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==1">详情</a></td>
         </tr>
         
