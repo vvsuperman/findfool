@@ -1,8 +1,21 @@
 package zpl.oj.service.imp;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +60,7 @@ public class InviteServiceImp implements InviteService {
 	public String inviteUserToQuiz(InviteUser u, Quiz q, String duration) {
 		//生成testuser
 		Testuser tuser = new Testuser();
-		tuser.setUsername(u.getUsername());
+		tuser.setUsername(u.getName());
 		tuser.setEmail(u.getEmail());
 		
 		//等级
@@ -112,32 +125,51 @@ public class InviteServiceImp implements InviteService {
 	 * @param tu
 	 * @param pwd
 	 * 应使用线程，发送邮件耗时太久
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 * 0605更改，改用新浪云服务批量发送邮件
 	 */
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
-			String pwd, User hrUser) {
-		 String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+			String pwd, User hrUser) throws ClientProtocolException, IOException {
+		String testurl = desService.encode(tu.getEmail()+"|"+q.getQuizid());
+
+		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+		String api_user = (String) PropertiesUtil.getContextProperty("api_user");
+		String api_key = (String) PropertiesUtil.getContextProperty("api_key");
+		String mailfrom = (String) PropertiesUtil.getContextProperty("mailfrom");
+		String sendCloudUrl =  (String) PropertiesUtil.getContextProperty("sendcloudurl");
 		
-		String url = desService.encode(tu.getEmail()+"|"+q.getQuizid());
-		
-		final MailSenderInfo mailSenderInfo = initialEmail();
-		
-		
-		mailSenderInfo.setToAddress(tu.getEmail());
-		mailSenderInfo.setReplyToAddress(request.getReplyTo());
-		mailSenderInfo.setSubject(request.getSubject());
-		String context = request.getContext();
-		context += "<p>这是来自foolrank公司的邮件，您收到"+hrUser.getCompany()+"公司的测试邀请，请登录到:</p>"
-				+"<a href="+baseurl+"/#/testing/"+url+">"+baseurl+"/#/testing/"+url+"</a>"
-				+ "<br/>您的登录账号为：" + tu.getEmail() + " <br/>您的密码为：" + pwd
-				+ "<br/>您的测试时间为：" + request.getDuration()+"</p>";
-		mailSenderInfo.setContent(context);
-		
-		//发送邮件
-		SimpleMailSender.sendHtmlMail(mailSenderInfo);
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost(sendCloudUrl);
 		
 		
-		
+		List nvps = new ArrayList();
+    	nvps.add(new BasicNameValuePair("api_user", api_user));
+        nvps.add(new BasicNameValuePair("api_key", api_key));
+        nvps.add(new BasicNameValuePair("from", mailfrom));
+        nvps.add(new BasicNameValuePair("to", tu.getEmail()));
+        nvps.add(new BasicNameValuePair("subject", request.getSubject()));
+        String content = "<p> 这是来自"+hrUser.getCompany()+"公司的邮件，我们非常荣幸能收到您的简历，做为优秀的候选人之一，我们诚挚的邀请您参加此次笔试，使我们能进一步了解您的能力。请登陆到：</p>"
+        		+"<a href="+baseurl+"/#/testing/"+testurl+">"+baseurl+"/#/testing/"+testurl+"</a>"
+        		+" <p>完成笔试测试</p>"
+        		+"<p>您的密码是："+pwd+"</p>"
+        		+"<p>感谢您的参加!";
+   		
+       
+        nvps.add(new BasicNameValuePair("html", content));
+        httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+        // 请求
+        HttpResponse response = httpclient.execute(httpost);
+        // 处理响应
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) { // 正常返回
+          // 读取xml文档
+          String result = EntityUtils.toString(response.getEntity());
+          System.out.println(result);
+        } else {
+          System.err.println("error");
+        }
 	}
+	
 
 }
 

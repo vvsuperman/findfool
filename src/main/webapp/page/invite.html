@@ -1,22 +1,19 @@
 <div class="col-md-10 col-md-offset-1" style="padding: 70px" ng-controller="Excel">
-	<!-- <div class="row">
-		<p class="col-md-2">请先<a href="resource/static/invite.xls">下载</a>模板 </p>
-    </div> -->
+	 <div class="row">
+		<p class="col-md-2">请先<a href="resource/static/invite.xls" style="font-size: 16px">下载</a>模板 </p>
+    </div> 
 	
-	<!-- <div class="row">
+	<div class="row">
     	<div class="col-md-12" id="drop">请把模板文件拖动到这里</div>
   	</div>
-  	 -->
-    <!--  p>
-        <button class="btn btn-info pull-right" ng-click="refresh()">清理重复联系人</button>
-    </p-->
+  	 
+    
 	<div class="row" style="margin-top: 20px">
 	    <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
 	        <ul class="nav nav-tabs list-group">
 	            <li ng-repeat="tl in testlist track by $index"
 	                ng-class="{true: 'active', false: 'inactive'}[tl==active]">
-	                <a href data="{{tl}}" ng-click="selectTest($event.target)">
-	                    {{tl}}</a>
+	                <a>{{tl}}</a>
 	            </li>
 	        </ul>
 	        <table class="table form-inline">
@@ -28,7 +25,7 @@
 	            </tr>
 	            </thead>
 	            <tbody>
-	            <tr ng-repeat="user in xlsusers|filterTest:active">
+	            <tr ng-repeat="user in xlsusers">
 	
 	                <td>
 	                    <a class="glyphicon glyphicon-remove aa" href="" ng-click="removeOne(user)"></a>
@@ -69,7 +66,7 @@
 				     </div>
 	    		</div>
 	    		<div class="form-group">
-		    		<label class="col-sm-2 control-label">欢迎语1</label>
+		    		<label class="col-sm-2 control-label">欢迎语</label>
 		    		<div class="col-md-9">
 		    		  <label style="width: 80%;height: 250px" ng-bind="content" class="form-control" ></label>
 		    		 </div>

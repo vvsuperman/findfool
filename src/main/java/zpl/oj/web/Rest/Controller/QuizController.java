@@ -1,5 +1,6 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -203,7 +204,12 @@ public class QuizController {
 
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
-				inviteService.sendmail(request, q, tu, pwd,ht);
+				try {
+					inviteService.sendmail(request, q, tu, pwd,ht);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			

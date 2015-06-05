@@ -22,6 +22,9 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         {username: '', email: '', tel: '', test: Data.tname(),openCamera:''}
     ];
     
+    
+   
+    
     $scope.addOne = function (v) {
         var i = $scope.xlsusers.indexOf(v);
         if ($scope.active == 'notSelect') {
@@ -96,7 +99,11 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         $scope.xlsusers = tmpp;
     };
     
-    $scope.refresh();
+//    $scope.refresh();
+    $scope.testlist =[];
+    $scope.testlist.push(Data.tname());
+  
+  
     
     $scope.tnamelist = {};
     
@@ -145,22 +152,17 @@ OJApp.controller("Excel",function($scope, $http, Data) {
             	flashTip($scope.message.msg)
             }
         }).error(function (data) {
-        });
+        });	
     };
     
     $scope.sent = function () {
         for (tid in $scope.testlist) {
             var tmp = [];
-            if ($scope.testlist[tid] == 'notSelect') {
-                continue;
-            }
             for (var user in $scope.xlsusers) {
-                if ($scope.xlsusers[user].test == $scope.testlist[tid]) {
                     if ($scope.xlsusers[user].email != ""){
                     	$scope.xlsusers[user].openCamera=$scope.camera.selected;
                         tmp.push($scope.xlsusers[user]);
                     }
-                }
             }
             loadingTip();
             $scope.upload($scope.testlist[tid], tmp);
@@ -200,7 +202,8 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         output = to_json(wb);
         $scope.$apply(function () {
             $.merge($scope.xlsusers, output["Sheet1"]);
-            $scope.refresh();
+            $scope.xlsusers.shift();
+//            $scope.refresh();
         });
     }
     function handleDrop(e) {
@@ -227,12 +230,12 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
     }
-//    var drop = document.getElementById('drop');
-//    if (drop.addEventListener) {
-//        drop.addEventListener('dragenter', handleDragover, false);
-//        drop.addEventListener('dragover', handleDragover, false);
-//        drop.addEventListener('drop', handleDrop, false);
-//    }
+    var drop = document.getElementById('drop');
+    if (drop.addEventListener) {
+        drop.addEventListener('dragenter', handleDragover, false);
+        drop.addEventListener('dragover', handleDragover, false);
+        drop.addEventListener('drop', handleDrop, false);
+    }
 });
 
 OJApp.filter('filterTest', function () {
