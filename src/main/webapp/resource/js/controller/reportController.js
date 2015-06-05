@@ -9,7 +9,6 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/leftBar.html';
-    
     var testid = Data.tid();
 	 
 	$http({
@@ -17,7 +16,14 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
          method: 'POST',
          data: {"testid":testid}
      }).success(function (data) {
+    	/*data=[
+    	       {'email': 1, "score": 20, "totalScore":100,"state":1,"finishtime":1},
+    	       {'email': 1, "score": 30, "totalScore":100,"state":1,"finishtime":2},
+    	       {'email': 1, "score": 60, "totalScore":100,"state":1,"finishtime":3},
+    	       {'email': 1, "score": 10, "totalScore":100,"state":1,"finishtime":4},
+    	       ];*/
     	$scope.invites = data;
+    	console.log(data);
      }).error(function(){
     	 console.log("get data failed");
      })
@@ -33,6 +39,31 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 			 return "已完成";
 		 }
 	 }
+	 
+	 $scope.isScoreDown=false;
+	 function sortByScore(a,b){
+	  return a.score - b.score;
+	 }
+	 $scope.reversalScoreSort=function(){
+		 $scope.invites.sort(sortByScore); 
+		 if($scope.isScoreDown){
+			 $scope.invites.reverse();
+		 }
+		 $scope.isScoreDown=!$scope.isScoreDown;
+	 }
+	 
+	 $scope.isTimeDown=false;
+	 function sortByTime(a,b){
+		 return a.finishtime-b.finishtime;
+	 }
+	 $scope.reversalTimeSort=function(){
+		 $scope.invites.sort(sortByTime);
+		 if($scope.isTimeDown){
+			 $scope.invites.reverse();
+		 }
+		 $scope.isTimeDown=!$scope.isTimeDown;
+	 }
+	 
 	 
 	 $scope.viewReport = function(invite){
 		Data.setTid(invite.testid);

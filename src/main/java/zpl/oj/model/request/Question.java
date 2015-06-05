@@ -15,7 +15,14 @@ public class Question {
 	private String useranswer;
 	private String rightanswer;
 	private int score;
+	private int level;
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public Question() {
 		this.qid = -1;
 		this.setid = -1;
@@ -27,6 +34,7 @@ public class Question {
 		this.useranswer = "";
 		this.rightanswer = "";
 		this.score =0;
+		this.level=0;
 	}
 	public int getScore() {
 		return score;
