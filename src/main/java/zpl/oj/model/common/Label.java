@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Label implements Serializable{
 	private int id;
 	private int type;
-	private String value;
+	private String name;
 	public int getId() {
 		return id;
 	}
@@ -18,11 +18,11 @@ public class Label implements Serializable{
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getValue() {
-		return value;
+	public String getName() {
+		return name;
 	}
-	public void setValue(String value) {
-		this.value = value;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
 }

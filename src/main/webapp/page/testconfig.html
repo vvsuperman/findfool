@@ -1,7 +1,14 @@
-<div>
-	<div id="tags">
-	<input ng-repeat="tag in defaultTags+customTags"/>
+<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
+	style="margin-top: 20px">
+	<div id="labels" class="form-group">
+		<div ng-repeat="label in labels" class="checkbox-inline">
+			<label>
+			<span>{{label.labelname}}</span>
+			</label>
+			<input type="checkbox" ng-model="label.value" />
+			<br/>
+		</div>		
 	</div>
-	<div id="customTags">
-	</div>
+	<input type="text" ng-model="angmodel.labeladded"> <button ng-click="addLabel()">添加</button>
+	<button ng-click="saveConfig()">保存</button>
 </div>
