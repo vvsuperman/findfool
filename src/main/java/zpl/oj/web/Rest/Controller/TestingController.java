@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.dao.InviteDao;
+import zpl.oj.dao.LogTakeQuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
@@ -51,6 +53,8 @@ public class TestingController {
 	private ProblemService problemService;
 	@Autowired
 	private SchoolService schoolService;
+	@Autowired
+	private LogTakeQuizDao logTakeQuizDao;
 
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -109,7 +113,19 @@ public class TestingController {
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		
+		Invite invite = inviteDao.getInvites(testid, email);
+		Date nowDate = new Date();
 		
+		if(nowDate.before(invite.getStarttime())) {
+			rb.setMessage("试题尚未开始");
+			rb.setState(2);
+			return rb;
+		}else if(nowDate.after(invite.getStarttime())){
+			rb.setMessage("试题已截至");
+			rb.setState(3);
+			return rb;
+		}
+
 		
 		rb.setState(1);
 		return rb;
@@ -327,6 +343,14 @@ public class TestingController {
 		for(QuestionTestCase qs:question.getAnswer()){
 			qs.setIsright("");
 		}
+		//存用户的答题记录
+		LogTakeQuiz log = new LogTakeQuiz();
+		log.setIid(invite.getIid());
+		log.setProblemid(nowProblmeId);
+		log.setTime(new Date());
+		log.setNum((int)params.get("index"));
+		logTakeQuizDao.saveQuizLog(log);
+		
 		rb.setState(1);
 		rb.setMessage(question);
 		return rb;
@@ -366,6 +390,20 @@ public class TestingController {
 		for(QuestionTestCase qs:question.getAnswer()){
 			qs.setIsright("");
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		//存用户的答题记录
+		LogTakeQuiz log = new LogTakeQuiz();
+		log.setIid(invite.getIid());
+		log.setProblemid(problmeId);
+		log.setTime(new Date());
+		log.setNum((int)params.get("index"));
+		logTakeQuizDao.saveQuizLog(log);
+		
+		//记录取题的log
+		
+		
+		
 		rb.setState(1);
 		rb.setMessage(question);
 		return rb;
@@ -412,6 +450,16 @@ public class TestingController {
 		}
 		invite.setState(1);
 		inviteDao.updateInvite(invite);
+		
+		
+		//存用户的答题记录
+		LogTakeQuiz log = new LogTakeQuiz();
+		log.setIid(invite.getIid());
+		log.setTime(new Date());
+		log.setNum(-1); //-1表示答题完成
+		logTakeQuizDao.saveQuizLog(log);
+				
+		
 		rb.setState(0);
 		return rb;
 	}

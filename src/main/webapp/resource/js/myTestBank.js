@@ -82,7 +82,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	
 	//查看和修改试题的通用方法
 	$scope.modifyQuestionInTest = function (size,q,params) {
-	   	var question = jQuery.extend(true, {}, q);
+	//·   	var question = jQuery.extend(true, {}, q);  为何要用深拷贝？
 		 var modalInstance = $modal.open({
 		      templateUrl: 'page/myModalContent.html',
 		      controller: 'ModalInstanceCtrl',
@@ -92,11 +92,12 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 		        	  var obj ={};
 		        	  obj.operation = params.operation;
 		        	  obj.title=params.title;
-		        	  obj.question = question;
+		        	  obj.question = q;
 		        	  return obj;
 		          }
 		      }
 		 });
+		 
 	 };
 
     //add by zpl

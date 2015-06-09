@@ -99,6 +99,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/page.html',
                 controller: 'reportDetailController'
             }).
+            when('/report/log', {
+                templateUrl: 'page/page.html',
+                controller: 'reportLogController'
+            }).
             when('/oauthor', {
                 templateUrl: 'page/oauthor.html',
                 controller: 'oauthorController'

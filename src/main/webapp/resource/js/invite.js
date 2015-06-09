@@ -55,49 +55,49 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         $scope.content = ""
     };
     
-    $scope.refresh = function () {
-        var tmp = $scope.xlsusers;
-        var list = [];
-        $scope.testlist = [];
-        var tmpp = [];
-        for (var i in tmp) {
-            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
-                list.push(tmp[i].email + "::" + tmp[i].test);
-                tmpp.push(tmp[i]);
-            }
-            if ($.inArray(tmp[i].test, $scope.testlist) == -1) {
-                if (tmp[i].test == '') {
-                    if ($.inArray('notSelect', $scope.testlist) == -1) {
-                        $scope.testlist.push('notSelect');
-                    }
-                    continue;
-                }
-                $scope.testlist.push(tmp[i].test);
-            }
-        }
-        $scope.active = $scope.testlist[0];
-        $scope.selectTest = function (target) {
-            $scope.active = target.getAttribute('data');
-        };
-        $scope.xlsusers = tmpp;
-        for (t in $scope.testlist) {
-            if ($scope.testlist[t] == "notSelect") {
-                $scope.xlsusers.unshift({username: '', email: '', tel: '', test: ''});
-            } else {
-                $scope.xlsusers.unshift({username: '', email: '', tel: '', test: $scope.testlist[t]})
-            }
-        }
-        var tmp = $scope.xlsusers;
-        var tmpp = [];
-        var list = [];
-        for (var i in tmp) {
-            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
-                list.push(tmp[i].email + "::" + tmp[i].test);
-                tmpp.push(tmp[i]);
-            }
-        }
-        $scope.xlsusers = tmpp;
-    };
+//    $scope.refresh = function () {
+//        var tmp = $scope.xlsusers;
+//        var list = [];
+//        $scope.testlist = [];
+//        var tmpp = [];
+//        for (var i in tmp) {
+//            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
+//                list.push(tmp[i].email + "::" + tmp[i].test);
+//                tmpp.push(tmp[i]);
+//            }
+//            if ($.inArray(tmp[i].test, $scope.testlist) == -1) {
+//                if (tmp[i].test == '') {
+//                    if ($.inArray('notSelect', $scope.testlist) == -1) {
+//                        $scope.testlist.push('notSelect');
+//                    }
+//                    continue;
+//                }
+//                $scope.testlist.push(tmp[i].test);
+//            }
+//        }
+//        $scope.active = $scope.testlist[0];
+//        $scope.selectTest = function (target) {
+//            $scope.active = target.getAttribute('data');
+//        };
+//        $scope.xlsusers = tmpp;
+//        for (t in $scope.testlist) {
+//            if ($scope.testlist[t] == "notSelect") {
+//                $scope.xlsusers.unshift({username: '', email: '', tel: '', test: ''});
+//            } else {
+//                $scope.xlsusers.unshift({username: '', email: '', tel: '', test: $scope.testlist[t]})
+//            }
+//        }
+//        var tmp = $scope.xlsusers;
+//        var tmpp = [];
+//        var list = [];
+//        for (var i in tmp) {
+//            if ($.inArray(tmp[i].email + "::" + tmp[i].test, list) == -1) {
+//                list.push(tmp[i].email + "::" + tmp[i].test);
+//                tmpp.push(tmp[i]);
+//            }
+//        }
+//        $scope.xlsusers = tmpp;
+//    };
     
 //    $scope.refresh();
     $scope.testlist =[];
@@ -159,10 +159,14 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         for (tid in $scope.testlist) {
             var tmp = [];
             for (var user in $scope.xlsusers) {
-                    if ($scope.xlsusers[user].email != ""){
-                    	$scope.xlsusers[user].openCamera=$scope.camera.selected;
-                        tmp.push($scope.xlsusers[user]);
-                    }
+            	   if($scope.xlsusers[user].email == ""	){
+            		   smoke.alert("邮箱不可为空");
+            		   return false;
+            	   }
+            	
+                    
+                	$scope.xlsusers[user].openCamera=$scope.camera.selected;
+                    tmp.push($scope.xlsusers[user]);
             }
             loadingTip();
             $scope.upload($scope.testlist[tid], tmp);

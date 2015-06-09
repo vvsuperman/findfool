@@ -1,15 +1,11 @@
 package zpl.oj.web.Rest.Controller;
 
-import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.*;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,24 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mingdao.sdk.Config;
-
 import zpl.oj.dao.user.UserDao;
 import zpl.oj.model.common.VerifyQuestion;
 import zpl.oj.model.request.User;
-import zpl.oj.model.requestjson.RequestChangeUserInfo;
 import zpl.oj.model.requestjson.RequestUser;
 import zpl.oj.model.requestjson.RequestUserLogin;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.model.responsejson.ResponseMessage;
-import zpl.oj.model.responsejson.ResponseUserInfo;
 import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
-import zpl.oj.util.mail.MailSenderInfo;
-import zpl.oj.util.mail.SimpleMailSender;
-import zpl.oj.util.sms.HttpPost;
+import zpl.oj.util.sms.SMS;
+
+import com.mingdao.sdk.Config;
 
 @Controller
 @RequestMapping("/user")
@@ -46,6 +38,9 @@ public class UserController {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private SMS sms;
 
 	@Autowired
 	private SecurityService securityService;
@@ -57,22 +52,19 @@ public class UserController {
 	public ResponseBase getVertifyCode(@RequestBody Map map1) {
 		ResponseBase rb = new ResponseBase();
 		String mobile = (String) map1.get("mobile");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("username", ExamConstant.SMS_USERNAME);// 此处填写用户账号
-		map.put("scode", ExamConstant.SMS_PWD);// 此处填写用户密码
-		map.put("mobile", mobile);// 此处填写发送号码
-		map.put("tempid", ExamConstant.SMS_TEMPID);// 此处填写模板短信编号
-		// map.put("extcode","1234");
+		//发送短信
 		int max = 9999;
 		int min = 1000;
 		Random random = new Random();
 		int s = random.nextInt(max) % (max - min + 1) + min;
-		map.put("content", "@1@=" + s);// 此处填写模板短信内容
-		String temp = HttpPost.doPost(
-				"http://mssms.cn:8000/msm/sdk/http/sendsms.jsp", map, "UTF-8");
+		List<String> ls = new ArrayList<String>();
+		ls.add(s+"");
+		sms.send(mobile,ls,ExamConstant.SMS_TEMPID_REMIND);
 		rb.setMessage(s);
 		return rb;
 	}
+
+
 
 	@RequestMapping(value = "/oauthorlogin")
 	@ResponseBody
@@ -190,13 +182,7 @@ public class UserController {
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(u);
-			// 发送邮件
-			// MailSenderInfo mailSenderInfo = new MailSenderInfo();
-			// mailSenderInfo.setFromAddress("yigongquan4mail@sina.com");
-			// mailSenderInfo.setToAddress(u.getEmail());
-			// mailSenderInfo.setSubject("欢迎新用户");
-			// mailSenderInfo.setContent("欢迎你们彩笔们~");
-			// SimpleMailSender.sendHtmlMail(mailSenderInfo);
+			
 		}
 
 		return rb;

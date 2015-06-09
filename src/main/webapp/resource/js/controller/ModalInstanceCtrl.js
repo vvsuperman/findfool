@@ -30,7 +30,8 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,
 		            },
 		            data: sendData
 		        }).success(function (data) {
-		        	location.reload(); 
+//		        	location.reload(); 
+		        	console.log("更新试题.....");
 		        }).error(function (data) {
 		           console.log("获取数据错误");
 		        });

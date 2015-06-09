@@ -14,11 +14,12 @@ import zpl.oj.util.mail.MailSenderInfo;
 
 public interface InviteService {
 
-	public String inviteUserToQuiz(InviteUser u,Quiz q,String duration);
 	
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
 			String pwd,User hrUser) throws UnsupportedEncodingException, ClientProtocolException, IOException;
 	
 	public MailSenderInfo initialEmail();
+
+	String inviteUserToQuiz(InviteUser u, Quiz q,RequestTestInviteUser requestUser, User user);
 	
 }

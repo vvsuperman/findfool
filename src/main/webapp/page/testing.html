@@ -68,7 +68,7 @@
 	   <!-- 上方选项条 -->
 	   <div class="col-md-12">
 	   	  <ul class="pagination">
-			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem)">
+			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem,$index)">
 			   <a  href=""   class="dotA">
 			  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
 			   </a>
@@ -115,12 +115,6 @@
 		            		aceeditor language={{lg.context.CodeType}} data-ng-model="programCode.context"></div>
 		            <!--  div style="clear:both"></div-->
 		        </div>
-		        
-		        
-		     
-		     <!--    <div class="col-md-12" style="margin-top: 20px;">
-		            <button class="btn btn-primary" ng-click="run('test')">运行</button>
-		        </div> -->
 		        
 		        <div class="col-md-12" style="margin-top: 20px;">
 		            <button class="btn btn-primary" ng-click="run('submit')">运行/提交</button>

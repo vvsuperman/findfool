@@ -203,7 +203,7 @@ public class QuizController {
 				//由inviteuser生成testuser
 
 				// 生成invite、testuser
-				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
+				String pwd = inviteService.inviteUserToQuiz(tu, q,request,ht);
 				try {
 					inviteService.sendmail(request, q, tu, pwd,ht);
 				} catch (IOException e) {

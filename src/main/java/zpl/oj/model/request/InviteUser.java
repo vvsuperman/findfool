@@ -3,19 +3,19 @@ package zpl.oj.model.request;
 public class InviteUser {
 
 	
-	private String name;
+	private String username;
 	
 	private String email;
 	private String tel;
 
     private String test;
     private int openCamera;
-	public String getName() {
-		return name;
+	public String getUsernameame() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String name) {
+		this.username = name;
 	}
     public void setTest(String test) {
         this.test = test;

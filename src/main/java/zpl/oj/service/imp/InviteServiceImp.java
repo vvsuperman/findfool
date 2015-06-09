@@ -34,6 +34,7 @@ import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
+import zpl.oj.util.sms.SMS;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 @Service
@@ -47,6 +48,9 @@ public class InviteServiceImp implements InviteService {
 	@Autowired
 	private DESService desService;
 	
+	@Autowired
+	private SMS sms;
+	
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	
@@ -57,11 +61,22 @@ public class InviteServiceImp implements InviteService {
 	 * 目前只支持单sheet的excel，使用inviteuser方便以后扩展
 	 * */
 	@Override
-	public String inviteUserToQuiz(InviteUser u, Quiz q, String duration) {
+	public String inviteUserToQuiz(InviteUser u, Quiz q, RequestTestInviteUser requestUser,User user) {
 		//生成testuser
 		Testuser tuser = new Testuser();
-		tuser.setUsername(u.getName());
+		tuser.setUsername(u.getUsernameame());
 		tuser.setEmail(u.getEmail());
+		
+		//发送短信提醒
+	    if(u.getTel().equals("") == false ){
+	    	tuser.setTel(u.getTel());
+			//给应聘者发送笔试邀请
+			List<String> ls = new ArrayList<String>();
+			ls.add(user.getCompany());
+			ls.add(u.getEmail());
+			sms.send(u.getTel(), ls, ExamConstant.SMS_TEMPID_INVITE);
+	    }
+		
 		
 		//等级
 		//设置密码,5位的
@@ -83,8 +98,11 @@ public class InviteServiceImp implements InviteService {
 		invite.setTotalScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setBegintime("");
+		invite.setStarttime(requestUser.getStarttime());
+		invite.setDeadTime(requestUser.getDeadtime());
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
+		String duration = requestUser.getDuration();
 		if(duration!=null&&duration.equals("")==false){
 			invite.setDuration(duration);
 		}else{
@@ -100,7 +118,8 @@ public class InviteServiceImp implements InviteService {
 		}
 		return pwd;
 	}
-	
+
+	//更换邮件
 	//初始化邮件类
 	public MailSenderInfo initialEmail(){
 		MailSenderInfo mailSenderInfo = new MailSenderInfo();

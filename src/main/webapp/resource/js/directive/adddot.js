@@ -11,7 +11,6 @@ OJApp.directive('adddot', function() {
 			}
 			
 			scope.$on("adddot",function(event,index){
-				console.log("adddot");
 				if((index-1)==attrs.index){
 					elem.addClass("dot");
 				}
