@@ -1,14 +1,17 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 20px">
-	<div id="labels" class="form-group">
-		<div ng-repeat="label in labels" class="checkbox-inline">
-			<label>
-			<span>{{label.labelname}}</span>
-			</label>
-			<input type="checkbox" ng-model="label.value" />
-			<br/>
-		</div>		
-	</div>
-	<input type="text" ng-model="angmodel.labeladded"> <button ng-click="addLabel()">添加</button>
-	<button ng-click="saveConfig()">保存</button>
+	<form class="form-horizontal"  role="form">
+		<div class="form-group" ng-repeat="label in labels">
+		    <label  class="col-sm-2 control-label">{{label.labelname}}</label>
+		    <div class="col-sm-4">		    
+		      <input type="checkbox" ng-model="label.value">
+		    </div>
+		 </div>	 
+		<input type="text" ng-model="angmodel.labeladded"> <button ng-click="addLabel()">添加</button>
+		<br>
+		<button ng-click="saveConfig()">保存</button>
+	 </form>
 </div>
+<!-- 
+将数据库中labeltest表中的value字段名字改为isSelected
+ -->

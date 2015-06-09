@@ -3,33 +3,34 @@ package zpl.oj.model.common;
 import java.io.Serializable;
 
 public class Labeltest implements Serializable{
-	private int id;
-	private int testid;
-	private int labelid;
-	private int value;
-	public int getId() {
+	private Integer id;
+	private Integer testid;
+	private Integer labelid;
+	private Integer isSelected;
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public int getTestid() {
+	public Integer getTestid() {
 		return testid;
 	}
-	public void setTestid(int testid) {
+	public void setTestid(Integer testid) {
 		this.testid = testid;
 	}
-	public int getLabelid() {
+	public Integer getLabelid() {
 		return labelid;
 	}
-	public void setLabelid(int labelid) {
+	public void setLabelid(Integer labelid) {
 		this.labelid = labelid;
 	}
-	public int getValue() {
-		return value;
+	public Integer getIsSelected() {
+		return isSelected;
 	}
-	public void setValue(int value) {
-		this.value = value;
+	public void setIsSelected(Integer isSelected) {
+		this.isSelected = isSelected;
 	}
+
 	
 }

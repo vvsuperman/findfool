@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.Testuser;
@@ -210,6 +211,10 @@ public class QuizController {
 
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
+				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
+				for(Labeltest lt:labeltests){					
+					labelService.insertIntoLabelUser(tu.getEmail(), lt.getLabelid(), "");
+				}
 				inviteService.sendmail(request, q, tu, pwd,ht);
 			}
 			

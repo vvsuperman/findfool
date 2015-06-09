@@ -35,7 +35,7 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
             method: 'POST',
     	    data: {"testid": $scope.tid,"labels":$scope.labels}
         }).success(function (data) {
-            FlashTip("保存成功");            
+            flashTip("保存成功");            
         }).error(function(){
        	 console.log("get data failed");
         });
@@ -45,9 +45,9 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
     	$http({
             url: WEBROOT+"/label/addlabel",
             method: 'POST',
-    	    data: {"testid": $scope.tid,"label":$scope.ngmodel.labeladded}
+    	    data: {"testid": $scope.tid,"label":$scope.angmodel.labeladded}
         }).success(function (data) {
-            FlashTip("添加成功");
+            flashTip("添加成功");
         }).error(function(){
        	 console.log("get data failed");
         });

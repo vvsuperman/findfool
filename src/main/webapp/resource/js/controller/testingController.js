@@ -18,6 +18,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 //测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
+	 $scope.loginUser.pwd="Eh159";
 	 //$scope.loginUser.email="apachee@qq.com";
 
      $scope.schools = [];
@@ -47,6 +48,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.isCameraOk={};
 	 $scope.isCameraOk.ok=0;	 
+	 
+	 $scope.userInfo=[];
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -210,6 +213,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	    	 else
 	    	    		 alert(data.message);
 	    	     });*/
+	    		 $http({
+	    	         url: WEBROOT+"/testing/getLabels",
+	    	         method: 'POST',
+	    	         data: {"email":$scope.email, "testid": $scope.tid}
+	    	     }).success(function (data) {
+	    	    	 $scope.userInfo=data["message"];
+
+	    	     });
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
 	    		 flashTip("务必开启摄像头已开始考试");

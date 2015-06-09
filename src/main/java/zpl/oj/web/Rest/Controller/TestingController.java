@@ -1,6 +1,7 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -20,6 +21,9 @@ import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Label;
+import zpl.oj.model.common.LabelUser;
+import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
@@ -27,6 +31,7 @@ import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.InviteService;
+import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.SchoolService;
@@ -51,6 +56,8 @@ public class TestingController {
 	private ProblemService problemService;
 	@Autowired
 	private SchoolService schoolService;
+	@Autowired
+	private LabelService labelService;
 
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -115,6 +122,66 @@ public class TestingController {
 		return rb;
 	}
 	
+	@RequestMapping(value = "/getLabels")
+	@ResponseBody
+	public ResponseBase getLabels(@RequestBody Map<String,Object> params){
+		ResponseBase rb = new ResponseBase();
+		int testid = Integer.parseInt((String)params.get("testid"));
+		String email = (String)params.get("email");
+		
+		List<Labeltest> labelList=labelService.getLabelsOfTest(testid);
+		List<JsonLable> jsonLables=new ArrayList<TestingController.JsonLable>();
+		for(Labeltest lt:labelList){
+			if(lt.getIsSelected()==0) continue;
+			JsonLable jsonLable=new JsonLable();
+			Label label=labelService.getLabelById(lt.getLabelid());
+			if(label==null){
+				rb.setState(0);
+				rb.setMessage("标签不存在！");
+				return rb;
+			}
+			jsonLable.setLabelid(lt.getId());
+			jsonLable.setLabelname(label.getName());
+			Testuser testuser=tuserDao.findTestuserByName(email);
+			LabelUser labelUser=labelService.getLabelUserByTidAndLid(testuser.getTuid(), lt.getLabelid());
+			if(labelUser==null){
+				rb.setState(0);
+				rb.setMessage("labeluser不存在！");
+				return rb;				
+			}
+			jsonLable.setValue(labelUser.getValue());
+			jsonLables.add(jsonLable);
+		}
+		
+		rb.setState(1);
+		rb.setMessage(jsonLables);
+		return rb;
+	}
+	
+	public class JsonLable{
+		private Integer labelid;
+		private String labelname;
+		private String value;
+		public Integer getLabelid() {
+			return labelid;
+		}
+		public void setLabelid(Integer labelid) {
+			this.labelid = labelid;
+		}
+		public String getLabelname() {
+			return labelname;
+		}
+		public void setLabelname(String labelname) {
+			this.labelname = labelname;
+		}
+		public String getValue() {
+			return value;
+		}
+		public void setValue(String value) {
+			this.value = value;
+		}
+		
+	}
 	/*
 	 * 登陆，判断用户合法性
 	 * 判断用户是否已经开始做题，返回试题列表
