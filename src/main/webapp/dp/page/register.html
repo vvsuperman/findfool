@@ -1,0 +1,64 @@
+<div class="container">
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 30px">
+                 大众点评极客挑战赛
+        </h1>
+       
+	</div>
+	
+	
+	<div class="col-md-4 col-md-offset-4" class="text-center">
+	
+	    <form class="form-horizontal form-login">
+                <div class="form-group">
+                    <input type="text" class="form-control txt-large"  placeholder="邮箱" ng-model="Lemail">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control txt-large"   ng-model="pwd" ng-maxlength=20
+				ng-minlength=6 ng-keyup="enter($event)"  placeholder="密码">
+                </div>
+                
+                    <div class="form-group">
+                            <input type="text" class="form-control txt-large"  placeholder="手机号码" ng-model="mobile">   
+                           
+                    </div>
+                    
+                    <div class="col-md-offset-2">
+                        <p class="text-danger" ng-bind="errorMsg.mobile" ></p>
+                              
+                    </div>
+                    
+                     <div class="form-group">
+                           <input countbutton type="button" class=" btn btn-primary" value="获取验证码">
+                           
+                    </div>
+                    
+                    <div class="form-group">
+                            <input type="text" class="form-control txt-large" placeholder="验证码" ng-model="verifyAns">
+                           
+                    </div>
+                
+                <p class="text-danger" ng-bind="errmsg"></p>
+               
+                <div class="form-group">
+                    <a href="#/dp/register2" class="btn btn-lg btn-block btn-outline" type="button">
+                            注册
+                    </a>
+                </div>
+                <div class="form-group">
+                    <a href="#/dp/login" class="btn btn-outline btn-block btn-lg" type="button">
+                            登陆   
+                    </a>
+                </div>
+               
+            </form>
+       
+	</div>
+	
+</div>
+
+
+
+     

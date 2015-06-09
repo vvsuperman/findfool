@@ -90,4 +90,5 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<mvc:resources mapping="/bootstrap/**" location="/bootstrap/" />
 	<mvc:resources mapping="/resource/**" location="/resource/" />
 	<mvc:resources mapping="/page/**" location="/page/" />
+	<mvc:resources mapping="/dp/**" location="/dp/" />
 </beans>

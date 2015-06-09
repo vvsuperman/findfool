@@ -22,6 +22,23 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
+            when('/dp', {  //点评主页
+                templateUrl: 'dp/page/main.html',
+                controller: 'dpMainController'
+            }).
+            when('/dp/register', {  //点评主页
+                templateUrl: 'dp/page/register.html',
+                controller: 'dpMainController'
+            }).
+            when('/dp/register2', {  //点评主页
+                templateUrl: 'dp/page/register2.html',
+                controller: 'dpMainController'
+            }).
+            when('/dp/login', {  //点评主页
+                templateUrl: 'dp/page/login.html',
+                controller: 'dpMainController'
+            }).
+            
             when('/user', {
                 templateUrl: 'page/page.html',
                 controller: 'testshow'
