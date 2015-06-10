@@ -5,6 +5,13 @@ import java.util.Map;
 
 public class ExamConstant{
 	
+	//label名称的常量
+	public final static String LABEL_EMAIL = "email";
+	public final static String LABEL_PWD = "pwd";
+	public final static String LABEL_TEL = "tel";
+	
+	
+	
 	//短信模板
 	public final static String SMS_USERNAME = "XFTB702047";
 	public final static String SMS_PWD ="fw123456";

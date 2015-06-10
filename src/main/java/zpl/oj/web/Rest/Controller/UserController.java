@@ -47,6 +47,8 @@ public class UserController {
 	@Autowired
 	private VerifyQuestionService verifyQuestionService;
 
+	
+	//获取手机验证码
 	@RequestMapping(value = "/getvertifycode", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase getVertifyCode(@RequestBody Map map1) {

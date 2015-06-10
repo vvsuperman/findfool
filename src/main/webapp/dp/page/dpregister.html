@@ -13,15 +13,15 @@
 	
 	    <form class="form-horizontal form-login">
                 <div class="form-group">
-                    <input type="text" class="form-control txt-large"  placeholder="邮箱" ng-model="Lemail">
+                    <input type="text" class="form-control txt-large"  placeholder="邮箱" ng-model="tuser.email">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control txt-large"   ng-model="pwd" ng-maxlength=20
-				ng-minlength=6 ng-keyup="enter($event)"  placeholder="密码">
+				ng-minlength=6 ng-keyup="enter($event)"  placeholder="tuser.pwd">
                 </div>
                 
                     <div class="form-group">
-                            <input type="text" class="form-control txt-large"  placeholder="手机号码" ng-model="mobile">   
+                            <input type="text" class="form-control txt-large"  placeholder="手机号码" ng-model="tuser.mobile">   
                            
                     </div>
                     
@@ -43,7 +43,7 @@
                 <p class="text-danger" ng-bind="errmsg"></p>
                
                 <div class="form-group">
-                    <a href="#/dp/register2" class="btn btn-lg btn-block btn-outline" type="button">
+                    <a href="#/dp/register2" ng-click="preRegister()" class="btn btn-lg btn-block btn-outline" type="button">
                             注册
                     </a>
                 </div>

@@ -27,15 +27,15 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 controller: 'dpMainController'
             }).
             when('/dp/register', {  //点评主页
-                templateUrl: 'dp/page/register.html',
+                templateUrl: 'dp/page/dpregister.html',
                 controller: 'dpMainController'
             }).
             when('/dp/register2', {  //点评主页
-                templateUrl: 'dp/page/register2.html',
+                templateUrl: 'dp/page/dpregister2.html',
                 controller: 'dpMainController'
             }).
             when('/dp/login', {  //点评主页
-                templateUrl: 'dp/page/login.html',
+                templateUrl: 'dp/page/dplogin.html',
                 controller: 'dpMainController'
             }).
             
@@ -63,6 +63,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/test/:tid', {
                 templateUrl: 'page/page.html',
                 controller: 'TestPageTid'
+            }).
+            when('/testConfig', {
+                templateUrl: 'page/page.html',
+                controller: 'testConfig'
             }).
             when('/upgrade', {
                 templateUrl: 'page/page.html',
