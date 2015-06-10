@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
@@ -144,7 +145,7 @@ public class QuizController {
 		Quiz q = quizService.addQuiz(request);
 		List<Integer> labelIds=labelService.getSystemLabels();
 		for(int id:labelIds){
-			labelService.insertLabelToLabelTest(q.getQuizid(), id, 0);
+			labelService.insertIntoLabelTest(q.getQuizid(), id, 0);
 		}
 		ResponseMessage msg = new ResponseMessage();
 		if (q == null) {
@@ -212,8 +213,9 @@ public class QuizController {
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
 				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
-				for(Labeltest lt:labeltests){					
-					labelService.insertIntoLabelUser(tu.getEmail(), lt.getLabelid(), "");
+				for(Labeltest lt:labeltests){
+					Invite invite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
+					labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
 				}
 				inviteService.sendmail(request, q, tu, pwd,ht);
 			}

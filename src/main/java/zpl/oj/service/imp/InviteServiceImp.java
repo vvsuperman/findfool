@@ -2,6 +2,7 @@ package zpl.oj.service.imp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -137,6 +138,18 @@ public class InviteServiceImp implements InviteService {
 		
 		
 		
+	}
+
+	@Override
+	public Invite getInvites(int testid, String email) {
+		// TODO Auto-generated method stub
+		return inviteDao.getInvites(testid, email);
+	}
+
+	@Override
+	public List<Invite> getInvitesByTid(int testid) {
+		// TODO Auto-generated method stub
+		return inviteDao.getInviteByTid(testid);
 	}
 
 }

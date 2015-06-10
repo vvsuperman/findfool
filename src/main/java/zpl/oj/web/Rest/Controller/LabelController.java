@@ -1,28 +1,24 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.aspectj.apache.bcel.generic.LSTORE;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-
+import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Label;
+import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
-import zpl.oj.model.requestjson.RequestMessage;
 import zpl.oj.model.responsejson.ResponseBase;
-import zpl.oj.model.responsejson.ResponseMessage;
+import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
+
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/label") 
@@ -30,6 +26,8 @@ public class LabelController {
 
 	@Autowired
 	private LabelService labelService;
+	@Autowired
+	private InviteService inviteService;
 	@RequestMapping(value="/getlabels")
 	@ResponseBody
 	public ResponseBase getLabels(@RequestBody Map<String,Integer> map){
@@ -42,7 +40,7 @@ public class LabelController {
 			l.setLabelid(lt.getLabelid());
 			String labelname=labelService.getLabelNameByLabelId(lt.getLabelid());
 			l.setLabelname(labelname);
-			l.setValue(lt.getIsSelected()==1?true:false);
+			l.setIsSelected((lt.getIsSelected()==1?true:false));
 			labels.add(l);
 		}
 		rb.setState(1);
@@ -54,21 +52,21 @@ public class LabelController {
 	public ResponseBase saveConfig(@RequestBody Map<String,Object> map){
 		ResponseBase rb = new ResponseBase();
 		Integer testid=Integer.parseInt(map.get("testid").toString());
-//		String test="{\"labelid\":33,\"labelname\":\"sss\",\"value\":true}";
-//		Gson gson=new Gson();
-//		JsonLabel labels=gson.fromJson(test,JsonLabel.class);
-//		Labels labels=new Labels();
-//		labels.setLabelid(33);
-//		labels.setLabelname("sss");
-//		labels.setValue(true);
-//		System.out.println(gson.toJson(labels));
-		List<Map<String, Object>> labels=(List<Map<String,Object>>)map.get("labels");
-		System.out.println(labels.toString());
-		//List<Labels> labels=(List<Labels>)gson.fromJson(map.get("labels").toString(), Labels.class);
+		Gson gson=new Gson();
+
+		String labels=map.get("labels").toString();
+		labels=labels.substring(2,labels.length()-2);
+		String[] lArray=labels.split("\\}, \\{");
+		for(int i=0;i<lArray.length;i++){
+			lArray[i]="{"+lArray[i]+"}";
+			JsonLabel label=gson.fromJson(lArray[i],JsonLabel.class);
+			labelService.updateLabelTest(testid, label.getLabelid(), label.getIsSelected()?1:0);
+		}
 		rb.setState(1);
 		return rb;
 	}
 
+	//用户添加新的标签
 	@RequestMapping(value="/addlabel")
 	@ResponseBody
 	public ResponseBase addLabel(@RequestBody Map<String,String> map){
@@ -81,8 +79,14 @@ public class LabelController {
 		}
 		Label label=labelService.getLabelByLabelName(newlabel);
 		//如果标签未被加入到该test中
-		if(!labelService.isLableTestExist(testid, label.getId()))
-			labelService.insertLabelToLabelTest(testid, label.getId(), 0);
+		if(!labelService.isLableTestExist(testid, label.getId())){
+			labelService.insertIntoLabelTest(testid, label.getId(), 0);
+			//在labeluser中，对于该test所对应的invite，都插入一条数据
+			List<Invite> invites=inviteService.getInvitesByTid(testid);
+			for(Invite invite:invites){
+				labelService.insertIntoLabelUser(invite.getIid(), label.getId(), "");
+			}
+		}
 		rb.setState(1);
 		return rb;
 	}
@@ -91,7 +95,7 @@ public class LabelController {
 		
 		private Integer labelid;
 		private String labelname;
-		private Boolean value;
+		private Boolean isSelected;
 		public Integer getLabelid() {
 			return labelid;
 		}
@@ -104,15 +108,11 @@ public class LabelController {
 		public void setLabelname(String labelname) {
 			this.labelname = labelname;
 		}
-		public Boolean getValue() {
-			return value;
+		public Boolean getIsSelected() {
+			return isSelected;
 		}
-		public void setValue(Boolean value) {
-			this.value = value;
-		}
-		@Override
-		public String toString(){
-			return "labelid="+labelid+",labelname="+labelname+",value="+value;
+		public void setIsSelected(Boolean isSelected) {
+			this.isSelected = isSelected;
 		}
 	}
 }

@@ -18,7 +18,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 //测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
-	 $scope.loginUser.pwd="Eh159";
+	 //$scope.loginUser.pwd="3XT75";
 	 //$scope.loginUser.email="apachee@qq.com";
 
      $scope.schools = [];
@@ -271,7 +271,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 			 return false;
 		 }
 		 
-		 var sendData ={"email":$scope.email,"testid":$scope.tid,"tuser":$scope.tuser}
+		 var sendData ={"email":$scope.email,"testid":$scope.tid,"userInfo":$scope.userInfo}
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",
 	         method: 'POST',

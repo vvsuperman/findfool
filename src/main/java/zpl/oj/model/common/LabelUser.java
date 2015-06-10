@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class LabelUser implements Serializable {
 	private Integer id;
-	private Integer testuserid;
+	private Integer inviteid;
 	private Integer labelid;
 	private String value;
 	public Integer getId() {
@@ -13,11 +13,11 @@ public class LabelUser implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getTestuserid() {
-		return testuserid;
+	public Integer getInviteid() {
+		return inviteid;
 	}
-	public void setTestuserid(Integer testuserid) {
-		this.testuserid = testuserid;
+	public void setInviteid(Integer inviteid) {
+		this.inviteid = inviteid;
 	}
 	public Integer getLabelid() {
 		return labelid;

@@ -38,7 +38,7 @@ public interface LabelService{
 	/** 
 	 * description:更新测试的标签是否选择
 	 */
-	void updateLabelValue(int testid,int labelid,int value);
+	void updateLabelTest(int testid,int labelid,int isSelected);
 
 	/** 
 	 * description:判断用户自定义的新标签是否已经被其他用户添加过了
@@ -54,7 +54,7 @@ public interface LabelService{
 	/** 
 	 * description:在labeltest表中插入一条test的label
 	 */
-	abstract void insertLabelToLabelTest(int testid,int labelid,int value);
+	abstract void insertIntoLabelTest(int testid,int labelid,int isSelected);
 	
 	/** 
 	 * description:判断用户自定义的新标签是否已经被添加到test设置中
@@ -62,9 +62,11 @@ public interface LabelService{
 	abstract boolean isLableTestExist(Integer testid,Integer labelid);
 
 	//对labeluser表的操作
-	abstract void insertIntoLabelUser(String userEmail, int labelid, String value);
+	abstract void insertIntoLabelUser(Integer inviteid, int labelid, String value);
 	
-	abstract LabelUser getLabelUserByTidAndLid(Integer testuserid,Integer labelid);
+	abstract LabelUser getLabelUserByIidAndLid(Integer inviteid,Integer labelid);
+	
+	abstract List<LabelUser> getLabelUserByIid(Integer inviteid);
 	
 	abstract void updateLabelUser(int testid,int labelid,String value);
 }

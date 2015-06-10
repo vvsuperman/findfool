@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.type.MapLikeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.TestuserDao;
@@ -127,8 +130,8 @@ public class TestingController {
 	public ResponseBase getLabels(@RequestBody Map<String,Object> params){
 		ResponseBase rb = new ResponseBase();
 		int testid = Integer.parseInt((String)params.get("testid"));
-		String email = (String)params.get("email");
-		
+		String email = (String)params.get("email");		
+		Invite invite = inviteService.getInvites(testid, email);
 		List<Labeltest> labelList=labelService.getLabelsOfTest(testid);
 		List<JsonLable> jsonLables=new ArrayList<TestingController.JsonLable>();
 		for(Labeltest lt:labelList){
@@ -140,10 +143,9 @@ public class TestingController {
 				rb.setMessage("标签不存在！");
 				return rb;
 			}
-			jsonLable.setLabelid(lt.getId());
+			jsonLable.setLabelid(lt.getLabelid());
 			jsonLable.setLabelname(label.getName());
-			Testuser testuser=tuserDao.findTestuserByName(email);
-			LabelUser labelUser=labelService.getLabelUserByTidAndLid(testuser.getTuid(), lt.getLabelid());
+			LabelUser labelUser=labelService.getLabelUserByIidAndLid(invite.getIid(), lt.getLabelid());
 			if(labelUser==null){
 				rb.setState(0);
 				rb.setMessage("labeluser不存在！");
@@ -276,15 +278,24 @@ public class TestingController {
 		String email = (String) params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
 
-		Map userMap = (Map) params.get("tuser");
-		Testuser tuser = tuserDao.findTestuserByName(email);
-		tuser.setUsername((String) userMap.get("username"));
-		tuser.setSchool((String) userMap.get("school"));
-		tuser.setBlog((String) userMap.get("blog"));
-		tuser.setTel((String) userMap.get("tel"));
-		tuser.setTuid(tuid);
-		tuserDao.updateTestuserById(tuser);
+//		Map userMap = (Map) params.get("tuser");
+//		Testuser tuser = tuserDao.findTestuserByName(email);
+//		tuser.setUsername((String) userMap.get("username"));
+//		tuser.setSchool((String) userMap.get("school"));
+//		tuser.setBlog((String) userMap.get("blog"));
+//		tuser.setTel((String) userMap.get("tel"));
+//		tuser.setTuid(tuid);
+//		tuserDao.updateTestuserById(tuser);
 		// 计算该试题的信息，选择题有X道，简答题有X道,时间为多长，等等
+		String userInfo=params.get("userInfo").toString();
+		userInfo=userInfo.substring(2,userInfo.length()-2);
+		String[] infos=userInfo.split("\\}, \\{");
+		Gson gson=new Gson();
+		for(int i=0;i<infos.length;i++){
+			infos[i]="{"+infos[i]+"}";
+			JsonLable label=gson.fromJson(infos[i], JsonLable.class);
+			labelService.updateLabelUser(invite.getIid(), label.getLabelid(), label.getValue());
+		}
 		Map rtMap = tuserService.getTestInfo(testid);
 		rtMap.put("duration", invite.getDuration());
 		rb.setMessage(rtMap);

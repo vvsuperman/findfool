@@ -29,9 +29,9 @@ public class LabelServiceImpl implements LabelService {
 	}
 
 	@Override
-	public void insertLabelToLabelTest( int testid, int labelid, int value) {
+	public void insertIntoLabelTest( int testid, int labelid, int isSelected) {
 		// TODO Auto-generated method stub
-		labelDao.insertLabelToLabelTest(testid, labelid, value);
+		labelDao.insertIntoLabelTest(testid, labelid, isSelected);
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class LabelServiceImpl implements LabelService {
 	}
 
 	@Override
-	public void updateLabelValue(int testid, int labelid, int value) {
+	public void updateLabelTest(int testid, int labelid, int isSelected) {
 		// TODO Auto-generated method stub
-		labelDao.updateLabelValue(testid, labelid, value);
+		labelDao.updateLabelTest(testid, labelid, isSelected);
 	}
 
 	@Override
@@ -80,10 +80,9 @@ public class LabelServiceImpl implements LabelService {
 	}
 
 	@Override
-	public void insertIntoLabelUser(String userEmail, int labelid, String value) {
+	public void insertIntoLabelUser(Integer inviteid, int labelid, String value) {
 		// TODO Auto-generated method stub
-		Testuser testuser=testuserDao.findTestuserByName(userEmail); 
-		labelDao.insertIntoLabelUser(testuser.getTuid(), labelid, value);
+		labelDao.insertIntoLabelUser(inviteid, labelid, value);
 	}
 
 	@Override
@@ -93,15 +92,21 @@ public class LabelServiceImpl implements LabelService {
 	}
 
 	@Override
-	public LabelUser getLabelUserByTidAndLid(Integer testuserid, Integer labelid) {
+	public LabelUser getLabelUserByIidAndLid(Integer inviteid, Integer labelid) {
 		// TODO Auto-generated method stub
-		return labelDao.getLabelUserByTidAndLid(testuserid, labelid);
+		return labelDao.getLabelUserByIidAndLid(inviteid, labelid);
 	}
 
 	@Override
 	public void updateLabelUser(int testid, int labelid, String value) {
 		// TODO Auto-generated method stub
 		labelDao.updateLabelUser(testid, labelid, value);
+	}
+
+	@Override
+	public List<LabelUser> getLabelUserByIid(Integer inviteid) {
+		// TODO Auto-generated method stub
+		return labelDao.getLabelUserByIid(inviteid);
 	}
 
 }

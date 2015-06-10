@@ -48,6 +48,9 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
     	    data: {"testid": $scope.tid,"label":$scope.angmodel.labeladded}
         }).success(function (data) {
             flashTip("添加成功");
+            //$scope.$apply(function(){
+            	updateTestLabels();
+            //});
         }).error(function(){
        	 console.log("get data failed");
         });

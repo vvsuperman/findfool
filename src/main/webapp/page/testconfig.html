@@ -4,7 +4,7 @@
 		<div class="form-group" ng-repeat="label in labels">
 		    <label  class="col-sm-2 control-label">{{label.labelname}}</label>
 		    <div class="col-sm-4">		    
-		      <input type="checkbox" ng-model="label.value">
+		      <input type="checkbox" ng-model="label.isSelected">
 		    </div>
 		 </div>	 
 		<input type="text" ng-model="angmodel.labeladded"> <button ng-click="addLabel()">添加</button>
@@ -12,6 +12,3 @@
 		<button ng-click="saveConfig()">保存</button>
 	 </form>
 </div>
-<!-- 
-将数据库中labeltest表中的value字段名字改为isSelected
- -->
