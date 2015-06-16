@@ -290,7 +290,7 @@ public class UpLoadService{
 	  	      		}
 	      		}
 	      		if(type == ExamConstant.OPTION){
-	      			problem.setRightAnswer(rightAnswer);
+	      			problem.setRightanswer(rightAnswer);
 	      		}
 	     
 	      		problemDao.updateProblemRightAnswer(problem);

@@ -1,0 +1,133 @@
+<div class="container">
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 30px">
+                 大众点评极客挑战赛
+        </h1>
+       
+	</div>
+	
+	
+	<div class="col-md-6 col-md-offset-2" class="text-center">
+	
+	    <form class="form-horizontal form-login">
+               
+                
+                  <div class="form-group">
+		            <label class="col-sm-3 control-label">邮箱</label>
+		            <div >
+		                <p class="pull-left control-label" ng-bind="cad.email"  style="font-size: 16px;"></p>
+		            </div>
+                 </div>
+                 
+                 <div class="form-group">
+		            <label class="col-sm-3 control-label">手机</label>
+		            <div >
+		                <p class="pull-left control-label" ng-bind="cad.tel"  style="font-size: 16px;"></p>
+		            </div>
+                 </div>
+                 
+                   <div class="form-group">
+		            <label class="col-sm-3 control-label">姓名</label>
+		            <div >
+		                <p class="pull-left control-label" ng-bind="cad.username"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		                 <input class="form-control" type="text" ng-model="tempCad.username" ng-if="edit.profile==1">
+		            </div>
+                 </div>
+                 
+                 <div class="form-group">
+		            <label class="col-sm-3 control-label">学校</label>
+		            <div >
+		                <p class="pull-left control-label" ng-bind="cad.school"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		                 <input class="form-control" type="text" ng-model="tempCad.school" ng-if="edit.profile==1">
+		            </div>
+                 </div>
+                 
+                 <div class="form-group">
+		            <label class="col-sm-3 control-label">学历</label>
+		            <div >
+		                <p class="pull-left control-label" ng-bind="cad.degree"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		                 <input class="form-control" type="text" ng-model="tempCad.degree" ng-if="edit.profile==1">
+		            </div>
+                 </div>
+                
+                 <div class="form-group">
+		            <label class="col-sm-3 control-label">专业</label>
+		            <div >
+		                <p class="pull-left control-label" ng-bind="cad.discipline"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		                 <input class="form-control" type="text" ng-model="tempCad.discipline" ng-if="edit.profile==1">
+		            </div>
+                 </div> 
+                 
+                  <div class="form-group">
+		            <label class="col-sm-3 control-label">毕业时间</label>
+		            <div>
+		                <p class="pull-left control-label" ng-bind="cad.gratime"  style="font-size: 16px;"  ng-if="edit.profile==0"></p>
+		                 <input class="form-control" type="text" ng-model="tempCad.gratime" ng-if="edit.profile==1">
+		            </div>
+                 </div>
+                          
+                
+                <p class="text-danger col-md-offset-2" ng-bind="errmsg"></p>
+               
+                <div class="form-group " ng-if="edit.profile==0" style="margin-top: 20px" >
+                    <a  ng-click="modifyCad()" class="btn btn-lg btn-block btn-outline col-md-offset-3" type="button">
+                            修改基本信息
+                    </a>
+                     <a ng-click="edit.pwd=true" class="btn btn-outline btn-block btn-lg col-md-offset-3" type="button">
+                            修改密码   
+                    </a>
+                </div>
+                
+                
+                <div class="form-group" ng-if="edit.profile==1">
+                    <a  ng-click="saveCad()" class="btn btn-lg btn-block btn-outline col-md-offset-3" type="button">
+                           保存
+                    </a>
+                     <a ng-click="edit.profile=0" class="btn btn-outline btn-block btn-lg col-md-offset-3" type="button">
+                           取消   
+                    </a>
+                </div>
+                
+                
+                
+                 <div class="form-group" ng-if="edit.pwd">
+		            <label class="col-sm-3 control-label">旧密码</label>
+		            <div>
+		                 <input class="form-control" type="password" ng-model="pwd.old" >
+		            </div>
+                 </div> 
+                 
+                  <div class="form-group" ng-if="edit.pwd">
+		            <label class="col-sm-3 control-label">新密码</label>
+		            <div>
+		                 <input class="form-control" type="password" ng-model="pwd.newpd" >
+		            </div>
+                 </div>
+                 
+                   <div class="form-group" ng-if="edit.pwd">
+                    <a  ng-click="savePwd()" class="btn btn-lg btn-block btn-outline col-md-offset-3"  type="button">
+                            保存
+                    </a>
+                     <a ng-click="edit.pwd=false" class="btn btn-outline btn-block btn-lg col-md-offset-3" type="button">
+                            取消  
+                    </a>
+                </div>
+                
+                 <div class="form-group">
+                    <a  href="#/dp/testmain" class="btn btn-lg btn-block btn-outline col-md-offset-3"  type="button">
+                            返回主菜单
+                    </a>
+                 </div>
+                
+               
+            </form>
+       
+	</div>
+	
+</div>
+
+
+
+     

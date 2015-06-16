@@ -8,7 +8,6 @@ OJApp.directive('customvideo', function() {
 		link: function(scope, elem, attrs) {
 			
 			scope.$watch("videoplay",function(){
-				console.log('videoplay.................');
 				if(typeof(scope.videoplay)!="undefined"){
 					elem[0].play();
 				}

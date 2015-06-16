@@ -13,15 +13,15 @@
 	  <div class="col-md-4 col-md-offset-4">
 	    <form class="form-horizontal form-login">
                 <div class="form-group">
-                    <input type="email" class="form-control txt-large" id="email" placeholder="用户名/邮箱" ng-model="Lemail">
+                    <input type="email" class="form-control txt-large" id="email" placeholder="用户名/邮箱" ng-model="cad.email">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control txt-large" id="id="passwd"  ng-model="Lpwd" ng-maxlength=20
+                    <input type="password" class="form-control txt-large"  ng-model="cad.pwd" ng-maxlength=20
 				ng-minlength=6 ng-keyup="enter($event)"  placeholder="密码">
                 </div>
                 <p class="text-danger" ng-bind="errmsg"></p>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="confirm(1)">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="login()">
                         登陆
                     </button>
                 </div>

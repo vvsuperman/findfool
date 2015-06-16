@@ -113,7 +113,18 @@ public class Problem implements Serializable {
 	 * */
 	private Integer level;
 	
+	private int negative;
 	
+	
+
+
+	public int getNegative() {
+		return negative;
+	}
+
+	public void setNegative(int negative) {
+		this.negative = negative;
+	}
 
 	public Integer getLevel() {
 		return level;
@@ -139,11 +150,11 @@ public class Problem implements Serializable {
 		this.score = score;
 	}
 
-	public String getRightAnswer() {
+	public String getRightanswer() {
 		return rightanswer;
 	}
 
-	public void setRightAnswer(String rightAnswer) {
+	public void setRightanswer(String rightAnswer) {
 		this.rightanswer = rightAnswer;
 	}
 
