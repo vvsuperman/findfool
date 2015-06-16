@@ -6,6 +6,7 @@ OJApp.directive('countbutton', function() {
 		restrict: 'AE',
 		scope:true,
 		link: function(scope, elem, attrs) {
+	
 			var wait = 120;
 			elem.click(function(){
 				if(typeof(scope.mobile) == "undefined" || scope.mobile ==""){

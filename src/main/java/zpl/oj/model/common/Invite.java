@@ -20,6 +20,7 @@ public class Invite implements Serializable {
 		this.state = 1;
 		this.pwd ="";
 		this.openCamera=0;
+		
 	}
 	
 	/**
@@ -78,11 +79,28 @@ public class Invite implements Serializable {
 	 * 用户分数
 	 */
 	private int totalScore;
-	
-	
 	private Integer state;
-	
 	private int openCamera;
+	private Date starttime;//试题允许开始做的时间
+	private Date deadtime; //试题的终止时间
+	
+	public Date getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(Date startTime) {
+		this.starttime = startTime;
+	}
+
+	public Date getDeadtime() {
+		return deadtime;
+	}
+
+	public void setDeadTime(Date deadTime) {
+		this.deadtime = deadTime;
+	}
+
+	
 
 	public String getPwd() {
 		return pwd;

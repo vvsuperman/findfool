@@ -1,5 +1,6 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -211,13 +212,22 @@ public class QuizController {
 				//由inviteuser生成testuser
 
 				// 生成invite、testuser
-				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
+				String pwd = inviteService.inviteUserToQuiz(tu, q,request,ht);
 				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
 				for(Labeltest lt:labeltests){
 					Invite invite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
 					labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
 				}
-				inviteService.sendmail(request, q, tu, pwd,ht);
+				
+				
+				
+				
+				try {
+					inviteService.sendmail(request, q, tu, pwd,ht);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			
@@ -315,4 +325,3 @@ public class QuizController {
 	
 
 }
-

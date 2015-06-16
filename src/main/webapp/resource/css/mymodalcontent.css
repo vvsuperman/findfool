@@ -24,8 +24,8 @@ label input{
 }
 
 label span{
- 	margin-top: 3%; 
-	margin-left: 2%;
+ 	margin-top: 20px; 
+	margin-left: 20px;
 }
 
 label textarea{	

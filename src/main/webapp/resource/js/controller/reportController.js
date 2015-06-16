@@ -9,7 +9,6 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/leftBar.html';
-    
     var testid = Data.tid();
 	 
 	$http({
@@ -17,7 +16,9 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
          method: 'POST',
          data: {"testid":testid}
      }).success(function (data) {
+    	
     	$scope.invites = data;
+    	console.log(data);
      }).error(function(){
     	 console.log("get data failed");
      })
@@ -34,6 +35,31 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 		 }
 	 }
 	 
+	 $scope.isScoreDown=false;
+	 function sortByScore(a,b){
+	  return a.score - b.score;
+	 }
+	 $scope.reversalScoreSort=function(){
+		 $scope.invites.sort(sortByScore); 
+		 if($scope.isScoreDown){
+			 $scope.invites.reverse();
+		 }
+		 $scope.isScoreDown=!$scope.isScoreDown;
+	 }
+	 
+	 $scope.isTimeDown=false;
+	 function sortByTime(a,b){
+		 return a.finishtime-b.finishtime;
+	 }
+	 $scope.reversalTimeSort=function(){
+		 $scope.invites.sort(sortByTime);
+		 if($scope.isTimeDown){
+			 $scope.invites.reverse();
+		 }
+		 $scope.isTimeDown=!$scope.isTimeDown;
+	 }
+	 
+	 
 	 $scope.viewReport = function(invite){
 		Data.setTid(invite.testid);
         Data.setInviteid(invite.iid);
@@ -46,6 +72,7 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
 	$scope.showReport =2;
 	$scope.listNav=1;
 	$scope.detailNav=0;
+	$scope.logNav=0;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/leftBar.html';
@@ -133,6 +160,7 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
 OJApp.controller('reportDetailController',function ($scope,$http,Data,$routeParams,$modal) {
 	$scope.showReport =3;
 	$scope.listNav=0;
+	$scope.logNav=0;
 	$scope.detailNav=1;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
@@ -242,3 +270,34 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
 	 
 	 
 });
+
+
+OJApp.controller('reportLogController',function ($scope,$http,Data) {
+	$scope.showReport =4;
+	$scope.listNav=0;
+	$scope.logNav=1;	
+	$scope.detailNav=0;
+    $scope.ContentUs = 'page/contentUs.html';
+    $scope.template = 'page/testreport.html';
+    $scope.leftBar = 'page/leftBar.html';
+    
+    $http({
+        url: WEBROOT+"/report/log",
+        method: 'POST',
+        data: {"inviteid":Data.inviteid()}
+    }).success(function (data) {
+    	for(var i=0;i<data.length;i++){
+    		var datetime= new Date(data[i].time);
+    		data[i].year = datetime.getFullYear();
+    		data[i].month = datetime.getMonth()+1;
+    		data[i].day = datetime.getDate();
+    		data[i].hour = datetime.getHours();
+    		data[i].minute = datetime.getMinutes();
+    	}
+    	$scope.logs = data;
+    }).error(function(){
+   	 console.log("get data failed");
+    })
+    
+	
+})

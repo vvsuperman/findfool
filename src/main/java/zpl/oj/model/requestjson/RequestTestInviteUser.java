@@ -1,5 +1,6 @@
 package zpl.oj.model.requestjson;
 
+import java.util.Date;
 import java.util.List;
 
 import zpl.oj.model.common.Testuser;
@@ -13,7 +14,25 @@ public class RequestTestInviteUser {
 	private String replyTo;
 	private String context;
 	private String duration;
+	
+	private Date starttime; //试题的开始时间
+    private Date deadtime;   //试题的结束时间
 	private List<InviteUser> invite;	
+	
+	public Date getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
+	}
+	public Date getDeadtime() {
+		return deadtime;
+	}
+	public void setDeadtime(Date deadtime) {
+		this.deadtime = deadtime;
+	}
+	
+	
 	public String getDuration() {
 		return duration;
 	}

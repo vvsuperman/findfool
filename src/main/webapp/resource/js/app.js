@@ -22,6 +22,39 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
+            when('/dp', {  //点评主页
+                templateUrl: 'dp/page/main.html',
+                controller: 'cadLoginController'
+            }).
+            when('/dp/register', {  //点评主页
+                templateUrl: 'dp/page/dpregister.html',
+                controller: 'cadLoginController'
+            }).
+            when('/dp/register2', {  //点评主页
+                templateUrl: 'dp/page/dpregister2.html',
+                controller: 'cadLoginController'
+            }).
+            when('/dp/login', {  //点评主页
+                templateUrl: 'dp/page/dplogin.html',
+                controller: 'cadLoginController'
+            }).
+            when('/dp/testmain', {  //点评主页
+                templateUrl: 'dp/page/testmain.html',
+                controller: 'testMainController'
+            }).
+            when('/dp/testdetail', {  //点评主页
+                templateUrl: 'dp/page/testdetail.html',
+                controller: 'testDetailController'
+            }).
+            when('/dp/cadtesting/', {  //点评主页
+                templateUrl: 'dp/page/cadtesting.html',
+                controller: 'cadtestingController'
+            }).
+            when('/dp/profile/', {  //个人信息
+                templateUrl: 'dp/page/profile.html',
+                controller: 'profileController'
+            }).
+            
             when('/user', {
                 templateUrl: 'page/page.html',
                 controller: 'testshow'
@@ -102,6 +135,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/report/detail', {
                 templateUrl: 'page/page.html',
                 controller: 'reportDetailController'
+            }).
+            when('/report/log', {
+                templateUrl: 'page/page.html',
+                controller: 'reportLogController'
             }).
             when('/oauthor', {
                 templateUrl: 'page/oauthor.html',
@@ -455,4 +492,78 @@ OJApp.factory('Data', function (webStorage) {
     return new _data();
 });
 
+
+//用于客户端的服务
+OJApp.factory('CadData', function (webStorage) {
+    function _data() {
+    	  this._token = "";
+          this.getToken = function () {
+              if (this._token == "" || this._token == null) {
+                  this._token = webStorage.get("token");
+              }
+              return this._token;
+          };
+          this.setToken = function (to) {
+              webStorage.remove('token');
+              webStorage.add('token', to);
+              this._token = to;
+          };
+    	
+    	this._email = "";
+        this.getEmail = function () {
+            if (this._email == "" || this._email == null) {
+                this._email = webStorage.get("email");
+            }
+            return this._email;
+        };
+        this.setEmail = function (to) {
+            webStorage.remove('email');
+            webStorage.add('email', to);
+            this._email = to;
+        };
+        
+        
+        this._testid = "";
+        this.getTestid = function () {
+            if (this._testid == "" || this._testid == null) {
+                this._testid = webStorage.get("testid");
+            }
+            return this._testid;
+        };
+        this.setTestid = function (to) {
+            webStorage.remove('testid');
+            webStorage.add('testid', to);
+            this._testid = to;
+        };
+        
+        
+        this._testname = "";
+        this.getTestname = function () {
+            if (this._testname == "" || this._testname == null) {
+                this._testname = webStorage.get("testname");
+            }
+            return this._testname;
+        };
+        this.setTestname = function (to) {
+            webStorage.remove('testname');
+            webStorage.add('testname', to);
+            this._testname = to;
+        };
+        
+        
+        this.clear = function(){
+        	webStorage.clear();
+        	for (var p in this){
+        		if(typeof(this[p])=="function"){
+        		}
+        		else{
+        			this[p]="";
+        		}
+        	}
+        };
+       
+    }  
+     
+    return new _data();
+});
 

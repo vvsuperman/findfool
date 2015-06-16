@@ -19,6 +19,92 @@ public class Testuser {
 	private String degree;
 	private String faceid;
 	
+    private String discipline;	//专业
+    private String gratime;		//毕业时间
+    
+    private String city;		//城市
+    private String rollnumber;  //年级
+    private String gpa;         //gpa
+    private String gender;      //性别
+    
+    
+    
+    public String getCity() {
+		return city;
+	}
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getRollnumber() {
+		return rollnumber;
+	}
+
+
+	public void setRollnumber(String rollnumber) {
+		this.rollnumber = rollnumber;
+	}
+
+
+	public String getGpa() {
+		return gpa;
+	}
+
+
+	public void setGpa(String gpa) {
+		this.gpa = gpa;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	
+    
+    
+    public String getPwd() {
+		return pwd;
+	}
+
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	private String pwd;			//用户密码
+    
+    
+    public String getDiscipline() {
+		return discipline;
+	}
+
+
+	public void setDiscipline(String discipline) {
+		this.discipline = discipline;
+	}
+
+
+	public String getGratime() {
+		return gratime;
+	}
+
+
+	public void setGratime(String gratime) {
+		this.gratime = gratime;
+	}
+
+	
+	
+	
 	
 
 	

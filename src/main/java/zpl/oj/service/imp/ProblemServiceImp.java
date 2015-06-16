@@ -63,8 +63,9 @@ public class ProblemServiceImp implements ProblemService{
 		q.setName(p.getTitle());
 		q.setContext(p.getDescription());
 		q.setType(p.getType());
-		q.setRightanswer(p.getRightAnswer());
+		q.setRightanswer(p.getRightanswer());
 		q.setSetid(p.getProblemSetId());
+		q.setLevel(p.getLevel());
 		
 		List<ProblemTestCase> cases = problemTestCaseDao.getProblemTestCases(p.getProblemId());
 		List<QuestionTestCase> answer = new ArrayList<QuestionTestCase>();
@@ -266,7 +267,7 @@ public class ProblemServiceImp implements ProblemService{
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
 		p.setProblemSetId(ExamConstant.CUSTOM_SET_ID);   //自定义的试题，set为0
-		p.setRightAnswer(q.getQuestion().getRightanswer());
+		p.setRightanswer(q.getQuestion().getRightanswer());
 	
 		User u = userService.getUserById(q.getUser().getUid());
 		problemDao.updateProblemInstance(p);

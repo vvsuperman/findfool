@@ -8,18 +8,28 @@
         <thead>
         <tr>
             <th>用户名</th>
-            <th>持续时间</th>
             <th>状态</th>
-           <!--  <th>结果</th> -->
+            <th>完成时间&nbsp;&nbsp;
+            	<span class="glyphicon" style="cursor:pointer" 
+	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isTimeDown]" 
+	            	ng-click="reversalTimeSort()">
+            	</span>
+            </th>
+            <th  >得分&nbsp;&nbsp;
+            	<span class="glyphicon" style="cursor:pointer" 
+	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
+	            	ng-click="reversalScoreSort()">
+            	</span>
+            </th>
             <th>查看详情</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat = "invite in invites">
             <td ng-bind="invite.email"></td>
-            <td ng-bind="invite.duration"></td>
             <td ng-bind="getState(invite)"></td>
-           <!--  <td ><span ng-bind="getScore(invite)" ng-if="invite.state==1"></span> </td> -->
+            <td ng-bind="invite.finishtime"></td>
+            <td ng-bind="getScore(invite)"></td>
             <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==1">详情</a></td>
         </tr>
         
@@ -33,6 +43,7 @@
       <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]"><a customnav url="#/report/log" href="">答题日志</a></li>
 		 <li role="presentation" class="pull-right" ng-class="{1: 'active', 0: ''}[detailNav]"><button class="btn btn-primary" ng-click="printPDF()"><span class="glyphicon glyphicon-save"></span>&nbsp;导出为pdf</button></li> 
 	  </ul>
      
@@ -193,6 +204,7 @@
       <ul class="nav nav-pills" role="tablist">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
+	 	  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]"><a customnav url="#/report/log" href="">答题日志</a></li>
 	  </ul>
      
    </div>
@@ -217,7 +229,31 @@
 			        </tr>
 			        </tbody>
 			    </table>      
+  </div>
 </div>
 
 
-
+<div class="col-md-10 col-md-offset-1" style="" ng-if="showReport==4">
+ <div class="panel panel-default black-panel">
+   <div class="panel-heading">
+      <ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]"><a customnav url="#/report/log" href="">答题日志</a></li>
+	  </ul>
+   </div>
+	
+  <div style="margin: 30px">	
+	   <div ng-repeat="log in logs" >
+	      <p>被测用户在
+	       <span ng-bind="log.year"></span>年
+	       <span ng-bind="log.month"></span>月
+	       <span ng-bind="log.day"></span>日
+	       <span ng-bind="log.hour"></span>时
+	       <span ng-bind="log.minute"></span>分
+	       打开了第<span ng-bind="log.num"></span>道题</p>
+	   </div>	
+	</div>	
+			
+  </div>
+</div>
