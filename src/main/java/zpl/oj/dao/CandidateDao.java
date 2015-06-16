@@ -1,5 +1,7 @@
 package zpl.oj.dao;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -7,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import zpl.oj.model.common.Candidate;
 
 
-
+@Resource
 public interface CandidateDao {
 	 
   @Insert("INSERT INTO Candidate( username,email,school,company,blog,age,tel,registerdate,lastlogindate,state,discipline,gratime,degree,pwd)"

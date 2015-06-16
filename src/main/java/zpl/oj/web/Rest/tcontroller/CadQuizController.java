@@ -14,7 +14,7 @@ import zpl.oj.dao.CadTestDao;
 import zpl.oj.model.common.CadTest;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.responsejson.ResponseBase;
-import zpl.oj.service.cadservice.CadQuizService;
+import zpl.oj.service.imp.CadQuizService;
 import zpl.oj.util.Constant.ExamConstant;
 
 @Controller

@@ -202,5 +202,11 @@ public class InviteServiceImp implements InviteService {
 		return inviteDao.getInviteByTid(testid);
 	}
 
+	@Override
+	public String inviteUserToQuiz(InviteUser u, Quiz q, String duration) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 

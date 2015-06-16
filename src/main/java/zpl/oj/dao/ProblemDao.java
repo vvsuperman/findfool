@@ -1,16 +1,17 @@
 package zpl.oj.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
 import zpl.oj.model.common.Problem;
 
+@Repository(value="ProblemDao")
 public interface ProblemDao {
 
 	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "

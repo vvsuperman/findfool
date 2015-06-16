@@ -1,4 +1,4 @@
-package zpl.oj.service.cadservice;
+package zpl.oj.service.imp;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,11 +28,9 @@ import zpl.oj.util.Constant.ExamConstant;
 @Service
 public class CadQuizService {
 	
-	@Autowired
-	private CandidateDao cadDao;
 	
-	@Autowired
-	private CadTestDao cadTestDao;
+	
+	
 	
 	@Autowired
 	private ProblemDao problemDao;
@@ -43,9 +41,15 @@ public class CadQuizService {
 	@Autowired
 	private ProblemTestCaseDao problemTestCaseDao;
 	
+	@Autowired
+	private CandidateDao candidateDao;
+	
+	@Autowired
+	private CadTestDao cadTestDao;
+	
 	//生成试卷,包括invite和cadproblem
 	public CadTest genQuiz(String email, int  testid){
-		int cadid = cadDao.findUserByEmail(email).getCaid();
+		int cadid = candidateDao.findUserByEmail(email).getCaid();
 		//invite用来记录用户的做题信息，比如分数等
 		CadTest cadTest = new CadTest();
 		cadTest.setTestid(testid);

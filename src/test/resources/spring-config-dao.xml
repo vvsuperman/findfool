@@ -12,19 +12,34 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 		<!-- 这个是一个数据源，专门连接数据库的 -->
-<!--  	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-			<property name="url" value="jdbc:mysql://maven.gettongji.info:3306/oj"></property>
-			<property name="username" value="root"></property>
-			<property name="password" value="liuzheng"></property>
-		</bean> 
--->
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-			<property name="url" value="jdbc:mysql://localhost:3306/oj"></property>
-			<property name="username" value="root"></property>
-			<property name="password" value="fuki2012"></property>
-		</bean> 
+			<property name="url" value="jdbc:mysql://127.0.0.1/ojsite?useUnicode=true&amp;characterEncoding=utf8"></property>
+			
+			 <property name="username" value="root"></property> 
+			<!-- 以下两行为线上服务器配置文件，请不要改 -->
+			<!-- <property name="username" value="findfool"></property> -->
+			<!-- <property name="password" value="findfoolFw123456"></property> -->
+			
+	</bean>
+		
+	<!--by fangwei  dbcp有bug，换成c3p0的 -->
+	<!--  bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/ojsite?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="user" value="root" />
+        <property name="autoCommitOnClose" value="true"/>
+        <property name="checkoutTimeout" value="300"/>
+        <property name="initialPoolSize" value="20"/>
+        <property name="minPoolSize" value="20"/>
+        <property name="maxPoolSize" value=""/>
+        <property name="maxIdleTime" value="1"/>
+        <property name="maxStatements" value="0"/>
+        <property name="maxStatementsPerConnection" value="100"/>
+       
+    </bean-->
+	
+	
 		<!-- 这下面都是mybatis的配置 -->
 		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
@@ -32,10 +47,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			<!-- 备注：这里要是在接口里面写了sql语句，那么这一样就可以注释掉，这一行的意思是寻找所有的sql映射文件			
 			<property name="mapperLocations" value="classpath:model/*Mapper.xml"></property>
 			 -->
-		</bean> 
-		
+		</bean>
+		 
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+       		<property name="basePackage" value="zpl.oj.dao" />  
+    	</bean>
 		<!-- 这个是创建一个bean，他的名字叫做userTaskDao，也可以使用基于包的方式来自动装在 -->
-
+<!--
 		<bean id="solutionRunDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 			<property name="mapperInterface"  
 	           value="zpl.oj.dao.SolutionRunDao" />  
@@ -61,4 +79,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	           value="zpl.oj.dao.user.UserDao" />  
 	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 		</bean>
+		<bean id="leftMessageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+			<property name="mapperInterface"  
+	           value="zpl.oj.dao.LeftMessageDao" />  
+	        <property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+		</bean>
+-->
 </beans> 
+
