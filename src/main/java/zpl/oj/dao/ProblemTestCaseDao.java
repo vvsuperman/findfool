@@ -31,6 +31,10 @@ List<ProblemTestCase> getProTestCasesRandom(int problemId);
   @Select("select TEST_CASE_ID as testCaseId, PROBLEM_ID as problemId,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "
 			+ "PROBLEM_TEST_CASE WHERE TEST_CASE_ID = #{0}")
   ProblemTestCase getProblemTestCaseById(Integer testCaseId);
+  
+  @Select("select TEST_CASE_ID as testCaseId, PROBLEM_ID as problemId,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "
+			+ "PROBLEM_TEST_CASE WHERE args = #{0}")
+ProblemTestCase getProblemTestCaseByContent(String args);
 
     
 }

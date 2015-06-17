@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
+import zpl.oj.model.common.ProblemTag;
 import zpl.oj.model.common.Tag;
 
 public interface ProblemTagDao {
@@ -33,6 +34,9 @@ public interface ProblemTagDao {
 	
 	@Insert("insert tagproblem (tagid,problemid) values(#{0},#{1})")
 	void insertTagProblem(Integer tagid,Integer problemid);
+	
+	@Insert("select * from tagproblem where tagid=#{0} and problemid=#{1})")
+	ProblemTag getTagProblemByIds(Integer tagid,Integer problemid);
 	
 	
 	

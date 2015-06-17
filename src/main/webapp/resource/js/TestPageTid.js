@@ -196,24 +196,20 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
 		      }
 		 });
 	 };
+	 
+	 
+// 在testpagetid里修改逻辑不一样
 	 $scope.$on("questionModify",function(event,data){
-		 $timeout(function(){
-			 $scope.qs[$scope.modifyQsIndex]=data;
-		 },1000);
+//		 $timeout(function(){
+//			 $scope.qs[$scope.modifyQsIndex]=data;
+//		 },1000);
+		 
+//		 $scope.$apply(function(){
+//			 $scope.qs[$scope.modifyQsIndex]=data;
+			 console.log("testpagetid")
+//		 })
 	 });
-//	 $scope.$on("questionModify",function(event,data){
-//		
-//	 });
-/*	 
-	 $scope.$watch("Data.pid()",function(){
-		 console.log("test");
-		 if(Data.getModifyQs()){
-//			 $scope.qs[$scope.modifyQsIndex]=Data.getModifyQs();
-//			 console.log($scope.qs[$scope.modifyQsIndex]);
-//			 console.log($scope.qs);
-		 }
-//		 $scope.$apply()
-	 });*/
+
 	 
 	 $scope.deleteQuestionFromTest = function(question){
 		 var sendData = {"quizid":$scope.tid,"problemid":question.qid};

@@ -80,8 +80,16 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 	}
 
 	
+	 $scope.$on("questionModify",function(event,data){
+//		 $timeout(function(){
+//			 $scope.qs[$scope.modifyQsIndex]=data;
+//		 },1000);
+		 
+			 $scope.reciveData.questions[$scope.modifyQsIndex]=data;
+	 });
+	
 	//查看和修改试题的通用方法
-	$scope.modifyQuestionInTest = function (size,q,params) {
+	$scope.modifyQuestionInTest = function (size,q,params,modifyQsIndex) {
 	//·   	var question = jQuery.extend(true, {}, q);  为何要用深拷贝？
 		 var modalInstance = $modal.open({
 		      templateUrl: 'page/myModalContent.html',
@@ -93,6 +101,7 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 		        	  obj.operation = params.operation;
 		        	  obj.title=params.title;
 		        	  obj.question = q;
+		        	  obj.index = modifyQsIndex;
 		        	  return obj;
 		          }
 		      }

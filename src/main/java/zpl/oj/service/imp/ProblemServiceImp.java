@@ -279,15 +279,38 @@ public class ProblemServiceImp implements ProblemService{
 				tagDao.insertTag(tagContext);
 				tagid = tagDao.getTagByContext(tagContext).getTagId();
 			}
-			problemTagDao.insertTagProblem(tagid, pid);
+			if(problemTagDao.getTagProblemByIds(tagid, pid)==null){
+				problemTagDao.insertTagProblem(tagid, pid);
+			}
+		
 		}
 		//新建选项
 		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
-			ProblemTestCase pt = problemTestCaseDao.getProblemTestCaseById(qt.getCaseId());
-			pt.setArgs(qt.getText());
-			pt.setExceptedRes(qt.getIsright());
-			pt.setScore(qt.getScore());
-			problemTestCaseDao.updateProblemTestCase(pt);
+			ProblemTestCase pt = problemTestCaseDao.getProblemTestCaseByContent(qt.getText());
+			if(pt!=null){
+				pt.setArgs(qt.getText());
+				pt.setExceptedRes(qt.getIsright());
+				pt.setScore(qt.getScore());
+				problemTestCaseDao.updateProblemTestCase(pt);
+			}else{
+				String rightAnswer="";
+			    pt = new ProblemTestCase();
+				pt.setProblemId(pid);
+				pt.setArgs(qt.getText());
+				pt.setExceptedRes(qt.getIsright());
+				if(qt.getIsright()=="true"){
+					rightAnswer+="1";
+				}else{
+					rightAnswer+="0";
+				}
+				
+				pt.setScore(qt.getScore());
+				problemTestCaseDao.insertProblemTestCase(pt);
+			}
+			
+			
+			
+			
 		}
 		
 		//by fangwei，修改试题后，更新所有关联到该试题的测试，若测试已发送，则不更新

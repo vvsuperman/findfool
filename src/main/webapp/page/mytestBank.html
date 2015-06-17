@@ -55,7 +55,7 @@
 			            <td>
 			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
 			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>
-			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'})">/修改</a>
+			                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'},$index)">/修改</a>
 			                
 			                <a  ng-if="isAdded(q.qid)">已添加</a>
 			                <!--  a href="" ng-click="deleteQuestion(q)">删除</a-->
@@ -88,7 +88,7 @@
 		                <!--<textarea class="form-control" type="text" rows=9 style="width: 100%;resize: none"-->
 		                          <!--ng-model="newQuestion.context"></textarea>-->
 		                <!--<div ng-include src="'mdeditor.html'" ></div>-->
-						<textarea simditor minheight="60px" ng-model="newQuestion.context"></textarea>
+						<textarea simditor minheight="60px" ng-model="newQuestion.context" operation="edit"></textarea>
 						<!-- textarea ng-model="newQuestion.context"></textarea-->
 		                <div class="hedden" id="context" >{{context}}</div>
 		                <div class="row">
@@ -107,7 +107,7 @@
 		             	
 		                <ul style="margin-top: 30px;list-style-type:none">
 		                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-		                        <textarea simditor minheight="60px" style="height: 60px"  ng-model="ans.text"></textarea>
+		                        <textarea simditor minheight="60px" style="height: 60px"  ng-model="ans.text" operation="edit"></textarea>
 		                       
 		                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
 		                           ng-click="removeOne($index)">删除</a>
