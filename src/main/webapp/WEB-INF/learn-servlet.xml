@@ -18,7 +18,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 <!-- spring mvc的配置文件 -->
 <!-- 扫描web包，应用spring的注解 -->
 	
-	<context:component-scan base-package="zpl.oj.*" />
+	<context:component-scan base-package="zpl.oj.web.*" />
 
 	<mvc:annotation-driven />
  

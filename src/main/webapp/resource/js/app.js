@@ -20,7 +20,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
         $routeProvider.
             when('/', {
                 templateUrl: 'page/main.html',
-                controller: 'mainController'
+                controller: 'cadLoginController'
             }).
             when('/dp', {  //点评主页
                 templateUrl: 'dp/page/main.html',

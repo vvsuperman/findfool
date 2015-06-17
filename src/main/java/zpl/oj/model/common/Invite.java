@@ -20,6 +20,8 @@ public class Invite implements Serializable {
 		this.state = 1;
 		this.pwd ="";
 		this.openCamera=0;
+		this.starttime =null;
+		this.deadtime = null;
 		
 	}
 	

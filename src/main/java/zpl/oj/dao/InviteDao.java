@@ -15,7 +15,7 @@ public interface InviteDao {
 	  Invite getInviteById(int iid);
 
 	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime)"
-			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd}),#{starttime},#{deadtime}")
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime})")
 	  void insertInvite(Invite invite);
 	  
 	 // void deleteInvite(AoneObjectDeleted objectDeleted);

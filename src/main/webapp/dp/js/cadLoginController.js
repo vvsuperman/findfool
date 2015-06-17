@@ -10,13 +10,6 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	   	
 	}
 	
-	$scope.register = function(){
-		window.location.href='#/dp/register';
-	}
-	
-	$scope.login = function(){
-		window.location.href='#/dp/login';
-	}
 	
 	
 	$scope.$on("vertifycode",function(event,code){

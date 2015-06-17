@@ -216,7 +216,10 @@ public class QuizController {
 				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
 				for(Labeltest lt:labeltests){
 					Invite invite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
-					labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
+					if(labelService.getLabelUserByIidAndLid(invite.getIid(), lt.getLabelid())==null){
+						labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
+					}
+					
 				}
 				
 				

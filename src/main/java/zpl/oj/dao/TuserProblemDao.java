@@ -40,7 +40,7 @@ public interface TuserProblemDao {
   TuserProblem findByPidAndIid(int inviteId,int problemid);
   
   @Select("select sum(t2.score) from testuser_problem t1,problem t2 where t1.problemid = t2.problem_id and t1.invite_id=#{0} and t2.type=1")
-  public int getTotalScore(int inviteId);
+  public Integer getTotalScore(int inviteId);
   
   
  @Select(" select sum( case  when p.rightanswer =  t.useranswer then p.score else 0 end) as score from problem p,testuser_problem t" 

@@ -1,6 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 20px">
-	<form class="form-horizontal"  role="form">
+	<!-- <form class="form-horizontal"  role="form">
+		
 		<div class="form-group" ng-repeat="label in labels">
 		    <label  class="col-sm-2 control-label">{{label.labelname}}</label>
 		    <div class="col-sm-4">		    
@@ -10,5 +11,19 @@
 		<input type="text" ng-model="angmodel.labeladded"> <button ng-click="addLabel()">添加</button>
 		<br>
 		<button ng-click="saveConfig()">保存</button>
-	 </form>
+	 </form-->
+	 
+	 <div class="col-md-12">
+	    <h4>自定义标签</h4>
+	    <p>通常来说，用户只需要输入用户名、密码就可以开始做题了。但如果您需要用户输入一些个人信息，请从下列选项选择，或手动增加</p>
+	    <div class="col-md-4"   ng-repeat="label in labels">
+	     <label ><input  style="opacity:1;width:20px"  type="checkbox" ng-model="label.isSelected">{{label.labelname}}</label>
+	    </div>
+	 
+	 </div>
+	 <div class="col-md-12" style="margin-top: 20px">
+	   <input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签"> <button ng-click="addLabel()">添加</button>
+	   <button ng-click="saveConfig()">保存</button>
+	 </div>
+	 
 </div>

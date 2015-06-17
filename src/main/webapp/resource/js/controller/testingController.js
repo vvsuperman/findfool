@@ -271,6 +271,15 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 			 return false;
 		 }
 		 
+		 
+		 for(var i in $scope.userInfo){
+			if($scope.userInfo[i].value == ""){
+				$scope.errMsg="输入不得为空";
+				return false;
+				
+			} 
+		 }
+		 
 		 var sendData ={"email":$scope.email,"testid":$scope.tid,"userInfo":$scope.userInfo}
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",

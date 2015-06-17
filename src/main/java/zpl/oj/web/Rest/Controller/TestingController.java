@@ -125,13 +125,16 @@ public class TestingController {
 		String email = (String)params.get("email");
 		
 		Invite invite = inviteDao.getInvites(testid, email);
-		Date nowDate = new Date();
 		
-		if(nowDate.before(invite.getStarttime())) {
+		
+		Date nowDate = new Date();
+		if(invite.getStarttime()!=null && nowDate.before(invite.getStarttime()) ){
 			rb.setMessage("试题尚未开始");
 			rb.setState(2);
 			return rb;
-		}else if(nowDate.after(invite.getStarttime())){
+		}
+		
+		else if(invite.getDeadtime()!=null && nowDate.after(invite.getDeadtime())){
 			rb.setMessage("试题已截至");
 			rb.setState(3);
 			return rb;
