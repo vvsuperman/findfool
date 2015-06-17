@@ -172,6 +172,7 @@ public class InviteServiceImp implements InviteService {
         		+"<a href="+baseurl+"/#/testing/"+testurl+">"+baseurl+"/#/testing/"+testurl+"</a>"
         		+" <p>完成笔试测试</p>"
         		+"<p>您的密码是："+pwd+"</p>"
+        		+"<p>请务必使用firefox或chrome完成测试</p>"
         		+"<p>感谢您的参加!";
    		
        
