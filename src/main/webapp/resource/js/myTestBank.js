@@ -160,6 +160,8 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
                 }
                 $scope.reciveData.questions = questions;*/
                 $scope.reciveData.questions = $scope.message.questions;
+                Data.questions=$scope.reciveData.questions;	//将reciveData.questions添加到Data.questions。
+                console.log("Data.questions:"+Data.questions);
                 $scope.computePage();
             } else {
                 $scope.reciveData.totalPage = 1;

@@ -11,6 +11,7 @@
         <button class="btn btn-info pull-right" ng-click="refresh()">清理重复联系人</button>
     </p-->
 	<div class="row" style="margin-top: 20px">
+	<form>
 	    <div class="col-md-12 highlight" style="max-height: 400px;overflow: auto">
 	        <ul class="nav nav-tabs list-group">
 	            <li ng-repeat="tl in testlist track by $index"
@@ -38,12 +39,11 @@
 	                <td><input class="form-control" type="text" value="{{user.tel}}" ng-model="user.tel" />
 	                    <a class="glyphicon glyphicon-plus aa" href="" ng-click="addOne(user)"></a>
 	                </td>
-	
 	            </tr>
-	
 	            </tbody>
 	        </table>
 	    </div>
+	</form>
     </div>
     
     
@@ -82,6 +82,28 @@
 		    			</select>
 		    		</div>
 	    		</div>
+	    		<div class="col-md-4">
+			    	<div class="form-group">
+		              	<label for="dtp_input1" class="control-label">开始时间</label>
+		              	<div class="input-group date form_datetime" data-data="new Date()" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+		                  <input class="form-control" size="16" type="text" value="" ng-model="startTime">
+		                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+		              	</div>
+						<input type="hidden" id="dtp_input1" value="" /><br/>
+		        	</div>
+			    </div>
+			    <div class="col-md-offset-1 col-md-4">
+			    	<div class="form-group">
+		              	<label for="dtp_input1" class="control-label">结束时间</label>
+		              	<div class="input-group date form_datetime" data-data="new Date()" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+		                  <input class="form-control" size="16" type="text" value="" ng-model="endTime">
+		                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+		              	</div>
+						<input type="hidden" id="dtp_input1" value="" /><br/>
+		        	</div>
+			    </div>
 	    	</form>	  
 	    	
 	    	 <div class="col-md-6 col-md-offset-8">
@@ -100,3 +122,36 @@
 </div>
 <!--  script src="resource/js/xls/excel.js"></script-->
 <!--<script src="js/xlsreader.js"></script>-->
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>

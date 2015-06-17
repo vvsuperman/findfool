@@ -2,25 +2,11 @@
     <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>          
                  <a class="navbar-brand" href="http://foolrank.com/#/"><img alt="" style="width: 20px" class="img-responsive" src="resource/static/foollogolarge.png"></a>
                  <a class="navbar-brand" href="http://foolrank.com/#/">FoolRank</a>
             </div>
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                   <!--  
-                    <li>
-                        <a href="#">在线题库</a>
-                    </li>
-                    <li>
-                        <a href="#">平台特点</a>
-                    </li>
-                    <li>
-                        <a href="#">联系方式</a>
-                    </li> -->
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#/login">登陆</a>
@@ -33,247 +19,236 @@
         </div>
     </nav>
     
-     
-    
-    <div class="row clearfix" >
-        <div class="col-md-12">
-             <div style="text-align: center;height: 400px;" ng-if="video.show==0">
-                <h1 style="font-size: 64px;margin-top: 300px">
-                    最好用的IT人才评测系统
-                </h1>
-                <p style="font-size:xx-large">
-                    帮助您大量、精准的发现最合适的人才
-                </p>
-                <div style="margin-top: 20px">
-                    <a href="#/signup" class="btn btn-primary btn-lg" >免费注册FoolRank</a>
-                    <a class="btn btn-outline btn-lg" href=""  ng-click="showVideo()" >
-                    <span class="glyphicon glyphicon-play-circle"></span>
-                    观看视频介绍</a>
-                     
-                </div>
-            </div> 
-		    
-        </div>
-    </div>
-
-    <div class="row clearfix" style="background-color: #edf1f2;padding: 50px 0px;margin-bottom: -40px">
-        <br/>
-        <div style="text-align: center">
-            <h1>
-                平台特点
-            </h1>
-            <br/>
-           
-        </div>
-        <br/>
-        <div class="row">
-        <div class="col-md-4 column" style="text-align: center">
-            <img src="resource/static/flow.png" alt=""/>
-            <h2>
-                在线笔试，精简流程
-            </h2>
-            <br/>
-            <p>
-                在线题库，自动批改完成笔试
-            </p>
-        </div>
-        <div class="col-md-4 column" style="text-align: center">
-            <img src="resource/static/notech.png" alt=""/>
-            <h2>
-                非技术也能进行技术招聘
-            </h2>
-            <br/>
-            <p>
-                集成的测试、自动判分功能以及评价体系让非技术人才也能进行技术招聘
-            </p>
-            
-        </div>
-        <div class="col-md-4 column" style="text-align: center">
-            <img src="resource/static/zoomdown.png" alt=""/>
-            <h2>
-                降低招到不合格人才的概率
-            </h2>
-            <br/>
-            <p>
-                客观的评价体系让夸夸其谈的人无处可逃
-            </p>
-        </div>
-        </div>
-        <div class="row" style="margin-top: 50px">
-	         <div class="col-md-4 column" style="text-align: center;">
-	            <img src="resource/static/character1.png" alt=""/>
-	            <h2>
-	                同时进行大量笔试
-	            </h2>
-	            <br/>
-	            <p>
-	                能同时进行大量的并发笔试并保持良好的用户体验
-	            </p>
-	        </div>
-	        <div class="col-md-4 column" style="text-align: center">
-	            <img src="resource/static/character2.png" alt=""/>
-	            <h2>
-	                精准
-	            </h2>
-	            <br/>
-	            <p>
-	                根据公司需求，匹配最合适的人才
-	            </p>
-	        </div>
-	        <div class="col-md-4 column" style="text-align: center">
-	            <img src="resource/static/character3.png" alt=""/>
-	            <h2>
-	                安全监控
-	            </h2>
-	            <br/>
-	            <p>
-	                全程摄像头监控保证无作弊
-	            </p>
-	        </div>
-        </div>
-        <div class="col-md-12" style="text-align: center">
-            <br/>
-            <h2>
-                开启您的全新招聘之旅
-            </h2>
-            <br/>
-            <br/>
-            <p>
-                <a class="btn btn-primary btn-lg" href="#/signup">立即注册</a>
-            </p>
-            <br/>
-            <br/>
-        </div>
-    </div>
-    
-    
-     <carousel interval="myInterval">
-      <slide ng-repeat="slide in slides" active="slide.active">
-        <img ng-src="{{slide.image}}" style="margin:auto;">
-        <div class="carousel-caption">
-          <h4>{{slide.text}}</h4>
-        </div>
-      </slide>
-    </carousel>
-    
-    <br/>
     <div class="row clearfix">
-        <div class="text-center">
-            <h2>开发团队成员</h2>
-        </div>
-        <br/>
-        <div class="col-md-4 column text-center">
-            <img src="resource/static/member1.jpg" alt="" style="text-align: center;width: 60px;height: 60px;border-radius: 50%;"/>
-            <h2>
-                Cain
-            </h2>
-            <p>
-                .......！
-            </p>
-        </div>
-        <div class="col-md-4 column text-center">
-            <img src="resource/static/member2.jpg" alt="" style="width: 60px;height: 60px;border-radius: 50%;border-color: lawngreen;"/>
-            <h2>
-                战
-            </h2>
-            <p>
-                ......
-            </p>
-        </div>
-        <div class="col-md-4 column text-center">
-            <img src="resource/static/member3.jpg" alt="" style="width: 60px;height: 60px;border-radius: 50%;border-color: lawngreen;"/>
-            <h2>
-                藤蔓
-            </h2>
-            <p>
-                ......
-            </p>
-        </div>
-    </div>
-    <!-- <div class="row clearfix" style="background-color: #edf1f2;padding: 30px 0px;margin-top:20px;">
-        <div class="col-md-offset-2 col-md-4  text-center">
-            <button class="btn btn-default btn-lg" style="padding: 0px;"><img src="resource/static/android.png" alt=""/></button>
-            <br/>
-            <br/>
-            <button class="btn btn-default btn-lg" style="padding: 0px;"><img src="resource/static/iphone.png" alt=""/></button>
-        </div>
-        <div class="col-md-4 text-center">
-            <h2>传说中的手机客户端</h2>
-            <br/>
-            <p>
-               	 正在开发&内测中……
-            </p>
-        </div>
-    </div> -->
-
-    
-   
- 
-	    
-    <div class="row clearfix" style="background-color: rgb(35,183,229);padding: 30px;margin-bottom:40px;">
-        <div class="col-md-6 text-center" style="font-size:x-large;">
-            <p>心动了吗?心动不如行动！</p>
-        </div>
-        <div class="col-md-6 text-center">
-            <a class="btn btn-success btn-lg" href="#/signup">立即注册</a>
-        </div>
-    </div>
-    <div class="row clearfix" style="margin-bottom:30px;">
-        <div class="col-md-offset-1 col-md-3">
-            <h3>加入我们</h3>
-            <p>如果你熟悉<br/>
-                JavaEE, AngularJS, Javascript, CSS<br/>
-                中的任何一种技术<br/>
-                那么赶快加入FoolRank开发团队吧！<br/>
-                发送你的简介到service@foolrank.com<br>
-                © 2015 FoolRank Company, Inc. ·沪ICP备14039106-3号<br>
-            </p>
-        </div>
-        <div class="col-md-2">
-            <h3>联系方式</h3><br/>
-            <p>问题建议: service@foolrank.com</p>
-            <p>加入我们: service@foolrank.com</p>
-        </div>
-        <div class="col-md-2 text-center">
-            <h3>关注我们</h3><br/>
-            <img src="resource/static/contact.png" alt=""/>
-        </div>
-        <div class="col-md-3">
-            <h3>邮件订阅</h3><br/>
-            <p>不想错过任何更新? 请订阅我们</p>
-            <form class="form-inline">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入您的邮箱">
-                        <a class="input-group-addon btn btn-primary">订阅</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+    	<div class="col-md-12 banner">
+    		<img src="resource/static/main-01.png" style="width:100%;"/>
+    	</div>
     </div>
     
+    <div class="row clearfix character-block">
+ <!--    	<div class="vertical-line">
+    	</div> -->
+    	<div class="col-sm-3 character-block-1">
+    		<h3>在线评测、精准、高效</h3>
+    		<!-- <div class="line">
+    			<div></div>
+    		</div> -->
+    		<p>
+    			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+    		</p>
+    	</div>
+    	<div class="col-sm-3 character-block-2 hiden">
+    		<img src="resource/static/feature-01.png"/>
+    	</div>
+    	<div class="col-sm-3 character-block-3 hiden">
+    		<img src="resource/static/feature2-01.png"/>
+    	</div>
+    	<div class="col-sm-3 character-block-4">
+    		<h3>在线评测、精准、高效</h3>
+    		<!-- <div class="line">
+    			<div></div>
+    		</div> -->
+    		<p>
+    			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+    		</p>
+    	</div>
+    	<div class="col-sm-3 character-block-1">
+    		<h3>在线评测、精准、高效</h3>
+    		<!-- <div class="line">
+    			<div></div>
+    		</div> -->
+    		<p>
+    			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+    		</p>
+    	</div>
+    	<div class="col-sm-3 character-block-2 hiden">
+    		<img src="resource/static/feature3-01.png"/>
+    	</div>
+    	<div class="col-sm-3 character-block-3 hiden">
+    		<img src="resource/static/feature4-01.png"/>
+    	</div>
+    	<div class="col-sm-3 character-block-4">
+    		<h3>在线评测、精准、高效</h3>
+    		<!-- <div class="line">
+    			<div></div>
+    		</div> -->
+    		<p>
+    			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+    		</p>
+    	</div>
+    	<div class="featrue-img hiden">
+    		<img src="resource/static/feature.png" />
+    	</div>
+    </div>
+    
+    <div class="row clearfix">
+    	<div class="main-block1">
+   			<h3>FoolRank工作流程</h3>
+   			<p>
+   			Email邀请，通过Email发送测试链接，邀请应试者参加挑战。应试者可以在任何时间任何地点接受挑战。这将为你带来极具灵活性的人才挑战。
+   			</p>
+   			<div class="flow1 hiden">
+   				<img src="resource/static/flow1.png"/>
+   			</div>
+   			<div class="flow2 hiden">
+   				<img src="resource/static/flow2.png"/>
+   			</div>
+    	</div>
+    </div>
+    
+    <div style="height:40px;" class="hiden">
+    	<img style="height:100%;position:relative;left:50%;" src="resource/static/main-img1-1.png"/>
+    </div>
+    <div class="row clearfix main-width" style="position:relative">
+    	<div class="col-sm-8 main-block2 left" style="height:400px;">
+    		<h3>众多企业信赖的招聘帮手</h3>
+    		<div class="line">
+    			<div></div>
+    		</div>
+   			<p>
+   			Email邀请，通过Email发送测试链接，邀请应试者参加挑战。应试者可以在任何时间任何地点接受挑战。这将为你带来极具灵活性的人才挑战
+   			</p>
+   			<p>
+   			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+   			</p>
+    	</div>
+    	<div class="col-sm-4 main-block3 right hiden">
+    		<img class="img-responsive main-block3-img" src="resource/static/main-img1.png"/>
+    	</div>
+    	<div class="horizontal-line line3 hiden">
+	    		<div></div>
+	    	</div>
+    </div>
+    <div class="row clearfix main-width" style="position: relative;">
+    	<div class="col-sm-4 main-block3 left hiden">
+    		<img class="img-responsive main-block3-img " src="resource/static/main-img2.png"/>
+    	</div>
+    	<div class="col-sm-8 main-block2 right">
+    		<h3>众多企业信赖的招聘帮手</h3>
+    		<div class="line">
+    			<div></div>
+    		</div>
+   			<p>
+   			Email邀请，通过Email发送测试链接，邀请应试者参加挑战。应试者可以在任何时间任何地点接受挑战。这将为你带来极具灵活性的人才挑战
+   			</p>
+   			<p>
+   			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+   			</p>
+    	</div>
+    	<div class="horizontal-line line1 hiden">
+    		<div></div>
+    	</div>
+    </div>
+    <div class="row clearfix main-width">
+    	<div class="col-sm-4 main-block3 left hiden">
+    		<img class="img-responsive main-block3-img" src="resource/static/main-img3.png"/>
+    	</div>
+    	<div class="col-sm-8 main-block2 right">
+    		<h3>众多企业信赖的招聘帮手</h3>
+    		<div class="line">
+    			<div></div>
+    		</div>
+   			<p>
+   			Email邀请，通过Email发送测试链接，邀请应试者参加挑战。应试者可以在任何时间任何地点接受挑战。这将为你带来极具灵活性的人才挑战
+   			</p>
+   			<p>
+   			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+   			</p>
+    	</div>
+    	
+    </div>
+    <div class="row clearfix main-width" style="position: relative;">
+    	<div class="col-sm-8 main-block2 left">
+    		<h3>众多企业信赖的招聘帮手</h3>
+    		<div class="line">
+    			<div></div>
+    		</div>
+   			<p>
+   			Email邀请，通过Email发送测试链接，邀请应试者参加挑战。应试者可以在任何时间任何地点接受挑战。这将为你带来极具灵活性的人才挑战
+   			</p>
+   			<p>
+   			在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、高效在线评测、精准、
+   			</p>
+    	</div>
+    	<div class="col-sm-4 main-block3 right hiden">
+    		<img class="img-responsive main-block3-img" src="resource/static/main-img4.png"/>
+    	</div>
+    	<div class="horizontal-line line2 hiden">
+    		<div></div>
+    	</div>
+    </div>
+    
+    <div class="row clearfix main-block4">
+   		<div class="title">
+   			<h3>成功合作伙伴</h3>
+   			<div class="center-line"></div>
+   		</div>
+   		<div class="col-sm-2 col-sm-offset-1 company">
+  				<img class="img-responsive" src="resource/static/company-img1.png">
+   		</div>
+   		<div class="col-sm-2">
+   			<img class="img-responsive" src="resource/static/company-img2.png">
+   		</div>
+   		<div class="col-sm-2">
+   			<img class="img-responsive" src="resource/static/company-img3.png">
+   		</div>
+   		<div class="col-sm-2">
+   			<img class="img-responsive" src="resource/static/company-img4.png">
+   		</div>
+   		<div class="col-sm-2">
+   			<img class="img-responsive" src="resource/static/company-img5.png">
+   		</div>	
+    </div>
+    
+    <div class="row clearfix">
+    	<div class="main-block5">
+    		<div class="col-sm-3">
+    			<h4>加入我们</h4>
+    			<div>
+    				<p>如果你熟悉JavaEE、Javascript、CSS中</p>
+    				<p>任何一种技术</p>
+    				<p>那么赶快加入我们开发团队吧！</p>
+    				<p>发送建立到service@foolran.com</p>
+    			</div>
+    		</div>
+    		<div class="col-sm-3">
+    			<h4>联系我们</h4>
+    			<div>
+    				<p>如果你熟悉JavaEE、Javascript、CSS中</p>
+    				<p>任何一种技术</p>
+    				<p>那么赶快加入我们开发团队吧！</p>
+    				<p>发送建立到service@foolran.com</p>
+    			</div>
+    		</div>
+    		<div class="col-sm-3">
+    			<h4>关注我们</h4>
+    			<div>
+    				<p>如果你熟悉JavaEE、Javascript、CSS中</p>
+    				<p>任何一种技术</p>
+    				<p>那么赶快加入我们开发团队吧！</p>
+    				<p>发送建立到service@foolran.com</p>
+    			</div>
+    		</div>
+    		<div class="col-sm-3">
+    			<h4>邮件订阅</h4>
+    			<div>
+    				<p>如果你熟悉JavaEE、Javascript、CSS中</p>
+    				<p>任何一种技术</p>
+    				<p>那么赶快加入我们开发团队吧！</p>
+    				<p>发送建立到service@foolran.com</p>
+    			</div>
+    		</div>
+    		<div class="col-sm-12">
+    			<div class="bottom-icon">
+    				<img src="resource/static/icon2.png"/>
+    			</div>
+    			<div class="bottom-text">
+    				2015 FoolRank Company,Inc
+    			</div>
+    		</div>
+    	</div>
+    </div>
 </div>
-
-
-<!-- <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">&nbsp</h4>
-      </div>
-      <div class="modal-body">
-         <video height="500" controls autoplay="autoplay" > 
-			  <source src="resource/static/findfool.mp4">
-		 </video> 
-      </div>
-      
-    </div>
-  </div>
-</div> -->
-
- 
 
 
 

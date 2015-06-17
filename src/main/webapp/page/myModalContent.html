@@ -8,14 +8,11 @@
 </div>
 
 <div class="modal-body">
-  <div class="col-md-12" style="margin-top: 20px">
+   <div class="col-md-12" style="margin-top: 20px">
   	  	<!-- <textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea> -->
-      	  	<textarea simditor minheight="30px" operation={{operation}} ng-model="question.context"></textarea>
-      	</div>  
- 
-   
-
-  <div class="options list col-md-12 col-sm-12  col-xs-12" ng-if="question.type ==1 " >
+      	<textarea simditor minheight="30px" operation={{operation}} ng-model="question.context"></textarea>
+   </div>  
+   <div class="options list col-md-12 col-sm-12  col-xs-12" ng-if="question.type ==1 " >
       	  <label  customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}} 
       	  	index={{$index}} rightanswer={{question.rightanswer}} useranswer={{question.useranswer}} report={{report}}>
       	  	<span class='icon'></span><span class='icon-to-fade'></span>
@@ -24,9 +21,8 @@
   	     <!--  input type="checkbox"-->
       	  </label>
    </div>
-
-<div style="clear:both"></div>
- </div>
+   <div style="clear:both"></div>
+</div>
 
  <div class="modal-footer" >
      <button class="btn btn-primary" ng-if="operation=='edit'" ng-click="saveQustion()">保存</button>

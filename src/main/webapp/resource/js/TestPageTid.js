@@ -1,13 +1,13 @@
 /**
  * Created by liuzheng on 2014/7/26.
  */
-OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data) {
+OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$modal, Data, $timeout) {
     $scope.url = '#/test';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testlist.html';
     $scope.leftBar = 'page/leftBar.html';
     $scope.tid = $routeParams.tid;
-    
+    $scope.modifyQsIndex="";
     $scope.contain ={};
     $scope.contain.show =1;
     
@@ -34,7 +34,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     	}
     }
     
-    
+    //加载该测试题tid的所有题目
     $scope.testManage = function () {
         //add by zpl
         var sendData = new Object();
@@ -52,8 +52,8 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
             if ($scope.state) {
-                console.log($scope.message);
-                $scope.qs = $scope.message.qs;
+//                console.log($scope.message);
+                $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
                 $scope.isDisplay = new Array($scope.qs.length);
                 for(i in $scope.isDisplay)
                 	$scope.isDisplay[i]=false;
@@ -90,11 +90,11 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 
 
     $scope.Invite = function (target) {
-        console.log('Invite');
+//        console.log('Invite');
         window.location.href = '#/invite';
     };
     $scope.MultInvite = function (target) {
-        console.log('MultInvite');
+//        console.log('MultInvite');
         window.location.href = '#/invite';
         $scope.active = target.getAttribute('data');
         $scope.name = $scope.tests[$scope.active].name;
@@ -110,7 +110,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 //        $scope.leftBar = 'leftBar.html';
     };
     $scope.Report = function (target) {
-        console.log('Report');
+//        console.log('Report');
         $scope.leftBar = 'page/leftBar.html';
         $scope.template = 'page/report.html';
         $scope.active = target.getAttribute('data');
@@ -126,14 +126,14 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     
     
     $scope.showDefaultPanel = function(){
-    	console.log("show default panel");
+//    	console.log("show default panel");
     	$scope.panel.show = "default";
     	$scope.set.show =1;
     }
     
     
    $scope.showCustomPanel = function(){
-    	console.log("show custom panel");
+//    	console.log("show custom panel");
     	$scope.panel.show = "custom";
     }
    
@@ -168,7 +168,7 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 	        		flashTip(data.message);
 	        	}
 	        }).error(function (data) {
-	           console.log("获取数据错误");
+//	           console.log("获取数据错误");
 	        });
 		//阻止事件传播
 		// $event.stopPropagation();
@@ -176,8 +176,9 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
     
     //by fw 修改混乱逻辑，将方法从testpage移入
 	//查看和修改试题的通用方法
-	$scope.modifyQuestionInTest = function (size,q,params) {
+	$scope.modifyQuestionInTest = function (size,q,params,modifyQsIndex) {
 	   	var question = jQuery.extend(true, {}, q);
+	   	$scope.modifyQsIndex=modifyQsIndex;
 		 var modalInstance = $modal.open({
 		      templateUrl: 'page/myModalContent.html',
 		      controller: 'ModalInstanceCtrl',
@@ -189,15 +190,34 @@ OJApp.controller('TestPageTid',function($scope, $routeParams, $http,$modal, Data
 		        	  obj.title=params.title;
 		        	  obj.question = question;
 		        	  obj.type = q.type;
+		        	  obj.index=modifyQsIndex;
 		        	  return obj;
 		          }
 		      }
 		 });
 	 };
+	 $scope.$on("questionModify",function(event,data){
+		 $timeout(function(){
+			 $scope.qs[$scope.modifyQsIndex]=data;
+		 },1000);
+	 });
+//	 $scope.$on("questionModify",function(event,data){
+//		
+//	 });
+/*	 
+	 $scope.$watch("Data.pid()",function(){
+		 console.log("test");
+		 if(Data.getModifyQs()){
+//			 $scope.qs[$scope.modifyQsIndex]=Data.getModifyQs();
+//			 console.log($scope.qs[$scope.modifyQsIndex]);
+//			 console.log($scope.qs);
+		 }
+//		 $scope.$apply()
+	 });*/
 	 
 	 $scope.deleteQuestionFromTest = function(question){
 		 var sendData = {"quizid":$scope.tid,"problemid":question.qid};
-		 console.log("sendData..........",question);
+//		 console.log("sendData..........",question);
 		 $http({
 	            url: WEBROOT+"/test/delquestion",
 	            method: 'POST',

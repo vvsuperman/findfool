@@ -96,7 +96,7 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
     	else
     		$scope.panel.isBack=false;
     }
-    
+    //加载所有测试的信息
     $scope.tshow = function () {
         $http({
             url: WEBROOT+"/test/show",

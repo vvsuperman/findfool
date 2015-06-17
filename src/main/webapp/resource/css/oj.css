@@ -767,17 +767,25 @@ ul li {
  }
 .character-block{
 	position: relative;
+	max-width: 1280px;
+	margin: 0 auto;
 	/* background: url(../static/character-bck.png);
 	background-origin: border-box; */
 }
+.character-block h3{
+	padding: 0 0 10px 0;
+}
+.character-block p{
+	line-height: 1.5em;
+}
 .character-block>div{
 	height: 250px;
+	margin: 50px 0;
 }
 .character-block-1 {
-	padding: 60px 0 30px 40px;
+	padding: 60px 0 30px 0;
 }
 .character-block-1 h4 {
-	padding: 0 0 15px 0;
 	float: right;
 }
 .character-block-1 .line{
@@ -796,22 +804,23 @@ ul li {
 	float:left;
 }
 .character-block-2{
-	padding: 60px 90px 20px 40px;
+	padding: 60px 55px 20px 10px;
 }
 .character-block-2 img{
 	width:100%;
+	z-index: 10;
 }
 .character-block-3{
-	padding: 60px 40px 20px 90px;
+	padding: 60px 10px 20px 55px;
 }
 .character-block-3 img{
 	width:100%;
+	z-index: 10;
 }
 .character-block-4 {
-	padding: 60px 40px 30px 0;
+	padding: 60px 0 30px 0;
 }
 .character-block-4 h4 {
-	padding: 0 0 15px 0;
 	float: left;
 }
 .character-block-4 .line{
@@ -829,29 +838,93 @@ ul li {
 	padding: 10px 0 0 0;
 	float:left;
 }
+.character-block > div.featrue-img {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	height: 700px;
+	margin: 0 0 0 -69px;
+}
+.featrue-img img{
+	height: 100%;
+}
 .main-block1 {
+	position: relative;
 	height: 300px;
-	padding: 60px 22%;
+	padding: 60px 10%;
 	text-align:center;
+	color: #fff;
+	background-color: #4e9c9c;
 }
 .main-block1 h3{
-	margin: 30px 0;
+	margin: 30px 0 50px 0;
 }
 .main-block1 p{
 	line-height:20px;
 }
-.main-block2 {
+.main-block1 .flow1{
+	position: absolute;
+	top: 0;
+	left: 50%;
+	height: 60px;
+	margin: 0 0 0 -18px;
+}
+.main-block1 .flow2{
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	height: 50px;
+	margin: -50px 0 0 -21px;
+}
+.main-block1 img{
 	height: 100%;
-	padding: 40px 80px 0 60px;
+}
+.main-width {
+	max-width: 1280px;
+	margin:0 auto;
+}
+.main-block2 {
+	position:relative;
+	height: 100%;
+
 /* 	background-color: #02c1af; */
+}
+.main-block2.left{
+		padding: 1% 0 1% 8%;
+}
+.main-block2.right{
+		padding: 1% 8% 1% 0;
 }
 .main-block2 h3{
 	margin: 30px 0;
 }
+.main-block2 .line{
+	width: 100%;
+	height: 2px;
+	margin: 0 0 30px 0;
+	float: right;
+	
+}
+.main-block2 .line>div {
+	width: 20%;
+	float: left;
+	border: 1px solid #dedede;
+}
+.main-block2 p{
+	line-height: 1.5em;
+}
+
 .main-block3 {
 	height: auto;
 	position: relative;
 }
+.main-block3.right {
+		padding: 0 10% 0 0;
+}
+.main-block3.left {
+	padding: 0 0 0 10%;
+}
+
 /* .main-block3 img{
 	width: 100%;
 } */
@@ -859,24 +932,83 @@ ul li {
 	position: absolute;
 	top: -1px;
 	left: 0px;
-	height: 3px;
-	padding: 0 35px 0 15px;
+	height: 4px;
 	z-index: 999;
 	width: 100%;
 }
 .horizontal-line div{
 	background: url(../static/line.png);
-	height:1px;
+	height: 1px;
+}
+.line1{
+	margin: 0 0 0 5px;
+	padding: 0 11% 0 11%;
+}
+.line2{
+	padding: 0 15% 0 16%;
+}
+.line3{
+	padding: 0 30% 0 51%;
+	top: 0px;
 }
 .main-block4 {
-	height: 300px;
-	padding: 80px 22%;
 	text-align:center;
+	background: #fcfcfc;
+}
+.main-block4 .title{
+	padding: 80px 22% 20px 22%;
+}
+.main-block4 .center-line{
+	width:15%;
+	height: 2px;
+	margin:40px auto;
+	background-color:#dedede;
 }
 .main-block5>div {
-	height: 300px;
-	padding: 60px 0 0 60px;
-	background-color: #ececec;
+	padding: 10% 30px 0 30px;
+	background-color: #333;
+}
+.main-block5 h4{
+	color: #fff;
+	padding: 20px 0;
+}
+.main-block5 p{
+	color: #858585;
+}
+.main-block5 .bottom-icon{
+	margin:0 auto;
+	width: 60px;
+	height: 60px;
+}
+.main-block5 img{
+	width: 100%;
+}
+.main-block5 .bottom-text{
+	margin: 0 auto;
+	width: 200px;
+	height: 100px;
+	text-align: center;
+	line-height: 100px;
+}
+.navbar-default{
+	background: #3b5353;
+	border-color: #3b5353;
+	filter:alpha(opacity=80);  
+    -moz-opacity:0.8;  
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+.navbar-fixed-top, .navbar-fixed-bottom{
+	position: absolute;
+}
+.navbar{
+	font-size: 16px;
+}
+.navbar-default .navbar-nav > li > a{
+	color: #fff;
+}
+.navbar-default .navbar-nav > li > a:hover{
+	color: #4e9c9c;
 }
 
 /* 主页线条样式 */
@@ -889,10 +1021,8 @@ ul li {
 	background: url(../static/line.png);
 	z-index: 999;
 }
-
-.bubble {
-	display: inline-block;
-	background: yellow;
-	border-radius: 4px;
-	padding: 0 5px;
-}
+@media (max-width: 800px) {
+	.hiden {
+		display:none;
+	}
+ }

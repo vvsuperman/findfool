@@ -133,7 +133,7 @@ OJApp.controller("Excel",function($scope, $http, Data) {
             },
             
 //          data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
-            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content, "starttime": $scope.startTime, "deadtime": $scope.endTime}
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];

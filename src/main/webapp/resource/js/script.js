@@ -65,6 +65,12 @@ $(window).load(function() {
 		}
     });
 	
+	if($("left").height() > $("#right").height()){
+		$("#right").css("height",$("#left").height()) 
+		}else{
+		$("#left").css("height",$("#right").height()) 
+		}
+	
 	prettify();
 
 });
