@@ -15,6 +15,7 @@ import com.qiniu.util.Auth;
 
 import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.dao.InviteDao;
+import zpl.oj.dao.LogTakeQuizDao;
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.SetDao;
@@ -22,6 +23,7 @@ import zpl.oj.dao.SolutionRunDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.ProblemTestCase;
@@ -55,6 +57,8 @@ public class ReportService {
 	
 	@Autowired
 	private ImgUploadDao imgUploadDao;
+	@Autowired
+	private LogTakeQuizDao logTakeQuizDao;
 	
 	/*
 	 * 返回用户的图片
@@ -376,6 +380,12 @@ public class ReportService {
 		
 		
 		return proDetail;
+	}
+
+	public List<LogTakeQuiz> getReportLog(int inviteid) {
+		// TODO Auto-generated method stub
+		
+	    return	logTakeQuizDao.getQuizLogByIid(inviteid);
 	}
 	
 	

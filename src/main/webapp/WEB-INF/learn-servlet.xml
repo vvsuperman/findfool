@@ -17,6 +17,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 <!-- spring mvc的配置文件 -->
 <!-- 扫描web包，应用spring的注解 -->
+	
 	<context:component-scan base-package="zpl.oj.web.*" />
 
 	<mvc:annotation-driven />
@@ -90,4 +91,5 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<mvc:resources mapping="/bootstrap/**" location="/bootstrap/" />
 	<mvc:resources mapping="/resource/**" location="/resource/" />
 	<mvc:resources mapping="/page/**" location="/page/" />
+	<mvc:resources mapping="/dp/**" location="/dp/" />
 </beans>

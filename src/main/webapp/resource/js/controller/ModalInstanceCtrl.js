@@ -1,4 +1,4 @@
-OJApp.controller('ModalInstanceCtrl',function ($scope,$rootScope,$http,$modalInstance,Data,params) {
+OJApp.controller('ModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,params) {
 	//绑定变量到服务
 	
 	$scope.type = params.type;
@@ -6,9 +6,9 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$rootScope,$http,$modalIns
 	$scope.operation = params.operation;
 	$scope.title = params.title;
 	$scope.report = params.report;
-	$scope.modifyQsIndex=params.modifyQsIndex;
 	
 	$scope.saveQustion = function () {
+			
 			 var answers = $scope.question.answer;
 			 var rightanswer =""
 			 for(var i =0;i<answers.length;i++){
@@ -21,7 +21,7 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$rootScope,$http,$modalIns
 			 $scope.question.rightanswer = rightanswer;
 			 var sendData={"quizid":$scope.tid,"user":{"uid": Data.uid()},"question":$scope.question};
 			 
-//			 console.log("question..........",$scope.question);
+			 console.log("question..........",$scope.question);
 			 $http({
 		            url: WEBROOT+"/question/add",
 		            method: 'POST',
@@ -30,8 +30,8 @@ OJApp.controller('ModalInstanceCtrl',function ($scope,$rootScope,$http,$modalIns
 		            },
 		            data: sendData
 		        }).success(function (data) {
-		        	$rootScope.$broadcast("questionModify",$scope.question);
 //		        	location.reload(); 
+		        	console.log("更新试题.....");
 		        }).error(function (data) {
 		           console.log("获取数据错误");
 		        });

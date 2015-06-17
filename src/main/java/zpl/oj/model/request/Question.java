@@ -16,7 +16,14 @@ public class Question {
 	private String rightanswer;
 	private int score;
 	private int level;
+	private int limittime;
 	
+	public int getLimittime() {
+		return limittime;
+	}
+	public void setLimittime(int limittime) {
+		this.limittime = limittime;
+	}
 	public int getLevel() {
 		return level;
 	}

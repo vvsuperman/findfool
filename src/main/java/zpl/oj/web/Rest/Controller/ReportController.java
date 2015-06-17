@@ -11,6 +11,7 @@ import java.util.Map;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.responsejson.ResponseInvite;
@@ -88,6 +90,15 @@ public class ReportController {
 		return reportService.getProDetail(tProblem);
 	}
 	
+	/*
+	 * 获取用户日志
+	 * */
+	@RequestMapping(value = "/log")
+	@ResponseBody
+	public List<LogTakeQuiz> getReportLog(@RequestBody  Map<String,Integer> map) {
+		int inviteid = (Integer)map.get("inviteid");
+		return reportService.getReportLog(inviteid);
+	}
 	
 
 }

@@ -34,7 +34,6 @@ OJApp.controller("testshow",function($scope, $http, Data) {
      })*/
 
     $scope.Invite = function (target) {
-        console.log('Invite');
         $scope.active = target.getAttribute('data');
         $scope.tid = $scope.tests[$scope.active - 1].id;
         $scope.active = target.getAttribute('data');
@@ -43,7 +42,6 @@ OJApp.controller("testshow",function($scope, $http, Data) {
         $scope.leftBar = 'leftBar.html';
     };
     $scope.MultInvite = function (target) {
-        console.log('MultInvite');
         $scope.active = target.getAttribute('data');
         $scope.tid = $scope.tests[$scope.active - 1].id;
         $scope.active = target.getAttribute('data');
@@ -52,7 +50,6 @@ OJApp.controller("testshow",function($scope, $http, Data) {
         $scope.leftBar = 'leftBar.html';
     };
     $scope.Report = function (target) {
-        console.log('Report');
         $scope.active = target.getAttribute('data');
         $scope.tid = $scope.tests[$scope.active - 1].id;
         $scope.active = target.getAttribute('data');
@@ -62,7 +59,6 @@ OJApp.controller("testshow",function($scope, $http, Data) {
     };
     $scope.addKUtest = function (target) {
 //        添加库试题
-        console.log('addKUtest 添加库试题');
         $scope.active = target.getAttribute('data');
         $scope.tid = $scope.tests[$scope.active - 1].id;
         $scope.active = target.getAttribute('data');

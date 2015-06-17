@@ -5,10 +5,19 @@ import java.util.Map;
 
 public class ExamConstant{
 	
+	//label名称的常量
+	public final static String LABEL_EMAIL = "email";
+	public final static String LABEL_PWD = "pwd";
+	public final static String LABEL_TEL = "tel";
+	
+	
+	
 	//短信模板
 	public final static String SMS_USERNAME = "XFTB702047";
 	public final static String SMS_PWD ="fw123456";
-	public final static String SMS_TEMPID = "MB-2015030640";
+	public final static String SMS_TEMPID_REMIND = "MB-2015030640";
+	public final static String SMS_TEMPID_INVITE = "MB-2015060646";
+	public final static String SMS_ADDRESS= "http://mssms.cn:8000/msm/sdk/http/sendsms.jsp";
 	
 	
 	//统一登陆来源

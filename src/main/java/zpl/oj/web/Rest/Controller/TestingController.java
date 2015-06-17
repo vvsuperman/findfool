@@ -1,6 +1,7 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.type.MapLikeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import zpl.oj.dao.InviteDao;
+import zpl.oj.dao.LogTakeQuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.LogTakeQuiz;
+import zpl.oj.model.common.Label;
+import zpl.oj.model.common.LabelUser;
+import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
@@ -27,6 +36,7 @@ import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.InviteService;
+import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.SchoolService;
@@ -51,6 +61,11 @@ public class TestingController {
 	private ProblemService problemService;
 	@Autowired
 	private SchoolService schoolService;
+	@Autowired
+	private LogTakeQuizDao logTakeQuizDao;
+	
+	@Autowired
+	private LabelService labelService;
 
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -109,12 +124,86 @@ public class TestingController {
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		
+		Invite invite = inviteDao.getInvites(testid, email);
 		
+		
+		Date nowDate = new Date();
+		if(invite.getStarttime()!=null && nowDate.before(invite.getStarttime()) ){
+			rb.setMessage("试题尚未开始");
+			rb.setState(2);
+			return rb;
+		}
+		
+		else if(invite.getDeadtime()!=null && nowDate.after(invite.getDeadtime())){
+			rb.setMessage("试题已截至");
+			rb.setState(3);
+			return rb;
+		}
+
 		
 		rb.setState(1);
 		return rb;
 	}
 	
+	@RequestMapping(value = "/getLabels")
+	@ResponseBody
+	public ResponseBase getLabels(@RequestBody Map<String,Object> params){
+		ResponseBase rb = new ResponseBase();
+		int testid = Integer.parseInt((String)params.get("testid"));
+		String email = (String)params.get("email");		
+		Invite invite = inviteService.getInvites(testid, email);
+		List<Labeltest> labelList=labelService.getLabelsOfTest(testid);
+		List<JsonLable> jsonLables=new ArrayList<TestingController.JsonLable>();
+		for(Labeltest lt:labelList){
+			if(lt.getIsSelected()==0) continue;
+			JsonLable jsonLable=new JsonLable();
+			Label label=labelService.getLabelById(lt.getLabelid());
+			if(label==null){
+				rb.setState(0);
+				rb.setMessage("标签不存在！");
+				return rb;
+			}
+			jsonLable.setLabelid(lt.getLabelid());
+			jsonLable.setLabelname(label.getName());
+			LabelUser labelUser=labelService.getLabelUserByIidAndLid(invite.getIid(), lt.getLabelid());
+			if(labelUser==null){
+				rb.setState(0);
+				rb.setMessage("labeluser不存在！");
+				return rb;				
+			}
+			jsonLable.setValue(labelUser.getValue());
+			jsonLables.add(jsonLable);
+		}
+		
+		rb.setState(1);
+		rb.setMessage(jsonLables);
+		return rb;
+	}
+	
+	public class JsonLable{
+		private Integer labelid;
+		private String labelname;
+		private String value;
+		public Integer getLabelid() {
+			return labelid;
+		}
+		public void setLabelid(Integer labelid) {
+			this.labelid = labelid;
+		}
+		public String getLabelname() {
+			return labelname;
+		}
+		public void setLabelname(String labelname) {
+			this.labelname = labelname;
+		}
+		public String getValue() {
+			return value;
+		}
+		public void setValue(String value) {
+			this.value = value;
+		}
+		
+	}
 	/*
 	 * 登陆，判断用户合法性
 	 * 判断用户是否已经开始做题，返回试题列表
@@ -209,15 +298,24 @@ public class TestingController {
 		String email = (String) params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
 
-		Map userMap = (Map) params.get("tuser");
-		Testuser tuser = tuserDao.findTestuserByName(email);
-		tuser.setUsername((String) userMap.get("username"));
-		tuser.setSchool((String) userMap.get("school"));
-		tuser.setBlog((String) userMap.get("blog"));
-		tuser.setTel((String) userMap.get("tel"));
-		tuser.setTuid(tuid);
-		tuserDao.updateTestuserById(tuser);
+//		Map userMap = (Map) params.get("tuser");
+//		Testuser tuser = tuserDao.findTestuserByName(email);
+//		tuser.setUsername((String) userMap.get("username"));
+//		tuser.setSchool((String) userMap.get("school"));
+//		tuser.setBlog((String) userMap.get("blog"));
+//		tuser.setTel((String) userMap.get("tel"));
+//		tuser.setTuid(tuid);
+//		tuserDao.updateTestuserById(tuser);
 		// 计算该试题的信息，选择题有X道，简答题有X道,时间为多长，等等
+		String userInfo=params.get("userInfo").toString();
+		userInfo=userInfo.substring(2,userInfo.length()-2);
+		String[] infos=userInfo.split("\\}, \\{");
+		Gson gson=new Gson();
+		for(int i=0;i<infos.length;i++){
+			infos[i]="{"+infos[i]+"}";
+			JsonLable label=gson.fromJson(infos[i], JsonLable.class);
+			labelService.updateLabelUser(invite.getIid(), label.getLabelid(), label.getValue());
+		}
 		Map rtMap = tuserService.getTestInfo(testid);
 		rtMap.put("duration", invite.getDuration());
 		rb.setMessage(rtMap);
@@ -327,6 +425,14 @@ public class TestingController {
 		for(QuestionTestCase qs:question.getAnswer()){
 			qs.setIsright("");
 		}
+		//存用户的答题记录
+		LogTakeQuiz log = new LogTakeQuiz();
+		log.setIid(invite.getIid());
+		log.setProblemid(nowProblmeId);
+		log.setTime(new Date());
+		log.setNum((int)params.get("index"));
+		logTakeQuizDao.saveQuizLog(log);
+		
 		rb.setState(1);
 		rb.setMessage(question);
 		return rb;
@@ -366,6 +472,20 @@ public class TestingController {
 		for(QuestionTestCase qs:question.getAnswer()){
 			qs.setIsright("");
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		//存用户的答题记录
+		LogTakeQuiz log = new LogTakeQuiz();
+		log.setIid(invite.getIid());
+		log.setProblemid(problmeId);
+		log.setTime(new Date());
+		log.setNum((int)params.get("index"));
+		logTakeQuizDao.saveQuizLog(log);
+		
+		//记录取题的log
+		
+		
+		
 		rb.setState(1);
 		rb.setMessage(question);
 		return rb;
@@ -412,6 +532,16 @@ public class TestingController {
 		}
 		invite.setState(1);
 		inviteDao.updateInvite(invite);
+		
+		
+		//存用户的答题记录
+		LogTakeQuiz log = new LogTakeQuiz();
+		log.setIid(invite.getIid());
+		log.setTime(new Date());
+		log.setNum(-1); //-1表示答题完成
+		logTakeQuizDao.saveQuizLog(log);
+				
+		
 		rb.setState(0);
 		return rb;
 	}

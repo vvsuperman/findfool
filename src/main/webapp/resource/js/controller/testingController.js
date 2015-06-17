@@ -18,6 +18,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 //测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
+	 //$scope.loginUser.pwd="3XT75";
 	 //$scope.loginUser.email="apachee@qq.com";
 
      $scope.schools = [];
@@ -47,6 +48,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.isCameraOk={};
 	 $scope.isCameraOk.ok=0;	 
+	 
+	 $scope.userInfo=[];
 	 //检查该url是否合法
 	 $http({
          url: WEBROOT+"/testing/checkurl",
@@ -210,6 +213,14 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	    	 else
 	    	    		 alert(data.message);
 	    	     });*/
+	    		 $http({
+	    	         url: WEBROOT+"/testing/getLabels",
+	    	         method: 'POST',
+	    	         data: {"email":$scope.email, "testid": $scope.tid}
+	    	     }).success(function (data) {
+	    	    	 $scope.userInfo=data["message"];
+
+	    	     });
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
 	    		 flashTip("务必开启摄像头已开始考试");
@@ -260,7 +271,16 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 			 return false;
 		 }
 		 
-		 var sendData ={"email":$scope.email,"testid":$scope.tid,"tuser":$scope.tuser}
+		 
+		 for(var i in $scope.userInfo){
+			if($scope.userInfo[i].value == ""){
+				$scope.errMsg="输入不得为空";
+				return false;
+				
+			} 
+		 }
+		 
+		 var sendData ={"email":$scope.email,"testid":$scope.tid,"userInfo":$scope.userInfo}
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",
 	         method: 'POST',
@@ -325,7 +345,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	 }
 	    	if(data.state!=0){
 	    		$scope.tProblems = data.message.problems;
-		    	$scope.submitAndFetch($scope.tProblems[0]);
+		    	$scope.submitAndFetch($scope.tProblems[0],1);
 		    	$scope.genExtraInfo(data);
 		    	$scope.show =4;
 		    	//铺助数组，存储已完成的试题，用来判断已完成题数是否需要加一
@@ -372,7 +392,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
       *获取试题信息
       *自动提交上一道试题答案
      */
-     $scope.submitAndFetch= function(problem){
+     $scope.submitAndFetch= function(problem,index){
     	 //判断是否是第一道题，提交目前的试题
     	 var useranswer ="";
     	 if($scope.question.type ==1){
@@ -392,7 +412,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     	 
     	 
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
-    			 		 "useranswer":useranswer};
+    			 		 "useranswer":useranswer,"index":index};
     	 
     	 $http({
 	         url: WEBROOT+"/testing/submit",
@@ -422,9 +442,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      /*
       *获取一道试题信息
      */
-     $scope.fetchProblem= function(problem){
+     $scope.fetchProblem= function(problem,index){
     	 //判断是否是第一道题，提交目前的试题
-    	 var sendData = {"testid":$scope.tid,"email":$scope.email,"problemId":problem.problemid};
+    	 console.log("index.............",index);
+    	 var sendData = {"testid":$scope.tid,"email":$scope.email,"problemId":problem.problemid,"index":index+1};
     	 $http({
 	         url: WEBROOT+"/testing/fetchProblem",
 	         method: 'POST',
@@ -468,9 +489,9 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 }
     	 }
     	 if(index<$scope.tProblems.length){
-    		 $scope.submitAndFetch($scope.tProblems[index])
+    		 $scope.submitAndFetch($scope.tProblems[index],index+1)
     	 }else{
-    		 $scope.submitAndFetch($scope.tProblems[index-1]);
+    		 $scope.submitAndFetch($scope.tProblems[index-1],index+1);
     		 flashTip("以至最后一题，请仔细检查");
     	 }
     	 

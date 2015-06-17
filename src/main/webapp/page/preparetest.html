@@ -80,18 +80,18 @@
    	 <form class="form-horizontal"  role="form">
    	 	  <div class="row">
 	   	 	 <div class="col-md-6 col-md-offset-1" >
-	   	 	 	<h4>个人信息（选填，让面试官更好的了解自己吧）</h4>
+	   	 	 	<h4>个人信息</h4>
 	   	 	 </div>
    	 	  </div>
    	 	
-		  <div class="form-group row">
+		   <!--<div class="form-group row">
 		    <label  class="col-sm-2 control-label">姓名</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" ng-model="tuser.username" placeholder="姓名" >
 		    </div>
 		  </div>
 		  
-		  <!--  <div class="form-group">
+		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">学校</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">
@@ -107,7 +107,7 @@
 	              match-class="bg-info"
 	              input-class="form-control"/>
 		    </div>
-		  </div> -->
+		  </div> 
 		  
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label">博客</label>
@@ -121,12 +121,17 @@
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" ng-model="tuser.tel" placeholder="电话">
 		    </div>
-		  </div>
-		  
+		  </div>-->
+		   <div class="form-group" ng-repeat="user in userInfo">
+		    <label  class="col-sm-2 control-label">{{user.labelname}}</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" ng-model="user.value" placeholder="{{user.labelname}}">
+		    </div>
+		    </div>
 		   <div class="form-group">
 		    <label  class="col-sm-2 control-label"></label>
 		    <div class="col-sm-4">
-		      <p ng-bind="errMsg"></p>
+		      <p class="alert" ng-bind="errMsg"></p>
 		    </div>
 		  </div>
 		 

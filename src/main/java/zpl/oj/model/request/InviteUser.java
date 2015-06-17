@@ -10,12 +10,12 @@ public class InviteUser {
 
     private String test;
     private int openCamera;
-	public String getUsername() {
+	public String getUsernameame() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String name) {
+		this.username = name;
 	}
     public void setTest(String test) {
         this.test = test;

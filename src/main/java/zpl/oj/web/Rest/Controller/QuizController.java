@@ -1,5 +1,6 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.Testuser;
@@ -30,6 +33,7 @@ import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
 import zpl.oj.model.responsejson.ResponseQuizs;
 import zpl.oj.service.InviteService;
+import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.MD5.MD5Util;
@@ -49,6 +53,8 @@ public class QuizController {
 	private UserService userService;
 	@Autowired
 	private InviteService inviteService;
+	@Autowired
+	private LabelService labelService;
 	
 	
 
@@ -138,6 +144,10 @@ public class QuizController {
 		ResponseBase rb = new ResponseBase();
 
 		Quiz q = quizService.addQuiz(request);
+		List<Integer> labelIds=labelService.getSystemLabels();
+		for(int id:labelIds){
+			labelService.insertIntoLabelTest(q.getQuizid(), id, 0);
+		}
 		ResponseMessage msg = new ResponseMessage();
 		if (q == null) {
 			msg.setMsg("add failed!!");
@@ -202,8 +212,25 @@ public class QuizController {
 				//由inviteuser生成testuser
 
 				// 生成invite、testuser
-				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
-				inviteService.sendmail(request, q, tu, pwd,ht);
+				String pwd = inviteService.inviteUserToQuiz(tu, q,request,ht);
+				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
+				for(Labeltest lt:labeltests){
+					Invite invite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
+					if(labelService.getLabelUserByIidAndLid(invite.getIid(), lt.getLabelid())==null){
+						labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
+					}
+					
+				}
+				
+				
+				
+				
+				try {
+					inviteService.sendmail(request, q, tu, pwd,ht);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			
@@ -301,4 +328,3 @@ public class QuizController {
 	
 
 }
-
