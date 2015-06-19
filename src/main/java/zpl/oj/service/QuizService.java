@@ -30,7 +30,7 @@ public interface QuizService {
 
 	void deleteQuestionFromTest(QuizProblem quizProblem);
 	
-	void genQuiz(String quizName, int uid);
+	Integer genQuiz(String quizName, int uid);
 	
 	
 	

@@ -143,6 +143,7 @@ public class QuizController {
 		ResponseBase rb = new ResponseBase();
 
 		Quiz q = quizService.addQuiz(request);
+		//获取系统标签，并在labeltest中为该测试添加这些系统标签
 		List<Integer> labelIds=labelService.getSystemLabels();
 		for(int id:labelIds){
 			labelService.insertIntoLabelTest(q.getQuizid(), id, 0);
@@ -210,12 +211,17 @@ public class QuizController {
 			for (InviteUser tu : request.getInvite()) {
 				//由inviteuser生成testuser
 
+				Invite oldInvite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
+				
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q,request.getDuration());
-				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
-				for(Labeltest lt:labeltests){
+				//如果原来的invite不存在，则想labeluser中插入数据
+				if(oldInvite==null){
 					Invite invite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
-					labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
+					List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
+					for(Labeltest lt:labeltests){
+						labelService.insertIntoLabelUser(invite.getIid(), lt.getLabelid(), "");
+					}
 				}
 				inviteService.sendmail(request, q, tu, pwd,ht);
 			}
@@ -306,8 +312,12 @@ public class QuizController {
 			}
 			
 			String quizName = param.get("quizName");
-			quizService.genQuiz(quizName, uid);
-			
+			int quizId=quizService.genQuiz(quizName, uid);
+			//获取系统标签，并在labeltest中为该测试添加这些系统标签
+			List<Integer> labelIds=labelService.getSystemLabels();
+			for(int id:labelIds){
+				labelService.insertIntoLabelTest(quizId, id, 0);
+			}
 			
 		return null;
 		

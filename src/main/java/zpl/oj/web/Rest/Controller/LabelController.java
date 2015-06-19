@@ -55,12 +55,14 @@ public class LabelController {
 		Gson gson=new Gson();
 
 		String labels=map.get("labels").toString();
-		labels=labels.substring(2,labels.length()-2);
-		String[] lArray=labels.split("\\}, \\{");
-		for(int i=0;i<lArray.length;i++){
-			lArray[i]="{"+lArray[i]+"}";
-			JsonLabel label=gson.fromJson(lArray[i],JsonLabel.class);
-			labelService.updateLabelTest(testid, label.getLabelid(), label.getIsSelected()?1:0);
+		if(labels.length()>2){
+			labels=labels.substring(2,labels.length()-2);
+			String[] lArray=labels.split("\\}, \\{");
+			for(int i=0;i<lArray.length;i++){
+				lArray[i]="{"+lArray[i]+"}";
+				JsonLabel label=gson.fromJson(lArray[i],JsonLabel.class);
+				labelService.updateLabelTest(testid, label.getLabelid(), label.getIsSelected()?1:0);
+			}
 		}
 		rb.setState(1);
 		return rb;

@@ -11,4 +11,14 @@
 		<br>
 		<button ng-click="saveConfig()">保存</button>
 	 </form>
+	 <br>
+	 <p>现有的email：</p>
+	 <form class="form-horizontal"  role="form">
+		<div class="form-group" ng-repeat="e in emails">
+		    <input type="text" disabled="disabled" value="{{e.email}}"/>
+		 </div>	 
+		 <p ng-if="emails.length==0">无</p>
+		<label>邮箱：</label><input type="text" ng-model="angmodel.emailadded"> 
+		<button ng-click="addEmail()">添加</button>
+	 </form>
 </div>

@@ -27,6 +27,7 @@ import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
+import zpl.oj.model.common.QuizEmail;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
@@ -36,6 +37,7 @@ import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
+import zpl.oj.service.QuizEmailService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.SchoolService;
 //import zpl.oj.service.imp.LogService;
@@ -74,6 +76,8 @@ public class TestingController {
 	private TestuserDao tuserDao;
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
+	@Autowired
+	private QuizEmailService quizEmailService;
 //	@Autowired
 //	private LogService logService;
 
@@ -129,7 +133,8 @@ public class TestingController {
 	@ResponseBody
 	public ResponseBase getLabels(@RequestBody Map<String,Object> params){
 		ResponseBase rb = new ResponseBase();
-		int testid = Integer.parseInt((String)params.get("testid"));
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		String email = (String)params.get("email");		
 		Invite invite = inviteService.getInvites(testid, email);
 		List<Labeltest> labelList=labelService.getLabelsOfTest(testid);
@@ -288,13 +293,15 @@ public class TestingController {
 //		tuserDao.updateTestuserById(tuser);
 		// 计算该试题的信息，选择题有X道，简答题有X道,时间为多长，等等
 		String userInfo=params.get("userInfo").toString();
-		userInfo=userInfo.substring(2,userInfo.length()-2);
-		String[] infos=userInfo.split("\\}, \\{");
-		Gson gson=new Gson();
-		for(int i=0;i<infos.length;i++){
-			infos[i]="{"+infos[i]+"}";
-			JsonLable label=gson.fromJson(infos[i], JsonLable.class);
-			labelService.updateLabelUser(invite.getIid(), label.getLabelid(), label.getValue());
+		if(userInfo.length()>2){
+			userInfo=userInfo.substring(2,userInfo.length()-2);
+			String[] infos=userInfo.split("\\}, \\{");
+			Gson gson=new Gson();
+			for(int i=0;i<infos.length;i++){
+				infos[i]="{"+infos[i]+"}";
+				JsonLable label=gson.fromJson(infos[i], JsonLable.class);
+				labelService.updateLabelUser(invite.getIid(), label.getLabelid(), label.getValue());
+			}
 		}
 		Map rtMap = tuserService.getTestInfo(testid);
 		rtMap.put("duration", invite.getDuration());
@@ -482,14 +489,17 @@ public class TestingController {
 			rb.setMessage("非法访问");
 			return rb;
 		} else if (invite.getState() == 1) {
-			
-			
 			rb.setState(1);
 			rb.setMessage("试题已截至");
 			return rb;
 		}
 		invite.setState(1);
 		inviteDao.updateInvite(invite);
+		//用戶完成测试后，将公开链接发送到测试所设置的邮箱
+		List<QuizEmail> emailList=quizEmailService.getEmailsByQuizId(testid);
+		for(QuizEmail e:emailList){
+			quizEmailService.sendMail(e, invite);
+		}
 		rb.setState(0);
 		return rb;
 	}

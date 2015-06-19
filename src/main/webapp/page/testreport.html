@@ -158,9 +158,7 @@
 			   <div class="panel-body">
 			       <p>姓名：<span ng-bind="user.username"></span></p>
 			       <p>邮箱：<span ng-bind="user.email"></span></p>
-			       <p>毕业院校:<span ng-bind="user.school"></span></p>
-			       <p>最高学历:<span ng-bind="user.degree"></span></p>
-			       <p>个人博客：<span ng-bind="user.blog"></span></p>
+			       <p ng-repeat="u in userInfo">{{u.labelname}}：<span ng-bind="u.value"></span></p>
 			   </div>
 			</div>
 	  </div>	
