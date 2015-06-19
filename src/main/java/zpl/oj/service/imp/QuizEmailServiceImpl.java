@@ -52,7 +52,7 @@ public class QuizEmailServiceImpl implements QuizEmailService {
 		mailSenderInfo.setSubject("测试报告--来自foolrank");
 		String context = "<p>这是来自foolrank公司的邮件，您收到一份测试报告，请登录到:</p>"
 				+"<a href="+baseurl+"/#/publicReport/list/"+url+">"+baseurl+"/#/publicReport/list/"+url+"</a>"
-				+ "查看。"+"</p>";
+				+ " 查看。"+"</p>";
 		mailSenderInfo.setContent(context);
 		
 		//发送邮件
