@@ -1,17 +1,5 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main"
 	style="margin-top: 20px">
-	<!-- <form class="form-horizontal"  role="form">
-		
-		<div class="form-group" ng-repeat="label in labels">
-		    <label  class="col-sm-2 control-label">{{label.labelname}}</label>
-		    <div class="col-sm-4">		    
-		      <input type="checkbox" ng-model="label.isSelected">
-		    </div>
-		 </div>	 
-		<input type="text" ng-model="angmodel.labeladded"> <button ng-click="addLabel()">添加</button>
-		<br>
-		<button ng-click="saveConfig()">保存</button>
-	 </form-->
 	 
 	 <div class="col-md-12">
 	    <h4>自定义标签</h4>
@@ -21,9 +9,20 @@
 	    </div>
 	 
 	 </div>
-	 <div class="col-md-12" style="margin-top: 20px">
-	   <input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签"> <button ng-click="addLabel()">添加</button>
-	   <button ng-click="saveConfig()">保存</button>
+	 <div class="col-md-12" style="margin-top: 10px">
+	   <input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签"> <button class="btn btn-primary" ng-click="addLabel()">添加</button>
+	   <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
 	 </div>
-	 
+    
+     <div class="col-md-12" style="margin-top: 20px" >
+	 <h4>报告接受邮箱</h4>
+	 <p>用户做完测试后可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入一个邮箱来接受报告</p>
+	 <form class="form-horizontal"  role="form">
+		<div class="form-group" ng-repeat="e in emails">
+		    <label class="form-control col-md-3" ng-bind="e.email"></label>
+		 </div>	 
+		<input type="text" ng-model="angmodel.emailadded" placeholder="email"> 
+		<button class="btn btn-primary" ng-click="addEmail()">添加</button>
+	 </form>
+    </div>
 </div>

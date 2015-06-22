@@ -144,6 +144,7 @@ public class QuizController {
 		ResponseBase rb = new ResponseBase();
 
 		Quiz q = quizService.addQuiz(request);
+		//获取系统标签，并在labeltest中为该测试添加这些系统标签
 		List<Integer> labelIds=labelService.getSystemLabels();
 		for(int id:labelIds){
 			labelService.insertIntoLabelTest(q.getQuizid(), id, 0);
@@ -211,6 +212,8 @@ public class QuizController {
 			for (InviteUser tu : request.getInvite()) {
 				//由inviteuser生成testuser
 
+				Invite oldInvite = inviteService.getInvites(q.getQuizid(), tu.getEmail());
+				
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q,request,ht);
 				List<Labeltest> labeltests=labelService.getLabelsOfTest(q.getQuizid());
@@ -230,6 +233,7 @@ public class QuizController {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+
 				}
 			}
 			
@@ -319,8 +323,12 @@ public class QuizController {
 			}
 			
 			String quizName = param.get("quizName");
-			quizService.genQuiz(quizName, uid);
-			
+			int quizId=quizService.genQuiz(quizName, uid);
+			//获取系统标签，并在labeltest中为该测试添加这些系统标签
+			List<Integer> labelIds=labelService.getSystemLabels();
+			for(int id:labelIds){
+				labelService.insertIntoLabelTest(quizId, id, 0);
+			}
 			
 		return null;
 		

@@ -136,6 +136,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/page.html',
                 controller: 'reportListController'
             }).
+            when('/publicReport/list/:url', {
+                templateUrl: 'page/testreport.html',
+                controller: 'publicReportListController'
+            }).
             when('/report/detail', {
                 templateUrl: 'page/page.html',
                 controller: 'reportDetailController'

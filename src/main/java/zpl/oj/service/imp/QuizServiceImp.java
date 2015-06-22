@@ -179,7 +179,7 @@ public class QuizServiceImp implements QuizService {
 	}
 
 	@Override
-	public void genQuiz(String quizName, int uid) {
+	public Integer genQuiz(String quizName, int uid) {
 		// TODO Auto-generated method stub
 		QuizTemplete quizT = quizDao.getQuizTByName(quizName);
 		Quiz quiz = new Quiz();
@@ -196,6 +196,7 @@ public class QuizServiceImp implements QuizService {
 			 quizProblem.setQuizid(quizId);
 			 quizProblemDao.insertQuizproblem(quizProblem);
 		}
+		return quizId;
 		
 		List<Integer> labelIds=labelService.getSystemLabels();
 		for(int id:labelIds){
