@@ -196,12 +196,14 @@ public class QuizServiceImp implements QuizService {
 			 quizProblem.setQuizid(quizId);
 			 quizProblemDao.insertQuizproblem(quizProblem);
 		}
-		return quizId;
+		
 		
 		List<Integer> labelIds=labelService.getSystemLabels();
 		for(int id:labelIds){
 			labelService.insertIntoLabelTest(quizId, id, 0);
 		}
+		
+		return quizId;
 		
 	}
 

@@ -765,8 +765,11 @@ ul li {
  }
  
  .banner {
- 	padding: 0;
+ 	/* background: #e3f5ff url("../static/bg-02.jpg")  center no-repeat;
+ 	height: 600px; */
+
 /*  	position: fixed; */
+   padding: 0px;
  }
  .banner img {
  	width: 100%;
