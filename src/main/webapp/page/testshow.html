@@ -1,77 +1,37 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testshow.css" />
 
 
- <div class="col-md-12" style="margin: 0px -15px;">
-  <div class="panel panel-default black-panel ">
-	  <div class="panel-heading">
-	  	  <span>我的测试</span> 
-	  	  <button class="btn btn-primary pull-right"  data-toggle="modal" data-target="#testCreateModal">创建新测试</button>
-	  	  <div style="clear: both;"></div>
-	  </div>
-   
-	 <div class="panel-body row">
-       <div ng-repeat="test in tests">
-           <div class="col-md-3 col-sm-6 col-xs-12 test-block">
-           		<div class="panel panel-default" style="padding:0;margin:5px;">
-				  <div class="panel-heading" style="background-color:white;color:#1abc9c;border-color:#D7D4F0">
-				    <h3 class="panel-title">
-				    	<a href="#/test/{{test.quizid}}">{{test.name}}</a>
-				    </h3>
-				  </div>
-				  <div class="panel-body row">
-				    <div class="col-md-12">
-				       <span style="margin-left: 10px" ng-bind="test.questionNum"></span>道题，<span ng-bind="test.time"></span>分钟
-				    </div>
-				    <div class="col-md-12 test-tag" style="float:left">
-				       <div class="col-md-6">
-	                  		<span ng-bind="test.invitedNum" ></span><span>&nbsp;已邀请</span>
-                  		</div>
-				    
-				        <div class="col-md-6 ">
-	                  		<span class="glyphicon glyphicon-user" ></span>
-	                  		<a ng-click="inviteUser(test)"  href="">邀请</a>
-                  		</div>
-                  		
-                	</div>
-                	<div class="col-md-12 test-tag" style="float:left">
-                	   <div class="col-md-6">
-	                  		<span ng-bind="test.finishedNum" ></span><span>&nbsp;已完成</span>
-                  		</div>
-                	  
-                	   <div class="col-md-6">
-	                  		<span class="glyphicon glyphicon-stats" ></span>
-	                  		<a href="#/report"   ng-click="report(test)">报告</a>
-                  		</div>
-                	</div>
-				  </div>
+<!-- div ng-include src="'page/testsleftbar.html'"></div> -->
+<div class="admin-content tests">
+	<div class="item" ng-repeat="test in tests">
+		<div class="panel panel-default cspanel" >
+			<div class="panel-heading">
+				<h4><a href="#/test/{{test.quizid}}">{{test.name}}</a></h4>
+			</div>
+			<div class="panel-line">
+				<div></div>
+			</div>
+			<div class="panel-body">
+				<div class="info1">
+					<span ng-bind="test.questionNum"></span>道题，<span ng-bind="test.time"></span>分钟
 				</div>
-           </div>
-           
-           
-          <!--  <div class="col-md-2 col-md-offset-1 col-xs-4 col-xs-offset-2 testblock">
-                <div class="col-md-12 testtitle ">
-                  <a href="#/test/{{test.quizid}}">{{test.name}}</a>
-                </div>
-                
-                <div class="col-md-12 testinvite">
-                  <span class="glyphicon glyphicon-user" ></span>
-                  <a  ng-click="inviteUser(test)" class="blackFont" href="">邀请</a>
-       	            
-                </div>
-                
-                <div class="col-md-12 testreport">
-                  <span class="glyphicon glyphicon-stats" ></span>
-                  <a  href="#/report"  class="blackFont" ng-click="report(test)">报告</a>
-                </div>
-   				        
-           </div> -->
-           
-           
-       </div>
-     </div>
-  </div>
-</div>
-
+				<div class="info2">
+					<div><span ng-bind="test.invitedNum" ></span>已邀请</div>
+					<div><span ng-bind="test.finishedNum" ></span>已完成</div>
+				</div>
+				<div class="info3">
+					<a ng-click="inviteUser(test)"  href="">邀请</a>
+					<a ng-click="report(test)" href="#/report">报告</a>
+				</div>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<div class="item addtest" data-toggle="modal" data-target="#testCreateModal">
+		<div class="horizontal"></div>
+		<div class="vertical"></div>
+	</div>
+</div>	
 
 <div class="modal" id="testCreateModal" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"

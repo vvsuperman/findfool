@@ -311,6 +311,16 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
 OJApp.controller('nav', function($scope, Data) {
 	$scope.invitedleft = Data.invitedleft();
 	$scope.name = Data.email();
+	console.log(window.location.hash);
+	var hash=window.location.hash;
+	if(hash=="#/test"){
+		$scope.isTestActive=true;
+		$scope.isLibActive=false;
+	}
+	if(hash=="#/bank"){
+		$scope.isTestActive=false;
+		$scope.isLibActive=true;
+	}
 	// console.log(Data.name);
 	$scope.navTest = function() {
 		$scope.template = 'testshow.html';

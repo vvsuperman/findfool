@@ -1,89 +1,80 @@
-.testblock{
-	height: 100px;
-	margin-top:30px;
-    border: 1px solid #000;
-    border-radius:3px;
-}
 
-.testblock .testtitle{
-	font-size: 18px;
-	margin-top: 10px
+.tests{
+	background-color: #f8f8f8;
 }
-
-.testblock .testinvite{
-	margin-top: 10px;
+.tests .item{
+	float: left;
+	width: 280px;
+	margin: 0 20px;
 }
-
-.testblock .testreport{
-	color:black;
-	margin-top: 5px;
+.tests .item .panel{
+	border: 0px solid #979797;
+	box-shadow: 1px 1px 2px 0px rgba(193,192,192,0.50);
+	border-radius: 8px;
 }
-
-.test-tag {
-	margin-top: 10px;
+.tests .item .panel-heading h4{
+	font-size: 16px;
 }
-
-
-.skill-board{
-	 /* background: url("../static/skill_tree.png") no-repeat scroll center top; */
-  	 height: 300px; 
-  	 margin-top: 0px;	
-  	 background-size:100% 100%;	
+.tests .item .panel:hover{
+	border: 0px solid #00D8BD;
+	box-shadow: 1px 1px 2px 0px rgba(0,216,189,0.50);
 }
-
-.tooltip-inner{
-	 background-color:#fff !important;
-	 color:#000;
-	 border: 1px solid #000;
-	 width: auto！important;
-	
+.tests .item .panel-heading{
+	border-radius: 8px;
 }
-
-.tooltip.bottom .tooltip-arrow{
-	 border-bottom-color: #000  !important;
+.tests .panel-body{
+	padding: 15px 20px;
 }
-.tooltip.top .tooltip-arrow{
-	 border-top-color: #000  !important;
+.tests .info1{
+	font-size: 13px;
 }
-.tooltip.left .tooltip-arrow{
-	 border-left-color: #000  !important;
+.tests .info2, .info3{
+	font-size: 12px;
 }
-.tooltip.right .tooltip-arrow   {
-	 border-right-color: #000  !important;
+.tests .info1, .info2 div{
+	padding: 5px 0;
 }
-
- .panel.quize-block .panel-heading {
-	background-color: white;
-    border-color: #d7d4f0;
-    color: #1abc9c;
-    font-weight: bold;
-    font-size: 16px;
- }
- .panel.quize-block.nopadding .panel-body{
- 	padding: 0;
- 	overflow:hidden;
- }
- .panel.quize-block .panel-body img{
- 	width: 100%;
- }
- .panel.quize-block .panel-body p{
- 	text-indent: 2em;
- }
- .panel.quize-block .panel-footer{
- 	height: 55px;
- 	padding: 10px 5px;
- }
-  .panel.quize-block .panel-footer p{
-  	display: inline-block;
-  	height: 25px;
-  	line-height: 25px;
-  }
-  .panel.quize-block .panel-body{
-  	height:140px;
-  }
-  .panel.quize-block button{
-  	font-size: 14px;
-  }
-  
-  
-  
+.tests .info2, .tests .info3{
+	float: left;
+}
+.tests .info3{
+	height: 60px;
+	padding: 30px 0 0 0;
+}
+.tests .info3 a{
+	display: inline-block;
+	text-align: right;
+	width: 80px;
+}
+.tests .item.addtest{
+	position: relative;
+	height: 166px;
+	width: 288px;
+	background-color: #fcfcfc;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;border: 0px solid #979797;
+	box-shadow: 1px 1px 2px 0px rgba(193,192,192,0.50);
+}
+.tests .item.addtest:hover{
+	background-color: #fff;
+	border: 0px solid #00D8BD;
+	box-shadow: 1px 1px 2px 0px rgba(0,216,189,0.50);
+}
+.tests .item.addtest div{
+	background-color: #ddd;
+}
+.tests .item.addtest .horizontal{
+	width: 40px;
+	height: 2px;
+	position: absolute;
+	top: 82px;
+	left: 124px;
+}
+.tests .item.addtest .vertical{
+	width: 2px;
+	height: 40px;
+	position: absolute;
+	top: 63px;
+	left: 143px;
+}
