@@ -6,7 +6,7 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
     $scope.active = 1;
     $scope.template = 'page/testshow.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = '';
+    $scope.leftBar = 'page/testsleftbar.html';
     $scope.addtest ={};
     $scope.addtest.user ={};
     $scope.addtest.testtime=70;
@@ -128,7 +128,7 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
 /* 
  *  跳转到测试报告页面
  *   */
-    $scope.report = function (test) {
+    $scope.report = function (test) {S
         console.log("go to listreport",test);
         Data.setTid(test.quizid);
         Data.setTname(test.name);

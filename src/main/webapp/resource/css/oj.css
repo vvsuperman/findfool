@@ -1035,3 +1035,104 @@ ul li {
 		display:none;
 	}
  }
+ 
+/**
+ * 公共CSS
+ */
+ /*按钮*/
+ .btn.btn-default{
+ 	background: #00D8BD;
+ }
+ .btn {
+ 	font-size: 14px;
+ }
+ .btn:hover{
+ 	background:#1abc9c;
+ }
+/*panel*/
+.cspanel.panel-default > .panel-heading{
+	border: none;
+	padding: 12px 25px;
+	background-color: #fff;
+}
+.cspanel .panel-heading h4{
+	font-size: 15px;
+	margin: 0;
+}
+.cspanel .panel-line{
+	width: 100%;
+	padding: 0 20px;
+	height: 1px;
+	margin: 0 0 5px 0;
+}
+.cspanel .panel-line div{
+	background-color: #ddd;
+	margin: 0 auto;
+	height: 1px;
+	width: 100%;
+}
+ 
+ 
+ /**
+ * 组件css
+ */
+ /*后台左边栏*/
+.admin-sidebar{
+	width: 180px;
+	min-height: 1000px;
+	height: 100%;
+	margin-top: 50px;
+	background: #858585;
+	padding: 30px 0 0 30px;
+	float:left;
+	color: #fff;
+	position:fixed;
+}
+.admin-sidebar ul{
+	padding: 0;
+	maring: 0 auto;
+}
+.admin-sidebar ul li{
+	list-style: none;
+	height: 40px;
+	width: 100%;
+	line-height: 40px;
+	cursor:pointer;
+}
+.admin-sidebar ul li a{
+	color: #fff;
+}
+.admin-sidebar ul li a:hover{
+	color: #2ecc7e;
+}
+.admin-sidebar ul li span.glyphicon{
+	font-size: 20px;
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	left: 0;
+}
+.admin-sidebar ul li:hover{
+	color: #00D8BD;
+}
+.admin-sidebar .dividingline{
+	width: 100%;
+	margin: 40px 0 40px -18px;
+}
+.admin-sidebar .dividingline div{
+	height: 1px;
+	background-color: #ddd;
+}
+.admin-sidebar li.sub-list{
+	padding-left: 20px;
+}
+/*后台右边内容栏*/
+.admin-content{
+	width:100%;
+	height: 1000px;
+	margin-left:180px;
+	margin-top:50px;
+	background: #fff;
+	padding: 20px 180px 20px 20px;
+}
+ 	
