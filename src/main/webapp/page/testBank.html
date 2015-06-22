@@ -73,15 +73,15 @@
 				        <tr>
 				            <th style="width:70%;">试题内容</th>
 				            <th style="width:15%;">试题类型</th>
-				            <th style="width:8%;">难度</th>
-				            <th style="width:7%;">查看</th>
+				          <!--   <th style="width:8%;">难度</th> -->
+				            <th style="width:15%;">查看</th>
 				        </tr>
 			        </thead>
 			        <tbody>
 			        <tr ng-repeat="q in reciveData.questions" style="padding-left: 10px">
 			            <td abstract context={{q.context}} style="width:60%;overflow-x:hidden;overflow-y:hidden;" ></td>
 			            <td style="width:15%;"><span ng-bind="q.tag"></span></td>
-			            <td style="width:8%;"><span style="dispaly:inline-block;" ng-bind="q.level"></span></td>
+			           <!--  <td style="width:8%;"><span style="dispaly:inline-block;" ng-bind="q.level"></span></td> -->
 			            <td style="width:7%;">
 			                <a href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
 			                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>

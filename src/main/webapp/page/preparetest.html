@@ -43,9 +43,9 @@
    
     <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
      
-     <div class="col-md-3 col-md-offset-2">
+     <div class="col-md-6 col-md-offset-3">
      
-		 <div style="margin-top: 50px;"  ng-show="showCZone ==1"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div>   
+		 <div   ng-show="showCZone ==1"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div>   
 		 <div  style="margin-top: 10px" class="cameraIcon"  ng-show="showCZone ==1">  
 		     <p style="margin-top: 10%">点击以开启摄像头</p>    
 		     <img id="showBtn" class="img-responsive cameraBtn" ng-click="showVideo()" style="height: 100px;text-align: center;"  src="resource/static/cameraicon.png">
@@ -76,13 +76,9 @@
 		 
 		  
      </div>
-    <div class=" col-md-6" style= "margin-top: 50px">
+    <div class=" col-md-6 col-md-offset-3">
    	 <form class="form-horizontal"  role="form">
-   	 	  <div class="row">
-	   	 	 <div class="col-md-6 col-md-offset-1" >
-	   	 	 	<h4>个人信息</h4>
-	   	 	 </div>
-   	 	  </div>
+   	 	  
    	 	
 		   <!--<div class="form-group row">
 		    <label  class="col-sm-2 control-label">姓名</label>
@@ -136,8 +132,8 @@
 		  </div>
 		 
 		  
-		  <div class="col-xs-2 col-md-2 col-md-offset-3">
-		  	<button class="btn btn-outline" ng-click="submitUserInfo()">提交</button>
+		  <div class="col-xs-6 col-md-6 col-md-offset-2">
+		  	<button class="btn btn-primary btn-block" ng-click="submitUserInfo()">提交</button>
 		  </div>
    	  </form>
    </div>
@@ -165,6 +161,15 @@
    	 <div ng-include src="'page/testing.html'"  ng-if="show==4"></div>
    	 <!-- 测试完成 -->
    	  <div ng-include src="'page/testend.html'"  ng-if="show==5"></div>
+   	  
+   	   <div class="col-md-8 col-md-offset-2" style="height: 300px;margin-top: 200px;margin-left: 400px" ng-if="show==6">
+	      	<h2>测试尚未开始，请耐心等待</h2>
+	   </div>  
+	   
+	   <div class="col-md-8 col-md-offset-2" style="height: 300px;margin-top: 200px;margin-left: 400px" ng-if="show==7">
+	      	<h2>测试已截至</h2>
+	   </div>  
+		
 
 </div>
 

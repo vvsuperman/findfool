@@ -102,6 +102,8 @@ public class CadQuizController {
 			Map rtMap = cadQuizService.answerQuestion(cadTest,problemid,useranswer);
 			if(rtMap.get("question") == null){//试题已做完
 				rb.setState(1);
+				rb.setMessage("试题已做完");
+				return rb;
 			}else{
 				rb.setState(0);
 			}

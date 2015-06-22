@@ -40,7 +40,19 @@ public class Candidate {
     
     private int score;  		//分数，用于往前端传值
     
-    public int getScore() {
+    private String reseturl;   //重置密码链接
+    
+    public String getReseturl() {
+		return reseturl;
+	}
+
+
+	public void setReseturl(String reseturl) {
+		this.reseturl = reseturl;
+	}
+
+
+	public int getScore() {
 		return score;
 	}
 

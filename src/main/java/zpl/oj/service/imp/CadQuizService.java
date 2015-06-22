@@ -172,10 +172,10 @@ public class CadQuizService {
 		int pnums = cadProDao.countProblems(cadTest.getCtid());  
 		//题目回答完了,将cadTest设置为完成状态，否则取下一道题
 		Question q = null;
-		if(nums==pnums){
+		//只能做一半
+		if(nums>=pnums/2){
 			cadTest.setState(ExamConstant.INVITE_FINISH);
 			cadTestDao.updateCadTest(cadTest);
-			
 			
 		}else{//未回答完，取下一道题
 			q= getProblem(cadTest.getCtid());
@@ -185,7 +185,7 @@ public class CadQuizService {
 		int rank = cadTestDao.getRank(cadTest.getScore(),cadTest.getTestid());
 	    Map cadInfo = new HashMap<String, Integer>();
 	    cadInfo.put("nums", nums);
-	    cadInfo.put("pnums", pnums);
+//	    cadInfo.put("pnums", pnums);
 	    cadInfo.put("rank", rank);
 	    cadInfo.put("score", cadTest.getScore());
 		
@@ -211,8 +211,13 @@ public class CadQuizService {
 	    	int rank = cadTestDao.getRank(cdTest.getScore(),cdTest.getTestid());
 			
 			if(involve!=0){
-				percent = (involve-rank)/involve;
+				percent = (involve-rank)*100/involve;
 			}
+	    }
+	    
+	    int state =0;
+	    if(cdTest.getState() == ExamConstant.INVITE_FINISH){
+	       	state = 1;
 	    }
 	
 		
@@ -220,6 +225,7 @@ public class CadQuizService {
 		Map <String ,Object> map = new HashMap<String, Object>();
 		map.put("percent", percent);
 		map.put("cads", cads);
+		map.put("state", state);
 		
  		
 		

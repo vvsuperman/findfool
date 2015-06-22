@@ -1,39 +1,13 @@
    
 <div class="container">
 
-	<nav class="navbar navbar-default navbar-fixed-top " role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            
-                 <a class="navbar-brand" href="http://foolrank.com/#/"><img alt="" style="width: 20px" class="img-responsive" src="resource/static/foollogolarge.png"></a>
-                 <a class="navbar-brand" href="http://foolrank.com/#/">FoolRank</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#/login">登陆</a>
-                    </li>
-                    <li>
-                        <a href="#/signup">注册</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	
 	<div style="width:100%;" class="text-center">
 		<br/>
 		<br/>
 		<h1 style="font-size: 44px;margin-top: 50px">
-                    最好用的IT人才评测系统
+                   大众点评极客挑战赛
         </h1>
-        <p style="font-size:xx-large">
-            帮助您大量、精准的发现最合适的人才
-        </p>
 	</div>
     <div class="row" ng-show="requestStage==1">
         
@@ -48,8 +22,7 @@
                 <div class="form-group">
                      <label class="form-label" ng-bind="content"></label> <a  href="" ng-click="refreshQuestion()">刷新题目</a>
                     <input type="text" class="form-control txt-large" id="authCode" placeholder="验证码" ng-model="answer">
-                    </br>
-                    
+                    <p class="text-danger" ng-bind="errmsg"></p>
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="request()">

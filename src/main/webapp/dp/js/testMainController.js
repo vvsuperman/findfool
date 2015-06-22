@@ -4,7 +4,7 @@
 
 OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	 
-	
+    $scope.showtext=0;	
 	
 	$scope.email = CadData.getEmail();
 	
@@ -42,8 +42,18 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
    	 if(data.state!=0){
    		 $scope.errmsg = data.message;
    	 }else{
-   		 $scope.percent = data.message.percent;
+   		 var percent = data.message.percent;
    		 $scope.cads = data.message.cads;
+   		 $scope.state = data.message.state;
+   		 if(percent>=90){
+   			 $scope.slogan = "我伙呆！您打败了全国"+percent+"%的挑战者，你还是人类吗？";
+   		 }else if(percent>=70 && percent<90){
+   			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，你这么NB，你的小伙伴们造吗！";
+   		 }else if(percent>=50 && percent<69){
+   			 $scope.slogan = "您打败了全国"+percent+"%的挑战者，何弃疗！药不能停！再接再厉！";
+   		 }else{
+   			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
+   		 }
    		
    	 }
    	
@@ -53,6 +63,11 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 	
     
 	$scope.startTest = function(){
+		
+		if($scope.state == 1){
+			flashTip("太牛＊了，题库已被你虐残了！换个题库玩玩吧！");
+			return false;
+		}
 		 window.location.href='#/dp/cadtesting';
 	}
 	

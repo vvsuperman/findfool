@@ -2,6 +2,7 @@
  * 做题控制器
  */
 OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
+	$scope.time={};
 	
 	$http({
         url: WEBROOT+"/cadquiz/starttest",
@@ -9,16 +10,29 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
         data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
     }).success(function (data) {
    	 if(data.state!=0){//试题已完成·
-   		 $scope.errmsg = data.message;
+   		 flashTip(data.message);
    		 window.location.href='#/dp/testdetail';
    		 
    	 }else{
    		$scope.question = data.message.question;
    		$scope.cadInfo = data.message.cadInfo;
+   		$scope.countdown($scope.question.limittime);
    	 }
    	
     }).error(function(){
    	 console.log("get data failed");
+    })
+    
+    
+    $scope.countdown = function(limittime){
+		var beginTime = (new Date()).getTime();
+    	var remain = beginTime+limittime*1000;;
+   		$scope.$broadcast("countdown",remain);
+	}
+    
+    
+    $scope.$on("cdfinished",function(){
+    	$scope.submit();
     })
     
     $scope.submit=function(){
@@ -49,13 +63,16 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 		$http({
 	        url: WEBROOT+"/cadquiz/answerQuestion",
 	        method: 'POST',
-	        data: {"testid":206,problemid:$scope.question.qid,"email":CadData.getEmail(),useranswer:useranswer}
+	        data: {"testid":CadData.getTestid(),problemid:$scope.question.qid,"email":CadData.getEmail(),useranswer:useranswer}
 	    }).success(function (data) {
-	   	 if(data.state!=0){
-	   		 $scope.errmsg = data.message;
+	   	 if(data.state==1){
+	   		 flashTip(data.message)
+	   		 window.location.href='#/dp/testdetail';
 	   	 }else{
 	   		$scope.question = data.message.question;
+	   		
 	   		$scope.cadInfo = data.message.cadInfo;
+	   		$scope.countdown($scope.question.limittime);
 	   	 }
 	   	
 	    }).error(function(){
@@ -67,12 +84,13 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 		$http({
 	        url: WEBROOT+"/cadquiz/getquestion",
 	        method: 'POST',
-	        data: {"testid":206,"email":CadData.getEmail()}
+	        data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
 	    }).success(function (data) {
 	   	 if(data.state!=0){
 	   		 $scope.errmsg = data.message;
 	   	 }else{
 	   		$scope.question = data.message;
+	   		$scope.countdown($scope.question.limittime);
 	   	 }
 	   	
 	    }).error(function(){

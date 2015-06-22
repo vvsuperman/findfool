@@ -16,6 +16,7 @@ import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.requestjson.RequestTestMeta;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
+import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 @Service
@@ -33,6 +34,8 @@ public class QuizServiceImp implements QuizService {
 	@Autowired
 	private InviteDao inviteDao;
 	
+	@Autowired
+	private LabelService labelService;
 	
 	/*
 	 *根据拥有者返回quiz 
@@ -192,6 +195,11 @@ public class QuizServiceImp implements QuizService {
 		for(QuizProblem quizProblem:quizProbs){
 			 quizProblem.setQuizid(quizId);
 			 quizProblemDao.insertQuizproblem(quizProblem);
+		}
+		
+		List<Integer> labelIds=labelService.getSystemLabels();
+		for(int id:labelIds){
+			labelService.insertIntoLabelTest(quizId, id, 0);
 		}
 		
 	}

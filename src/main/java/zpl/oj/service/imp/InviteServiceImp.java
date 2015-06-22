@@ -32,6 +32,7 @@ import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.mail.MailSenderInfo;
+import zpl.oj.util.mail.SendCloud;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
 import zpl.oj.util.sms.SMS;
@@ -50,6 +51,8 @@ public class InviteServiceImp implements InviteService {
 	
 	@Autowired
 	private SMS sms;
+	@Autowired
+	private SendCloud sendCloud;
 	
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
@@ -99,7 +102,7 @@ public class InviteServiceImp implements InviteService {
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setBegintime("");
 		invite.setStarttime(requestUser.getStarttime());
-		invite.setDeadTime(requestUser.getDeadtime());
+		invite.setDeadtime(requestUser.getDeadtime());
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
 		String duration = requestUser.getDuration();
@@ -151,44 +154,23 @@ public class InviteServiceImp implements InviteService {
 	public void sendmail(RequestTestInviteUser request, Quiz q, InviteUser tu,
 			String pwd, User hrUser) throws ClientProtocolException, IOException {
 		String testurl = desService.encode(tu.getEmail()+"|"+q.getQuizid());
+		String subject = request.getSubject();
+		 String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
 
-		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
-		String api_user = (String) PropertiesUtil.getContextProperty("api_user");
-		String api_key = (String) PropertiesUtil.getContextProperty("api_key");
-		String mailfrom = (String) PropertiesUtil.getContextProperty("mailfrom");
-		String sendCloudUrl =  (String) PropertiesUtil.getContextProperty("sendcloudurl");
-		
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httpost = new HttpPost(sendCloudUrl);
-		
-		
-		List nvps = new ArrayList();
-    	nvps.add(new BasicNameValuePair("api_user", api_user));
-        nvps.add(new BasicNameValuePair("api_key", api_key));
-        nvps.add(new BasicNameValuePair("from", mailfrom));
-        nvps.add(new BasicNameValuePair("to", tu.getEmail()));
-        nvps.add(new BasicNameValuePair("subject", request.getSubject()));
+	
         String content = "<p> 这是来自"+hrUser.getCompany()+"公司的邮件，我们非常荣幸能收到您的简历，做为优秀的候选人之一，我们诚挚的邀请您参加此次笔试，使我们能进一步了解您的能力。请登陆到：</p>"
         		+"<a href="+baseurl+"/#/testing/"+testurl+">"+baseurl+"/#/testing/"+testurl+"</a>"
         		+" <p>完成笔试测试</p>"
         		+"<p>您的密码是："+pwd+"</p>"
-        		+"<p>请务必使用firefox或chrome完成测试</p>"
+        		+"<p>请务必使用火狐或Chrome等非IE浏览器打开链接</p>"
         		+"<p>感谢您的参加!";
    		
-       
-        nvps.add(new BasicNameValuePair("html", content));
-        httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
-        // 请求
-        HttpResponse response = httpclient.execute(httpost);
-        // 处理响应
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) { // 正常返回
-          // 读取xml文档
-          String result = EntityUtils.toString(response.getEntity());
-          System.out.println(result);
-        } else {
-          System.err.println("error");
-        }
+       sendCloud.sendmail(tu.getEmail(), subject, content);
+      
 	}
+	
+	
+	
 	
 
 	@Override

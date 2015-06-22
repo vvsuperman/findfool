@@ -15,22 +15,26 @@ public class RequestTestInviteUser {
 	private String context;
 	private String duration;
 	
-	private Date starttime; //试题的开始时间
-    private Date deadtime;   //试题的结束时间
+	private String starttime; //试题的开始时间
 	private List<InviteUser> invite;	
 	
-	public Date getStarttime() {
+	
+    public String getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Date starttime) {
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
-	public Date getDeadtime() {
+	public String getDeadtime() {
 		return deadtime;
 	}
-	public void setDeadtime(Date deadtime) {
+	public void setDeadtime(String deadtime) {
 		this.deadtime = deadtime;
 	}
+	private String deadtime;   //试题的结束时间
+	
+	
+	
 	
 	
 	public String getDuration() {

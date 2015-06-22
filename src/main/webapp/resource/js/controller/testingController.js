@@ -64,6 +64,10 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
     		 }else{
     			 flashTip(data.message);
     		 }
+    	 }else if(data.state==2){ //试题尚未开始
+    		 $scope.show =6
+    	 }else if(data.state==3){//试题已截至
+    		 $scope.show =7
     	 }
     	 else{
     		 $scope.show = 1;
@@ -314,6 +318,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	beginTime = (new Date(beginTime.replace(/\-/g,"/"))).getTime();
 	    	var duration =data.message.invite.duration*60*1000;
 	    	$scope.time.remain = beginTime+duration;
+	    	$scope.$broadcast("countdown",$scope.time.remain);
 	    	//定时器提醒
 	    	var nowTime = (new Date()).getTime();
 	    	var remain = $scope.time.remain - nowTime;

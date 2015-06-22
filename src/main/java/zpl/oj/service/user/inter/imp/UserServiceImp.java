@@ -1,8 +1,10 @@
 package zpl.oj.service.user.inter.imp;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.mail.MailSenderInfo;
+import zpl.oj.util.mail.SendCloud;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.ValidateCode;
 
@@ -26,6 +29,9 @@ public class UserServiceImp implements UserService{
     private InviteService inviteService;
     @Autowired
     private VerifyQuestionService vfQuestion;
+    
+    @Autowired
+    private SendCloud sendCloud;
     
     
 	@Override
@@ -99,15 +105,19 @@ public class UserServiceImp implements UserService{
         user.setResetUrl(sb.toString());
         userDao.updateUser(user);
         //发送邮件
-        MailSenderInfo mailSenderInfo = inviteService.initialEmail(); 
-        mailSenderInfo.setToAddress(email);
-        mailSenderInfo.setSubject("重置密码");
         
         String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
         String content ="<p>您好，这是一封重置密码的邮件，请到</p><a href='"+baseurl+"/#/"+sb.toString()+"'>"+baseurl+"/#/"+sb.toString()+"</a><p>重置密码</p>";
-        mailSenderInfo.setContent(content);
       //发送邮件
-      	SimpleMailSender.sendHtmlMail(mailSenderInfo);
+        try {
+			sendCloud.sendmail(email, "重置密码", content);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
       	
       	
       	

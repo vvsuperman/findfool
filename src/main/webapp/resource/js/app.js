@@ -54,6 +54,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'dp/page/profile.html',
                 controller: 'profileController'
             }).
+            when('/dp/findpwd',{
+            	templateUrl: 'dp/page/findPwd.html',
+            	controller: 'findCadPwdCtrl'
+            }).
             
             when('/user', {
                 templateUrl: 'page/page.html',

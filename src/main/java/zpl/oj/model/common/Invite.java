@@ -83,25 +83,26 @@ public class Invite implements Serializable {
 	private int totalScore;
 	private Integer state;
 	private int openCamera;
-	private Date starttime;//试题允许开始做的时间
-	private Date deadtime; //试题的终止时间
-	
-	public Date getStarttime() {
+	private String starttime;//试题允许开始做的时间
+	public String getStarttime() {
 		return starttime;
 	}
 
-	public void setStarttime(Date startTime) {
-		this.starttime = startTime;
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
 	}
 
-	public Date getDeadtime() {
+	public String getDeadtime() {
 		return deadtime;
 	}
 
-	public void setDeadTime(Date deadTime) {
-		this.deadtime = deadTime;
+	public void setDeadtime(String deadtime) {
+		this.deadtime = deadtime;
 	}
 
+	private String deadtime; //试题的终止时间
+	
+	
 	
 
 	public String getPwd() {

@@ -39,12 +39,13 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 		
 		$scope.tuser.tel = $scope.mobile;
 		
-		$scope.tuser.pwd = md5($scope.tuser.pwd);
+	  	var tmpUser = jQuery.extend(true, {},  $scope.tuser);
+		tmpUser.pwd =  md5($scope.tuser.pwd);
 		
 		$http({
 	         url: WEBROOT+"/cad/preregister",
 	         method: 'POST',
-	         data: $scope.tuser
+	         data: tmpUser
 	     }).success(function (data) {
 	    	 if(data.state!=0){
 	    		 $scope.errmsg = data.message;

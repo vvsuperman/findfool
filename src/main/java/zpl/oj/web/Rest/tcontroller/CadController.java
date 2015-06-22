@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.dao.CandidateDao;
 import zpl.oj.model.common.Candidate;
+import zpl.oj.model.common.VerifyQuestion;
+import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.VerifyQuestionService;
+import zpl.oj.service.imp.CadService;
 
 
 //客户端做挑战赛的控制器
@@ -22,6 +26,13 @@ import zpl.oj.model.responsejson.ResponseBase;
 public class CadController {
 	@Autowired
     CandidateDao cadDao;
+	
+	@Autowired
+	private VerifyQuestionService verifyQuestionService;
+	
+	@Autowired
+	private CadService cadService;
+
 	
 	//注册步骤1
 	@RequestMapping(value = "/preregister", method = RequestMethod.POST)
@@ -38,11 +49,13 @@ public class CadController {
 		if(cadDao.countUserByEmail(cand.getEmail())>0){
 			rb.setState(1);
 			rb.setMessage("email已注册，请直接登陆");
+			return rb;
 		}
 		
 		if(cadDao.findTuserByTel(cand.getTel())!=null){
 			rb.setState(2);
-			rb.setMessage("手机号码已被注册，请直接登陆");
+			rb.setMessage("手机号码已被注册，");
+			return rb;
 		}
 		
 		cadDao.insertUser(cand);
@@ -173,6 +186,92 @@ public class CadController {
 		return rb;
 		
 	}
+	
+	
+	// 重置密码申请,发送用户邮件
+		@RequestMapping(value = "/setting/resetpwdapply")
+		@ResponseBody
+		public ResponseBase reSetPwdApply(@RequestBody Map map) {
+			ResponseBase rb = new ResponseBase();
+			String email = (String) map.get("email");
+			String content = (String)map.get("content");
+			String answer = (String)map.get("answer");
+			
+			VerifyQuestion vQuestion = verifyQuestionService.getVQuestByContent(content);
+			if(vQuestion == null){
+				rb.setState(1);
+				rb.setMessage("验证问题不存在");
+				return rb;
+			}
+			if(answer.equals(vQuestion.getAnswer()) == false){
+				rb.setState(1);
+				rb.setMessage("验证码错误");
+				return rb;
+			}
+			
+			
+			if (email == null) {
+				rb.setState(1);
+				rb.setMessage("email为空");
+				return rb;
+			};
+			Candidate cad = cadDao.findUserByEmail(email);
+			if (cad == null) {
+				rb.setState(1);
+				rb.setMessage("email错误，用户不存在");
+				return rb;
+			}
+		    cadService.resetPwdApply(email, cad);
+			rb.setState(0);
+			return rb;
+		}
+
+		// 验证url是否合法
+		@RequestMapping(value = "/setting/checkurl")
+		@ResponseBody
+		public ResponseBase checkUrl(@RequestBody Map map) {
+			ResponseBase rb = new ResponseBase();
+			String url = (String) map.get("url");
+			if (url == null) {
+				rb.setState(1);
+				rb.setMessage("param为空");
+			}
+			;
+			Candidate cad = cadDao.findTuserByUrl(url);
+			if (cad == null) {
+				rb.setState(1);
+				rb.setMessage("错误的url地址");
+				return rb;
+			}
+			rb.setState(0);
+			rb.setMessage(cad.getEmail());
+			return rb;
+		}
+
+		// 重置密码
+		@RequestMapping(value = "/setting/resetpwd")
+		@ResponseBody
+		public ResponseBase reSetPwd(@RequestBody Map map) {
+			ResponseBase rb = new ResponseBase();
+			String email = (String) map.get("email");
+			String pwd = (String) map.get("password");
+			String confirmpwd = (String) map.get("confirmPassword");
+
+			if (pwd == null || pwd.equals("") == true) {
+				rb.setState(1);
+				rb.setMessage("密码为空");
+				return rb;
+			}
+			;
+			if (pwd.equals(confirmpwd) == false) {
+				rb.setState(1);
+				rb.setMessage("两次密码不相同");
+				return rb;
+			}
+			cadDao.updatePwdByEmail(pwd, email);
+			rb.setState(0);
+			return rb;
+		}
 
 
 }

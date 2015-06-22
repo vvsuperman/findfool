@@ -1,4 +1,4 @@
-OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window) {
+OJApp.controller('findCadPwdCtrl',function ($scope,$http,Data,$routeParams,$window) {
 	
 	//获取验证码
 	$scope.refreshQuestion = function(){
@@ -14,7 +14,7 @@ OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window)
 	$scope.request=function(){
 		if($scope.email && $scope.answer){
 			$http({
-				url: WEBROOT + "/user/setting/resetpwdapply",
+				url: WEBROOT + "/cad/setting/resetpwdapply",
 				method: 'POST',
 				data: {'email': $scope.email,'content':$scope.content,'answer':$scope.answer}
 			}).success(function(data){
@@ -27,6 +27,8 @@ OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window)
 				}
 				
 			});
+		}else{
+			$scope.errmsg= "输入均不得为空";
 		}
 	};
 	

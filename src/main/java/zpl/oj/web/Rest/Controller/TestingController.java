@@ -127,14 +127,17 @@ public class TestingController {
 		Invite invite = inviteDao.getInvites(testid, email);
 		
 		
-		Date nowDate = new Date();
-		if(invite.getStarttime()!=null && nowDate.before(invite.getStarttime()) ){
+		String nowDate = df.format(new Date());
+		
+		
+		
+		if(invite.getStarttime()!=null && nowDate.compareTo(invite.getStarttime())<0){
 			rb.setMessage("试题尚未开始");
 			rb.setState(2);
 			return rb;
 		}
 		
-		else if(invite.getDeadtime()!=null && nowDate.after(invite.getDeadtime())){
+		else if(invite.getDeadtime()!=null && nowDate.compareTo(invite.getDeadtime())>0){
 			rb.setMessage("试题已截至");
 			rb.setState(3);
 			return rb;
@@ -308,14 +311,17 @@ public class TestingController {
 //		tuserDao.updateTestuserById(tuser);
 		// 计算该试题的信息，选择题有X道，简答题有X道,时间为多长，等等
 		String userInfo=params.get("userInfo").toString();
-		userInfo=userInfo.substring(2,userInfo.length()-2);
-		String[] infos=userInfo.split("\\}, \\{");
-		Gson gson=new Gson();
-		for(int i=0;i<infos.length;i++){
-			infos[i]="{"+infos[i]+"}";
-			JsonLable label=gson.fromJson(infos[i], JsonLable.class);
-			labelService.updateLabelUser(invite.getIid(), label.getLabelid(), label.getValue());
+		if(userInfo.length()>2){
+			userInfo=userInfo.substring(2,userInfo.length()-2);
+			String[] infos=userInfo.split("\\}, \\{");
+			Gson gson=new Gson();
+			for(int i=0;i<infos.length;i++){
+				infos[i]="{"+infos[i]+"}";
+				JsonLable label=gson.fromJson(infos[i], JsonLable.class);
+				labelService.updateLabelUser(invite.getIid(), label.getLabelid(), label.getValue());
+			}
 		}
+		
 		Map rtMap = tuserService.getTestInfo(testid);
 		rtMap.put("duration", invite.getDuration());
 		rb.setMessage(rtMap);
