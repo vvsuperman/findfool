@@ -8,9 +8,10 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 	$scope.showReport =1;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
-    $scope.leftBar = 'page/leftBar.html';
+    $scope.leftBar = 'page/testlistleftbar.html';
     var testid = Data.tid();
-    
+    $scope.tname = Data.tname();
+
     
 	$http({
          url: WEBROOT+"/report/list",
@@ -76,8 +77,8 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
 	$scope.logNav=0;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
-    $scope.leftBar = 'page/leftBar.html';
-    
+    $scope.leftBar = 'page/testlistleftbar.html';
+    $scope.tname = Data.tname();
     var testid = Data.tid();
     var inviteid = Data.inviteid();
     var tuid = Data.tuid();
@@ -167,100 +168,7 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
    	 console.log("get data failed");
     })
 });
-OJApp.controller('publicReportListController',function ($scope,$http,$routeParams) {
-	$scope.showReport =2;
-	$scope.listNav=1;
-	$scope.detailNav=0;   
-    
-    var param = strDec($routeParams.url, "1", "2", "3").split("|");
-    var inviteid = param[0];
-    var testid = param[1];
-    var tuid = param[2];
-    $scope.userInfo=[];
-    
-    
-    $scope.printPDF=function(){
-    	var pdf = new jsPDF('p','pt','a4');
-        pdf.addHTML(document.getElementById('pdf'),function() {
-            pdf.save('report.pdf');
-        });
-    };
-	 
-    $http({
-        url: WEBROOT+"/report/overall",
-        method: 'POST',
-        data: {"testid":testid,"iid":inviteid,"uid":tuid}
-    }).success(function (data) {
-    	$scope.score = data.score;
-    	$scope.rank = data.rank;
-    	$scope.user = data.user;
-    	$scope.labels = data.dimension.name;
-    	$scope.data = data.dimension.val;
-    	//生成说明文字
-    	$scope.setNum = $scope.labels.length;
-    	$scope.contents = data.dimension.content;
-    	$scope.faceproblmes = data.dimension.faceproblem;
-    	$scope.names = data.dimension.name;
-    	
-    	$scope.namenums=[]
-    	$scope.showFacePro =[];
-    	for(var i=0;i<$scope.data[0].length;i++){
-    		var namenum={};
-    		namenum.name = $scope.names[i];
-    		namenum.num = $scope.data[1][i]/$scope.data[0][i]
-    		namenum.faceproblem = $scope.faceproblmes[i];
-    		$scope.namenums.push(namenum);
-    		$scope.showFacePro[i]=0;//控制面试题的显示
-    	}
-        
-    	//level的雷达图
-    	$scope.levelLabels = data.levelDimension.name;
-    	$scope.levelData = data.levelDimension.val;
-    	
-    	
-    	
-    	
-    	
-    	var totalScores = $scope.data[0];
-    	var userScores = $scope.data[1];
-    	$scope.descStr =[];
-    	for(var i=0; i< totalScores.length; i++){
-    		var tmpStr = $scope.labels[i]+":"+(userScores[i]/totalScores[i])*100+"%";
-    		$scope.descStr.push(tmpStr);
-    	}
-    	
-     	//得分	
-     	var score = data.score.split("/");
-     	$scope.labelsScore =['用户成绩', '总分'];
-     	$scope.dataScore = [parseInt(score[0]),parseInt(score[1])];
-     	//排名
-     	var rank = data.rank.split("/");
-     	$scope.labelsRank =['用户排名', '总人数'];
-     	$scope.dataRank = [parseInt(rank[0]),parseInt(rank[1])];
-     		//data.score.split("/");
-     	//照片
-     	$scope.imgs = data.imgs;
-     	//保留从倒数第三个"/"后的字符串
-     	
-//     	for(var i = 0;i< $scope.imgs.length;i++){
-//     		var location = $scope.imgs[i].location;
-//     		var j = location.lastIndexOf("/");
-//     		j = location.lastIndexOf("/",j-1);
-//     		j = location.lastIndexOf("/",j-1);
-//     		$scope.imgs[i].location =location.slice(j,location.length);
-//     	}
-     	//获取用户在开始测试时所填信息
-        $http({
-            url: WEBROOT+"/testing/getLabels",
-            method: 'POST',
-            data: {"email":$scope.user.email, "testid": testid}
-        }).success(function (data) {
-       	 	$scope.userInfo=data["message"];
-        });
-    }).error(function(){
-   	 console.log("get data failed");
-    })
-});
+
 
 OJApp.controller('reportDetailController',function ($scope,$http,Data,$routeParams,$modal) {
 	$scope.showReport =3;
@@ -269,12 +177,12 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
 	$scope.detailNav=1;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
-    $scope.leftBar = 'page/leftBar.html';
+    $scope.leftBar = 'page/testlistleftbar.html';
     
     var testid = Data.tid();
     var inviteid = Data.inviteid();
     var tuid = Data.tuid();
-	 
+    $scope.tname = Data.tname();
     $http({
         url: WEBROOT+"/report/detail",
         method: 'POST',
@@ -384,8 +292,8 @@ OJApp.controller('reportLogController',function ($scope,$http,Data) {
 	$scope.detailNav=0;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
-    $scope.leftBar = 'page/leftBar.html';
-    
+    $scope.leftBar = 'page/testlistleftbar.html';
+    $scope.tname = Data.tname();
     $http({
         url: WEBROOT+"/report/log",
         method: 'POST',
@@ -406,3 +314,99 @@ OJApp.controller('reportLogController',function ($scope,$http,Data) {
     
 	
 })
+
+
+OJApp.controller('publicReportListController',function ($scope,$http,$routeParams) {
+	$scope.showReport =2;
+	$scope.listNav=1;
+	$scope.detailNav=0;   
+	 $scope.tname = Data.tname();
+    var param = strDec($routeParams.url, "1", "2", "3").split("|");
+    var inviteid = param[0];
+    var testid = param[1];
+    var tuid = param[2];
+    $scope.userInfo=[];
+    
+    
+    $scope.printPDF=function(){
+    	var pdf = new jsPDF('p','pt','a4');
+        pdf.addHTML(document.getElementById('pdf'),function() {
+            pdf.save('report.pdf');
+        });
+    };
+	 
+    $http({
+        url: WEBROOT+"/report/overall",
+        method: 'POST',
+        data: {"testid":testid,"iid":inviteid,"uid":tuid}
+    }).success(function (data) {
+    	$scope.score = data.score;
+    	$scope.rank = data.rank;
+    	$scope.user = data.user;
+    	$scope.labels = data.dimension.name;
+    	$scope.data = data.dimension.val;
+    	//生成说明文字
+    	$scope.setNum = $scope.labels.length;
+    	$scope.contents = data.dimension.content;
+    	$scope.faceproblmes = data.dimension.faceproblem;
+    	$scope.names = data.dimension.name;
+    	
+    	$scope.namenums=[]
+    	$scope.showFacePro =[];
+    	for(var i=0;i<$scope.data[0].length;i++){
+    		var namenum={};
+    		namenum.name = $scope.names[i];
+    		namenum.num = $scope.data[1][i]/$scope.data[0][i]
+    		namenum.faceproblem = $scope.faceproblmes[i];
+    		$scope.namenums.push(namenum);
+    		$scope.showFacePro[i]=0;//控制面试题的显示
+    	}
+        
+    	//level的雷达图
+    	$scope.levelLabels = data.levelDimension.name;
+    	$scope.levelData = data.levelDimension.val;
+    	
+    	
+    	
+    	
+    	
+    	var totalScores = $scope.data[0];
+    	var userScores = $scope.data[1];
+    	$scope.descStr =[];
+    	for(var i=0; i< totalScores.length; i++){
+    		var tmpStr = $scope.labels[i]+":"+(userScores[i]/totalScores[i])*100+"%";
+    		$scope.descStr.push(tmpStr);
+    	}
+    	
+     	//得分	
+     	var score = data.score.split("/");
+     	$scope.labelsScore =['用户成绩', '总分'];
+     	$scope.dataScore = [parseInt(score[0]),parseInt(score[1])];
+     	//排名
+     	var rank = data.rank.split("/");
+     	$scope.labelsRank =['用户排名', '总人数'];
+     	$scope.dataRank = [parseInt(rank[0]),parseInt(rank[1])];
+     		//data.score.split("/");
+     	//照片
+     	$scope.imgs = data.imgs;
+     	//保留从倒数第三个"/"后的字符串
+     	
+//     	for(var i = 0;i< $scope.imgs.length;i++){
+//     		var location = $scope.imgs[i].location;
+//     		var j = location.lastIndexOf("/");
+//     		j = location.lastIndexOf("/",j-1);
+//     		j = location.lastIndexOf("/",j-1);
+//     		$scope.imgs[i].location =location.slice(j,location.length);
+//     	}
+     	//获取用户在开始测试时所填信息
+        $http({
+            url: WEBROOT+"/testing/getLabels",
+            method: 'POST',
+            data: {"email":$scope.user.email, "testid": testid}
+        }).success(function (data) {
+       	 	$scope.userInfo=data["message"];
+        });
+    }).error(function(){
+   	 console.log("get data failed");
+    })
+});

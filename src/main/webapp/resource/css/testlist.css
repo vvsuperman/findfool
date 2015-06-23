@@ -1,38 +1,3 @@
-.admin-content.testqs{
-	padding: 0 180px 0 0;
-	min-width: 1000px;
-	font-size: 12px;
-	background-color: #f8f8f8;
-}
-.testqs .topbar {
-	width: 100%;
-	height: 50px;
-	border-bottom: 1px solid #ddd;
-	background-color: #fff;
-}
-.testqs .topbar .type{
-	color: #00D8BD;
-	font-size: 13px;
-}
-.testqs .topbar div{
-	width: 160px;
-	height: 50px;
-	line-hight: 50px;
-	text-align: center;
-	float: left;
-	line-height: 50px;
-}
-.testqs .topbar .invite{
-	float: right;
-	padding: 9px 0;
-	margin-right: 20px;
-}
-.testqs .topbar .glyphicon{
-	font-size: 20px;
-	position: relative;
-	top: 5px;
-	left: 0;
-}
 
 .qslist{
 	width: 100%;

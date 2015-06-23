@@ -1,9 +1,22 @@
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 <link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 
-<div class="col-md-offset-1 col-md-11" ng-if="showReport ==1">
+<div class="admin-content testqs" ng-if="showReport ==1">
     <!-- <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn> -->
-    </p>
+    
+    <div class="topbar">
+		<div class="type">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
+				&nbsp;{{tname}}
+		</div>
+		<!-- <div>
+			40道题，90分钟
+		</div> -->
+		<div class="invite">
+			<a class="btn btn-default">发送邀请</a>
+		</div>
+	</div>
+    
     <table class="table table-striped">
         <thead>
         <tr>
@@ -37,32 +50,44 @@
     </table>
 </div>	
 
-<div class="col-md-11 col-md-offset-1" style="" ng-if="showReport ==2">
-  <div class="panel panel-default black-panel">
-   <div class="panel-heading">
-      <ul class="nav nav-pills" role="tablist">
+
+ <div class="admin-content testqs" style="" >
+   <div class="topbar">
+		<div class="type">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
+				&nbsp;{{tname}}
+		</div>
+		<!-- <div>
+			40道题，90分钟
+		</div> -->
+		<div class="invite">
+			<a class="btn btn-default">发送邀请</a>
+		</div>
+	</div>
+	
+	
+	<div class="panel-back" ng-if="showReport ==2"> 
+	<!--   <div class="inner-back"> -->
+      <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
-		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
-		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]"><a customnav url="#/report/log" href="">答题日志</a></li>
-		 <li role="presentation" class="pull-right" ng-class="{1: 'active', 0: ''}[detailNav]"><button class="btn btn-primary" ng-click="printPDF()"><span class="glyphicon glyphicon-save"></span>&nbsp;导出为pdf</button></li> 
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
+		 
 	  </ul>
+	  
      
-   </div>
-   <div class="panel-body" id="pdf" style="background:#FFF;">
-        <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
-		   <div class="panel-heading">
-		     知识结构
-		   </div>
-		    <div class="col-md-4 col-md-offset-1" style="margin-top: 20px" >
-		         <p><strong>得分:</strong></p>
-		         <p ng-repeat="str in descStr">{{str}}</p>
-		        
+        <div class="col-md-8" style="margin-top: 20px>
+		    <div class="col-md-12" >
+		      <!-- <div class="knowtag">知识结构</div> -->
+		       <div class="col-md-12" style="margin-top:20px"><img src="resource/static/knowledge.png" alt="知识结构"></div> 
+		        <div class="col-md-4 col-md-offset-1" style="margin-top: 20px" >
+			         <p><strong>得分:</strong></p>
+			         <p ng-repeat="str in descStr">{{str}}</p>
+		        </div>
 		         
-		       </div> 
 			      <div class="col-md-5" style="margin-top: 20px;margin-bottom: 10px">
-			      <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
-			   </div>  
-		      
+			        <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
+			      </div>  
 		  
 		       
 		       <div class="panel-body"  ng-repeat="namenum in namenums">
@@ -82,7 +107,7 @@
 		          </div>
 		          
 		          <div class="col-md-12" >
-		            <a href="" ng-click="showFacePro[$index]==1?showFacePro[$index]=0:showFacePro[$index]=1" style="margin-left: 15px">
+		            <a href="" class="blackFont" ng-click="showFacePro[$index]==1?showFacePro[$index]=0:showFacePro[$index]=1" style="margin-left: 15px">
 		            <span class="glyphicon glyphicon-plus" ng-if="showFacePro[$index]==0"></span>
 		            <span class="glyphicon glyphicon-minus" ng-if="showFacePro[$index]==1"></span>
 		            &nbsp;可能的面试题
@@ -97,115 +122,57 @@
 		          </div>
 		         
 		       </div>
-		       
-		      <!--    <div class="col-md-12"  style="margin-top: 15px;margin-bottom: 15px">
-		          <div class="col-md-12">
-		          	 <div class="col-md-2 greenFont" style="font-size: 20px">开发语言:</div>
-		          	 <img src="resource/static/5star.png" class="col-md-3 img-response" style="margin-top: -5px">
-		          </div>
-		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px">
-				    开发语言掌握能力反映了候选者对某一开发语言的掌握程度，表明候选者对某一语言掌握程度较高。
-				    语言能力是一个基础能力，会涉及到的语法、函数、执行效率等语言特性，在工作中能进行有效的编码，
-				    降低bug几率，是程序员的一项基本能力。         
-		          </div>
-		       </div>
-		       
-		        <div class="col-md-12"  style="margin-top: 15px;margin-bottom: 15px">
-		          <div class="col-md-12">
-		          	 <div class="col-md-2 greenFont" style="font-size: 20px">开发平台:</div>
-		          	 <img src="resource/static/5star.png" class="col-md-3 img-response" style="margin-top: -5px">
-		          </div>
-		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px">
-				    开发语言掌握能力反映了候选者对某一领域平台的掌握能力，就如Android开发者必须掌握andorid的Api，
-				    服务端的开发者必须理解HTTP协议。对于某一岗位，除了开发语言之外还必须掌握的特定领域开发能力。
-				    反映了候选者的项目熟练度以及领域熟练度。得分较高者能够较好的适应实际的工作需求，有着较高的编程熟练度，
-				    对该领域的知识有一个系统的认识，能够较快的参与到实际项目中。       
-		          </div>
-		       </div>
-		       
-		        <div class="col-md-12"  style="margin-top: 15px;margin-bottom: 15px">
-		          <div class="col-md-12">
-		          	 <div class="col-md-2 greenFont" style="font-size: 20px">算法:</div>
-		          	 <img src="resource/static/5star.png" class="col-md-3 img-response" style="margin-top: -5px">
-		          </div>
-		          <div class="col-md-12" style="padding-left: 30px;margin-top: 10px;font-size: 16px;line-height: 26px">
-				    在一些面向底层的开发中，算法是非常重要的一个环节。优异的程序员也会不断磨练自己算法的掌握能力。       
-		          </div>
-		       </div> -->
+		 </div>      
+		     
 		   
-		</div>
 		
 		
 	  
-	     <div class="col-md-4" >
-			<div class="panel panel-default black-panel" >
-			   <div class="panel-heading">
+	     <div class="col-md-4" style="margin-top: 20px" >
 			     用户得分:<span ng-bind="score" style="color: #1abc9c;font-size:20px" ></span>
-			   </div>
-			   <div class="panel-body">
 			     <div class="col-md-12">
 			       <canvas id="doughnut"  class="chart chart-doughnut" data="dataScore"  labels="labelsScore"></canvas> 
 			     </div>  
-			   </div>
-			</div>
 		</div>
 		
-		<div class="col-md-4" >	
-			<div class="panel panel-default black-panel" >
-			   <div class="panel-heading" >
+		<div class="col-md-4" style="margin-top: 20px">	
 			     用户排名:<span ng-bind="rank" style="color: #1abc9c;font-size:20px"></span>
-			   </div>
-			   <div class="panel-body">
+			   <div class="col-md-12">
 			       <canvas id="doughnut" class="chart chart-doughnut" data="dataRank"  labels="labelsRank"></canvas> 
 			   </div>
-			</div>
 		</div>
 		
-		<div class="col-md-4">
-			<div class="panel panel-default black-panel">
-			   <div class="panel-heading">
-			     用户信息
-			   </div>
-			   <div class="panel-body">
+		<div class="col-md-4" style="margin-top: 20px">
+			   
+			   <div class="col-md-12" style="margin-top:20px"><img src="resource/static/userinfo.png" alt="  用户信息"></div> 
+			   <div class="col-md-12" style="margin-top: 20px">
 			       <p>姓名：<span ng-bind="user.username"></span></p>
 			       <p>邮箱：<span ng-bind="user.email"></span></p>
 			       <p ng-repeat="u in userInfo">{{u.labelname}}：<span ng-bind="u.value"></span></p>
 			   </div>
-			</div>
-	  </div>	
+	    </div>	
 	  
 	  <div style="clear: both;"></div>
 	  
 
-	  <div class="row"  >
-	     <div class="col-md-3" ng-repeat="img in imgs">
+	  <div class="row" style="margin-left: 20px" >
+	      <div class="col-md-12" style="margin-top:20px;margin-bottom: 10px"><img src="resource/static/camera.png" alt="监控摄像"></div> 
+	     <div class="col-md-2" ng-repeat="img in imgs" style="margin-top: 10px">
 	    	<img ng-src="{{img.location}}"  class="img-responsive  center-block"></img>
 	     </div>
 	  </div>
-		
-		<!-- <div class="panel panel-default black-panel col-md-8" style="padding-left: 0px;padding-right: 0px">
-		   <div class="panel-heading">
-		     知识结构
-		   </div>
-		   <div class="panel-body">
-		      <canvas id="radar" class="chart chart-radar" data="levelData"  labels="levelLabels" series＝"series"></canvas> 
-		   </div>
-		</div>
-		 -->
-    </div>
-  </div>
-</div>
+	<!--  </div> inner-back	 -->
+	</div>	<!-- panel-back -->
 
-<div class="col-md-10 col-md-offset-1" style="" ng-if="showReport==3">
- <div class="panel panel-default black-panel">
-   <div class="panel-heading">
-      <ul class="nav nav-pills" role="tablist">
+ 
+   <div class="panel-back" ng-if="showReport ==3">
+       <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
-		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
-	 	  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]"><a customnav url="#/report/log" href="">答题日志</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
+		 
 	  </ul>
      
-   </div>
 			   <table class="table table-striped" style="table-layout:fixed;">
 			   	<col style="width: 10%" />
 				<col style="width: 80%" />
@@ -228,18 +195,15 @@
 			        </tbody>
 			    </table>      
   </div>
-</div>
 
 
-<div class="col-md-10 col-md-offset-1" style="" ng-if="showReport==4">
- <div class="panel panel-default black-panel">
-   <div class="panel-heading">
-      <ul class="nav nav-pills" role="tablist">
+<div class="panel-back" style="" ng-if="showReport==4">
+        <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
-		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]"><a customnav url="#/report/detail" href="">详细报告</a></li>
-		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]"><a customnav url="#/report/log" href="">答题日志</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
+		 
 	  </ul>
-   </div>
 	
   <div style="margin: 30px">	
 	   <div ng-repeat="log in logs" >
