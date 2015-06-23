@@ -1,0 +1,63 @@
+ <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+ <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+ 
+ <div class="col-md-12" style="margin-top: 15px">
+   <div class="col-xs-3">
+     <a href="#/dp/testdetail" class="btn btn-primary" >返回</a>
+   </div>
+   
+   <div class="col-xs-5 col-xs-offset-1" style="margin-top: 5px">
+     <p>分数/排名:<span ng-bind="cadInfo.score"></span>/<span ng-bind="cadInfo.rank"></span></p>
+   </div>
+   
+     <div class="col-xs-3 " style="margin-top: 5px">
+        <div timer next=1 class="pull-right" >
+                         
+                        <span class="minutes"></span>:<span class="seconds"></span> 
+                             
+                   </div>
+    <!--   <p>倒计时:<span ng-bind="question.limittime"></span></p> -->
+   </div>
+ </div>
+ 
+ <div style="clear:both"></div>
+ 
+ 
+ <div class="col-md-12" style="margin-top: 20px">
+  	  	<!-- <textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea> -->
+      	  	<textarea simditor minheight="30px" operation="view" ng-model="question.context"></textarea>
+      	</div>  
+      	
+  <div class="col-xs-12" style="margin-top:20px">
+    <div class="col-xs-6"> <p>答题数:<span ng-bind="cadInfo.nums"></span></p></div>
+        <div class="col-xs-4 pull-right">
+         <p>难度:<span ng-bind="question.level"></span></p>
+         </div>
+  </div>   	
+  
+  
+ 
+   
+
+  <div class="options list col-md-12 col-sm-12  col-xs-12" ng-if="question.type ==1 " >
+      	  <label  customradiobox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation="edit"
+      	  	index={{$index}} rightanswer={{question.rightanswer}} useranswer={{question.useranswer}} report={{report}}>
+      	  	<span class='icon'></span><span class='icon-to-fade'></span>
+      	    <!-- <textarea ckeditor  minheight="70" width="90%" operation={{operation}} class='optiontext'   ng-model="option.text"></textarea> -->
+  	    <textarea simditor minheight="20px"  operation="view" class='optiontext'  ng-model="option.text"></textarea>
+  	     <!--  input type="checkbox"-->
+      	  </label>
+   </div>
+   
+   <div class="col-xs-12" style="margin-top: 20px;margin-bottom: 50px">
+     <button class="btn btn-primary col-xs-4 col-xs-offset-1 col-md-2" ng-click="submit()">提交/下一题</button>
+     <button class="btn btn-primary col-xs-offset-3 col-xs-4 col-md-2" ng-click="getNext()">跳过</button>
+   </div>
+   
+   
+   <script src="resource/js/simditor/module.js"></script>
+<script src="resource/js/simditor/hotkeys.js"></script>
+<script src="resource/js/simditor/uploader.js"></script>
+<script src="resource/js/simditor/simditor.js"></script>
+<script src="resource/js/directive/custom_simditor.js"></script>

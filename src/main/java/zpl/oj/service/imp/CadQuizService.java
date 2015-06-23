@@ -24,6 +24,8 @@ import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
+import zpl.oj.util.des.DESService;
 
 @Service
 public class CadQuizService {
@@ -46,6 +48,10 @@ public class CadQuizService {
 	
 	@Autowired
 	private CadTestDao cadTestDao;
+	
+	@Autowired
+	private DESService desService;
+	
 	
 	//生成试卷,包括invite和cadproblem
 	public CadTest genQuiz(String email, int  testid){
@@ -230,6 +236,13 @@ public class CadQuizService {
  		
 		
 		return map;
+	}
+
+    //生成公共测试链接，加密testid,以及slogan
+	public String genPublicUrl(int testid, String slogan) {
+		// TODO Auto-generated method stub
+		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+		return baseurl+"/#/publictest/"+desService.encode(testid+"|"+slogan+"|"+ExamConstant.PUBLIC_COMPANY);
 	}
 
 }

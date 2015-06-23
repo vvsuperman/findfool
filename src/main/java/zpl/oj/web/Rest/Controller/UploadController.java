@@ -119,7 +119,7 @@ public class UploadController {
 		    //取到了一张清晰的人脸
 			faceid  =((JSONObject)jFace.getJSONArray("face").get(0)).get("face_id").toString();
 //			faceid= jso.getString("facd_id");
-			Testuser testUser = tuserDao.findTestuserByName(img.getEmail());
+			Testuser testUser = tuserDao.findTuserByEmail(img.getEmail());
 			testUser.setFaceid(faceid);
 			tuserDao.updateTestuserById(testUser);
 			imgUploadService.upDateInsertImg(img);
@@ -136,7 +136,7 @@ public class UploadController {
 			}
 			else{
 				String newFaceid =((JSONObject)jFace.getJSONArray("face").get(0)).get("face_id").toString();
-				String baseFacdid = tuserDao.findTestuserByName(img.getEmail()).getFaceid();
+				String baseFacdid = tuserDao.findTuserByEmail(img.getEmail()).getFaceid();
 				jFace = faceUtil.faceCompare(baseFacdid, newFaceid);
 				//若相似度不足60，则判定人脸为不相似，存入数据库
 				if(jFace.getDouble("similarity")<60){

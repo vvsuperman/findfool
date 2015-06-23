@@ -13,8 +13,8 @@ import zpl.oj.model.common.Testuser;
 
 public interface TestuserDao {
 	 
-  @Insert("INSERT INTO testuser( username,email,school,company,blog,age,tel,registerdate,lastlogindate,state,discipline,gratime)"
-			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{tel},#{registerDate},#{lastLoginDate},#{state},#{discipline},#{gratime})")
+  @Insert("INSERT INTO testuser( username,email,school,company,blog,age,tel,registerdate,lastlogindate,state,discipline,gratime,pwd)"
+			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{tel},#{registerDate},#{lastLoginDate},#{state},#{discipline},#{gratime},#{pwd})")
   void insertTestuser(Testuser testuser);
   
   @Update("update testuser set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},tel=#{tel},discipline=#{discipline},gratime=#{gratime},"
@@ -22,7 +22,10 @@ public interface TestuserDao {
   void updateTestuserById(Testuser testuser);
   
   @Select("select * from testuser where email = #{0}")
-  Testuser findTestuserByName(String email);
+  Testuser findTuserByEmail(String email);
+  
+  @Select("select * from testuser where tel = #{0}")
+  Testuser findTuserByTel(String tel);
   
   @Select("select * from testuser where tuid = #{0}")
   Testuser findTestuserById(int tuid);

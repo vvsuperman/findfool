@@ -1,5 +1,6 @@
 package zpl.oj.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,8 @@ import zpl.oj.dao.TestuserDao;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
-import zpl.oj.model.common.Testuser;
 import zpl.oj.service.LabelService;
+import zpl.oj.util.json.JsonLabel;
 
 @Service
 public class LabelServiceImpl implements LabelService {
@@ -26,6 +27,25 @@ public class LabelServiceImpl implements LabelService {
 	public List<Integer> getSystemLabels() {
 		// TODO Auto-generated method stub
 		return labelDao.getSystemLabels();
+	}
+	
+	/**
+	 * @param testid
+	 * @return
+	 */
+	@Override
+	public List<JsonLabel> getTestLabels(Integer testid) {
+		List<Labeltest> list=getLabelsOfTest(testid);
+		List<JsonLabel> labels=new ArrayList<JsonLabel>();
+		for(Labeltest lt:list){
+			JsonLabel l=new JsonLabel();
+			l.setLabelid(lt.getLabelid());
+			String labelname=getLabelNameByLabelId(lt.getLabelid());
+			l.setLabelname(labelname);
+			l.setIsSelected((lt.getIsSelected()==1?true:false));
+			labels.add(l);
+		}
+		return labels;
 	}
 
 	@Override
@@ -108,5 +128,7 @@ public class LabelServiceImpl implements LabelService {
 		// TODO Auto-generated method stub
 		return labelDao.getLabelUserByIid(inviteid);
 	}
+	
+
 
 }

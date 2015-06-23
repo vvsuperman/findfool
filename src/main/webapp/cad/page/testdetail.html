@@ -1,0 +1,49 @@
+<div class="col-md-6 col-md-offset-3" class="text-center" style="margin-top:50px " >
+   
+   <div class="row" >
+	   <div class="col-md-12 col-xs-12" style="margin-top: 10px;">
+	     <div class="col-xs-3 col-md-offset-1 col-md-3">
+	       <img ng-src="{{testsrc}}">
+	     </div>
+	     <div class="col-xs-9 col-md-8 " style="margin-top: 10px;">
+	       <a class="btn btn-outline" href="#/dp/testmain">返回主界面</a>
+	       <button class="btn btn-primary" ng-click="startTest()">开始答题</button>
+	     </div>
+	   </div>
+   </div>
+   
+   
+   <div class="col-xs-12 text-center" style="color:#FF6600 ;margin-top: 50px;">
+       <p style="font-size: 24px;margin-top: 60px" ng-bind="slogan"></p>
+   </div>
+   
+   <div style="clear: both"></div>
+   
+   <div class="panel panel-default" style="padding:0;margin-top:50px;">
+		 <div class="panel-heading">
+		    <h3 class="panel-title">
+		    	单项排名
+		    </h3>
+		  </div>
+		  <div class="panel-body row">
+		   <table class="table">
+		   <thead>
+		      <tr>
+		        <th>排名</th>
+		        <th>姓名</th>
+		        <th>学校</th>
+		        <th>得分</th>
+		      </tr>
+		   </thead>
+		    <tbody>
+		     <tr ng-repeat="cad in cads">
+		       <td>{{$index+1}}</td>
+		       <td ng-bind="cad.username"></td>
+		       <td ng-bind="cad.school"></td>
+		       <td ng-bind="cad.score">{{$index}}</td>
+		     </tr>
+		    </tbody>
+		   </table>
+	     </div>
+   </div> 
+</div>

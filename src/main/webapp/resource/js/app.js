@@ -164,6 +164,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'page/findPwd.html',
             	controller: 'findPwdCtrl'
             }).
+            when('/publictest/:url',{
+            	templateUrl: 'page/page.html',
+            	controller: 'publictestCtrl'
+            }).
             when('/:auth',{
             	templateUrl: 'page/findPwd.html',
             	controller: 'findPwdCtrl'

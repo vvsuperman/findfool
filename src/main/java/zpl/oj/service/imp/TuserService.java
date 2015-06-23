@@ -43,13 +43,13 @@ public class TuserService {
 	
 	public int updateUser(Testuser testuser) {
 		// TODO Auto-generated method stub
-		Testuser tuser =testuserDao.findTestuserByName(testuser.getEmail()); 
+		Testuser tuser =testuserDao.findTuserByEmail(testuser.getEmail()); 
 		if(tuser!=null){
 			//该邮箱的用户曾经做过题，执行更新操作
 			return tuser.getTuid(); 
 		}else{
 			testuserDao.insertTestuser(testuser);
-			return testuserDao.findTestuserByName(testuser.getEmail()).getTuid();
+			return testuserDao.findTuserByEmail(testuser.getEmail()).getTuid();
 		}
 				
 	}
