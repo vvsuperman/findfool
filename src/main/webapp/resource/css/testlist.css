@@ -46,12 +46,19 @@
 	border-radius: 8px;
 	background-color: #fff;
 }
+.qslist .listcontent .scroll{
+	overflow-y :scroll;
+	height: 350px;
+}
 .qslist .item{
 	padding: 13px 0;
 	border-bottom: 1px solid #ddd;
 	overflow:hidden;
 	zoom:1;
 	font-size: 12px;
+}
+.qslist .item .qscontent a{
+	color: #00d8bd;
 }
 .qsindex,.qscontent,.qstype,.qsoperate{
 	float: left;
@@ -75,9 +82,6 @@
 	width: 50px;
 	float: left;
 	text-align: center;
-}
-.qslist .qscontent .icon span{
-	color: #ddd;
 }
 .qslist .qstype{
 	width: 20%;

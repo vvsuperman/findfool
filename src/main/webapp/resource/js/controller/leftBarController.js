@@ -4,6 +4,4 @@ OJApp.controller('leftBarController',function($scope,Data){
 		
 	});
 	$scope.tid = Data.tid();
-	
-	
 });
