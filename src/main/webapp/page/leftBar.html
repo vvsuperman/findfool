@@ -1,29 +1,34 @@
-    <div class="bs-sidebar hidden-print affix col-md-2 customBar" role="complementary" style="width: 180px!important;" ng-controller="leftBarController">
-        <ul class="nav bs-sidenav customSideNav">
+    <div class="admin-sidebar" role="complementary"  ng-controller="leftBarController">
+        <ul>
 
-            <li >
-                <h4 style="margin-left: 10px" class="greenFont" ng-bind="tname"></h4>
-            </li>
+          
             <li class="">
-                <h4 style="margin-left: 10px"><strong>测试管理</strong></h4>
+                试卷管理
             </li>
 
             <li class="">
-                <a href="#/test/{{tid}}" style="font-size: 18px"><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-th-list"></span>试题</a>
+                <a href="#/test/{{tid}}" ><span class="glyphicon glyphicon-th-list"></span>试题</a>
             </li>
             
-            <li>
-                <!--http://bootstrap.kinghack.com/components.html-->
-                <a href="#/invite" style="font-size: 18px"><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-envelope"></span>邀请</a>
-            </li>
             <li class="">
-                <a href="#/testConfig" style="font-size: 18px"><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-cog"></span>设置</a>
-            </li>
-            <li><h4  style="margin-left: 10px"><strong>测试报告</strong></h4>
+                <a href="#/testConfig" ><span  class="glyphicon glyphicon-cog"></span>通用设置</a>
             </li>
             
             <li>
-                <a href="#/report" style="font-size: 18px"><span style="margin-right: 5px;font-size: 18px" class="glyphicon glyphicon-eye-open"></span>报告</a>
+                <a href="#/invite" ><span class="glyphicon glyphicon-envelope"></span>邀请</a>
+            </li>
+           
+            <li>试卷报告
+            </li>
+            
+            <li>
+                <a href="#/report" ><span class="glyphicon glyphicon-eye-open"></span>已邀请</a>
+            </li>
+            <li>
+                <a href="#/report" ><span class="glyphicon glyphicon-eye-open"></span>进行中</a>
+            </li>
+             <li>
+                <a href="#/report" ><span class="glyphicon glyphicon-eye-open"></span>已完成</a>
             </li>
         </ul>
     </div>
