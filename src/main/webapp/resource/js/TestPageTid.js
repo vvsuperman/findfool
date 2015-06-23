@@ -5,7 +5,7 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
     $scope.url = '#/test';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testlist.html';
-    $scope.leftBar = 'page/leftBar.html';
+    $scope.leftBar = 'page/testlistleftbar.html';
     $scope.tid = $routeParams.tid;
     $scope.modifyQsIndex="";
     $scope.contain ={};
@@ -21,6 +21,10 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
     $scope.test.addAction = true;
     
     $scope.set={};
+    
+    $scope.$watch("Data.tname()",function(){
+		$scope.tname = Data.tname();
+	});
     
     $scope.getTypeName = function(typeName){
     	if(typeName == 1){
@@ -51,6 +55,7 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
+            console.log($scope.message);
             if ($scope.state) {
 //                console.log($scope.message);
                 $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
