@@ -584,7 +584,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      $scope.finishTest = function(){
     	 smoke.confirm("你确定完成测试吗？",function(e){
     		 if(e){
-    			 
     			 $scope.run('submit');
     	    	 $scope.endTest();
     		 }else{}

@@ -65,10 +65,10 @@
         <div class="col-md-offset-4 col-md-4">
             <form class="form-horizontal form-login">
                 <div class="form-group">
-                    <input type="password" class="form-control txt-large" id="newPwd" placeholder="新密码" ng-model="newPwd">
+                    <input type="password" class="form-control txt-large"  placeholder="密码" ng-model="pwd">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control txt-large" id="confirmPwd" placeholder="重复密码" ng-model="confirmPwd">
+                    <input type="password" class="form-control txt-large" placeholder="确认密码" ng-model="confirmpwd">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="submit()">
@@ -78,7 +78,7 @@
             </form>
         </div>
     </div>
-    <div class="row" ng-show="successStage==1">
+    <div class="col-md-offset-4 col-md-4" ng-show="successStage==1">
     	<div class="alert alert-success" role="alert">
     		<span class="glyphicon glyphicon-ok" style="font-size:18px;"></span>
     		<span>重置成功，请牢记新的登录密码</span>

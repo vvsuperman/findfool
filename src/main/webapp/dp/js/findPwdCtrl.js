@@ -1,4 +1,7 @@
-OJApp.controller('findCadPwdCtrl',function ($scope,$http,Data,$routeParams,$window) {
+OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$window) {
+	
+	 //判断用户是否登陆
+
 	
 	//获取验证码
 	$scope.refreshQuestion = function(){
@@ -23,6 +26,7 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,Data,$routeParams,$wind
 					return false;
 				}else{
 					flashTip('已向您邮箱发送重置密码信息');
+					$scope.refreshQuestion();
 					$scope.isMessage=1;
 				}
 				
@@ -33,28 +37,42 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,Data,$routeParams,$wind
 	};
 	
 	$scope.submit=function(){
-		if($scope.newPwd==$scope.confirmPwd){
-			var pwd=md5($scope.confirmPwd);
-			$http({
-				url: WEBROOT+"/user/setting/resetpwd",
-				method: 'POST',
-				data: {'email': $scope.email,'password': pwd,'confirmPassword': pwd}
-			}).success(function(){
+		
+		if(typeof($scope.pwd)=="undefined" ||typeof($scope.confirmpwd)=="undefined"||  $scope.pwd=="" ||$scope.confirmpwd==""){
+			$scope.errmsg="输入不得为空";
+			flashTip("输入不得为空");
+			return false;
+		}
+		
+		if($scope.pwd != $scope.confirmpwd){
+			flashTip("两次密码不同");
+			return false;
+		}
+		
+		var pwd=md5($scope.pwd);
+		var confirmpwd=md5($scope.confirmpwd);
+		$http({
+			url: WEBROOT+"/cad/setting/resetpwd",
+			method: 'POST',
+			data: {'email': $scope.email,'pwd': pwd,'confirmpwd': confirmpwd}
+		}).success(function(data){
+			if(data.state==0){
 				flashTip('重置密码成功');
 				$scope.successStage=1;
 				$scope.submitStage=0;
-			}).error(function(){
-				flashTip('重置密码失败');
-			});
-		}
-		else{
-			flashTip("密码不一致")
-		}
+			}else{
+				flashTip(data.message);
+			}
+			
+		}).error(function(){
+			flashTip('重置密码失败');
+		});
+		
 	}
 	
 	$scope.checkUrl=function(){
 		$http({
-			url: WEBROOT+'/user/setting/checkurl',
+			url: WEBROOT+'/cad/setting/checkurl',
 			method: 'POST',
 			data: {'url': $routeParams.auth}
 		}).success(function(data){

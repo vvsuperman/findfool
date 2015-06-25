@@ -4,6 +4,12 @@
 OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	$scope.time={};
 	
+	 //判断用户是否登陆
+	$scope.email = CadData.getEmail();
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
+	
 	$http({
         url: WEBROOT+"/cadquiz/starttest",
         method: 'POST',
@@ -15,6 +21,7 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
    		 
    	 }else{
    		$scope.question = data.message.question;
+   		$scope.getQuestionStar($scope.question);
    		$scope.cadInfo = data.message.cadInfo;
    		$scope.countdown($scope.question.limittime);
    	 }
@@ -27,6 +34,7 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
     $scope.countdown = function(limittime){
 		var beginTime = (new Date()).getTime();
     	var remain = beginTime+limittime*1000;;
+    	console.log("limittime....",limittime);
    		$scope.$broadcast("countdown",remain);
 	}
     
@@ -71,6 +79,8 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	   	 }else{
 	   		$scope.question = data.message.question;
 	   		
+	   		$scope.getQuestionStar($scope.question);
+	   		
 	   		$scope.cadInfo = data.message.cadInfo;
 	   		$scope.countdown($scope.question.limittime);
 	   	 }
@@ -80,6 +90,20 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	    })
 	}
 	
+    
+    $scope.getQuestionStar = function(question){
+    	var star ="";
+   		if(question.level ==1){
+   		    star ="1star";
+   		}else if(question.level == 2){
+   			star ="2star";
+   		}else if(question.level == 3){
+   			star ="3star"
+   		}
+   		$scope.questionStar ="resource/static/"+star+".png"
+   	
+    }
+    
 	$scope.getNext = function(){
 		$http({
 	        url: WEBROOT+"/cadquiz/getquestion",
@@ -90,6 +114,7 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	   		 $scope.errmsg = data.message;
 	   	 }else{
 	   		$scope.question = data.message;
+	   		$scope.getQuestionStar($scope.question);
 	   		$scope.countdown($scope.question.limittime);
 	   	 }
 	   	

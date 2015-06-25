@@ -20,18 +20,19 @@ OJApp.config(['$routeProvider' , '$locationProvider',
         $routeProvider.
             when('/', {
                 templateUrl: 'page/main.html',
-                controller: 'cadLoginController'
+                controller: 'mainController'
             }).
-            when('/dp', {  //点评主页
-                templateUrl: 'dp/page/main.html',
-                controller: 'cadLoginController'
-            }).
+         
             when('/dp/register', {  //点评主页
                 templateUrl: 'dp/page/dpregister.html',
                 controller: 'cadLoginController'
             }).
             when('/dp/register2', {  //点评主页
                 templateUrl: 'dp/page/dpregister2.html',
+                controller: 'cadLoginController'
+            }).
+            when('/dp/', {  //点评主页
+                templateUrl: 'dp/page/dplogin.html',
                 controller: 'cadLoginController'
             }).
             when('/dp/login', {  //点评主页
@@ -171,6 +172,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/:auth',{
             	templateUrl: 'page/findPwd.html',
             	controller: 'findPwdCtrl'
+            }).
+            when('/dp/:auth',{
+            	templateUrl: 'dp/page/findPwd.html',
+            	controller: 'findCadPwdCtrl'
             }).
             otherwise({
                 redirectTo: '/'
@@ -560,6 +565,20 @@ OJApp.factory('CadData', function (webStorage) {
             webStorage.remove('testname');
             webStorage.add('testname', to);
             this._testname = to;
+        };
+        
+        
+        this._rembme = "";
+        this.getRembme = function () {
+            if (this._rembme == "" || this._rembme == null) {
+                this._rembme = webStorage.get("rembme");
+            }
+            return this._rembme;
+        };
+        this.setRembme = function (to) {
+            webStorage.remove('rembme');
+            webStorage.add('rembme', to);
+            this._rembme = to;
         };
         
         

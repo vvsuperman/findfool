@@ -163,11 +163,17 @@ public class CadQuizService {
 		
 		String rightanser = problem.getRightanswer();
 		if(rightanser.equals(useranswer)){
-			cadTest.setScore(cadTest.getScore()+problem.getScore());
-		}else{
-			if(cadTest.getScore()>0){
-				cadTest.setScore(cadTest.getScore()-problem.getNegative());
+			if(problem.getScore()!=0){
+				cadTest.setScore(cadTest.getScore()+problem.getScore());
 			}
+			
+		}else{
+			if(problem.getNegative()!=0){
+				if(cadTest.getScore()>0){
+					cadTest.setScore(cadTest.getScore()-problem.getNegative());
+				}
+			}
+			
 			
 		}
 		//答题数+1
@@ -209,29 +215,34 @@ public class CadQuizService {
 
 	public  Map prepareTest(int testid, String email) {
 		// TODO Auto-generated method stub
+		
 		int involve = cadTestDao.getInvolve(testid);
 	    CadTest cdTest =cadTestDao.getCdByIds(testid, email);
 	    //用户还未开始做题
+		Map <String ,Object> map = new HashMap<String, Object>();
 	    int percent =0;
-	    if(cdTest != null){
-	    	int rank = cadTestDao.getRank(cdTest.getScore(),cdTest.getTestid());
-			
-			if(involve!=0){
-				percent = (involve-rank)*100/involve;
-			}
+	    if(cdTest == null){
+            map.put("percent",0);
+            map.put("state", 0);
+	    }else{
+	    	 int rank = cadTestDao.getRank(cdTest.getScore(),cdTest.getTestid());
+	 		if(involve!=0){
+	 			percent = (involve-rank)*100/involve;
+	 		}
+	 	    
+	 	    int state =0;
+	 	    if(cdTest.getState() == ExamConstant.INVITE_FINISH){
+	 	       	state = 1;
+	 	    }
+	 	
+	 		map.put("percent", percent);
+			map.put("state", state);
 	    }
 	    
-	    int state =0;
-	    if(cdTest.getState() == ExamConstant.INVITE_FINISH){
-	       	state = 1;
-	    }
+	    List<Candidate> cads = cadTestDao.getFrontCad(testid);
+	    map.put("cads", cads);
 	
 		
-		List<Candidate> cads = cadTestDao.getFrontCad(testid);
-		Map <String ,Object> map = new HashMap<String, Object>();
-		map.put("percent", percent);
-		map.put("cads", cads);
-		map.put("state", state);
 		
  		
 		

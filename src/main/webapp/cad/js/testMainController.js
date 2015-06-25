@@ -20,7 +20,7 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	
 	$scope.logout = function(){
 		CadData.clear();
-		window.location.href='#/dp/login';
+		window.location.href='#/dp/';
 	}
 	
 

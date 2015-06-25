@@ -179,6 +179,7 @@ OJApp.controller('publicReportListController',function ($scope,$http,$routeParam
     $scope.userInfo=[];
     
     
+    
     $scope.printPDF=function(){
     	var pdf = new jsPDF('p','pt','a4');
         pdf.addHTML(document.getElementById('pdf'),function() {

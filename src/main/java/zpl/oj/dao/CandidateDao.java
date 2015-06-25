@@ -17,7 +17,7 @@ public interface CandidateDao {
   void insertUser(Candidate cad);
   
   @Update("update Candidate set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},tel=#{tel},gratime=#{gratime},discipline=#{discipline},"
-  		+ "registerdate = #{registerDate},lastlogindate=#{lastLoginDate},faceid=#{faceid},degree=#{degree},reseturl=#{reseturl}  where tuid =#{tuid}")
+  		+ "registerdate = #{registerDate},lastlogindate=#{lastLoginDate},faceid=#{faceid},degree=#{degree},reseturl=#{reseturl}  where caid =#{caid}")
   void updateUserById(Candidate cad);
   
   @Update("update Candidate set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},tel=#{tel},gratime=#{gratime},discipline=#{discipline},"

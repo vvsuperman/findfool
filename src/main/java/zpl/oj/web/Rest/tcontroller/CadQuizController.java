@@ -142,8 +142,13 @@ public class CadQuizController {
 		@ResponseBody
 		public ResponseBase prepareTest(@RequestBody Map<String, Object> map) {
 			ResponseBase rb = new ResponseBase();
-			int testid =(Integer)map.get("testid");
+			Integer testid =(Integer)map.get("testid");
 			String email = (String)map.get("email");
+			if(testid==null || email == null){
+				rb.setState(1);
+				rb.setMessage("参数异常");
+				return rb;
+			}
 			Map rtMap = cadQuizService.prepareTest(testid,email);
 			rb.setState(0);
 			rb.setMessage(rtMap);

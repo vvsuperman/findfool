@@ -5,8 +5,14 @@
 OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	 
     $scope.showtext=0;	
-	
+  
+    //判断用户是否登陆
 	$scope.email = CadData.getEmail();
+	
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
+	
 	
 	
 	$scope.cadInfo ={};
@@ -20,7 +26,7 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	
 	$scope.logout = function(){
 		CadData.clear();
-		window.location.href='#/dp/login';
+		window.location.href='#/dp';
 	}
 	
 
@@ -30,6 +36,13 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 });
 
 OJApp.controller('testDetailController',function ($scope,$http,CadData) {
+	 //判断用户是否登陆
+	$scope.email = CadData.getEmail();
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
+	
+   
 	var testname = CadData.getTestname();
 	$scope.testsrc ="resource/static/"+ testname+".png";	
 	
@@ -54,6 +67,7 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
    		 }else{
    			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
    		 }
+   		 
    		
    	 }
    	
@@ -75,6 +89,12 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 
 
 OJApp.controller('profileController',function ($scope,$http,CadData) {
+	
+	 //判断用户是否登陆
+	$scope.email = CadData.getEmail();
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
 	
 	$scope.edit={};
 	$scope.edit.profile=0;

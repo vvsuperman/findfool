@@ -107,7 +107,7 @@ public class UserServiceImp implements UserService{
         //发送邮件
         
         String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
-        String content ="<p>您好，这是一封重置密码的邮件，请到</p><a href='"+baseurl+"/#/"+sb.toString()+"'>"+baseurl+"/#/"+sb.toString()+"</a><p>重置密码</p>";
+        String content ="<p>您好，这是来自foolrank.com的重置密码邮件，请到</p><a href='"+baseurl+"/#/"+sb.toString()+"'>"+baseurl+"/#/"+sb.toString()+"</a><p>重置密码</p>";
       //发送邮件
         try {
 			sendCloud.sendmail(email, "重置密码", content);
