@@ -22,10 +22,10 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$w
 				data: {'email': $scope.email,'content':$scope.content,'answer':$scope.answer}
 			}).success(function(data){
 				if(data.state !=0){
-					flashTip(data.message);
+					$scope.errmsg=data.message;
 					return false;
 				}else{
-					flashTip('已向您邮箱发送重置密码信息');
+					$scope.errmsg='已向您邮箱发送重置密码信息';
 					$scope.refreshQuestion();
 					$scope.isMessage=1;
 				}
@@ -40,12 +40,12 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$w
 		
 		if(typeof($scope.pwd)=="undefined" ||typeof($scope.confirmpwd)=="undefined"||  $scope.pwd=="" ||$scope.confirmpwd==""){
 			$scope.errmsg="输入不得为空";
-			flashTip("输入不得为空");
+			$scope.errmsg="输入不得为空";
 			return false;
 		}
 		
 		if($scope.pwd != $scope.confirmpwd){
-			flashTip("两次密码不同");
+			$scope.errmsg="两次密码不同";
 			return false;
 		}
 		
@@ -57,15 +57,15 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$w
 			data: {'email': $scope.email,'pwd': pwd,'confirmpwd': confirmpwd}
 		}).success(function(data){
 			if(data.state==0){
-				flashTip('重置密码成功');
+				$scope.errmsg='重置密码成功';
 				$scope.successStage=1;
 				$scope.submitStage=0;
 			}else{
-				flashTip(data.message);
+				$scope.errmsg=data.message;
 			}
 			
 		}).error(function(){
-			flashTip('重置密码失败');
+			$scope.errmsg='重置密码失败';
 		});
 		
 	}
@@ -82,7 +82,7 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$w
 		}).error(function(err){
 			$scope.requestStage=0;
 			$scope.submitStage=1;
-			flashTip('链接地址无效');
+			$scope.errmsg='链接地址无效';
 		});
 	}
 	

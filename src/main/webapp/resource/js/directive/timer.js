@@ -18,6 +18,7 @@ OJApp.directive('timer',['$timeout', function($timeout) {
 		                $this.find('span.'+event.type).html(event.value);
 		                break;
 		            case "finished":
+		            	
 		            	scope.$emit("cdfinished");
 		                break;
 		        }
@@ -39,7 +40,7 @@ OJApp.directive('timer',['$timeout', function($timeout) {
 		                $this.find('span.'+event.type).html(event.value);
 		                break;
 		            case "finished":
-//		            	scope.$emit("cdfinished");
+		            	scope.$emit("cdfinished");
 		                break;
 		        }
 		    });

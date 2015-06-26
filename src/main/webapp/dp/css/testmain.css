@@ -2,3 +2,25 @@
 	height: 70px;
 	cursor: pointer;
 }
+
+.options .simditor{
+	border-width: 0px;
+}
+
+.options .simditor-body{
+	padding-top:0px !important;
+	margin-top: 0px;
+}
+
+.options .simditor-body p{
+	margin-bottom: 0px;
+}
+
+.circle {
+    width: 90px;
+    height: 90px;
+    background: #E7E7E7;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}

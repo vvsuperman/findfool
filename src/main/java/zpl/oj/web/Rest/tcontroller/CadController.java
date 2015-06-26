@@ -105,8 +105,15 @@ public class CadController {
 		}
 		
 		Candidate cad = cadDao.findUserByEmail(cand.getEmail());
-		if(cad.getPwd().equals(cand.getPwd())==false){
+		if(cad==null){
 			rb.setState(2);
+			rb.setMessage("用户名不存在");
+			return rb;
+		}
+		
+		
+		if(cad.getPwd().equals(cand.getPwd())==false){
+			rb.setState(3);
 			rb.setMessage("用户名密码不匹配");
 			return rb;
 		}

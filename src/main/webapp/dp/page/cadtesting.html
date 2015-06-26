@@ -1,10 +1,11 @@
- <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+ <link rel="stylesheet" type="text/css" href="resource/css/cadtest.css"/>
+ <link rel="stylesheet" type="text/css" href="dp/css/testmain.css"/>
  <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 <link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
 <title>大众点评-极客挑战赛</title> 
  <div class="col-md-12" style="margin-top: 15px">
    <div class="col-xs-3">
-     <a href="#/dp/testdetail" class="btn btn-primary" >返回</a>
+     <a href="#/dp/testdetail" class="btn btn-info" >返回</a>
    </div>
    
    <div class="col-xs-5 col-xs-offset-1" style="margin-top: 5px">
@@ -41,7 +42,7 @@
  
    
 
-  <div class="options list col-md-12 col-sm-12  col-xs-12" ng-if="question.type ==1 " >
+  <div class="options list col-md-12 col-sm-12  col-xs-12" ng-if="question.type ==1 " style="margin-top: 20px" >
       	  <label  customradiobox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation="edit"
       	  	index={{$index}} rightanswer={{question.rightanswer}} useranswer={{question.useranswer}} report={{report}}>
       	  	<span class='icon'></span><span class='icon-to-fade'></span>
@@ -52,8 +53,8 @@
    </div>
    
    <div class="col-xs-12" style="margin-top: 20px;margin-bottom: 50px">
-     <button class="btn btn-primary col-xs-4 col-xs-offset-1 col-md-2" ng-click="submit()">提交/下一题</button>
-     <button class="btn btn-primary col-xs-offset-3 col-xs-4 col-md-2" ng-click="getNext()">跳过</button>
+     <button class="btn btn-info col-xs-4 col-xs-offset-1 col-md-2" ng-click="submit()">提交/下一题</button>
+     <button class="btn btn-info col-xs-offset-3 col-xs-4 col-md-2" ng-click="getNext()">跳过</button>
    </div>
    
    

@@ -25,7 +25,7 @@ OJApp.directive('countbutton', function() {
 function time(o,wait,scope,mobile) {
     if (wait == 0) {
         o.removeAttr("disabled");          
-        o.val("免费获取验证码");
+        o.html("免费获取验证码");
         wait = 120;
     } else {
     	if(wait == 120){
@@ -42,7 +42,7 @@ function time(o,wait,scope,mobile) {
     		});
     	}
         o.attr("disabled", true);
-        o.val("重新发送(" + wait + ")");
+        o.html("重新发送(" + wait + ")");
         wait--;
         setTimeout(function() {
             time(o,wait,scope,mobile)

@@ -16,7 +16,7 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
         data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
     }).success(function (data) {
    	 if(data.state!=0){//试题已完成·
-   		 flashTip(data.message);
+   		 smoke.alert(data.message);
    		 window.location.href='#/dp/testdetail';
    		 
    	 }else{
@@ -74,7 +74,7 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	        data: {"testid":CadData.getTestid(),problemid:$scope.question.qid,"email":CadData.getEmail(),useranswer:useranswer}
 	    }).success(function (data) {
 	   	 if(data.state==1){
-	   		 flashTip(data.message)
+	   		 smoke.alert(data.message)
 	   		 window.location.href='#/dp/testdetail';
 	   	 }else{
 	   		$scope.question = data.message.question;
