@@ -84,6 +84,28 @@
   margin-left: -20%;
 }
 
+
+
+@media screen and (max-width: 600px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  .smoke-base .dialog  {
+   top: 25%;
+   width: 80%;
+   left: 10%;
+   margin-left: 0px;
+   /* border: 2px solid  #51A9DA; */
+   border-radius:5px;
+ 
+  }
+   
+  .smoke-base .dialog-inner {
+    font-size:16px;
+   }
+
+ 
+}
+
+
+
 .smoke-base .dialog-inner {
   padding: 15px;
 

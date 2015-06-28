@@ -36,6 +36,16 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 });
 
 OJApp.controller('testDetailController',function ($scope,$http,CadData) {
+	
+	wx.checkJsApi({
+	      jsApiList: [
+	        'onMenuShareTimeline',
+	      ],
+	      success: function (res) {
+	        alert(JSON.stringify(res));
+	      }
+	    });
+	
 	 //判断用户是否登陆
 	$scope.email = CadData.getEmail();
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
@@ -67,7 +77,7 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
    			 $scope.slogan = "您打败了全国"+percent+"%的挑战者，何弃疗！药不能停！再接再厉！";
    		 }else if(percent<50 && percent>0){
    			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
-   		 }else{
+   		 }else if(percent==0){
    			$scope.slogan = "您还未开始做题，来！证明你自己！";
    		 }
    		 
@@ -87,6 +97,9 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 		}
 		 window.location.href='#/dp/cadtesting';
 	}
+	
+	
+
 	
 });
 

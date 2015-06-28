@@ -127,7 +127,13 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	     }).success(function (data) {
 	    	 if(data.state!=0){
 	    		 $scope.errmsg = data.message;
-	    	 }else{
+	    	 }else if(data.state ==4){
+	    	 //用户未完成第二步注册
+	    		 CadData.setEmail(data.message);
+	    		 
+	    	 }
+	    	 
+	    	 else{
 	    		 CadData.setToken(data.message.token);
 	    		 CadData.setEmail(data.message.email);
 	    		 window.location.href='#/dp/testmain';

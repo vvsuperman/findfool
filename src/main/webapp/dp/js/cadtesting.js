@@ -67,6 +67,10 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 				useranswer +="0";
 			}
 		}
+		//用户未提交
+		if(useranswer=="0000"){
+			smoke.alert("你还没有答题哦，怎么就提交了？如果这题不会，可以选择跳过～");
+		}
 		
 		$http({
 	        url: WEBROOT+"/cadquiz/answerQuestion",

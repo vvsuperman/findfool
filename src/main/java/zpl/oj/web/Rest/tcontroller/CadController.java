@@ -117,6 +117,14 @@ public class CadController {
 			rb.setMessage("用户名密码不匹配");
 			return rb;
 		}
+		
+		//用户未完成第二部注册
+		if(cad.getUsername() == null){
+			rb.setState(4);
+			rb.setMessage(cad.getEmail());
+			return rb;
+		}
+		
 		Map rtMap = new HashMap<String, Object>();
 		rtMap.put("email",cand.getEmail());
 		rb.setState(0);
