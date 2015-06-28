@@ -1,183 +1,144 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testshow.css" />
 
-		<!-- 用户引导页面内容 -->
- <div div class="col-md-12" ng-if="guide.show==1" style="margin: 0px -15px;">
- 	<div class="panel panel-default black-panel ">
-	  <div class="panel-heading">
-	  	  <span>用户引导</span> 
-	  </div>
-	  <div class="panel-body">
-	  	  <div class="col-md-offset-2" ng-if="panel.isBack" >
-	   	      <a href="" ng-click="goBack()">
-	   	      	<span class="glyphicon glyphicon-share-alt"></span>返回
-	   	      </a>
-	   	  </div>
-	   	  <div class="col-md-offset-2 col-md-8" ng-if="panel.isGuide">
-    		<h4 style="margin-top: 30px;margin-bottom: 20px">不知道怎么用？</h4>
-    		<button class="btn btn-outline" ng-click="panel.isGuide=false;panel.body=1;">招聘程序员</button>
-    	  </div>
-    	  
-    	   <!-- panel.body=1 -->
-   		   <div class="col-md-12" ng-if="panel.body==1">
-	    	 <h5>您需要招聘什么样的开发人员？</h5>
-	    	 <div style="margin:20px 0">
-	    		<h4>Web开发</h4>
-	    		<div class="row">
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block" 
-			    			ng-mouseover="testFrontEndShow=0"  
-			    			ng-mouseleave="testFrontEndShow=1" 
-			    			ng-init="testFrontEndShow=1"
-			    			ng-class="{'nopadding': testFrontEndShow}">
-				    		<div class="panel-heading" >
-				    			<span>WEB前端试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testFrontEnd.png" ng-show="testFrontEndShow==1">
-				    			<p ng-show="testFrontEndShow==0">考察对html、css、javascript及常用框架Jquery、Bootstrap等知识的掌握程度，并通过编程题考察分析和动手能力。
+<style>
+	.innertest{
+		padding: 20px;
+	}
+	.innertest .cspanel .panel-heading{
+		text-align: center;
+	}
+	.innertest .item{
+		position: relative;
+		width: 220px;
+		height: 210px;
+		float: left;
+		margin-left: 20px;
+	}
+	.innertest .item .panel-heading{
+		text-algin: left;
+	}
+	.innertest .item .panel-body{
+		padding: 10px;
+	}
+	.innertest .item button{
+		position: absolute;
+		left: 50%;
+		bottom: 10px;
+		width: 100px;
+		margin-left: -50px;
+	}
+</style>
+
+
+<div class="innertest">
+	<h4>您需要招聘什么样的开发人员？</h4>
+	<div class="panel panel-default cspanel" >
+		<div class="panel-heading">
+			<h4>Web开发</h4>
+		</div>
+		<div class="panel-line">
+			<div></div>
+		</div>
+		<div class="panel-body">
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>Web前端试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察对html、css、javascript及常用框架Jquery、Bootstrap等知识的掌握程度，并通过编程题考察分析和动手能力。
+				    	包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+					</p>
+					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
+				</div>
+			</div>
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>Java后端试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察Java服务端开发相关java, spring, hibernate等知识的掌握程度，并通过编程题考察分析和动手能力。
 				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>	  
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block"
-		    				ng-mouseover="testJavaShow=0"  
-			    			ng-mouseleave="testJavaShow=1" 
-			    			ng-init="testJavaShow=1"
-			    			ng-class="{'nopadding': testJavaShow}">
-				    		<div class="panel-heading" >
-				    			<span>Java后端试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testJava.jpg" ng-show="testJavaShow==1">
-				    			<p ng-show="testJavaShow==0">考察Java服务端开发相关java, spring, hibernate等知识的掌握程度，并通过编程题考察分析和动手能力。
+					</p>
+					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('java')">自动生成试题</button>
+				</div>
+			</div>
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>PHP后端试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察php服务端开发相关php,thinkphp等知识的掌握程度，并通过编程题考察分析和动手能力。
 				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('java')">自动生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>	 
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block"
-		    			ng-mouseover="testPhpShow=0"  
-			    		ng-mouseleave="testPhpShow=1" 
-			    		ng-init="testPhpShow=1"
-			    		ng-class="{'nopadding': testPhpShow}">
-				    		<div class="panel-heading">
-				    			<span>PHP后端试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testPhp.png" ng-show="testPhpShow==1">
-				    			<p ng-show="testPhpShow==0">考察php服务端开发相关php,thinkphp等知识的掌握程度，并通过编程题考察分析和动手能力。
+					</p>
+					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('php')">自动生成试题</button>
+				</div>
+			</div>
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>全栈开发试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察包括前端和后端相关知识的掌握程度，并通过编程题考察分析和动手能力。
 				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right"  ng-click="genQuiz('php')">自动生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>	 
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block"
-		    			ng-mouseover="testWebShow=0"  
-			    		ng-mouseleave="testWebShow=1" 
-			    		ng-init="testWebShow=1"
-			    		ng-class="{'nopadding': testWebShow}">
-				    		<div class="panel-heading" >
-				    			<span>全栈开发试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testWeb.png" ng-show="testWebShow==1">
-				    			<p ng-show="testWebShow==0">考察包括前端和后端相关知识的掌握程度，并通过编程题考察分析和动手能力。
+					</p>
+					<button class="btn btn-primary btn-sm pull-right">手工生成试题</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default cspanel" >
+		<div class="panel-heading">
+			<h4>Web移动开发</h4>
+		</div>
+		<div class="panel-line">
+			<div></div>
+		</div>
+		<div class="panel-body">
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>Android开发试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察Android相关android sdk，linux等知识的掌握程度，并通过编程题考察分析和动手能力。
 				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right">手工生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>				
-	    		</div>
-		    	<h4>移动开发</h4>
-	    		<div class="row">
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block"
-		    			ng-mouseover="testAndroidShow=0"  
-			    		ng-mouseleave="testAndroidShow=1" 
-			    		ng-init="testAndroidShow=1"
-			    		ng-class="{'nopadding': testAndroidShow}">
-				    		<div class="panel-heading" >
-				    			<span>Android开发试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testAndroid.jpg" ng-show="testAndroidShow==1">
-				    			<p ng-show="testAndroidShow==0">考察Android相关android sdk，linux等知识的掌握程度，并通过编程题考察分析和动手能力。
+					</p>
+					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('android')">自动生成试题</button>
+				</div>
+			</div>
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>IOS开发试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察IOS相关object-c，swift等知识的掌握程度，并通过编程题考察分析和动手能力。
 				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('android')">自动生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>	
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block"
-		    			ng-mouseover="testIosShow=0"  
-			    		ng-mouseleave="testIosShow=1" 
-			    		ng-init="testIosShow=1"
-			    		ng-class="{'nopadding': testIosShow}">
-				    		<div class="panel-heading" >
-				    			<span>IOS开发试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testIos.jpg" ng-show="testIosShow==1">
-				    			<p ng-show="testIosShow==0">考察IOS相关object-c，swift等知识的掌握程度，并通过编程题考察分析和动手能力。
+					</p>
+					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('object_c')">自动生成试题</button>
+				</div>
+			</div>
+			<div class="item panel panel-default">
+				<div class="panel-heading">
+					<h4>Web App开发试题</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						考察Web App开发相关基本技能包括html,css,javascript。 以及一些javascript类库，包括jQuery， Anuglarjs等知识的掌握程度，并通过编程题考察分析和动手能力。
 				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('object_c')">自动生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>	   	
-	    			<div class="col-md-3 col-sm-6 col-xs-12">
-		    			<div class="panel panel-default quize-block"
-		    			ng-mouseover="testH5Show=0"  
-			    		ng-mouseleave="testH5Show=1" 
-			    		ng-init="testH5Show=1"
-			    		ng-class="{'nopadding': testH5Show}">
-				    		<div class="panel-heading" >
-				    			<span>Web App开发试题</span>
-				    		</div>
-				    		<div class="panel-body">
-				    			<img src="resource/static/testH5.png" ng-show="testH5Show==1">
-				    			<p ng-show="testH5Show==0">考察Web App开发相关基本技能包括html,css,javascript。 以及一些javascript类库，包括jQuery， Anuglarjs等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
-		    					</p>
-				    		</div>
-				    		<div class="panel-footer">
-				    			<p>建议用时:90分钟</p>
-				    			<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
-				    		</div>
-			    		</div>
-	    			</div>	
-	    		</div>
-    		</div>
-   		</div>
- 	</div>
+					</p>
+					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+
 <div class="modal" id="testCreateModal" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"
      aria-hidden="true">

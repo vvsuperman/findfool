@@ -22,10 +22,10 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
     
     $scope.set={};
     
-    $scope.$watch("Data.tname()",function(){
+   /*$scope.$watch("Data.tname()",function(){
 		$scope.tname = Data.tname();
-	});
-    
+	});*/
+
     $scope.getTypeName = function(typeName){
     	if(typeName == 1){
     		return "选择题";

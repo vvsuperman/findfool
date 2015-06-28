@@ -1,14 +1,14 @@
-<div class="admin-sidebar">
+<div class="admin-sidebar" ng-controller="leftbarController">
 	<ul>
 		<li>试卷</li>
-		<li>
-			<a href="#/test">
+		<li >
+			<a href="#/test" ng-class="{true: 'active', false: 'inactive'}[isTestActive]">
 				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 				&nbsp;我的试卷
 			</a>
 		</li>
 		<li>
-			<a href="#/innertest">
+			<a href="#/innertest"  ng-class="{true: 'active', false: 'inactive'}[isInnertestActive]">
 				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 				&nbsp;内置试卷
 			</a>

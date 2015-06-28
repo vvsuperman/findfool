@@ -1,14 +1,26 @@
- <div class="bs-sidebar hidden-print affix col-md-1 customBar" role="complementary" style="width: 180px!important;" >
-        <ul class="nav bs-sidenav customSideNav">
-
-			<li class="">
-                <h4 style="margin-left: 10px"><strong>试题库</strong></h4>
-            </li>
-            <li class="">
-                <a href="#/bank" style="font-size: 18px">网站题库</a>
-            </li>
-            <li class="">
-                <a href="#/mybank"  style="font-size: 18px">我的题库</a>
-            </li>
-        </ul>
- </div>
+<!-- 
+ <style>
+	.admin-sidebar a.active{
+		color:#00d8bd;
+	}
+	.admin-sidebar a.inactive{
+		color:#fff;
+	}
+</style> -->
+<div class="admin-sidebar" ng-controller="leftbarController">
+	<ul>
+		<li>试题库</li>
+		<li >
+			<a href="#/bank" ng-class="{true: 'active', false: 'inactive'}[isBankActive]">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+				&nbsp;网站题库
+			</a>
+		</li>
+		<li>
+			<a href="#/mybank"  ng-class="{true: 'active', false: 'inactive'}[isMybankActive]">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+				&nbsp;我的题库
+			</a>
+		</li>
+	</ul>
+</div>

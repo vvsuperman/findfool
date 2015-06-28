@@ -1132,6 +1132,9 @@ ul li {
 	height: 1px;
 	margin: 0 0 5px 0;
 }
+.cspanel .panel-line.no-padding{
+	padding: 0;
+}
 .cspanel .panel-line div{
 	background-color: #ddd;
 	margin: 0 auto;
@@ -1182,6 +1185,12 @@ ul li {
 .admin-sidebar ul li:hover{
 	color: #00D8BD;
 }
+.admin-sidebar a.active{
+	color:#00d8bd;
+}
+.admin-sidebar a.inactive{
+	color:#fff;
+}
 .admin-sidebar .dividingline{
 	width: 100%;
 	margin: 20px 0 20px -18px;
@@ -1199,6 +1208,7 @@ ul li {
 	margin-left:180px;
 	margin-top:50px;
 	background: #fff;
-	padding: 20px 180px 20px 20px;
+	padding-right: 180px;
+	min-width: 900px;
 }
  	

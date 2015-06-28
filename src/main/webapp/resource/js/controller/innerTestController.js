@@ -8,7 +8,7 @@ OJApp.controller('InnerTest',function($scope, $http, Data, $modal) {
     $scope.active = 1;
     $scope.template = 'page/innerTest.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = '';
+    $scope.leftBar = 'page/testsleftbar.html';
     $scope.addtest ={};
     $scope.addtest.user ={};
     $scope.addtest.testtime=70;

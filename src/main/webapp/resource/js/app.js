@@ -14,7 +14,6 @@ var OJApp = angular.module('OJApp', [
     'angucomplete-alt'
 ]);
 
-
 OJApp.config(['$routeProvider' , '$locationProvider',
     function ($routeProvider,$locationProvider) {
         $routeProvider.
