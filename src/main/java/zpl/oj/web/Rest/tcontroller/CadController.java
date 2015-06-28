@@ -105,11 +105,26 @@ public class CadController {
 		}
 		
 		Candidate cad = cadDao.findUserByEmail(cand.getEmail());
-		if(cad.getPwd().equals(cand.getPwd())==false){
+		if(cad==null){
 			rb.setState(2);
+			rb.setMessage("用户名不存在");
+			return rb;
+		}
+		
+		
+		if(cad.getPwd().equals(cand.getPwd())==false){
+			rb.setState(3);
 			rb.setMessage("用户名密码不匹配");
 			return rb;
 		}
+		
+		//用户未完成第二部注册
+		if(cad.getUsername() == null){
+			rb.setState(4);
+			rb.setMessage(cad.getEmail());
+			return rb;
+		}
+		
 		Map rtMap = new HashMap<String, Object>();
 		rtMap.put("email",cand.getEmail());
 		rb.setState(0);
@@ -164,23 +179,23 @@ public class CadController {
 		ResponseBase rb = new ResponseBase();
 		
 		String email = map.get("email");
-		String oldpwd = map.get("oldpwd");
-		String newpwd = map.get("newpwd");
+		String pwd = map.get("pwd");
+		String confirmpwd = map.get("confirmpwd");
 		
-		if(email==null||oldpwd==null||newpwd==null){
+		if(email==null||pwd==null||confirmpwd==null){
 			rb.setState(1);
 			rb.setMessage("输入项均不得为空，请重新输入");
 			return rb;
 		}
 		
 		Candidate  cad = cadDao.findUserByEmail(email);
-		if(cad.getPwd().equals(oldpwd)==false){
+		if(cad.getPwd().equals(pwd)==false){
 			rb.setState(2);
 			rb.setMessage("用户名，密码不匹配");
 			return rb;
 		}
 		
-		cadDao.updatePwdByEmail(newpwd, email);;
+		cadDao.updatePwdByEmail(confirmpwd, email);;
 		rb.setState(0);
 		rb.setMessage("修改成功");
 		return rb;
@@ -254,21 +269,35 @@ public class CadController {
 		public ResponseBase reSetPwd(@RequestBody Map map) {
 			ResponseBase rb = new ResponseBase();
 			String email = (String) map.get("email");
-			String pwd = (String) map.get("password");
-			String confirmpwd = (String) map.get("confirmPassword");
+			String pwd = (String) map.get("pwd");
+			String confirmpwd = (String) map.get("confirmpwd");
 
-			if (pwd == null || pwd.equals("") == true) {
+			if(email == null||pwd==null||confirmpwd==null){
 				rb.setState(1);
-				rb.setMessage("密码为空");
+				rb.setMessage("输入不得为空");
 				return rb;
 			}
-			;
-			if (pwd.equals(confirmpwd) == false) {
-				rb.setState(1);
+			
+			if(pwd.equals(confirmpwd)==false){
+				rb.setState(2);
 				rb.setMessage("两次密码不相同");
 				return rb;
 			}
-			cadDao.updatePwdByEmail(pwd, email);
+			
+			Candidate cad = cadDao.findUserByEmail(email);
+			if(cad == null){
+				rb.setState(2);
+				rb.setMessage("用户不存在");
+				return rb;
+			}
+			
+			if (cad.getPwd().equals(pwd) == false) {
+				rb.setState(3);
+				rb.setMessage("原用户密码错误");
+				return rb;
+			}
+			
+			cadDao.updatePwdByEmail(confirmpwd, email);
 			rb.setState(0);
 			return rb;
 		}

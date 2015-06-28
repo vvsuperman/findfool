@@ -5,6 +5,32 @@ var WEBROOT = "/oj";
 var CUSTOM_SET = 0;
 //var MD_REDIRECT = "http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F";
 //var MD_REDIRECT = "http://127.0.0.1:8080/oj/#/";
+
+var data =["了解数据结构与算法，知道数据结构的基础知识，能进行数据结构的基本操作，基础知识掌握较差",
+           "掌握数据结构与算法的基础概念，熟练运用数据结构知识，具有一定的算法基础",
+           "精通数据结构与算法，能在项目中熟练运用数据结构的相关知识，具有较大的发展潜力"];
+
+var html =["初步了解html/css的基础知识，能够进行初级的页面绘制",
+           "会使用html/css的进行网页绘制，能解决一般的界面问题，对html/css熟练掌握",
+           "精通html/css，能有针对性的做出特效，能解决绝大部分界面问题"];
+
+var javascript=["初步掌握javascript语言，能进行基本操作,能进行初级的javascript开发",
+                "熟练掌握javascript语言，能熟练进行页面逻辑开发，能完成大部分的页面逻辑任务",
+                "精通javascript,对ECMA规范有深入的认识，对前端的逻辑开发非常擅长"
+                ];
+
+
+var jquery=["了解jQuery，能进行初级操作",
+            "掌握jQuery，能熟练的操纵网页元素",
+            "精通jQuery，能非常熟练的操纵网页元素" ];
+
+
+var bootstrap =[""]
+
+
+var PUBLIC_COMPANY=1;
+var PUBLIC_SYSTEM=0;
+
 var MD_REDIRECT = "http%3A%2F%2Ffindfool.com%2F%23%2F" 
 	
 var u = navigator.userAgent, app = navigator.appVersion;          

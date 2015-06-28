@@ -5,12 +5,28 @@
 OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	$scope.tuser={};
 	
-	
-	if(CadData.getEmail()!=""){
-	   	
+	//获取用户是否点击remberme
+	$scope.rembme = CadData.getRembme();
+	if($scope.rembme){
+		var email = CadData.getEmail();
+		if(email !=null){
+			 window.location.href='#/dp/testmain';
+		}
 	}
 	
+	//如果用户点击记住我,直接跳转到主界面
+	$scope.$watch("rembme",function(){
+		if($scope.rembme){
+			CadData.setRembme(true)
+		}else{
+			CadData.setRembme(false);
+			
+		}
+	})
 	
+	
+	
+		
 	
 	$scope.$on("vertifycode",function(event,code){
 		$scope.$apply(function(){
@@ -32,10 +48,10 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 			$scope.errmsg = "输入皆不可为空";
 			return false;
 		}
-		if($scope.verifyCode != $scope.verifyAns){
-			$scope.errmsg = "验证码错误";
-			return false;
-		}
+//		if($scope.verifyCode != $scope.verifyAns){
+//			$scope.errmsg = "验证码错误";
+//			return false;
+//		}
 		
 		$scope.tuser.tel = $scope.mobile;
 		
@@ -94,10 +110,7 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	}
 	
 	$scope.login = function(){
-		
-		
-		
-		if( !$scope.cad.email || !$scope.cad.pwd){
+		if(typeof($scope.cad)=="undefined"|| typeof($scope.cad.email)=="undefined"||typeof($scope.cad.pwd)=="undefined"||!$scope.cad.email || !$scope.cad.pwd){
 			$scope.errmsg = "输入皆不可为空";
 			return false;
 		}
@@ -114,7 +127,13 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	     }).success(function (data) {
 	    	 if(data.state!=0){
 	    		 $scope.errmsg = data.message;
-	    	 }else{
+	    	 }else if(data.state ==4){
+	    	 //用户未完成第二步注册
+	    		 CadData.setEmail(data.message);
+	    		 
+	    	 }
+	    	 
+	    	 else{
 	    		 CadData.setToken(data.message.token);
 	    		 CadData.setEmail(data.message.email);
 	    		 window.location.href='#/dp/testmain';

@@ -1,6 +1,5 @@
 package zpl.oj.web.Rest.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Label;
-import zpl.oj.model.common.LabelUser;
-import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
+import zpl.oj.util.json.JsonLabel;
 
 import com.google.gson.Gson;
 
@@ -28,25 +26,20 @@ public class LabelController {
 	private LabelService labelService;
 	@Autowired
 	private InviteService inviteService;
+	
+	
+	//根据testid获取test的标签信息
 	@RequestMapping(value="/getlabels")
 	@ResponseBody
 	public ResponseBase getLabels(@RequestBody Map<String,Integer> map){
 		ResponseBase rb = new ResponseBase();
 		Integer testid=map.get("testid");
-		List<Labeltest> list=labelService.getLabelsOfTest(testid);
-		List<JsonLabel> labels=new ArrayList<JsonLabel>();
-		for(Labeltest lt:list){
-			JsonLabel l=new JsonLabel();
-			l.setLabelid(lt.getLabelid());
-			String labelname=labelService.getLabelNameByLabelId(lt.getLabelid());
-			l.setLabelname(labelname);
-			l.setIsSelected((lt.getIsSelected()==1?true:false));
-			labels.add(l);
-		}
+		List<JsonLabel> labels = labelService.getTestLabels(testid);
 		rb.setState(1);
 		rb.setMessage(labels);
 		return rb;
 	}
+	
 	@RequestMapping(value="/saveconfig")
 	@ResponseBody
 	public ResponseBase saveConfig(@RequestBody Map<String,Object> map){
@@ -93,28 +86,5 @@ public class LabelController {
 		return rb;
 	}
 	
-	class JsonLabel{
-		
-		private Integer labelid;
-		private String labelname;
-		private Boolean isSelected;
-		public Integer getLabelid() {
-			return labelid;
-		}
-		public void setLabelid(Integer labelid) {
-			this.labelid = labelid;
-		}
-		public String getLabelname() {
-			return labelname;
-		}
-		public void setLabelname(String labelname) {
-			this.labelname = labelname;
-		}
-		public Boolean getIsSelected() {
-			return isSelected;
-		}
-		public void setIsSelected(Boolean isSelected) {
-			this.isSelected = isSelected;
-		}
-	}
+	
 }

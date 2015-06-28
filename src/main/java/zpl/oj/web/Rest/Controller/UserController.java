@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.common.Candidate;
+import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.VerifyQuestion;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestUser;
@@ -46,6 +49,8 @@ public class UserController {
 	private SecurityService securityService;
 	@Autowired
 	private VerifyQuestionService verifyQuestionService;
+	
+	
 
 	
 	//获取手机验证码
@@ -382,21 +387,35 @@ public class UserController {
 	public ResponseBase reSetPwd(@RequestBody Map map) {
 		ResponseBase rb = new ResponseBase();
 		String email = (String) map.get("email");
-		String pwd = (String) map.get("password");
-		String confirmpwd = (String) map.get("confirmPassword");
+		String pwd = (String) map.get("pwd");
+		String confirmpwd = (String) map.get("confirmpwd");
 
-		if (pwd == null || pwd.equals("") == true) {
+		if(email == null||pwd==null||confirmpwd==null){
 			rb.setState(1);
-			rb.setMessage("密码为空");
+			rb.setMessage("输入不得为空");
 			return rb;
 		}
-		;
-		if (pwd.equals(confirmpwd) == false) {
-			rb.setState(1);
+		
+		if(pwd.equals(confirmpwd)==false){
+			rb.setState(2);
 			rb.setMessage("两次密码不相同");
 			return rb;
 		}
-		userDao.updatePwd(pwd, email);
+		
+		User user = userDao.getUserIdByEmail(email);
+		if(user == null){
+			rb.setState(2);
+			rb.setMessage("用户不存在");
+			return rb;
+		}
+		
+		if (user.getPwd().equals(pwd) == false) {
+			rb.setState(3);
+			rb.setMessage("原用户密码错误");
+			return rb;
+		}
+		
+		userDao.updatePwd(confirmpwd, email);
 		rb.setState(0);
 		return rb;
 	}

@@ -30,6 +30,29 @@ public class CadQuizController {
 	@Autowired
 	private CadTestDao CadTestDao;
 	
+	
+	//发布为公开测试
+	@RequestMapping(value = "/publictest", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase publicTest(@RequestBody Map<String, Object> map) {
+		ResponseBase rb = new ResponseBase();
+		int testid = (Integer)map.get("testid");
+		String slogan = (String)map.get("slogan");
+		if(testid==0 || slogan == null){
+			rb.setState(1);
+			rb.setMessage("标题不得为空");
+			return rb;
+		}
+		
+		String pUrl = cadQuizService.genPublicUrl(testid,slogan);
+		rb.setState(0);
+		rb.setMessage(pUrl);
+		return rb;
+		
+	}
+	
+	
+	
 	//生成试题，并取一道题
 	@RequestMapping(value = "/starttest", method = RequestMethod.POST)
 	@ResponseBody
@@ -119,8 +142,13 @@ public class CadQuizController {
 		@ResponseBody
 		public ResponseBase prepareTest(@RequestBody Map<String, Object> map) {
 			ResponseBase rb = new ResponseBase();
-			int testid =(Integer)map.get("testid");
+			Integer testid =(Integer)map.get("testid");
 			String email = (String)map.get("email");
+			if(testid==null || email == null){
+				rb.setState(1);
+				rb.setMessage("参数异常");
+				return rb;
+			}
 			Map rtMap = cadQuizService.prepareTest(testid,email);
 			rb.setState(0);
 			rb.setMessage(rtMap);

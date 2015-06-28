@@ -5,6 +5,7 @@ import java.util.List;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
+import zpl.oj.util.json.JsonLabel;
 
 public interface LabelService{
 
@@ -69,4 +70,6 @@ public interface LabelService{
 	abstract List<LabelUser> getLabelUserByIid(Integer inviteid);
 	
 	abstract void updateLabelUser(int testid,int labelid,String value);
+
+	List<JsonLabel> getTestLabels(Integer testid);
 }

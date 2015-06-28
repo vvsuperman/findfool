@@ -14,7 +14,7 @@ import zpl.oj.model.common.Problem;
 @Repository(value="ProblemDao")
 public interface ProblemDao {
 
-	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,  "
+	@Select("    select  UUID,  PROBLEM_ID as problemId, belong, TITLE,  DESCRIPTION,  DATE,level,  "
 			+ "PROBLEM_SET_ID as problemSetId,  CREATOR, TYPE,  LIMIT_TIME as limitTime,  LIMIT_MEM,  SUBMIT,  SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER,score,negative  FROM PROBLEM  WHERE isdelete=0 and problem_Id = #{id}")
 	  Problem getProblem(int id);
 	

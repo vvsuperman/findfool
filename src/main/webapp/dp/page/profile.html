@@ -1,3 +1,4 @@
+<title>大众点评-极客挑战赛</title>
 <div class="container">
 	<div style="width:100%;" class="text-center">
 		<br/>
@@ -11,59 +12,59 @@
 	
 	<div class="col-md-6 col-md-offset-2" class="text-center">
 	
-	    <form class="form-horizontal form-login">
+	    <form class="form-horizontal">
                
                 
                   <div class="form-group">
-		            <label class="col-sm-3 control-label">邮箱</label>
-		            <div >
+		           <label class="col-xs-3 control-label">邮箱</label> 
+		            <div class="col-xs-9" >
 		                <p class="pull-left control-label" ng-bind="cad.email"  style="font-size: 16px;"></p>
 		            </div>
                  </div>
                  
                  <div class="form-group">
-		            <label class="col-sm-3 control-label">手机</label>
-		            <div >
-		                <p class="pull-left control-label" ng-bind="cad.tel"  style="font-size: 16px;"></p>
+		            <label class="col-xs-3 control-label">手机</label> 
+		            <div  class="col-xs-9" >
+		                <p class="pull-left  control-label" ng-bind="cad.tel"  style="font-size: 16px;"></p>
 		            </div>
                  </div>
                  
                    <div class="form-group">
-		            <label class="col-sm-3 control-label">姓名</label>
-		            <div >
-		                <p class="pull-left control-label" ng-bind="cad.username"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		            <label class="col-xs-3 control-label">姓名</label>
+		            <div  class="col-xs-9" >
+		                <p class="pull-left  control-label" ng-bind="cad.username"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
 		                 <input class="form-control" type="text" ng-model="tempCad.username" ng-if="edit.profile==1">
 		            </div>
                  </div>
                  
                  <div class="form-group">
-		            <label class="col-sm-3 control-label">学校</label>
-		            <div >
-		                <p class="pull-left control-label" ng-bind="cad.school"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		             <label class="col-xs-3 control-label">学校</label>
+		            <div  class="col-xs-9">
+		                <p class="pull-left  control-label" ng-bind="cad.school"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
 		                 <input class="form-control" type="text" ng-model="tempCad.school" ng-if="edit.profile==1">
 		            </div>
                  </div>
                  
                  <div class="form-group">
-		            <label class="col-sm-3 control-label">学历</label>
-		            <div >
-		                <p class="pull-left control-label" ng-bind="cad.degree"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		           <label class="col-xs-3 control-label">学历</label> 
+		            <div  class="col-xs-9">
+		                <p class="pull-left  control-label" ng-bind="cad.degree"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
 		                 <input class="form-control" type="text" ng-model="tempCad.degree" ng-if="edit.profile==1">
 		            </div>
                  </div>
                 
                  <div class="form-group">
-		            <label class="col-sm-3 control-label">专业</label>
-		            <div >
-		                <p class="pull-left control-label" ng-bind="cad.discipline"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
+		            <label class="col-xs-3 control-label">专业</label> 
+		            <div class="col-xs-9" >
+		                <p class="pull-left  control-label" ng-bind="cad.discipline"  style="font-size: 16px;" ng-if="edit.profile==0"></p>
 		                 <input class="form-control" type="text" ng-model="tempCad.discipline" ng-if="edit.profile==1">
 		            </div>
                  </div> 
                  
                   <div class="form-group">
-		            <label class="col-sm-3 control-label">毕业时间</label>
-		            <div>
-		                <p class="pull-left control-label" ng-bind="cad.gratime"  style="font-size: 16px;"  ng-if="edit.profile==0"></p>
+		           <label class="col-xs-3 control-label">毕业时间</label> 
+		            <div  class="col-xs-9">
+		                <p class="pull-left  control-label" ng-bind="cad.gratime"  style="font-size: 16px;"  ng-if="edit.profile==0"></p>
 		                 <input class="form-control" type="text" ng-model="tempCad.gratime" ng-if="edit.profile==1">
 		            </div>
                  </div>
@@ -93,15 +94,15 @@
                 
                 
                  <div class="form-group" ng-if="edit.pwd">
-		            <label class="col-sm-3 control-label">旧密码</label>
-		            <div>
+		            <label class="col-xs-3 control-label">旧密码</label>
+		            <div  class="col-xs-9">
 		                 <input class="form-control" type="password" ng-model="pwd.old" >
 		            </div>
                  </div> 
                  
                   <div class="form-group" ng-if="edit.pwd">
-		            <label class="col-sm-3 control-label">新密码</label>
-		            <div>
+		            <label class="col-xs-3 control-label">新密码</label>
+		            <div  class="col-xs-9">
 		                 <input class="form-control" type="password" ng-model="pwd.newpd" >
 		            </div>
                  </div>

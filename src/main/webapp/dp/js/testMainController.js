@@ -5,8 +5,14 @@
 OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	 
     $scope.showtext=0;	
-	
+  
+    //判断用户是否登陆
 	$scope.email = CadData.getEmail();
+	
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
+	
 	
 	
 	$scope.cadInfo ={};
@@ -20,7 +26,7 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	
 	$scope.logout = function(){
 		CadData.clear();
-		window.location.href='#/dp/login';
+		window.location.href='#/dp';
 	}
 	
 
@@ -30,8 +36,26 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 });
 
 OJApp.controller('testDetailController',function ($scope,$http,CadData) {
-	var testname = CadData.getTestname();
-	$scope.testsrc ="resource/static/"+ testname+".png";	
+	
+	wx.checkJsApi({
+	      jsApiList: [
+	        'onMenuShareTimeline',
+	      ],
+	      success: function (res) {
+	        alert(JSON.stringify(res));
+	      }
+	    });
+	
+	 //判断用户是否登陆
+	$scope.email = CadData.getEmail();
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
+	
+   
+	$scope.testname = CadData.getTestname();
+	$scope.testsrc ="resource/static/"+ $scope.testname+".png";	
+	$scope.testdes ="在"+$scope.testname+"中"
 	
 	
 	$http({
@@ -51,9 +75,12 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
    			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，你这么NB，你的小伙伴们造吗！";
    		 }else if(percent>=50 && percent<69){
    			 $scope.slogan = "您打败了全国"+percent+"%的挑战者，何弃疗！药不能停！再接再厉！";
-   		 }else{
+   		 }else if(percent<50 && percent>0){
    			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
+   		 }else if(percent==0){
+   			$scope.slogan = "您还未开始做题，来！证明你自己！";
    		 }
+   		 
    		
    	 }
    	
@@ -65,16 +92,25 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 	$scope.startTest = function(){
 		
 		if($scope.state == 1){
-			flashTip("太牛＊了，题库已被你虐残了！换个题库玩玩吧！");
+			smoke.alert("太牛＊了，题库已被你虐残了！换个题库玩玩吧！");
 			return false;
 		}
 		 window.location.href='#/dp/cadtesting';
 	}
 	
+	
+
+	
 });
 
 
 OJApp.controller('profileController',function ($scope,$http,CadData) {
+	
+	 //判断用户是否登陆
+	$scope.email = CadData.getEmail();
+	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
+		window.location.href='#/dp';
+	}
 	
 	$scope.edit={};
 	$scope.edit.profile=0;
