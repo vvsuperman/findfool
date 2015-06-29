@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/testlist.css" />
 	
-<div class="testqs">
+<div class="testqs" style="padding-bottom: 20px">
 	<div class="topbar">
 		<div class="type">
 			<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
@@ -59,7 +59,7 @@
 						<input abstract ng-bind="getTypeName(q.type)">
 					</div>
 					<div class="qsoperate">
-						<a class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">
+						<a style="margin-left: 15px" class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">
 							<span class="glyphicon glyphicon-trash"></span>
 						</a>
 						&nbsp;&nbsp;&nbsp;
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 	</div>	
-	<div class="addqs">
+	<div class="addqs" >
 		<button class="btn btn-outline" data="{{tid}}"
 			ng-click="showDefaultPanel()">&nbsp;&nbsp;&nbsp;添加库试题&nbsp;&nbsp;&nbsp;
 		</button>
@@ -85,7 +85,7 @@
 			ng-click="showCustomPanel()">添加自定义试题
 		</button>
 	</div>
-	<div ng-include src="'page/testBank.html'" ng-controller="TestBank"
+	<div  ng-include src="'page/testBank.html'" ng-controller="TestBank"
 	ng-if="panel.show=='default'"></div>
 	<div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
 		ng-if="panel.show=='custom'"></div>

@@ -1,104 +1,15 @@
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 
-<style>
-	.qslib{
-		padding:20px;
-	}
-	.qslib .qstypes{
-		float: left;
-		width: 100%;
-		border: 1px solid #ddd;
-		border-radius: 0 10px 10px 10px;
-	}
-	.qslib .nav-tabs{
-		border: none;
-	}
-	.qslib .qstypes .panel-heading{
-		background-color: #2fe2bf;
-		text-align: center;
-		color: #fff;
-	}
-	.qslib .qstypes .panel-body div{
-		float: left;
-		width: 120px;
-		margin: 10px 30px;
-	}
-	.qslib .qstypes .typeitem{
-		margin: 30px 20px;
-		float: left;
-	}
-	.qslib .qstypes .typeitem.full{
-		width: 95%;
-	}
-	.qslib .qstypes .typeitem.half{
-		width: 45%;
-	}
-	.libqslist{
-		border-radius: 8px;
-		padding: 10px 0 20px 0;
-	}
-	.libqslist .item{
-		border-bottom: 1px solid #ddd;
-	}
-	.libqslist .qsindex,.libqslist .qscontent,.libqslist .qstype,.libqslist .qsoperate{
-		height: 44px;
-		padding: 13px 0;
-		float: left;
-	}
-	.libqslist .heading{
-		height: 50px;
-		padding: 10px 0;
-		vertical-align: center;
-	}
-	.libqslist .heading .info{
-		height: 50px;
-	}
-	.libqslist .heading .info a{
-		float: right;
-		position: relative;
-		right: 30px;
-		top 0;
-	}
-	.libqslist .heading .info span{
-		position: relative;
-		left: 30px;
-		top 0;
-	}
-	.libqslist .heading .info,.libqslist .heading .title{
-		border-bottom: 1px solid #ddd;
-	}
-	.libqslist .qsindex{
-		width: 10%;
-		text-align: center;
-	}
-	.libqslist .qscontent{
-		width: 60%;
-		padding-right: 50px;
-	}
-	.libqslist .qscontent .content{
-		width: 80%;
-		overflow:hidden;
-		white-space:nowrap;
-	}
-	.qslib .qstypes .libqslist .item{
-		margin: 0;
-	}
-	.libqslist .qstype{
-		width: 20%;
-	}
-	.libqslist .qsoperate{
-		width: 10%;
-	}
-</style>
-<div class="qslib">
-	<div class="panel panel-default cspanel">
+
+<div class="qslib col-md-12">
+	<div class="panel panel-default cspanel col-md-11" >
 		<div class="panel-heading">
 			<h4>添加库试题</h4>
 		</div>
 		<div class="panel-line no-padding">
 			<div></div>
 		</div>
-		<div class="panel-body">
+		<div class="panel-body ">
    			<ul class="nav nav-tabs">
 			  	<li ng-repeat="tt in Qtype"  ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
             		<a href  ng-click="goPage(tt.data)">  {{tt.name}}</a>
@@ -129,7 +40,7 @@
 				   	 	</div>
 			    	</div>  
 	    		</div>
-	    		<div class="libqslist" ng-if="set.show==0" >
+	    		<div class=" libqslist" ng-if="set.show==0" >
 	    			<div class="heading">
 	    				<div class="info">
 	    					<span ng-bind="reciveData.selectedSets.name"></span>

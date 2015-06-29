@@ -1,36 +1,9 @@
 <link rel="stylesheet" type="text/css" href="resource/css/testshow.css" />
 
-<style>
-	.innertest{
-		padding: 20px;
-	}
-	.innertest .cspanel .panel-heading{
-		text-align: center;
-	}
-	.innertest .item{
-		position: relative;
-		width: 220px;
-		height: 210px;
-		float: left;
-		margin-left: 20px;
-	}
-	.innertest .item .panel-heading{
-		text-algin: left;
-	}
-	.innertest .item .panel-body{
-		padding: 10px;
-	}
-	.innertest .item button{
-		position: absolute;
-		left: 50%;
-		bottom: 10px;
-		width: 100px;
-		margin-left: -50px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+<link rel="stylesheet" type="text/css" href="resource/css/testlist.css" />
 
-
-<div class="innertest">
+<div class="innertest col-md-11" ng-if="showpage==1">
 	<h4>您需要招聘什么样的开发人员？</h4>
 	<div class="panel panel-default cspanel" >
 		<div class="panel-heading">
@@ -42,50 +15,50 @@
 		<div class="panel-body">
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>Web前端试题</h4>
+					<a href="" ng-click="viewInnQuiz('webFront')">Web前端试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
 						考察对html、css、javascript及常用框架Jquery、Bootstrap等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    	包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+				    	包括：选择题40道,考试时长70分钟，总分160。
 					</p>
 					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
 				</div>
 			</div>
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>Java后端试题</h4>
+			    	<a href="" ng-click="viewInnQuiz('java')">Java后端试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
 						考察Java服务端开发相关java, spring, hibernate等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+				    			包括：选择题40道，编程题1道，考试时长70分钟，总分200。
 					</p>
 					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('java')">自动生成试题</button>
 				</div>
 			</div>
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>PHP后端试题</h4>
+				  <a href="" ng-click="viewInnQuiz('php')">PHP后端试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
 						考察php服务端开发相关php,thinkphp等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+				    			包括：选择题40道，编程题1道，考试时长70分钟，总分200。
 					</p>
 					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('php')">自动生成试题</button>
 				</div>
 			</div>
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>全栈开发试题</h4>
+			    	<a href="">全栈开发试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
 						考察包括前端和后端相关知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+				    	由于个人能力不一样，请手动生成试题
 					</p>
-					<button class="btn btn-primary btn-sm pull-right">手工生成试题</button>
+					<!-- <button class="btn btn-primary btn-sm pull-right">手工生成试题</button> -->
 				</div>
 			</div>
 		</div>
@@ -100,36 +73,36 @@
 		<div class="panel-body">
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>Android开发试题</h4>
+				   <a href="" ng-click="viewInnQuiz('android')">Java后端试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
 						考察Android相关android sdk，linux等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+				    			包括：选择题40道，编程题1道，考试时长70分钟，总分160。
 					</p>
 					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('android')">自动生成试题</button>
 				</div>
 			</div>
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>IOS开发试题</h4>
+				   <a href="" ng-click="viewInnQuiz('object_c')">IOS开发试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
 						考察IOS相关object-c，swift等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+				    			包括：选择题40道，编程题1道，考试时长70分钟，总分160。
 					</p>
 					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('object_c')">自动生成试题</button>
 				</div>
 			</div>
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-					<h4>Web App开发试题</h4>
+				    <a href="" ng-click="viewInnQuiz('webFont')">Web App开发试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
-						考察Web App开发相关基本技能包括html,css,javascript。 以及一些javascript类库，包括jQuery， Anuglarjs等知识的掌握程度，并通过编程题考察分析和动手能力。
-				    			包括：选择题40道，编程题2道，考试时长75分钟，总分100。
+						考察Web App开发相关基本技能包括html,css,javascript。 以及一些javascript类库，以及jQuery的掌握成都
+				    			包括：选择题40道，考试时长70分钟，总分160。
 					</p>
 					<button class="btn btn-primary btn-sm pull-right" ng-click="genQuiz('webFront')">自动生成试题</button>
 				</div>
@@ -139,44 +112,68 @@
 </div>
 
 
-<div class="modal" id="testCreateModal" tabindex="0"
-     role="dialog" aria-labelledby="TryLabel"
-     aria-hidden="true">
-     <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header" >
-	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel" style="font-size:16px;color:#1abc9c">新建测试</h4>
-	      </div>
-	      <div class="modal-body">
-	         <form class="form-horizontal" role="form">
-				  
-				  <div class="form-group">
-				    <label class="col-sm-2 control-label">测试名称</label>
-				    <div class="col-sm-6">
-				      <input type="text" class="form-control" ng-model="addtest.name" placeholder="测试名称">
-				    </div>
-				  </div>
-				  
-				  <div class="form-group">
-				    <label  class="col-sm-2 control-label">时间</label>
-				    <div class="col-sm-6">
-				      <input type="text" class="form-control" ng-model="addtest.testtime" >
-				    </div>
-				  </div>
-				  
-				   <div class="form-group">
-				    <label  class="col-sm-2 control-label">备注</label>
-				    <div class="col-sm-6">
-				      <textarea  class="form-control" ng-model="addtest.extrainfo"  placeholder="备注" style="width:100%;heght:200px"></textarea>
-				    </div>
-				  </div>
-			  </form>
-	      </div>
-	      <div class="modal-footer">
-	     	 <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="pushTest()">新建</button>
-	         <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
-	      </div>
-	    </div>
-  </div>
+<div class=" col-md-11" ng-if="showpage==2">
+	<div class="modal-header" >
+           <button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true" style="color:#1abc9c">&times;</span><span class="sr-only">Close</span></button>
+            <span class="modal-title" style="font-size:16px;color:#1abc9c" ng-bind="quizName"></span>
+            
+        </div>
+
+        <div class="testqs">
+				<div class="qslist">
+					<div class="listcontent">
+						<div class="item header">
+							<div class="qsindex">&nbsp;</div>
+							<div class="qscontent">试题内容</div>
+							<div class="qstype">类型</div>
+						</div>
+						<div class="scroll">
+							<div class="item" ng-repeat="q in qs">
+								<div class="qsindex">
+									<span ng-bind="'Q'+($index+1)"></span>
+								</div>
+								<div class="qscontent">
+									<div class="content">
+										<a href="" 
+											ng-click="displayQuestionDetails($index)"
+											ng-if="!isDisplay[$index]">
+											 <input abstract context={{q.context}} > 
+										</a>
+										<a href=""
+											ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
+											 <input abstract context={{q.context}}> 
+										</a>
+									</div>
+									 <div class="icon">
+									 	<a  href=""
+											ng-click="displayQuestionDetails($index)"
+											ng-if="!isDisplay[$index]">
+											<span class="glyphicon glyphicon-chevron-down"></span>	
+										</a>
+										 <a  href=""
+											ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
+											<span class="glyphicon glyphicon-chevron-up"></span>
+										</a>
+									 </div>
+									 
+								</div>
+								<div class="qstype">
+									<input abstract ng-bind="getTypeName(q.type)">
+								</div>
+								
+								<div ng-include src="'page/questiondetail.html'" ng-if="isDisplay[$index]">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+			    
+
+			<div style="clear:both"></div>
+        </div>
+
+       
 </div>
+
+
+

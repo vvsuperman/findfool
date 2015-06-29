@@ -3,11 +3,128 @@
  *
  * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
  */
+.innertest{
+		padding: 20px;
+	}
+	.innertest .cspanel .panel-heading{
+		text-align: center;
+	}
+	.innertest .item{
+		position: relative;
+		width: 220px;
+		height: 210px;
+		float: left;
+		margin-left: 20px;
+	}
+	.innertest .item .panel-heading{
+		text-algin: left;
+	}
+	.innertest .item .panel-body{
+		padding: 10px;
+	}
+	.innertest .item button{
+		position: absolute;
+		left: 50%;
+		bottom: 10px;
+		width: 100px;
+		margin-left: -50px;
+	} 
+ 
+ 
+ 
+.qslib{
+		padding:20px;
+	}
+	.qslib .qstypes{
+		float: left;
+		width: 100%;
+		border: 1px solid #ddd;
+		border-radius: 0 10px 10px 10px;
+	}
+	.qslib .nav-tabs{
+		border: none;
+	}
+	.qslib .qstypes .panel-heading{
+		background-color: #2fe2bf;
+		text-align: center;
+		color: #fff;
+	}
+	.qslib .qstypes .panel-body div{
+		float: left;
+		width: 120px;
+		margin: 10px 30px;
+	}
+	.qslib .qstypes .typeitem{
+		margin: 30px 20px;
+		float: left;
+	}
+	.qslib .qstypes .typeitem.full{
+		width: 95%;
+	}
+	.qslib .qstypes .typeitem.half{
+		width: 45%;
+	}
+	.libqslist{
+		border-radius: 8px;
+		padding: 10px 0 20px 0;
+	}
+	.libqslist .item{
+		border-bottom: 1px solid #ddd;
+	}
+	.libqslist .qsindex,.libqslist .qscontent,.libqslist .qstype,.libqslist .qsoperate{
+		height: 44px;
+		padding: 13px 0;
+		float: left;
+	}
+	.libqslist .heading{
+		height: 50px;
+		padding: 10px 0;
+		vertical-align: center;
+	}
+	.libqslist .heading .info{
+		height: 50px;
+	}
+	.libqslist .heading .info a{
+		float: right;
+		position: relative;
+		right: 30px;
+		top 0;
+	}
+	.libqslist .heading .info span{
+		position: relative;
+		left: 30px;
+		top 0;
+	}
+	.libqslist .heading .info,.libqslist .heading .title{
+		border-bottom: 1px solid #ddd;
+	}
+	.libqslist .qsindex{
+		width: 10%;
+		text-align: center;
+	}
+	.libqslist .qscontent{
+		width: 60%;
+		padding-right: 50px;
+	}
+	.libqslist .qscontent .content{
+		width: 80%;
+		overflow:hidden;
+		white-space:nowrap;
+	}
+	.qslib .qstypes .libqslist .item{
+		margin: 0;
+	}
+	.libqslist .qstype{
+		width: 20%;
+	}
+	.libqslist .qsoperate{
+		width: 10%;
+	}
+ 
  
  
 .panel-back{
 	margin-top:20px;
-	margin-left:40px;
 	background: #FFFFFF;
 	border: 0px solid #00D8BD;
 	box-shadow: 1px 1px 2px 0px rgba(193,192,192,0.50);
@@ -15,6 +132,7 @@
 	padding-left: 20px;
 	padding-top: 20px;
  }
+ 
  
 /* .panel-back li{
 	background: #f8f8f8; 
@@ -33,12 +151,14 @@
  
  
  
-.admin-content.testqs{
+.testqs{
 	padding: 0 180px 0 0;
 	min-width: 1000px;
 	/* font-size: 14px; */
 	background-color: #f8f8f8;
 }
+
+
 .testqs .topbar {
 	width: 100%;
 	height: 50px;
@@ -1209,7 +1329,7 @@ ul li {
 	margin-left:180px;
 	margin-top:50px;
 	background: #fff;
-	padding-right: 180px;
+	/* padding-right: 180px; */
 	min-width: 900px;
 }
  	

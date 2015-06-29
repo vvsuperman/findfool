@@ -1,0 +1,72 @@
+<!-- 接受read， -->
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+<link rel="stylesheet" type="text/css" href="resource/css/testlist.css" />
+
+
+<div class="modal-header" >
+<button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true" style="color:#1abc9c">&times;</span><span class="sr-only">Close</span></button>
+            <span class="modal-title" style="font-size:16px;color:#1abc9c" ng-bind="quizName"></span>
+            
+        </div>
+
+        <div class="modal-body">
+			
+				<div class="qslist">
+					<div class="listcontent">
+						<div class="item header">
+							<div class="qsindex">&nbsp;</div>
+							<div class="qscontent">试题内容</div>
+							<div class="qstype">类型</div>
+						</div>
+						<div class="scroll">
+							<div class="item" ng-repeat="q in qs">
+								<div class="qsindex">
+									<span ng-bind="'Q'+($index+1)"></span>
+								</div>
+								<div class="qscontent">
+									<div class="content">
+										<a href="" 
+											ng-click="displayQuestionDetails($index)"
+											ng-if="!isDisplay[$index]">
+											 <input abstract context={{q.context}} > 
+										</a>
+										<a href=""
+											ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
+											 <input abstract context={{q.context}}> 
+										</a>
+									</div>
+									 <div class="icon">
+									 	<a  href=""
+											ng-click="displayQuestionDetails($index)"
+											ng-if="!isDisplay[$index]">
+											<span class="glyphicon glyphicon-chevron-down"></span>	
+										</a>
+										 <a  href=""
+											ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
+											<span class="glyphicon glyphicon-chevron-up"></span>
+										</a>
+									 </div>
+								</div>
+								<div class="qstype">
+									<span  ng-bind="getTypeName(q.type)"></span>
+								</div>
+								
+								<div ng-include src="'page/questiondetail.html'" ng-if="isDisplay[$index]">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+			    
+
+			<div style="clear:both"></div>
+        </div>
+
+        <div class="modal-footer" >
+            <button class="btn btn-warning" ng-click="cancel()">取消</button>
+        </div>
+
+<script src="resource/js/simditor/module.js"></script>
+<script src="resource/js/simditor/hotkeys.js"></script>
+<script src="resource/js/simditor/uploader.js"></script>
+<script src="resource/js/simditor/simditor.js"></script>         

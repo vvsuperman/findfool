@@ -5,22 +5,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.mail.MessagingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import zpl.oj.dao.QuizDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
-import zpl.oj.model.common.Testuser;
+import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestDetail;
@@ -36,12 +34,7 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
-import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.base64.BASE64;
-import zpl.oj.util.des.DESService;
-import zpl.oj.util.mail.MailSenderInfo;
-import zpl.oj.util.mail.SimpleMailSender;
-import zpl.oj.util.randomCode.RandomCode;
 
 @Controller
 @RequestMapping("/test")
@@ -55,6 +48,8 @@ public class QuizController {
 	private InviteService inviteService;
 	@Autowired
 	private LabelService labelService;
+	@Autowired
+	private QuizDao quizDao;
 	
 	
 
@@ -303,7 +298,7 @@ public class QuizController {
 		return rb;
 	}
 	
-	//
+	//根据模板生成试题
 	@RequestMapping(value = "/genquiz",method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase genQuizFromTemplete(
@@ -333,6 +328,38 @@ public class QuizController {
 		return null;
 		
 	}
+	
+	
+	//根据模板名获取id
+	@RequestMapping(value = "/gettemp",method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase getTempIdByName(
+			@RequestBody Map<String,String> param
+			) throws Exception{
+		    //获取用户id
+		    ResponseBase rb = new ResponseBase();   
+		
+			String quizName = param.get("quizName");
+			if(quizName == null){
+				rb.setState(1);
+				rb.setMessage("试题名不得为空");
+				return rb;
+			}
+			
+			QuizTemplete quizT = quizDao.getQuizTByName(quizName);
+			if(quizT==null){
+				rb.setState(2);
+				rb.setMessage("试题模板为空");
+				return rb;
+			}
+			
+			rb.setState(0);
+			rb.setMessage(quizT.getQuizId());
+			return rb;
+			
+		
+	}
+	
 	
 
 }

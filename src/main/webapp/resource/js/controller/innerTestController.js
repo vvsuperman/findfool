@@ -51,6 +51,8 @@ OJApp.controller('InnerTest',function($scope, $http, Data, $modal) {
     }
     
     
+    $scope.showpage =1;
+    
     $scope.genQuiz = function(data){
     	loadingTip();
 		$http({
@@ -72,37 +74,88 @@ OJApp.controller('InnerTest',function($scope, $http, Data, $modal) {
 	}
 	
     
-    $scope.viewGuideModal = function(data){
-    	console.log("view guide modal.........",data);
-    	 var modalInstance = $modal.open({
-		      templateUrl: 'page/guideModal.html',
-		      controller: 'guideModalCtrl',
-		      resolve: {
-		          params:function(){
-		        	  var obj ={};
-		        	  obj.title="技能介绍";
-		        	  obj.content = $scope.guideArray[data];
-		        	  obj.data =data;
-		        	  return obj;
-		          }
-		      }
-		     })
+    $scope.viewInnQuiz = function(data){
+
+    	 console.log("data........",data);
+    	 $scope.showpage =2;
+    	 $http({
+    	        url: WEBROOT+"/test/gettemp",
+    	        method: 'POST',
+    	        headers: {
+    	            "Authorization": Data.token()
+    	        },
+    	        data: {"quizName":data}
+    	    }).success(function (data) {
+    	        if(data.state!=0){
+    	        	smoke.alert(data.message);
+    	        	return false;
+    	        }else{
+    	        	$scope.getTest(data.message);
+    	        }
+    	       
+    	    })
+    		
+    	  
+    	 
     }
     
-    $scope.goNext = function (id) {	
-    	$scope.panel.trace.push($scope.panel.body);	
-    	$scope.panel.body=id;
-    	$scope.panel.isBack=true;
-    }
+    $scope.displayQuestionDetails = function(index){
+		 for(i in $scope.qs){
+			 $scope.isDisplay[i]=false;
+		 }
+		 $scope.isDisplay[index]=true;
+	 }
+
+	 $scope.hideQuestionDetails = function(index){
+		 $scope.isDisplay[index]=false;
+	 }
+   
+   
+   
+	//加载该测试题tid的所有题目
+   $scope.getTest = function (quizid) {
+       //add by zpl
+		if(quizid == 0){
+			smoke.alert("quiz不得为空");
+			return false;
+		}
+		
+       var sendData = new Object();
+       sendData.user = new Object();
+       sendData.user.uid = Data.uid();
+       sendData.quizid = quizid;
+       $http({
+           url: WEBROOT+"/test/manage",
+           method: 'POST',
+           headers: {
+               "Authorization": Data.token()
+           },
+           data: sendData
+       }).success(function (data) {
+           $scope.state = data["state"];//1 true or 0 false
+           $scope.message = data["message"];
+           console.log($scope.message);
+           if ($scope.state) {
+//               console.log($scope.message);
+               $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
+               $scope.isDisplay = new Array($scope.qs.length);
+               for(i in $scope.isDisplay)
+               	$scope.isDisplay[i]=false;
+               $scope.testtime = $scope.message.testtime;
+               $scope.extraInfo = $scope.message.extraInfo;
+               $scope.emails = $scope.message.emails;
+               $scope.name = $scope.message.name;
+           } else {
+
+           }
+       }).error(function (data) {
+       	flashTip("获取数据错误");
+       });
+     
+   };
     
-    $scope.goBack = function () {    	
-		var id= $scope.panel.trace.pop();
-		$scope.panel.body=id;
-    	if($scope.panel.trace.length!=0)
-    		$scope.panel.isBack=true;
-    	else
-    		$scope.panel.isBack=false;
-    }
+    
+  
     
     $scope.tshow = function () {
         $http({
