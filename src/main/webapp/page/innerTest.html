@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 <link rel="stylesheet" type="text/css" href="resource/css/testlist.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 
 <div class="innertest col-md-11" ng-if="showpage==1">
 	<h4>您需要招聘什么样的开发人员？</h4>
@@ -97,7 +99,7 @@
 			</div>
 			<div class="item panel panel-default">
 				<div class="panel-heading">
-				    <a href="" ng-click="viewInnQuiz('webFont')">Web App开发试题</a>
+				    <a href="" ng-click="viewInnQuiz('webFront')">Web App开发试题</a>
 				</div>
 				<div class="panel-body">
 					<p>
@@ -113,13 +115,21 @@
 
 
 <div class=" col-md-11" ng-if="showpage==2">
-	<div class="modal-header" >
-           <button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true" style="color:#1abc9c">&times;</span><span class="sr-only">Close</span></button>
-            <span class="modal-title" style="font-size:16px;color:#1abc9c" ng-bind="quizName"></span>
-            
-        </div>
+	
 
         <div class="testqs">
+	        <div class="topbar">
+			<div class="type">
+				<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
+				&nbsp;<span ng-bind="name"></span>
+			</div>
+			<!-- <div>
+				40道题，90分钟
+			</div> -->
+			<div class="invite">
+				<button class="btn btn-default" ng-click="goBack()">返回</button>
+			</div>
+		</div>
 				<div class="qslist">
 					<div class="listcontent">
 						<div class="item header">
@@ -158,7 +168,7 @@
 									 
 								</div>
 								<div class="qstype">
-									<input abstract ng-bind="getTypeName(q.type)">
+									<input abstract ng-bind="getType(q.type)">
 								</div>
 								
 								<div ng-include src="'page/questiondetail.html'" ng-if="isDisplay[$index]">

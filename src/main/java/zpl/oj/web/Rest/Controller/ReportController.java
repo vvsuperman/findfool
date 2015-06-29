@@ -77,8 +77,13 @@ public class ReportController {
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public List<ResponseInvite> getReportList(@RequestBody Map<String,Integer> map) {
-		int testid = map.get("testid");
-		return reportService.getInviteReport(testid);
+		Integer testid = map.get("testid");
+		Integer state = map.get("state");
+		if(testid == null || state == null){
+			return null;
+		}
+		
+		return reportService.getInviteReport(testid,state);
 	}
 	
 	/*

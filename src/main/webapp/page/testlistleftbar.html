@@ -1,36 +1,40 @@
 <div class="admin-sidebar">
 	<ul>
-		<li>设置</li>
+		<li>试题设置</li>
 		<li>
-			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-			&nbsp;问题
+		    <a href="#/test/{{tid}}" ng-class="{true: 'active', false: 'inactive'}[activeValue == 1]">
+			  <span style="font-size:14px" class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></span>
+			  <span  style="font-size:14px" class="glyphicon">问题</span>
+			</a>
 		</li>
 		<li>
-			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-			&nbsp;通用设置
+		  <a href="#/testConfig"  ng-class="{true: 'active', false: 'inactive'}[activeValue == 1]">
+			<span style="font-size: 14px" class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+			<span  style="font-size:14px" class="glyphicon">通用设置</span>
+		  </a>	
 		</li>
-		<li>
+		<!-- <li>
 			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 			&nbsp;候选人设置
-		</li>
+		</li> -->
 	</ul>
 	<div class="dividingline">
 		<div></div>
 	</div>
 	<ul>
-		<li>设置</li>
+		<li>邀请</li>
 		<li>
-			<a href="#/report" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;已邀请</a>
+			<a href="#/report/0" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;已邀请</a>
 			
 		</li>
 		<li>
-			<a href="#/report" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;过程中</a>
+			<a href="#/report/1" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;过程中</a>
 			
 		<li>
-			<a href="#/report" class="glyphicon glyphicon-list-alt" aria-hidden="true">	&nbsp;已完成</a>
+			<a href="#/report/2" class="glyphicon glyphicon-list-alt" aria-hidden="true">	&nbsp;已完成</a>
 		
 		</li>
-		<li class="sub-list">
+		<!-- <li class="sub-list">
 			<a href="#/report" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;评估中</a>
 				
 		</li>
@@ -42,5 +46,5 @@
 			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 				&nbsp;淘汰
 		</li>
-	</ul>
+	</ul> -->
 </div>

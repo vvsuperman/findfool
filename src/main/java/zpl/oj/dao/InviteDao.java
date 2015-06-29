@@ -42,8 +42,8 @@ public interface InviteDao {
 	 * */
 	@Select("select t2.email,t1.iid,t1.testid,t1.uid ,t1.invitetime,t1.begintime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd "
 			+ "from invite t1,testuser t2 "
-			+ "where  t1.uid= t2.tuid and t1.testid =#{0} and (t1.state=1 or t1.state=0) order by t1.state,t1.finishtime,t1.inviteTime desc")
-	List<ResponseInvite> getOrderInviteByTid(Integer testid); 
+			+ "where  t1.uid= t2.tuid and t1.testid =#{0} and t1.state=#{1} order by t1.state,t1.finishtime,t1.inviteTime desc")
+	List<ResponseInvite> getOrderInviteByTid(Integer testid, Integer state); 
 	
 	//某一个测试的发送人数
 	@Select("select count(*) from invite where testid=#{0}")

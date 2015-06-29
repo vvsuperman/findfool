@@ -9,6 +9,8 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/testlistleftbar.html';
+    
+    $scope.tid = $routeParams.state;
    
     var testid = Data.tid();
     $scope.tname = Data.tname();

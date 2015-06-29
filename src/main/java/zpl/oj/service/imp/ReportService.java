@@ -344,8 +344,8 @@ public class ReportService {
 	 * 返回一个测试下所有未完成和已完成的测试
 	 * 按完成时间倒序排列
 	 * */
-	public List<ResponseInvite> getInviteReport(int testid){
-		return inviteDao.getOrderInviteByTid(testid);
+	public List<ResponseInvite> getInviteReport(int testid,int state){
+		return inviteDao.getOrderInviteByTid(testid,state);
 	}
 
 	//生成编程题的用户答案

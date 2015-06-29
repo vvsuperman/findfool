@@ -22,7 +22,7 @@
 			     	<div class="panel panel-default">
 						<div class="panel-heading" ng-bind="domainset.domainName"></div>
 						<div class="panel-body">
-						     <div  ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
+						     <div class="col-md-2"  ng-repeat="set in domainset.problemSets" ng-model="reciveData.selectedSets">
 						      	<img ng-src="resource/static/{{set.name}}.png"  class="img-responsive setImg center-block" ng-click="showQuestions(set)"  ></img>
 						      	<p class="text-center" ng-bind="set.comment"></p>
 						     </div>

@@ -48,7 +48,7 @@ public class CadService {
         cadDao.updateUserById(cad);
         //发送邮件
         String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
-        String content ="<p>您好，这是来自foolrank.com的重置密码邮件，请到</p><p><a href='"+baseurl+"/#/dp/"+sb.toString()+"'>"+baseurl+"/#/dp/"+sb.toString()+"</a></p><p>重置密码</p>";
+        String content ="<p>您好，这是来自foolrank.com的重置密码邮件，请到</p><p><a href='"+baseurl+"/#/dp/reset/"+sb.toString()+"'>"+baseurl+"/#/dp/reset/"+sb.toString()+"</a></p><p>重置密码</p>";
       	try {
 			sendCloud.sendmail(email, "重置密码", content);
 		} catch (ClientProtocolException e) {

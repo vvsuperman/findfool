@@ -128,7 +128,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/preparetest.html',
                 controller: 'testingController'
             }).
-            when('/report', {
+            when('/report/:state', {
                 templateUrl: 'page/page.html',
                 controller: 'reportController'
             }).
@@ -168,11 +168,11 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'page/page.html',
             	controller: 'publictestCtrl'
             }).
-            when('/:auth',{
+            when('/reset/:auth',{
             	templateUrl: 'page/findPwd.html',
             	controller: 'findPwdCtrl'
             }).
-            when('/dp/:auth',{
+            when('/dp/reset/:auth',{
             	templateUrl: 'dp/page/findPwd.html',
             	controller: 'findCadPwdCtrl'
             }).
