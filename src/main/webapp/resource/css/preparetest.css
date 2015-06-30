@@ -1,19 +1,38 @@
+.pretest{
+	width: 661px;
+	height: 439px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -330px;
+	margin-top: -220px;
+	background-image: url('./resource/static/pretest.png');
+}
+.pretest .info{
+	width: 200px;
+	height: 100px;
+	position: relative;
+	left: 235px;
+	top: 150px;
+	text-align: center;
+}
+.pretest .pwd{
+	width: 220px;
+	height: 17px;
+	position: relative;
+	left: 225px;
+	top: 160px;
+}
 .cameraIcon{
 	font-size:24px;
 	height: 200px;
-	border:1px solid #e1e1e8;
-	border-radius:5px; 
-	background-color: #e1e1e8;
-	width: 80%;
+	border-radius: 10px; 
+	background-color: #ddd;
+	width: 300px;
+	padding-top: 50px;
 	text-align: center;
 	cursor: pointer;
-	
 }
-
-.cameraBtn{
-	margin-left: 30%;
-}
-
 
  .ui-autocomplete {
           /* will be fixed by options.outHeight */
