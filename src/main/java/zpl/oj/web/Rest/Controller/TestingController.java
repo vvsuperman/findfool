@@ -360,8 +360,7 @@ public class TestingController {
 		
 		//对某一test、用户对发送第一次测试
 		List<TuserProblem> tProblems=null;
-		//初始化试题列表
-		
+		invite.setState(ExamConstant.INVITE_PROGRESS);
 		
 		//初始化开始时间
 		if(invite.getBegintime().equals("")==true){
@@ -539,7 +538,7 @@ public class TestingController {
 			rb.setMessage("试题已截至");
 			return rb;
 		}
-		invite.setState(1);
+		invite.setState(ExamConstant.INVITE_FINISH);
 		inviteDao.updateInvite(invite);
 		
 		

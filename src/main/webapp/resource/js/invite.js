@@ -5,7 +5,7 @@ OJApp.controller("invite",function($scope, $http, Data) {
     $scope.url = '#/invite';
     $scope.template = 'page/invite.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = 'page/leftBar.html';
+    $scope.leftBar = 'page/testlistleftbar.html';
 })
 
 OJApp.controller("Excel",function($scope, $http, Data) {

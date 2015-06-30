@@ -108,7 +108,7 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
         
         Data.setTid(test.quizid);
         Data.setTname(test.name);
-        window.location.href="#/report" 
+        window.location.href="#/report/show/2" 
     };
     
 /* 

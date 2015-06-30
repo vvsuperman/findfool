@@ -40,7 +40,8 @@ public class ExamConstant{
 	public final static int ESSAY =3;
 	
 	public final static int INVITE_PUB =0;    //邀请已发送
-	public final static int INVITE_FINISH =1; //测试已完成
+	public final static int INVITE_PROGRESS=1;//测试进行中
+	public final static int INVITE_FINISH =2; //测试已完成
 	
 	//试题导入时excel定义的列名
 	public static final String QUESTION_TYPE = "type";

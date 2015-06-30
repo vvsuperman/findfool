@@ -10,7 +10,7 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
     $scope.template = 'page/testreport.html';
     $scope.leftBar = 'page/testlistleftbar.html';
     
-    $scope.tid = $routeParams.state;
+    var state = $routeParams.state;
    
     var testid = Data.tid();
     $scope.tname = Data.tname();
@@ -19,7 +19,7 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 	$http({
          url: WEBROOT+"/report/list",
          method: 'POST',
-         data: {"testid":testid}
+         data: {"testid":testid,"state":state}
      }).success(function (data) {
     	
     	$scope.invites = data;
@@ -34,8 +34,10 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
 	 
 	 $scope.getState = function(invite){
 		 if(invite.state==0){
-			 return "未完成";
+			 return "已发送";
 		 }else if(invite.state ==1){
+			 return "进行中";
+		 }else if(invite.state ==2){
 			 return "已完成";
 		 }
 	 }

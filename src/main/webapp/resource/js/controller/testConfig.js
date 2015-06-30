@@ -4,7 +4,7 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
     $scope.active = 1;
     $scope.template = 'page/testconfig.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = 'page/leftBar.html';
+    $scope.leftBar = 'page/testlistleftbar.html';
 
     $scope.defaultTags=[];
     $scope.customTags=[];
@@ -15,6 +15,8 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
     $scope.angmodel=[];
     $scope.angmodel.labeladded="";
     $scope.angmodel.emailadded="";
+    
+    $scope.name = Data.tname();
 
     $scope.updateTestLabels= function (){
 		$http({

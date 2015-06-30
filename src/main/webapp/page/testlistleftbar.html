@@ -1,16 +1,21 @@
-<div class="admin-sidebar">
+<div class="admin-sidebar" ng-controller="leftbarController">
 	<ul>
 		<li>试题设置</li>
 		<li>
-		    <a href="#/test/{{tid}}" ng-class="{true: 'active', false: 'inactive'}[activeValue == 1]">
+		    <a ng-click="showQuestions()" ng-class="{true: 'active', false: 'inactive'}[question]">
 			  <span style="font-size:14px" class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></span>
-			  <span  style="font-size:14px" class="glyphicon">问题</span>
+			  <span  style="font-size:14px" class="glyphicon">&nbsp;题目</span>
 			</a>
 		</li>
+		
+		<!-- <li>
+			<a href="" ng-class="{true: 'active', false: 'inactive'}[question == 1]" ng-click="showQuestions" class="glyphicon glyphicon-th-list" aria-hidden="true">&nbsp;题目</a>
+			
+		</li> -->
 		<li>
-		  <a href="#/testConfig"  ng-class="{true: 'active', false: 'inactive'}[activeValue == 1]">
+		  <a  ng-click="commonSet()"  ng-class="{true: 'active', false: 'inactive'}[set]">
 			<span style="font-size: 14px" class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			<span  style="font-size:14px" class="glyphicon">通用设置</span>
+			<span  style="font-size:14px" class="glyphicon">&nbsp;通用设置</span>
 		  </a>	
 		</li>
 		<!-- <li>
@@ -24,14 +29,14 @@
 	<ul>
 		<li>邀请</li>
 		<li>
-			<a href="#/report/0" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;已邀请</a>
+			<a href="" ng-class="{true: 'active', false: 'inactive'}[lBar.state1]" ng-click="invited(0)" class="glyphicon glyphicon-record" aria-hidden="true">&nbsp;已邀请</a>
 			
 		</li>
 		<li>
-			<a href="#/report/1" class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;过程中</a>
+			<a href=""  ng-class="{true: 'active', false: 'inactive'}[lBar.state2]"  ng-click="invited(1)"  class="glyphicon glyphicon-adjust" aria-hidden="true">&nbsp;进行中</a>
 			
 		<li>
-			<a href="#/report/2" class="glyphicon glyphicon-list-alt" aria-hidden="true">	&nbsp;已完成</a>
+			<a href=""  ng-class="{true: 'active', false: 'inactive'}[lBar.state3]"  ng-click="invited(2)" class="glyphicon glyphicon-ok-circle" aria-hidden="true">&nbsp;已完成</a>
 		
 		</li>
 		<!-- <li class="sub-list">

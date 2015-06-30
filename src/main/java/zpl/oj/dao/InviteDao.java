@@ -50,7 +50,7 @@ public interface InviteDao {
 	int countInvites(Integer testid);	
 	
 	//某一个测试的完成人数
-	@Select("select count(*) from invite where testid=#{0} and state=1") 
+	@Select("select count(*) from invite where testid=#{0} and state=2") 
 	int countInviteFinished(Integer testid);
 	
 	
