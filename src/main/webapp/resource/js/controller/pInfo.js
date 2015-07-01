@@ -5,7 +5,7 @@ OJApp.controller("pInfo",function($scope, $http, Data) {
     $scope.url = '#/profile';
     $scope.template = 'page/profile.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = 'page/leftBar.html';
+    $scope.leftBar = 'page/testsleftbar.html';
     
     $scope.user ={};
     $scope.tempUser ={};

@@ -2,7 +2,7 @@
     text-shadow: 0 1px 5px rgba(0,0,0,.1);
     color:#666666;
     text-align: center;
-    padding-left: 80px;
+    padding-left: 0px;
 }
 
 .timer .days-wrapper,
@@ -43,6 +43,9 @@
 
 .dotA{
 	border-width: 0px!important;
+	/* height: 20px; */
+	text-align: center;
+	
 	
 }
 
@@ -53,23 +56,39 @@ a.dotA:hover{
 
 
 .dot{
-	margin-left:-5px;
-	width:20px !important;
-    height:20px; 
+	/* margin-left:-5px; */
+	/* width:20px !important;
+    height:20px;  */
     background-color:#1abc9c; 
-    border-radius:10px !important;
+   /*  border-radius:10px !important; */
     /* width:20px; height:20px; background-color:#F00; border-radius:10px; */
+    height: 40px;
+    padding-top: 12px;
 }
 
+.dotA div{
+	 height: 40px;
+	 padding-top: 12px;
+}
+
+.dotDiv{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 5px;
+    padding-top: 10px;
+	padding-bottom: 10px;
+}
 
 .dot span{
 	/* margin-left: 10px !important; */
 	/* margin-right: 15px !important; */
-	height:20px; 
-	line-height:20px; 
-	display:block; 
+/* 	height:20px; 
+	line-height:20px;  */
+/* 	display:block;  */
 	color:#FFF; 
-	text-align:center
+	text-align:center;
+
+	
 }
 
 .progress{

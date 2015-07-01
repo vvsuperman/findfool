@@ -533,7 +533,7 @@ public class TestingController {
 			rb.setState(1);
 			rb.setMessage("非法访问");
 			return rb;
-		} else if (invite.getState() == 1) {
+		} else if (invite.getState() == ExamConstant.INVITE_FINISH) {
 			rb.setState(1);
 			rb.setMessage("试题已截至");
 			return rb;

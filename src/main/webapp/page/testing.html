@@ -11,8 +11,8 @@
 	</div>
 </div> -->
 
-<div>
-		<nav class="navbar navbar-dafault" role="navigation">
+<div style="background-color: #F8F8F8">
+		<nav class="navbar " role="navigation" style="background: #979797;border-radius:0px;min-height: 40px">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -23,32 +23,14 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">FoolRank</a>
+		      <a class="navbar-brand" style="color: white">FoolRank</a>
 		    </div>
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse">
 		      
 		        
-		         <div class="col-md-2 col-md-offset-2 hidden-sm hidden-xs">
-		           <progressbar class="progress-striped active" type=success value="answerCount.sum" max="answerCount.total">
-		           </progressbar>
-		          </div>
-		          <div class="col-md-1" style="margin-top: 12px">
-		          <span ng-bind="answerCount.sum"></span> / <span ng-bind="answerCount.total"></span>
-		         </div>
-		          
-		          <div timer class="col-md-4  timer">
-                          <div class="hours-wrapper">
-                              <span class="hours"></span> <br>hours
-                          </div>
-                          <div class="minutes-wrapper">
-                              <span class="minutes"></span> <br>minutes
-                          </div>
-                          <div class="seconds-wrapper">
-                              <span class="seconds"></span> <br>seconds
-                          </div>
-                   </div>
+		       
 		          
 		          
 		          <!-- progressbar class="progress-striped active" value="22" type="success"><i>40%</i> </progressbar> -->
@@ -66,18 +48,8 @@
 	  <div class="container-fluid">
 	  <div class="row">
 	   <!-- 上方选项条 -->
-	   <div class="col-md-12">
-	   	  <ul class="pagination">
-			<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem,$index)">
-			   <a  href=""   class="dotA">
-			  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
-			   </a>
-			 </li >
-		 </ul>
-	   </div>
-	   
 	   <!-- 做题界面 -->
-	   <div class="col-md-9">
+	   <div class="col-md-8" style="background: #FFFFFF;box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.50);border-radius: 8px;padding: 0px;margin-left: 15px;margin-right: 15px">
 	   	 <div class="row" ng-if="questionType==1">
 		   	 	<div class="col-md-12" style="margin-top: 20px">
 			       	<textarea  	simditor 	minheight="60px" operation="view" class='optiontext'  width="100%"
@@ -120,7 +92,7 @@
 		            <button class="btn btn-primary" ng-click="run('submit')">运行/提交</button>
 		        </div>
 		        
-		        <div class="col-md-12" style="margin-top: 20px;" >
+		        <div class="col-md-12" style="margin-top: 20px;margin-bottom: 100px" >
 					     <p>运行结果</p>
 					   <!--   <textarea simditor  minheight="300px"  width="100%" operation="view" ng-model="result.display"></textarea> -->
 					     <textarea style="width:100%;height:300px" ng-bind="result.display"></textarea>
@@ -144,23 +116,63 @@
 		<!-- essay -->
 		
 		
-		  <div class="col-md-2 col-md-offset-5" style="margin-top: 20px" >
+		  <div class="col-md-2" style="margin-top: 20px;margin-bottom: 100px" >
 		  	<button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
 	      </div>
 	   </div>
 	   
-	    <div class="col-md-3">
-       	   <!--  <div id="cameraZone" >
-			  <video id="video" width="280" height="280" autoplay>
-			  </video>       
-			  <canvas camera id="canvas" width="280" height="280">
-			  </canvas>
-		    </div>
-		    <br/>
-		    <br/> -->
-		    <!-- <button class="btn btn-outline" ng-click="showVideo()">开启摄像</button> -->
-	    	<!-- <button class="btn btn-outline" ng-click="takePicture()">拍照</button> -->
-	    	<button class="btn btn-outline" ng-click="finishTest()" style="margin-left:90px;">完成测试</button>
+	    <div class="col-md-3" style="background: #FFFFFF;border-radius: 8px;">
+	    
+	            <div timer class="col-md-12  timer" style="margin-top: 20px">
+                          <div class="hours-wrapper">
+                              <span class="hours"></span> <br>hours
+                          </div>
+                          <div class="minutes-wrapper">
+                              <span class="minutes"></span> <br>minutes
+                          </div>
+                          <div class="seconds-wrapper">
+                              <span class="seconds"></span> <br>seconds
+                          </div>
+                 </div>
+                 <div style ="clear:both"></div>
+                 <div style="border: 1px solid #E6E6E6;;margin-top: 30px;margin-bottom: 30px"></div>
+                 
+	            <div class="col-md-9" style="margin-top: 20px ">
+		           <progressbar class="progress-striped active" type=success value="answerCount.sum" max="answerCount.total">
+		           </progressbar>
+		        </div>
+		        
+		         <div class="col-md-3" style="margin-top: 32px">
+		          <span ng-bind="answerCount.sum"></span> / <span ng-bind="answerCount.total"></span>
+		        </div>
+		        
+		        <div style="clear: both"></div>
+		         <div style="border: 1px solid #E6E6E6;;margin-top: 30px;margin-bottom: 30px"></div>
+		        
+		       
+		        
+		       
+                 
+                 <div class="col-md-12">
+				   	  <!-- <ul class="pagination">
+						<li ng-repeat="problem in tProblems" ng-click="fetchProblem(problem,$index)">
+						   <a  href=""   class="dotA">
+						  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
+						   </a>
+						 </li>
+					 </ul> -->
+					 
+					 <div class="col-md-2 dotDiv"  ng-repeat="problem in tProblems" ng-click="fetchProblem(problem,$index)">
+						   <a  href=""   class="dotA">
+						  	<div  adddot index={{$index}}><span>{{$index+1}}</span></div>
+						   </a>
+					 </div>
+				 </div>
+				 
+				 <div style="clear: both"></div>
+				 <button class="btn btn-outline btn-block" ng-click="finishTest()" style="margin-top: 30px">完成测试</button>
+       	 
+	    
 		</div>
 	  </div>
  </div>

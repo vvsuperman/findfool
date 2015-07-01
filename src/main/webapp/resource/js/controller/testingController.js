@@ -14,6 +14,19 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 //	 $scope.testid ="11";
 //	 $scope.tid = "11";
 
+	 document.onkeydown= function(e) {    
+	        // 兼容FF和IE和Opera    
+        var theEvent = e || window.event;    
+        var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+        if (code == 13) {    
+           if($scope.show ==1){
+        	   $scope.login();
+           }
+            return false;    
+        }    
+        return true;    
+	 }  
+	 
 	
 //测试数据	 
 	 $scope.tuser = {};
