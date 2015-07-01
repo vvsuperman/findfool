@@ -45,7 +45,7 @@
      
     
    <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
-     <div class="col-md-3 col-md-offset-4">
+     <div class="col-md-3 col-md-offset-4" ng-if="showCzone==1||showCzone==2">
 		 <div   ng-show="showCZone ==1&&openCamera==0"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div> 
 		 <div   ng-show="showCZone ==1&&openCamera==2"><span style="color: red">*&nbsp;建议开启摄像头，让企业更好的认识自己</span></div> 
 		 </br>  
@@ -82,46 +82,6 @@
 
     <div class=" col-md-6 col-md-offset-3" style="margin-top:30px">
    	 <form class="form-horizontal"  role="form">
-   	 	  
-   	 	
-		   <!--<div class="form-group row">
-		    <label  class="col-sm-2 control-label">姓名</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.username" placeholder="姓名" >
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		    <label  class="col-sm-2 control-label">学校</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.school" ui-event="{autocompletecreate:'changeClass(schoolOption)'}" ui-autocomplete="schoolOption" placeholder="学校">
-		      <angucomplete-alt id="schools"
-	              placeholder="学校"
-	              minlength="2"
-	              pause="400"
-	              selected-object="tuser.school"
-	              remote-url="/oj/testing/getSchools?email={{email}}&testid={{tid}}&name={{tuser.school}}"
-	              remote-url-data-field="message"
-	              title-field="name"
-	              search-field="name"
-	              match-class="bg-info"
-	              input-class="form-control"/>
-		    </div>
-		  </div> 
-		  
-		   <div class="form-group">
-		    <label  class="col-sm-2 control-label">博客</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.blog" placeholder="博客，github等" >
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		    <label  class="col-sm-2 control-label">电话</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="tuser.tel" placeholder="电话">
-		    </div>
-		  </div>-->
 		   <div class="form-group" ng-repeat="user in userInfo">
 		    <label  class="col-sm-2 control-label">{{user.labelname}}</label>
 		    <div class="col-sm-4">
