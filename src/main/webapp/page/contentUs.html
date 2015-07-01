@@ -2,7 +2,7 @@
     <!--<div class="highlight col-md-2  " style="display: none;">-->
      <a href=""><span class="glyphicon glyphicon-chevron-down pull-right"  ng-if="contact.show==0" ng-click="contact.show=1"></span></a>	
 	 <a href=""><span class="glyphicon glyphicon-chevron-up pull-right" ng-if="contact.show==1" ng-click="contact.show=0"></span></a>	
-    <a href="" class="text-center" ng-click="contact.show=1-contact.show">请给我们提出宝贵的建议</a>
+    <a href="" class="text-center" ng-click="contact.show=1-contact.show">宝贵建议</a>
     <textarea rows="8" id="yr" style="width: 100% ;resize: none;" ng-class="{0: '', 1: 'hedden'}[contact.show]" ng-model="suggest.content"></textarea>
     <button ng-class="{0: 'btn btn-success btn-xs center-block', 1: 'hedden'}[contact.show]" ng-click="addSuggest()" style="margin-top:5px">提交</button>
 </div>
