@@ -169,6 +169,7 @@
  
  
 .testqs{
+	padding: 0 180px 0 0;
 	min-width: 1000px;
 	/* font-size: 14px; */
 	background-color: #f8f8f8;
@@ -1345,7 +1346,7 @@ ul li {
 	margin-left:180px;
 	margin-top:50px;
 	background: #fff;
-	padding-right: 180px;
+	/* padding-right: 180px; */
 	min-width: 900px;
 }
  	

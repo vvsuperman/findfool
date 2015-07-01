@@ -201,6 +201,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         //data: {"email":($scope.loginUser.email).replace(/(^\s*)|(\s*$)/g,''), "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
          	 data: {"email":$scope.email,"pwd": $scope.loginUser.pwd,"testid":$scope.tid}
 	     }).success(function (data) {
+	    	 
 	    	 if( data.state == 0){
 	    		 //用户名或密码不匹配
 	    		 if(data.message ==1){
@@ -212,13 +213,16 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    			 flashTip("用户不存在");
 	    			 return false;
 	    		 }
-	    		 
 	    	 }else if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.errMsg = "";
-	    		 //填写用户信息
-	    		 $scope.show = 2;
+	    		 if($scope.openCamera==0||$scope.openCamera==2){
+	    			 $scope.show = 2;
+	    		 } else if($scope.openCamera==1){
+	    			 $scope.show = 3;
+	    		 }
+	    		 //启动摄像头拍照页面
 	    		 //$scope.tuser.tuid = data.message;
 	    		 /*$http({
 	    	         url: WEBROOT+"/testing/getSchools",
@@ -236,7 +240,6 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    	         data: {"email":$scope.email, "testid": $scope.tid}
 	    	     }).success(function (data) {
 	    	    	 $scope.userInfo=data["message"];
-
 	    	     });
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头

@@ -26,13 +26,19 @@
 .cameraIcon{
 	font-size:24px;
 	height: 200px;
-	border-radius: 10px; 
-	background-color: #ddd;
-	width: 300px;
-	padding-top: 50px;
+	border:1px solid #e1e1e8;
+	border-radius:5px; 
+	background-color: #e1e1e8;
+	width: 80%;
 	text-align: center;
 	cursor: pointer;
+	
 }
+
+.cameraBtn{
+	margin-left: 30%;
+}
+
 
  .ui-autocomplete {
           /* will be fixed by options.outHeight */
