@@ -1,3 +1,8 @@
+.dpimg{
+	height: 60px;
+	cursor: pointer;
+}
+
 .mainimg{
 	height: 70px;
 	cursor: pointer;

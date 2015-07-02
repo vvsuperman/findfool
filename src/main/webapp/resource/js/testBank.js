@@ -54,7 +54,7 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
     $scope.url = '#/bank';
     $scope.template = 'page/testBank.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = 'page/testsleftbar.html';
+    $scope.leftBar = 'page/libleftBar.html';
     $scope.active = 1;
     $scope.show = 1;
     $scope.privi = Data.privi();
