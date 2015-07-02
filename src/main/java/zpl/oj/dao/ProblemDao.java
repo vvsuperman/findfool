@@ -38,9 +38,9 @@ public interface ProblemDao {
 	  
 	@Insert("    INSERT INTO PROBLEM("
 			+ " UUID, belong,   TITLE,   DESCRIPTION,   DATE,   PROBLEM_SET_ID,  CREATOR,   TYPE,   LIMIT_TIME, "
-			+ "  LIMIT_MEM,   SUBMIT,   SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER ,score,negative)"
+			+ "  LIMIT_MEM,   SUBMIT,   SLOVED,   MODIFIER,   MODIFYDATE,RIGHTANSWER ,score,negative,level )"
 			+ " VALUES( #{uuid},#{belong},  #{title},  #{description},  #{date},  #{problemSetId},  #{creator},  #{type},  "
-			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate},#{rightanswer},#{score},#{negative})")
+			+ "#{limitTime},  #{limitMem},  #{submit},  #{sloved},  #{modifier},  #{modifydate},#{rightanswer},#{score},#{negative},#{level})")
 	  void insertProblem(Problem problem);	  
 	
 	//by fangwei 

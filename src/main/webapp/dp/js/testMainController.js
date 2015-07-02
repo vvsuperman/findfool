@@ -12,14 +12,34 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
-	
-	
-	
-	$scope.cadInfo ={};
+
+	$http({
+        url: WEBROOT+"/cadquiz/getlevel",
+        method: 'POST',
+        data: {"email":CadData.getEmail()}
+    }).success(function (data) {
+   	    $scope.level = data.message;
+    });
 	
 	$scope.openTest = function(testid,testname){
 		CadData.setTestid(testid);
 		CadData.setTestname(testname);
+		
+		
+		window.location.href='#/dp/testdetail';
+	 
+	}
+	
+	
+	$scope.cadInfo ={};
+	
+	$scope.openTest = function(testid,testname,level){
+		CadData.setTestid(testid);
+		CadData.setTestname(testname);
+		if( $scope.level<level ){
+			smoke.alert("您还没有挑战本测试的资格，请完成之前的挑战赛");
+			return false;
+		}
 		window.location.href='#/dp/testdetail';
 	 
 	}
@@ -37,14 +57,6 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 
 OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 	
-	wx.checkJsApi({
-	      jsApiList: [
-	        'onMenuShareTimeline',
-	      ],
-	      success: function (res) {
-	        alert(JSON.stringify(res));
-	      }
-	    });
 	
 	 //判断用户是否登陆
 	$scope.email = CadData.getEmail();
@@ -63,7 +75,11 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
         method: 'POST',
         data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
     }).success(function (data) {
-   	 if(data.state!=0){
+    if(data.state == 101){
+    	smoke.alert(data.message);
+    	window.location.href='#/dp/testmain';
+    }
+    else if(data.state!=0){
    		 $scope.errmsg = data.message;
    	 }else{
    		 var percent = data.message.percent;

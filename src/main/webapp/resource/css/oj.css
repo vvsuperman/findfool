@@ -3,6 +3,44 @@
  *
  * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
  */
+ 
+.myqs{
+		padding: 20px;
+	}
+	.myqs .panel-heading{
+		height: 56px;
+	}
+	.myqs .panel-heading h4{
+		float: left;
+		line-height: 32px;
+	}
+	.myqs .panel-heading>div{
+		marigin-right: 20px;
+	}
+	.myqs .panel-heading>button{
+		margin-right: 20px;
+	}
+	.myqs .title, .myqs .item{
+		border-bottom: 1px solid #ddd;
+	}
+	.myqs .qsindex,.myqs .qscontent,.myqs .qsoperate{
+		float: left;
+		height: 50px;
+		line-height: 50px;
+	}
+	.myqs .qsindex{
+		width: 15%;
+		text-align: center;
+	}
+	.myqs .qscontent{
+		width: 60%;
+		over-flow: hidden;
+	}
+	.myqs .qsoperate{
+		width: 25%;
+	} 
+ 
+ 
 .simditor{
 	border-width: 0px !important; 
 } 

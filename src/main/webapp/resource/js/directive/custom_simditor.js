@@ -4,7 +4,6 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
         require: '?ngModel',
         scope: true,
         link: function (scope, elem, attrs, ngModel) {
-        	console.log("simditor initial............");
         	var option ={
             	  textarea: elem,
             	  toolbar:[
@@ -45,7 +44,6 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             })
             
             editor.on('valuechanged', function () {
-            	console.log("simditor value changed...............");
                if(attrs.operation=="edit"){  //为何会被替换掉，在view时强制改为不可替换
             	   $timeout(function () {
                        scope.$apply(function () {

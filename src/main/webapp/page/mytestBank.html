@@ -3,41 +3,7 @@
 <link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 
 <style>
-	.myqs{
-		padding: 20px;
-	}
-	.myqs .panel-heading{
-		height: 56px;
-	}
-	.myqs .panel-heading h4{
-		float: left;
-		line-height: 32px;
-	}
-	.myqs .panel-heading>div{
-		marigin-right: 20px;
-	}
-	.myqs .panel-heading>button{
-		margin-right: 20px;
-	}
-	.myqs .title, .myqs .item{
-		border-bottom: 1px solid #ddd;
-	}
-	.myqs .qsindex,.myqs .qscontent,.myqs .qsoperate{
-		float: left;
-		height: 50px;
-		line-height: 50px;
-	}
-	.myqs .qsindex{
-		width: 15%;
-		text-align: center;
-	}
-	.myqs .qscontent{
-		width: 60%;
-		over-flow: hidden;
-	}
-	.myqs .qsoperate{
-		width: 25%;
-	}
+	
 </style>
 
 <div class="myqs">
@@ -86,8 +52,8 @@
 						<span ng-bind="'Q'+($index+1)"></span>
 					</div>
 					<div class="qscontent">
-						<div class="content">
-							<div abstract context={{q.context}} class="qcontent"></div>
+						<div class="content" style="width:90%; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+							<div abstract context={{q.context}} class="qcontent" ></div>
 						</div>
 					</div>
 					<div class="qsoperate">
@@ -98,10 +64,10 @@
 					</div>
 					<div style="clear:both;"></div>
 				</div>
-				<div>
-			        <ul style="margin-left: 20px;margin-top: 20px" class="pagination-plain">
+				<div class="col-md-12">
+			        <ul style="margin-left: 20px;margin-top: 20px;" class="pagination-plain">
 			            <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)" class="previous" href="">← 向前</a></li>
-			            <li ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)" href="">{{i.index}}</a></li>
+			            <li  ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)" href="">{{i.index}}</a></li>
 			            <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)" class="next" href="">向后→</a></li>
 			        </ul>
 		        </div>

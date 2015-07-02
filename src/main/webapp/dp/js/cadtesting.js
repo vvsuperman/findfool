@@ -15,7 +15,11 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
         method: 'POST',
         data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
     }).success(function (data) {
-   	 if(data.state!=0){//试题已完成·
+    	if(data.state == 101){
+        	smoke.alert(data.message);
+        	window.location.href='#/dp/testmain';
+        }
+    	else if(data.state!=0){//试题已完成·
    		 smoke.alert(data.message);
    		 window.location.href='#/dp/testdetail';
    		 
@@ -70,6 +74,7 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 		//用户未提交
 		if(useranswer=="0000"){
 			smoke.alert("你还没有答题哦，怎么就提交了？如果这题不会，可以选择跳过～");
+			return false;
 		}
 		
 		$http({
@@ -77,7 +82,11 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	        method: 'POST',
 	        data: {"testid":CadData.getTestid(),problemid:$scope.question.qid,"email":CadData.getEmail(),useranswer:useranswer}
 	    }).success(function (data) {
-	   	 if(data.state==1){
+	    	if(data.state == 101){
+	        	smoke.alert(data.message);
+	        	window.location.href='#/dp/testmain';
+	        }
+	    	else if(data.state==1){
 	   		 smoke.alert(data.message)
 	   		 window.location.href='#/dp/testdetail';
 	   	 }else{
@@ -114,7 +123,11 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	        method: 'POST',
 	        data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
 	    }).success(function (data) {
-	   	 if(data.state!=0){
+	    	if(data.state == 101){
+	        	smoke.alert(data.message);
+	        	window.location.href='#/dp/testmain';
+	        }
+	    	else if(data.state!=0){
 	   		 $scope.errmsg = data.message;
 	   	 }else{
 	   		$scope.question = data.message;

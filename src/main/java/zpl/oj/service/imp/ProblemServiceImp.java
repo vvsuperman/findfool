@@ -66,6 +66,9 @@ public class ProblemServiceImp implements ProblemService{
 		q.setRightanswer(p.getRightanswer());
 		q.setSetid(p.getProblemSetId());
 		q.setLevel(p.getLevel());
+		q.setScore(p.getScore());
+		q.setNegative(p.getNegative());
+		q.setLimittime(p.getLimitTime());
 		
 		List<ProblemTestCase> cases = problemTestCaseDao.getProblemTestCases(p.getProblemId());
 		List<QuestionTestCase> answer = new ArrayList<QuestionTestCase>();
@@ -261,8 +264,7 @@ public class ProblemServiceImp implements ProblemService{
 		p.setModifier(q.getUser().getUid());
 		p.setProblemSetId(q.getQuestion().getSetid());
 		p.setDescription(q.getQuestion().getContext());
-		p.setLimitMem(512);
-		p.setLimitTime(5);
+		p.setLimitTime(q.getQuestion().getLimittime());
 		p.setModifydate(new Date());
 		p.setTitle(q.getQuestion().getName());
 		p.setType(q.getQuestion().getType());
@@ -286,7 +288,7 @@ public class ProblemServiceImp implements ProblemService{
 		}
 		//新建选项
 		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
-			ProblemTestCase pt = problemTestCaseDao.getProblemTestCaseByContent(qt.getText());
+			ProblemTestCase pt = problemTestCaseDao.getProblemTestCaseById(qt.getCaseId());
 			if(pt!=null){
 				pt.setArgs(qt.getText());
 				pt.setExceptedRes(qt.getIsright());

@@ -10,6 +10,28 @@ public class ProblemTestCase implements Serializable {
 	 */
 	private Integer testCaseId;
 	
+	
+	//试题难度
+	private int level;
+	
+	private int negative;
+	
+	public int getNegative() {
+		return negative;
+	}
+
+	public void setNegative(int negative) {
+		this.negative = negative;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	/**
 	 * 问题编号,
 	 */

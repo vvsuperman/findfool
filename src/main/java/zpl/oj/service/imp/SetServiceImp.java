@@ -23,6 +23,7 @@ public class SetServiceImp implements SetService {
 	public List<Domain> getSets() {
 		List<Domain> domains = domainDao.getAllDomain();
 		for(Domain domain: domains){
+			//访问userset中存在的set
 			List<ProblemSet> sets = setDao.getSetByDomainId(domain.getDomainId());
 			domain.setProblemSets(sets);
 		}
