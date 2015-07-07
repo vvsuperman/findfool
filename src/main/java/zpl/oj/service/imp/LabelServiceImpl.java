@@ -75,7 +75,10 @@ public class LabelServiceImpl implements LabelService {
 	@Override
 	public boolean isLableExist(String labelname) {
 		List<Label> list=labelDao.getLabelByLabelName(labelname);
-		if(list.size()==1) return true;
+	
+		if(list.size()==1)
+			return true;
+		
 		else return false;
 	}
 
@@ -95,7 +98,7 @@ public class LabelServiceImpl implements LabelService {
 	@Override
 	public boolean isLableTestExist(Integer testid,Integer labelid) {
 		List<Labeltest> labeltests=labelDao.getLabelTestByTestidAndLabelName(testid,labelid);
-		if(labeltests.size()==1) return true;
+		if(labeltests.size()>=1) return true;
 		else return false;
 	}
 

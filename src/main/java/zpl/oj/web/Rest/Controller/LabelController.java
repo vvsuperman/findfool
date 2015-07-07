@@ -69,6 +69,7 @@ public class LabelController {
 		Integer testid=Integer.parseInt(map.get("testid"));
 		String newlabel=map.get("label");
 		//如果该标签已经存在
+		if(newlabel.length()!=0){
 		if(!labelService.isLableExist(newlabel)){
 			labelService.insertNewLabel(0, newlabel);
 		}
@@ -82,7 +83,7 @@ public class LabelController {
 				labelService.insertIntoLabelUser(invite.getIid(), label.getId(), "");
 			}
 		}
-		rb.setState(1);
+		rb.setState(1);}
 		return rb;
 	}
 	

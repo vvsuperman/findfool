@@ -29,6 +29,7 @@ public interface LabelDao {
 	@Select("select * from label where name = #{0}")
 	List<Label> getLabelByLabelName(String labelname);
 
+
 	// 对labeltest表的操作
 	@Insert("INSERT INTO labeltest(TESTID,LABELID,ISSELECTED)"
 			+ " VALUES (#{0}, #{1}, #{2})")

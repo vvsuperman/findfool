@@ -142,6 +142,7 @@ public class QuizController {
 		//获取系统标签，并在labeltest中为该测试添加这些系统标签
 		List<Integer> labelIds=labelService.getSystemLabels();
 		for(int id:labelIds){
+		
 			labelService.insertIntoLabelTest(q.getQuizid(), id, 0);
 		}
 		ResponseMessage msg = new ResponseMessage();
@@ -322,6 +323,7 @@ public class QuizController {
 			//获取系统标签，并在labeltest中为该测试添加这些系统标签
 			List<Integer> labelIds=labelService.getSystemLabels();
 			for(int id:labelIds){
+			
 				labelService.insertIntoLabelTest(quizId, id, 0);
 			}
 			

@@ -62,6 +62,9 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
 	}
 
     $scope.addLabel = function (){
+    if($scope.angmodel.labeladded==""){
+    	flashTip("标签不能为空");
+    }else{
     	$http({
             url: WEBROOT+"/label/addlabel",
             method: 'POST',
@@ -73,7 +76,7 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
             $scope.angmodel.labeladded="";
         }).error(function(){
        	 console.log("get data failed");
-        });
+        });}
     }
     $scope.addEmail = function (){
     	$http({
