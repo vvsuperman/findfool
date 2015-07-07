@@ -37,7 +37,8 @@
 	padding-right: 30px;
 }
 .qslist .qscontent .content{
-	width: 300px;
+	/* width: 300px; */
+	width:80%;
 	float: left;
 	overflow:hidden;
 	white-space:nowrap;

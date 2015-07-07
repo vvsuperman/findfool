@@ -1,4 +1,4 @@
-OJApp.controller('guideModalCtrl',function ($scope,$http,$modalInstance,Data,params) {
+OJApp.controller('guideModalCtrl',['$scope','$http','modalInstance','Data','params',function ($scope,$http,$modalInstance,Data,params) {
 	//绑定变量到服务	
 	$scope.title = params.title;
 	$scope.content = params.content;
@@ -29,4 +29,4 @@ OJApp.controller('guideModalCtrl',function ($scope,$http,$modalInstance,Data,par
 	}
 	
 	
-});
+}]);

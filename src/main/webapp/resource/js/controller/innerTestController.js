@@ -1,7 +1,7 @@
 /**
  * Created by gilbert on 2015/3/31.
  */
-OJApp.controller('InnerTest',function($scope, $http, Data, $modal) {
+OJApp.controller('InnerTest',['$scope','$http','Data','$modal',function($scope, $http, Data, $modal) {
 	//控制图片及信息显示
 	
     $scope.url = '#/innertest';
@@ -204,5 +204,5 @@ OJApp.controller('InnerTest',function($scope, $http, Data, $modal) {
     	$scope.showpage=1;
     }
 
-})
+}])
 

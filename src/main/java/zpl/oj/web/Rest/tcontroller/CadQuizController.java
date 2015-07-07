@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.dao.CadTestDao;
 import zpl.oj.model.common.CadTest;
+import zpl.oj.model.common.ChallengeRule;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.imp.CadQuizService;
@@ -29,6 +30,33 @@ public class CadQuizController {
 	
 	@Autowired
 	private CadTestDao CadTestDao;
+	
+	
+	
+	//获取testid
+	@RequestMapping(value = "/gettest", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase getTest(@RequestBody Map<String, Object> map) {
+		ResponseBase rb = new ResponseBase();
+		String testname = (String)map.get("testname");
+		if(testname == null){
+			rb.setState(1);
+			rb.setMessage("测试名不得为空");
+			return rb;
+		}
+		
+		ChallengeRule cr = cadQuizService.getCRByName(testname);
+		if(cr == null){
+			rb.setState(2);
+			rb.setMessage("测试名不存在");
+			return rb;
+		}
+		
+		rb.setState(0);
+		rb.setMessage(cr.getTestid());
+		return rb;
+		
+	}
 	
 	
 	//发布为公开测试

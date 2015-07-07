@@ -62,13 +62,15 @@ a.dotA:hover{
     background-color:#1abc9c; 
    /*  border-radius:10px !important; */
     /* width:20px; height:20px; background-color:#F00; border-radius:10px; */
-    height: 40px;
-    padding-top: 12px;
+    height: 16%;
+   
+    
 }
 
 .dotA div{
-	 height: 40px;
-	 padding-top: 12px;
+	 height: 16%;
+     padding-top: 10%;
+     padding-bottom: 10%; 
 }
 
 .dotDiv{

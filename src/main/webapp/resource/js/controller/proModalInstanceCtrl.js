@@ -1,4 +1,4 @@
-OJApp.controller('proModalInstanceCtrl',function ($scope,$http,$modalInstance,Data,params) {
+OJApp.controller('proModalInstanceCtrl',['$scope','$http','$modalInstance','Data','params',function ($scope,$http,$modalInstance,Data,params) {
 	//绑定变量到服务
 	
 	
@@ -16,4 +16,4 @@ OJApp.controller('proModalInstanceCtrl',function ($scope,$http,$modalInstance,Da
 	}
 	
 	
-});
+}]);

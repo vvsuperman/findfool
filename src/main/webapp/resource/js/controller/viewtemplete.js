@@ -1,4 +1,4 @@
-OJApp.controller('viewtempCtrl',function ($scope,$http,$modalInstance,Data,params) {
+OJApp.controller('viewtempCtrl',['$scope','$http','$modalInstance','Data','params',function ($scope,$http,$modalInstance,Data,params) {
 	//绑定变量到服务	
 	$scope.quizName = params.quizName;
 	//获取quizid
@@ -94,4 +94,4 @@ OJApp.controller('viewtempCtrl',function ($scope,$http,$modalInstance,Data,param
 	}
 	
 	
-});
+}]);

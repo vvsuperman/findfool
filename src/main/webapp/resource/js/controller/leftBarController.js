@@ -1,4 +1,4 @@
-OJApp.controller('leftBarController',function($scope,Data){
+OJApp.controller('leftBarController',['$scope','Data',function($scope,Data){
 	$scope.$watch("Data.tname()",function(){
 		$scope.tname = Data.tname();
 		
@@ -44,4 +44,4 @@ OJApp.controller('leftBarController',function($scope,Data){
 		
 	}
 	
-});
+}]);

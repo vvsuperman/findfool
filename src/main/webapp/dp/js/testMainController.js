@@ -2,7 +2,7 @@
  * 
  */
 
-OJApp.controller('testMainController',function ($scope,$http,CadData) {
+OJApp.controller('testMainController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	 
     $scope.showtext=0;	
   
@@ -21,27 +21,39 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
    	    $scope.level = data.message;
     });
 	
-	$scope.openTest = function(testid,testname){
-		CadData.setTestid(testid);
-		CadData.setTestname(testname);
-		
-		
-		window.location.href='#/dp/testdetail';
-	 
-	}
-	
+
 	
 	$scope.cadInfo ={};
 	
-	$scope.openTest = function(testid,testname,level){
-		CadData.setTestid(testid);
-		CadData.setTestname(testname);
+	$scope.openTest = function(testname,level){
+		
 		if( $scope.level<level ){
-			smoke.alert("您还没有挑战本测试的资格，请完成之前的挑战赛");
+			if(level ==2){
+				smoke.alert("想挑战我？请积分超过300分后再来哦～");
+			}else if(level ==3){
+				smoke.alert("想跟我玩？继续玩小红小白，凑够500分再来");
+			}
+			
 			return false;
 		}
-		window.location.href='#/dp/testdetail';
-	 
+		$http({
+	        url: WEBROOT+"/cadquiz/gettest",
+	        method: 'POST',
+	        data: {"testname":testname}
+	    }).success(function (data) {
+	   	    if(data.state!=0){
+	   	    	smoke.alert(data.message);
+	   	    	return false;
+	   	    }else{
+	   	    	console.log("settestid..............");
+	   	    	CadData.setTestid(data.message);
+	   	    	CadData.setTestname(testname);
+	   			window.location.href='#/dp/testdetail';
+	   		 
+	   	    }
+	    });
+		
+		
 	}
 	
 	$scope.logout = function(){
@@ -53,9 +65,9 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	
 	
 	
-});
+}]);
 
-OJApp.controller('testDetailController',function ($scope,$http,CadData) {
+OJApp.controller('testDetailController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
 	
 	 //判断用户是否登陆
@@ -64,7 +76,8 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 		window.location.href='#/dp';
 	}
 	
-   
+	
+	
 	$scope.testname = CadData.getTestname();
 	$scope.testsrc ="resource/static/"+ $scope.testname+".png";	
 	$scope.testdes ="在"+$scope.testname+"中"
@@ -91,13 +104,11 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
    			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，你这么NB，你的小伙伴们造吗！";
    		 }else if(percent>=50 && percent<69){
    			 $scope.slogan = "您打败了全国"+percent+"%的挑战者，何弃疗！药不能停！再接再厉！";
-   		 }else if(percent<50 && percent>0){
-   			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
    		 }else if(percent==0){
    			$scope.slogan = "您还未开始做题，来！证明你自己！";
+   		 }else{
+   			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
    		 }
-   		 
-   		
    	 }
    	
     }).error(function(){
@@ -117,10 +128,10 @@ OJApp.controller('testDetailController',function ($scope,$http,CadData) {
 	
 
 	
-});
+}]);
 
 
-OJApp.controller('profileController',function ($scope,$http,CadData) {
+OJApp.controller('profileController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
 	 //判断用户是否登陆
 	$scope.email = CadData.getEmail();
@@ -197,4 +208,4 @@ OJApp.controller('profileController',function ($scope,$http,CadData) {
 	
 	
 	
-});
+}]);

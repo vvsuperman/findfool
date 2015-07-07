@@ -2,7 +2,7 @@
  * 
  */
 
-OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
+OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	$scope.tuser={};
 	
 	//获取用户是否点击remberme
@@ -78,8 +78,12 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	
 	
 	
-	$scope.degrees=[{id:0,name:"大专"},{id:1,name:"本科"},{id:2,name:"研究生"},{id:2,name:"博士"}];
+	$scope.degrees=[{id:0,name:"大专"},{id:1,name:"本科"},{id:2,name:"硕士研究生"},{id:3,name:"博士研究生"}];
+	$scope.gratimes=[{id:0,time:"2014"},{id:1,time:"2015"},{id:2,time:"2016"},{id:3,time:"2017"}];
+	
 	$scope.tuser.degree="本科";
+	$scope.tuser.gratime="2016";
+	
 	
 	$scope.register = function(){
 		
@@ -130,7 +134,7 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	    	 }else if(data.state ==4){
 	    	 //用户未完成第二步注册
 	    		 CadData.setEmail(data.message);
-	    		 
+	    		 window.location.href='#/dp/register2';
 	    	 }
 	    	 
 	    	 else{
@@ -143,4 +147,4 @@ OJApp.controller('cadLoginController',function ($scope,$http,CadData) {
 	     })
 	}
 	
-});
+}]);

@@ -25,7 +25,7 @@
                              
                 <div class="form-group">
                     <select class="form-control" ng-model="tuser.degree" ng-options="d.name as d.name for d in degrees">
-		    			</select> 
+		    	    </select> 
 						
 						
                 </div>
@@ -34,8 +34,10 @@
                         <input type="text" class="form-control txt-large" placeholder="专业" ng-model="tuser.discipline">
                 </div>
                 
+                
                  <div class="form-group">
-                        <input type="text" class="form-control txt-large" placeholder="毕业年份" ng-model="tuser.gratime">
+                    <select class="form-control" ng-model="tuser.gratime" ng-options="d.time as d.time for d in gratimes">
+		    	    </select> 
                 </div>
                 
             

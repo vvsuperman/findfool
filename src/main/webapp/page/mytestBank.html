@@ -6,25 +6,27 @@
 	
 </style>
 
-<div class="myqs">
+<div class="myqs"  >
 	<div class="panel panel-default cspanel">
 		<div class="panel-heading">
 			<h4>添加库试题</h4>
-			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			   <div class="btn-group" style="margin-left: 20px">
+				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 				                 新增试题 <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
 				    <li><a href="" ng-click="showAddPage(1)">选择题</a></li>
 				    <li><a href="" ng-click="showAddPage(3)">简答题</a></li>
 				</ul>
-		 	</div>
-			<button type="button" class="btn btn-outline pull-right" 
+				</div>
+				
+				<button type="button" class="btn btn-outline" 
 				data-toggle="modal" data-target="#importModal" 
 				ng-click="showImportPage()">
 				导入试题
-			</button>
-			 <div style="clear: both;"></div>
+			  </button>
+			
+			
 		</div>
 		<div class="panel-line no-padding">
 			<div></div>
@@ -65,12 +67,11 @@
 					<div style="clear:both;"></div>
 				</div>
 				<div class="col-md-12">
-			        <ul style="margin-left: 20px;margin-top: 20px;" class="pagination-plain">
-			            <li ng-class="{true: '', false: 'disabled'}[reciveData.frontPage]"><a ng-click="queryQuestions(1)" class="previous" href="">← 向前</a></li>
-			            <li  ng-repeat="i in reciveData.pagelist" ng-class="{true: 'active', false: ''}[i.current]"><a ng-click="queryQuestions(i.index)" href="">{{i.index}}</a></li>
-			            <li ng-class="{true: '', false: 'disabled'}[reciveData.rearPage]"><a ng-click="queryQuestions(reciveData.index)" class="next" href="">向后→</a></li>
-			        </ul>
+			         <pagination total-items="reciveData.totalPage" max-size="10"  ng-model="currPage" ng-change="queryQuestions(currPage)"  class="pagination-sm" boundary-links="true" rotate="false" 
+			          first-text="第一页" last-text="最后一页" previous-text="上一页" next-text="下一页">
+			         </pagination>
 		        </div>
+		        
 		    </div>
 		    
 		    <div ng-class="{0:'', 1: 'hedden'}[show]">  
@@ -220,4 +221,5 @@
         </div>
     </div>
 </div>
+
 

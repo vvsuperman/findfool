@@ -41,14 +41,12 @@
    </div>
    
    
-    <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
      
     
    <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
-     <div class="col-md-3 col-md-offset-4" ng-if="showCzone==1||showCzone==2">
+     <div class="col-md-3 col-md-offset-4">
 		 <div   ng-show="showCZone ==1&&openCamera==0"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div> 
 		 <div   ng-show="showCZone ==1&&openCamera==2"><span style="color: red">*&nbsp;建议开启摄像头，让企业更好的认识自己</span></div> 
-		 </br>  
 		 <div  style="margin-top: 10px" class="cameraIcon"  ng-show="showCZone ==1">  
 		     <p style="margin-top: 10%">点击以开启摄像头</p>    
 		     <img id="showBtn" class="img-responsive cameraBtn" ng-click="showVideo()" style="height: 100px;text-align: center;"  src="resource/static/cameraicon.png">

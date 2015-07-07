@@ -8,7 +8,7 @@
 
 
 
-OJApp.controller('mainController',function($scope, $http,$routeParams,$location, Data,$modal) {	
+OJApp.controller('mainController',['$scope','$http','$routeParams','$location','Data','$modal',function($scope, $http,$routeParams,$location, Data,$modal) {	
    // $scope.url = '#';
      var code = $routeParams.code;
      $scope.video={};
@@ -305,10 +305,10 @@ OJApp.controller('mainController',function($scope, $http,$routeParams,$location,
             $scope.confirm(1)
         }
     };
-});
+}]);
 
 
-OJApp.controller('nav', function($scope, Data) {
+OJApp.controller('nav', ['$scope','Data',function($scope, Data) {
 	$scope.invitedleft = Data.invitedleft();
 	$scope.name = Data.email();
 	
@@ -352,14 +352,14 @@ OJApp.controller('nav', function($scope, Data) {
 		Data.clear();
 		window.location.href = '#/';
 	}
-});
+}]);
 
-OJApp.controller('Upgrade', function($scope) {
+OJApp.controller('Upgrade', ['$scope',function($scope) {
 	$scope.url = '#/upgrade';
 	$scope.template = 'page/upgrade.html';
 	$scope.ContentUs = 'page/contentUs.html';
 	$scope.leftBar = '';
-});
+}]);
 
 OJApp.controller('RockRoll', function($scope, $routeParams) {
 	$scope.url = '#/upgrade';

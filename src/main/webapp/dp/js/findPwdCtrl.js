@@ -1,4 +1,4 @@
-OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$window) {
+OJApp.controller('findCadPwdCtrl',['$scope','$http','CadData','$routeParams','$window',function ($scope,$http,CadData,$routeParams,$window) {
 	
 	 //判断用户是否登陆
 
@@ -95,4 +95,4 @@ OJApp.controller('findCadPwdCtrl',function ($scope,$http,CadData,$routeParams,$w
 		$scope.requestStage=1;
 		$scope.submitStage=0;
 	}
-});
+}]);

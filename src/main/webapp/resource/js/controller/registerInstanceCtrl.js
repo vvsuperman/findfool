@@ -1,4 +1,4 @@
-OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Data,params) {
+OJApp.controller('registerInstanceCtrl',['$scope','$http','$modalInstance','Data','params',function ($scope,$http,$modalInstance,Data,params) {
 	
 	$scope.Remail = params.email;
 	$scope.company = params.company;
@@ -95,4 +95,4 @@ OJApp.controller('registerInstanceCtrl',function ($scope,$http,$modalInstance,Da
 	
 	
 	
-});
+}]);

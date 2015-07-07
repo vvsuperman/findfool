@@ -1,4 +1,4 @@
-OJApp.controller('videoInstanceCtrl',function ($scope,$modalInstance) {
+OJApp.controller('videoInstanceCtrl',['$scope','modalInstance',function ($scope,$modalInstance) {
 	
     $scope.videoplay =0;
     
@@ -10,4 +10,4 @@ OJApp.controller('videoInstanceCtrl',function ($scope,$modalInstance) {
 	
 	
 	
-});
+}]);

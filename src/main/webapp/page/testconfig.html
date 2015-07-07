@@ -23,12 +23,16 @@
 		 </div>
 		 <div class="col-md-12" style="margin-top: 10px">
 		   <input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签"> <button class="btn btn-primary" ng-click="addLabel()">添加</button>
-		   <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
+		   
+		 </div>
+		 
+		 <div class="col-md-12">
+		  <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
 		 </div>
 	    
 	     <div class="col-md-12" style="margin-top: 20px" >
-		 <h4>报告接受邮箱</h4>
-		 <p>用户做完测试后可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入一个邮箱来接受报告</p>
+		 <h4>报告接收邮箱</h4>
+		 <p>做完测试后您可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入邮箱来接收报告（可多个，依次添加）</p>
 		 <form class="form-horizontal"  role="form">
 			<div class="form-group" ng-repeat="e in emails">
 			   <div class="col-md-3">

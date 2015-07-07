@@ -1,4 +1,4 @@
-OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
+OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope, $http, Data,$modal) {
 	
 	$scope.url = '#/testConfig';
     $scope.active = 1;
@@ -94,4 +94,4 @@ OJApp.controller('testConfig',function($scope, $http, Data,$modal) {
        	 console.log("get data failed");
         });
     }
-})
+}])

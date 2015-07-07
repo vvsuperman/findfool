@@ -6,6 +6,7 @@
  
 .myqs{
 		padding: 20px;
+		width: 100%;
 	}
 	.myqs .panel-heading{
 		height: 56px;
@@ -62,7 +63,7 @@
 		padding: 20px;
 	}
 	.innertest .cspanel .panel-heading{
-		text-align: center;
+		/* text-align: center; */
 	}
 	.innertest .item{
 		position: relative;
@@ -207,7 +208,7 @@
  
  
 .testqs{
-	padding: 0 180px 0 0;
+	padding: 0 200px 0 0;
 	min-width: 1000px;
 	/* font-size: 14px; */
 	background-color: #f8f8f8;

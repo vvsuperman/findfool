@@ -275,17 +275,17 @@ public class ProblemServiceImp implements ProblemService{
 		problemDao.updateProblemInstance(p);
 		int pid = p.getProblemId();
 		//更新tag
-		for(String tagContext:q.getQuestion().getTag()){
-			Integer tagid = tagDao.getTagByContext(tagContext).getTagId();
-			if(tagid == null){
-				tagDao.insertTag(tagContext);
-				tagid = tagDao.getTagByContext(tagContext).getTagId();
-			}
-			if(problemTagDao.getTagProblemByIds(tagid, pid)==null){
-				problemTagDao.insertTagProblem(tagid, pid);
-			}
-		
-		}
+//		for(String tagContext:q.getQuestion().getTag()){
+//			Integer tagid = tagDao.getTagByContext(tagContext).getTagId();
+//			if(tagid == null){
+//				tagDao.insertTag(tagContext);
+//				tagid = tagDao.getTagByContext(tagContext).getTagId();
+//			}
+//			if(problemTagDao.getTagProblemByIds(tagid, pid)==null){
+//				problemTagDao.insertTagProblem(tagid, pid);
+//			}
+//		
+//		}
 		//新建选项
 		for(QuestionTestCase qt:q.getQuestion().getAnswer()){
 			ProblemTestCase pt = problemTestCaseDao.getProblemTestCaseById(qt.getCaseId());

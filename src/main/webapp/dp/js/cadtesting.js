@@ -1,7 +1,7 @@
 /**
  * 做题控制器
  */
-OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
+OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	$scope.time={};
 	
 	 //判断用户是否登陆
@@ -42,10 +42,14 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
    		$scope.$broadcast("countdown",remain);
 	}
     
-    
+    //倒计时提交
     $scope.$on("cdfinished",function(){
+    	$scope.firsttime =0;
     	$scope.submit();
     })
+    
+    //双段提交标志位。如果用户提交空,首先提示不可提交。而后再提交；如果是从倒计时进来，则直接提交
+    $scope.firsttime =1;
     
     $scope.submit=function(){
 		
@@ -53,8 +57,8 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 		var options = $scope.question.answer;
 		var length = options.length
 		for(var i=0;i<length;i++){
-			for(var j=i;j<length-i;j++){
-				if(options[j]>options[j+1]){
+			for(var j=i;j<length-i-1;j++){
+				if(options[j].caseId>options[j+1].caseId){
 					var option = options[j];
 					options[j] = options[j+1];
 					options[j+1] = option;
@@ -72,7 +76,8 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 			}
 		}
 		//用户未提交
-		if(useranswer=="0000"){
+		if(useranswer=="0000" && $scope.firsttime ==1){
+			$scope.firsttime =0;
 			smoke.alert("你还没有答题哦，怎么就提交了？如果这题不会，可以选择跳过～");
 			return false;
 		}
@@ -101,17 +106,19 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	    }).error(function(){
 	   	 console.log("get data failed");
 	    })
+	    
+	    $scope.firsttime =1;
 	}
 	
     
     $scope.getQuestionStar = function(question){
     	var star ="";
    		if(question.level ==1){
-   		    star ="1star";
+   		    star ="dp1star";
    		}else if(question.level == 2){
-   			star ="2star";
+   			star ="dp2star";
    		}else if(question.level == 3){
-   			star ="3star"
+   			star ="dp3star"
    		}
    		$scope.questionStar ="resource/static/"+star+".png"
    	
@@ -140,4 +147,4 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	    })
 	}
 	
-})
+}])

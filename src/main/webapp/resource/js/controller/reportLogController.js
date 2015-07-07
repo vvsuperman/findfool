@@ -2,7 +2,7 @@
  * 
  */
 
-OJApp.controller('reportLogController',function ($scope,$http,Data) {
+OJApp.controller('reportLogController',['$scope','$http','Data',function ($scope,$http,Data) {
 	$scope.showReport =4;
 	$scope.listNav=0;
 	$scope.logNav=1;
@@ -22,4 +22,4 @@ OJApp.controller('reportLogController',function ($scope,$http,Data) {
     })
     
 	
-})
+}])

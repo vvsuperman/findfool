@@ -28,7 +28,7 @@ public interface CadTestDao {
 
 	
 	//根据score计算排名
-	@Select("select count(*) from cad_test where score > #{0} and testid=#{1}")
+	@Select("select count(*) from cad_test where score >= #{0} and testid=#{1}")
 	int getRank(double score,int testid);
 	
 	//获得参与人数

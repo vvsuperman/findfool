@@ -1,6 +1,6 @@
 'use strict';
 
-OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
+OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
@@ -43,7 +43,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.monitor =1;
 	 
-
+     $scope.quiz={};
 	 
 	 $scope.btnShow =1;
 
@@ -311,7 +311,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 $scope.errMsg = "错误";
 	    		 
 	    	 }else{
-	    		 $scope.show = 3;
+	    		 $scope.show=3;
 	    		 $scope.testInfo = data.message;
 	    	 }	 
 	         
@@ -656,12 +656,12 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      
      
    
-});
+}]);
 
-OJApp.controller("pagCtrl",function($scope){
+OJApp.controller("pagCtrl",['$scope',function($scope){
 	
 	$scope.totalItems = 41;
-})
+}])
 
 
 

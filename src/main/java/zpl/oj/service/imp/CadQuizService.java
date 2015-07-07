@@ -213,16 +213,15 @@ public class CadQuizService {
 		cadProblem.setUseranswer(useranswer);
 		cadProDao.updateAnswerByIds(cadProblem);
 		
-		double plus = crDao.findCRByTestid(cadTest.getTestid()).getPlus();
 		String rightanser = problem.getRightanswer();
 		if(rightanser.equals(useranswer)){
 			if(problem.getScore()!=0){
-				cadTest.setScore(cadTest.getScore()+problem.getScore()*plus);
+				cadTest.setScore(cadTest.getScore()+problem.getScore());
 			}
 			
 		}else{
 			if(problem.getNegative()!=0){
-				cadTest.setScore(cadTest.getScore()-problem.getNegative()*plus);
+				cadTest.setScore(cadTest.getScore()-problem.getNegative());
 			}
 			
 			
@@ -278,7 +277,13 @@ public class CadQuizService {
 	    }else{
 	    	 int rank = cadTestDao.getRank(cdTest.getScore(),cdTest.getTestid());
 	 		if(involve!=0){
-	 			percent = (involve-rank)*100/involve;
+	 			if(involve ==1){
+	 				percent=100;
+	 			}
+	 			else{
+	 				percent = (involve-rank)*100/involve;
+	 			}
+	 			
 	 		}
 	 	    
 	 	    int state =0;
@@ -305,6 +310,12 @@ public class CadQuizService {
 		// TODO Auto-generated method stub
 		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
 		return baseurl+"/#/publictest/"+desService.encode(testid+"|"+slogan+"|"+ExamConstant.PUBLIC_COMPANY);
+	}
+
+
+	public ChallengeRule getCRByName(String testname) {
+		// TODO Auto-generated method stub
+		return crDao.getCRByTestname(testname);
 	}
 
 }

@@ -1,4 +1,4 @@
-OJApp.controller( "adminController",function($scope,$http,upload){
+OJApp.controller( "adminController",['$scope','$http','upload',function($scope,$http,upload){
 	$scope.showImport = false;
 	
 	$scope.showImportForm = function(){
@@ -13,4 +13,4 @@ OJApp.controller( "adminController",function($scope,$http,upload){
 		}
 	}
 
-});
+}]);
