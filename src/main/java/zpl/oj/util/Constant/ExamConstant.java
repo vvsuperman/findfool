@@ -90,9 +90,11 @@ public class ExamConstant{
 	public static final Map LEVEL_MAP = new HashMap<Integer,String>(){{put(1,"简单");put(2,"普通");put(3,"困难");}};
 
 
+	// 微信SDK配置
+	public static final String WX_APP_ID = "wx11de16f2995797e0";
+	public static final String WX_APP_SECRET = "cf6460d191e3b305eec87661a4d8eb8b";
 	
-	
-	
-	
+	public static final String[] MEMCACHED_SERVERS = {"192.168.1.22:11211"};
+	public static final Integer[] MEMCACHED_WEIGHTS = {3};
 }	
 

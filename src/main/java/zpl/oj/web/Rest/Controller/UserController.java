@@ -419,4 +419,18 @@ public class UserController {
 		rb.setState(0);
 		return rb;
 	}
+	
+	// 微信js sdk配置
+	@RequestMapping(value = "/wxjsk/config")
+	@ResponseBody
+	public ResponseBase wxSDKConfig() {
+//		String accessToken = JsSdk.getAccessToken();
+		Map<String, String> data = JsSdk.sign("xxx", "http://www.baidu.com");
+		data.put("test", JsSdk.getAccessToken());
+		ResponseBase rb = new ResponseBase();
+//		Map data = new HashMap<String, String>();
+		rb.setMessage(data);
+		
+		return rb;
+	}
 }
