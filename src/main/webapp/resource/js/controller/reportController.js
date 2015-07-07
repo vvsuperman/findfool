@@ -110,7 +110,7 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     	$scope.data = data.dimension.val;
     	//生成说明文字
     	$scope.setNum = $scope.labels.length;
-    	$scope.contents = data.dimension.content;
+    	//$scope.contents = data.dimension.content;
     	$scope.faceproblmes = data.dimension.faceproblem;
     	$scope.names = data.dimension.name;
     	
@@ -121,10 +121,44 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     		namenum.name = $scope.names[i];
     		namenum.num = $scope.data[1][i]/$scope.data[0][i]
     		namenum.faceproblem = $scope.faceproblmes[i];
+    		
+    	       //namenum.contents=initialstr[namenum.name];
+    	    // initialstr2=initialstr[namenum.name];
+    	       if(namenum.num<=0.4){
+    	    	  namenum.contents=initialstr[namenum.name][0];
+    	       }else if(namenum.num<=0.8){ 
+    	    	   namenum.contents=initialstr[namenum.name][1];}
+    	       
+    	    	   else if(namenum.num<=1.0){ 
+        	    	   namenum.contents=initialstr[namenum.name][2];
+    }
+    	       
+    	       
+    	       
+    	       
+    	       
+    	       
+    		
     		$scope.namenums.push(namenum);
+    	     
+    	
+    		//console.log()
+    		
+    		//根据namenum.name获取角标：java，c等等
+//          system.out.print(namenum.name);
+    		
+    		
+    		//根据namenum.num得到级别
+    		
+    		//得到的放到$scope.contents里
+    	
+    		
     		$scope.showFacePro[i]=0;//控制面试题的显示
     	}
-        
+     
+       
+    	
+    	
     	//level的雷达图
     	$scope.levelLabels = data.levelDimension.name;
     	$scope.levelData = data.levelDimension.val;
