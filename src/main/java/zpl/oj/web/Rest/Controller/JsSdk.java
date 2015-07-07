@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Formatter;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -16,26 +17,36 @@ import java.io.UnsupportedEncodingException;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import net.spy.memcached.MemcachedClient;
+
 import com.google.gson.Gson;
-import com.whalin.MemCached.MemCachedClient;
-import com.whalin.MemCached.SockIOPool;
 
 import zpl.oj.util.Constant.ExamConstant;
 
 class JsSdk {
 
-	private static MemCachedClient cachedClient = new MemCachedClient();
-	private static SockIOPool pool = SockIOPool.getInstance();
+	private static MemcachedClient cachedClient = null;
+	// new InetSocketAddress("192.168.1.22", 11211)
+	// private static SockIOPool pool = SockIOPool.getInstance();
 
 	static {
-		// cachedClient = new MemCachedClient();
-		pool.setServers(ExamConstant.MEMCACHED_SERVERS);
-		pool.setWeights(ExamConstant.MEMCACHED_WEIGHTS);
-		pool.setInitConn(5);
-		pool.setMinConn(5);
-		pool.setMaxConn(10);
-		pool.setMaxIdle(10);
-//		pool.initialize();
+		try {
+			cachedClient = new MemcachedClient(new InetSocketAddress(
+					"192.168.1.22", 11211));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// pool.setServers(ExamConstant.MEMCACHED_SERVERS);
+		// pool.setWeights(ExamConstant.MEMCACHED_WEIGHTS);
+		//
+		// pool.setInitConn(5);
+		// pool.setMinConn(5);
+		// pool.setMaxConn(10);
+		// pool.setMaxIdle(10);
+		// pool.setMaintSleep(30);
+		//
+		// pool.setNagle(false);
+		// pool.initialize();
 	}
 
 	public static void main(String[] args) {
@@ -100,7 +111,34 @@ class JsSdk {
 		return Long.toString(System.currentTimeMillis() / 1000);
 	}
 
-	public static String getAccessToken() {
+	public static String getJsApiTicket() {
+		String ticket = "";
+		if (cachedClient.get("jsapi_ticket") == null) {
+			String accessToken = getAccessToken();
+			StringBuilder urlSb = new StringBuilder();
+			urlSb.append("https://api.weixin.qq.com/cgi-bin/ticket/getticket?");
+			urlSb.append("type=jsapi&access_token=");
+			urlSb.append(accessToken);
+
+			String result = doGet(urlSb.toString());
+			System.out.println("Result: " + result);
+			Gson gson = new Gson();
+			JsApiTicketResponse resp = gson.fromJson(result,
+					JsApiTicketResponse.class);
+			ticket = resp.getTicket();
+			// cachedClient.set("jsapi_ticket", resp.getTicket(),
+			// resp.getExpires_in());
+			cachedClient.set("jsapi_ticket", resp.getExpires_in(),
+					resp.getTicket());
+		} else {
+			ticket = cachedClient.get("jsapi_ticket").toString();
+			System.out.println("ticket from cache: " + ticket);
+		}
+
+		return ticket;
+	}
+
+	private static String getAccessToken() {
 		String accessToken = "";
 		if (cachedClient.get("access_token") == null) {
 			StringBuilder urlSb = new StringBuilder();
@@ -112,11 +150,14 @@ class JsSdk {
 			String result = doGet(urlSb.toString());
 			System.out.println("Result: " + result);
 			Gson gson = new Gson();
-			WxResp resp = gson.fromJson(result, WxResp.class);
-			cachedClient.set("access_token", resp.getAccess_token(),
-					resp.getExpires_in());
+			AccessTokenResponse resp = gson.fromJson(result,
+					AccessTokenResponse.class);
+			accessToken = resp.getAccess_token();
+			cachedClient.set("access_token", resp.getExpires_in(),
+					resp.getAccess_token());
 		} else {
 			accessToken = cachedClient.get("access_token").toString();
+			System.out.println("accessToken from cache: " + accessToken);
 		}
 
 		return accessToken;
@@ -150,7 +191,7 @@ class JsSdk {
 		}
 	}
 
-	class WxResp {
+	class AccessTokenResponse {
 		private String access_token;
 		private int expires_in;
 
@@ -160,6 +201,45 @@ class JsSdk {
 
 		public void setAccess_token(String access_token) {
 			this.access_token = access_token;
+		}
+
+		public int getExpires_in() {
+			return expires_in;
+		}
+
+		public void setExpires_in(int expires_in) {
+			this.expires_in = expires_in;
+		}
+	}
+
+	class JsApiTicketResponse {
+		private int errcode;
+		private String errmsg;
+		private String ticket;
+		private int expires_in;
+
+		public int getErrcode() {
+			return errcode;
+		}
+
+		public void setErrcode(int errcode) {
+			this.errcode = errcode;
+		}
+
+		public String getErrmsg() {
+			return errmsg;
+		}
+
+		public void setErrmsg(String errmsg) {
+			this.errmsg = errmsg;
+		}
+
+		public String getTicket() {
+			return ticket;
+		}
+
+		public void setTicket(String ticket) {
+			this.ticket = ticket;
 		}
 
 		public int getExpires_in() {
