@@ -56,12 +56,14 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		//将用户答案按照id排排序，并生成正确的useranswer
 		var options = $scope.question.answer;
 		var length = options.length
+		
+		
 		for(var i=0;i<length;i++){
-			for(var j=i;j<length-i-1;j++){
-				if(options[j].caseId>options[j+1].caseId){
-					var option = options[j];
-					options[j] = options[j+1];
-					options[j+1] = option;
+			for(var j=i+1;j<length;j++){
+				if(options[j].caseId<options[i].caseId){
+					var option = options[i];
+					options[i] = options[j];
+					options[j] = option;
 				}
 			}
 		}

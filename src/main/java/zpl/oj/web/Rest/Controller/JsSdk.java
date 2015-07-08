@@ -22,17 +22,20 @@ import net.spy.memcached.MemcachedClient;
 import com.google.gson.Gson;
 
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 class JsSdk {
+	
 
 	private static MemcachedClient cachedClient = null;
+	private static String memcachUrl = (String) PropertiesUtil.getContextProperty("memcachUrl");;
 	// new InetSocketAddress("192.168.1.22", 11211)
 	// private static SockIOPool pool = SockIOPool.getInstance();
 
 	static {
 		try {
 			cachedClient = new MemcachedClient(new InetSocketAddress(
-					"192.168.1.22", 11211));
+					memcachUrl, 11211));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +74,6 @@ class JsSdk {
 		// 注意这里参数名必须全部小写，且必须有序
 		string1 = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonce_str
 				+ "&timestamp=" + timestamp + "&url=" + url;
-		System.out.println(string1);
 
 		try {
 			MessageDigest crypt = MessageDigest.getInstance("SHA-1");
@@ -89,6 +91,7 @@ class JsSdk {
 		ret.put("nonceStr", nonce_str);
 		ret.put("timestamp", timestamp);
 		ret.put("signature", signature);
+		ret.put("wxappid", ExamConstant.WX_APP_ID);
 
 		return ret;
 	}
