@@ -118,8 +118,18 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 	
     
     
-
-    
+    /**
+     * wxData这个数据结构你根据注释改一下
+     * 别的不用动了
+     * 正式环境debug记得设为false
+     */
+    var wxData = {
+	    'imgUrl': window.location.origin+'/assets/images/logo.jpg',   // 分享显示的图标
+	    'link': $location.absUrl(),   // 分享链接
+	    'title': $scope.slogan,  // 分享标题,
+	    'desc': $scope.slogan,     // 分享内容
+	    'type': 'link'  // music, video, link
+	};
     
         	$http({
                 url: WEBROOT+"/user/wxjsk/config",
@@ -135,23 +145,58 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
            	    timestamp: wxdata.timestamp, // 必填，生成签名的时间戳
            	    nonceStr: wxdata.nonceStr, // 必填，生成签名的随机串
            	    signature: wxdata.signature,// 必填，签名，见附录1
-           	    jsApiList: wxdata.jsapi_ticket // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+           	    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo']
             	});
             });
         	
         	
         	wx.ready(function(){
-        		console.log("wx ready........");
+        		wx.onMenuShareTimeline({
+        	        title: wxData.title,
+        	        link: wxData.link,
+        	        imgUrl: wxData.imgUrl,
+        	        success: function() {},
+        	        cancel: function() {}
+        	    });
+
+        	    wx.onMenuShareAppMessage({
+        	        title: wxData.title,
+        	        desc: wxData.desc,
+        	        link: wxData.link,
+        	        imgUrl: wxData.imgUrl,
+        	        type: wxData.type,
+        	        dataUrl: '',
+        	        success: function() {},
+        	        error: function() {}
+        	    });
+
+        	    wx.onMenuShareQQ({
+        	        title: wxData.title,
+        	        desc: wxData.desc,
+        	        link: wxData.link,
+        	        imgUrl: wxData.imgUrl,
+        	        success: function() {},
+        	        error: function() {}
+        	    });
+
+        	    wx.onMenuShareWeibo({
+        	        title: wxData.title,
+        	        desc: wxData.desc,
+        	        link: wxData.link,
+        	        imgUrl: wxData.imgUrl,
+        	        success: function() {},
+        	        error: function() {}
+        	    });
         	})
         	
-        	wx.checkJsApi({
-              jsApiList:['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-              success: function(res) {
-                // 以键值对的形式返回，可用的api值true，不可用为false
-                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-            	console.log(res);
-              }
-           });
+//        	wx.checkJsApi({
+//              jsApiList:['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+//              success: function(res) {
+//                // 以键值对的形式返回，可用的api值true，不可用为false
+//                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+//            	console.log(res);
+//              }
+//           });
         	
         	
     
