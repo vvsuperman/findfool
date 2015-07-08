@@ -28,28 +28,19 @@ class JsSdk {
 	
 
 	private static MemcachedClient cachedClient = null;
-	private static String memcachUrl = (String) PropertiesUtil.getContextProperty("memcachUrl");;
+	private static String memcachUrl = (String) PropertiesUtil.getContextProperty("memcachUrl");
+	private static int memcachPort = Integer.parseInt((String) PropertiesUtil.getContextProperty("memcachPort"));
 	// new InetSocketAddress("192.168.1.22", 11211)
 	// private static SockIOPool pool = SockIOPool.getInstance();
 
 	static {
 		try {
 			cachedClient = new MemcachedClient(new InetSocketAddress(
-					memcachUrl, 11211));
+					memcachUrl, memcachPort));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// pool.setServers(ExamConstant.MEMCACHED_SERVERS);
-		// pool.setWeights(ExamConstant.MEMCACHED_WEIGHTS);
-		//
-		// pool.setInitConn(5);
-		// pool.setMinConn(5);
-		// pool.setMaxConn(10);
-		// pool.setMaxIdle(10);
-		// pool.setMaintSleep(30);
-		//
-		// pool.setNagle(false);
-		// pool.initialize();
+		
 	}
 
 	public static void main(String[] args) {
@@ -61,6 +52,8 @@ class JsSdk {
 		// for (Map.Entry entry : ret.entrySet()) {
 		// System.out.println(entry.getKey() + ", " + entry.getValue());
 		// }
+		
+		
 		System.out.println(JsSdk.getAccessToken());
 	};
 
