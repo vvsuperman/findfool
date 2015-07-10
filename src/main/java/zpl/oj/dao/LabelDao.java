@@ -41,8 +41,12 @@ public interface LabelDao {
 	List<Labeltest> getLabelTestByTestidAndLabelName(Integer testid,
 			Integer labelid);
 
-	@Select("select * from labeltest where testid = #{0}")
+//	@Select("select * from labeltest where testid = #{0}")
+//	List<Labeltest> getLabelsOfTest(int testid);
+	
+	@Select("select * from labeltest t1,label t2 where t1.testid=#{0} and t1.labelid=t2.id")
 	List<Labeltest> getLabelsOfTest(int testid);
+
 
 	@Update("update labeltest set isSelected = #{2} where testid = #{0} and labelid = #{1}")
 	void updateLabelTest(int testid, int labelid, int isSelected);

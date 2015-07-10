@@ -35,19 +35,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		});
 	}
 
-	// $scope.getSystemLabels= function (){
-	// $http({
-	// url: WEBROOT+"/label/getsystemlabels",
-	// method: 'POST',
-	// data: {"testid": $scope.tid}
-	// }).success(function (data) {
-	// $scope.systemlabels=data["message"];
-	// //console.log("labels:")
-	// //console.log($scope.labels);
-	// }).error(function(){
-	// console.log("get data failed");
-	// });
-	// }
+
 
 	$scope.orseclected = function(value) {
 
@@ -76,7 +64,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 
 	$scope.updateTestLabels();
 	$scope.updateQuizEmails();
-	// $scope.getSystemLabels();
+	
 
 	$scope.saveConfig = function() {
 		$http({
@@ -93,27 +81,17 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		});
 	}
 
-	$scope.findLableType = function(value) {
-		$http({
-			url : WEBROOT + "/label/findlabletype",
-			method : 'POST',
-			data : {
-				"labelname" : value.labelname
-			}
-		}).success(function(data) {
-			$scope.labeltype = data["message"];
-		}).error(function() {
-			console.log("get data failed");
-		});
-	}
-	
-	$scope.istype();
 	$scope.istype=function(value){
-		console.log("$scope.findLableType(value)");
-		if($scope.findLableType(value)==0){return false;}else{return true;}
-		
-		
-	}
+	
+	if(value.labeltype==0)
+	{return true;
+	
+	}else{
+		return false;}
+	
+	
+}
+
 	$scope.deleteLable = function(value) {
 		$http({
 			url : WEBROOT + "/label/deletelable",
@@ -143,15 +121,6 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		}
 	}
 
-	// $scope.findSystemLabel=function(value){
-	// $scope.findLableType(value);
-	// if($scope.labeltype==0)
-	// {return true;}else{
-	// return false;
-	// }
-	//    	
-	//
-	// }
 
 	
     $scope.addLabel = function (){

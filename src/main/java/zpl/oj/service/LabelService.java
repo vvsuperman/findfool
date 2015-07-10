@@ -74,7 +74,6 @@ public interface LabelService{
 
 	List<JsonLabel> getTestLabels(Integer testid);
 
-	abstract Integer findLableType(String ln);
 
 	
 
@@ -85,6 +84,8 @@ public interface LabelService{
 
 
 	abstract void deleteLable(Integer id, Object testid);
+
+	abstract Integer findLableType(String ln);
 
 	//abstract List<JsonLabel> getTestLabelsSeclected(Integer testid);
 }

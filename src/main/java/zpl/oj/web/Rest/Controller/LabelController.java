@@ -41,42 +41,8 @@ public class LabelController {
 		rb.setMessage(labels);
 		return rb;
 	}
-//	//韩亚全 获取系统标签
-//	@RequestMapping(value="/getsystemlabels")
-//	@ResponseBody
-//	public ResponseBase getSystemLabels(@RequestBody Map<String,Integer> map){
-//		ResponseBase rb = new ResponseBase();
-//		Integer testid=map.get("testid");
-//		rb.setState(1);
-//		List<JsonLabel> systemlabels = labelService.getSystemLabels2(testid);
-//		rb.setMessage(systemlabels);
-//		return rb;
-//	
-//
-//	}
 
-	
-	
-	
-	
-	//根据labename获取type
-	@RequestMapping(value="/findlabletype")
-	@ResponseBody
-	public ResponseBase findLableType(@RequestBody Map<String,String> map){
-		ResponseBase rb = new ResponseBase();
-		String ln=map.get("labelname");
-		System.out.println(ln);
-	     Integer label2 = labelService.findLableType(ln);
-//	Map rtMap = new HashMap<String,Object>();	       
-//	rtMap.put("a", value);
-//	rtMap.put("b", value);
-	rb.setMessage(label2);
-		return rb;
-	}
-	
-	
-	
-	
+
 	
 	//根据labename获取type
 	@RequestMapping(value="/deletelable")
