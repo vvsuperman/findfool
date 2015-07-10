@@ -2,6 +2,7 @@ package zpl.oj.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -10,6 +11,7 @@ import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
+import zpl.oj.util.json.JsonLabel;
 
 public interface LabelDao {
 
@@ -58,4 +60,21 @@ public interface LabelDao {
 
 	@Select("select * from labeluser where inviteid = #{0}")
 	List<LabelUser> getLabelUserByIid(Integer inviteid);
+
+	@Select("select type,id from label where name = #{0}")
+	Integer findLableType(String ln);
+
+	
+
+
+	
+	@Select("select id from label where name = #{0}")
+	Object findLableId(String ln);
+
+	
+	@Delete("delete from labeltest where labelid=#{0} and testid=#{1}")
+	void deleteLable(Integer id, Object testid);
+
+	//@Select("select * from labeltest t1,label t2 where t1.testid=#{0} and  t1.labelid<=9 and t1.labelid=t2.id")
+	//List<label> getSystemLabels2(Integer testid);
 }

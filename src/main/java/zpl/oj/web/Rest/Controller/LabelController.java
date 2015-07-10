@@ -1,8 +1,10 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +41,58 @@ public class LabelController {
 		rb.setMessage(labels);
 		return rb;
 	}
+//	//韩亚全 获取系统标签
+//	@RequestMapping(value="/getsystemlabels")
+//	@ResponseBody
+//	public ResponseBase getSystemLabels(@RequestBody Map<String,Integer> map){
+//		ResponseBase rb = new ResponseBase();
+//		Integer testid=map.get("testid");
+//		rb.setState(1);
+//		List<JsonLabel> systemlabels = labelService.getSystemLabels2(testid);
+//		rb.setMessage(systemlabels);
+//		return rb;
+//	
+//
+//	}
+
+	
+	
+	
+	
+	//根据labename获取type
+	@RequestMapping(value="/findlabletype")
+	@ResponseBody
+	public ResponseBase findLableType(@RequestBody Map<String,String> map){
+		ResponseBase rb = new ResponseBase();
+		String ln=map.get("labelname");
+		System.out.println(ln);
+	     Integer label2 = labelService.findLableType(ln);
+//	Map rtMap = new HashMap<String,Object>();	       
+//	rtMap.put("a", value);
+//	rtMap.put("b", value);
+	rb.setMessage(label2);
+		return rb;
+	}
+	
+	
+	
+	
+	
+	//根据labename获取type
+	@RequestMapping(value="/deletelable")
+	@ResponseBody
+	public void deleteLable(@RequestBody Map<Object,Object> map){
+	
+		String ln= (String)map.get("labelname");
+		Object testid= map.get("testid");
+		Integer label2 = labelService.findLableType(ln);
+		if(label2==1){
+		Integer id=(Integer) labelService.findLableId(ln);
+	labelService.deleteLable(id,testid);}
+	else{return;}
+}
+	
+	
 	
 	@RequestMapping(value="/saveconfig")
 	@ResponseBody
@@ -68,7 +122,7 @@ public class LabelController {
 		ResponseBase rb = new ResponseBase();
 		Integer testid=Integer.parseInt(map.get("testid"));
 		String newlabel=map.get("label");
-		//如果该标签已经存在
+		//如果该标签已经存在 
 		if(newlabel.length()!=0){
 		if(!labelService.isLableExist(newlabel)){
 			labelService.insertNewLabel(0, newlabel);
@@ -76,7 +130,7 @@ public class LabelController {
 		Label label=labelService.getLabelByLabelName(newlabel);
 		//如果标签未被加入到该test中
 		if(!labelService.isLableTestExist(testid, label.getId())){
-			labelService.insertIntoLabelTest(testid, label.getId(), 0);
+			labelService.insertIntoLabelTest(testid, label.getId(),1);
 			//在labeluser中，对于该test所对应的invite，都插入一条数据
 			List<Invite> invites=inviteService.getInvitesByTid(testid);
 			for(Invite invite:invites){

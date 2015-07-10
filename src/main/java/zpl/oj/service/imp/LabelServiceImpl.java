@@ -3,6 +3,7 @@ package zpl.oj.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -131,7 +132,50 @@ public class LabelServiceImpl implements LabelService {
 		// TODO Auto-generated method stub
 		return labelDao.getLabelUserByIid(inviteid);
 	}
+
+	@Override
+	public Integer findLableType(String ln) {
+		
+		return  labelDao.findLableType(ln);
+	}
+
+
+
+
 	
+	@Override
+	public Object findLableId(String ln) {
+		return  labelDao.findLableId(ln);
+		
+	}
+
+	@Override
+	public void deleteLable(Integer id,Object testid) {
+	
+		labelDao.deleteLable(id,testid);			
+	}
+
+//	@Override
+//	public List<JsonLabel> getSystemLabels2(Integer testid) {
+//		List<Hanyaquan> list= labelDao.getSystemLabels2(testid);
+//		List<JsonLabel> systemlabels=new ArrayList<JsonLabel>();
+//		for(Hanyaquan lt:list){
+//			JsonLabel l=new JsonLabel();
+//			l.setLabelid(lt.getLabelid());
+//			l.setLabelname(lt.getName());
+//			l.setIsSelected(lt.getIsSelected()==1?true:false);		
+//			systemlabels.add(l);
+//		}
+//		return systemlabels;
+//	}
+
+	private String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 
 }
