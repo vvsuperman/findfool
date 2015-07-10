@@ -46,7 +46,6 @@ OJApp.controller('testMainController',['$scope','$http','CadData','$location',fu
 	   	    	smoke.alert(data.message);
 	   	    	return false;
 	   	    }else{
-	   	    	console.log("settestid..............");
 	   	    	CadData.setTestid(data.message);
 	   	    	CadData.setTestname(testname);
 	   			window.location.href='#/dp/testdetail';
@@ -97,6 +96,7 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
    		 $scope.errmsg = data.message;
    	 }else{
    		 var percent = data.message.percent;
+   		 $scope.percent = percent;
    		 $scope.cads = data.message.cads;
    		 $scope.state = data.message.state;
    		 if(percent>=90){
@@ -110,37 +110,18 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
    		 }else{
    			 $scope.slogan = "您打败了全国"+percent+"％的挑战者，蛋白质肯定不是你，快让我们见识你的实力！";
    		 }
-   	 }
-   	
-    }).error(function(){
-   	 console.log("get data failed");
-    })
-	
-    
-    
-    /**
-     * wxData这个数据结构你根据注释改一下
-     * 别的不用动了
-     * 正式环境debug记得设为false
-     */
-    var wxData = {
-	    'imgUrl': window.location.origin+'/assets/images/logo.jpg',   // 分享显示的图标
-	    'link': $location.absUrl(),   // 分享链接
-	    'title': $scope.slogan,  // 分享标题,
-	    'desc': $scope.slogan,     // 分享内容
-	    'type': 'link'  // music, video, link
-	};
-    
-        	$http({
-                url: WEBROOT+"/user/wxjsk/config",
-                method: 'POST',
-                data: {"url":$location.absUrl()}
-            }).success(function (data) {
-           	    console.log(data.message);
-           	    var wxdata = data.message;
+   		
+   		
+   		$http({
+            url: WEBROOT+"/user/wxjsk/config",
+            method: 'POST',
+            //data: {"url":$location.absUrl()}
+            data: {"url":"http://foolrank.com/"}
+        }).success(function (data) {
+       	    wxdata = data.message;
            	    
            	 wx.config({
-           	    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+           	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
            	    appId: wxdata.wxappid, // 必填，公众号的唯一标识
            	    timestamp: wxdata.timestamp, // 必填，生成签名的时间戳
            	    nonceStr: wxdata.nonceStr, // 必填，生成签名的随机串
@@ -148,9 +129,24 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
            	    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo']
             	});
             });
+	
+	
+	
+			/**
+		     * weixin share data
+		     */
+		    var wxData = {
+			    'imgUrl': "http://foolrank.com/resource/static/dpgeek.jpg",  
+			    'link': "http://evt.dianping.com/event/campus15/",  
+			    'title': "我在点评挑战赛中打败了"+$scope.percent+"%的好友，你还不快来！",
+			    'desc': "战斗的大幕已经拉开，年轻的Geek们，是时候展现真正的技术了。我们期待你披荆斩棘，创造奇迹！", 
+			    'type': 'link' 
+			};
         	
         	
         	wx.ready(function(){
+        		
+        		
         		wx.onMenuShareTimeline({
         	        title: wxData.title,
         	        link: wxData.link,
@@ -188,24 +184,19 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
         	        error: function() {}
         	    });
         	})
-        	
-//        	wx.checkJsApi({
-//              jsApiList:['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-//              success: function(res) {
-//                // 以键值对的形式返回，可用的api值true，不可用为false
-//                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-//            	console.log(res);
-//              }
-//           });
-        	
-        	
-    
-    //获取微信ticket
+   	 }
+   	
+    }).error(function(){
+   	 console.log("get data failed");
+    })
 	
-	$socpe.shareWX = function(){
-		
-	}
     
+    
+    
+    	
+        	
+
+        	
     
 	$scope.startTest = function(){
 		

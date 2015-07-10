@@ -55,6 +55,8 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	 
 	 $scope.showCZone = 1;//控制是否显示视频区域
 	 
+	 $scope.showPanel = 1;//控制是否显示整个拍照区域
+	 
 	 $scope.pictureOK = 0;//用户是否上传好照片
 	 
 	 $scope.openCamera=0;//该用户是否必须打开摄像头才能进行考试，0：必须开启，1：不开启，2：可以开启可以不开启
@@ -109,7 +111,7 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 							  $scope.btn.Show=3
 							 });
 					 $scope.$broadcast("updatePicture","1");
-					 $scope.pictureOK =1;
+					
 				}
 			}, {
 				ok: "是",
@@ -118,6 +120,11 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 				reverseButtons: true
 			});
 	 }
+	 
+	 //基准照片上传成功
+	 $scope.$on("baseImgSave",function(){
+		 $scope.pictureOK =1;
+	 })
 	 
 	 //基准照片需要重新拍摄
 	 $scope.$on("baseImgRecapture",function(){
@@ -218,22 +225,13 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.errMsg = "";
 	    		 if($scope.openCamera==0||$scope.openCamera==2){
-	    			 $scope.show = 2;
+	    			 
+	    			 $scope.showCPanel=1
 	    		 } else if($scope.openCamera==1){
-	    			 $scope.show = 3;
+	    			 $scope.showCPanel=2; //不开启拍照区域
 	    		 }
-	    		 //启动摄像头拍照页面
-	    		 //$scope.tuser.tuid = data.message;
-	    		 /*$http({
-	    	         url: WEBROOT+"/testing/getSchools",
-	    	         method: 'GET',
-	    	         data: {"name":'ss',"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
-	    	     }).success(function (data) {
-	    	    	 if(data.state==200)
-	    	    		 $scope.schools=data.message;
-	    	    	 else
-	    	    		 alert(data.message);
-	    	     });*/
+	    		 $scope.show = 2;
+	    		 
 	    		 $http({
 	    	         url: WEBROOT+"/testing/getLabels",
 	    	         method: 'POST',
@@ -286,10 +284,11 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){
-		 if($scope.pictureOK!=1 && $scope.openCamera==0){
-			 smoke.alert("请先拍照");
-			 return false;
-		 }
+			 if($scope.pictureOK!=1 && ($scope.openCamera==0||$scope.openCamera==2)){
+				 smoke.alert("请先拍照");
+				 return false;
+			 }
+		
 		 
 		 
 		 for(var i in $scope.userInfo){

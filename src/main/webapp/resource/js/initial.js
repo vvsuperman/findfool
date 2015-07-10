@@ -2,9 +2,6 @@
 //常量
 var WEBROOT = "/oj";
 //var WEBROOT = "";
-//var CUSTOM_SET = 0;
-//var MD_REDIRECT = "http%3A%2F%2Flocalhost:8080%2Foj%2F%23%2F";
-//var MD_REDIRECT = "http://127.0.0.1:8080/oj/#/";
 
 var data =["了解数据结构与算法，知道数据结构的基础知识，能进行数据结构的基本操作，基础知识掌握较差",
            "掌握数据结构与算法的基础概念，熟练运用数据结构知识，具有一定的算法基础",

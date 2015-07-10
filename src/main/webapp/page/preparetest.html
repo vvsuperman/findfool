@@ -5,7 +5,7 @@
    <div class="container-fluid" ng-if="show==1">
    	 <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" role="form">
    	 	  <div class="row">
-	   	 	 <div class="col-md-6 col-md-offset-1" >
+	   	 	 <div class="col-md-6 col-md-offset-2" >
 	   	 	 	<h5>您好</h5>
 	   	 	 	<h5>非常荣幸邀请您参加这次测试</h5>
 	   	 	 	<h5>请输入邮件中的测试密码</h5>
@@ -44,7 +44,7 @@
      
     
    <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
-     <div class="col-md-3 col-md-offset-4">
+     <div class="col-md-3 col-md-offset-4" ng-show="showCPane==1">
 		 <div   ng-show="showCZone ==1&&openCamera==0"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div> 
 		 <div   ng-show="showCZone ==1&&openCamera==2"><span style="color: red">*&nbsp;建议开启摄像头，让企业更好的认识自己</span></div> 
 		 <div  style="margin-top: 10px" class="cameraIcon"  ng-show="showCZone ==1">  
