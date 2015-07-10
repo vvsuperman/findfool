@@ -1,4 +1,4 @@
-OJApp.controller("testshow",function($scope, $http, Data) {
+OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Data) {
 //    $scope.local = false;
     $scope.template = 'testshow.html';
     $scope.ContentUs = 'contentUs.html';
@@ -95,4 +95,4 @@ OJApp.controller("testshow",function($scope, $http, Data) {
     ];
     $scope.question = $scope.questionss[0];
 
-});
+}]);

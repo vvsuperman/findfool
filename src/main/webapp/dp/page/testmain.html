@@ -23,7 +23,7 @@
 
 <div class="col-md-12"  style="background:url('resource/static/dp_back.jpg') repeat;margin-bottom: 100px" >
 
- <div style="width:100%;padding-top: 50px" class="text-center">
+  <div style="width:100%;padding-top: 30px" class="text-center">
 		<img src="resource/static/dp-logo2.png">
 		<p style="color: white;margin-left: 50px">大众点评第二届极客挑战赛</p>
        
@@ -45,20 +45,23 @@
 	  </div>
 	</div>
 	
-	<div class="col-md-6 col-md-offset-3" class="text-center" style="margin-top:30px;margin-bottom: 100px">
+	<div class="col-md-6 col-md-offset-3" class="text-center" style="margin-top:30px;">
 	
 	       <div class="panel panel-default" style="padding:0;margin-bottom:50px;border-radius:10px ;border-color: #CC0000">
-				 <div class="panel-heading" style="background-color:#CC0000;color:#1abc9c;border-top-left-radius:5px;border-top-right-radius:5px ">
+				 <div class="panel-heading" style="background-color:#FF3C43;color:#1abc9c;border-top-left-radius:5px;border-top-right-radius:5px ">
 				    <h3 class="panel-title" style="color: white;text-align: center;">
 				    	红色技能
 				    </h3>
 				  </div>
 				  <div class="panel-body row">
-				    <div class="col-xs-4 ">
-				      <img alt="" src="resource/static/java.png" class="img-responsive mainimg" ng-click="openTest(206,'java')" >
+
+				    <div class="col-xs-4" style="text-align: center;">
+				      <img alt="" src="resource/static/java.png" class="dpimg" ng-click="openTest('Java',1)" >
+				      <p style="padding-top: 10px">Java</p>
 				    </div>
-				      <div class="col-xs-4">
-				      <img alt="" src="resource/static/c++.png" class="img-responsive mainimg">
+				      <div class="col-xs-4" style="text-align: center;">
+				      <img alt="" src="resource/static/c++.png" class="dpimg" ng-click="openTest('C/C++',1)">
+				        <p style="padding-top: 10px">C/C++</p>
 				    </div> 
                 	
 				  </div>
@@ -69,19 +72,28 @@
 				
 	       <div class="panel panel-default" style="padding:0;margin-bottom:50px;border-radius:10px ;border-color: #000000">
 				 <div class="panel-heading" style="background-color:#E7E7E7;color:#000000;border-top-left-radius:5px;border-top-right-radius:5px ">
-				    <h3 class="panel-title" style="color: #000000;text-align: center;">
+				    <h3 class="panel-title" style="color: #555;text-align: center;">
 				    	白色技能
 				    </h3>
 				  </div>
 				  <div class="panel-body row">
-				    <div class="col-xs-4">
-				      <img alt="" src="resource/static/javascript.png" class="img-responsive mainimg" style="height: 65px" >
+
+				    <div class="col-xs-4"  style="text-align: center;">
+				      <img alt="" src="resource/static/javascript.png " class="dpimg"   ng-click="openTest('前端',2)">
+				       <p style="padding-top: 10px">前端</p>
 				    </div>
-				     <div class="col-xs-4">
-				      <img alt="" src="resource/static/database.png" class="img-responsive mainimg" >
+				     <div class="col-xs-4" style="text-align: center;">
+				      <img alt="" src="resource/static/mysql.png" class="dpimg"  ng-click="openTest('Mysql',2)">
+				        <p style="padding-top: 10px">Mysql</p>
 				    </div>
-				     <div class="col-xs-4">
-				      <img alt="" src="resource/static/c++.png" class="img-responsive mainimg" >
+
+				     <div class="col-xs-4" style="text-align: center;">
+				      <img alt="" src="resource/static/linux.png" class="dpimg" ng-click="openTest('Linux',2)" >
+				      <p style="padding-top: 10px">Linux</p>
+				    </div>
+				      <div class="col-xs-4" style="margin-top: 10px; text-align: center;" >
+				      <img alt="" src="resource/static/algorithm.png" class="dpimg" ng-click="openTest('算法',2)" >
+				      <p style="padding-top: 10px">算法</p>
 				    </div>
                 	
 				  </div>
@@ -94,21 +106,31 @@
 				    </h3>
 				  </div>
 				  <div class="panel-body row">
-				      <div class="col-xs-4">
-				      <img alt="" src="resource/static/object_c.png" class="img-responsive mainimg" >
+				      <div class="col-xs-4" style="text-align: center;">
+				       <img alt="" src="resource/static/object_c.png" class="dpimg" ng-click="openTest('ObjectC',3)"  >
+				       <p style="padding-top: 10px">Object_c</p>
+				      </div>
+				    
+
+				     <div class="col-xs-4" style="text-align: center;">
+				      <img alt="" src="resource/static/android.png" class="dpimg" ng-click="openTest('Android',3)" >
+				       <p style="padding-top: 10px">Android</p>
 				    </div>
 				    
-				     <div class="col-xs-4">
-				      <img alt="" src="resource/static/android.png" class="img-responsive mainimg" >
+				      <div class="col-xs-4" style="text-align: center;">
+				      <img alt="" src="resource/static/python.png" class="dpimg" ng-click="openTest('Python',3)" >
+				       <p style="padding-top: 10px">Python</p>
 				    </div>
+				 
 				 
 				     
 				  </div>
 			</div>
 	   </div>
 	
-
-	
+       
+	<div class="col-md-12" style="margin-top:100px;color:#3E4F5E;text-align: center;padding-bottom: 100px">
+              <p >由foolrank.com提供技术支持</p>
+            </div>
 	   
 	</div>
-	

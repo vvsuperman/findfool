@@ -3,6 +3,45 @@
  *
  * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
  */
+ 
+.myqs{
+		padding: 20px;
+		width: 100%;
+	}
+	.myqs .panel-heading{
+		height: 56px;
+	}
+	.myqs .panel-heading h4{
+		float: left;
+		line-height: 32px;
+	}
+	.myqs .panel-heading>div{
+		marigin-right: 20px;
+	}
+	.myqs .panel-heading>button{
+		margin-right: 20px;
+	}
+	.myqs .title, .myqs .item{
+		border-bottom: 1px solid #ddd;
+	}
+	.myqs .qsindex,.myqs .qscontent,.myqs .qsoperate{
+		float: left;
+		height: 50px;
+		line-height: 50px;
+	}
+	.myqs .qsindex{
+		width: 15%;
+		text-align: center;
+	}
+	.myqs .qscontent{
+		width: 60%;
+		over-flow: hidden;
+	}
+	.myqs .qsoperate{
+		width: 25%;
+	} 
+ 
+ 
 .simditor{
 	border-width: 0px !important; 
 } 
@@ -24,7 +63,7 @@
 		padding: 20px;
 	}
 	.innertest .cspanel .panel-heading{
-		text-align: center;
+		/* text-align: center; */
 	}
 	.innertest .item{
 		position: relative;
@@ -169,6 +208,7 @@
  
  
 .testqs{
+	padding: 0 200px 0 0;
 	min-width: 1000px;
 	/* font-size: 14px; */
 	background-color: #f8f8f8;
@@ -1204,8 +1244,8 @@ ul li {
 	line-height: 100px;
 }
 .navbar-default{
-	background: #3b5353;
-	border-color: #3b5353;
+	background: #2B435A;
+	border-color: #2B435A;
 	filter:alpha(opacity=80);  
     -moz-opacity:0.8;  
     -khtml-opacity: 0.8;
@@ -1345,7 +1385,7 @@ ul li {
 	margin-left:180px;
 	margin-top:50px;
 	background: #fff;
-	padding-right: 180px;
+	/* padding-right: 180px; */
 	min-width: 900px;
 }
  	

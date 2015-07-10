@@ -1,4 +1,4 @@
-OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window) {
+OJApp.controller('findPwdCtrl',['$scope','$http','Data','$routeParams','$window',function ($scope,$http,Data,$routeParams,$window) {
 	
 	
 	
@@ -90,4 +90,4 @@ OJApp.controller('findPwdCtrl',function ($scope,$http,Data,$routeParams,$window)
 		$scope.requestStage=1;
 		$scope.submitStage=0;
 	}
-});
+}]);

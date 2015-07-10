@@ -10,16 +10,16 @@
 //document.write('<script src=resource/js/simditor/uploader.js><\/script>');
 //document.write('<script src=resource/js/simditor/simditor.js><\/script>');
 
-OJApp.controller('MyTestBank',function($scope) {
+OJApp.controller('MyTestBank',['$scope',function($scope) {
     $scope.url = '#/mybank';
     $scope.template = 'page/mytestBank.html';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = 'page/libleftBar.html';
     $scope.active = 1;
     $scope.show = 1;
-});
+}]);
 
-OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
+OJApp.controller('mytestbank',['$scope','$http','Data','$sce','$modal',function($scope, $http, Data,$sce,$modal) {
 	
     $scope.url = '#/mybank';
     $scope.template = 'page/mytestBank.html';
@@ -406,5 +406,5 @@ OJApp.controller('mytestbank',function($scope, $http, Data,$sce,$modal) {
 			  $scope.reciveData.choosedQlist.push(q);		
 		}		
 	}
-});
+}]);
 

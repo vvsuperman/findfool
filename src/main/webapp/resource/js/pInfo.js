@@ -1,7 +1,9 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-function pInfo($scope, $http, Data) {
+
+OJApp.controller('pInfo',['$scope','$http','Data',function ($scope,$http,Data) {
+	 
     $scope.url = '#/profile';
     $scope.template = 'page/profile.html';
     $scope.ContentUs = 'page/contentUs.html';
@@ -82,4 +84,4 @@ function pInfo($scope, $http, Data) {
 
         });
     };
-}
+}])

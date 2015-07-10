@@ -25,7 +25,7 @@ public class LabelServiceImpl implements LabelService {
 	private TestuserDao testuserDao;
 	
 	@Override
-	public List<Integer> getSystemLabels() {
+	public List<Label> getSystemLabels() {
 		// TODO Auto-generated method stub
 		return labelDao.getSystemLabels();
 	}

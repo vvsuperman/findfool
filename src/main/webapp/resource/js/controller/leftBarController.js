@@ -1,4 +1,4 @@
-OJApp.controller('leftBarController',function($scope,Data){
+OJApp.controller('leftBarController',['$scope','Data',function($scope,Data){
 	$scope.$watch("Data.tname()",function(){
 		$scope.tname = Data.tname();
 		
@@ -34,10 +34,14 @@ OJApp.controller('leftBarController',function($scope,Data){
 	$scope.invited = function(state){
 		if(state==1){
 			$scope.lBar.state1= true;	
+		}else if(state==2){
+			$scope.lBar.state2 = true;
+		}else if(state==3){
+			$scope.lBar.state3 = true;
 		}
 		
 		window.location.href = '#/report/show/'+state;
 		
 	}
 	
-});
+}]);

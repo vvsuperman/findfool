@@ -25,7 +25,7 @@ public interface ProblemTestCaseDao {
   List<ProblemTestCase> getProblemTestCases(int problemId);  
   
   @Select("select TEST_CASE_ID as testCaseId, PROBLEM_ID as problemId,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "
-			+ "PROBLEM_TEST_CASE WHERE PROBLEM_ID = #{0} ")
+			+ "PROBLEM_TEST_CASE WHERE PROBLEM_ID = #{0} order by rand()")
 List<ProblemTestCase> getProTestCasesRandom(int problemId);  
   
   @Select("select TEST_CASE_ID as testCaseId, PROBLEM_ID as problemId,  SCORE,  EXCEPTED_RES as exceptedRes,  ARGS,  DETAIL FROM "

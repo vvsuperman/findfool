@@ -5,6 +5,19 @@ import java.util.Map;
 
 public class ExamConstant{
 	
+	public static final int SET_BASE = 1;
+	
+	public final static int DP_RED=1;
+	public final static int DP_WHITE=2;
+	public final static int DP_BLUE=3;
+	public final static int DP_M = 300;//300分
+	public final static int DP_H = 500;
+	public final static int DP_CNUM = 65; //C答题数
+	public final static int DP_JAVANUM = 75; //JAVA答题数
+	public final static double DP_EASYPLUS = 1.2; //简单题乘法因子
+	public final static double DP_HARDPLUS = 0.8; //复杂题乘法因子
+	
+	
 	
 	//共有测试类别：是公司发出来的还是系统发出来的
 	public final static int PUBLIC_COMPANY = 1;
@@ -57,6 +70,8 @@ public class ExamConstant{
 	public static final String QUESTION_REPONAME = "reponame";
 	public static final String QUESTION_ANSWER = "answer";
 	public static final String QUESTION_LEVEL = "level";
+	public static final String QUESTION_NEGATIVE = "negative";
+	public static final String QUESTION_LIMITTIME = "limittime";
 	
 	//试题类型
 	public static final String QUESTION_TYPE_OPTION = "option";
@@ -73,7 +88,13 @@ public class ExamConstant{
 	public static final String BR = "<br>";
 	
 	public static final Map LEVEL_MAP = new HashMap<Integer,String>(){{put(1,"简单");put(2,"普通");put(3,"困难");}};
+
+
+	// 微信SDK配置
+	public static final String WX_APP_ID = "wx11de16f2995797e0";
+	public static final String WX_APP_SECRET = "cf6460d191e3b305eec87661a4d8eb8b";
 	
-	
+	public static final String[] MEMCACHED_SERVERS = {"192.168.1.22:11211"};
+	public static final Integer[] MEMCACHED_WEIGHTS = {3};
 }	
 

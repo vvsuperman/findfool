@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-OJApp.controller("pInfo",function($scope, $http, Data) {
+OJApp.controller("pInfo",['$scope','$http','Data',function($scope, $http, Data) {
     $scope.url = '#/profile';
     $scope.template = 'page/profile.html';
     $scope.ContentUs = 'page/contentUs.html';
@@ -115,4 +115,4 @@ OJApp.controller("pInfo",function($scope, $http, Data) {
          }
          $scope.PWD = md5($scope.pwd);
     }
-})
+}])

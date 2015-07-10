@@ -1,4 +1,4 @@
-OJApp.controller('ModalInstanceCtrl',function ($rootScope,$scope,$http,$modalInstance,Data,params) {
+OJApp.controller('ModalInstanceCtrl',['$rootScope','$scope','$http','$modalInstance','Data','params',function ($rootScope,$scope,$http,$modalInstance,Data,params) {
 	//绑定变量到服务
 	
 	$scope.type = params.type;
@@ -48,4 +48,4 @@ OJApp.controller('ModalInstanceCtrl',function ($rootScope,$scope,$http,$modalIns
 	}
 	
 	
-});
+}]);

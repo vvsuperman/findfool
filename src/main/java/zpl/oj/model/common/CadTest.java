@@ -7,7 +7,7 @@ public class CadTest {
 	   int ctid;
 	   int testid;
 	   int cadid;
-	   int score;
+	   double score;
 	   int pnums;
 	   int nums;
 	   public int getState() {
@@ -37,10 +37,10 @@ public class CadTest {
 	public void setCadid(int cadid) {
 		this.cadid = cadid;
 	}
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 	public int getPnums() {

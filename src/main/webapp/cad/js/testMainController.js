@@ -11,12 +11,6 @@ OJApp.controller('testMainController',function ($scope,$http,CadData) {
 	
 	$scope.cadInfo ={};
 	
-	$scope.openTest = function(testid,testname){
-		CadData.setTestid(testid);
-		CadData.setTestname(testname);
-		window.location.href='#/dp/testdetail';
-	 
-	}
 	
 	$scope.logout = function(){
 		CadData.clear();

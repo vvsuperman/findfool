@@ -6,6 +6,14 @@ public class Label implements Serializable{
 	private int id;
 	private int type;
 	private String name;
+	private int isSelected;
+	
+	public int getIsSelected() {
+		return isSelected;
+	}
+	public void setIsSelected(int isSelected) {
+		this.isSelected = isSelected;
+	}
 	public int getId() {
 		return id;
 	}

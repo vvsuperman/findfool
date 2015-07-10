@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
+OJApp.controller('TestPage',['$scope','$http','Data','$modal',function($scope, $http, Data,$modal) {
     $scope.url = '#/test';
     $scope.active = 1;
     $scope.template = 'page/testshow.html';
@@ -200,5 +200,5 @@ OJApp.controller('TestPage',function($scope, $http, Data,$modal) {
         });
     };
 
-})
+}])
 

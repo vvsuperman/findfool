@@ -1,4 +1,4 @@
-OJApp.controller('signupCtrl',function ($scope,$http,Data) {
+OJApp.controller('signupCtrl',['$scope','$http','Data',function ($scope,$http,Data) {
 	
 	$scope.Remail;
 	$scope.company;
@@ -65,6 +65,7 @@ OJApp.controller('signupCtrl',function ($scope,$http,Data) {
                             Data.setInvitedleft($scope.message.invited_left);
                             //end bu zpl
                             Data.setName($scope.message.email);
+                            Data.setEmail($scope.message.email);
                             /*$scope.cancel();*/
                             //除去modal层的遮罩
 //                            var child = document.getElementsByClassName("modal-backdrop fade in");
@@ -90,4 +91,4 @@ OJApp.controller('signupCtrl',function ($scope,$http,Data) {
         	$scope.errorMsg.general = "所有选项均不可为空";
         }
     };
-});
+}]);

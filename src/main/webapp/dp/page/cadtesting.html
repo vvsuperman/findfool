@@ -1,4 +1,4 @@
- <link rel="stylesheet" type="text/css" href="resource/css/cadtest.css"/>
+
  <link rel="stylesheet" type="text/css" href="dp/css/testmain.css"/>
  <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
 <link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
@@ -25,7 +25,7 @@
  <div style="clear:both"></div>
  
  
- <div class="col-md-12" style="margin-top: 20px">
+ <div class="col-md-12" style="margin-top: 20px" oncontextmenu="return false;" onselectstart="return false;" oncopy="return false;"oncut="return false;">
   	  	<!-- <textarea ckeditor minheight="120" width="100%" operation={{operation}} ng-model="question.context"></textarea> -->
       	  	<textarea simditor minheight="30px" operation="view" ng-model="question.context"></textarea>
       	</div>  
@@ -34,7 +34,7 @@
         <div class="col-xs-4"> <span>答题数:<span ng-bind="cadInfo.nums"></span></span></div>
         <div class="col-xs-8 col-md-3 pull-right" style="" >
           <span style="vertical-align: middle;">难度:</span>
-          <img style="width:100px;margin-left: 5px;" ng-src="{{questionStar}}" alt="{{question.level}}">
+          <img style="width:60px;margin-left: 5px;" ng-src="{{questionStar}}" alt="{{question.level}}">
          </div>
   </div>   	
   
@@ -57,9 +57,3 @@
      <button class="btn btn-info col-xs-offset-3 col-xs-4 col-md-2" ng-click="getNext()">跳过</button>
    </div>
    
-   
-   <script src="resource/js/simditor/module.js"></script>
-<script src="resource/js/simditor/hotkeys.js"></script>
-<script src="resource/js/simditor/uploader.js"></script>
-<script src="resource/js/simditor/simditor.js"></script>
-<script src="resource/js/directive/custom_simditor.js"></script>

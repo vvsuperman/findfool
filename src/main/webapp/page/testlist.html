@@ -23,9 +23,12 @@
 		<div class="listcontent">
 			<div class="item header">
 				<div class="qsindex">&nbsp;</div>
-				<div class="qscontent">试题内容</div>
+				<div class="qscontent">试题内容
+				<!--  <a style="margin-left: 68%" href="" ng-click="expandAll()">展开全部</a> 展开全部会死机--> 
+				</div>
+				
 				<div class="qstype">类型</div>
-				<div class="qsoperate">删除/上移/下移</div>
+				<div class="qsoperate">删除/上移/下移/修改</div>
 			</div>
 			<div class="scroll">
 				<div class="item" ng-repeat="q in qs">
@@ -33,24 +36,24 @@
 						<span ng-bind="'Q'+($index+1)"></span>
 					</div>
 					<div class="qscontent">
-						<div class="content">
-							<a href="" 
+						<div class="content" >
+							<a href=""  class="greenFont"
 								ng-click="displayQuestionDetails($index)"
 								ng-if="!isDisplay[$index]">
 								 <input abstract context={{q.context}} > 
 							</a>
-							<a href=""
+							<a href=""   class="greenFont"
 								ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
-								 <input abstract context={{q.context}}> 
+								 <input abstract context={{q.context}} > 
 							</a>
 						</div>
 						 <div class="icon">
-						 	<a  href=""
+						 	<a  href=""   class="greenFont"
 								ng-click="displayQuestionDetails($index)"
 								ng-if="!isDisplay[$index]">
 								<span class="glyphicon glyphicon-chevron-down"></span>	
 							</a>
-							 <a  href=""
+							 <a  href=""   class="greenFont"
 								ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
 								<span class="glyphicon glyphicon-chevron-up"></span>
 							</a>
@@ -60,6 +63,7 @@
 						<input abstract ng-bind="getTypeName(q.type)">
 					</div>
 					<div class="qsoperate">
+					
 						<a style="margin-left: 15px" class="blackFont" href="" ng-click="deleteQuestionFromTest(q)">
 							<span class="glyphicon glyphicon-trash"></span>
 						</a>
@@ -71,6 +75,12 @@
 						<a class="blackFont" href="" ng-click="moveDown($index)">
 							<span class="glyphicon glyphicon-circle-arrow-down"></span>
 						</a>
+						&nbsp;&nbsp;&nbsp;
+						<a  class="blackFont" href="" ng-if="q.setid==0"
+							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'},$index)">
+							<span class="glyphicon glyphicon-edit"></span>
+						</a>
+						
 					</div>
 					<div ng-include src="'page/questiondetail.html'" ng-if="isDisplay[$index]">
 					</div>
@@ -95,10 +105,7 @@
 
 
 
-<script src="resource/js/simditor/module.js"></script>
-<script src="resource/js/simditor/hotkeys.js"></script>
-<script src="resource/js/simditor/uploader.js"></script>
-<script src="resource/js/simditor/simditor.js"></script> 
+
 <!-- <script src="http://simditor.tower.im/assets/scripts/simditor.js"></script> -->
 
 

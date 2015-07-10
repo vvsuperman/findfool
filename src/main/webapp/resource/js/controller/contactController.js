@@ -1,4 +1,4 @@
-OJApp.controller('contactController',function($scope,$http,Data){
+OJApp.controller('contactController',['$scope','$http','Data',function($scope,$http,Data){
 	$scope.tname = Data.tname();
 	$scope.suggest ={};
 	$scope.contact ={};
@@ -21,4 +21,4 @@ OJApp.controller('contactController',function($scope,$http,Data){
 				flashTip("获取数据错误");
 		    });
 	};
-});
+}]);

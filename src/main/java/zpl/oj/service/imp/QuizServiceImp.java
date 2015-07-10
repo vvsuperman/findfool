@@ -198,8 +198,7 @@ public class QuizServiceImp implements QuizService {
 		}
 		
 		
-		List<Integer> labelIds=labelService.getSystemLabels();
-	
+
 		return quizId;
 		
 	}

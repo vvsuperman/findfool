@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.dao.QuizDao;
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Label;
 import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
@@ -140,10 +141,10 @@ public class QuizController {
 
 		Quiz q = quizService.addQuiz(request);
 		//获取系统标签，并在labeltest中为该测试添加这些系统标签
-		List<Integer> labelIds=labelService.getSystemLabels();
-		for(int id:labelIds){
-		
-			labelService.insertIntoLabelTest(q.getQuizid(), id, 0);
+
+		List<Label> labels=labelService.getSystemLabels();
+		for(Label label:labels){
+			labelService.insertIntoLabelTest(q.getQuizid(), label.getId(), label.getIsSelected());
 		}
 		ResponseMessage msg = new ResponseMessage();
 		if (q == null) {
@@ -321,10 +322,11 @@ public class QuizController {
 			String quizName = param.get("quizName");
 			int quizId=quizService.genQuiz(quizName, uid);
 			//获取系统标签，并在labeltest中为该测试添加这些系统标签
-			List<Integer> labelIds=labelService.getSystemLabels();
-			for(int id:labelIds){
-			
-				labelService.insertIntoLabelTest(quizId, id, 0);
+
+			//获取系统标签，并在labeltest中为该测试添加这些系统标签
+			List<Label> labels=labelService.getSystemLabels();
+			for(Label label:labels){
+				labelService.insertIntoLabelTest(quizId, label.getId(), label.getIsSelected());
 			}
 			
 		return null;

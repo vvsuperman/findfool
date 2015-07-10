@@ -1,4 +1,4 @@
-OJApp.controller("oauthorController",function($scope, $http, Data,$routeParams) {
+OJApp.controller("oauthorController",['$scope','$http','Data','$routeParams',function($scope, $http, Data,$routeParams) {
 
 	$scope.template = 'page/oauthor.html';
     $scope.ContentUs = '';
@@ -74,4 +74,4 @@ OJApp.controller("oauthorController",function($scope, $http, Data,$routeParams) 
 
     
 
-});
+}]);

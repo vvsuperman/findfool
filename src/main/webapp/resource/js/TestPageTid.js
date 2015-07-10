@@ -1,7 +1,7 @@
 /**
  * Created by liuzheng on 2014/7/26.
  */
-OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$modal, Data, $timeout) {
+OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$modal','Data','$timeout',function($scope,$rootScope, $routeParams, $http,$modal, Data, $timeout) {
     $scope.url = '#/test';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testlist.html';
@@ -237,11 +237,23 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
 	        	flashTip("获取数据错误");
 	        });
 	 }
+	 
+	 
+	 $scope.expandAll = function(){
+	
+		 console.log("expandall .....",$scope.isDisplay.length);
+		 for(i in $scope.isDisplay)
+         	$scope.isDisplay[i]=true;
+		 
+		 for(var i=0;i<$scope.isDisplay.length;i++){
+			 $scope.isDisplay[i]=true;
+		 }
+	 }
 
 	 $scope.displayQuestionDetails = function(index){
-		 for(i in $scope.qs){
-			 $scope.isDisplay[i]=false;
-		 }
+//		 for(i in $scope.qs){
+//			 $scope.isDisplay[i]=false;
+//		 }
 		 $scope.isDisplay[index]=true;
 	 }
 
@@ -279,4 +291,4 @@ OJApp.controller('TestPageTid',function($scope,$rootScope, $routeParams, $http,$
     	
     }
  
-});
+}]);

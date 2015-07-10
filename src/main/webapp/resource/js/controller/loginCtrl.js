@@ -1,4 +1,4 @@
-OJApp.controller('loginCtrl',function ($scope,$http,Data) {
+OJApp.controller('loginCtrl',['$scope','$http','Data',function ($scope,$http,Data) {
 	
 	//手机的错误信息
 	$scope.errorMsg={};
@@ -62,4 +62,4 @@ OJApp.controller('loginCtrl',function ($scope,$http,Data) {
             )
         }
     };
-});
+}]);

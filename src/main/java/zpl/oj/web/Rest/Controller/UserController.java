@@ -41,7 +41,7 @@ public class UserController {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private SMS sms;
 
@@ -49,29 +49,24 @@ public class UserController {
 	private SecurityService securityService;
 	@Autowired
 	private VerifyQuestionService verifyQuestionService;
-	
-	
 
-	
-	//获取手机验证码
+	// 获取手机验证码
 	@RequestMapping(value = "/getvertifycode", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase getVertifyCode(@RequestBody Map map1) {
 		ResponseBase rb = new ResponseBase();
 		String mobile = (String) map1.get("mobile");
-		//发送短信
+		// 发送短信
 		int max = 9999;
 		int min = 1000;
 		Random random = new Random();
 		int s = random.nextInt(max) % (max - min + 1) + min;
 		List<String> ls = new ArrayList<String>();
-		ls.add(s+"");
-		sms.send(mobile,ls,ExamConstant.SMS_TEMPID_REMIND);
+		ls.add(s + "");
+		sms.send(mobile, ls, ExamConstant.SMS_TEMPID_REMIND);
 		rb.setMessage(s);
 		return rb;
 	}
-
-
 
 	@RequestMapping(value = "/oauthorlogin")
 	@ResponseBody
@@ -189,7 +184,7 @@ public class UserController {
 			rb.setState(1);
 			rb.setToken(securityService.computeToken(u));
 			rb.setMessage(u);
-			
+
 		}
 
 		return rb;
@@ -317,9 +312,6 @@ public class UserController {
 			return rb;
 		}
 	}
-	
-	
-	
 
 	// 重置密码申请,发送用户邮件
 	@RequestMapping(value = "/setting/resetpwdapply")
@@ -327,34 +319,35 @@ public class UserController {
 	public ResponseBase reSetPwdApply(@RequestBody Map map) {
 		ResponseBase rb = new ResponseBase();
 		String email = (String) map.get("email");
-		String content = (String)map.get("content");
-		String answer = (String)map.get("answer");
-		
-		VerifyQuestion vQuestion = verifyQuestionService.getVQuestByContent(content);
-		if(vQuestion == null){
+		String content = (String) map.get("content");
+		String answer = (String) map.get("answer");
+
+		VerifyQuestion vQuestion = verifyQuestionService
+				.getVQuestByContent(content);
+		if (vQuestion == null) {
 			rb.setState(1);
 			rb.setMessage("验证问题不存在");
 			return rb;
 		}
-		if(answer.equals(vQuestion.getAnswer()) == false){
+		if (answer.equals(vQuestion.getAnswer()) == false) {
 			rb.setState(1);
 			rb.setMessage("验证码错误");
 			return rb;
 		}
-		
-		
+
 		if (email == null) {
 			rb.setState(1);
 			rb.setMessage("email为空");
 			return rb;
-		};
+		}
+		;
 		User user = userDao.getUserIdByEmail(email);
 		if (user == null) {
 			rb.setState(1);
 			rb.setMessage("email错误，用户不存在");
 			return rb;
 		}
-	    userService.resetPwdApply(email, user);
+		userService.resetPwdApply(email, user);
 		rb.setState(0);
 		return rb;
 	}
@@ -390,33 +383,53 @@ public class UserController {
 		String pwd = (String) map.get("pwd");
 		String confirmpwd = (String) map.get("confirmpwd");
 
-		if(email == null||pwd==null||confirmpwd==null){
+		if (email == null || pwd == null || confirmpwd == null) {
 			rb.setState(1);
 			rb.setMessage("输入不得为空");
 			return rb;
 		}
-		
-		if(pwd.equals(confirmpwd)==false){
+
+		if (pwd.equals(confirmpwd) == false) {
 			rb.setState(2);
 			rb.setMessage("两次密码不相同");
 			return rb;
 		}
-		
+
 		User user = userDao.getUserIdByEmail(email);
-		if(user == null){
+		if (user == null) {
 			rb.setState(2);
 			rb.setMessage("用户不存在");
 			return rb;
 		}
-		
+
 		if (user.getPwd().equals(pwd) == false) {
 			rb.setState(3);
 			rb.setMessage("原用户密码错误");
 			return rb;
 		}
-		
+
 		userDao.updatePwd(confirmpwd, email);
 		rb.setState(0);
 		return rb;
 	}
+
+	// 微信js sdk配置
+	@RequestMapping(value = "/wxjsk/config")
+	@ResponseBody
+	public ResponseBase wxSDKConfig(@RequestBody Map map) {
+		String url = (String) map.get("url");
+		String ticket = JsSdk.getJsApiTicket();
+		Map<String, String> data = JsSdk.sign(ticket, url);
+		data.put("debug", "true");
+		data.put(
+				"jsApiList",
+				"['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo']");
+		ResponseBase rb = new ResponseBase();
+		// Map data = new HashMap<String, String>();
+		rb.setMessage(data);
+
+		return rb;
+	}
+	
+	
 }

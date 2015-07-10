@@ -1,7 +1,8 @@
 /**
  * Created by liuzheng on 2014/7/27.
  */
-function commonsetting($scope,$http,Data) {
+
+OJApp.controller('commonsetting',['$scope','$http','Data',function($scope,$http,Data) {
     $scope.zdy=false;
     $scope.comSave = function () {
 //        var qid = [];
@@ -44,4 +45,4 @@ function commonsetting($scope,$http,Data) {
 
         });
     };
-}
+}])

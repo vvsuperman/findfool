@@ -17,7 +17,7 @@ public interface LabelDao {
 
 	// 对label表的操作
 	@Select("select * from label where type = 0")
-	List<Integer> getSystemLabels();
+	List<Label> getSystemLabels();
 
 	@Insert("INSERT INTO label(TYPE,NAME)" + " VALUES (#{0}, #{1})")
 	void insertNewLabel(int type, String labelname);

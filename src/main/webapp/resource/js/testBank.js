@@ -1,8 +1,8 @@
-!window.Simditor && 
-document.write('<script src=resource/js/simditor/module.js><\/script>');
-document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
-document.write('<script src=resource/js/simditor/uploader.js><\/script>');
-document.write('<script src=resource/js/simditor/simditor.js><\/script>');
+//!window.Simditor && 
+//document.write('<script src=resource/js/simditor/module.js><\/script>');
+//document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
+//document.write('<script src=resource/js/simditor/uploader.js><\/script>');
+//document.write('<script src=resource/js/simditor/simditor.js><\/script>');
 
 
 
@@ -50,11 +50,11 @@ function QuestionMeta() {
     }
 }
 
-OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
+OJApp.controller('TestBank',['$scope','$http','Data','$sce','$modal',function($scope, $http,Data,$sce,$modal) {
     $scope.url = '#/bank';
     $scope.template = 'page/testBank.html';
     $scope.ContentUs = 'page/contentUs.html';
-    $scope.leftBar = 'page/testsleftbar.html';
+    $scope.leftBar = 'page/libleftBar.html';
     $scope.active = 1;
     $scope.show = 1;
     $scope.privi = Data.privi();
@@ -406,4 +406,4 @@ OJApp.controller('TestBank',function($scope, $http,Data,$sce,$modal) {
 			  $scope.reciveData.choosedQlist.push(q);		
 		}		
 	}
-});
+}]);

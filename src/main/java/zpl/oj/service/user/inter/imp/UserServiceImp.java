@@ -1,24 +1,24 @@
 package zpl.oj.service.user.inter.imp;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import zpl.oj.dao.SetDao;
+import zpl.oj.dao.UserSetDao;
 import zpl.oj.dao.user.UserDao;
-import zpl.oj.model.common.VerifyQuestion;
+import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.request.User;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
-import zpl.oj.util.mail.MailSenderInfo;
 import zpl.oj.util.mail.SendCloud;
-import zpl.oj.util.mail.SimpleMailSender;
-import zpl.oj.util.randomCode.ValidateCode;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -32,6 +32,14 @@ public class UserServiceImp implements UserService{
     
     @Autowired
     private SendCloud sendCloud;
+    
+    @Autowired
+    private UserSetDao userSetDao;
+    
+    @Autowired
+    private SetDao setDao;
+    
+    
     
     
 	@Override
@@ -53,6 +61,9 @@ public class UserServiceImp implements UserService{
 		}else{
 			userDao.addUser(u);			
 		}
+		int uid = userDao.getUserIdByEmail(u.getEmail()).getUid();
+		
+		
 		return true;
 	}
 

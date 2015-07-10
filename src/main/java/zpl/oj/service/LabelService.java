@@ -14,8 +14,8 @@ public interface LabelService{
 	/** 
 	 * description:获取所有的系统标签，返回它们的id
 	 */
-	abstract List<Integer> getSystemLabels();
-	//abstract List<JsonLabel> getSystemLabels2(Integer testid);
+
+	abstract List<Label> getSystemLabels();
 
 	/** 
 	 * description:向labe表中加入新的label

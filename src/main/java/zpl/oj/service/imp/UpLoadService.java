@@ -190,6 +190,13 @@ public class UpLoadService{
 					// TODO: handle exception
 					throw createException(row,ExamConstant.QUESTION_SCORE);
 				}
+      			
+      			try {
+	      			problem.setNegative((int)Double.parseDouble(((getValuebyCell(row,map,ExamConstant.QUESTION_NEGATIVE)))));
+				} catch (Exception e) {
+					// TODO: handle exception
+					throw createException(row,ExamConstant.QUESTION_NEGATIVE);
+				}
 	      		
 	      		
 	      		
@@ -218,6 +225,17 @@ public class UpLoadService{
 	      		if(row.getCell(map.get(ExamConstant.QUESTION_LEVEL))!=null){
 	      			try {
 	      				problem.setLevel(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_LEVEL)));
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+	      			
+	      		}
+	      		
+	      		
+	      	   //处理做题时间
+	      		if(row.getCell(map.get(ExamConstant.QUESTION_LIMITTIME))!=null){
+	      			try {
+	      				problem.setLimitTime(Integer.parseInt(getValuebyCell(row,map,ExamConstant.QUESTION_LIMITTIME)));
 					} catch (Exception e) {
 						// TODO: handle exception
 					}

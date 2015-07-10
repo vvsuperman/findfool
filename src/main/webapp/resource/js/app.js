@@ -184,7 +184,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
     }]);
 
 
-OJApp.factory('Data', function (webStorage) {
+OJApp.factory('Data', ['webStorage',function (webStorage) {
     function _data() {
         this._flag = 0;
         this.flag = function () {
@@ -506,11 +506,11 @@ OJApp.factory('Data', function (webStorage) {
         };
     }
     return new _data();
-});
+}]);
 
 
 //用于客户端的服务
-OJApp.factory('CadData', function (webStorage) {
+OJApp.factory('CadData', ['webStorage',function (webStorage) {
     function _data() {
     	  this._token = "";
           this.getToken = function () {
@@ -595,5 +595,5 @@ OJApp.factory('CadData', function (webStorage) {
     }  
      
     return new _data();
-});
+}]);
 

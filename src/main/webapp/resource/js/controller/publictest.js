@@ -1,4 +1,4 @@
-OJApp.controller('publictestCtrl',function ($scope,$http,CadData,$routeParams) {
+OJApp.controller('publictestCtrl',['$scope','$http','CadData','$routeParams',function ($scope,$http,CadData,$routeParams) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.testid = param[0];
@@ -134,4 +134,4 @@ OJApp.controller('publictestCtrl',function ($scope,$http,CadData,$routeParams) {
 		     })
 		}
 	 
-})
+}])

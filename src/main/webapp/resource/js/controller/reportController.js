@@ -1,10 +1,10 @@
-!window.Simditor && 
-document.write('<script src=resource/js/simditor/module.js><\/script>');
-document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
-document.write('<script src=resource/js/simditor/uploader.js><\/script>');
-document.write('<script src=resource/js/simditor/simditor.js><\/script>');
+//!window.Simditor && 
+//document.write('<script src=resource/js/simditor/module.js><\/script>');
+//document.write('<script src=resource/js/simditor/hotkeys.js><\/script>');
+//document.write('<script src=resource/js/simditor/uploader.js><\/script>');
+//document.write('<script src=resource/js/simditor/simditor.js><\/script>');
 
-OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
+OJApp.controller('reportController',['$scope','$http','Data','$routeParams',function ($scope,$http,Data,$routeParams) {
 	$scope.showReport =1;
     $scope.ContentUs = 'page/contentUs.html';
     $scope.template = 'page/testreport.html';
@@ -73,9 +73,9 @@ OJApp.controller('reportController',function ($scope,$http,Data,$routeParams) {
         Data.setTuid(invite.uid);
         window.location.href="#/report/list";
 	 }
-});
+}]);
 
-OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams) {
+OJApp.controller('reportListController',['$scope','$http','Data','$routeParams',function ($scope,$http,Data,$routeParams) {
 	$scope.showReport =2;
 	$scope.listNav=1;
 	$scope.detailNav=0;
@@ -206,9 +206,9 @@ OJApp.controller('reportListController',function ($scope,$http,Data,$routeParams
     }).error(function(){
    	 console.log("get data failed");
     })
-});
+}]);
 
-OJApp.controller('publicReportListController',function ($scope,$http,$routeParams) {
+OJApp.controller('publicReportListController',['$scope','$http','$routeParams',function ($scope,$http,$routeParams) {
 	$scope.showReport =2;
 	$scope.listNav=1;
 	$scope.detailNav=0;   
@@ -302,10 +302,10 @@ OJApp.controller('publicReportListController',function ($scope,$http,$routeParam
     }).error(function(){
    	 console.log("get data failed");
     })
-});
+}]);
 
 
-OJApp.controller('reportDetailController',function ($scope,$http,Data,$routeParams,$modal) {
+OJApp.controller('reportDetailController',['$scope','$http','$routeParams','$modal',function ($scope,$http,Data,$routeParams,$modal) {
 	$scope.showReport =3;
 	$scope.listNav=0;
 	$scope.logNav=0;
@@ -417,10 +417,10 @@ OJApp.controller('reportDetailController',function ($scope,$http,Data,$routePara
 		
 	 
 	 
-});
+}]);
 
 
-OJApp.controller('reportLogController',function ($scope,$http,Data) {
+OJApp.controller('reportLogController',['$scope','$http','Data',function ($scope,$http,Data) {
 	$scope.showReport =4;
 	$scope.listNav=0;
 	$scope.logNav=1;	
@@ -448,10 +448,10 @@ OJApp.controller('reportLogController',function ($scope,$http,Data) {
     })
     
 	
-})
+}])
 
 
-OJApp.controller('publicReportListController',function ($scope,$http,$routeParams) {
+OJApp.controller('publicReportListController',['$scope','$http','$routeParams',function ($scope,$http,$routeParams) {
 	$scope.showReport =2;
 	$scope.listNav=1;
 	$scope.detailNav=0;   
@@ -544,4 +544,4 @@ OJApp.controller('publicReportListController',function ($scope,$http,$routeParam
     }).error(function(){
    	 console.log("get data failed");
     })
-});
+}]);

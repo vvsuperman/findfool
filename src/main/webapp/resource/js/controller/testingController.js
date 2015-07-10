@@ -1,6 +1,6 @@
 'use strict';
 
-OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
+OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 	 $scope.email = param[0];
@@ -43,7 +43,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 $scope.monitor =1;
 	 
-
+     $scope.quiz={};
 	 
 	 $scope.btnShow =1;
 
@@ -54,6 +54,8 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 $scope.showCamera = 1;
 	 
 	 $scope.showCZone = 1;//控制是否显示视频区域
+	 
+	 $scope.showPanel = 1;//控制是否显示整个拍照区域
 	 
 	 $scope.pictureOK = 0;//用户是否上传好照片
 	 
@@ -109,7 +111,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 							  $scope.btn.Show=3
 							 });
 					 $scope.$broadcast("updatePicture","1");
-					 $scope.pictureOK =1;
+					
 				}
 			}, {
 				ok: "是",
@@ -118,6 +120,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 				reverseButtons: true
 			});
 	 }
+	 
+	 //基准照片上传成功
+	 $scope.$on("baseImgSave",function(){
+		 $scope.pictureOK =1;
+	 })
 	 
 	 //基准照片需要重新拍摄
 	 $scope.$on("baseImgRecapture",function(){
@@ -201,6 +208,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	         //data: {"email":($scope.loginUser.email).replace(/(^\s*)|(\s*$)/g,''), "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
          	 data: {"email":$scope.email,"pwd": $scope.loginUser.pwd,"testid":$scope.tid}
 	     }).success(function (data) {
+	    	 
 	    	 if( data.state == 0){
 	    		 //用户名或密码不匹配
 	    		 if(data.message ==1){
@@ -212,31 +220,24 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    			 flashTip("用户不存在");
 	    			 return false;
 	    		 }
-	    		 
 	    	 }else if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.errMsg = "";
-	    		 //填写用户信息
+	    		 if($scope.openCamera==0||$scope.openCamera==2){
+	    			 
+	    			 $scope.showCPanel=1
+	    		 } else if($scope.openCamera==1){
+	    			 $scope.showCPanel=2; //不开启拍照区域
+	    		 }
 	    		 $scope.show = 2;
-	    		 //$scope.tuser.tuid = data.message;
-	    		 /*$http({
-	    	         url: WEBROOT+"/testing/getSchools",
-	    	         method: 'GET',
-	    	         data: {"name":'ss',"email":$scope.loginUser.email, "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
-	    	     }).success(function (data) {
-	    	    	 if(data.state==200)
-	    	    		 $scope.schools=data.message;
-	    	    	 else
-	    	    		 alert(data.message);
-	    	     });*/
+	    		 
 	    		 $http({
 	    	         url: WEBROOT+"/testing/getLabels",
 	    	         method: 'POST',
 	    	         data: {"email":$scope.email, "testid": $scope.tid}
 	    	     }).success(function (data) {
 	    	    	 $scope.userInfo=data["message"];
-
 	    	     });
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
@@ -283,10 +284,11 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	 
 	 //提交用户信息
 	 $scope.submitUserInfo = function(){
-		 if($scope.pictureOK!=1 && $scope.openCamera==0){
-			 smoke.alert("请先拍照");
-			 return false;
-		 }
+			 if($scope.pictureOK!=1 && ($scope.openCamera==0||$scope.openCamera==2)){
+				 smoke.alert("请先拍照");
+				 return false;
+			 }
+		
 		 
 		 
 		 for(var i in $scope.userInfo){
@@ -308,7 +310,7 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
 	    		 $scope.errMsg = "错误";
 	    		 
 	    	 }else{
-	    		 $scope.show = 3;
+	    		 $scope.show=3;
 	    		 $scope.testInfo = data.message;
 	    	 }	 
 	         
@@ -653,12 +655,12 @@ OJApp.controller('testingController',function ($scope,$http,Data,$routeParams,$t
      
      
    
-});
+}]);
 
-OJApp.controller("pagCtrl",function($scope){
+OJApp.controller("pagCtrl",['$scope',function($scope){
 	
 	$scope.totalItems = 41;
-})
+}])
 
 
 

@@ -1,14 +1,14 @@
 /**
  * Created by liuzheng on 2014/7/11.
  */
-OJApp.controller("invite",function($scope, $http, Data) {
+OJApp.controller("invite",['$scope','$http','Data',function($scope, $http, Data) {
     $scope.url = '#/invite';
     $scope.template = 'page/invite.html';
     $scope.ContentUs = 'page/contentUs.html';
     $scope.leftBar = 'page/testlistleftbar.html';
-})
+}])
 
-OJApp.controller("Excel",function($scope, $http, Data) {
+OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) {
 	$scope.duration=70;
 	
 	$scope.camera={};
@@ -240,7 +240,7 @@ OJApp.controller("Excel",function($scope, $http, Data) {
         drop.addEventListener('dragover', handleDragover, false);
         drop.addEventListener('drop', handleDrop, false);
     }
-});
+}]);
 
 OJApp.filter('filterTest', function () {
     return function (items, v) {

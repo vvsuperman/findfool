@@ -17,7 +17,14 @@ public class Question {
 	private int score;
 	private int level;
 	private int limittime;
+	private int negative;
 	
+	public int getNegative() {
+		return negative;
+	}
+	public void setNegative(int negative) {
+		this.negative = negative;
+	}
 	public int getLimittime() {
 		return limittime;
 	}

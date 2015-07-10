@@ -14,11 +14,13 @@ import org.springframework.stereotype.Service;
 import zpl.oj.dao.CadProblemDao;
 import zpl.oj.dao.CadTestDao;
 import zpl.oj.dao.CandidateDao;
+import zpl.oj.dao.ChallengeRuleDao;
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.model.common.CadProblem;
 import zpl.oj.model.common.CadTest;
 import zpl.oj.model.common.Candidate;
+import zpl.oj.model.common.ChallengeRule;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.ProblemTestCase;
 import zpl.oj.model.request.Question;
@@ -52,6 +54,57 @@ public class CadQuizService {
 	@Autowired
 	private DESService desService;
 	
+	@Autowired
+	private ChallengeRuleDao crDao;
+	
+	
+	//判断用户是否有权限访问到该题库
+	public boolean checkLevel(int testid, String email){
+		ChallengeRule cr = crDao.findCRByTestid(testid);
+		int level = getLevel(email);
+		if(cr.getDomid()>level){
+			return false;
+		}else{
+			return true;
+		}
+	} 
+	
+	
+	//判断用户的等级 1为红，2为白，3为蓝
+	public int getLevel(String email){
+		List<ChallengeRule> easys = crDao.findCRById(ExamConstant.DP_RED);
+		int easyScore =0;
+		for(ChallengeRule easy:easys){
+			if(cadTestDao.getCdByIds(easy.getTestid(), email)!=null){
+				easyScore += cadTestDao.getCdByIds(easy.getTestid(), email).getScore();
+			}
+			
+		}
+		
+		int mediumScore =0;
+		if(easyScore > ExamConstant.DP_M){
+			List<ChallengeRule> mediums = crDao.findCRById(ExamConstant.DP_WHITE);
+			for(ChallengeRule medium:mediums){
+				if(cadTestDao.getCdByIds(medium.getTestid(), email)!=null){
+					mediumScore += cadTestDao.getCdByIds(medium.getTestid(), email).getScore();
+				}
+				
+			}
+			if(easyScore+mediumScore>ExamConstant.DP_H){
+				//得分高于500
+				return 3;
+			}else{
+				//得分高于300，小于500
+				return 2;
+			}
+			
+		}else{
+			//分数未达标，只能做红色题
+			return 1;
+		}
+		
+		
+	}
 	
 	//生成试卷,包括invite和cadproblem
 	public CadTest genQuiz(String email, int  testid){
@@ -160,7 +213,6 @@ public class CadQuizService {
 		cadProblem.setUseranswer(useranswer);
 		cadProDao.updateAnswerByIds(cadProblem);
 		
-		
 		String rightanser = problem.getRightanswer();
 		if(rightanser.equals(useranswer)){
 			if(problem.getScore()!=0){
@@ -169,9 +221,7 @@ public class CadQuizService {
 			
 		}else{
 			if(problem.getNegative()!=0){
-				if(cadTest.getScore()>0){
-					cadTest.setScore(cadTest.getScore()-problem.getNegative());
-				}
+				cadTest.setScore(cadTest.getScore()-problem.getNegative());
 			}
 			
 			
@@ -184,7 +234,7 @@ public class CadQuizService {
 		int pnums = cadProDao.countProblems(cadTest.getCtid());  
 		//题目回答完了,将cadTest设置为完成状态，否则取下一道题
 		Question q = null;
-		//只能做一半
+		
 		if(nums>=pnums/2){
 			cadTest.setState(ExamConstant.INVITE_FINISH);
 			cadTestDao.updateCadTest(cadTest);
@@ -227,7 +277,13 @@ public class CadQuizService {
 	    }else{
 	    	 int rank = cadTestDao.getRank(cdTest.getScore(),cdTest.getTestid());
 	 		if(involve!=0){
-	 			percent = (involve-rank)*100/involve;
+	 			if(involve ==1){
+	 				percent=100;
+	 			}
+	 			else{
+	 				percent = (involve-rank)*100/involve;
+	 			}
+	 			
 	 		}
 	 	    
 	 	    int state =0;
@@ -254,6 +310,12 @@ public class CadQuizService {
 		// TODO Auto-generated method stub
 		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
 		return baseurl+"/#/publictest/"+desService.encode(testid+"|"+slogan+"|"+ExamConstant.PUBLIC_COMPANY);
+	}
+
+
+	public ChallengeRule getCRByName(String testname) {
+		// TODO Auto-generated method stub
+		return crDao.getCRByTestname(testname);
 	}
 
 }

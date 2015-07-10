@@ -1,5 +1,6 @@
-OJApp.controller('testConfig', function($scope, $http, Data, $modal) {
 
+OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope, $http, Data,$modal) {
+	
 	$scope.url = '#/testConfig';
 	$scope.active = 1;
 	$scope.template = 'page/testconfig.html';
@@ -152,46 +153,38 @@ OJApp.controller('testConfig', function($scope, $http, Data, $modal) {
 	//
 	// }
 
-	$scope.addLabel = function() {
-		if ($scope.angmodel.labeladded == "") {
-			flashTip("标签不能为空");
-		} else {
-			$http({
-				url : WEBROOT + "/label/addlabel",
-				method : 'POST',
-				data : {
-					"testid" : $scope.tid,
-					"label" : $scope.angmodel.labeladded
-				}
-			}).success(function(data) {
-				flashTip("添加成功");
+	
+    $scope.addLabel = function (){
+    	$http({
+            url: WEBROOT+"/label/addlabel",
+            method: 'POST',
+    	    data: {"testid": $scope.tid,"label":$scope.angmodel.labeladded}
+        }).success(function (data) {
+            flashTip("添加成功");
 
-				$scope.updateTestLabels();
-				$scope.angmodel.labeladded = "";
-			}).error(function() {
-				console.log("get data failed");
-			});
-		}
-	}
-	$scope.addEmail = function() {
-		$http({
-			url : WEBROOT + "/quizemail/addemail",
-			method : 'POST',
-			data : {
-				"testid" : $scope.tid,
-				"email" : $scope.angmodel.emailadded
-			}
-		}).success(function(data) {
-			if (data.state == 1) {
-				flashTip("添加成功");
-				$scope.updateQuizEmails();
-				$scope.angmodel.emailadded = "";
-			} else {
-				$scope.angmodel.emailadded = "";
-				flashTip(data.message);
-			}
-		}).error(function() {
-			console.log("get data failed");
-		});
-	}
-})
+            $scope.updateTestLabels();
+            $scope.angmodel.labeladded="";
+        }).error(function(){
+       	 console.log("get data failed");
+        });
+    }
+    $scope.addEmail = function (){
+    	$http({
+            url: WEBROOT+"/quizemail/addemail",
+            method: 'POST',
+    	    data: {"testid": $scope.tid,"email":$scope.angmodel.emailadded}
+        }).success(function (data) {
+        	if(data.state==1){
+	            flashTip("添加成功");
+	            $scope.updateQuizEmails();
+	            $scope.angmodel.emailadded="";
+        	}
+        	else{
+	            $scope.angmodel.emailadded="";
+        		flashTip(data.message);
+        	}
+        }).error(function(){
+       	 console.log("get data failed");
+        });
+    }
+}])

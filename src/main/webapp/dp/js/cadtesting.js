@@ -1,7 +1,7 @@
 /**
  * 做题控制器
  */
-OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
+OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	$scope.time={};
 	
 	 //判断用户是否登陆
@@ -15,7 +15,11 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
         method: 'POST',
         data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
     }).success(function (data) {
-   	 if(data.state!=0){//试题已完成·
+    	if(data.state == 101){
+        	smoke.alert(data.message);
+        	window.location.href='#/dp/testmain';
+        }
+    	else if(data.state!=0){//试题已完成·
    		 smoke.alert(data.message);
    		 window.location.href='#/dp/testdetail';
    		 
@@ -38,22 +42,28 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
    		$scope.$broadcast("countdown",remain);
 	}
     
-    
+    //倒计时提交
     $scope.$on("cdfinished",function(){
+    	$scope.firsttime =0;
     	$scope.submit();
     })
+    
+    //双段提交标志位。如果用户提交空,首先提示不可提交。而后再提交；如果是从倒计时进来，则直接提交
+    $scope.firsttime =1;
     
     $scope.submit=function(){
 		
 		//将用户答案按照id排排序，并生成正确的useranswer
 		var options = $scope.question.answer;
 		var length = options.length
+		
+		
 		for(var i=0;i<length;i++){
-			for(var j=i;j<length-i;j++){
-				if(options[j]>options[j+1]){
-					var option = options[j];
-					options[j] = options[j+1];
-					options[j+1] = option;
+			for(var j=i+1;j<length;j++){
+				if(options[j].caseId<options[i].caseId){
+					var option = options[i];
+					options[i] = options[j];
+					options[j] = option;
 				}
 			}
 		}
@@ -68,8 +78,10 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 			}
 		}
 		//用户未提交
-		if(useranswer=="0000"){
+		if(useranswer=="0000" && $scope.firsttime ==1){
+			$scope.firsttime =0;
 			smoke.alert("你还没有答题哦，怎么就提交了？如果这题不会，可以选择跳过～");
+			return false;
 		}
 		
 		$http({
@@ -77,7 +89,11 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	        method: 'POST',
 	        data: {"testid":CadData.getTestid(),problemid:$scope.question.qid,"email":CadData.getEmail(),useranswer:useranswer}
 	    }).success(function (data) {
-	   	 if(data.state==1){
+	    	if(data.state == 101){
+	        	smoke.alert(data.message);
+	        	window.location.href='#/dp/testmain';
+	        }
+	    	else if(data.state==1){
 	   		 smoke.alert(data.message)
 	   		 window.location.href='#/dp/testdetail';
 	   	 }else{
@@ -92,17 +108,19 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	    }).error(function(){
 	   	 console.log("get data failed");
 	    })
+	    
+	    $scope.firsttime =1;
 	}
 	
     
     $scope.getQuestionStar = function(question){
     	var star ="";
    		if(question.level ==1){
-   		    star ="1star";
+   		    star ="dp1star";
    		}else if(question.level == 2){
-   			star ="2star";
+   			star ="dp2star";
    		}else if(question.level == 3){
-   			star ="3star"
+   			star ="dp3star"
    		}
    		$scope.questionStar ="resource/static/"+star+".png"
    	
@@ -114,7 +132,11 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	        method: 'POST',
 	        data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
 	    }).success(function (data) {
-	   	 if(data.state!=0){
+	    	if(data.state == 101){
+	        	smoke.alert(data.message);
+	        	window.location.href='#/dp/testmain';
+	        }
+	    	else if(data.state!=0){
 	   		 $scope.errmsg = data.message;
 	   	 }else{
 	   		$scope.question = data.message;
@@ -127,4 +149,4 @@ OJApp.controller('cadtestingController',function ($scope,$http,CadData) {
 	    })
 	}
 	
-})
+}])

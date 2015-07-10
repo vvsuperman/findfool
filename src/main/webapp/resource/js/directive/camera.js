@@ -41,7 +41,6 @@ OJApp.directive('camera', function() {
 		    	
 		    	//face++ js接口不可用，改用java
 		    	//state为是否第一次传递照片
-		    	console.log("state",state);
 		    	$.ajax({
 			    		url :WEBROOT+"/uploadimg",
 			    		type : "POST",
