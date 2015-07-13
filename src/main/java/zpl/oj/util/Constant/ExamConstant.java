@@ -96,5 +96,9 @@ public class ExamConstant{
 	
 	public static final String[] MEMCACHED_SERVERS = {"192.168.1.22:11211"};
 	public static final Integer[] MEMCACHED_WEIGHTS = {3};
+	
+	// 评论对象类型
+	public static final int COMMENT_SUBJECT_TYPE_TEST = 1;
+	public static final int COMMENT_SUBJECT_TYPE_QUESTION = 2;
 }	
 
