@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue','Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft Yahei',sans-serif;
+    background: #fff;
+}
+
+
+
+.jumbotron {
+    background-image: url(resource/static/bg.jpg);
+    position: relative;
+    min-height: 650px;
+    padding-top: 200px;
+    margin-bottom: 0px;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
