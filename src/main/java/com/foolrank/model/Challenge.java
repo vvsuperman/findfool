@@ -1,5 +1,7 @@
 package com.foolrank.model;
 
+import java.util.Date;
+
 /**
  * 挑战赛模型
  * 
@@ -11,6 +13,7 @@ public class Challenge {
 	private int companyId;
 	private String name;
 	private int type;
+	private String logo;
 	private String description;
 	private String prize;
 	private String startTime;
@@ -123,5 +126,13 @@ public class Challenge {
 
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 }
