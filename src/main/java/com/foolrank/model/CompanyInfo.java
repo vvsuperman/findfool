@@ -1,8 +1,9 @@
-package com.foolrank.response.json;
+package com.foolrank.model;
 
-public class Company {
+public class CompanyInfo {
+
 	private int id;
-	private String name;
+	private int companyId;
 	private String logo;
 	private String address;
 	private String tel;
@@ -16,20 +17,12 @@ public class Company {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public int getCompanyId() {
+		return companyId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
 	public String getAddress() {
@@ -54,5 +47,13 @@ public class Company {
 
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 }

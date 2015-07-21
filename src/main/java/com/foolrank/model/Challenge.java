@@ -1,6 +1,5 @@
 package com.foolrank.model;
 
-import java.util.Date;
 
 /**
  * 挑战赛模型

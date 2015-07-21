@@ -46,7 +46,6 @@ public class ChallengeController {
 		String strCompanyId = params.get("cid");
 		int companyId = strCompanyId == null ? 0 : Integer
 				.parseInt(strCompanyId.trim());
-		System.out.println("companyId:" + companyId);
 		String strPage = params.get("p");
 		int page = strPage == null ? 1 : Integer.parseInt(strPage.trim());
 		if (page <= 0) {
