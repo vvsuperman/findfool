@@ -45,6 +45,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
 			<property name="typeAliasesPackage" value="zpl.oj.model.*"></property>
+			<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 			<!-- 备注：这里要是在接口里面写了sql语句，那么这一样就可以注释掉，这一行的意思是寻找所有的sql映射文件			
 			<property name="mapperLocations" value="classpath:model/*Mapper.xml"></property>
 			 -->
