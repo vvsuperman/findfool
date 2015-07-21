@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foolrank.model.Challenge;
+import com.foolrank.response.json.SimpleChallenge;
 
 import zpl.oj.dao.ChallengeDao;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.util.StringUtil;
 
 @Controller
 @RequestMapping("/challenge")
@@ -27,7 +29,7 @@ public class ChallengeController {
 
 	@Autowired
 	private ChallengeDao challengeDao;
-	
+
 	@RequestMapping(value = "/{signedId}")
 	@ResponseBody
 	public String index(@PathVariable("signedId") String signedId) {
@@ -39,9 +41,14 @@ public class ChallengeController {
 	@RequestMapping(value = "/getListByStatus")
 	@ResponseBody
 	public ResponseBase getListByStatus(@RequestBody Map<String, String> params) {
-		int status = Integer.parseInt(params.get("status"));
-		int companyId = Integer.parseInt(params.get("cid"));
-		int page = Integer.parseInt(params.get("p"));
+		String strStatus = params.get("status");
+		int status = strStatus == null ? 1 : Integer.parseInt(strStatus.trim());
+		String strCompanyId = params.get("cid");
+		int companyId = strCompanyId == null ? 0 : Integer
+				.parseInt(strCompanyId.trim());
+		System.out.println("companyId:" + companyId);
+		String strPage = params.get("p");
+		int page = strPage == null ? 1 : Integer.parseInt(strPage.trim());
 		if (page <= 0) {
 			page = 1;
 		}
@@ -49,12 +56,31 @@ public class ChallengeController {
 		int offset = (page - 1) * pageSize;
 		List<Challenge> challenges = null;
 		if (companyId > 0) {
-			challenges = challengeDao.getList(companyId, status, offset, pageSize);
+			challenges = challengeDao.getListByCompany(companyId, status,
+					offset, pageSize);
 		} else {
-			challenges = challengeDao.getList(status, offset, pageSize);
+			challenges = challengeDao.getListByStatus(status, offset, pageSize);
 		}
+		List<SimpleChallenge> result = null;
+		if (challenges.size() > 0) {
+			result = new ArrayList<SimpleChallenge>();
+			for (Challenge challenge : challenges) {
+				SimpleChallenge item = new SimpleChallenge();
+				item.setId(challenge.getId());
+				item.setName(challenge.getName());
+				item.setLogo(challenge.getLogo());
+				item.setDescription(challenge.getDescription());
+				item.setKey(challenge.getSignedKey());
+				item.setStartTime(StringUtil.toDateTimeString(challenge
+						.getStartTime()));
+				item.setEndTime(StringUtil.toDateTimeString(challenge
+						.getEndTime()));
+				result.add(item);
+			}
+		}
+
 		ResponseBase rb = new ResponseBase();
-		rb.setMessage(challenges);
+		rb.setMessage(result);
 
 		return rb;
 	}
