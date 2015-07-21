@@ -9,8 +9,8 @@ import com.foolrank.model.Challenge;
 public interface ChallengeDao {
 
 	@Select("SELECT * FROM challenge WHERE status=#{0} ORDER BY start_time ASC LIMIT #{1},#{2}")
-	List<Challenge> getList(int status, int offset, int count);
+	List<Challenge> getListByStatus(int status, int offset, int count);
 
-	@Select("SELECT * FROM challenge WHERE company_id=#{0} ORDER BY start_time ASC LIMIT #{1},#{2}")
-	List<Challenge> getList(int corporateId, int status, int offset, int count);
+	@Select("SELECT * FROM challenge WHERE company_id=#{0} AND status=#{1} ORDER BY start_time ASC LIMIT #{2},#{3}")
+	List<Challenge> getListByCompany(int companyId, int status, int offset, int count);
 }
