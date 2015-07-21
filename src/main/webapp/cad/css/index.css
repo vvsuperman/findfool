@@ -17,24 +17,24 @@ body {
     min-height: 40px;
     width: 100%;
     border: 0;
-    background: #4D4D4D;
+    background: #fff;
     opacity: .98;
     z-index: 100;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
     background: transparent;
-    color: #fff;
+    color: #444;
     border-bottom: 2px solid #00D8BD;
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: #ddd;
+    color: #aaa;
 }
 
 .navbar-nav>li>a {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 16px;
+    padding-bottom: 18px;
 }
 
 /*------------1.2 footer------------*/
