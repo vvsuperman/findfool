@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.foolrank.model.CompanyInfo;
-import com.foolrank.response.json.Company;
+import com.foolrank.model.CompanyModel;
+import com.foolrank.response.json.CompanyJson;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.model.responsejson.ResponseBase;
@@ -27,20 +27,23 @@ public class CompanyController {
 		String strCompanyId = params.get("cid");
 		int companyId = strCompanyId == null ? 0 : Integer
 				.parseInt(strCompanyId.trim());
-		Company company = null;
+		CompanyJson item = null;
 		if (companyId > 0) {
-			CompanyInfo companyInfo = companyDao.getInfoById(companyId);
-			if (companyInfo != null) {
-				company = new Company();
-				company.setId(companyInfo.getCompanyId());
-				company.setAddress(companyInfo.getAddress());
-				company.setTel(companyInfo.getTel());
-				company.setLogo(companyInfo.getLogo());
-				company.setWebsite(companyInfo.getWebsite());
+			CompanyModel company = companyDao.getById(companyId);
+			if (company != null) {
+				item = new CompanyJson();
+				item.setId(company.getId());
+				item.setName(company.getName());
+				item.setCover(company.getCover());
+				item.setAddress(company.getAddress());
+				item.setTel(company.getTel());
+				item.setLogo(company.getLogo());
+				item.setWebsite(company.getWebsite());
+				item.setDescription(company.getDescription());
 			}
 		}
 		ResponseBase rb = new ResponseBase();
-		rb.setMessage(company);
+		rb.setMessage(item);
 
 		return rb;
 	}

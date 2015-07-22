@@ -1,12 +1,14 @@
 package com.foolrank.response.json;
 
-public class Company {
+public class CompanyJson {
 	private int id;
 	private String name;
+	private String cover;
 	private String logo;
 	private String address;
 	private String tel;
 	private String website;
+	private String description;
 
 	public int getId() {
 		return id;
@@ -54,5 +56,21 @@ public class Company {
 
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

@@ -1,13 +1,14 @@
 package com.foolrank.model;
 
-public class CompanyInfo {
-
+public class CompanyModel {
 	private int id;
-	private int companyId;
+	private String name;
+	private String cover;
 	private String logo;
 	private String address;
 	private String tel;
 	private String website;
+	private String description;
 
 	public int getId() {
 		return id;
@@ -15,14 +16,6 @@ public class CompanyInfo {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getAddress() {
@@ -55,5 +48,29 @@ public class CompanyInfo {
 
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
