@@ -54,7 +54,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 
 		if($scope.orseclected(args) == false)
 		{ console.log(args);
-	    	return 'btn btn-default btn-xs dropdown-toggle'; }
+	    	return 'btn btn-info btn-xs dropdown-toggle'; }
 	       else if($scope.orseclected(args) ==true){ return 'btn  btn-xs disabled ';
 	       } 
 		};
@@ -90,7 +90,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 				"labels" : $scope.labels
 			}
 		}).success(function(data) {
-			flashTip("保存成功");
+			
 		}).error(function() {
 			console.log("get data failed");
 		});

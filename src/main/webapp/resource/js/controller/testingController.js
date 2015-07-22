@@ -227,12 +227,9 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.errMsg = "";
-	    		 if($scope.openCamera==0||$scope.openCamera==2){
-	    			 $scope.cPanel.hide = false;
-	    			 $scope.cPanel.show=true;
-	    		 } else if($scope.openCamera==1){
-	    			 $scope.cPanel.hide = true;
-	    			 $scope.cPanel.show=false; //不开启拍照区域
+	    		 if($scope.openCamera==1){
+	    			  //不开启拍照区域
+	    			 $scope.showCZone =3;
 	    		 }
 	    		 $scope.show = 2;
 	    		 
