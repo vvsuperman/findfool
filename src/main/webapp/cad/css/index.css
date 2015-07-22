@@ -1,29 +1,77 @@
 body {
     margin: 0;
     font-family: 'Helvetica Neue','Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft Yahei',sans-serif;
+    background: #eceef1;
 }
 
 
-/*-------------------------------01.section-------------------------------*/
+/*-------------------------------01.General-------------------------------*/
 
 /*------------1.1 site-header------------*/
 
-.site-header {
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
     position: fixed;
     top: 0;
-    min-height: 50px;
+    min-height: 40px;
     width: 100%;
-    border-bottom: 1px solid #4d4d4d;
-    background: #4d4d4d;
-    opacity: .90;
+    border: 0;
+    background: #4D4D4D;
+    opacity: .98;
     z-index: 100;
 }
 
-/*------------1.2 jumbotron------------*/
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background: transparent;
+    color: #fff;
+    border-bottom: 2px solid #00D8BD;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #ddd;
+}
+
+.navbar-nav>li>a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/*------------1.2 footer------------*/
+.site-footer {
+    background: #4d4d4d;
+    color: #dadada;
+    padding: 80px 0;
+}
+
+.site-footer .container {
+    width: 600px;
+}
+.site-footer p {
+    margin-top: 20px;
+    color: #b4b4b4;
+    font-size: 13px;
+}
+
+/*------------1.3 general------------*/
+.text-center {
+    text-align: center;    
+}
+.container {
+    margin: 0 auto;
+}
+/*------------1.4 responsible------------*/
+
+
+
+/*-------------------------------02.Index-------------------------------*/
+
+
+/*------------1.1.2 jumbotron------------*/
 .jumbotron {
-    background-image: url(../static/bg.jpg);
+    background-image: url(../../resource/static/dpbg.jpg);
     position: relative;
-    min-height: 600px;
+    min-height: 500px;
     padding-top: 200px;
     margin-bottom: 0px;
     background-position: center top;
@@ -33,6 +81,71 @@ body {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+
+/*------------1.1.3 activities------------*/
+.activities {
+    min-height: 600px;
+    background-repeat: no-repeat;
+    background-position: center top;
+    padding-top: 50px;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; 
+}
+
+.underway {
+    margin-top: 30px;
+}
+
+.squad-title {
+    height: 50px;
+    background: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+    padding: 18px 0 0 20px;
+    position: relative;
+
+}
+    
+
+.squad-title h3 {
+    font-size: 16px;
+}
+
+.activities .media {
+    margin-top: 1px;
+    background: #fff;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.05);
+
+}
+
+.comesoon {
+    margin-top: 60px;
+}
+
+.activities .media-left {
+
+    border-right: 1px solid #e9e9e9;
+    height: 100px;
+}
+
+.activities .media-object {
+   width:100%;
+  
+}
+
+.activities .media-body {
+    padding: 20px 20px 20px 50px;
+}
+
+
+/*-------------------------------03.Com-------------------------------*/
+
+
+/*-------------------------------3.1.section-------------------------------*/
+
+
+/*------------3.1.1 jumbotron------------*/
 
 .intro {
     color: #fff;
@@ -48,24 +161,22 @@ body {
     position: absolute;
     width: 100%;
     height: 160px;
-    background-image: url(../static/linebutton.svg);
+    background-image: url(img/com-img/linebutton.svg);
     background-repeat: no-repeat;
     z-index: 5;
     background-position: center top;
-   
     bottom: 0px;
 }
 
 .button-try .btn {
     padding-top: 12px;
-    margin-top: 3px;	
+    margin-top: 3px;
     margin-left: 3px;
     border-radius: 10px;
     width: 169px;
     height: 50px;
     color: #fff;
     font-size: 18px;
-     background-color:transparent;
 }
 
 .button-try .btn:hover {
@@ -75,10 +186,10 @@ body {
 }
 
 
-/*------------1.2 features------------*/
+/*------------3.1.2 features------------*/
 .features {
     min-height: 800px;
-    background-image: url(../static/linefeature.svg);
+    background-image: url(img/com-img/linefeature.svg);
     background-repeat: no-repeat;
     background-position: center top;
     padding-top: 50px;
@@ -95,7 +206,7 @@ body {
     margin-top: 50px;
 }
 .features .feature .feature-icon {
-    background-image: url(../static/feature.png);
+    background-image: url(img/com-img/feature.png);
     height: 130px;
     width: 130px;
     background-size: 520px 130px;
@@ -143,9 +254,9 @@ body {
 }
 
 
-/*------------1.3 flow------------*/
+/*------------3.1.3 flow------------*/
 .flow {
-    background-image: url(../static/bg2.jpg);
+    background-image: url(img/com-img/bg2.jpg);
     position: relative;
     height: 400px;
     background-size: 90px 400px;
@@ -179,7 +290,7 @@ body {
 
 }
 
-/*------------1.4 flow-specs------------*/
+/*------------3.1.4 flow-specs------------*/
 
 .flow-specs .specs {
     line-height: 1.7;
@@ -212,39 +323,11 @@ body {
 }
 
 
-/*------------1.5 footer------------*/
-.site-footer {
-    background: #4d4d4d;
-    color: #dadada;
-    padding: 80px 0;
-}
-
-.site-footer .container {
-    width: 600px;
-}
-.site-footer p {
-    margin-top: 20px;
-    color: #b4b4b4;
-    font-size: 13px;
-}
-
-/*-------------------------------02.general-------------------------------*/
-
-
-.text-center {
-    text-align: center;    
-}
-.container {
-    margin: 0 auto;
-}
 
 
 
-
-
-
-/*-------------------------------03.responsive-------------------------------*/
-/*------------1.1 bg@features------------*/
+/*-------------------------------3.2responsive-------------------------------*/
+/*------------3.2.1 bg@features------------*/
 
 @media screen and (max-width: 767px) {
     .features {
@@ -252,7 +335,7 @@ body {
     }
 }
 
-/*------------1.2 bg@flow-specs------------*/
+/*------------3.2.2 bg@flow-specs------------*/
 
 
 @media screen and (min-width: 1200px) {
@@ -261,7 +344,7 @@ body {
         width: 1100px;
     }
     .line_big {
-        background-image: url(../static/linebig.svg);
+        background-image: url(img/com-img/linebig.svg);
         background-position: center top;
         min-height: 1600px;
         background-repeat: no-repeat;
@@ -279,7 +362,7 @@ body {
 }
 @media screen and (max-width: 1200px) and (min-width: 992px) {
     .line_mid{
-        background-image: url(../static/linemid.svg);
+        background-image: url(img/com-img/linemid.svg);
         background-position: center top;
         min-height: 1500px;
         background-repeat: no-repeat;
@@ -304,7 +387,7 @@ body {
         display: none;
     }
     .line_small {
-        background-image: url(../static/linesmall.svg);
+        background-image: url(img/com-img/linesmall.svg);
         background-position: center top;
         min-height: 1500px;
         background-repeat: no-repeat;
@@ -352,71 +435,75 @@ body {
 
 }
 
+/*-------------------------------04. Company-------------------------------*/
 
-
-
-.simditor .simditor-body p{
-	margin-bottom: 8px;
-}
-
-
-.carsousel .item{
-	height: 300px;
-}
-
-.myfooter{
-	border-top:1px solid #374652;
-	margin-top:80px;
-	height: 80px;
-	color:#374652;
-	padding-top: 20px;
-	/* background-color: #ffffff; */
-}
-
-
-
-.content-header{
-	border-top: 1px solid #e4e4e4;
-    color: #b6b6b6;
-    font-size: 18px;
-    margin: 50px 0 25px;
-    text-align: center;
-}
-
-
-.content-header span{
-	background: none repeat scroll 0 0 #fff;
-    display: inline-block;
-    padding: 0 16px;
+.company {
+    min-height: 800px;
     position: relative;
-    top: -10px;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box; 
 }
 
-.logohead{
-	 background: url("../static/sea.jpg") no-repeat scroll center top;
-  	 height: 600px; 
-  	 margin-top: 0px;
-  	 background-size:100% 100%;	
-  	 color:#fff;
+.company .row {
+    position: relative;
+    top: -30px;
+    margin-bottom: 80px;
+}
+.com-brief{
+    height: 500px;
+    margin-top: 1px;
+    background: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
 }
 
-.logohead img{
-	height:540px;
+.awards{
+    height: 300px;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    background: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+}
+.enter{
+    height: 50px;
+    margin-top: 1px;
+    margin-bottom: 30px;
+    padding-top: 12px;
+    background: #00D8BD;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+}
+.company a {
+    color: #fff;
+}
+.past{
+    height: 300px;
+    margin-top: 1px;
+    background: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
 }
 
-.mainimg{
-	position:absolute;
-	margin-top:10px;
-	
+.company .media-object {
+    width: 100%;
+    padding: 20px 50px;
+
 }
 
-.logoFont{
-	font-size:24px;
+/*-------------------------------04. rank-------------------------------*/
+
+
+
+.ranks {
+    min-height: 800px;
+    margin-top: 80px;
 }
 
-.nav-btn{
-	height: 20px;
+.rank {
+    height:600px;
+    margin-top: 1px;
+    background: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
 }
+
 
 
 

@@ -4,6 +4,8 @@
 OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	$scope.time={};
 	
+	$scope.showtext = 1;
+	
 	 //判断用户是否登陆
 	$scope.email = CadData.getEmail();
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
@@ -144,6 +146,27 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 	   		$scope.countdown($scope.question.limittime);
 	   	 }
 	   	
+	    }).error(function(){
+	   	 console.log("get data failed");
+	    })
+	}
+	
+	$scope.comment={};
+	
+	$scope.submitComment = function(){
+		
+		if(typeof($scope.comment.txt) == "undefined" || $scope.comment.txt.replace(/\s+/g,"")==""){
+			flashTip("吐槽不可为空");
+			return false;
+		}
+		
+		$http({
+	        url: WEBROOT+"/comment/add",
+	        method: 'POST',
+	        data: {"email":CadData.getEmail(),"pid":0,"content":$scope.comment.txt,"stype":2,"sid":$scope.question.qid}
+	    }).success(function (data) {
+	    	flashTip("吐槽成功，感谢您的吐槽!");
+	    	$scope.showtext =0;
 	    }).error(function(){
 	   	 console.log("get data failed");
 	    })

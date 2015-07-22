@@ -199,6 +199,9 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	 $scope.$on("video",function(){
 		 $scope.showVideo();
 	 })
+	 
+	 
+	 $scope.cPanel={};
      
      //检测测试密码
 	 $scope.login = function(){
@@ -225,10 +228,11 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.errMsg = "";
 	    		 if($scope.openCamera==0||$scope.openCamera==2){
-	    			 
-	    			 $scope.showCPanel=1
+	    			 $scope.cPanel.hide = false;
+	    			 $scope.cPanel.show=true;
 	    		 } else if($scope.openCamera==1){
-	    			 $scope.showCPanel=2; //不开启拍照区域
+	    			 $scope.cPanel.hide = true;
+	    			 $scope.cPanel.show=false; //不开启拍照区域
 	    		 }
 	    		 $scope.show = 2;
 	    		 
@@ -238,6 +242,11 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	    	         data: {"email":$scope.email, "testid": $scope.tid}
 	    	     }).success(function (data) {
 	    	    	 $scope.userInfo=data["message"];
+	    	    	 //如果无label，摄像头也未强制开启，则跳转到试题详情页面
+	    	    	 if($scope.userInfo.length == 0 && ($scope.openCamera ==1 || $scope.openCamera ==2)){
+	    	    		 $scope.show =3;
+	    	    	 }
+	    	    	 
 	    	     });
 	    	 }else{
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头

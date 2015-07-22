@@ -52,8 +52,21 @@
       	  </label>
    </div>
    
-   <div class="col-xs-12" style="margin-top: 20px;margin-bottom: 50px">
+   <div class="col-xs-12" style="margin-top: 20px">
      <button class="btn btn-info col-xs-4 col-xs-offset-1 col-md-2" ng-click="submit()">提交/下一题</button>
      <button class="btn btn-info col-xs-offset-3 col-xs-4 col-md-2" ng-click="getNext()">跳过</button>
+   </div>
+   
+   
+   <div class="col-xs-12" style="margin-top: 20px;margin-bottom: 50px">
+      <a href=""  ng-click="showtext==1?showtext=0:showtext=1">
+	        &nbsp;我要吐槽</a>
+	  <div ng-if="showtext==1" style="margin-top: 10px;">
+		  <textarea style="width: 100%;height: 100px" ng-model="comment.txt" placeholder="我的吐槽.....">
+		  </textarea>
+		   <button style="margin-top: 20px" class="btn btn-info" ng-click="submitComment()">提交吐槽</button>
+	  </div>
+	  
+   
    </div>
    

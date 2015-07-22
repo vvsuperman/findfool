@@ -21,6 +21,22 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
+            when('/cad/comlist', {  //客户端主页
+                templateUrl: 'cad/page/comlist.html',
+                controller: 'comListController'
+            }).
+            when('/cad/eachcom', {  //客户公司详情
+                templateUrl: 'cad/page/eachcom.html',
+                controller: 'eachComController'
+            }).
+            when('/cad/frcom', {  //客户端主页
+                templateUrl: 'cad/page/frcom.html',
+                controller: 'frComController'
+            }).
+            when('/cad/rank', {  //客户端主页
+                templateUrl: 'cad/page/rank.html',
+                controller: 'cadRankController'
+            }).
          
             when('/dp/register', {  //点评主页
                 templateUrl: 'dp/page/dpregister.html',
