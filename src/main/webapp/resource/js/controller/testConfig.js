@@ -46,6 +46,21 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 
 	};
 
+	
+	//动态样式
+	$scope.setStyle = function(args) 
+	    {
+		
+
+		if($scope.orseclected(args) == false)
+		{ console.log(args);
+	    	return 'btn btn-default btn-xs dropdown-toggle'; }
+	       else if($scope.orseclected(args) ==true){ return 'btn  btn-xs disabled ';
+	       } 
+		};
+	
+	
+	
 	$scope.updateQuizEmails = function() {
 		$http({
 			url : WEBROOT + "/quizemail/getemails",

@@ -18,19 +18,27 @@
 		    <p>通常来说，用户只需要输入用户名、密码就可以开始做题了。但如果您需要用户输入一些个人信息，请从下列选项选择，或手动增加</p>
 		    <div class="col-md-4"   ng-repeat="label in labels">
 		     <!--  <span  ng-hide="true"><input  style="opacity:1;width:20px"  type="checkbox" ng-model="label.isSelected">{{label.labelname}}</span> --> 
-		      <button   ng-show="istype(label)" ng-click="saveConfigOne(label,1)">  {{label.labelname}}</button> 
+		   		     <button   ng-show="istype(label)"    ng-class="setStyle(label.isSelected)"  style="background-color:#0099CC;margin-top: 5px "  ng-click="saveConfigOne(label,1)">  {{label.labelname}}</button>    
 		    </div>
-		 
 		 </div>
 		 <div class="col-md-12" style="margin-top: 10px">
 		   <input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签"> <button class="btn btn-primary" ng-click="addLabel()">添加</button>
 		   
 		 </div>
 		 
-		 <div class="col-md-12">
+		<!--<div class="col-md-12">
 		  <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
-		 </div>
-	    
+		 </div>  -->  
+		  <div class="col-md-12"  >
+		 <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+		  <h4>您已经添加的标签</h4>
+		    <div    class="col-md-4 "ng-repeat="label in labels" >
+		 <button ng-show="orseclected(label.isSelected)"  class="btn btn-xs" style="background-color:#0099CC;margin-top: 5px "ng-click="saveConfigOne(label,2)">  {{label.labelname}}</button> 
+		    </div>
+		  <h4>&nbsp;</h4>  <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+		   </div>
+		
+	    <!-- class="col-md-4" -->
 	     <div class="col-md-12" style="margin-top: 20px" >
 		 <h4>报告接收邮箱</h4>
 		 <p>做完测试后您可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入邮箱来接收报告（可多个，依次添加）</p>
@@ -45,11 +53,7 @@
 		 </form>
 	    </div>
 	 
-	    	    <div class="col-md-4"   ng-repeat="label in labels">
-		    <!--  <span >  {{label.labelname}}</span> -->
-		 <button ng-show="orseclected(label.isSelected)"   ng-click="saveConfigOne(label,2)">  {{label.labelname}}</button> 
-		   
-		    </div>
+	    	 
 	   
     </div>
     
