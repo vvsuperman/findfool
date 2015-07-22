@@ -1,0 +1,207 @@
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+
+<div class=" testqs" ng-if="showReport ==1">
+    <!-- <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn> -->
+    
+    <div class="topbar">
+		<div class="type">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
+				&nbsp;{{tname}}
+		</div>
+		<!-- <div>
+			40道题，90分钟
+		</div> -->
+		<div class="invite">
+			<a href="#/invite" class="btn btn-default">发送邀请</a>
+		</div>
+	</div>
+    
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>状态</th>
+            <th>完成时间&nbsp;&nbsp;
+            	<span class="glyphicon" style="cursor:pointer" 
+	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isTimeDown]" 
+	            	ng-click="reversalTimeSort()">
+            	</span>
+            </th>
+            <th  >得分&nbsp;&nbsp;
+            	<span class="glyphicon" style="cursor:pointer" 
+	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
+	            	ng-click="reversalScoreSort()">
+            	</span>
+            </th>
+            <th>查看详情</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat = "invite in invites">
+            <td ng-bind="invite.email"></td>
+            <td ng-bind="getState(invite)"></td>
+            <td ng-bind="invite.finishtime"></td>
+            <td ng-bind="getScore(invite)"></td>
+            <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
+        </tr>
+        
+        </tbody>
+    </table>
+</div>	
+
+
+	
+	<div class="col-md-11 panel-back" ng-if="showReport ==2"> 
+	<!--   <div class="inner-back"> -->
+      <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
+		 
+	  </ul>
+	  
+     
+        <div class="col-md-8" style="margin-top: 20px>
+		    <div class="col-md-8">
+		      <!-- <div class="knowtag">知识结构</div> -->
+		       <div class="col-md-12" style="margin-top:20px"><img src="resource/static/knowledge.png" alt="知识结构"></div> 
+		        <div class="col-md-4 col-md-offset-1" style="margin-top: 20px" >
+			         <p><strong>得分:</strong></p>
+			         <p ng-repeat="str in descStr">{{str}}</p>
+		        </div>
+		         
+			      <div class="col-md-5" style="margin-top: 20px;margin-bottom: 10px">
+			        <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
+			      </div>  
+		  
+		       <div style="clear:both"></div>
+		       <div class="panel-body"  ng-repeat="namenum in namenums" style="margin-top: 15px">
+		         
+		          
+		          <div class="col-md-12">
+		          	  <div class="col-md-3 col-xs-4 greenFont" style="font-size: 18px;" ng-bind="namenum.name"></div>
+		          	   <div star num={{namenum.num}} size=2></div>
+		          	  
+		          </div>
+		           <div style="clear:both"></div>
+		         
+		          <div class="col-md-12 skill">
+		           <div simditor
+							minheight="30px" operation="view" class='optiontext' 
+							ng-model="contents[$index]"></div>
+		          </div>
+		          
+		          <div class="col-md-12" >
+		            <a href="" class="blackFont" ng-click="showFacePro[$index]==1?showFacePro[$index]=0:showFacePro[$index]=1" style="margin-left: 15px">
+		            <span class="glyphicon glyphicon-plus" ng-if="showFacePro[$index]==0"></span>
+		            <span class="glyphicon glyphicon-minus" ng-if="showFacePro[$index]==1"></span>
+		            &nbsp;可能的面试题
+		            </a>
+		          </div>
+		          <p ng-bind="faceproblems[$index]">123</p>
+		          
+		           <div class="col-md-12 skill" ng-show="showFacePro[$index]==1">
+		           <div simditor
+							minheight="30px" operation="view" class='optiontext' 
+							ng-model="namenum.faceproblem"></div>
+		          </div>
+		         
+		       </div>
+		 </div>      
+		     
+		   
+		
+		
+	  
+	     <div class="col-md-4" style="margin-top: 20px" >
+			     用户得分:<span ng-bind="score" style="color: #1abc9c;font-size:20px" ></span>
+			     <div class="col-md-12">
+			       <canvas id="doughnut"  class="chart chart-doughnut" data="dataScore"  labels="labelsScore"></canvas> 
+			     </div>  
+		</div>
+		
+		<div class="col-md-4" style="margin-top: 20px">	
+			     用户排名:<span ng-bind="rank" style="color: #1abc9c;font-size:20px"></span>
+			   <div class="col-md-12">
+			       <canvas id="doughnut" class="chart chart-doughnut" data="dataRank"  labels="labelsRank"></canvas> 
+			   </div>
+		</div>
+		
+		<div class="col-md-4" style="margin-top: 20px">
+			   
+			   <div class="col-md-12" style="margin-top:20px"><img src="resource/static/userinfo.png" alt="  用户信息"></div> 
+			   <div class="col-md-12" style="margin-top: 20px">
+			       <p>姓名：<span ng-bind="user.username"></span></p>
+			       <p>邮箱：<span ng-bind="user.email"></span></p>
+			       <p ng-repeat="u in userInfo">{{u.labelname}}：<span ng-bind="u.value"></span></p>
+			   </div>
+	    </div>	
+	  
+	  <div style="clear: both;"></div>
+	  
+
+	  <div class="col-md-11" style="margin-left: 20px" >
+	      <div class="col-md-12" style="margin-top:20px;margin-bottom: 10px"><img src="resource/static/camera.png" alt="监控摄像"></div> 
+	     <div class="col-md-2" ng-repeat="img in imgs" style="margin-top: 10px">
+	    	<img ng-src="{{img.location}}"  class="img-responsive  center-block"></img>
+	     </div>
+	  </div>
+	<!--  </div> inner-back	 -->
+	</div>	<!-- panel-back -->
+
+ 
+   <div class="col-md-10 panel-back" ng-if="showReport ==3">
+       <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
+		 
+	  </ul>
+     
+			   <table class="table table-striped" style="table-layout:fixed;">
+			   	<col style="width: 10%" />
+				<col style="width: 80%" />
+				<col style="width: 10%" />
+			        <thead>
+				        <tr>
+				        	<th>是否正确</th>
+				            <th>试题内容</th>
+				            <th>查看详情</th>
+				        </tr>
+			        </thead>
+			        <tbody>
+			        <tr ng-repeat="q in questions">
+			        	<td  ng-class="{1:'text-success',2:'text-danger'}[color]">{{judge(q)}}</td>
+			            <td abstract context={{q.context}} style="overflow:hidden;white-space:nowrap;"></td>
+			            <td>
+			                <a class="blackFont" href="" ng-click="viewQuestion('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
+			            </td>
+			        </tr>
+			        </tbody>
+			    </table>      
+  </div>
+
+
+<div class="col-md-10 panel-back" style="" ng-if="showReport==4">
+        <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
+		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
+		 
+	  </ul>
+	
+  <div style="margin: 30px">	
+	   <div ng-repeat="log in logs" >
+	      <p>被测用户在
+	       <span ng-bind="log.year"></span>年
+	       <span ng-bind="log.month"></span>月
+	       <span ng-bind="log.day"></span>日
+	       <span ng-bind="log.hour"></span>时
+	       <span ng-bind="log.minute"></span>分
+	       打开了第<span ng-bind="log.num"></span>道题</p>
+	   </div>	
+	</div>	
+			
+  </div>
+</div>
