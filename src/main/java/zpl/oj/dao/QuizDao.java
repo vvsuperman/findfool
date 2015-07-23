@@ -3,12 +3,16 @@ package zpl.oj.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.request.User;
+
+import com.foolrank.provider.QuizProvider;
 
 public interface QuizDao {
 
@@ -52,8 +56,8 @@ public interface QuizDao {
 	@Select("select * from quiz_templete where quizTName = #{quizName}")
 	QuizTemplete getQuizTByName(String quizName);
 
-	@Select("SELECT * FROM quiz WHERE type=1 AND owner in () AND status=#{status} ORDER BY start_time ASC LIMIT #{offset},#{count}")
-	List<Quiz> getChallengeListByUsers(List<User> userList, int status, int offset, int count);
+	@SelectProvider(type = QuizProvider.class, method = "getChallengeListByUsers")
+	List<Quiz> getChallengeListByUsers(@Param("users") List<User> userList, @Param("status") int status, @Param("offset") int offset, @Param("count") int count);
 
 	@Select("SELECT * FROM quiz WHERE type=1 AND status=#{0} ORDER BY start_time ASC LIMIT #{1},#{2}")
 	List<Quiz> getChallengeListByStatus(int status, int offset, int count);
