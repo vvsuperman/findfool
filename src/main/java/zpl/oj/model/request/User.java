@@ -21,9 +21,10 @@ public class User {
 	private int invitedNum;
 	private int state;
 	private String tel;
-	private String mdUid;//明道的uid
-	private String resetUrl; //重置密码时随机生成的url
-	
+	private String mdUid;// 明道的uid
+	private String resetUrl; // 重置密码时随机生成的url
+	private int companyId;
+
 	public String getResetUrl() {
 		return resetUrl;
 	}
@@ -39,7 +40,6 @@ public class User {
 	public void setMdUid(String mdUid) {
 		this.mdUid = mdUid;
 	}
-
 
 	public User() {
 		this.fname = "no value";
@@ -60,181 +60,148 @@ public class User {
 		this.tel = "no value";
 	}
 
-
 	public int getUid() {
 		return uid;
 	}
-
 
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
 
-
 	public String getFname() {
 		return fname;
 	}
-
 
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
 
-
 	public String getLname() {
 		return lname;
 	}
-
 
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getCompany() {
 		return company;
 	}
-
 
 	public void setCompany(String company) {
 		this.company = company;
 	}
 
-
 	public int getPrivilege() {
 		return privilege;
 	}
-
 
 	public void setPrivilege(int privilege) {
 		this.privilege = privilege;
 	}
 
-
 	public String getPwd() {
 		return pwd;
 	}
-
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
 
-
 	public String getLink() {
 		return link;
 	}
-
 
 	public void setLink(String link) {
 		this.link = link;
 	}
 
-
 	public String getAge() {
 		return age;
 	}
-
 
 	public void setAge(String age) {
 		this.age = age;
 	}
 
-
 	public String getDegree() {
 		return degree;
 	}
-
 
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
 
-
 	public String getSchool() {
 		return school;
 	}
-
 
 	public void setSchool(String school) {
 		this.school = school;
 	}
 
-
 	public Date getRegisterDate() {
 		return registerDate;
 	}
-
 
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
 
-
 	public Date getLastLoginDate() {
 		return lastLoginDate;
 	}
-
 
 	public void setLastLoginDate(Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
 
-
-
-
 	public int getInvitedNum() {
 		return invitedNum;
 	}
-
 
 	public void setInvitedNum(int invitedNum) {
 		this.invitedNum = invitedNum;
 	}
 
-
 	public int getState() {
 		return state;
 	}
-
 
 	public void setState(int state) {
 		this.state = state;
 	}
 
-
 	public String getTel() {
 		return tel;
 	}
-
 
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
-
 	public int getInvited_left() {
 		return invited_left;
 	}
-
 
 	public void setInvited_left(int invited_left) {
 		this.invited_left = invited_left;
 	}
 
+	public int getCompanyId() {
+		return companyId;
+	}
 
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
+	}
 
-
-	
-	
 }

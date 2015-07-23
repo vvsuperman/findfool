@@ -20,6 +20,11 @@ import com.foolrank.model.Challenge;
 import com.foolrank.response.json.SimpleChallenge;
 
 import zpl.oj.dao.ChallengeDao;
+import zpl.oj.dao.CompanyDao;
+import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.common.Quiz;
+import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.util.StringUtil;
 
@@ -28,7 +33,13 @@ import zpl.oj.util.StringUtil;
 public class ChallengeController {
 
 	@Autowired
-	private ChallengeDao challengeDao;
+	private UserDao userDao;
+
+	@Autowired
+	private QuizDao quizDao;
+	
+	@Autowired
+	private CompanyDao companyDao;
 
 	@RequestMapping(value = "/{signedId}")
 	@ResponseBody
@@ -41,6 +52,7 @@ public class ChallengeController {
 	@RequestMapping(value = "/getListByStatus")
 	@ResponseBody
 	public ResponseBase getListByStatus(@RequestBody Map<String, String> params) {
+		// 获取参数
 		String strStatus = params.get("status");
 		int status = strStatus == null ? 1 : Integer.parseInt(strStatus.trim());
 		String strCompanyId = params.get("cid");
@@ -53,19 +65,22 @@ public class ChallengeController {
 		}
 		int pageSize = 10;
 		int offset = (page - 1) * pageSize;
-		List<Challenge> challenges = null;
+		// 进行查询
+		List<Quiz> challenges = null;
 		if (companyId > 0) {
-			challenges = challengeDao.getListByCompany(companyId, status,
-					offset, pageSize);
+			List<User> users = userDao.getListByCompany(companyId);
+			if (users!=null) {
+				challenges = quizDao.getChallengeListByUsers(users, status, offset, pageSize);
+			}
 		} else {
-			challenges = challengeDao.getListByStatus(status, offset, pageSize);
+			challenges = quizDao.getChallengeListByStatus(status, offset, pageSize);
 		}
 		List<SimpleChallenge> result = null;
-		if (challenges.size() > 0) {
+		if (challenges != null && challenges.size() > 0) {
 			result = new ArrayList<SimpleChallenge>();
-			for (Challenge challenge : challenges) {
+			for (Quiz challenge : challenges) {
 				SimpleChallenge item = new SimpleChallenge();
-				item.setId(challenge.getId());
+				item.setId(challenge.getQuizid());
 				item.setName(challenge.getName());
 				item.setLogo(challenge.getLogo());
 				item.setDescription(challenge.getDescription());
