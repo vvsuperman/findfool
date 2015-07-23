@@ -1,5 +1,6 @@
 package com.foolrank.model;
 
+
 public class CompanyModel {
 	private int id;
 	private String name;
