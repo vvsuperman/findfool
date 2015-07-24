@@ -14,6 +14,7 @@ public interface LabelService{
 	/** 
 	 * description:获取所有的系统标签，返回它们的id
 	 */
+
 	abstract List<Label> getSystemLabels();
 
 	/** 
@@ -72,4 +73,19 @@ public interface LabelService{
 	abstract void updateLabelUser(int testid,int labelid,String value);
 
 	List<JsonLabel> getTestLabels(Integer testid);
+
+
+	
+
+
+
+	abstract Object findLableId(String ln);
+
+
+
+	abstract void deleteLable(Integer id, Object testid);
+
+	abstract Integer findLableType(String ln);
+
+	//abstract List<JsonLabel> getTestLabelsSeclected(Integer testid);
 }

@@ -29,7 +29,7 @@ public interface QuizDao {
 	Quiz getQuizByOwnerAndName(String name, int uid);
 
 	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO,  UUID, EMAILS "
-			+ "FROM QUIZ WHERE UUID = #{0} ORDER BY QUIZID DESC limit 1")
+			+ "FROM QUIZ WHERE UUID = #{0} ORDER BY QUIZID DanESC limit 1")
 	Quiz getNewestQuizByUuid(int uuid);
 
 	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS "

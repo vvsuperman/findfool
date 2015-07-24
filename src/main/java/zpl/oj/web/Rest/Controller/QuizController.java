@@ -141,6 +141,7 @@ public class QuizController {
 
 		Quiz q = quizService.addQuiz(request);
 		//获取系统标签，并在labeltest中为该测试添加这些系统标签
+
 		List<Label> labels=labelService.getSystemLabels();
 		for(Label label:labels){
 			labelService.insertIntoLabelTest(q.getQuizid(), label.getId(), label.getIsSelected());
@@ -321,6 +322,7 @@ public class QuizController {
 			String quizName = param.get("quizName");
 			int quizId=quizService.genQuiz(quizName, uid);
 			//获取系统标签，并在labeltest中为该测试添加这些系统标签
+
 			//获取系统标签，并在labeltest中为该测试添加这些系统标签
 			List<Label> labels=labelService.getSystemLabels();
 			for(Label label:labels){

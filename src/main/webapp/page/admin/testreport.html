@@ -89,8 +89,9 @@
 		          <div class="col-md-12 skill">
 		           <div simditor
 							minheight="30px" operation="view" class='optiontext' 
-						ng-bind="namenum.contents"></div>
-		          </div>  
+							ng-model="contents[$index]"></div>
+		          </div>
+		          
 		          <div class="col-md-12" >
 		            <a href="" class="blackFont" ng-click="showFacePro[$index]==1?showFacePro[$index]=0:showFacePro[$index]=1" style="margin-left: 15px">
 		            <span class="glyphicon glyphicon-plus" ng-if="showFacePro[$index]==0"></span>

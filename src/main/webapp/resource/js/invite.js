@@ -13,8 +13,8 @@ OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) 
 	
 	$scope.camera={};
 	$scope.camera.selected=0;
-//	$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"}];
-	$scope.options=[{id:0,content:"必须开启"}];
+	$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"}];
+//	$scope.options=[{id:0,content:"必须开启"}];
 	$scope.subject = "笔试邀请";
 	
 	$scope.content = "     我们非常荣幸能收到您的简历，做为优秀的候选人之一，我们诚挚的邀请您参加测试，使我们能进一步了解您的能力。";
