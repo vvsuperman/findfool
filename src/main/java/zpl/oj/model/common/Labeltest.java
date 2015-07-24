@@ -7,6 +7,13 @@ public class Labeltest implements Serializable{
 	private Integer testid;
 	private Integer labelid;
 	private Integer isSelected;
+	private int type;
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public Integer getId() {
 		return id;
 	}

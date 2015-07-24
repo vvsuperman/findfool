@@ -3,6 +3,7 @@ package zpl.oj.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class LabelServiceImpl implements LabelService {
 	
 	@Override
 	public List<Label> getSystemLabels() {
-		// TODO Auto-generated method stub
+		// TODO Auto-rgenerated method stub
 		return labelDao.getSystemLabels();
 	}
 	
@@ -42,6 +43,7 @@ public class LabelServiceImpl implements LabelService {
 			l.setLabelid(lt.getLabelid());
 			String labelname=getLabelNameByLabelId(lt.getLabelid());
 			l.setLabelname(labelname);
+		    l.setLabeltype(lt.getType());
 			l.setIsSelected((lt.getIsSelected()==1?true:false));
 			labels.add(l);
 		}
@@ -75,7 +77,10 @@ public class LabelServiceImpl implements LabelService {
 	@Override
 	public boolean isLableExist(String labelname) {
 		List<Label> list=labelDao.getLabelByLabelName(labelname);
-		if(list.size()==1) return true;
+	
+		if(list.size()==1)
+			return true;
+		
 		else return false;
 	}
 
@@ -95,7 +100,7 @@ public class LabelServiceImpl implements LabelService {
 	@Override
 	public boolean isLableTestExist(Integer testid,Integer labelid) {
 		List<Labeltest> labeltests=labelDao.getLabelTestByTestidAndLabelName(testid,labelid);
-		if(labeltests.size()==1) return true;
+		if(labeltests.size()>=1) return true;
 		else return false;
 	}
 
@@ -128,7 +133,35 @@ public class LabelServiceImpl implements LabelService {
 		// TODO Auto-generated method stub
 		return labelDao.getLabelUserByIid(inviteid);
 	}
+
+
+	@Override
+	public Object findLableId(String ln) {
+		return  labelDao.findLableId(ln);
+		
+	}
+
+	@Override
+	public void deleteLable(Integer id,Object testid) {
 	
+		labelDao.deleteLable(id,testid);			
+	}
+
+
+
+	private String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer findLableType(String ln) {
+		// TODO Auto-generated method stub
+		return labelDao.findLableType(ln);
+	}
+
+
+
 
 
 }

@@ -5,6 +5,15 @@ public class JsonLabel{
 	private Integer labelid;
 	private String labelname;
 	private Boolean isSelected;
+	
+	private int labeltype;
+
+	public int getLabeltype() {
+		return labeltype;
+	}
+	public void setLabeltype(int labeltype) {
+		this.labeltype = labeltype;
+	}
 	public Integer getLabelid() {
 		return labelid;
 	}
