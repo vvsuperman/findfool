@@ -83,7 +83,6 @@ OJApp.controller("pInfo",['$scope','$http','Data',function($scope, $http, Data) 
     
     //修改密码
     $scope.modifyPwd = function(){
-    	console.log("oldpwd...........",$scope.pwd.old);
     	
     		 $http({
     	            url: WEBROOT+"/user/setting/setpwd",

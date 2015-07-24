@@ -43,10 +43,10 @@
    
      
     
-   <div class="container-fluid" style="margin-top: 100px" ng-show="show==2">
-     <div class="col-md-3 col-md-offset-4" ng-hide="cPane.hide">
-		 <div   ng-show="showCZone ==1&&openCamera==0"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div> 
-		 <div   ng-show="showCZone ==1&&openCamera==2"><span style="color: red">*&nbsp;建议开启摄像头，让企业更好的认识自己</span></div> 
+   <div class="container-fluid" style="margin-top: 50px" ng-show="show==2">
+     <div class="col-md-3 col-md-offset-4" ng-show="showCZone==1||showCZone==2">
+		 <div   ng-show="openCamera==0"><span style="color: red">*&nbsp;照片不能为空，请拍摄您的照片</span></div> 
+		 <!-- <div   ng-show="openCamera==2"><span style="color: red">*&nbsp;建议开启摄像头，让企业更好的认识自己</span></div>  -->
 		 <div  style="margin-top: 10px" class="cameraIcon"  ng-show="showCZone ==1">  
 		     <p style="margin-top: 10%">点击以开启摄像头</p>    
 		     <img id="showBtn" class="img-responsive cameraBtn" ng-click="showVideo()" style="height: 100px;text-align: center;"  src="resource/static/cameraicon.png">
@@ -58,7 +58,7 @@
 	        <p tooltip="检测不到摄像头？如果电脑没有摄像头或摄像头损坏，请更换具有摄像功能的电脑;拍的照片不清晰？尽量将头像显示在摄像头中间，并保证室内具有良好的光环境" tooltip-placement="right">拍照遇到问题怎么办</p> 
 	     </div>
     
-       	  <div id="cameraZone" ng-show="showCZone ==2" style="margin-top:50px">
+       	  <div id="cameraZone" ng-show="showCZone==2" style="margin-top:50px">
 			  <video  ng-show="monitor==1" id="video" width="320" height="240" autoplay>
 			  </video>       
 			  <canvas ng-show="monitor==2" camera id="canvas" width="320" height="240">
@@ -78,24 +78,26 @@
 		  
      </div>
 
-    <div class=" col-md-6 col-md-offset-3" style="margin-top:30px">
+    <div class=" col-md-4 col-md-offset-3" style="margin-top:30px;padding-left: 80px">
    	 <form class="form-horizontal"  role="form">
 		   <div class="form-group" ng-repeat="user in userInfo">
-		    <label  class="col-sm-2 control-label">{{user.labelname}}</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" ng-model="user.value" placeholder="{{user.labelname}}">
+		         <input type="text" class="form-control txt-large" placeholder="{{user.labelname}}" ng-model="user.value">
+			   <!--  <label  class="col-sm-2 control-label">{{user.labelname}}</label>
+			    <div class="col-sm-4">
+			      <input type="text" class="form-control" ng-model="user.value" placeholder="{{user.labelname}}">
+			    </div> -->
 		    </div>
-		    </div>
-		   <div class="form-group">
+		     <p class="alert" ng-bind="errMsg"></p>
+		   <!-- <div class="form-group">
 		    <label  class="col-sm-2 control-label"></label>
 		    <div class="col-sm-4">
 		      <p class="alert" ng-bind="errMsg"></p>
 		    </div>
-		  </div>
+		  </div> -->
 		 
-		  
-		  <div class="col-xs-6 col-md-6 col-md-offset-2">
-		  	<button class="btn btn-primary btn-block" ng-click="submitUserInfo()">提交</button>
+	
+		  <div class="form-group">
+		  	<button class="btn btn-primary btn-lg btn-block" ng-click="submitUserInfo()">提交</button>
 		  </div>
    	  </form>
    </div>

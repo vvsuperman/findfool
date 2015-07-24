@@ -247,10 +247,10 @@
 
 
 
-.carousel-caption{
+/* .carousel-caption{
 	bottom:100px !important;
 }
-
+ */
 .wait{
 	background: url('../static/wait.gif')
 }
@@ -966,14 +966,14 @@ ul li {
 	height: 60px;
 }
 
-.carousel .item{
+/* .carousel .item{
 	height: 300px !important;
 }
 
 .carousel{
 	height: 300px !important;
 	margin:40px -15px 0px -15px !important;
-}
+} */
 
 
 
