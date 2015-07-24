@@ -1,0 +1,91 @@
+   
+<div class="container">
+
+	<nav class="navbar navbar-default navbar-fixed-top " role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            
+                 <a class="navbar-brand" href="http://foolrank.com/#/"><img alt="" style="width: 20px" class="img-responsive" src="resource/static/foollogolarge.png"></a>
+                 <a class="navbar-brand" href="http://foolrank.com/#/">FoolRank</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/login">登录</a>
+                    </li>
+                    <li>
+                        <a href="#/signup">注册</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 50px">
+                    最好用的IT人才评测系统
+        </h1>
+        <p style="font-size:xx-large">
+            帮助您大量、精准的发现最合适的人才
+        </p>
+	</div>
+    <div class="row" ng-show="requestStage==1">
+        
+        <div class="col-md-offset-4 col-md-4">
+        <p style="font-size:30px;text-align: center;margin-top: 50px" class="greenFont">
+           找回密码
+        </p>
+            <form class="form-horizontal form-login">
+                <div class="form-group">
+                    <input type="email" class="form-control txt-large" id="email" placeholder="注册邮箱" ng-model="email">
+                </div>
+                <div class="form-group">
+                     <label class="form-label" ng-bind="content"></label> <a  href="" ng-click="refreshQuestion()">刷新题目</a>
+                    <input type="text" class="form-control txt-large" id="authCode" placeholder="验证码" ng-model="answer">
+                    </br>
+                    
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="request()">
+                        提交
+                    </button>
+                    </br>
+                    <span style="color: red;font-size: 18px;" ng-show="isMessage==1">请到您的邮箱获取重置密码信息！</span>
+                </div>       
+            </form>
+        </div>
+    </div>
+    <div class="row" ng-show="submitStage==1">
+        <div class="col-md-offset-4 col-md-4">
+            <form class="form-horizontal form-login">
+                <div class="form-group">
+                    <input type="password" class="form-control txt-large"  placeholder="密码" ng-model="pwd">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control txt-large" placeholder="确认密码" ng-model="confirmpwd">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="submit()">
+                        重置密码
+                    </button>
+                </div>       
+            </form>
+        </div>
+    </div>
+    <div class="col-md-offset-4 col-md-4" ng-show="successStage==1">
+    	<div class="alert alert-success" role="alert">
+    		<span class="glyphicon glyphicon-ok" style="font-size:18px;"></span>
+    		<span>重置成功，请牢记新的登录密码</span>
+    		</br>
+    		</br>
+    		<a href="#/login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重新登录</a>
+    	</div>
+    	
+    </div>
+</div>
