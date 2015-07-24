@@ -1,0 +1,60 @@
+
+<div class="container">
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 30px">
+                    最好用的IT人才评测系统
+        </h1>
+        <p style="font-size:xx-large">
+            帮助您大量、精准的发现最合适的人才
+        </p>
+	</div>
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <form class="form-horizontal form-signup">
+                <div class="form-group">
+                    <input type="email" class="form-control txt-large" placeholder="邮箱" ng-model="Remail">
+                </div>
+                <p class="text-danger"  ng-bind="errorEmail"></p>
+                <div class="form-group">
+                    <input type="text" class="form-control txt-large" placeholder="姓名" ng-model="name">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control txt-large" placeholder="密码"  ng-model="Rpwd"
+				             	   ng-maxlength=20 ng-minlength=6>
+                </div>
+               <!--<div class="form-group">
+                    <input type="password" class="form-control txt-large" id="repeatPassword" placeholder="重复密码" ng-model="Rrepwd"
+				                ng-maxlength=20 ng-minlength=6>
+                </div>  --> 
+                <div class="form-group">
+                    <input type="text" class="form-control txt-large" id="phone" placeholder="手机号码"  ng-model="mobile">
+                    <br/>
+                    <button countbutton class="btn btn-success pull-right">获取验证码</button>
+                </div>
+                <p class="text-danger" ng-bind="errorMsg.mobile" ></p>
+                <div class="form-group">
+                    <input type="text" class="form-control txt-large" id="verification" placeholder="验证码" ng-model="verifyAns">
+                </div>
+                 <p class="text-danger" ng-bind="errorMsg.general" ></p>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="addhr()">
+                        注册
+                    </button>
+                </div>
+                <hr/>
+                <div class="form-group">
+                    <a href="#/cad/login" class="btn btn-outline btn-lg btn-block">
+                            已有账号？登录
+                    </a>
+                </div>
+                <!-- <div class="form-group">
+                    <a class="btn btn-outline btn-block btn-lg" ng-click="mdLogin()">
+                            使用明道账号登录
+                    </a>
+                </div> -->
+            </form>
+        </div>
+    </div>
+</div>
