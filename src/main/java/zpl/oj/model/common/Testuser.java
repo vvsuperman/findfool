@@ -12,6 +12,7 @@ public class Testuser {
 	
 	private String blog;
 	private int age;
+
 	private String registerDate;
 	private String lastLoginDate;
 	private String tel;

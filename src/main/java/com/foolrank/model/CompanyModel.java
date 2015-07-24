@@ -10,6 +10,15 @@ public class CompanyModel {
 	private String tel;
 	private String website;
 	private String description;
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+	private int uid;
 
 	public int getId() {
 		return id;
