@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.foolrank.model.Challenge;
-import com.foolrank.response.json.SimpleChallenge;
-
-import zpl.oj.dao.ChallengeDao;
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.user.UserDao;
@@ -27,6 +23,8 @@ import zpl.oj.model.common.Quiz;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.util.StringUtil;
+
+import com.foolrank.response.json.SimpleChallenge;
 
 @Controller
 @RequestMapping("/challenge")
@@ -103,9 +101,9 @@ public class ChallengeController {
 	@ResponseBody
 	public ResponseBase getListByType(@RequestBody Map<String, String> params) {
 		int corporateId = Integer.parseInt(params.get("cid"));
-		List<Challenge> challenges = new ArrayList<Challenge>();
+//		List<Challenge> challenges = new ArrayList<Challenge>();
 		ResponseBase rb = new ResponseBase();
-		rb.setMessage(challenges);
+//		rb.setMessage(challenges);
 
 		return rb;
 	}
