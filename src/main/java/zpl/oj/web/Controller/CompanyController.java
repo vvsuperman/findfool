@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foolrank.model.CompanyModel;
 import com.foolrank.response.json.CompanyJson;
+import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.model.responsejson.ResponseBase;
@@ -44,6 +45,31 @@ public class CompanyController {
 		}
 		ResponseBase rb = new ResponseBase();
 		rb.setMessage(item);
+
+		return rb;
+	}
+	
+	@RequestMapping(value = "/create")
+	@ResponseBody
+	public ResponseBase create(@RequestBody Map<String, String> params) {
+		String name = RequestUtil.getStringParam(params, "name", true);
+		String cover = RequestUtil.getStringParam(params, "cover", true);
+		String logo = RequestUtil.getStringParam(params, "logo", true);
+		String address = RequestUtil.getStringParam(params, "address", true);
+		String tel = RequestUtil.getStringParam(params, "tel", true);
+		String website = RequestUtil.getStringParam(params, "website", true);
+		String description = RequestUtil.getStringParam(params, "description", true);
+		CompanyModel company = new CompanyModel();
+		company.setName(name);
+		company.setCover(cover);
+		company.setLogo(logo);
+		company.setAddress(address);
+		company.setTel(tel);
+		company.setWebsite(website);
+		company.setDescription(description);
+		companyDao.add(company);
+		ResponseBase rb = new ResponseBase();
+		rb.setMessage(company.getId());
 
 		return rb;
 	}
