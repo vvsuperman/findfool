@@ -191,7 +191,15 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/dp/reset/:auth',{
             	templateUrl: 'dp/page/findPwd.html',
             	controller: 'findCadPwdCtrl'
-            }).
+            }). 
+            when('/cad/signup',{
+            	templateUrl: 'cad/page/signup.html',
+            	controller: 'cadSignupCtrl'
+            }). 
+            when('/cad/login',{
+            	templateUrl: 'cad/page/login.html',
+            	controller: 'cadLoginCtrl'
+            }). 
             otherwise({
                 redirectTo: '/'
             });

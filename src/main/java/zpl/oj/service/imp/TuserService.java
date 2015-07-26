@@ -17,6 +17,7 @@ import zpl.oj.dao.ProblemTestCaseDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.*;
+import zpl.oj.model.request.User;
 import zpl.oj.util.Constant.ExamConstant;
 
 @Service
@@ -125,6 +126,44 @@ public class TuserService {
 		tuserProblemDao.clearProblem(iid);
 		return tuserProblemDao.findProblemByInviteId(iid);
 	}
+
+/**
+ * 获取客户端登录邮箱
+ */
+
+	public Testuser findTuserByEmail(String email) { 
+		  return testuserDao.findTuserByEmail(email);
+
+	}
+
+
+	public Testuser getTestuserById(int tuid) {
+		return testuserDao.findTestuserById(tuid);
+	}
+	
+	
+
+public Testuser userLogin(int tuid) {
+		testuserDao.updateLoginDateByUid(tuid);
+		return getTestuserById(tuid);
+	
+}
+
+
+
+public void updateTestuser(Testuser test1) {
+	testuserDao.updateTestuser(test1);
+}
+
+
+
+/**
+ * 获取客户端登录用户密码
+ * @param pwd
+ * @return
+ */
+
+
 	
 
 	
