@@ -16,7 +16,7 @@ import com.foolrank.provider.QuizProvider;
 
 public interface QuizDao {
 
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS "
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
 	Quiz getQuiz(int tid);
 
