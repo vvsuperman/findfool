@@ -13,7 +13,7 @@ public class QuizProvider {
 		int offset = (int) map.get("offset");
 		int count = (int) map.get("count");
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT * FROM quiz WHERE type=1 AND owner in (");
+		sb.append("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND owner in (");
 		for (int i = 0; i < users.size(); i++) {
 			sb.append(users.get(i).getUid());
 			if (i < users.size() - 1) {

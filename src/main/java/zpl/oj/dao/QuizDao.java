@@ -59,6 +59,6 @@ public interface QuizDao {
 	@SelectProvider(type = QuizProvider.class, method = "getChallengeListByUsers")
 	List<Quiz> getChallengeListByUsers(@Param("users") List<User> userList, @Param("status") int status, @Param("offset") int offset, @Param("count") int count);
 
-	@Select("SELECT * FROM quiz WHERE type=1 AND status=#{0} ORDER BY start_time ASC LIMIT #{1},#{2}")
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND status=#{0} ORDER BY start_time ASC LIMIT #{1},#{2}")
 	List<Quiz> getChallengeListByStatus(int status, int offset, int count);
 }
