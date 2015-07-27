@@ -319,7 +319,7 @@ OJApp.controller('publicReportListController', [
 			})
 		} ]);
 
-OJApp.controller('reportDetailController', [ '$scope', '$http', '$routeParams',
+OJApp.controller('reportDetailController', [ '$scope', '$http','Data', '$routeParams',
 		'$modal', function($scope, $http, Data, $routeParams, $modal) {
 			$scope.showReport = 3;
 			$scope.listNav = 0;

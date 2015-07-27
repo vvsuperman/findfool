@@ -1,7 +1,7 @@
 
 //常量
-var WEBROOT = "/oj";
-//var WEBROOT = "";
+//var WEBROOT = "/oj";
+var WEBROOT = "";
 
 
 
