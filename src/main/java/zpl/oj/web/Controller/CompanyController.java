@@ -14,6 +14,7 @@ import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
 
 @Controller
@@ -25,7 +26,10 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyService companyService;
-
+	
+	@Autowired
+	private ImgUploadService imgUploadService;
+	
 	@RequestMapping(value = "/getById")
 	@ResponseBody
 	public ResponseBase getById(@RequestBody Map<String, String> params) {
@@ -70,40 +74,28 @@ public class CompanyController {
 		return rb;
 	}
 
-	// 创建新公司
+	
 	@RequestMapping(value = "/create")
 	@ResponseBody
-	public ResponseBase createCompany(@RequestBody CompanyModel params) {
-		// String strCompanyId = params.get("cid");
+	public ResponseBase create(@RequestBody Map<String, String> params) {
+		String name = RequestUtil.getStringParam(params, "name", true);
+		String cover = RequestUtil.getStringParam(params, "cover", true);
+		String logo = RequestUtil.getStringParam(params, "logo", true);
+		String address = RequestUtil.getStringParam(params, "address", true);
+		String website = RequestUtil.getStringParam(params, "website", true);
+		String description = RequestUtil.getStringParam(params, "description", true);
+		CompanyModel company = new CompanyModel();
+		company.setName(name);
+		company.setCover(cover);
+		company.setLogo(logo);
+		company.setAddress(address);
+		company.setWebsite(website);
+		company.setDescription(description);
+		companyDao.add(company);
 		ResponseBase rb = new ResponseBase();
-		String companyName = params.getName();
-		if (params.getUid() == 0) {
-			rb.setState(4);
-			rb.setMessage("参数错误！");
-			return rb;
-		}
-		if (companyService.getByUid(params.getUid()) != null) {
-			rb.setState(1);
-			rb.setMessage("您已经创建了公司！");
-			return rb;
-		}
-		if (companyName == null) {
-			rb.setState(2);
-			rb.setMessage("公司名称不能为空，请重新输入");
-			return rb;
-		}
+		rb.setMessage(company.getId());
 
-		CompanyModel com = companyService.findCompanyByName(companyName);
-		if (com != null) {
-
-			rb.setState(3);
-			rb.setMessage("公司名称已经存在，如果您已经注册请登录，如果继续注册，请更改公司名称或用公司全称");
-			return rb;
-
-		}
-		companyService.createCompany(params);
-
-		CompanyModel cm = companyService.findCompanyByName(companyName);
+		CompanyModel cm = companyService.findCompanyByName(name);
 		rb.setState(0);
 		rb.setMessage(cm);
 		return rb;
@@ -128,46 +120,45 @@ public class CompanyController {
 		return rb;
 	}
 
-	/*
-	 * @RequestMapping(value = "/create")
-	 * 
-	 * @ResponseBody public ResponseBase create(@RequestBody Map<String, String>
-	 * params) { String name = RequestUtil.getStringParam(params, "name", true);
-	 * String cover = RequestUtil.getStringParam(params, "cover", true); String
-	 * logo = RequestUtil.getStringParam(params, "logo", true); String address =
-	 * RequestUtil.getStringParam(params, "address", true); String tel =
-	 * RequestUtil.getStringParam(params, "tel", true); String website =
-	 * RequestUtil.getStringParam(params, "website", true); String description =
-	 * RequestUtil.getStringParam(params, "description", true); CompanyModel
-	 * company = new CompanyModel(); company.setName(name);
-	 * company.setCover(cover); company.setLogo(logo);
-	 * company.setAddress(address); company.setTel(tel);
-	 * company.setWebsite(website); company.setDescription(description);
-	 * companyDao.add(company); ResponseBase rb = new ResponseBase();
-	 * rb.setMessage(company.getId());
-	 * 
-	 * return rb; }
-	 */
-
-	/*
-	 * @RequestMapping(value = "/modify")
-	 * 
-	 * @ResponseBody public ResponseBase modify(@RequestBody Map<String, String>
-	 * params) { int id = RequestUtil.getIntParam(params, "id", 0); String name
-	 * = RequestUtil.getStringParam(params, "name", true); String cover =
-	 * RequestUtil.getStringParam(params, "cover", true); String logo =
-	 * RequestUtil.getStringParam(params, "logo", true); String address =
-	 * RequestUtil.getStringParam(params, "address", true); String tel =
-	 * RequestUtil.getStringParam(params, "tel", true); String website =
-	 * RequestUtil.getStringParam(params, "website", true); String description =
-	 * RequestUtil.getStringParam(params, "description", true); CompanyModel
-	 * company = new CompanyModel(); company.setId(id); company.setName(name);
-	 * company.setCover(cover); company.setLogo(logo);
-	 * company.setAddress(address); company.setTel(tel);
-	 * company.setWebsite(website); company.setDescription(description);
-	 * companyDao.modify(company); ResponseBase rb = new ResponseBase();
-	 * rb.setMessage(company.getId());
-	 * 
-	 * return rb; }
-	 */
+	
+	
+	@RequestMapping(value = "/uploadimg")
+	@ResponseBody
+	public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		String companyName = RequestUtil.getStringParam(params, "name", true);
+		if(companyName == null){
+			rb.setState(1);
+			rb.setMessage("公司名不得为空");
+			return rb;
+		}
+		
+		CompanyModel company = companyDao.findCompanyByName(companyName);
+		if(company == null){
+			rb.setState(2);
+			rb.setMessage("无此公司");
+			return rb;
+		}
+		
+		String img =  RequestUtil.getStringParam(params, "img", true);
+		if(img == null){
+			rb.setState(3);
+			rb.setMessage("图片不可为空");
+			return rb;
+		}
+		
+		Integer flag = RequestUtil.getIntParam(params, "flag");
+		if(flag == null){
+			rb.setState(4);
+			rb.setMessage("标志不可为空");
+			return rb;
+		}
+		
+//		imgUploadService.saveCompanyImg(company,img,flag);
+		return null;
+		
+		
+		
+		
+	}
 }
