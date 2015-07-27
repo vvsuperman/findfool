@@ -38,7 +38,6 @@ public interface TestuserDao {
 	@Select("select pwd from testuser where email = #{0}")
 	String findTuserByPwd(String email);
 
-
 	
 	@Update("update testuser set username=#{username},pwd=#{pwd},tel=#{tel} where email =#{email}")
 	void updateTestuser(Testuser test1);

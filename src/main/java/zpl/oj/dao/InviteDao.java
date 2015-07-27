@@ -3,6 +3,7 @@ package zpl.oj.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -17,6 +18,11 @@ public interface InviteDao {
 	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera)"
 			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera})")
 	  void insertInvite(Invite invite);
+	
+	@Insert("INSERT INTO INVITE(TESTID,HRID,UID,INVITETIME,begintime,FINISHTIME,SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera)"
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera})")
+	@Options(useGeneratedKeys = true, keyProperty = "iid", keyColumn = "iid")
+	int add(Invite invite);
 	  
 	 // void deleteInvite(AoneObjectDeleted objectDeleted);
 

@@ -6,6 +6,7 @@
 package zpl.oj.web.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,17 +15,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import zpl.oj.dao.CompanyDao;
+import zpl.oj.dao.InviteDao;
+import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.TestuserDao;
+import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.common.CadTest;
+import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.Testuser;
+import zpl.oj.model.common.TuserProblem;
+import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.util.StringUtil;
+import zpl.oj.util.Constant.ExamConstant;
 
 import com.foolrank.response.json.SimpleChallenge;
+import com.foolrank.util.RequestUtil;
 
 @Controller
 @RequestMapping("/challenge")
@@ -35,16 +49,104 @@ public class ChallengeController {
 
 	@Autowired
 	private QuizDao quizDao;
-	
+
 	@Autowired
 	private CompanyDao companyDao;
+	
+	@Autowired
+	private TestuserDao testuserDao;
+	
+	@Autowired
+	private InviteDao inviteDao;
+	
+	@Autowired
+	private ProblemDao problemDao;
+	
+	@Autowired
+	private TuserProblemDao tuserProblemDao;
 
-	@RequestMapping(value = "/{signedId}")
+	@RequestMapping(value = "/{id}")
 	@ResponseBody
-	public String index(@PathVariable("signedId") String signedId) {
-		System.out.println(signedId);
+	public String index(@PathVariable("id") String id) {
+		String strId = "";
+		String strTuId = "";
+
 		// return new ModelAndView("login");
-		return signedId;
+		return id;
+	}
+
+	@RequestMapping(value = "/start", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase start(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+
+		String email = RequestUtil.getStringParam(params, "email", "", true);
+		if (email.equals("")) {
+			rb.setState(10001);
+			rb.setMessage("email不为空");
+			return rb;
+		}
+		int quizId = RequestUtil.getIntParam(params, "testid");
+		if (quizId <= 0) {
+			rb.setState(10002);
+			rb.setMessage("挑战赛ID非法");
+			return rb;
+		}
+
+		Quiz quiz = quizDao.getQuiz(quizId);
+		if (quiz == null ||
+			quiz.getType() != ExamConstant.QUIZ_TYPE_CHALLENGE ||
+			quiz.getStatus() != ExamConstant.STATUS_RUNNING) {
+			rb.setState(20001);
+			rb.setMessage("挑战不存在或者不在进行");
+			return rb;
+		}
+
+		// 生成invite
+		Invite invite = inviteDao.getInvites(quizId, email);
+		if (invite == null) {
+			invite = genInvite(email, quizId);
+		}
+		if (invite.getState() == ExamConstant.INVITE_FINISH) {
+			// 试卷已做完
+			rb.setState(1);
+			rb.setMessage("试卷已做完");
+			return rb;
+		}
+		Map<String, Object> rtMap = new HashMap<String, Object>();
+		rtMap.put("problems", tuserProblemDao.findProblemByInviteId(invite.getIid()));
+
+		rb.setState(0);
+		rb.setMessage(rtMap);
+		return rb;
+	}
+	
+	private Invite genInvite(String email, int quizId) {
+		Testuser testuser = testuserDao.findTuserByEmail(email);
+		if (testuser == null) {
+			//
+		}
+		int tuId = testuser.getTuid();
+		Invite invite = new Invite();
+		invite.setUid(tuId);
+		invite.setTestid(quizId);
+		invite.setBegintime(StringUtil.nowDateTime());
+		invite.setScore(0);
+		invite.setState(ExamConstant.INVITE_PUB);
+		inviteDao.add(invite);
+		
+		// 获取考题
+		List<Problem> problemList = problemDao.getProblemByTestid(quizId);
+		for (Problem problem : problemList) {
+			TuserProblem tuserProblem = new TuserProblem();
+			tuserProblem.setInviteId(invite.getIid());
+			tuserProblem.setTuid(tuId);
+			tuserProblem.setProblemid(problem.getProblemId());
+			
+			tuserProblemDao.insertTuserProblem(tuserProblem);
+		}
+		
+		return invite;
 	}
 
 	@RequestMapping(value = "/getListByStatus")
@@ -67,11 +169,13 @@ public class ChallengeController {
 		List<Quiz> challenges = null;
 		if (companyId > 0) {
 			List<User> users = userDao.getListByCompany(companyId);
-			if (users!=null) {
-				challenges = quizDao.getChallengeListByUsers(users, status, offset, pageSize);
+			if (users != null) {
+				challenges = quizDao.getChallengeListByUsers(users, status,
+						offset, pageSize);
 			}
 		} else {
-			challenges = quizDao.getChallengeListByStatus(status, offset, pageSize);
+			challenges = quizDao.getChallengeListByStatus(status, offset,
+					pageSize);
 		}
 		List<SimpleChallenge> result = null;
 		if (challenges != null && challenges.size() > 0) {
@@ -101,9 +205,9 @@ public class ChallengeController {
 	@ResponseBody
 	public ResponseBase getListByType(@RequestBody Map<String, String> params) {
 		int corporateId = Integer.parseInt(params.get("cid"));
-//		List<Challenge> challenges = new ArrayList<Challenge>();
+		// List<Challenge> challenges = new ArrayList<Challenge>();
 		ResponseBase rb = new ResponseBase();
-//		rb.setMessage(challenges);
+		// rb.setMessage(challenges);
 
 		return rb;
 	}
