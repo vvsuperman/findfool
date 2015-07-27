@@ -276,7 +276,6 @@ OJApp.controller('TestBank',['$scope','$http','Data','$sce','$modal',function($s
     //end by zpl
    
     $scope.goPage = function (data) {
-    	console.log("data.............",data);
         $scope.show = 1;
         $scope.context = "";
         $scope.keyword = "";
