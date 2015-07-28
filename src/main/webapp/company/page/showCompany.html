@@ -1,0 +1,50 @@
+
+<div class="container">
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 30px">
+               {{company.name}}
+        </h1>
+      
+	</div>
+    <div class="row" >
+        <div class="col-md-offset-4 col-md-4">
+            <form class="form-horizontal form-signup">
+                
+             
+                <div class="form-group">
+                    <a>公司电话</a>
+                    <input type="text" class="form-control txt-large" id="phone"   ng-model="company.tel"  disabled>
+					</div>
+					     <div class="form-group">
+                    <a>公司地址</a>
+                    <input type="text" class="form-control txt-large" id="phone"   ng-model="company.address"  disabled>
+					</div>
+            
+                <div class="form-group">
+                <a>公司网址</a>
+              <input type="textfield" class="form-control txt-large" placeholder="公司网址" ng-model="company.website" readonly>
+ </div>
+      <div class="form-group">
+      <a>详细信息</a>
+      <textarea    ng-model="company.description" class="form-control" rows="3" readonly></textarea>
+ </div>
+    
+    <p class="text-danger" ng-bind="errorMsg.general" ></p>
+                <div class="form-group">
+                <a href="#/company/companySet" class="btn btn-outline btn-lg btn-block">
+                      返回
+                      </a>
+                </div>
+                <hr/>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="modifyCompany(company)">
+                            修改
+                                       </button>
+                </div>
+          
+            </form>
+        </div>
+    </div>
+</div>

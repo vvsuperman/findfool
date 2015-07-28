@@ -1,5 +1,7 @@
 package zpl.oj.service.imp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,26 @@ public class CompanyService {
 		// TODO Auto-generated method stub
 		return companyDao.getByUid(userId);
 	}
+
+
+	public List<CompanyModel> findAll() {
+		// TODO Auto-generated method stub
+		return companyDao.findAll();
+	}
+
+
+	public List<CompanyModel> findAllByName(String cname) {
+		// TODO Auto-generated method stub
+		return companyDao.findAllByName(cname);
+	}
+
+
+	public void cDelete(int id) {
+	
+		companyDao.cDelete(id);
+	}
+
+
 
 
 }

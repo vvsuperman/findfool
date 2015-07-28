@@ -1,5 +1,6 @@
 package zpl.oj.web.Controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,82 +74,84 @@ public class CompanyController {
 		return rb;
 	}
 	
-	//创建新公司
-	@RequestMapping(value = "/create")
-	@ResponseBody
-	public ResponseBase createCompany(@RequestBody CompanyModel params) {
-	//	String strCompanyId = params.get("cid");
-		ResponseBase rb = new ResponseBase();
-		 String  companyName=params.getName();
-		 if(params.getUid()==0){
-			 rb.setState(4);
-			 rb.setMessage("参数错误！");
-			 return rb;
-		 }
-		 if(companyService.getByUid(params.getUid())!=null){
-			 rb.setState(1);
-				rb.setMessage("您已经创建了公司！");
-				return rb;
-		 }
-		 if(companyName==null){
-				rb.setState(2);
-				rb.setMessage("公司名称不能为空，请重新输入");
-				return rb;
-		 }
-		 
-		 CompanyModel com=companyService.findCompanyByName(companyName);
-		if(com!=null){
-			
-			rb.setState(3);
-			rb.setMessage("公司名称已经存在，如果您已经注册请登录，如果继续注册，请更改公司名称或用公司全称");
-			return rb;
-		 
-			
-		}
-	 companyService.createCompany(params);
-	 
-	 CompanyModel cm=companyService.findCompanyByName(companyName);
-	 rb.setState(0);
-	 rb.setMessage(cm);
-	 return rb;
-	}
-	
-	
-	
-	
-//修改公司信息
-	@RequestMapping(value = "/modify")
-	@ResponseBody
-	public ResponseBase modifyCompany(@RequestBody CompanyModel params) {
-		ResponseBase rb = new ResponseBase();
-		 String  companyName=params.getName();
-		 if(companyName==null){
-				rb.setState(1);
-				rb.setMessage("公司名称不能为空，请重新输入");
-				return rb;
-		 }
-		 
-	 companyService.modifyCompany(params);
-	 CompanyModel cm=companyService.findCompanyByName(companyName);
-	 rb.setState(0);
-	 rb.setMessage(cm);
-	 return rb;
-	}
+//	//创建新公司
+//	@RequestMapping(value = "/create")
+//	@ResponseBody
+//	public ResponseBase createCompany(@RequestBody CompanyModel params) {
+//	//	String strCompanyId = params.get("cid");
+//		ResponseBase rb = new ResponseBase();
+//		 String  companyName=params.getName();
+//		 if(params.getUid()==0){
+//			 rb.setState(4);
+//			 rb.setMessage("参数错误！");
+//			 return rb;
+//		 }
+//		 if(companyService.getByUid(params.getUid())!=null){
+//			 rb.setState(1);
+//				rb.setMessage("您已经创建了公司！");
+//				return rb;
+//		 }
+//		 if(companyName==null){
+//				rb.setState(2);
+//				rb.setMessage("公司名称不能为空，请重新输入");
+//				return rb;
+//		 }
+//		 
+//		 CompanyModel com=companyService.findCompanyByName(companyName);
+//		if(com!=null){
+//			
+//			rb.setState(3);
+//			rb.setMessage("公司名称已经存在，如果您已经注册请登录，如果继续注册，请更改公司名称或用公司全称");
+//			return rb;
+//		 
+//			
+//		}
+//	 companyService.createCompany(params);
+//	 
+//	 CompanyModel cm=companyService.findCompanyByName(companyName);
+//	 rb.setState(0);
+//	 rb.setMessage(cm);
+//	 return rb;
+//	}
+//	
+//	
+//	
+//	
+////修改公司信息
+//	@RequestMapping(value = "/modify")
+//	@ResponseBody
+//	public ResponseBase modifyCompany(@RequestBody CompanyModel params) {
+//		ResponseBase rb = new ResponseBase();
+//		 String  companyName=params.getName();
+//		 if(companyName==null){
+//				rb.setState(1);
+//				rb.setMessage("公司名称不能为空，请重新输入");
+//				return rb;
+//		 }
+//		 
+//	 companyService.modifyCompany(params);
+//	 CompanyModel cm=companyService.findCompanyByName(companyName);
+//	 rb.setState(0);
+//	 rb.setMessage(cm);
+//	 return rb;
+//	}
 	
 	@RequestMapping(value = "/create")
 	@ResponseBody
 	public ResponseBase create(@RequestBody Map<String, String> params) {
 		String name = RequestUtil.getStringParam(params, "name", true);
-		String cover = RequestUtil.getStringParam(params, "cover", true);
-		String logo = RequestUtil.getStringParam(params, "logo", true);
+		String tel = RequestUtil.getStringParam(params, "mobile", true);
+
+		//String cover = RequestUtil.getStringParam(params, "cover", true);
+	//	String logo = RequestUtil.getStringParam(params, "logo", true);
 		String address = RequestUtil.getStringParam(params, "address", true);
-		String tel = RequestUtil.getStringParam(params, "tel", true);
+		
 		String website = RequestUtil.getStringParam(params, "website", true);
 		String description = RequestUtil.getStringParam(params, "description", true);
 		CompanyModel company = new CompanyModel();
 		company.setName(name);
-		company.setCover(cover);
-		company.setLogo(logo);
+	//	company.setCover(cover);
+	//	company.setLogo(logo);
 		company.setAddress(address);
 		company.setTel(tel);
 		company.setWebsite(website);
@@ -159,6 +162,35 @@ public class CompanyController {
 
 		return rb;
 	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/updateimage")
+	@ResponseBody
+	public ResponseBase updateimage(@RequestBody Map<String, String> params) {
+		int id = RequestUtil.getIntParam(params, "id", 0);
+
+		String cover = RequestUtil.getStringParam(params, "name", true);
+		String logo = RequestUtil.getStringParam(params, "mobile", true);
+		CompanyModel company = new CompanyModel();
+		company.setId(id);
+	    company.setCover(cover);
+	    company.setLogo(logo);
+		companyDao.updateimage(company);
+		ResponseBase rb = new ResponseBase();
+		rb.setMessage(company.getId());
+
+		return rb;
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/modify")
 	@ResponseBody
@@ -174,8 +206,8 @@ public class CompanyController {
 		CompanyModel company = new CompanyModel();
 		company.setId(id);
 		company.setName(name);
-		company.setCover(cover);
-		company.setLogo(logo);
+		//company.setCover(cover);
+		//company.setLogo(logo);
 		company.setAddress(address);
 		company.setTel(tel);
 		company.setWebsite(website);
@@ -186,4 +218,42 @@ public class CompanyController {
 
 		return rb;
 	}
+	
+	//查找全部公司，返回所有公司信息，ID，名称，电话
+	@RequestMapping(value = "/findAll")
+	@ResponseBody
+	public ResponseBase findAll() {
+		List<CompanyModel> companyList=   companyService.findAll();
+
+		ResponseBase rb = new ResponseBase();
+		rb.setMessage(companyList);
+
+		return rb;
+	}
+	//查找全部公司，返回所有公司信息，ID，名称，电话
+		@RequestMapping(value = "/findAllByName")
+		@ResponseBody
+		public ResponseBase findAllByName(@RequestBody Map<String, String> params) {
+			String cname = RequestUtil.getStringParam(params, "cname", true);
+		
+			List<CompanyModel> companyList=   companyService.findAllByName(cname);
+
+			ResponseBase rb = new ResponseBase();
+			rb.setMessage(companyList);
+
+			return rb;
+		}
+		@RequestMapping(value = "/delete")
+		@ResponseBody
+		public ResponseBase cDelete(@RequestBody Map<String, String> params) {
+			int id = RequestUtil.getIntParam(params, "id", 0);		
+			  companyService.cDelete(id);
+
+			
+
+			return null;
+		}
+		
+	
+	
 }

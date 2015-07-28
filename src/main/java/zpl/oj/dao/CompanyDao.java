@@ -1,17 +1,27 @@
 package zpl.oj.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Testuser;
+
 import org.apache.ibatis.annotations.Options;
 
 import com.foolrank.model.CompanyModel;
 
 public interface CompanyDao {
 
-	@Insert("INSERT INTO company(name,cover,logo,address,tel,website,description) VALUES (#{name},#{cover},#{logo},#{address},#{tel},#{website},#{description})")
+//	@Insert("INSERT INTO company(name,cover,logo,address,tel,website,description) VALUES (#{name},#{cover},#{logo},#{address},#{tel},#{website},#{description})")
+//	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+//	int add(CompanyModel company);
+
+	
+
+	@Insert("INSERT INTO company(name,address,tel,website,description) VALUES (#{name},#{address},#{tel},#{website},#{description})")
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 	int add(CompanyModel company);
 
@@ -34,6 +44,25 @@ public interface CompanyDao {
 	
 	@Update("UPDATE company SET name=#{name},cover=#{cover},logo=#{logo},address=#{address},tel=#{tel},website=#{website},description=#{description} WHERE id=#{id}")
 	void modify(CompanyModel company);
+
+	
+	@Select("SELECT * FROM company")
+	List<CompanyModel> findAll();
+
+	
+	@Select("SELECT * FROM company WHERE name LIKE CONCAT(CONCAT('%', #{0}), '%')")
+	List<CompanyModel> findAllByName(String cname);
+
+	
+	@Delete("DELETE from company where id=#{id}")
+	void cDelete(int id);
+
+	
+	@Update("update company set cover=#{cover} ,logo=#{logo} where id =#{id}")
+	void updateimage(CompanyModel company);
+
+	@Select("SELECT * FROM company WHERE id=#{id}")
+	void show(CompanyModel company);
 }
 
 

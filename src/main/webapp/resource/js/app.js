@@ -200,10 +200,25 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'cad/page/login.html',
             	controller: 'cadLoginCtrl'
             }). 
+            when('/company/companySet',{
+            	templateUrl: 'company/page/companyIndex.html',
+            	controller: 'companySet'
+            }). when('/company/create',{
+            	templateUrl: 'company/page/createCompany.html',
+            	controller: 'companySet'
+            }). 
+            when('/company/show/:companyId',{
+            	templateUrl: 'company/page/showCompany.html',
+            	controller: 'companySet'
+            }). 
+            when('/company/modify/:companyId',{
+            	templateUrl: 'company/page/ modifyCompany.html',
+            	controller: 'companySet'
+            }). 
             otherwise({
                 redirectTo: '/'
             });
-        
+       
 //        $locationProvider.html5Mode(true);
     }]);
 

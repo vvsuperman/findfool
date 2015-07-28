@@ -1,0 +1,52 @@
+
+<div class="container">
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 30px">
+                    创建新公司
+        </h1>
+      
+	</div>
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <form class="form-horizontal form-signup">
+                <div class="form-group">
+                    <input type="textfield" class="form-control txt-large" placeholder="公司名称(必须输入)" ng-model="companyname">
+            
+                </div>
+                <p class="text-danger"  ></p>
+                <div class="form-group">
+                    <input type="textfield" class="form-control txt-large" placeholder="公司地址" ng-model="address">
+                </div>
+              
+                <div class="form-group">
+                    <input type="text" class="form-control txt-large" id="phone" placeholder="公司电话"  ng-model="mobile">
+					</div>
+                <p class="text-danger" ng-bind="errorMsg.mobile" ></p>
+                <div class="form-group">
+              <input type="textfield" class="form-control txt-large" placeholder="公司网址" ng-model="website">
+ </div>
+      <div class="form-group">
+      <a>详细信息</a>
+      <textarea    ng-model="description" class="form-control" rows="3"></textarea>
+ </div>
+    
+    <p class="text-danger" ng-bind="errorMsg.general" ></p>
+                <div class="form-group">
+                <a href="#/company/companySet" class="btn btn-outline btn-lg btn-block">
+                      返回
+                      </a>
+                </div>
+                <hr/>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="create()">
+                            下一步
+                                       </button>
+                   
+                </div>
+          
+            </form>
+        </div>
+    </div>
+</div>
