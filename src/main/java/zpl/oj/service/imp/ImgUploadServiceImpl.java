@@ -1,22 +1,12 @@
 package zpl.oj.service.imp;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qiniu.common.QiniuException;
-import com.qiniu.http.Response;
-import com.qiniu.storage.UploadManager;
-import com.qiniu.util.Auth;
-import com.qiniu.util.StringMap;
-
+import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
@@ -24,17 +14,31 @@ import zpl.oj.service.ImgUploadService;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.base64.BASE64;
 
+import com.foolrank.model.CompanyModel;
+import com.qiniu.common.QiniuException;
+import com.qiniu.http.Response;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.util.Auth;
+
 @Service
 public class ImgUploadServiceImpl implements ImgUploadService {
 
+	private int COMPANY_COVER=1;
+	private int COMPANY_LOGO=2;
+	
 	@Autowired
 	ImgUploadDao imgStoreDao;
+	
+	@Autowired
+	CompanyDao companyDao;
+	
+	
+	
 	
 	@Override
 	public String saveImg(Img img) {
 		
 		String url ="-";
-		PrintStream out=System.out;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=new Date();
 		String today=sdf.format(date);
@@ -45,9 +49,45 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		String time=sdf.format(date);
 		//fileKey+=url+time+".jpg";
 		filename+=url+time+".jpg";
+		String imgdata = img.getImgData();
+		//将img存到七牛
+		pushImg(filename, imgdata);
+		
+		return filename;
+	}
+	
+	
+	
+	
+	//保存公司的封面或logo
+	public void saveCompanyImg(CompanyModel company, String imgdata,int flag){
+				
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String filename = company.getName()+sdf.format(new Date());
+		pushImg(filename, imgdata);
+		//保存封面
+		if(flag==COMPANY_COVER){
+			company.setCover(filename);
+		}
+		//保存
+		else if(flag==COMPANY_LOGO){
+			company.setLogo(filename);
+		}
+		companyDao.modify(company);
+	}
+	
+	
+	
+	
+
+	/**
+	 * @param filename
+	 * @param imgdata
+	 */
+	public void pushImg(String filename, String imgdata) {
 		byte[] imgBytes=null;
 		try {
-			imgBytes = BASE64.decodeBASE64(img.getImgData());
+			imgBytes = BASE64.decodeBASE64(imgdata);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -65,9 +105,6 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		out.println(filename);		
-		
-		return filename;
 	}
 
 	@Override
