@@ -154,7 +154,7 @@ public class CompanyController {
 			return rb;
 		}
 		
-//		imgUploadService.saveCompanyImg(company,img,flag);
+		imgUploadService.saveCompanyImg(company,img,flag);
 		return null;
 		
 		
