@@ -65,14 +65,27 @@ public class ChallengeController {
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
 
-	@RequestMapping(value = "/{id}")
+	@RequestMapping(value = "/{signedId}")
 	@ResponseBody
-	public String index(@PathVariable("id") String id) {
-		String strId = "";
-		String strTuId = "";
+	public ResponseBase index(@PathVariable("signedId") String signedId) {
+		ResponseBase rb = new ResponseBase();
+		Quiz challenge = quizDao.getChallengeBySignedKey(signedId);
+		if (challenge == null || challenge.getStatus() != ExamConstant.QUIZ_TYPE_CHALLENGE) {
+			rb.setState(20001);
+			rb.setMessage("挑战不存在或者不在进行");
+			return rb;
+		}
+		SimpleChallenge item = new SimpleChallenge();
+		item.setId(challenge.getQuizid());
+		item.setName(challenge.getName());
+		item.setLogo(challenge.getLogo());
+		item.setDescription(challenge.getDescription());
+		item.setKey(challenge.getSignedKey());
+		item.setStartTime(StringUtil.toDateTimeString(challenge.getStartTime()));
+		item.setEndTime(StringUtil.toDateTimeString(challenge.getEndTime()));
+		rb.setMessage(item);
 
-		// return new ModelAndView("login");
-		return id;
+		return rb;
 	}
 
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
