@@ -152,6 +152,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
        	 console.log("get data failed");
         });
     }
+    
     $scope.addEmail = function (){
     	$http({
             url: WEBROOT+"/quizemail/addemail",
@@ -171,4 +172,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
        	 console.log("get data failed");
         });
     }
+    
+    $scope.setPublic = function(){
+    	
+    }
+    
 }])
