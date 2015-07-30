@@ -1,5 +1,10 @@
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
 
-<div class="container">
+
+
+<div class="container" >
 	<div style="width:100%;" class="text-center">
 		<br/>
 		<br/>
@@ -10,7 +15,7 @@
 	</div>
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
-            <form class="form-horizontal form-signup">
+           <form class="form-horizontal form-signup">  
                 <div class="form-group">
                     <input type="textfield" class="form-control txt-large" placeholder="公司名称(必须输入)" ng-model="companyname">
             
@@ -27,26 +32,42 @@
                 <div class="form-group">
               <input type="textfield" class="form-control txt-large" placeholder="公司网址" ng-model="website">
  </div>
+         
       <div class="form-group">
       <a>详细信息</a>
       <textarea    ng-model="description" class="form-control" rows="3"></textarea>
  </div>
-    
+               <div class="btn btn-primary"  upload-button header ={{companyname}}
+    	         url="/company/uploadimg" on-success="onSuccess(response)" >上传公司图片
+    	          </br>
+    	          </div>
+    	             </br> </br>
+             <div class="btn btn-primary"  upload-button header ={{companyname}}
+    	          ng-click="uploadimg(false)" on-success="onSuccess(response)" >上传公司logo
+    	          
+    	          </div>
+    	          <div>
+             
+             <div ng-controller="upload1">
+              <input  name="myFile" type="file"   />            
+             </div>
+            
+    <div>
     <p class="text-danger" ng-bind="errorMsg.general" ></p>
                 <div class="form-group">
-                <a href="#/company/companySet" class="btn btn-outline btn-lg btn-block">
-                      返回
-                      </a>
-                </div>
-                <hr/>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="create()">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="create()">
                             下一步
                                        </button>
-                   
+                   </br>
+                <a href="#/company/companySet"><button  class="btn btn-outline btn-lg btn-block">
+                      返回</button>
+                      </a>
+        
+                  
+                </div>
                 </div>
           
-            </form>
+           </form> 
         </div>
     </div>
 </div>

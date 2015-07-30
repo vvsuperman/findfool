@@ -214,11 +214,15 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/company/modify/:companyId',{
             	templateUrl: 'company/page/ modifyCompany.html',
             	controller: 'companySet'
+            }).    
+            when('/company/updateimage',{
+            	templateUrl: 'company/page/ updateimage.html',
+            	controller: 'companySet'
             }). 
             otherwise({
                 redirectTo: '/'
             });
-       
+        
 //        $locationProvider.html5Mode(true);
     }]);
 

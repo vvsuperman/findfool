@@ -1,7 +1,10 @@
 OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function ($scope,$http,$routeParams,Data) {
 	    var cid = $routeParams.companyId;
 	    console.log(cid);
-
+	    
+	$scope.company ={};
+    $scope.show={};
+	$scope.show.step1 =true; 
 	$scope.findAll = function () {			
                     $http({
                         url: WEBROOT+"/company/findAll",
@@ -55,23 +58,90 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
     	else{  $scope.findAll();}
 };
 
+//加载图片到服务器
+//$scope.uploadimg=function(flag){
+//	if(flag){
+//		console.log("1");
+//	  
+//		console.log($scope.companyname);
+//		
+//		
+//
+//        $http({
+//            url: WEBROOT+"/company/uploadimg",
+//            method: 'POST',
+//            data: {"flag":flag,"name": $scope.ccompanyname,"img":$scope}
+//
+//        }).success(function (data) {
+//            $scope.companyList = data["message"];
+//       
+//            
+//       console.log("按名字查询");
+//  
+//        })
+//		
+//	}else{
+//		console.log("2");
+//		}
+//	
+//}
+
+//
+//	  $scope.doUpload = function () {
+//		  console.log($scope.companyname);
+//	    upload({
+//	      url: '/upload',
+//	      method: 'POST',
+//	      data: {
+//	        anint: 123,
+//	        aBlob: Blob([1,2,3]), // Only works in newer browsers
+//	        aFile: $scope.myFile, // a jqLite type="file" element, upload() will extract all the files from the input and put them into the FormData object before sending.
+//	      }
+//	    }).then(
+//	      function (response) {
+//	        console.log(response.data); // will output whatever you choose to return from the server on a successful upload
+//	      },
+//	      function (response) {
+//	          console.error(response); //  Will return if status code is above 200 and lower than 300, same as $http
+//	      }
+//	    );
+//	  }
+
+
+
+
 
 $scope.create = function () {	
 	$scope.errorMsg={};
-	
+	console.log($scope.show);
 if($scope.companyname){
+	   $scope.companyModel={};
+	   console.log($scope.show);
     $http({
         url: WEBROOT+"/company/create",
         method: 'POST',
-        data: {"name": $scope.companyname,"address": $scope.address,"mobile": $scope.mobile,"website": $scope.website,"description":$scope.description}
+        data: {"name": $scope.ccompanyname,"address": $scope.address,"mobile": $scope.mobile,"website": $scope.website,"description":$scope.description}
 
     }).success(function (data) {
-        $scope.companyList = data["message"];
+        $scope.companyModel = data["message"];
+        $scope.show =2; 
+        location.reload() 
+ 
     })}
 
 	else{
 		$scope.errorMsg.general = "公司名字不能为空";}
+
 };
+
+
+
+
+$scope.updateImageCompany=function(companyModel){
+	var url = "#/company/update/"+companyModel.id;
+
+	 window.location.href=url;
+}
 
 $scope.show = function (cid) {	
 	
@@ -131,4 +201,30 @@ $scope.showCompany=function(company){
   
    
     
+}]);
+
+OJApp.controller('upload1',['upload','$http','$scope',function(upload,$http,$scope){
+	console.log("initial upload");
+	$scope.doUpload=function(){
+		
+		console.log("doupload......................."+$scope.myFile);
+//		upload({
+//		      url: '/upload',
+//		      method: 'POST',
+//		      data: {
+//		        company: 1111111,
+//		        aFile: $scope.myFile, // a jqLite type="file" element, upload() will extract all the files from the input and put them into the FormData object before sending.
+//		      }
+//		    }).then(
+//		      function (response) {
+//		        console.log(response.data); // will output whatever you choose to return from the server on a successful upload
+//		      },
+//		      function (response) {
+//		          console.error(response); //  Will return if status code is above 200 and lower than 300, same as $http
+//		      }
+//		    );
+		
+	}
+	
+	 
 }]);

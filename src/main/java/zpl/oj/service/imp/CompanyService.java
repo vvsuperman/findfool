@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.TestuserDao;
+import zpl.oj.model.request.User;
 
 import com.foolrank.model.CompanyModel;
 
@@ -60,6 +61,24 @@ public class CompanyService {
 	public void cDelete(int id) {
 	
 		companyDao.cDelete(id);
+	}
+
+
+	public CompanyModel findByName(String cname) {
+		// TODO Auto-generated method stub
+		return companyDao.findByName(cname);
+	}
+
+
+	public List<User> findUserByEmail(String email) {
+		return  companyDao.findUserByEmail(email);
+		
+	}
+
+
+	public void updateUser(User user, int id) {
+		companyDao.updateUser(user,id);
+		
 	}
 
 

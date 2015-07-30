@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Testuser;
+import zpl.oj.model.request.User;
 
 import org.apache.ibatis.annotations.Options;
 
@@ -63,6 +64,16 @@ public interface CompanyDao {
 
 	@Select("SELECT * FROM company WHERE id=#{id}")
 	void show(CompanyModel company);
+
+	@Select("SELECT * FROM company WHERE name=#{cname}")
+	CompanyModel findByName(String cname);
+
+	@Select("SELECT * FROM user WHERE email=#{0}")
+	List<User> findUserByEmail(String email);
+
+	
+	@Update("update user set companyId=#{1}  where id =#{id}")
+	void updateUser(User user, int id);
 }
 
 

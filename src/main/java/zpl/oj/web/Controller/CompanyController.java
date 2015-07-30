@@ -6,15 +6,20 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.foolrank.model.CompanyModel;
 import com.foolrank.response.json.CompanyJson;
 import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.CompanyDao;
+import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
 
 @Controller
@@ -26,6 +31,9 @@ public class CompanyController {
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private ImgUploadService imgUploadService;
 	
 	@RequestMapping(value = "/getById")
 	@ResponseBody
@@ -74,68 +82,7 @@ public class CompanyController {
 		return rb;
 	}
 	
-//	//创建新公司
-//	@RequestMapping(value = "/create")
-//	@ResponseBody
-//	public ResponseBase createCompany(@RequestBody CompanyModel params) {
-//	//	String strCompanyId = params.get("cid");
-//		ResponseBase rb = new ResponseBase();
-//		 String  companyName=params.getName();
-//		 if(params.getUid()==0){
-//			 rb.setState(4);
-//			 rb.setMessage("参数错误！");
-//			 return rb;
-//		 }
-//		 if(companyService.getByUid(params.getUid())!=null){
-//			 rb.setState(1);
-//				rb.setMessage("您已经创建了公司！");
-//				return rb;
-//		 }
-//		 if(companyName==null){
-//				rb.setState(2);
-//				rb.setMessage("公司名称不能为空，请重新输入");
-//				return rb;
-//		 }
-//		 
-//		 CompanyModel com=companyService.findCompanyByName(companyName);
-//		if(com!=null){
-//			
-//			rb.setState(3);
-//			rb.setMessage("公司名称已经存在，如果您已经注册请登录，如果继续注册，请更改公司名称或用公司全称");
-//			return rb;
-//		 
-//			
-//		}
-//	 companyService.createCompany(params);
-//	 
-//	 CompanyModel cm=companyService.findCompanyByName(companyName);
-//	 rb.setState(0);
-//	 rb.setMessage(cm);
-//	 return rb;
-//	}
-//	
-//	
-//	
-//	
-////修改公司信息
-//	@RequestMapping(value = "/modify")
-//	@ResponseBody
-//	public ResponseBase modifyCompany(@RequestBody CompanyModel params) {
-//		ResponseBase rb = new ResponseBase();
-//		 String  companyName=params.getName();
-//		 if(companyName==null){
-//				rb.setState(1);
-//				rb.setMessage("公司名称不能为空，请重新输入");
-//				return rb;
-//		 }
-//		 
-//	 companyService.modifyCompany(params);
-//	 CompanyModel cm=companyService.findCompanyByName(companyName);
-//	 rb.setState(0);
-//	 rb.setMessage(cm);
-//	 return rb;
-//	}
-	
+//创建新公司
 	@RequestMapping(value = "/create")
 	@ResponseBody
 	public ResponseBase create(@RequestBody Map<String, String> params) {
@@ -145,7 +92,7 @@ public class CompanyController {
 		//String cover = RequestUtil.getStringParam(params, "cover", true);
 	//	String logo = RequestUtil.getStringParam(params, "logo", true);
 		String address = RequestUtil.getStringParam(params, "address", true);
-		
+
 		String website = RequestUtil.getStringParam(params, "website", true);
 		String description = RequestUtil.getStringParam(params, "description", true);
 		CompanyModel company = new CompanyModel();
@@ -153,12 +100,13 @@ public class CompanyController {
 	//	company.setCover(cover);
 	//	company.setLogo(logo);
 		company.setAddress(address);
-		company.setTel(tel);
 		company.setWebsite(website);
 		company.setDescription(description);
-		companyDao.add(company);
+		companyDao.add(company);	 
+        CompanyModel companymodel  =companyService.findByName(company.getName());
+		
 		ResponseBase rb = new ResponseBase();
-		rb.setMessage(company.getId());
+		rb.setMessage(companymodel);
 
 		return rb;
 	}
@@ -174,13 +122,24 @@ public class CompanyController {
 	public ResponseBase updateimage(@RequestBody Map<String, String> params) {
 		int id = RequestUtil.getIntParam(params, "id", 0);
 
-		String cover = RequestUtil.getStringParam(params, "name", true);
-		String logo = RequestUtil.getStringParam(params, "mobile", true);
-		CompanyModel company = new CompanyModel();
+		String cover = RequestUtil.getStringParam(params, "cover", true);
+		String logo = RequestUtil.getStringParam(params, "logo", true);
+		String email = RequestUtil.getStringParam(params, "email", true);
+		CompanyModel company = companyDao.getById(id);
+
 		company.setId(id);
 	    company.setCover(cover);
 	    company.setLogo(logo);
 		companyDao.updateimage(company);
+		 List<User> userlist  = companyService.findUserByEmail(email);
+		 
+		 if(userlist!=null){
+	for (User user : userlist) {
+		companyService.updateUser(user,company.getId());
+		
+	}
+	
+		 }
 		ResponseBase rb = new ResponseBase();
 		rb.setMessage(company.getId());
 
@@ -218,7 +177,7 @@ public class CompanyController {
 
 		return rb;
 	}
-	
+
 	//查找全部公司，返回所有公司信息，ID，名称，电话
 	@RequestMapping(value = "/findAll")
 	@ResponseBody
@@ -243,6 +202,22 @@ public class CompanyController {
 
 			return rb;
 		}
+		
+		//根据公司的名称返回公司的信息
+				@RequestMapping(value = "/findByName")
+				@ResponseBody
+				public ResponseBase findByName(@RequestBody Map<String, String> params) {
+					String cname = RequestUtil.getStringParam(params, "cname", true);
+				
+					CompanyModel company=   companyService.findByName(cname);
+
+					ResponseBase rb = new ResponseBase();
+					rb.setMessage(company);
+
+					return rb;
+				}
+		
+		
 		@RequestMapping(value = "/delete")
 		@ResponseBody
 		public ResponseBase cDelete(@RequestBody Map<String, String> params) {
@@ -254,6 +229,60 @@ public class CompanyController {
 			return null;
 		}
 		
+
 	
-	
+	/*@RequestMapping(value = "/uploadimg")
+	@ResponseBody
+	public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		@RequestParam MultipartFile[] file,
+		@RequestHeader (value="Authorization",required=false) String token
+//		String companyName = RequestUtil.getStringParam(params, "name", true);
+		if(companyName == null){
+			rb.setState(1);
+			rb.setMessage("公司名不得为空");
+			return rb;
+		}
+		
+		CompanyModel company = companyDao.findCompanyByName(companyName);
+		if(company == null){
+			rb.setState(2);
+			rb.setMessage("无此公司");
+			return rb;
+		}
+		
+		String img =  RequestUtil.getStringParam(params, "img", true);
+		if(img == null){
+			rb.setState(3);
+			rb.setMessage("图片不可为空");
+			return rb;
+		}
+		
+		Integer flag = RequestUtil.getIntParam(params, "flag");
+		if(flag == null){
+			rb.setState(4);
+			rb.setMessage("标志不可为空");
+			return rb;
+		}
+		
+		imgUploadService.saveCompanyImg(company,img,flag);
+		return null;
+		
+		
+		
+		
+	}*/
+		
+		@RequestMapping(value = "/uploadimg")
+		@ResponseBody
+		public ResponseBase uploadCompanyImg(
+				@RequestParam MultipartFile[] file
+//				@RequestBody Map<String, String> params
+				) {
+//			System.out.println("............"+params+"..............");
+			System.out.println();
+			return null;
+		}
+		
+		  
 }
