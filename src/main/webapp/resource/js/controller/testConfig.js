@@ -50,13 +50,12 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 	//动态样式
 	$scope.setStyle = function(args) 
 	    {
-		
-
 		if($scope.orseclected(args) == false)
-		{ console.log(args);
-	    	return 'btn btn-info btn-xs dropdown-toggle'; }
-	       else if($scope.orseclected(args) ==true){ return 'btn  btn-xs disabled ';
-	       } 
+		  { 
+	    	 return 'btn btn-info btn-xs dropdown-toggle'; }
+	         else if($scope.orseclected(args) ==true){ 
+	        	 return 'btn  btn-xs disabled ';
+	         } 
 		};
 	
 	
@@ -152,6 +151,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
        	 console.log("get data failed");
         });
     }
+    
     $scope.addEmail = function (){
     	$http({
             url: WEBROOT+"/quizemail/addemail",
@@ -171,4 +171,56 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
        	 console.log("get data failed");
         });
     }
+    
+    
+    //将挑战赛设为公有
+    $scope.setPublic = function(){
+    		$http({
+                url: WEBROOT+"/test/setpub",
+                method: 'POST',
+        	    data: {"testid": $scope.tid,"publicFlag":$scope.publicFlag}
+            }).success(function (data) {
+            	if(data.state ==0){
+            		if(data.message!=""){
+            			$scope.pubUrl = "http://foolrank.com/challenge/"+data.message;	
+            			$scope.publicFlag =1;
+            		}else{
+            			$scope.publicFlag =0;
+            		}
+            	}else{
+            		console.log(data.message);
+            	}
+            	
+            }).error(function(){
+           	 console.log("get data failed");
+            });
+    	
+    }
+    
+    
+    //查看挑战赛是否是公有,若为空则给出
+    $scope.checkPublic = function(){
+    	$http({
+            url: WEBROOT+"/test/checkpub",
+            method: 'POST',
+    	    data: {"testid": $scope.tid}
+        }).success(function (data) {
+        	if(data.state ==0){
+        		if(data.message!=""){
+        			$scope.publicFlag = "http://foolrank.com/challenge/#/"+data.message;	
+        			$scope.publicFlag =0;
+        		}else{
+        			$scope.publicFlag =1;
+        		}
+        	}else{
+        		console.log(data.message);
+        	}
+        	
+        }).error(function(){
+       	 console.log("get data failed");
+        });
+    }
+    
+    $scope.checkPublic();
+    
 }])

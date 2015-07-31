@@ -175,6 +175,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	}
 
 
+
 	
 
 
@@ -188,5 +189,12 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 
 
 
+
+
+	@Override
+	public void saveCompanyImg(CompanyModel company, String img, Integer flag) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

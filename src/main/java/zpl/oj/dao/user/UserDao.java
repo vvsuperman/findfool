@@ -47,7 +47,7 @@ public interface UserDao {
 	@Update("update user set pwd=#{0} where email = #{1}")
 	void updatePwd(String pwd, String email);
 
-	@Select("SELECT * FROM user WHERE company_id=#{0}")
+	@Select("SELECT uid,fname,lname,email,company,privilege,pwd,link,age,degree,school,register_date as registerDate,last_login_date as lastLoginDate,invited_left,invited_num as invitedNum,state,tel,resetUrl,companyId as companyId FROM user WHERE companyId=#{0}")
 	List<User> getListByCompany(int companyId);
 
 	@Update("update user set companyId=#{companyId} where email = #{email}")
