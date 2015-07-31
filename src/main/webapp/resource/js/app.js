@@ -21,6 +21,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
+            when('/challenge/:signedid', {  //客户端主页
+                templateUrl: 'cad/page/comlist.html',
+                controller: 'comListController'
+            }).
             when('/cad/comlist', {  //客户端主页
                 templateUrl: 'cad/page/comlist.html',
                 controller: 'comListController'

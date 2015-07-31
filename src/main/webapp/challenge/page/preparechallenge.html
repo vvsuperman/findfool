@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="resource/css/preparetest.css"/>   
+   
+    <form class="form-horizontal col-md-8 col-md-offset-3" style="margin-top: 100px" ng-if="show==3">
+   	 	  <div class="row">
+	   	 	 <div class="col-md-6 col-md-offset-1" >
+	   	 	 	<h4>即将开始测试</h4>
+	   	 	 	<h4>请确保你处于一个无打扰，安静的环境</h4>
+	   	 	 	<h4>测试时间为{{testInfo.duration}}分钟</h4>
+	   	 	 	<h4>选择题：<span class="text-success" ng-bind="testInfo.optionNum"></span></h4>
+	   	 	 	<h4>编程：<span class="text-success" ng-bind="testInfo.programNum"></span></h4>
+	   	 	 	<h4>问答题：<span class="text-success" ng-bind="testInfo.essayNum"></span></h4>
+	   	 	 	<h4>请独立完成所有的试题，请不要尝试借助于其它任何手段，否则将被以作弊论处</h4>
+	   	 	 </div>
+   	 	  </div>
+		  
+		  <div class="col-xs-2 col-md-2 col-md-offset-3">
+		  	<button class="btn btn-primary" ng-click="startTest()">开始</button>
+		  </div>
+   	  </form>
+   	  
+   	 <div ng-include src="'page/testing.html'"  ng-if="show==4"></div>
+   	 <!-- 测试完成 -->
+   	  <div ng-include src="'page/testend.html'"  ng-if="show==5"></div>
+   	  
+   	   <div class="col-md-8 col-md-offset-2" style="height: 300px;margin-top: 200px;margin-left: 400px" ng-if="show==6">
+	      	<h2>测试尚未开始，请耐心等待</h2>
+	   </div>  
+	   
+	   <div class="col-md-8 col-md-offset-2" style="height: 300px;margin-top: 200px;margin-left: 400px" ng-if="show==7">
+	      	<h2>测试已截至</h2>
+	   </div>  
+		
+
+</div>
+

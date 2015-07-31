@@ -207,7 +207,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
         }).success(function (data) {
         	if(data.state ==0){
         		if(data.message!=""){
-        			$scope.publicFlag = "http://foolrank.com/challenge/"+data.message;	
+        			$scope.publicFlag = "http://foolrank.com/challenge/#/"+data.message;	
         			$scope.publicFlag =0;
         		}else{
         			$scope.publicFlag =1;
