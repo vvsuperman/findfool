@@ -67,9 +67,9 @@
   	    <td width="10%" class="listViewThS1">查看</td>
         <td width="10%" class="listViewThS1">修改</td>
         <td width="10%" class="listViewThS1">删除</td>
+          <td width="10%" class="listViewThS1">关联用户</td>
    
         </tr>
-
 			<tr ng-repeat="company in companyList">
 		  	    <td>{{company.name}}</td>
 		  	    <td>{{company.address}}</td>
@@ -77,8 +77,8 @@
 		        <td><a   ng-click="showCompany(company)" href="">查看</a></td>
 		        <td><a   ng-click="modifyCompany(company)" href="">修改</a></td>
 				<td><a  ng-click="cDelete(company.id)" href="">删除</a></td>
+				<td><a  ng-click="addUserFn(company)" href="">关联用户</a></td>
 		        </tr>
-
 	</table>
 
 

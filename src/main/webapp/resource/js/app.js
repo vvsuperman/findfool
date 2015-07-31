@@ -212,11 +212,15 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	controller: 'companySet'
             }). 
             when('/company/modify/:companyId',{
-            	templateUrl: 'company/page/ modifyCompany.html',
+            	templateUrl: 'company/page/modifyCompany.html',
             	controller: 'companySet'
             }).    
             when('/company/updateimage',{
             	templateUrl: 'company/page/ updateimage.html',
+            	controller: 'companySet'
+            }).
+            when('/company/addUser/:companyId',{
+            	templateUrl: 'company/page/addUser.html',
             	controller: 'companySet'
             }). 
             otherwise({

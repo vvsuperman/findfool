@@ -32,6 +32,15 @@
       <textarea    ng-model="company.description" class="form-control" rows="3"></textarea>
  </div>
     
+ <div class="btn btn-primary"  upload-button header ={{company.id}},1
+    	         url="company/uploadimg" on-success="onSuccess(response)" >上传公司图片
+    	          </br>
+    	          </div>
+    	           </br> </br>
+             <div class="btn btn-primary"  upload-button header ={{company.id}},2
+    	          url="company/uploadimg" on-success="onSuccess(response)" >上传公司logo
+    	          
+    	          </div>
     <p class="text-danger" ng-bind="errorMsg.general" ></p>
                 <div class="form-group">
                 <a href="#/company/companySet" class="btn btn-outline btn-lg btn-block">
@@ -40,8 +49,8 @@
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="create()">
-                            下一步
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="modify()">
+                            确定修改
                                        </button>
                    
                 </div>

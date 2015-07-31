@@ -16,7 +16,7 @@ public interface UserDao {
 
 	@Update("update user set "
 			+ "fname=#{fname},lname=#{lname},company=#{company},tel=#{tel},privilege=${privilege},"
-			+ "pwd=#{pwd},invited_left=${invited_left},resetUrl=#{resetUrl},invited_num=${invitedNum} "
+			+ "pwd=#{pwd},invited_left=${invited_left},resetUrl=#{resetUrl},invited_num=${invitedNum},companyId=${companyId} "
 			+ "where uid=${uid}")
 	void updateUser(User u);
 
@@ -49,4 +49,7 @@ public interface UserDao {
 
 	@Select("SELECT * FROM user WHERE company_id=#{0}")
 	List<User> getListByCompany(int companyId);
+
+	@Update("update user set companyId=#{companyId} where email = #{email}")
+	void insertCompanyId(String item);
 }

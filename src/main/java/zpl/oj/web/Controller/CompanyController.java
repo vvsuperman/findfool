@@ -1,8 +1,13 @@
 package zpl.oj.web.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.Array;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,10 +22,12 @@ import com.foolrank.response.json.CompanyJson;
 import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.CompanyDao;
+import zpl.oj.dao.user.UserDao;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
+
 
 @Controller
 @RequestMapping("/company")
@@ -34,6 +41,9 @@ public class CompanyController {
 	
 	@Autowired
 	private ImgUploadService imgUploadService;
+
+	@Autowired
+	private UserDao userDao;
 	
 	@RequestMapping(value = "/getById")
 	@ResponseBody
@@ -82,23 +92,17 @@ public class CompanyController {
 		return rb;
 	}
 	
-//创建新公司
+//创建新公司,第一步创建公司的方法
 	@RequestMapping(value = "/create")
 	@ResponseBody
 	public ResponseBase create(@RequestBody Map<String, String> params) {
 		String name = RequestUtil.getStringParam(params, "name", true);
 		String tel = RequestUtil.getStringParam(params, "mobile", true);
-
-		//String cover = RequestUtil.getStringParam(params, "cover", true);
-	//	String logo = RequestUtil.getStringParam(params, "logo", true);
 		String address = RequestUtil.getStringParam(params, "address", true);
-
 		String website = RequestUtil.getStringParam(params, "website", true);
 		String description = RequestUtil.getStringParam(params, "description", true);
 		CompanyModel company = new CompanyModel();
 		company.setName(name);
-	//	company.setCover(cover);
-	//	company.setLogo(logo);
 		company.setAddress(address);
 		company.setWebsite(website);
 		company.setDescription(description);
@@ -110,10 +114,6 @@ public class CompanyController {
 
 		return rb;
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -147,14 +147,10 @@ public class CompanyController {
 	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping(value = "/modify")
 	@ResponseBody
 	public ResponseBase modify(@RequestBody Map<String, String> params) {
-		int id = RequestUtil.getIntParam(params, "id", 0);
+		int id = RequestUtil.getIntParam(params, "cid", 0);
 		String name = RequestUtil.getStringParam(params, "name", true);
 		String cover = RequestUtil.getStringParam(params, "cover", true);
 		String logo = RequestUtil.getStringParam(params, "logo", true);
@@ -229,60 +225,142 @@ public class CompanyController {
 			return null;
 		}
 		
-
-	
-	/*@RequestMapping(value = "/uploadimg")
-	@ResponseBody
-	public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
-		ResponseBase rb = new ResponseBase();
-		@RequestParam MultipartFile[] file,
-		@RequestHeader (value="Authorization",required=false) String token
-//		String companyName = RequestUtil.getStringParam(params, "name", true);
-		if(companyName == null){
-			rb.setState(1);
-			rb.setMessage("公司名不得为空");
-			return rb;
+		
+		//关联用户 将公司关联到用户
+		@RequestMapping(value = "/addUser")
+		@ResponseBody
+		public ResponseBase addUser(@RequestBody Map<String, Object> params) {
+	       int companyId=         (int) params.get("companyId");
+			
+		      List    items= (List) params.get("item");
+		      for (Object item : items) {
+	              if(item==null){
+	            	  continue;   	  
+	              }
+	                String  Item =(String)item;
+	                User user  = userDao.getUserIdByEmail(Item);
+	                user.setCompanyId(companyId);
+	                userDao.updateUser(user);
+                  }      
+		      System.out.println();
+		      ResponseBase rb = new ResponseBase();
+				rb.setMessage("关联成功！");
+				return rb;
+				
 		}
 		
-		CompanyModel company = companyDao.findCompanyByName(companyName);
-		if(company == null){
-			rb.setState(2);
-			rb.setMessage("无此公司");
-			return rb;
-		}
-		
-		String img =  RequestUtil.getStringParam(params, "img", true);
-		if(img == null){
-			rb.setState(3);
-			rb.setMessage("图片不可为空");
-			return rb;
-		}
-		
-		Integer flag = RequestUtil.getIntParam(params, "flag");
-		if(flag == null){
-			rb.setState(4);
-			rb.setMessage("标志不可为空");
-			return rb;
-		}
-		
-		imgUploadService.saveCompanyImg(company,img,flag);
-		return null;
 		
 		
 		
 		
-	}*/
+		
+		
+		
 		
 		@RequestMapping(value = "/uploadimg")
 		@ResponseBody
 		public ResponseBase uploadCompanyImg(
-				@RequestParam MultipartFile[] file
-//				@RequestBody Map<String, String> params
+				@RequestParam MultipartFile[] file,
+			//	@RequestBody Map<String, String> params,
+				@RequestHeader (value="Authorization",required=false) String imgifo
 				) {
-//			System.out.println("............"+params+"..............");
-			System.out.println();
-			return null;
+		
+			ResponseBase rb = new ResponseBase();
+		  String[] strArray = null;   
+
+			  strArray = imgifo.split(",");
+			  String id=strArray[0];
+               String f=strArray[1];
+               int companyId=Integer.parseInt(id);
+               int flag = Integer.parseInt(f);
+               
+           System.out.println(flag);
+         
+		        CompanyModel company=   	companyDao.getById(companyId);
+
+			 if(company == null){
+					rb.setState(1);
+					rb.setMessage("图片插入错误，无法找到该公司");
+					return rb;
+				}
+
+				if(file == null){
+					rb.setState(3);
+					rb.setMessage("图片不可为空");
+					return rb;
+				}
+				
+//				if(flag == null){
+//					rb.setState(4);
+//					rb.setMessage("标志不可为空");
+//					return rb;
+//				}
+				
+		
+				
+			//	return null;			 
+				 for (MultipartFile fileitem : file) {
+					 
+					 if(!fileitem.isEmpty()){
+
+						// imgUploadService.saveCompanyImg(company,fileitem,flag);
+//							FileUtils.writeByteArrayToFile(new File(path,fileName),fileitem.getBytes());
+			 imgUploadService.saveCompanyImg(company,fileitem,flag);
+
+				        } 
+		 
+					
+				}
+				return null; 
+			 
 		}
+
+		
+		/*@RequestMapping(value = "/uploadimg")
+		@ResponseBody
+		public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
+			ResponseBase rb = new ResponseBase();
+			@RequestParam MultipartFile[] file,
+			@RequestHeader (value="Authorization",required=false) String token
+//			String companyName = RequestUtil.getStringParam(params, "name", true);
+			if(companyName == null){
+				rb.setState(1);
+				rb.setMessage("公司名不得为空");
+				return rb;
+			}
+			
+			CompanyModel company = companyDao.findCompanyByName(companyName);
+			if(company == null){
+				rb.setState(2);
+				rb.setMessage("无此公司");
+				return rb;
+			}
+			
+			String img =  RequestUtil.getStringParam(params, "img", true);
+			if(img == null){
+				rb.setState(3);
+				rb.setMessage("图片不可为空");
+				return rb;
+			}
+			
+			Integer flag = RequestUtil.getIntParam(params, "flag");
+			if(flag == null){
+				rb.setState(4);
+				rb.setMessage("标志不可为空");
+				return rb;
+			}
+			
+			imgUploadService.saveCompanyImg(company,img,flag);
+			return null;
+			
+			
+			
+			
+		}*/
+			
+
+
+}
 		
 		  
-}
+
