@@ -173,8 +173,24 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
         });
     }
     
+    //将挑战赛设为公有
     $scope.setPublic = function(){
+    	if(publicFlag){
+    		var flag =1;
+    	}else{
+    		var flag = 0;
+    	}
     	
+    	$http({
+            url: WEBROOT+"/test/setpub",
+            method: 'POST',
+    	    data: {"testid": $scope.tid,"flag":flag}
+        }).success(function (data) {
+        	var url = data.message;
+        	$scope.pubUrl = "http://foolrank.com/challenge/"+url;
+        }).error(function(){
+       	 console.log("get data failed");
+        });
     }
     
 }])

@@ -26,10 +26,10 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyService companyService;
-	
+
 	@Autowired
 	private ImgUploadService imgUploadService;
-	
+
 	@RequestMapping(value = "/getById")
 	@ResponseBody
 	public ResponseBase getById(@RequestBody Map<String, String> params) {
@@ -61,8 +61,7 @@ public class CompanyController {
 	@RequestMapping(value = "/getByUid")
 	@ResponseBody
 	public ResponseBase getByUid(@RequestBody Map<String, String> params) {
-		String strUserId = params.get("uid");
-		int userId = strUserId == null ? 0 : Integer.parseInt(strUserId.trim());
+		int userId = RequestUtil.getIntParam(params, "uid", 0);
 		ResponseBase rb = new ResponseBase();
 		if (userId <= 0) {
 			rb.setState(1);
@@ -74,28 +73,37 @@ public class CompanyController {
 		return rb;
 	}
 
-	
+	// 创建新公司
 	@RequestMapping(value = "/create")
 	@ResponseBody
-	public ResponseBase create(@RequestBody Map<String, String> params) {
-		String name = RequestUtil.getStringParam(params, "name", true);
-		String cover = RequestUtil.getStringParam(params, "cover", true);
-		String logo = RequestUtil.getStringParam(params, "logo", true);
-		String address = RequestUtil.getStringParam(params, "address", true);
-		String website = RequestUtil.getStringParam(params, "website", true);
-		String description = RequestUtil.getStringParam(params, "description", true);
-		CompanyModel company = new CompanyModel();
-		company.setName(name);
-		company.setCover(cover);
-		company.setLogo(logo);
-		company.setAddress(address);
-		company.setWebsite(website);
-		company.setDescription(description);
-		companyDao.add(company);
+	public ResponseBase createCompany(@RequestBody CompanyModel params) {
 		ResponseBase rb = new ResponseBase();
-		rb.setMessage(company.getId());
+		String companyName = params.getName();
+		if (params.getUid() == 0) {
+			rb.setState(4);
+			rb.setMessage("参数错误！");
+			return rb;
+		}
+		if (companyService.getByUid(params.getUid()) != null) {
+			rb.setState(1);
+			rb.setMessage("您已经创建了公司！");
+			return rb;
+		}
+		if (companyName == null) {
+			rb.setState(2);
+			rb.setMessage("公司名称不能为空，请重新输入");
+			return rb;
+		}
 
-		CompanyModel cm = companyService.findCompanyByName(name);
+		CompanyModel com = companyService.findCompanyByName(companyName);
+		if (com != null) {
+			rb.setState(3);
+			rb.setMessage("公司名称已经存在，如果您已经注册请登录，如果继续注册，请更改公司名称或用公司全称");
+			return rb;
+		}
+		companyService.createCompany(params);
+
+		CompanyModel cm = companyService.findCompanyByName(companyName);
 		rb.setState(0);
 		rb.setMessage(cm);
 		return rb;
@@ -112,7 +120,6 @@ public class CompanyController {
 			rb.setMessage("公司名称不能为空，请重新输入");
 			return rb;
 		}
-
 		companyService.modifyCompany(params);
 		CompanyModel cm = companyService.findCompanyByName(companyName);
 		rb.setState(0);
@@ -121,44 +128,41 @@ public class CompanyController {
 	}
 
 	
-	
+
 	@RequestMapping(value = "/uploadimg")
 	@ResponseBody
 	public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
 		String companyName = RequestUtil.getStringParam(params, "name", true);
-		if(companyName == null){
+		if (companyName == null) {
 			rb.setState(1);
 			rb.setMessage("公司名不得为空");
 			return rb;
 		}
-		
+
 		CompanyModel company = companyDao.findCompanyByName(companyName);
-		if(company == null){
+		if (company == null) {
 			rb.setState(2);
 			rb.setMessage("无此公司");
 			return rb;
 		}
-		
-		String img =  RequestUtil.getStringParam(params, "img", true);
-		if(img == null){
+
+		String img = RequestUtil.getStringParam(params, "img", true);
+		if (img == null) {
 			rb.setState(3);
 			rb.setMessage("图片不可为空");
 			return rb;
 		}
-		
+
 		Integer flag = RequestUtil.getIntParam(params, "flag");
-		if(flag == null){
+		if (flag == null) {
 			rb.setState(4);
 			rb.setMessage("标志不可为空");
 			return rb;
 		}
 		
 		imgUploadService.saveCompanyImg(company,img,flag);
+
 		return null;
-		
-		
-		
-		
 	}
 }

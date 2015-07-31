@@ -1,6 +1,7 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -35,7 +36,9 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.base64.BASE64;
+import zpl.oj.util.StringUtil;
 
 @Controller
 @RequestMapping("/test")
@@ -364,6 +367,30 @@ public class QuizController {
 		
 	}
 	
+	
+	//设置公开挑战的key
+		@RequestMapping(value = "/setpub",method=RequestMethod.POST)
+		@ResponseBody
+		public ResponseBase setPub(@RequestBody Map<String,String> param){
+			 ResponseBase rb = new ResponseBase();
+			 
+			 String testid = param.get("testid");
+			 if(testid == null){
+				 rb.setState(1);
+				 rb.setMessage("testid不得为空");
+				 return rb;
+			 }
+			 
+			 Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
+			 
+			 String signedKey = MD5Util.stringMD5(testid+StringUtil.toDateTimeString(new Date()));
+			 quiz.setSignedKey(signedKey);
+			 quizDao.updateQuiz(quiz);
+			 rb.setState(0);
+			 rb.setMessage(signedKey);
+			 
+			 return rb;
+		}
 	
 
 }

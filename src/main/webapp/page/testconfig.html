@@ -53,9 +53,14 @@
 		 </form>
 	    </div>
 	 
-	    <div>
+	     <div class="col-md-12" style="margin-top: 20px" >
+		   <h4>设为公开挑战</h4>
+		   <p>可以将您的试卷变成公开挑战，并生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
 	       <span ><input  style="opacity:1;width:20px"  type="checkbox" ng-model="publicFlag" ng-change="setPublic()">设为公开挑战赛</span>
+	       <p ng-bind="pubUrl"></p>
 	    </div>
+	    
+	    
 	    	 
 	   
     </div>
