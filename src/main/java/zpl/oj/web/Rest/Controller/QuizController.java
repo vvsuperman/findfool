@@ -374,22 +374,48 @@ public class QuizController {
 		public ResponseBase setPub(@RequestBody Map<String,String> param){
 			 ResponseBase rb = new ResponseBase();
 			 
+             if(param.get("testid")==null || param.get("publicFlag")==null){
+            	 rb.setState(2);
+            	 rb.setMessage("输入均不可为空");
+            	 return rb;
+             }			 
+			 
 			 String testid = param.get("testid");
-			 if(testid == null){
-				 rb.setState(1);
-				 rb.setMessage("testid不得为空");
-				 return rb;
-			 }
+			 String publicFlag =  param.get("publicFlag");
+			
 			 
 			 Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
+			 String signedKey ="";
+			 if(publicFlag.equals("0")){
+				 signedKey = MD5Util.stringMD5(testid+StringUtil.toDateTimeString(new Date()));
+			 }
+		     quiz.setSignedKey(signedKey);
 			 
-			 String signedKey = MD5Util.stringMD5(testid+StringUtil.toDateTimeString(new Date()));
-			 quiz.setSignedKey(signedKey);
+			
 			 quizDao.updateQuiz(quiz);
 			 rb.setState(0);
 			 rb.setMessage(signedKey);
 			 
 			 return rb;
+		}
+		
+		//判断是否有公开挑战赛
+		@RequestMapping(value = "/checkpub",method=RequestMethod.POST)
+		@ResponseBody
+		public ResponseBase checkPub(@RequestBody Map<String,Object> param){
+			 ResponseBase rb = new ResponseBase();
+			 String testid = (String)param.get("testid");
+			 if(testid == null){
+				 rb.setState(1);
+            	 rb.setMessage("testid不可为空");
+            	 return rb;
+			 }
+			 Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
+			 
+			 rb.setState(0);
+			 rb.setMessage(quiz.getSignedKey());
+			 return rb;
+			 
 		}
 	
 
