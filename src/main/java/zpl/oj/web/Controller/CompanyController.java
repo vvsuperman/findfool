@@ -74,6 +74,30 @@ public class CompanyController {
 	
 	
 	
+	
+	
+
+	//根据公司id，查找该公司所有挑战赛
+	@RequestMapping(value = "/findAllTest")
+	@ResponseBody
+	public ResponseBase findAllTest(@RequestBody Map<String, String> params) {
+		String comid = params.get("comid");
+
+        return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //根据用户id返回公司信息
 	@RequestMapping(value = "/getByUid")
 	@ResponseBody

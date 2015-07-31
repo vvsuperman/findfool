@@ -29,7 +29,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'cad/page/comlist.html',
                 controller: 'comListController'
             }).
-            when('/cad/eachcom', {  //客户公司详情
+            when('/cad/eachcom/:comid', {  //客户公司详情
                 templateUrl: 'cad/page/eachcom.html',
                 controller: 'eachComController'
             }).
@@ -86,7 +86,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/rock&roll/:rrid', {
                 templateUrl: 'page/page.html',
                 controller: 'RockRoll'
-            }).
+            }). 	
             when('/loginok', {
                 templateUrl: 'page/page.html',
                 controller: 'LoginOk'
