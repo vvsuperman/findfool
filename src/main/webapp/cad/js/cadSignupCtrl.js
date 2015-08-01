@@ -30,7 +30,7 @@ OJApp.controller('cadSignupCtrl',['$scope','$http','Data',function ($scope,$http
                 	var re = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;	
  					
  				    if(!re.test($scope.Remail)){
- 						$scope.errorEmail = "请输入正确的email格式1";
+ 						$scope.errorEmail = "请输入正确的email格式";
  						return false;
  					} 	
 				

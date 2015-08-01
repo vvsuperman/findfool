@@ -1,21 +1,33 @@
 package zpl.oj.web.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.Array;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.foolrank.model.CompanyModel;
 import com.foolrank.response.json.CompanyJson;
 import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.CompanyDao;
+import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
+
 
 @Controller
 @RequestMapping("/company")
@@ -23,13 +35,16 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyDao companyDao;
-
+	
 	@Autowired
 	private CompanyService companyService;
-
+	
 	@Autowired
 	private ImgUploadService imgUploadService;
 
+	@Autowired
+	private UserDao userDao;
+	
 	@RequestMapping(value = "/getById")
 	@ResponseBody
 	public ResponseBase getById(@RequestBody Map<String, String> params) {
@@ -56,12 +71,40 @@ public class CompanyController {
 
 		return rb;
 	}
+	
+	
+	
+	
+	
 
-	// 根据用户id返回公司信息
+	//根据公司id，查找该公司所有挑战赛
+	@RequestMapping(value = "/findAllTest")
+	@ResponseBody
+	public ResponseBase findAllTest(@RequestBody Map<String, String> params) {
+		String comid = params.get("comid");
+
+        return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//根据用户id返回公司信息
 	@RequestMapping(value = "/getByUid")
 	@ResponseBody
 	public ResponseBase getByUid(@RequestBody Map<String, String> params) {
-		int userId = RequestUtil.getIntParam(params, "uid", 0);
+		String strUserId = params.get("uid");
+		int userId = strUserId == null ? 0 : Integer
+				.parseInt(strUserId.trim());
 		ResponseBase rb = new ResponseBase();
 		if (userId <= 0) {
 			rb.setState(1);
@@ -72,97 +115,277 @@ public class CompanyController {
 		rb.setMessage(company);
 		return rb;
 	}
-
-	// 创建新公司
+	
+//创建新公司,第一步创建公司的方法
 	@RequestMapping(value = "/create")
 	@ResponseBody
-	public ResponseBase createCompany(@RequestBody CompanyModel params) {
+	public ResponseBase create(@RequestBody Map<String, String> params) {
+		String name = RequestUtil.getStringParam(params, "name", true);
+		String tel = RequestUtil.getStringParam(params, "mobile", true);
+		String address = RequestUtil.getStringParam(params, "address", true);
+		String website = RequestUtil.getStringParam(params, "website", true);
+		String description = RequestUtil.getStringParam(params, "description", true);
+		CompanyModel company = new CompanyModel();
+		company.setName(name);
+		company.setAddress(address);
+		company.setWebsite(website);
+		company.setDescription(description);
+		company.setTel(tel);
+		companyDao.add(company);	 
+        CompanyModel companymodel  =companyService.findByName(company.getName());
+		
 		ResponseBase rb = new ResponseBase();
-		String companyName = params.getName();
-		if (params.getUid() == 0) {
-			rb.setState(4);
-			rb.setMessage("参数错误！");
-			return rb;
-		}
-		if (companyService.getByUid(params.getUid()) != null) {
-			rb.setState(1);
-			rb.setMessage("您已经创建了公司！");
-			return rb;
-		}
-		if (companyName == null) {
-			rb.setState(2);
-			rb.setMessage("公司名称不能为空，请重新输入");
-			return rb;
-		}
+		rb.setMessage(companymodel);
 
-		CompanyModel com = companyService.findCompanyByName(companyName);
-		if (com != null) {
-			rb.setState(3);
-			rb.setMessage("公司名称已经存在，如果您已经注册请登录，如果继续注册，请更改公司名称或用公司全称");
-			return rb;
-		}
-		companyService.createCompany(params);
-
-		CompanyModel cm = companyService.findCompanyByName(companyName);
-		rb.setState(0);
-		rb.setMessage(cm);
 		return rb;
 	}
+	
+	
+	
+	@RequestMapping(value = "/updateimage")
+	@ResponseBody
+	public ResponseBase updateimage(@RequestBody Map<String, String> params) {
+		int id = RequestUtil.getIntParam(params, "id", 0);
 
-	// 修改公司信息
+		String cover = RequestUtil.getStringParam(params, "cover", true);
+		String logo = RequestUtil.getStringParam(params, "logo", true);
+		String email = RequestUtil.getStringParam(params, "email", true);
+		CompanyModel company = companyDao.getById(id);
+
+		company.setId(id);
+	    company.setCover(cover);
+	    company.setLogo(logo);
+		companyDao.updateimage(company);
+		 List<User> userlist  = companyService.findUserByEmail(email);
+		 
+		 if(userlist!=null){
+	for (User user : userlist) {
+		companyService.updateUser(user,company.getId());
+		
+	}
+	
+		 }
+		ResponseBase rb = new ResponseBase();
+		rb.setMessage(company.getId());
+
+		return rb;
+	}
+	
+	
 	@RequestMapping(value = "/modify")
 	@ResponseBody
-	public ResponseBase modifyCompany(@RequestBody CompanyModel params) {
+	public ResponseBase modify(@RequestBody Map<String, String> params) {
+		int id = RequestUtil.getIntParam(params, "cid", 0);
+		String name = RequestUtil.getStringParam(params, "name", true);
+		String cover = RequestUtil.getStringParam(params, "cover", true);
+		String logo = RequestUtil.getStringParam(params, "logo", true);
+		String address = RequestUtil.getStringParam(params, "address", true);
+		String tel = RequestUtil.getStringParam(params, "tel", true);
+		String website = RequestUtil.getStringParam(params, "website", true);
+		String description = RequestUtil.getStringParam(params, "description", true);
+		CompanyModel company = new CompanyModel();
+		company.setId(id);
+		company.setName(name);
+		//company.setCover(cover);
+		//company.setLogo(logo);
+		company.setAddress(address);
+		company.setTel(tel);
+		company.setWebsite(website);
+		company.setDescription(description);
+		companyDao.modify(company);
 		ResponseBase rb = new ResponseBase();
-		String companyName = params.getName();
-		if (companyName == null) {
-			rb.setState(1);
-			rb.setMessage("公司名称不能为空，请重新输入");
-			return rb;
-		}
-		companyService.modifyCompany(params);
-		CompanyModel cm = companyService.findCompanyByName(companyName);
-		rb.setState(0);
-		rb.setMessage(cm);
+		rb.setMessage(company.getId());
+
 		return rb;
 	}
 
-	
-
-	@RequestMapping(value = "/uploadimg")
+	//查找全部公司，返回所有公司信息，ID，名称，电话
+	@RequestMapping(value = "/findAll")
 	@ResponseBody
-	public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
+	public ResponseBase findAll() {
+		List<CompanyModel> companyList=   companyService.findAll();
+
 		ResponseBase rb = new ResponseBase();
-		String companyName = RequestUtil.getStringParam(params, "name", true);
-		if (companyName == null) {
-			rb.setState(1);
-			rb.setMessage("公司名不得为空");
-			return rb;
-		}
+		rb.setMessage(companyList);
 
-		CompanyModel company = companyDao.findCompanyByName(companyName);
-		if (company == null) {
-			rb.setState(2);
-			rb.setMessage("无此公司");
-			return rb;
-		}
+		return rb;
+	}
+	//查找全部公司，返回所有公司信息，ID，名称，电话
+		@RequestMapping(value = "/findAllByName")
+		@ResponseBody
+		public ResponseBase findAllByName(@RequestBody Map<String, String> params) {
+			String cname = RequestUtil.getStringParam(params, "cname", true);
+		
+			List<CompanyModel> companyList=   companyService.findAllByName(cname);
 
-		String img = RequestUtil.getStringParam(params, "img", true);
-		if (img == null) {
-			rb.setState(3);
-			rb.setMessage("图片不可为空");
-			return rb;
-		}
+			ResponseBase rb = new ResponseBase();
+			rb.setMessage(companyList);
 
-		Integer flag = RequestUtil.getIntParam(params, "flag");
-		if (flag == null) {
-			rb.setState(4);
-			rb.setMessage("标志不可为空");
 			return rb;
 		}
 		
-		imgUploadService.saveCompanyImg(company,img,flag);
+		//根据公司的名称返回公司的信息
+				@RequestMapping(value = "/findByName")
+				@ResponseBody
+				public ResponseBase findByName(@RequestBody Map<String, String> params) {
+					String cname = RequestUtil.getStringParam(params, "cname", true);
+				
+					CompanyModel company=   companyService.findByName(cname);
 
-		return null;
-	}
+					ResponseBase rb = new ResponseBase();
+					rb.setMessage(company);
+
+					return rb;
+				}
+		
+		
+		@RequestMapping(value = "/delete")
+		@ResponseBody
+		public ResponseBase cDelete(@RequestBody Map<String, String> params) {
+			int id = RequestUtil.getIntParam(params, "id", 0);		
+			  companyService.cDelete(id);
+
+			
+
+			return null;
+		}
+		
+		
+		//关联用户 将公司关联到用户
+		@RequestMapping(value = "/addUser")
+		@ResponseBody
+		public ResponseBase addUser(@RequestBody Map<String, Object> params) {
+	       int companyId=         (int) params.get("companyId");
+			
+		      List    items= (List) params.get("item");
+		      for (Object item : items) {
+	              if(item==null){
+	            	  continue;   	  
+	              }
+	                String  Item =(String)item;
+	                User user  = userDao.getUserIdByEmail(Item);
+	                user.setCompanyId(companyId);
+	                userDao.updateUser(user);
+                  }      
+		      System.out.println();
+		      ResponseBase rb = new ResponseBase();
+				rb.setMessage("关联成功！");
+				return rb;
+				
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		@RequestMapping(value = "/uploadimg")
+		@ResponseBody
+		public ResponseBase uploadCompanyImg(
+				@RequestParam MultipartFile[] file,
+			//	@RequestBody Map<String, String> params,
+				@RequestHeader (value="Authorization",required=false) String imgifo
+				) {
+		
+			ResponseBase rb = new ResponseBase();
+		  String[] strArray = null;   
+
+			  strArray = imgifo.split(",");
+			  String id=strArray[0];
+               String f=strArray[1];
+               int companyId=Integer.parseInt(id);
+               int flag = Integer.parseInt(f);
+               
+           System.out.println(flag);
+         
+		        CompanyModel company=   	companyDao.getById(companyId);
+
+			 if(company == null){
+					rb.setState(1);
+					rb.setMessage("图片插入错误，无法找到该公司");
+					return rb;
+				}
+
+				if(file == null){
+					rb.setState(3);
+					rb.setMessage("图片不可为空");
+					return rb;
+				}
+				
+//				if(flag == null){
+//					rb.setState(4);
+//					rb.setMessage("标志不可为空");
+//					return rb;
+//				}
+				
+		
+				
+			//	return null;			 
+				 for (MultipartFile fileitem : file) {
+					 
+					 if(!fileitem.isEmpty()){
+
+						// imgUploadService.saveCompanyImg(company,fileitem,flag);
+//							FileUtils.writeByteArrayToFile(new File(path,fileName),fileitem.getBytes());
+			 imgUploadService.saveCompanyImg(company,fileitem,flag);
+
+				        } 
+		 
+					
+				}
+				return null; 
+			 
+		}
+
+		
+		/*@RequestMapping(value = "/uploadimg")
+		@ResponseBody
+		public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
+			ResponseBase rb = new ResponseBase();
+			@RequestParam MultipartFile[] file,
+			@RequestHeader (value="Authorization",required=false) String token
+//			String companyName = RequestUtil.getStringParam(params, "name", true);
+			if(companyName == null){
+				rb.setState(1);
+				rb.setMessage("公司名不得为空");
+				return rb;
+			}
+			
+			CompanyModel company = companyDao.findCompanyByName(companyName);
+			if(company == null){
+				rb.setState(2);
+				rb.setMessage("无此公司");
+				return rb;
+			}
+			
+			String img =  RequestUtil.getStringParam(params, "img", true);
+			if(img == null){
+				rb.setState(3);
+				rb.setMessage("图片不可为空");
+				return rb;
+			}
+			
+			Integer flag = RequestUtil.getIntParam(params, "flag");
+			if(flag == null){
+				rb.setState(4);
+				rb.setMessage("标志不可为空");
+				return rb;
+			}
+			
+			imgUploadService.saveCompanyImg(company,img,flag);
+			return null;
+			
+			
+			
+			
+		}*/
+			
+
+
 }
+		
+		  
+

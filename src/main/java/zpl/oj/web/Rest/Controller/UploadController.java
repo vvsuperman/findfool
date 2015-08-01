@@ -68,8 +68,6 @@ public class UploadController {
 		}
 		
 		
-		
-		
 		try {
 			upLoadService.batchImport(file,uid);
 		} catch (Exception e) {

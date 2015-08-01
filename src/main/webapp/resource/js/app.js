@@ -86,7 +86,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/rock&roll/:rrid', {
                 templateUrl: 'page/page.html',
                 controller: 'RockRoll'
-            }).
+            }). 	
             when('/loginok', {
                 templateUrl: 'page/page.html',
                 controller: 'LoginOk'
@@ -203,6 +203,29 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/cad/login',{
             	templateUrl: 'cad/page/login.html',
             	controller: 'cadLoginCtrl'
+            }). 
+            when('/company/companyset',{
+            	templateUrl: 'company/page/companyIndex.html',
+            	controller: 'companySet'
+            }). when('/company/create',{
+            	templateUrl: 'company/page/createCompany.html',
+            	controller: 'companySet'
+            }). 
+            when('/company/show/:companyId',{
+            	templateUrl: 'company/page/showCompany.html',
+            	controller: 'companySet'
+            }). 
+            when('/company/modify/:companyId',{
+            	templateUrl: 'company/page/modifyCompany.html',
+            	controller: 'companySet'
+            }).    
+            when('/company/updateimage',{
+            	templateUrl: 'company/page/ updateimage.html',
+            	controller: 'companySet'
+            }).
+            when('/company/addUser/:companyId',{
+            	templateUrl: 'company/page/addUser.html',
+            	controller: 'companySet'
             }). 
             otherwise({
                 redirectTo: '/'

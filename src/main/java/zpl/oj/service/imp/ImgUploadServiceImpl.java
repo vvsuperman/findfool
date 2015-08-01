@@ -1,16 +1,21 @@
 package zpl.oj.service.imp;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
 import zpl.oj.service.ImgUploadService;
+import zpl.oj.util.StringUtil;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.base64.BASE64;
 
@@ -56,15 +61,37 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		return filename;
 	}
 	
+
+//	//保存公司的封面或logo
+//	public void saveCompanyImg(Integer companyId, File fileitem,Integer flag){
+//		//get company		
+//		 
+//		CompanyModel company=companyDao.getById(companyId);
+//	
+//		
+//		                        
+//		//String filename = company.getName()+sdf.format(new Date());
+//		                        
+//		String filename = company.getName()+StringUtil.toDateTimeString(new Date());
+//		pushImg(filename, fileitem);
+//		//保存封面
+//		if(flag==COMPANY_COVER){
+//			company.setCover(filename);
+//		}
+//		//保存
+//		else if(flag==COMPANY_LOGO){
+//			company.setLogo(filename);
+//		}
+//		companyDao.modify(company);
+//	}
 	
 	
 	
 	//保存公司的封面或logo
-	public void saveCompanyImg(CompanyModel company, String imgdata,int flag){
-				
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String filename = company.getName()+sdf.format(new Date());
-		pushImg(filename, imgdata);
+	public void saveCompanyImg(CompanyModel company, MultipartFile fileitem,int flag){
+                       		                        
+		String filename = company.getName()+StringUtil.toDateTimeString(new Date());
+		pushImg(filename, fileitem);
 		//保存封面
 		if(flag==COMPANY_COVER){
 			company.setCover(filename);
@@ -73,13 +100,36 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		else if(flag==COMPANY_LOGO){
 			company.setLogo(filename);
 		}
+		
 		companyDao.modify(company);
 	}
 	
+	/**
+	 * @param filename
+	 * @param imgdata
+	 */
+	public void pushImg(String filename, MultipartFile imgFile) {
+		byte[] imgBytes=null;
+	try {
+		imgBytes=imgFile.getBytes();
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+		String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
+		String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");
+		Auth auth=Auth.create(accessKey, secretKey);
+		String upToken=auth.uploadToken("foolrank");
+		UploadManager uploadManager=new UploadManager();
+		try {
+			//file =new File(filename);
+			Response response=uploadManager.put(imgBytes, filename, upToken);
+		} catch (QiniuException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
-	
-	
-
 	/**
 	 * @param filename
 	 * @param imgdata
@@ -123,6 +173,20 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	    imgForDao.setTime(time);	    
 	    insertImg(imgForDao);		
 	}
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
 
 
 
