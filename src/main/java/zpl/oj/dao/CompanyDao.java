@@ -1,10 +1,13 @@
 package zpl.oj.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import zpl.oj.model.common.Testuser;
+
 import org.apache.ibatis.annotations.Options;
 
 import com.foolrank.model.CompanyModel;
@@ -34,6 +37,7 @@ public interface CompanyDao {
 	
 	@Update("UPDATE company SET name=#{name},cover=#{cover},logo=#{logo},address=#{address},tel=#{tel},website=#{website},description=#{description} WHERE id=#{id}")
 	void modify(CompanyModel company);
+	
+	@Select("SELECT * FROM company WHERE status=#{0} LIMIT #{1},#{2}")
+	List<CompanyModel> getList(int status, int offset, int count);
 }
-
-

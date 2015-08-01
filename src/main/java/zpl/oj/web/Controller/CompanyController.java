@@ -1,5 +1,7 @@
 package zpl.oj.web.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,5 +166,25 @@ public class CompanyController {
 		imgUploadService.saveCompanyImg(company,img,flag);
 
 		return null;
+	}
+	
+	@RequestMapping(value = "/getList")
+	@ResponseBody
+	public ResponseBase getList() {
+		ResponseBase rb = new ResponseBase();
+		List<CompanyModel> companies = companyDao.getList(1, 0, 100);
+		if (companies != null && companies.size() > 0) {
+			List<CompanyJson> items = new ArrayList<CompanyJson>();
+			for (CompanyModel company : companies) {
+				CompanyJson item = new CompanyJson();
+				item.setId(company.getId());
+				item.setName(company.getName());
+				item.setLogo(company.getLogo());
+				item.setDescription(company.getName());
+				items.add(item);
+			}
+			rb.setMessage(items);
+		}
+		return rb;
 	}
 }

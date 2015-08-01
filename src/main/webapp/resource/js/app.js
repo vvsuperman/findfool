@@ -29,6 +29,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'cad/page/comlist.html',
                 controller: 'comListController'
             }).
+            when('/cad/challengelist', {  //客户端主页
+                templateUrl: 'cad/page/challengelist.html',
+                controller: 'challengeListController'
+            }).
             when('/cad/eachcom/:comid', {  //客户公司详情
                 templateUrl: 'cad/page/eachcom.html',
                 controller: 'eachComController'
