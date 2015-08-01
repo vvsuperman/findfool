@@ -127,46 +127,7 @@ public class CompanyController {
 		return rb;
 	}
 
-	/*
-	 * @RequestMapping(value = "/create")
-	 * 
-	 * @ResponseBody public ResponseBase create(@RequestBody Map<String, String>
-	 * params) { String name = RequestUtil.getStringParam(params, "name", true);
-	 * String cover = RequestUtil.getStringParam(params, "cover", true); String
-	 * logo = RequestUtil.getStringParam(params, "logo", true); String address =
-	 * RequestUtil.getStringParam(params, "address", true); String website =
-	 * RequestUtil.getStringParam(params, "website", true); String description =
-	 * RequestUtil.getStringParam(params, "description", true); CompanyModel
-	 * company = new CompanyModel(); company.setName(name);
-	 * company.setCover(cover); company.setLogo(logo);
-	 * company.setAddress(address); company.setWebsite(website);
-	 * company.setDescription(description); companyDao.add(company);
-	 * ResponseBase rb = new ResponseBase(); rb.setMessage(company.getId());
-	 * 
-	 * return rb; }
-	 */
-
-	/*
-	 * @RequestMapping(value = "/modify")
-	 * 
-	 * @ResponseBody public ResponseBase modify(@RequestBody Map<String, String>
-	 * params) { int id = RequestUtil.getIntParam(params, "id", 0); String name
-	 * = RequestUtil.getStringParam(params, "name", true); String cover =
-	 * RequestUtil.getStringParam(params, "cover", true); String logo =
-	 * RequestUtil.getStringParam(params, "logo", true); String address =
-	 * RequestUtil.getStringParam(params, "address", true); String tel =
-	 * RequestUtil.getStringParam(params, "tel", true); String website =
-	 * RequestUtil.getStringParam(params, "website", true); String description =
-	 * RequestUtil.getStringParam(params, "description", true); CompanyModel
-	 * company = new CompanyModel(); company.setId(id); company.setName(name);
-	 * company.setCover(cover); company.setLogo(logo);
-	 * company.setAddress(address); company.setTel(tel);
-	 * company.setWebsite(website); company.setDescription(description);
-	 * companyDao.modify(company); ResponseBase rb = new ResponseBase();
-	 * rb.setMessage(company.getId());
-	 * 
-	 * return rb; }
-	 */
+	
 
 	@RequestMapping(value = "/uploadimg")
 	@ResponseBody
@@ -199,8 +160,9 @@ public class CompanyController {
 			rb.setMessage("标志不可为空");
 			return rb;
 		}
+		
+		imgUploadService.saveCompanyImg(company,img,flag);
 
-		// imgUploadService.saveCompanyImg(company,img,flag);
 		return null;
 	}
 }

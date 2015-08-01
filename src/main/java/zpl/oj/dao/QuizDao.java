@@ -15,6 +15,11 @@ import zpl.oj.model.request.User;
 import com.foolrank.provider.QuizProvider;
 
 public interface QuizDao {
+	
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
+			+ "FROM QUIZ WHERE signedKey = #{0}")
+	Quiz getQuizByKey(String signedkey);
+	
 
 	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
