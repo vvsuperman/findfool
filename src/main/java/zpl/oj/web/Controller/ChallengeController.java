@@ -70,29 +70,33 @@ public class ChallengeController {
 	//根据signedid获取testid
 	@RequestMapping(value = "/gettest")
 	@ResponseBody
-	public ResponseBase gettest(@RequestBody Map<String, String> params) {
+	public ResponseBase getTest(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
-		String signedkey = (String)params.get("signedkey");
-		if(signedkey == null){
+		String signedkey = RequestUtil.getStringParam(params, "signedkey", "", true);
+		if(signedkey.equals("")) {
 			rb.setState(1);
 			rb.setMessage("输入不得为空");
 			return rb;
 		}
 		
 		Quiz quiz = quizDao.getQuizByKey(signedkey);
-		if(quiz == null){
+		if(quiz == null) {
 			rb.setState(1);
 			rb.setMessage("无对应试卷");
 			return rb;
 		}
+		SimpleChallenge challenge = new SimpleChallenge();
+		challenge.setKey(signedkey);
+		challenge.setLogo(quiz.getLogo());
+		challenge.setName(quiz.getName());
+		challenge.setDescription(quiz.getDescription());
+		challenge.setStartTime(quiz.getStartTime());
+		challenge.setEndTime(quiz.getEndTime());
 		
 		rb.setState(0);
-		rb.setMessage(quiz.getQuizid());
+		rb.setMessage(challenge);
 		return rb;
-		
 	}
-	
-	
 
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
 	@ResponseBody
