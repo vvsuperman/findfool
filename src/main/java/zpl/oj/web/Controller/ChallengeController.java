@@ -65,28 +65,34 @@ public class ChallengeController {
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
 
-	@RequestMapping(value = "/{signedId}")
+	
+	
+	//根据signedid获取testid
+	@RequestMapping(value = "/gettest")
 	@ResponseBody
-	public ResponseBase index(@PathVariable("signedId") String signedId) {
+	public ResponseBase gettest(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
-		Quiz challenge = quizDao.getChallengeBySignedKey(signedId);
-		if (challenge == null || challenge.getStatus() != ExamConstant.QUIZ_TYPE_CHALLENGE) {
-			rb.setState(20001);
-			rb.setMessage("挑战不存在或者不在进行");
+		String signedkey = (String)params.get("signedkey");
+		if(signedkey == null){
+			rb.setState(1);
+			rb.setMessage("输入不得为空");
 			return rb;
 		}
-		SimpleChallenge item = new SimpleChallenge();
-		item.setId(challenge.getQuizid());
-		item.setName(challenge.getName());
-		item.setLogo(challenge.getLogo());
-		item.setDescription(challenge.getDescription());
-		item.setKey(challenge.getSignedKey());
-		item.setStartTime(StringUtil.toDateTimeString(challenge.getStartTime()));
-		item.setEndTime(StringUtil.toDateTimeString(challenge.getEndTime()));
-		rb.setMessage(item);
-
+		
+		Quiz quiz = quizDao.getQuizByKey(signedkey);
+		if(quiz == null){
+			rb.setState(1);
+			rb.setMessage("无对应试卷");
+			return rb;
+		}
+		
+		rb.setState(0);
+		rb.setMessage(quiz.getQuizid());
 		return rb;
+		
 	}
+	
+	
 
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
 	@ResponseBody
@@ -224,4 +230,5 @@ public class ChallengeController {
 
 		return rb;
 	}
+	
 }
