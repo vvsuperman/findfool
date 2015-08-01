@@ -65,15 +65,34 @@ public class ChallengeController {
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
 
-	@RequestMapping(value = "/{id}")
+	
+	
+	//根据signedid获取testid
+	@RequestMapping(value = "/gettest")
 	@ResponseBody
-	public String index(@PathVariable("id") String id) {
-		String strId = "";
-		String strTuId = "";
-
-		// return new ModelAndView("login");
-		return id;
+	public ResponseBase gettest(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		String signedkey = (String)params.get("signedkey");
+		if(signedkey == null){
+			rb.setState(1);
+			rb.setMessage("输入不得为空");
+			return rb;
+		}
+		
+		Quiz quiz = quizDao.getQuizByKey(signedkey);
+		if(quiz == null){
+			rb.setState(1);
+			rb.setMessage("无对应试卷");
+			return rb;
+		}
+		
+		rb.setState(0);
+		rb.setMessage(quiz.getQuizid());
+		return rb;
+		
 	}
+	
+	
 
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
 	@ResponseBody
