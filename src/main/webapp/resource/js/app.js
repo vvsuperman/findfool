@@ -204,7 +204,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'cad/page/login.html',
             	controller: 'cadLoginCtrl'
             }). 
-            when('/company/companySet',{
+            when('/company/companyset',{
             	templateUrl: 'company/page/companyIndex.html',
             	controller: 'companySet'
             }). when('/company/create',{

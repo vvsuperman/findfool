@@ -122,7 +122,7 @@ if($scope.companyname&&$scope.address&&$scope.mobile&&$scope.website,$scope.desc
     $http({
         url: WEBROOT+"/company/create",
         method: 'POST',
-        data: {"name": $scope.ccompanyname,"address": $scope.address,"mobile": $scope.mobile,"website": $scope.website,"description":$scope.description}
+        data: {"name": $scope.companyname,"address": $scope.address,"mobile": $scope.mobile,"website": $scope.website,"description":$scope.description}
 
     }).success(function (data) {
         $scope.companyModel = data["message"];

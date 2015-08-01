@@ -130,6 +130,7 @@ public class CompanyController {
 		company.setAddress(address);
 		company.setWebsite(website);
 		company.setDescription(description);
+		company.setTel(tel);
 		companyDao.add(company);	 
         CompanyModel companymodel  =companyService.findByName(company.getName());
 		
