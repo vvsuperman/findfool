@@ -25,13 +25,17 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'challenge/page/preparechallenge.html',
                 controller: 'ctestingController'
             }).
-            when('/cad/comlist', {  //客户端主页
+            when('/cad/comlist', {  //公司列表页
                 templateUrl: 'cad/page/comlist.html',
                 controller: 'comListController'
             }).
-            when('/cad/challengelist', {  //客户端主页
+            when('/cad/challengelist', {  //挑战赛列表页
                 templateUrl: 'cad/page/challengelist.html',
                 controller: 'challengeListController'
+            }).
+            when('/cad/challenge/:signedkey', {  //挑战赛详情页
+                templateUrl: 'cad/page/challengeinfo.html',
+                controller: 'challengeInfoController'
             }).
             when('/cad/eachcom/:comid', {  //客户公司详情
                 templateUrl: 'cad/page/eachcom.html',
