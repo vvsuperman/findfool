@@ -174,6 +174,9 @@ public class ChallengeController {
 		// 获取参数
 		String strStatus = params.get("status");
 		int status = strStatus == null ? 1 : Integer.parseInt(strStatus.trim());
+		if (status < 1) {
+			status = 1;
+		}
 		String strCompanyId = params.get("cid");
 		int companyId = strCompanyId == null ? 0 : Integer
 				.parseInt(strCompanyId.trim());
