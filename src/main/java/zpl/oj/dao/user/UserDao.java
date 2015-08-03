@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import zpl.oj.model.common.Quiz;
 import zpl.oj.model.request.User;
 
 public interface UserDao {
@@ -52,4 +53,15 @@ public interface UserDao {
 
 	@Update("update user set companyId=#{companyId} where email = #{email}")
 	void insertCompanyId(String item);
+
+	
+//	@Select("SELECT * FROM quiz WHERE owner=#{0} and type=1")
+//	List<Quiz> getQuizByUid(int uid);
+//	
+	
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS,DESCRIPTION "
+			+ "FROM QUIZ WHERE OWNER = #{0} and type=#{1}")
+	List<Quiz> getQuizByUid(int uid,int quizTypeChallenge);
+
+
 }

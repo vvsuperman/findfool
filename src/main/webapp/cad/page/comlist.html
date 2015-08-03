@@ -70,14 +70,14 @@
                     <h3>已开始</h3>
                 </div>
 
-                <div class="media">
+                <div class="media" ng-repeat="company in companyList">
                     <div class="media-left col-md-1">
                         <a href="http://evt.dianping.com/event/campus15/pc.html">
-                       	 <img class="media-object" src="resource/static/dp.jpg" alt="dp">
+                       	 <img class="media-object" src="{{company.logo}}" alt="dp">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h5 class="media-heading"><a href="http://evt.dianping.com/event/campus15/pc.html">大众点评第二届极客挑战赛</a></h5>
+                        <h5 class="media-heading"><a  ng-click="showCompanyTest(company)" href="">{{company.name}}</a></h5>
                     </div>
                 </div>
                

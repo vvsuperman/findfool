@@ -74,6 +74,9 @@ public interface CompanyDao {
 	
 	@Update("update user set companyId=#{1}  where id =#{id}")
 	void updateUser(User user, int id);
+
+	
+
 }
 
 

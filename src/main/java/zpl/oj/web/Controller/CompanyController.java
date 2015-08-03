@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,13 +23,20 @@ import org.springframework.web.multipart.MultipartFile;
 import com.foolrank.model.CompanyModel;
 import com.foolrank.response.json.CompanyJson;
 import com.foolrank.util.RequestUtil;
+import com.qiniu.util.Auth;
 
 import zpl.oj.dao.CompanyDao;
+import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.common.ImgForDao;
+import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Quiz;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
+import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 
 @Controller
@@ -41,6 +51,9 @@ public class CompanyController {
 	
 	@Autowired
 	private ImgUploadService imgUploadService;
+	
+	@Autowired
+	private ImgUploadDao imgUploadDao;
 
 	@Autowired
 	private UserDao userDao;
@@ -85,15 +98,6 @@ public class CompanyController {
 
         return null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -272,14 +276,8 @@ public class CompanyController {
 				return rb;
 				
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+
+	
 		
 		@RequestMapping(value = "/uploadimg")
 		@ResponseBody
@@ -313,26 +311,12 @@ public class CompanyController {
 					rb.setMessage("图片不可为空");
 					return rb;
 				}
-				
-//				if(flag == null){
-//					rb.setState(4);
-//					rb.setMessage("标志不可为空");
-//					return rb;
-//				}
-				
-		
-				
-			//	return null;			 
+
 				 for (MultipartFile fileitem : file) {
 					 
 					 if(!fileitem.isEmpty()){
-
-						// imgUploadService.saveCompanyImg(company,fileitem,flag);
-//							FileUtils.writeByteArrayToFile(new File(path,fileName),fileitem.getBytes());
 			 imgUploadService.saveCompanyImg(company,fileitem,flag);
-
 				        } 
-		 
 					
 				}
 				return null; 
@@ -340,51 +324,77 @@ public class CompanyController {
 		}
 
 		
-		/*@RequestMapping(value = "/uploadimg")
+		//得到公司详情
+		@RequestMapping(value = "/getcomTail")
 		@ResponseBody
-		public ResponseBase uploadCompanyImg(@RequestBody Map<String, String> params) {
+		public ResponseBase getcomTail(@RequestBody Map<String, String> params) {
+			String strComid = params.get("comid");
 			ResponseBase rb = new ResponseBase();
-			@RequestParam MultipartFile[] file,
-			@RequestHeader (value="Authorization",required=false) String token
-//			String companyName = RequestUtil.getStringParam(params, "name", true);
-			if(companyName == null){
-				rb.setState(1);
-				rb.setMessage("公司名不得为空");
-				return rb;
-			}
-			
-			CompanyModel company = companyDao.findCompanyByName(companyName);
-			if(company == null){
-				rb.setState(2);
-				rb.setMessage("无此公司");
-				return rb;
-			}
-			
-			String img =  RequestUtil.getStringParam(params, "img", true);
-			if(img == null){
-				rb.setState(3);
-				rb.setMessage("图片不可为空");
-				return rb;
-			}
-			
-			Integer flag = RequestUtil.getIntParam(params, "flag");
-			if(flag == null){
-				rb.setState(4);
-				rb.setMessage("标志不可为空");
-				return rb;
-			}
-			
-			imgUploadService.saveCompanyImg(company,img,flag);
-			return null;
-			
-			
-			
-			
-		}*/
-			
-
-
-}
 		
-		  
 
+			int comid = strComid == null ? 0 : Integer
+					.parseInt(strComid.trim());
+			
+			if(comid==0){
+				rb.setState(1);
+				return rb;
+			}
+	      Map<String,Object>    map		=companyService.getcomTail(comid);
+			
+          rb.setMessage(map);
+
+	     
+			return rb;
+		}
+
+
+	// 查询所有挑战赛已经公开的公司
+	@RequestMapping(value = "/comListByType")
+	@ResponseBody
+	public ResponseBase comListByType() {
+		ResponseBase rb = new ResponseBase();
+		List<CompanyModel> companyList = companyService.findAll();
+		for(int i=0;i<companyList.size();i++){
+			CompanyModel companyModel=companyList.get(i);
+  
+			int comid = companyModel.getId();
+
+			if (comid == 0) {
+				rb.setState(1);
+				return rb;
+			}
+
+			List<User> userList = userDao.getListByCompany(comid);
+			if(userList.size()==0){
+				
+				companyList.remove(companyModel);
+				i=i-1;
+				continue;
+			}
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<Quiz> quizList = new ArrayList<Quiz>();
+			for (User user : userList) {
+				// 做常量
+				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
+						ExamConstant.QUIZ_TYPE_CHALLENGE);
+				for (Quiz quiz : quizListUse) {
+					quizList.add(quiz);
+				}
+			}
+
+			if (quizList.size()==0) {
+				companyList.remove(companyModel);
+				i=i-1;
+				continue;
+			}
+			
+		       String logoLocation=   	companyService.getImg(companyModel.getLogo());
+
+		companyModel.setLogo(logoLocation);
+		}
+		
+		rb.setMessage(companyList);
+		return rb;
+	}
+}
