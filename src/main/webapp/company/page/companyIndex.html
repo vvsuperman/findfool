@@ -1,20 +1,10 @@
-<!doctype html>
-<link rel="stylesheet" href="cad/css/index.css" />
 
-<html lang="en" margin-left:100px>
- <head>
-  <meta charset="UTF-8">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>Document</title>
- </head>
- <body>
   <div class="container">
 
 <table  border="1" height="170" width="100%" . padding-left: 20px; >
 <tr  height="150" width="100%" >
-	<td>本公司logo</td>
+	<td><img src="http://">（本公司的logo） </td>
+
 </tr>
 <tr  height="20" width="600">
 	<td>
@@ -34,18 +24,16 @@
     <option value="2">按名称查找</option>
   </select>
 </td>
-<td><input name="cname" type="text" id="cid"  ng-model="Lcname" placeholder="请输入要查询公司的名称" style="width:200px"></td>
+<td><input name="cname" type="text" id="cid"  ng-model="Lcname" placeholder="请输入要查询公司的名称" style="width:200px; height:30px"></td>
 
 <td width="19%" align="center">
-			<div class="control">
-			
-				<button type="submit" class='button' ng-click="findAllByName()">搜索</button>	        
-				<button type="reset"
-				        onClick="">清空</button>
-			</div>
+			<div class="control">				
+				<button type="submit" class='button' ng-click="findAllByName() >搜索</button>
+				<button type="reset" class='button' onClick="">清空</button>
+			</div> 
 		</td>
 
-		<td><a href="#/company/create"><button type='button' class='button' >创建公司</button>  </a>  </td>
+		<td><a href="#/company/create"><button  class='btn btn-primary' >创建公司</button>  </a>  </td>
 </tr>
 
 </table>
@@ -74,7 +62,7 @@
 		  	    <td>{{company.name}}</td>
 		  	    <td>{{company.address}}</td>
 		  	    <td>{{company.tel}}</td>
-		        <td><a   ng-click="showCompany(company)" href="">查看</a></td>
+		        <td><button class="btn btn-primary"   ng-click="showCompany(company)" href="">查看</button></td>
 		        <td><a   ng-click="modifyCompany(company)" href="">修改</a></td>
 				<td><a  ng-click="cDelete(company.id)" href="">删除</a></td>
 		        </tr>
@@ -86,5 +74,3 @@
 </div>
 </div>
 
- </body>
-</html>
