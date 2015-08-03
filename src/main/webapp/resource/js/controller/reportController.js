@@ -295,14 +295,7 @@ OJApp.controller('publicReportListController', [
 						$scope.imgs = data.imgs;
 						// 保留从倒数第三个"/"后的字符串
 
-						// for(var i = 0;i< $scope.imgs.length;i++){
-						// var location = $scope.imgs[i].location;
-						// var j = location.lastIndexOf("/");
-						// j = location.lastIndexOf("/",j-1);
-						// j = location.lastIndexOf("/",j-1);
-						// $scope.imgs[i].location
-						// =location.slice(j,location.length);
-						// }
+					
 						// 获取用户在开始测试时所填信息
 						$http({
 							url : WEBROOT + "/testing/getLabels",
@@ -557,16 +550,8 @@ OJApp.controller('publicReportListController', [
 						// data.score.split("/");
 						// 照片
 						$scope.imgs = data.imgs;
-						// 保留从倒数第三个"/"后的字符串
 
-						// for(var i = 0;i< $scope.imgs.length;i++){
-						// var location = $scope.imgs[i].location;
-						// var j = location.lastIndexOf("/");
-						// j = location.lastIndexOf("/",j-1);
-						// j = location.lastIndexOf("/",j-1);
-						// $scope.imgs[i].location
-						// =location.slice(j,location.length);
-						// }
+					
 						// 获取用户在开始测试时所填信息
 						$http({
 							url : WEBROOT + "/testing/getLabels",
