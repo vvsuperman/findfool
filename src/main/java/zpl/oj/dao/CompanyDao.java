@@ -74,6 +74,7 @@ public interface CompanyDao {
 	
 	@Update("update user set companyId=#{1}  where id =#{id}")
 	void updateUser(User user, int id);
+	
+	@Select("SELECT * FROM company WHERE status=#{0} LIMIT #{1},#{2}")
+	List<CompanyModel> getList(int status, int offset, int count);
 }
-
-

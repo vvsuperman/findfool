@@ -11,7 +11,6 @@
 		<h1 style="font-size: 44px;margin-top: 30px">
                     创建新公司
         </h1>
-      
 	</div>
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
@@ -37,20 +36,7 @@
       <a>详细信息</a>
       <textarea    ng-model="description" class="form-control" rows="3"></textarea>
  </div>
-               <div class="btn btn-primary"  upload-button header ={{companyname}}
-    	         url="/company/uploadimg" on-success="onSuccess(response)" >上传公司图片
-    	          </br>
-    	          </div>
-    	             </br> </br>
-             <div class="btn btn-primary"  upload-button header ={{companyname}}
-    	          ng-click="uploadimg(false)" on-success="onSuccess(response)" >上传公司logo
-    	          
-    	          </div>
-    	          <div>
-             
-             <div ng-controller="upload1">
-              <input  name="myFile" type="file"   />            
-             </div>
+              
             
     <div>
     <p class="text-danger" ng-bind="errorMsg.general" ></p>
@@ -62,12 +48,48 @@
                 <a href="#/company/companySet"><button  class="btn btn-outline btn-lg btn-block">
                       返回</button>
                       </a>
-        
-                  
+       
                 </div>
                 </div>
-          
            </form> 
         </div>
     </div>
 </div>
+
+
+
+<div class="text-center" style="width:100%;">
+
+ <div class="btn btn-primary"  upload-button header ={{company.id}},1
+    	         url="company/uploadimg" on-success="onSuccess(response)" >上传公司图片
+    	          </br>
+    	          </div>
+    	           </br> </br>
+             <div class="btn btn-primary"  upload-button header ={{company.id}},2
+    	          ng-click="company/uploadimg" on-success="onSuccess(response)" >上传公司logo
+    	          
+    	          </div>
+    	       <div class="form-group" style="width:33%; margin-left: 33%">
+    	       </br>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="create()">
+                            继续添加
+                                       </button>
+                   </br>
+                <a href="#/company/companySet"><button  class="btn btn-outline btn-lg btn-block">
+                      完成</button>
+                      </a>   
+                </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

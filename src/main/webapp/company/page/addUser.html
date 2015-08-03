@@ -1,0 +1,57 @@
+
+
+<div class="container" >
+	<div style="width:100%;" class="text-center">
+		<br/>
+		<br/>
+		<h1 style="font-size: 44px;margin-top: 30px">
+                    关联用户
+        </h1>
+	</div>
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+           <form class="form-horizontal form-signup">   
+               <div> 
+        <div ng-repeat="(key,item) in items track by $index" >   <!-- 借助track by $index进行循环-->
+      <table     width=110%>
+      <tr>
+      <td> <a class="glyphicon glyphicon-remove aa"  ng-click="Fn.del(key)" /></td>
+      <td> <input    type="email"  style="margin-top: 10px"    placeholder="邮箱" class="form-control txt-large"  ng-model="items[key]"/></td>
+      <td> <a  style="margin-left: 5px"   class="glyphicon glyphicon-plus aa"  ng-click="Fn.add()"/></td>
+            
+            </tr>
+              </table>
+   </div>
+
+
+        </div>
+        <p class="text-danger" >{{msg}}</p>
+    <div>
+    <p class="text-danger" ng-bind="errorMsg.general" ></p>
+                <div class="form-group" >
+                  <button type="submit" class="btn btn-primary btn-lg btn-block"   ng-click="addUser(companyId)">
+                            确定关联
+                                       </button>
+                   </br>
+                <a href="#/company/companySet"><button  class="btn btn-outline btn-lg btn-block">
+                      返回</button>
+                      </a>
+       
+                </div>
+                </div>
+           </form> 
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

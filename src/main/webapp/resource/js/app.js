@@ -21,11 +21,19 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
+            when('/challenge/:signedid', {  //客户端主页
+                templateUrl: 'challenge/page/preparechallenge.html',
+                controller: 'ctestingController'
+            }).
             when('/cad/comlist', {  //客户端主页
-                templateUrl: 'cad/page/comlist.html',
+                templateUrl: 'cad/page/pagenav.html',
                 controller: 'comListController'
             }).
-            when('/cad/eachcom', {  //客户公司详情
+            when('/cad/challengelist', {  //客户端主页
+                templateUrl: 'cad/page/challengelist.html',
+                controller: 'challengeListController'
+            }).
+            when('/cad/eachcom/:comid', {  //客户公司详情
                 templateUrl: 'cad/page/eachcom.html',
                 controller: 'eachComController'
             }).
@@ -82,7 +90,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             when('/rock&roll/:rrid', {
                 templateUrl: 'page/page.html',
                 controller: 'RockRoll'
-            }).
+            }). 	
             when('/loginok', {
                 templateUrl: 'page/page.html',
                 controller: 'LoginOk'
@@ -200,7 +208,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'cad/page/login.html',
             	controller: 'cadLoginCtrl'
             }). 
-            when('/company/companySet',{
+            when('/company/companyset',{
             	templateUrl: 'company/page/companyIndex.html',
             	controller: 'companySet'
             }). when('/company/create',{
@@ -212,11 +220,15 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	controller: 'companySet'
             }). 
             when('/company/modify/:companyId',{
-            	templateUrl: 'company/page/ modifyCompany.html',
+            	templateUrl: 'company/page/modifyCompany.html',
             	controller: 'companySet'
             }).    
             when('/company/updateimage',{
             	templateUrl: 'company/page/ updateimage.html',
+            	controller: 'companySet'
+            }).
+            when('/company/addUser/:companyId',{
+            	templateUrl: 'company/page/addUser.html',
             	controller: 'companySet'
             }). 
             otherwise({

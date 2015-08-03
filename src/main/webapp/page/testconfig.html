@@ -28,15 +28,15 @@
 		<!--<div class="col-md-12">
 		  <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
 		 </div>  -->  
-		  <div class="col-md-12"  >
-		 <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
-		  <h4>已添加标签</h4>
-		    <div   class="col-md-3" ng-repeat="label in labels" ng-show="orseclected(label.isSelected)" >
-		       <button   class="btn btn-info btn-xs" style="margin-top: 5px" 
-		       ng-click="saveConfigOne(label,2)">  {{label.labelname}}</button> 
-		    </div>
-		  <h4>&nbsp;</h4>  <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
-		   </div>
+		<div class="col-md-12"  >
+			 <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+			  <h4>已添加标签</h4>
+			    <div   class="col-md-3" ng-repeat="label in labels" ng-show="orseclected(label.isSelected)" >
+			       <button   class="btn btn-info btn-xs" style="margin-top: 5px" 
+			       ng-click="saveConfigOne(label,2)">  {{label.labelname}}</button> 
+			    </div>
+			  <h4>&nbsp;</h4>  <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+		</div>
 		
 	    <!-- class="col-md-4" -->
 	     <div class="col-md-12" style="margin-top: 20px" >
@@ -53,6 +53,17 @@
 		 </form>
 	    </div>
 	 
+	     <div class="col-md-12" style="margin-top: 20px;margin-bottom: 100px" >
+		   <h4>设为公开挑战</h4>
+		   <p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
+		     <p ng-if="publicFlag==1">挑战赛地址：<span ng-bind="pubUrl"></span></p>
+	         <button class="btn btn-primary" ng-if="publicFlag==0" ng-click="setPublic()">设为公开挑战赛</button>
+	         <button class="btn btn-primary" ng-if="publicFlag==1" ng-click="setPublic()">设为私有测试</button> 
+	       </span>
+	       
+	    </div>
+	    
+	    
 	    	 
 	   
     </div>
