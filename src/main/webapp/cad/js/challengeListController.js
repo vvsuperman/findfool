@@ -22,4 +22,13 @@ OJApp.controller('challengeListController',['$scope','$http','CadData',function 
 	
 	$scope.renderList(1, $scope.unrunChallenges);
 	$scope.renderList(2, $scope.runningChallenges);
+	
+	
+	$scope.myInterval = 5000;
+	$scope.noWrapSlides = false;
+    var slides = $scope.slides = [];
+    
+    slides.push({image:'resource/static/comlistbg.jpg'});
+    slides.push({image:'resource/static/dpbg.jpg'});
+
 }])

@@ -26,7 +26,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 controller: 'ctestingController'
             }).
             when('/cad/comlist', {  //客户端主页
-                templateUrl: 'cad/page/comlist.html',
+                templateUrl: 'cad/page/pagenav.html',
                 controller: 'comListController'
             }).
             when('/cad/challengelist', {  //客户端主页

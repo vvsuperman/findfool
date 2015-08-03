@@ -2,6 +2,10 @@
  * 做题控制器
  */
 OJApp.controller('comListController',['$scope','$http','CadData',function ($scope,$http,CadData) {
+	
+	$scope.nav = 'cad/page/cadnav.html'
+	$scope.template = 'cad/page/comlist.html';
+	
 	$scope.renderList = function(status, challenges) {
 		$http({
 			url: WEBROOT + '/challenge/getListByStatus',
