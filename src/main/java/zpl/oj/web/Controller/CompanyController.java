@@ -85,10 +85,7 @@ public class CompanyController {
 		return rb;
 	}
 	
-	
-	
-	
-	
+
 
 	//根据公司id，查找该公司所有挑战赛
 	@RequestMapping(value = "/findAllTest")
@@ -98,7 +95,6 @@ public class CompanyController {
 
         return null;
 	}
-	
 	
 	
 	
@@ -143,7 +139,6 @@ public class CompanyController {
 
 		return rb;
 	}
-	
 	
 	
 	@RequestMapping(value = "/updateimage")
@@ -299,7 +294,7 @@ public class CompanyController {
                
            System.out.println(flag);
          
-		        CompanyModel company=   	companyDao.getById(companyId);
+		        CompanyModel company= companyDao.getById(companyId);
 
 			 if(company == null){
 					rb.setState(1);
@@ -331,7 +326,6 @@ public class CompanyController {
 		public ResponseBase getcomTail(@RequestBody Map<String, String> params) {
 			String strComid = params.get("comid");
 			ResponseBase rb = new ResponseBase();
-		
 
 			int comid = strComid == null ? 0 : Integer
 					.parseInt(strComid.trim());
@@ -340,7 +334,7 @@ public class CompanyController {
 				rb.setState(1);
 				return rb;
 			}
-	      Map<String,Object>    map		=companyService.getcomTail(comid);
+	      Map<String,Object>    map	=companyService.getcomTail(comid);
 			
           rb.setMessage(map);
 
@@ -389,8 +383,8 @@ public class CompanyController {
 				i=i-1;
 				continue;
 			}
-			
-		       String logoLocation=   	companyService.getImg(companyModel.getLogo());
+		
+		String logoLocation= companyService.getImg(companyModel.getLogo());
 
 		companyModel.setLogo(logoLocation);
 		}

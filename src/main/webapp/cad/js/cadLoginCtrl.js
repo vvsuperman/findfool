@@ -1,5 +1,7 @@
 OJApp.controller('cadLoginCtrl',['$scope','$http','Data',function ($scope,$http,Data) {
 	
+	
+	//客户端用户登录功能
 	//手机的错误信息
 	$scope.errorMsg={};
 	$scope.verifyQtn ={};
@@ -7,7 +9,7 @@ OJApp.controller('cadLoginCtrl',['$scope','$http','Data',function ($scope,$http,
 
 	$scope.confirm = function () {
         if ($scope.Lemail && $scope.Lpwd) {
-        	//	console.log("1");
+        	    //	console.log("1");
         		var pwd = md5($scope.Lpwd);
         		console.log(pwd);
         	

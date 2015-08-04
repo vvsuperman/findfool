@@ -29,6 +29,32 @@ console.log(comid);
 
 	$scope.getcomTail();
 
+	//开始挑战前进行登录判断，如果没有登录，跳转到登录界面
+	
+	
+	$scope.isLogin=function(){
+		
+		console.log("正在验证是否登录");
+		$scope.Lemail=Data.email();
+		console.log($scope.Lemail);
+
+		if($scope.Lemail==null){
+
+			var url = "#/cad/login";
+			 window.location.href=url;
+			
+		}else{
+			var url2 = "#//testing";
+			console.log("用户已经登录");
+		
+		}
+		
+		
+		
+	}
+	
+	
+	
 	
 	
 	

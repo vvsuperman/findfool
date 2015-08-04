@@ -34,6 +34,7 @@ import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.imp.CompanyService;
 import zpl.oj.util.StringUtil;
 import zpl.oj.util.Constant.ExamConstant;
 
@@ -43,6 +44,9 @@ import com.foolrank.util.RequestUtil;
 @Controller
 @RequestMapping("/challenge")
 public class ChallengeController {
+	
+	@Autowired
+	private CompanyService companyService;
 
 	@Autowired
 	private UserDao userDao;
@@ -211,5 +215,32 @@ public class ChallengeController {
 
 		return rb;
 	}
+	
+	
+    //Fr挑战赛详情
+	@RequestMapping(value = "/getFrChallage")
+	@ResponseBody
+	public ResponseBase getFrChallage(@RequestBody Map<String, String> params) {
+	
+		  List<Quiz>   frQuizList =   quizDao.getQuizByType(ExamConstant.QUIZ_TYPE_FRCHALLENGE);
+		
+		  ResponseBase rb = new ResponseBase();
+		   
+          rb.setMessage(frQuizList);
+		
+		  return rb;
+	}
+
+	
+	//挑战赛分类查询方法
+	
+	private List  getFrCByName() {
+		
+		return null;
+	}
+	
+	
+	
+	
 	
 }
