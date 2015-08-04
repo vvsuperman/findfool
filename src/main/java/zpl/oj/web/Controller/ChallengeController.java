@@ -69,14 +69,37 @@ public class ChallengeController {
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
 
-	@RequestMapping(value = "/{id}")
+	
+	
+	//根据signedid获取testid
+	@RequestMapping(value = "/gettest")
 	@ResponseBody
-	public String index(@PathVariable("id") String id) {
-		String strId = "";
-		String strTuId = "";
-
-		// return new ModelAndView("login");
-		return id;
+	public ResponseBase getTest(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		String signedkey = RequestUtil.getStringParam(params, "signedkey", "", true);
+		if(signedkey.equals("")) {
+			rb.setState(1);
+			rb.setMessage("输入不得为空");
+			return rb;
+		}
+		
+		Quiz quiz = quizDao.getQuizByKey(signedkey);
+		if(quiz == null) {
+			rb.setState(1);
+			rb.setMessage("无对应试卷");
+			return rb;
+		}
+		SimpleChallenge challenge = new SimpleChallenge();
+		challenge.setKey(signedkey);
+		challenge.setLogo(quiz.getLogo());
+		challenge.setName(quiz.getName());
+		challenge.setDescription(quiz.getDescription());
+		challenge.setStartTime(quiz.getStartTime());
+		challenge.setEndTime(quiz.getEndTime());
+		
+		rb.setState(0);
+		rb.setMessage(challenge);
+		return rb;
 	}
 
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
@@ -159,6 +182,9 @@ public class ChallengeController {
 		// 获取参数
 		String strStatus = params.get("status");
 		int status = strStatus == null ? 1 : Integer.parseInt(strStatus.trim());
+		if (status < 1) {
+			status = 1;
+		}
 		String strCompanyId = params.get("cid");
 		int companyId = strCompanyId == null ? 0 : Integer
 				.parseInt(strCompanyId.trim());

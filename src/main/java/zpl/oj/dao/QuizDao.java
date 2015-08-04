@@ -15,6 +15,11 @@ import zpl.oj.model.request.User;
 import com.foolrank.provider.QuizProvider;
 
 public interface QuizDao {
+	
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
+			+ "FROM QUIZ WHERE signedKey = #{0}")
+	Quiz getQuizByKey(String signedkey);
+	
 
 	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
@@ -65,4 +70,7 @@ public interface QuizDao {
 	
 	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=#{0}  ORDER BY start_time ASC")
 	List<Quiz> getQuizByType(int quizTypeFrchallenge);
+	
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND signed_key=#{0}")
+	Quiz getChallengeBySignedKey(String signedKey);
 }

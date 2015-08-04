@@ -1,10 +1,20 @@
 'use strict';
 
-OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
-	//根据头信息解析出测试id和用户id，检查有没有开始做测试
+OJApp.controller('ctestingController',['$scope','$http','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
 	 var signedkey = $routeParams.signedkey;
 	 
-	 
+	 //通过signedkey获得testid
+	 $http({
+         url: WEBROOT+"/challenge/gettest",
+         method: 'POST',
+         data: sendData
+     }).success(function (data) {
+    	 if(data.state!=0){
+    		 console.log(data.message);
+    	 }else{
+    		 
+    	 }
+     })
 	
 	 
 	 $scope.genExtraInfo = function(data){
