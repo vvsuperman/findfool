@@ -1,51 +1,51 @@
-
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>查找公司</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
   <div class="container">
 
-<table  border="1" height="170" width="100%" . padding-left: 20px; >
-<tr  height="150" width="100%" >
-	<td><img src="http://">（本公司的logo） </td>
-
-</tr>
-<tr  height="20" width="600">
-	<td>
 
 
-<form width="400" height="20">
+
 	
 
-<table >
-<tr height="20" >
-<td>
 
 
- <select ng-change="onChange(x)" ng-model="x">
-  <option value="0" selected >--按条件查询--</option>
+ <!-- <select ng-change="onChange(x)" ng-model="x">
+ <form action="save.php" method="post" >
+ <label>查找公司：</label>
+  <option value="0" selected="selected" >--按条件查询--</option>
      <option value="1" >全部</option>
     <option value="2">按名称查找</option>
   </select>
-</td>
-<td><input name="cname" type="text" id="cid"  ng-model="Lcname" placeholder="请输入要查询公司的名称" style="width:200px; height:30px"></td>
+  </form>  -->
+<div class="col-md-12">
+ 
+ <div class="col-md-6">
+ <div class="btn-group">
+ <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">--按条件查询公司名称--<span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    	<li>全部</li>
+    	<li>按名称查找</li>
+    	<li>按地点查找</li>
+    	<li>按电话查找</li>
+    </ul>
+ 
+  </div>
+  <input name="cname" type="text" id="cid"  ng-model="Lcname" placeholder="请输入要查询公司的名称" style="width:200px; height:30px;margin:40px;">
+  </div>
+  <div class="col-md-6" style="margin-top: 40px">				
+				&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-success" ng-click="findAllByName() ">搜索</button>&nbsp;&nbsp;&nbsp;
+				<button type="reset" class="btn btn-danger" onClick="">清空</button>
+  
+  <a href="#/company/create"><button  class='btn btn-primary'  >创建公司</button> </a>  
+  </div>
+</div>
 
-<td width="19%" align="center">
-			<div class="control">				
-				<button type="submit" class='button' ng-click="findAllByName() >搜索</button>
-				<button type="reset" class='button' onClick="">清空</button>
-			</div> 
-		</td>
-
-		<td><a href="#/company/create"><button  class='btn btn-primary' >创建公司</button>  </a>  </td>
-</tr>
-
-</table>
-	</form>
-	</td>
-
-</tr>
-
-</table>
-	
-	<div>
-<form method="post" action="companyAction_delete.do" namespace="/sys" border="1">
+<div class="col-md-12">		
+<form>
 <table border="1" width="100%" border="0" cellspacing="0" cellpadding="0" id="PowerTable" class="PowerTable">
 	<tr>
     
@@ -55,14 +55,14 @@
   	    <td width="10%" class="listViewThS1">查看</td>
         <td width="10%" class="listViewThS1">修改</td>
         <td width="10%" class="listViewThS1">删除</td>
-          <td width="10%" class="listViewThS1">关联用户</td>
+        <td width="10%" class="listViewThS1">关联用户</td>
    
         </tr>
 			<tr ng-repeat="company in companyList">
 		  	    <td>{{company.name}}</td>
 		  	    <td>{{company.address}}</td>
 		  	    <td>{{company.tel}}</td>
-		        <td><button class="btn btn-primary"   ng-click="showCompany(company)" href="">查看</button></td>
+		        <td><a   ng-click="showCompany(company)" href="">查看</button></td>
 		        <td><a   ng-click="modifyCompany(company)" href="">修改</a></td>
 				<td><a  ng-click="cDelete(company.id)" href="">删除</a></td>
 				<td><a  ng-click="addUserFn(company)" href="">关联用户</a></td>
@@ -73,4 +73,3 @@
 </form>
 </div>
 </div>
-
