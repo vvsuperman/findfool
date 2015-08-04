@@ -23,7 +23,7 @@
 </nav>
 
 
-    <div class="jumbotron" style="min-height: 350px; background-image: url(resource/static/com-dp.jpg);">
+    <div class="jumbotron" style="min-height: 350px; background-image: url('{{companyTail.coverLocation}}');">
 
     </div>
 
@@ -37,9 +37,8 @@
 
                     <div class="com-brief">
 
-                    
                         <div class="media media-middle">
-                            <img class="media-object" src="resource/static/dp.jpg" alt="dp">
+                            <img class="media-object" src="{{companyTail.logoLocation}}" alt="dp">
                         </div>
 
 
@@ -55,28 +54,29 @@
                             <div class="website">
                                 
                                 <img src="resource/static/iconfont-lianjie.png" alt="lianjie">              
-                                <p>www.dianping.com</p>
+                                <p>{{companyTail.website}}</p>
 
                             </div> 
                             
-                            <p class="introduction"> 大众点评网于2003年4月成立于上海。大众点评是中国领先的本地生活信息及交易平台，也是全球最早建立的独立第三方消费点评网站。大众点评不仅为用户提供商户信息、消费点评及消费优惠等信息服务，同时亦提供团购、餐厅预订、外卖及电子会员卡等O2O（Online To Offline）交易服务。</p>
+                            <p class="introduction">{{companyTail.description}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-9">
 
                         
-                    <div class="com-activities">
+                    <div class="com-activities" ng-repeat="quiz in quizList">
                         <h2>
-                            大众点评第二届极客挑战赛  点评GEEK联盟集结号
+                            {{quiz.extraInfo}}
                         </h2>
 
-                        <p style="padding-bottom: 20px">我们是点评神盾局，我们正在召集一群各具所长的“特工”，能用手中的代码完成一个个“不可能”的任务。我们的终极任务是创造o2o的新世界，改变人类的生活方式。更有超多炫酷奖品与荣誉等你来拿。</p>
-                         <a href="http://evt.dianping.com/event/campus15/"><div class="enter text-center">
+                        <p style="padding-bottom: 20px">{{quiz.description}}</p>
+                        <div  >
+                         <a href="http://evt.dianping.com/event/campus15/"><div class="enter text-center "  style="width:50%;margin: 0 auto;">
 
                         开始挑战
                     </div></a>
-
+                             </div>
 
                     </div>
                 </div>

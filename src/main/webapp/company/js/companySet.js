@@ -1,7 +1,7 @@
 OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function ($scope,$http,$routeParams,Data) {
 	    var cid = $routeParams.companyId;
 	    console.log(cid);
-	    
+	   
 
 //	   $scope.imgifo="4,1";
 	   console.log($scope.imgifo);

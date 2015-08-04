@@ -77,4 +77,5 @@ public interface CompanyDao {
 	
 	@Select("SELECT * FROM company WHERE status=#{0} LIMIT #{1},#{2}")
 	List<CompanyModel> getList(int status, int offset, int count);
+
 }

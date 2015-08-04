@@ -9,6 +9,26 @@ public class CompanyJson {
 	private String tel;
 	private String website;
 	private String description;
+	private String coverLocation;
+	private String logoLocation;
+	
+	
+
+	public String getCoverLocation() {
+		return coverLocation;
+	}
+
+	public void setCoverLocation(String coverLocation) {
+		this.coverLocation = coverLocation;
+	}
+
+	public String getLogoLocation() {
+		return logoLocation;
+	}
+
+	public void setLogoLocation(String logoLocation) {
+		this.logoLocation = logoLocation;
+	}
 
 	public int getId() {
 		return id;
