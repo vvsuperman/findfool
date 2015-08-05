@@ -431,6 +431,8 @@ public class CompanyController {
 		String logoLocation= companyService.getImg(companyModel.getLogo());
 
 		companyModel.setLogo(logoLocation);
+		
+		
 		}
 		
 		rb.setMessage(companyList);

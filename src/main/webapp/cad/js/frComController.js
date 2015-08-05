@@ -3,6 +3,9 @@
  */
 OJApp.controller('frComController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
+	$scope.nav = 'cad/page/cadnav.html'
+		$scope.template = 'cad/page/comlist.html';
+	
 	
 	$scope.getFrChallage=function(){
 		$http({

@@ -42,4 +42,5 @@ public interface TestuserDao {
 	@Update("update testuser set username=#{username},pwd=#{pwd},tel=#{tel} where email =#{email}")
 	void updateTestuser(Testuser test1);
 
+
 }

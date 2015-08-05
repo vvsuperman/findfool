@@ -1,7 +1,7 @@
 /**
  * 客户端首页控制器
  */
-OJApp.controller('comListController',['$scope','$http','CadData',function ($scope,$http,CadData) {
+OJApp.controller('comListController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
 	
 
 	$scope.nav = 'cad/page/cadnav.html'
@@ -17,8 +17,9 @@ OJApp.controller('comListController',['$scope','$http','CadData',function ($scop
 		}).success(function(data) {
 //			$scope.companyTail = data["message"];
 			$scope.companyList=data["message"];
-			
-			                      
+//			$scope.username=Data.name();
+//			$scope.email=Data.email();
+//			          console.log(Data.name());         
 		}).error(function() {
 			console.log("get data failed");
 		})
@@ -55,4 +56,30 @@ OJApp.controller('comListController',['$scope','$http','CadData',function ($scop
 	}
 	
 	$scope.renderList(1, null);
+//	$scope.isLogin=function(param){
+//		if(param==1){
+//		if($scope.email==null){
+//			return true;
+//		}else{
+//			return false;
+//		}
+//		}else{
+//			
+//			if($scope.email==null){
+//				return false;
+//			}else{
+//				return true;
+//			}		
+//		}
+//
+//		
+//	}
+//	
+//	$scope.loginOut=function(){
+//		Data.clear();
+//		
+//		 window.location.reload();		
+//	}
+	
+	
 }])

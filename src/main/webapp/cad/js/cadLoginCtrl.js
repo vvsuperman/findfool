@@ -34,6 +34,8 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',function($scope, $h
 
 						Data.setName($scope.message.username);
 						Data.setEmail($scope.Lemail);
+						
+						
 
 						// 修改
 						if ($scope.state == 0) {
@@ -47,6 +49,10 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',function($scope, $h
 							$scope.errmsg = data.message.msg;
 
 						}
+						
+						var url = "#/cad/comlist";
+
+						 window.location.href=url;
 					}).error(function() {
 						console.log("err");
 						alert("网络错误");
