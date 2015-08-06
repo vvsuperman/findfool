@@ -75,43 +75,43 @@ public class PersonalController {
 	
 	@RequestMapping(value ="/modify")
 	@ResponseBody
-	public ResponseBase modify(@RequestBody Map<String, String> params) {
+	public ResponseBase modify(@RequestBody Testuser testuser) {
 		ResponseBase rb = new ResponseBase();
 //必须传过来用户的id
 //		
-        int tuid =RequestUtil.getIntParam(params,"testid");
-
-		String username = RequestUtil.getStringParam(params, "username", true);
-		String email = RequestUtil.getStringParam(params, "email", true);
-		String school = RequestUtil.getStringParam(params, "school", true);
-		String company = RequestUtil.getStringParam(params, "company", true);
-		String blog = RequestUtil.getStringParam(params, "blog",true);
-		String tel = RequestUtil.getStringParam(params, "tel", true);
-		String degree = RequestUtil.getStringParam(params, "degree", true);
-		String gratime = RequestUtil.getStringParam(params, "gratime", true);
-		String city = RequestUtil.getStringParam(params, "city", true);
-		String gender = RequestUtil.getStringParam(params, "gender",true);
-		String rollnumber = RequestUtil.getStringParam(params, "rollnumber", true);
-		String gpa = RequestUtil.getStringParam(params, "gpa", true);
-		String discipline = RequestUtil.getStringParam(params, "discipline", true);
-        int age =RequestUtil.getIntParam(params,"age");
-//		
-                        Testuser  testuser             = testuserDao.findTestuserById(tuid);
-                        
-                        testuser.setAge(age);
-                        testuser.setBlog(blog);
-                        testuser.setCity(city);
-                        testuser.setCompany(company);
-                        testuser.setDegree(degree);
-                        testuser.setDiscipline(discipline);
-                        testuser.setEmail(email);
-                        testuser.setGender(gender);
-                        testuser.setGpa(gpa);
-                        testuser.setGratime(gratime);
-                        testuser.setRollnumber(rollnumber);
-                        testuser.setSchool(school);
-                        testuser.setTel(tel);
-                        testuser.setUsername(username);
+//        int tuid =RequestUtil.getIntParam(params,"testid");
+//
+//		String username = RequestUtil.getStringParam(params, "username", true);
+//		String email = RequestUtil.getStringParam(params, "email", true);
+//		String school = RequestUtil.getStringParam(params, "school", true);
+//		String company = RequestUtil.getStringParam(params, "company", true);
+//		String blog = RequestUtil.getStringParam(params, "blog",true);
+//		String tel = RequestUtil.getStringParam(params, "tel", true);
+//		String degree = RequestUtil.getStringParam(params, "degree", true);
+//		String gratime = RequestUtil.getStringParam(params, "gratime", true);
+//		String city = RequestUtil.getStringParam(params, "city", true);
+//		String gender = RequestUtil.getStringParam(params, "gender",true);
+//		String rollnumber = RequestUtil.getStringParam(params, "rollnumber", true);
+//		String gpa = RequestUtil.getStringParam(params, "gpa", true);
+//		String discipline = RequestUtil.getStringParam(params, "discipline", true);
+//        int age =RequestUtil.getIntParam(params,"age");
+//////		
+//                        Testuser  testuser             = testuserDao.findTestuserById(tuid);
+//                        
+//                        testuser.setAge(age);
+//                        testuser.setBlog(blog);
+//                        testuser.setCity(city);
+//                        testuser.setCompany(company);
+//                        testuser.setDegree(degree);
+//                        testuser.setDiscipline(discipline);
+//                        testuser.setEmail(email);
+//                        testuser.setGender(gender);
+//                        testuser.setGpa(gpa);
+//                        testuser.setGratime(gratime);
+//                        testuser.setRollnumber(rollnumber);
+//                        testuser.setSchool(school);
+//                        testuser.setTel(tel);
+//                        testuser.setUsername(username);
         
         
 		if((testuser.getEmail()==null)&&(testuser.getUsername()==null)){
