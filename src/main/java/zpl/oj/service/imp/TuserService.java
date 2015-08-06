@@ -113,6 +113,7 @@ public class TuserService {
 		rtMap.put("optionNum", option);
 		rtMap.put("essayNum", essay);
 		rtMap.put("programNum", program);
+		rtMap.put("testid",testid);
 		
 		return rtMap;
 	}

@@ -34,6 +34,7 @@ import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.imp.TuserService;
 import zpl.oj.util.StringUtil;
 import zpl.oj.util.Constant.ExamConstant;
 
@@ -64,13 +65,16 @@ public class ChallengeController {
 	
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
+	
+	@Autowired
+	private TuserService tuserService;
 
 	
 	
 	//根据signedid获取testid
-	@RequestMapping(value = "/gettest")
+	@RequestMapping(value = "/checktest")
 	@ResponseBody
-	public ResponseBase getTest(@RequestBody Map<String, String> params) {
+	public ResponseBase checkTest(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
 		String signedkey = RequestUtil.getStringParam(params, "signedkey", "", true);
 		if(signedkey.equals("")) {
@@ -85,16 +89,9 @@ public class ChallengeController {
 			rb.setMessage("无对应试卷");
 			return rb;
 		}
-		SimpleChallenge challenge = new SimpleChallenge();
-		challenge.setKey(signedkey);
-		challenge.setLogo(quiz.getLogo());
-		challenge.setName(quiz.getName());
-		challenge.setDescription(quiz.getDescription());
-		challenge.setStartTime(quiz.getStartTime());
-		challenge.setEndTime(quiz.getEndTime());
 		
 		rb.setState(0);
-		rb.setMessage(challenge);
+		rb.setMessage(tuserService.getTestInfo(quiz.getQuizid()));
 		return rb;
 	}
 

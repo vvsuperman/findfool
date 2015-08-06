@@ -1,9 +1,14 @@
 'use strict';
 
-OJApp.controller('ctestingController',['$scope','$http','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
+OJApp.controller('ctestingController',['$scope','$http','CadData','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,CadData,$routeParams,$timeout,$sce,$compile,$interval) {
 	 var signedkey = $routeParams.signedkey;
 	 
-	 //通过signedkey获得testid
+	 $scope.email = CadData.getEmail();
+	 if(typeof($scope.email) == "undefined"){
+		 flashTip("请先登陆");
+		 window.location.href=WEBROOT+"cad/comlist"; 
+	 }
+	 //通过signedkey获得testid和试卷的信息
 	 $http({
          url: WEBROOT+"/challenge/gettest",
          method: 'POST',
@@ -12,7 +17,9 @@ OJApp.controller('ctestingController',['$scope','$http','Data','$routeParams','$
     	 if(data.state!=0){
     		 console.log(data.message);
     	 }else{
-    		 
+    		 $scope.testInfo = data.message;
+    		 $scope.tid = $scope.testInfo.testid;
+    		 $scope.show = 3;
     	 }
      })
 	
