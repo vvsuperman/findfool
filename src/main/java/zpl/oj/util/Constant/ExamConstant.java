@@ -98,6 +98,7 @@ public class ExamConstant {
 	// 测试/比赛类型
 	public static final int QUIZ_TYPE_PRIVATE = 0;
 	public static final int QUIZ_TYPE_CHALLENGE = 1;
+	public static final int QUIZ_TYPE_FRCHALLENGE = 2;
 
 	public static final int STATUS_DELETED = -1;
 	public static final int STATUS_UNCHECK = 0;

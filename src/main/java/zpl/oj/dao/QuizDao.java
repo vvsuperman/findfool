@@ -66,6 +66,10 @@ public interface QuizDao {
 
 	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND status=#{0} ORDER BY start_time ASC LIMIT #{1},#{2}")
 	List<Quiz> getChallengeListByStatus(int status, int offset, int count);
+
+	
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=#{0}  ORDER BY start_time ASC")
+	List<Quiz> getQuizByType(int quizTypeFrchallenge);
 	
 	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND signed_key=#{0}")
 	Quiz getChallengeBySignedKey(String signedKey);

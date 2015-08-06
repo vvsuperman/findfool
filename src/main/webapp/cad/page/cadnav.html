@@ -1,9 +1,10 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="cadNavController">
+
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 
      <ul class="nav navbar-nav">
@@ -12,12 +13,16 @@
         <li><a href="#">练习大厅</a></li>
         <li><a href="#/cad/rank">排行榜</a></li>
         <li><a href="#/">企业入口</a></li>
+     </ul> 
+     
+     <ul class="nav navbar-nav navbar-right">
+          <li ng-show="isLogin(1)"><a href="#/cad/signup">注册</a></li>
+          <li ng-show="isLogin(1)"><a href="#/cad/login">登录</a></li>
+          <li> <a href="" >{{username}}</a>
+          <li ng-show="isLogin(2)"><a  ng-click="loginOut()"  href="">退出</a></li>
+     </ul>
         
-        <li><a href="#/cad/signup">注册</a></li>
-        <li><a href="#/cad/login">登录</a></li>
-        
-
-      </ul>
+   </div>
 
 
     </div><!-- /.navbar-collapse -->

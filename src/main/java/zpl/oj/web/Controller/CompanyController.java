@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +26,12 @@ import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.user.UserDao;
+import zpl.oj.model.common.Quiz;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
+import zpl.oj.util.Constant.ExamConstant;
 
 @Controller
 @RequestMapping("/company")
@@ -71,6 +75,8 @@ public class CompanyController {
 
 		return rb;
 	}
+	
+
 
 	// 根据公司id，查找该公司所有挑战赛
 	@RequestMapping(value = "/findAllTest")
@@ -123,6 +129,8 @@ public class CompanyController {
 
 		return rb;
 	}
+	
+	
 
 	@RequestMapping(value = "/updateimage")
 	@ResponseBody
@@ -289,10 +297,150 @@ public class CompanyController {
 			}
 
 		}
-		return null;
+		rb.setMessage(company);
+		return rb;
 
 	}
 
+		
+	
+	
+
+	
+		
+//		@RequestMapping(value = "/uploadimg")
+//		@ResponseBody
+//		public ResponseBase uploadCompanyImg(
+//				@RequestParam MultipartFile[] file,
+//			//	@RequestBody Map<String, String> params,
+//				@RequestHeader (value="Authorization",required=false) String imgifo
+//				) {
+//		
+//			ResponseBase rb = new ResponseBase();
+//		  String[] strArray = null;   
+//
+//			  strArray = imgifo.split(",");
+//			  String id=strArray[0];
+//               String f=strArray[1];
+//               int companyId=Integer.parseInt(id);
+//               int flag = Integer.parseInt(f);
+//               
+//           System.out.println(flag);
+//         
+//		        CompanyModel company= companyDao.getById(companyId);
+//
+//			 if(company == null){
+//					rb.setState(1);
+//					rb.setMessage("图片插入错误，无法找到该公司");
+//					return rb;
+//				}
+//
+//				if(file == null){
+//					rb.setState(3);
+//					rb.setMessage("图片不可为空");
+//					return rb;
+//				}
+//
+//				 for (MultipartFile fileitem : file) {
+//					 
+//					 if(!fileitem.isEmpty()){
+//			 imgUploadService.saveCompanyImg(company,fileitem,flag);
+//				        } 
+//					
+//				}
+//				return null; 
+//			 
+//=======
+//		if (file == null) {
+//			rb.setState(3);
+//			rb.setMessage("图片不可为空");
+//			return rb;
+//>>>>>>> refs/heads/master
+//		}
+//
+//<<<<<<< HEAD
+//		
+		//得到公司详情
+		@RequestMapping(value = "/getcomTail")
+		@ResponseBody
+		public ResponseBase getcomTail(@RequestBody Map<String, String> params) {
+			String strComid = params.get("comid");
+			ResponseBase rb = new ResponseBase();
+
+			int comid = strComid == null ? 0 : Integer
+					.parseInt(strComid.trim());
+			
+			if(comid==0){
+				rb.setState(1);
+				return rb;
+			}
+	
+
+	      Map<String,Object>    map	=companyService.getcomTail(comid);
+			
+          rb.setMessage(map);
+
+	     
+			return rb;
+		}
+
+
+	
+
+	// 查询所有挑战赛已经公开的公司
+	@RequestMapping(value = "/comListByType")
+	@ResponseBody
+	public ResponseBase comListByType() {
+		ResponseBase rb = new ResponseBase();
+		List<CompanyModel> companyList = companyService.findAll();
+		for(int i=0;i<companyList.size();i++){
+			CompanyModel companyModel=companyList.get(i);
+  
+			int comid = companyModel.getId();
+
+			if (comid == 0) {
+				rb.setState(1);
+				return rb;
+			}
+
+			List<User> userList = userDao.getListByCompany(comid);
+			if(userList.size()==0){
+				
+				companyList.remove(companyModel);
+				i=i-1;
+				continue;
+			}
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<Quiz> quizList = new ArrayList<Quiz>();
+			for (User user : userList) {
+				// 做常量
+				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
+						ExamConstant.QUIZ_TYPE_CHALLENGE);
+				for (Quiz quiz : quizListUse) {
+					quizList.add(quiz);
+				}
+			}
+
+			if (quizList.size()==0) {
+				companyList.remove(companyModel);
+				i=i-1;
+				continue;
+			}
+		
+		String logoLocation= companyService.getImg(companyModel.getLogo());
+
+		companyModel.setLogo(logoLocation);
+		
+		
+		}
+		
+		rb.setMessage(companyList);
+           return rb;
+	}
+
+	
+	
 	@RequestMapping(value = "/getList")
 	@ResponseBody
 	public ResponseBase getList() {

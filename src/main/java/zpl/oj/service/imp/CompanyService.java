@@ -129,7 +129,7 @@ public class CompanyService {
 		String imgLogo = item.getLogo();
 
 		String coverLocation = getImg(imgCover);
-		String logoLocation = getImg(imgCover);
+		String logoLocation = getImg(imgLogo);
 
 		item.setCoverLocation(coverLocation);
 		item.setLogoLocation(logoLocation);

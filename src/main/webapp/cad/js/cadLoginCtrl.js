@@ -1,14 +1,19 @@
-OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',
-		function($scope, $http, Data) {
+
+OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',function($scope, $http, Data) {
 			// 手机的错误信息
 			$scope.errorMsg = {};
 			$scope.verifyQtn = {};
 
-			$scope.confirm = function() {
-				if ($scope.Lemail && $scope.Lpwd) {
-					// console.log("1");
-					var pwd = md5($scope.Lpwd);
-					console.log(pwd);
+
+
+	$scope.confirm = function () {
+        if ($scope.Lemail && $scope.Lpwd) {
+        	    //	console.log("1");
+        		var pwd = md5($scope.Lpwd);
+        		console.log(pwd);
+        	
+        	
+  
 
 					$http({
 						url : WEBROOT + "/tuser/confirm",
@@ -29,6 +34,8 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',
 
 						Data.setName($scope.message.username);
 						Data.setEmail($scope.Lemail);
+						
+						
 
 						// 修改
 						if ($scope.state == 0) {
@@ -42,6 +49,10 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',
 							$scope.errmsg = data.message.msg;
 
 						}
+						
+						var url = "#/cad/comlist";
+
+						 window.location.href=url;
 					}).error(function() {
 						console.log("err");
 						alert("网络错误");
