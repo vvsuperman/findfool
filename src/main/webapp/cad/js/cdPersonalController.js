@@ -4,26 +4,29 @@
 OJApp.controller('cdPersonalController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
 	
 
-	$scope.nav = 'cad/page/cadnav.html'
+	$scope.nav = 'cad/page/cadnav.html';
+	$scope.template= 'cad/page/cadPersonal.html';
+
+		
 	$scope.email=Data.email();
 	
-	$scope.testid="347";
-	$scope.username="韩亚全";
-	$scope.email="aaa";
-	$scope.school="bbb";
-$scope.company="ccc";
-$scope.blog="ddd";
-$scope.age="24";
-	$scope.tel="121121";
-	$scope.degree="fff";
-	$scope.gratime="ggg";
-	$scope.city="hhh";
-	$scope.gender="jjj";
-$scope.rollnumber="222";
-$scope.gpa="kkk";
-$scope.discipline="lll";
-	
-	console.log("js控制器已经执行");
+//	$scope.testid="347";
+//	$scope.username="韩亚全";
+//	$scope.email="aaa";
+//	$scope.school="bbb";
+//$scope.company="ccc";
+//$scope.blog="ddd";
+//$scope.age="24";
+//	$scope.tel="121121";
+//	$scope.degree="fff";
+//	$scope.gratime="ggg";
+//	$scope.city="hhh";
+//	$scope.gender="jjj";
+//$scope.rollnumber="222";
+//$scope.gpa="kkk";
+//$scope.discipline="lll";
+//	
+//	console.log("js控制器已经执行");
 	
 	
 	
@@ -41,7 +44,7 @@ $scope.discipline="lll";
 			}
 		}).success(function(data) {
 			$scope.map=data["message"];
-			$scope.testUser=$scope.map.testUser;
+			$scope.testuser=$scope.map.testuser;
 			$scope.inviteList=$scope.map.inviteList;
        
 		}).error(function() {
@@ -50,7 +53,7 @@ $scope.discipline="lll";
 		
 	}
 
-//	$scope.cdPersonalList();
+	$scope.cdPersonalList();
 
 	
 	$scope.showCompanyTest=function(company){
@@ -64,26 +67,49 @@ $scope.discipline="lll";
 		$http({
 			url : WEBROOT + "/personal/modify",
 			method : 'POST',
-			data : {
-				'tuid':$scope.testid,
-				'username':$scope.username,'email':$scope.email,'school':$scope.school,'company':$scope.company,
-				'blog':$scope.blog,'age':$scope.age,'tel':$scope.tel,
-				'degree':$scope.degree,'gratime':$scope.gratime,'city':$scope.city,'gender':$scope.gender,
-				'rollnumber':$scope.rollnumber,'gpa':$scope.gpa,'discipline':$scope.discipline
-			}
+			data :$scope.testuser,
+//				'tuid':$scope.testid,
+//				'username':$scope.username,'email':$scope.email,'school':$scope.school,'company':$scope.company,
+//			'blog':$scope.blog,'age':$scope.age,'tel':$scope.tel,
+//				'degree':$scope.degree,'gratime':$scope.gratime,'city':$scope.city,'gender':$scope.gender,
+//				'rollnumber':$scope.rollnumber,'gpa':$scope.gpa,'discipline':$scope.discipline
+			
 		}).success(function(data) {
 			$scope.map=data["message"];
-			$scope.testUser=$scope.map.testUser;
+			$scope.testuser=$scope.map.testuser;
 			$scope.inviteList=$scope.map.inviteList;
        
 		}).error(function() {
 			console.log("get data failed");
 		})
 		
+	};
+	
+	
+	//$scope.cdPersonalModify();
+
+	//判断是否显示元素
+	$scope.show=true;
+	
+	$scope.ifShow=function(param){
+		if(param==1){
+		$scope.show=false;
+		}else if(param==2){
+			$scope.show=true;
+			
+		}
 	}
 	
+
 	
-	$scope.cdPersonalModify();
+
+		
+	
+	
+	
+	
+	
+	
 
 
 	

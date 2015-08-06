@@ -127,11 +127,11 @@ public class PersonalController {
 		}
         
         
-	   testuserDao.updateTestuserById(testuser);
+	       testuserDao.updateTestuserById(testuser);
 		
 
 		System.out.println();
-		return null;
+		return rb;
 
 	}
 	

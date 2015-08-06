@@ -46,7 +46,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 controller: 'cadRankController'
             }).   
             when('/cad/personal', {  //客户端主页
-                templateUrl: 'cad/page/cadPersonal.html',
+                templateUrl: 'cad/page/pagenav.html',
                 controller: 'cdPersonalController'
             }).
           

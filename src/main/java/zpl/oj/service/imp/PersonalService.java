@@ -23,13 +23,13 @@ public class PersonalService {
 
 	public Map<String, Object> findAllList(String email) {
 		
-       Testuser testUser=testuserDao.findTuserByEmail(email);
+       Testuser testuser=testuserDao.findTuserByEmail(email);
 		                   
-		List<Invite>     inviteList    =  inviteDao.getInviteByUid(testUser.getTuid());
+		List<Invite>     inviteList    =  inviteDao.getInviteByUid(testuser.getTuid());
 	
 		  Map<String,Object> map=new HashMap<String,Object>();
 		  
-		map.put("testUser", testUser);
+		map.put("testuser", testuser);
 		map.put("inviteList",inviteList);
 		
 		
