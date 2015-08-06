@@ -5,8 +5,10 @@ OJApp.controller('cadNavController',['$scope','$http','CadData','Data',function 
 	
 
 	$scope.cadNav=function(){
-		$scope.username=Data.name();
-		$scope.email=Data.email();
+		$scope.username=CadData.getTestname();;
+		$scope.email=CadData.getEmail();
+		
+		
 	}
 
 	$scope.cadNav();

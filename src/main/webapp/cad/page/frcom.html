@@ -1,36 +1,37 @@
 <link rel="stylesheet" href="cad/css/index.css" />
 
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+  </ol>
 
-<nav class="navbar navbar-default">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-      <ul class="nav navbar-nav">
-        <li><a href="#/cad/comlist">公司挑战<span class="sr-only"></span></a></li>
-        <li class="active"><a href="#/cad/frcom">FR挑战赛</a></li>
-        <li><a href="#">练习</a></li>
-        <li><a href="#/cad/rank">排行榜</a></li>
-        <li><a href="#/">企业入口</a></li>
-
-      </ul>
-
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-
-    <div class="jumbotron">
-        <div class="container text-center">
-
-
-        </div> 
-
+      <img src="resource/static/comlistbg.jpg" alt="...">
+      <div class="carousel-caption">
+      </div>
     </div>
+    <div class="item">
+      <img src="resource/static/dpbg.jpg" alt="...">
+      <div class="carousel-caption">
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
 
 
@@ -41,12 +42,20 @@
             <div class="underway" >
 
                 <div class="squad-title">
-                    <h3>已开始</h3>
+                    <h3>已开始1</h3>
                 </div>
-
                 
-               
-
+                  <div class="media" style="padding-top: 20px" ng-repeat="x in frQuizBegin"  >
+                    <div class="media-left col-md-1" >
+                        <a href="#">
+                       	 <img class="media-object" src="resource/static/android.png" alt="android" style="width:50px">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading"><a href="#">{{x.name}}</a></h5>
+                    </div>
+                </div>
+                
             </div>
             <div class="comesoon">
                 <div class="squad-title">
@@ -54,27 +63,16 @@
                 </div>
                 
                  
-                <div class="media">
+                <div class="media" style="padding-top: 20px" ng-repeat="x  in  frQuizNaver">
                     <div class="media-left col-md-1">
                         <a href="">
-                       	 <img class="media-object" src="resource/static/object_c.png" alt="object_c">
+                       	 <img class="media-object" src="resource/static/object_c.png" alt="object_c"  style="width:50px">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h5 class="media-heading"><a href="">ios挑战赛</a></h5>
+                        <h5 class="media-heading"><a href="">{{x.name}}</a></h5>
                     </div>
                 </div> 
-                 
-                <div class="media">
-                    <div class="media-left col-md-1" >
-                        <a href="#">
-                       	 <img class="media-object" src="resource/static/android.png" alt="android">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h5 class="media-heading"><a href="#">android挑战赛</a></h5>
-                    </div>
-                </div>
                 
             </div>
 

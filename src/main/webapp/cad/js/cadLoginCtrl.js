@@ -1,5 +1,5 @@
 
-OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',function($scope, $http, Data) {
+OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data','CadData',function($scope, $http, Data,CadData) {
 			// 手机的错误信息
 			$scope.errorMsg = {};
 			$scope.verifyQtn = {};
@@ -32,9 +32,8 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'Data',function($scope, $h
 						var name = $scope.Lname;
 						$scope.message = data["message"];
 
-						Data.setName($scope.message.username);
-						Data.setEmail($scope.Lemail);
-						
+						CadData.setEmail($scope.Lemail);
+						CadData.setTestname($scope.message.username)
 						
 
 						// 修改
