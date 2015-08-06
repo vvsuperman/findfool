@@ -65,7 +65,7 @@ $scope.discipline="lll";
 			url : WEBROOT + "/personal/modify",
 			method : 'POST',
 			data : {
-				'testid':$scope.testid,
+				'tuid':$scope.testid,
 				'username':$scope.username,'email':$scope.email,'school':$scope.school,'company':$scope.company,
 				'blog':$scope.blog,'age':$scope.age,'tel':$scope.tel,
 				'degree':$scope.degree,'gratime':$scope.gratime,'city':$scope.city,'gender':$scope.gender,

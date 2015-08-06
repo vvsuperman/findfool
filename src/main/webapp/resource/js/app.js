@@ -34,7 +34,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 controller: 'challengeListController'
             }).
             when('/cad/eachcom/:comid', {  //客户公司详情
-                templateUrl: 'cad/page/eachcom.html',
+                templateUrl: 'cad/page/pagenav.html',
                 controller: 'eachComController'
             }).
             when('/cad/frcom', {  //客户端主页
@@ -42,7 +42,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 controller: 'frComController'
             }). 
             when('/cad/rank', {  //客户端主页
-                templateUrl: 'cad/page/rank.html',
+                templateUrl: 'cad/page/pagenav.html',
                 controller: 'cadRankController'
             }).   
             when('/cad/personal', {  //客户端主页

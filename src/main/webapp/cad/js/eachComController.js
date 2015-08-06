@@ -3,6 +3,11 @@
  */
 OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams','Data',function ($scope,$http,CadData,$routeParams,Data) {
 
+	
+	$scope.nav = 'cad/page/cadnav.html';
+	$scope.template= 'cad/page/eachcom.html';
+	
+	
 	var comid = $routeParams.comid;
 console.log(comid);
 	$scope.getcomTail=function(){
