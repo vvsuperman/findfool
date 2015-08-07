@@ -72,16 +72,12 @@ public class PersonalController {
 	public ResponseBase modify(@RequestBody Testuser testuser) {
 		ResponseBase rb = new ResponseBase();
    
-		if((testuser.getEmail()==null)&&(testuser.getUsername()==null)){
+		if(testuser.getEmail()==null){
 			rb.setState(1);
-			rb.setMessage("邮箱不能为空或用户名不能为空");	
+			rb.setMessage("邮箱不能为空");	
 		}
-		if(testuser.getTel()==null){
-			rb.setState(2);
-			rb.setMessage("手机号码不能为空");			
-		}
+	
 	    testuserDao.updateTestuserById(testuser);
-		System.out.println();
 		return rb;
 
 	}

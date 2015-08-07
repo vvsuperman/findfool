@@ -41,28 +41,28 @@ public class PersonalService {
 
 	public Map<String, Object> findAllList(String email) {
 		
-		List<Challenge> myChallenge=new ArrayList<Challenge>();
-       Testuser testuser=testuserDao.findTuserByEmail(email);
-		                   
-		List<Invite>     inviteList    =  inviteDao.getInviteByUid(testuser.getTuid());
-	for (Invite invite : inviteList) {
-		Challenge challenge=new Challenge();
-	    User  user= userDao.getUserIdByUid(invite.getHrid());
-	    CompanyModel  company = companyDao.getByUid(user.getCompanyId());
-	    Quiz quiz=quizDao.getQuiz(invite.getTestid());
-	    challenge.setChallengeScore(invite.getScore());
-	    if(company!=null){
-	    	
-	        challenge.setChallengeCompany(company.getName());	
-	    }
-	    challenge.setChallengeTime(invite.getFinishtime());
-	    if(quiz.getExtraInfo()!=null){
-	    	
-	    	challenge.setChallengeName(quiz.getExtraInfo());
-	    }
-	    
-	     myChallenge.add(challenge);
-		
+		List<Challenge> myChallenge = new ArrayList<Challenge>();
+		Testuser testuser = testuserDao.findTuserByEmail(email);
+
+		List<Invite> inviteList = inviteDao.getInviteByUid(testuser.getTuid());
+		for (Invite invite : inviteList) {
+			Challenge challenge = new Challenge();
+			User user = userDao.getUserIdByUid(invite.getHrid());
+			CompanyModel company = companyDao.getByUid(user.getCompanyId());
+			Quiz quiz = quizDao.getQuiz(invite.getTestid());
+			challenge.setChallengeScore(invite.getScore());
+			if (company != null) {
+
+				challenge.setChallengeCompany(company.getName());
+			}
+			challenge.setChallengeTime(invite.getFinishtime());
+			if (quiz.getExtraInfo() != null) {
+
+				challenge.setChallengeName(quiz.getExtraInfo());
+			}
+
+			myChallenge.add(challenge);
+
 	}
 		
 		
