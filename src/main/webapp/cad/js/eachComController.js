@@ -22,7 +22,6 @@ console.log(comid);
 			$scope.map=data["message"];
 			$scope.companyTail=$scope.map.company;
 			$scope.quizList=$scope.map.quizList;
-			console.log($scope.quizList[0].extraInfo);
 			
 			                      
 	   console.log($scope.companyTail.name);

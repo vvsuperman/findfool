@@ -108,6 +108,9 @@ public class CompanyController {
 	@RequestMapping(value = "/create")
 	@ResponseBody
 	public ResponseBase create(@RequestBody Map<String, String> params) {
+		
+		ResponseBase rb = new ResponseBase();
+		
 		String name = RequestUtil.getStringParam(params, "name", true);
 		String tel = RequestUtil.getStringParam(params, "mobile", true);
 		String address = RequestUtil.getStringParam(params, "address", true);
@@ -120,11 +123,17 @@ public class CompanyController {
 		company.setWebsite(website);
 		company.setDescription(description);
 		company.setTel(tel);
+		if(companyDao.findByName(name)!=null){
+			rb.setState(1);
+			rb.setMessage("公司已存在");
+			return rb;
+		}
+		
+		
 		companyDao.add(company);
 		CompanyModel companymodel = companyService
 				.findByName(company.getName());
 
-		ResponseBase rb = new ResponseBase();
 		rb.setMessage(companymodel);
 
 		return rb;
@@ -173,11 +182,10 @@ public class CompanyController {
 		String website = RequestUtil.getStringParam(params, "website", true);
 		String description = RequestUtil.getStringParam(params, "description",
 				true);
-		CompanyModel company = new CompanyModel();
-		company.setId(id);
+		CompanyModel company = companyDao.getById(id);
 		company.setName(name);
-		// company.setCover(cover);
-		// company.setLogo(logo);
+//	    company.setCover(cover);
+//		company.setLogo(logo);
 		company.setAddress(address);
 		company.setTel(tel);
 		company.setWebsite(website);
@@ -194,8 +202,11 @@ public class CompanyController {
 	@ResponseBody
 	public ResponseBase findAll() {
 		List<CompanyModel> companyList = companyService.findAll();
-
 		ResponseBase rb = new ResponseBase();
+	    for(CompanyModel company:companyList){
+	    	String logoLocation = companyService.getImg(company.getLogo());
+			company.setLogo(logoLocation);
+	    }
 		rb.setMessage(companyList);
 
 		return rb;
@@ -308,58 +319,6 @@ public class CompanyController {
 
 	
 		
-//		@RequestMapping(value = "/uploadimg")
-//		@ResponseBody
-//		public ResponseBase uploadCompanyImg(
-//				@RequestParam MultipartFile[] file,
-//			//	@RequestBody Map<String, String> params,
-//				@RequestHeader (value="Authorization",required=false) String imgifo
-//				) {
-//		
-//			ResponseBase rb = new ResponseBase();
-//		  String[] strArray = null;   
-//
-//			  strArray = imgifo.split(",");
-//			  String id=strArray[0];
-//               String f=strArray[1];
-//               int companyId=Integer.parseInt(id);
-//               int flag = Integer.parseInt(f);
-//               
-//           System.out.println(flag);
-//         
-//		        CompanyModel company= companyDao.getById(companyId);
-//
-//			 if(company == null){
-//					rb.setState(1);
-//					rb.setMessage("图片插入错误，无法找到该公司");
-//					return rb;
-//				}
-//
-//				if(file == null){
-//					rb.setState(3);
-//					rb.setMessage("图片不可为空");
-//					return rb;
-//				}
-//
-//				 for (MultipartFile fileitem : file) {
-//					 
-//					 if(!fileitem.isEmpty()){
-//			 imgUploadService.saveCompanyImg(company,fileitem,flag);
-//				        } 
-//					
-//				}
-//				return null; 
-//			 
-//=======
-//		if (file == null) {
-//			rb.setState(3);
-//			rb.setMessage("图片不可为空");
-//			return rb;
-//>>>>>>> refs/heads/master
-//		}
-//
-//<<<<<<< HEAD
-//		
 		//得到公司详情
 		@RequestMapping(value = "/getcomTail")
 		@ResponseBody
@@ -404,10 +363,10 @@ public class CompanyController {
 			}
 
 			List<User> userList = userDao.getListByCompany(comid);
-			if(userList.size()==0){
-				
+			if (userList.size() == 0) {
+
 				companyList.remove(companyModel);
-				i=i-1;
+				i = i - 1;
 				continue;
 			}
 
@@ -422,21 +381,20 @@ public class CompanyController {
 				}
 			}
 
-			if (quizList.size()==0) {
+			if (quizList.size() == 0) {
 				companyList.remove(companyModel);
-				i=i-1;
+				i = i - 1;
 				continue;
 			}
-		
-		String logoLocation= companyService.getImg(companyModel.getLogo());
 
-		companyModel.setLogo(logoLocation);
-		
-		
+			String logoLocation = companyService.getImg(companyModel.getLogo());
+
+			companyModel.setLogo(logoLocation);
+
 		}
-		
+
 		rb.setMessage(companyList);
-           return rb;
+		return rb;
 	}
 
 	

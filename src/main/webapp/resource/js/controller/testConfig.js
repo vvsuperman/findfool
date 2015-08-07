@@ -173,19 +173,22 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     }
     
     
+    $scope.publictest={};
+    $scope.publictest.flag=0;
+    
     //将挑战赛设为公有
     $scope.setPublic = function(){
     		$http({
                 url: WEBROOT+"/test/setpub",
                 method: 'POST',
-        	    data: {"testid": $scope.tid,"publicFlag":$scope.publicFlag}
+        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag}
             }).success(function (data) {
             	if(data.state ==0){
             		if(data.message!=""){
-            			$scope.pubUrl = "http://foolrank.com/challenge/"+data.message;	
-            			$scope.publicFlag =1;
+            			$scope.publictest.url = "http://foolrank.com/challenge/"+data.message;	
+            			$scope.publictest.flag =1;
             		}else{
-            			$scope.publicFlag =0;
+            			$scope.publictest.flag =0;
             		}
             	}else{
             		console.log(data.message);
@@ -197,6 +200,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     	
     }
     
+   
     
     //查看挑战赛是否是公有,若为空则给出
     $scope.checkPublic = function(){
@@ -206,11 +210,11 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     	    data: {"testid": $scope.tid}
         }).success(function (data) {
         	if(data.state ==0){
-        		if(data.message!=""){
-        			$scope.publicFlag = "http://foolrank.com/challenge/#/"+data.message;	
-        			$scope.publicFlag =0;
+        		if(typeof(data.message) !="undefined" && data.message!=""){
+        			$scope.publictest.url = "http://foolrank.com/challenge/#/"+data.message;	
+        			$scope.publictest.flag =1;
         		}else{
-        			$scope.publicFlag =1;
+        			$scope.publictest.flag =0;
         		}
         	}else{
         		console.log(data.message);

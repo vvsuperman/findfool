@@ -345,7 +345,11 @@ public class ReportService {
 	 * 按完成时间倒序排列
 	 * */
 	public List<ResponseInvite> getInviteReport(int testid,int state){
-		return inviteDao.getOrderInviteByTid(testid,state);
+		List<ResponseInvite> invites =  inviteDao.getOrderInviteByTid(testid,state);
+		for(ResponseInvite invite:invites){
+				getInviteScore(invite);
+		}
+		return invites;
 	}
 
 	//生成编程题的用户答案

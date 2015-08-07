@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="cad/css/index.css" />
 
-    <div class="jumbotron" style="min-height: 350px; background-image: url('{{companyTail.coverLocation}}');">
+    <div class="jumbotron" style="background-image: url('{{companyTail.coverLocation}}');">
 
     </div>
 
@@ -44,16 +44,15 @@
                         
                     <div class="com-activities" ng-repeat="quiz in quizList">
                         <h2>
-                            {{quiz.extraInfo}}
+                            {{quiz.name}}
                         </h2>
 
                         <p style="padding-bottom: 20px">{{quiz.description}}</p>
                         <div  >
-                         <a href=""  ng-click="isLogin()"><div class="enter text-center "  style="width:50%;margin: 0 auto;">
-
-                        开始挑战
-                    </div></a>
-                             </div>
+	                         <a href=""  ng-click="isLogin()"><div class="enter text-center "  style="width:50%;margin: 0 auto;">
+	                          开始挑战
+	                        </a>
+                        </div>
 
                     </div>
                 </div>

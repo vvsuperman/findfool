@@ -21,7 +21,7 @@ public interface QuizDao {
 	Quiz getQuizByKey(String signedkey);
 	
 
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status,signed_key as signedKey "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
 	Quiz getQuiz(int tid);
 
@@ -50,7 +50,7 @@ public interface QuizDao {
 
 	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
 			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
-			+ "UUID = #{uuid},  EMAILS = #{emails}"
+			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey}"
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
