@@ -45,13 +45,8 @@ import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 @RequestMapping("/personal")
 public class PersonalController {
 	
-	
-	
 	@Autowired
 	private TestuserDao testuserDao;
-
-	
-	
 
 	@Autowired
 	private CompanyService companyService;
@@ -71,76 +66,23 @@ public class PersonalController {
 
 	}
 	
-	
-	
+//根据用户id修改用户信息
 	@RequestMapping(value ="/modify")
 	@ResponseBody
 	public ResponseBase modify(@RequestBody Testuser testuser) {
 		ResponseBase rb = new ResponseBase();
-//必须传过来用户的id
-//		
-//        int tuid =RequestUtil.getIntParam(params,"testid");
-//
-//		String username = RequestUtil.getStringParam(params, "username", true);
-//		String email = RequestUtil.getStringParam(params, "email", true);
-//		String school = RequestUtil.getStringParam(params, "school", true);
-//		String company = RequestUtil.getStringParam(params, "company", true);
-//		String blog = RequestUtil.getStringParam(params, "blog",true);
-//		String tel = RequestUtil.getStringParam(params, "tel", true);
-//		String degree = RequestUtil.getStringParam(params, "degree", true);
-//		String gratime = RequestUtil.getStringParam(params, "gratime", true);
-//		String city = RequestUtil.getStringParam(params, "city", true);
-//		String gender = RequestUtil.getStringParam(params, "gender",true);
-//		String rollnumber = RequestUtil.getStringParam(params, "rollnumber", true);
-//		String gpa = RequestUtil.getStringParam(params, "gpa", true);
-//		String discipline = RequestUtil.getStringParam(params, "discipline", true);
-//        int age =RequestUtil.getIntParam(params,"age");
-//////		
-//                        Testuser  testuser             = testuserDao.findTestuserById(tuid);
-//                        
-//                        testuser.setAge(age);
-//                        testuser.setBlog(blog);
-//                        testuser.setCity(city);
-//                        testuser.setCompany(company);
-//                        testuser.setDegree(degree);
-//                        testuser.setDiscipline(discipline);
-//                        testuser.setEmail(email);
-//                        testuser.setGender(gender);
-//                        testuser.setGpa(gpa);
-//                        testuser.setGratime(gratime);
-//                        testuser.setRollnumber(rollnumber);
-//                        testuser.setSchool(school);
-//                        testuser.setTel(tel);
-//                        testuser.setUsername(username);
-        
-        
-		if((testuser.getEmail()==null)&&(testuser.getUsername()==null)){
+   
+		if(testuser.getEmail()==null){
 			rb.setState(1);
-			rb.setMessage("邮箱不能为空或用户名不能为空");
-			
-			
+			rb.setMessage("邮箱不能为空");	
 		}
-		if(testuser.getTel()==null){
-			rb.setState(2);
-			rb.setMessage("手机号码不能为空");
-				
-		}
-        
-        
-	   testuserDao.updateTestuserById(testuser);
-		
-
-		System.out.println();
-		return null;
+	
+	    testuserDao.updateTestuserById(testuser);
+		return rb;
 
 	}
 	
 
 	
 	
-	
-//	'username':$scope.username,'email':$scope.email,'school':$scope.school,'company':$scope.company,
-//	'blog':$scope.blog,'age':$scope.age,'tel':$scope.tel,
-//	'degree':$scope.degree,'gratime':$scope.gratime,'city':$scope.city,'gender':$scope.gender,
-//	'rollnumber':$scope.rollnumber,'gpa':$scope.gpa,'discipline':$scope.discipline
 }

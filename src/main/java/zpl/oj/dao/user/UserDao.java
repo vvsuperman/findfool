@@ -31,7 +31,7 @@ public interface UserDao {
 			+ "user where email = #{email}")
 	User getUserIdByEmail(String email);
 
-	@Select("select uid,fname,lname,email,company,privilege,pwd,link,age,degree,school,register_date as registerDate,last_login_date as lastLoginDate,invited_left,invited_num,state,tel from "
+	@Select("select uid,fname,lname,email,company,companyId,privilege,pwd,link,age,degree,school,register_date as registerDate,last_login_date as lastLoginDate,invited_left,invited_num,state,tel from "
 			+ "user where uid = #{uid}")
 	User getUserIdByUid(int uid);
 

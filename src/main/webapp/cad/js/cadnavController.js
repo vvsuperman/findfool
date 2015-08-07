@@ -2,14 +2,9 @@
  * 客户端首页上部分控制器
  */
 OJApp.controller('cadNavController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
-	
 
-	$scope.cadNav=function(){
-		$scope.username=Data.name();
-		$scope.email=Data.email();
-	}
-
-	$scope.cadNav();
+		$scope.username=CadData.getTestname();
+		$scope.email=CadData.getEmail();
 
 	$scope.isLogin=function(param){
 		if(param==1){
@@ -27,7 +22,6 @@ OJApp.controller('cadNavController',['$scope','$http','CadData','Data',function 
 			}		
 		}
 
-		
 	}
 	
 	$scope.loginOut=function(){

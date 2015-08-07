@@ -4,7 +4,7 @@
 OJApp.controller('frComController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
 	$scope.nav = 'cad/page/cadnav.html'
-		$scope.template = 'cad/page/comlist.html';
+		$scope.template = 'cad/page/frcom.html';
 	
 	
 	$scope.getFrChallage=function(){
@@ -14,11 +14,11 @@ OJApp.controller('frComController',['$scope','$http','CadData',function ($scope,
 			data : {
 			
 			}
-		}).success(function(data) {
-//			$scope.companyTail = data["message"];
-			$scope.frQuizList=data["message"];
-			
-			                      
+		}).success(function(data) {				
+			$scope.map=data["message"];
+			$scope.frQuizNaver=$scope.map.frQuizNaver;
+			$scope.frQuizBegin=$scope.map.frQuizBegin;
+			$scope.frQuizOver=$scope.map.frQuizOver;
 		}).error(function() {
 			console.log("get data failed");
 		})
