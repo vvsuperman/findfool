@@ -7,13 +7,14 @@
   </div>
 
 <div class="container" style="margin-top:5%">
-<div class="row">
-<div class="panel panel-default panel-info col-md-4" id="panel">
-    &nbsp;&nbsp;<div class="panel-heading">{{testuser.username}}</div>
+<div class="row ">
+<div class="col-md-3">
+<div class="panel panel-default panel-info" id="panel">
+ <div class="panel-heading">个人信息</div>
   
   <div class="panel-body ">
    <ul class="list-group"  ng-show="show">
-     <li class="list-group-item"  style="text-align:center;">个人信息</li>
+     <li class="list-group-item" >姓名：{{testuser.username}}</li>
      <li class="list-group-item">学校：{{testuser.school}}
      </li>
      
@@ -38,17 +39,17 @@
      <ul class="list-group" ng-show="!show">
      <li class="list-group-item"  style="text-align:center;">修改个人信息</li>
     <br/>
-         <input type="formenter" class="form-control" placeholder="姓名" value="{{testuser.username}}" >
-     <input type="formenter" class="form-control" placeholder="学校" value="{{testuser.school}}" style="margin-top:5px">
-     <input type="formenter"  class="form-control"  placeholder="公司" value="{{testuser.company}}" style="margin-top:5px">
+         <input type="text" class="form-control" placeholder="姓名"  ng-model="testuser.username" >
+     <input type="text" class="form-control" placeholder="学校"   ng-model="testuser.school" style="margin-top:5px">
+     <input type="text"  class="form-control"  placeholder="公司" ng-model="testuser.company" style="margin-top:5px">
   
-     <input type="formenter"  class="form-control"  placeholder="手机" value="{{testuser.tel}}" style="margin-top:5px">
-     <input type="formenter"  class="form-control"  placeholder="邮箱" value="{{testuser.email}}" style="margin-top:5px">
-     <input type="formenter"  class="form-control"  placeholder="博客" value="{{testuser.blog}}" style="margin-top:5px">
+     <input type="text"  class="form-control"  placeholder="手机" ng-model="testuser.tel" style="margin-top:5px">
+     <input type="text"  class="form-control"  placeholder="邮箱" ng-model="testuser.email" style="margin-top:5px">
+     <input type="text"  class="form-control"  placeholder="博客" ng-model="testuser.blog" style="margin-top:5px">
      
-     <input type="formenter"  class="form-control"  placeholder="年龄" value="{{testuser.age}}" style="margin-top:5px">
-     <input type="formenter" class="form-control"  placeholder="学位" value="{{testuser.degree}}" style="margin-top:5px">
-     <input type="formenter" class="form-control" placeholder="地址" value="{{testuser.city}}" style="margin-top:5px">
+     <input type="text"  class="form-control"  placeholder="年龄" ng-model="testuser.age" style="margin-top:5px">
+     <input type="text" class="form-control"  placeholder="学位" ng-model="testuser.degree" style="margin-top:5px">
+     <input type="text" class="form-control" placeholder="地址" ng-model="testuser.city" style="margin-top:5px">
     </ul>
       
       
@@ -59,32 +60,37 @@
       
     <div>
      <button class="btn btn-primary " type="reset" ng-click="ifShow(2)" ng-show="!show">返回</button>&nbsp;&nbsp;&nbsp;&nbsp;
-      <button class="btn btn-primary " type="reset" ng-click="ifShow(1)" ng-show="show">修改</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-primary btn-lg btn-block"  type="reset" ng-click="ifShow(1)" ng-show="show">修改</button>&nbsp;&nbsp;&nbsp;&nbsp;
       <button class="btn btn-success " type="submit" ng-show="!show" ng-click="cdPersonalModify()">确定</button>
     </div>
   </div>
  </div>
- 
- 
- 
- 
-
-<div class="panel panel-default panel-success col-md-7"  style="margin-left:15px">
-    <div class="panel-heading">挑战纪录</div>
-	<div class="panel-body">
-		<p>什么时间挑战了什么，获得了什么。。。。。自行添加
-		</p>
-		<ul class="list-group">
-			<li class="list-group-item">挑战赛：</li>
-			<li class="list-group-item">公司：</li>
-			<li class="list-group-item">挑战时间：</li>
-			<li class="list-group-item">得分：</li>
-			<li class="list-group-item">排名：</li>
-		</ul>
-	</div>
-	<div class="panel-footer"></div>
 </div>
 
+<div   class="col-md-8"  style="margin-left:15px">
+<div class="panel panel-default panel-success " >
+
+    <div class="panel-heading">挑战纪录</div>
+   
+	<table  class="table table-bordered"style="text-align:center;">
+	<tr >
+	<td >挑战赛</td>
+			<td >公司</td>
+			<td>挑战时间</td>
+			<td >得分</td>
+			<td >排名</td>
+	</tr>
+		<tr ng-repeat="my in  myChallenge" >
+			<td >{{my.challengeName}}</td>
+			<td >{{my.challengeCompany}}</td>
+			<td>{{my.challengeTime}}</td>
+			<td >{{my.challengeScore}}</td>
+			<td ></td>
+		</tr>
+	  </table>
+	<div class="panel-footer"></div>
+</div>
+</div>
  
 
 

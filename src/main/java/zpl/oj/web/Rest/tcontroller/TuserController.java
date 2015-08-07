@@ -79,10 +79,9 @@ public class TuserController {
 		@ResponseBody
 		public ResponseBase userLogin(@RequestBody RequestUserLogin request) {
 			ResponseBase rb = new ResponseBase();
-			Testuser u = new Testuser();
 			ResponseMessage msg = new ResponseMessage();
 	
-			u = tuserService.findTuserByEmail(request.getEmail());
+			Testuser u = tuserService.findTuserByEmail(request.getEmail());
 			
 			if (u== null) {
 				msg.setMsg("usernotexist");
@@ -103,8 +102,10 @@ public class TuserController {
 				rb.setMessage(u);
 				rb.setState(0);
 			//	rb.setToken(securityService.computeToken(u));
-			}
+			
+			
 			return rb;
+			}
 		}
 		
 

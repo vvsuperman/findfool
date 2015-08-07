@@ -1,41 +1,19 @@
 /**
  * 客户端首页控制器
  */
-OJApp.controller('cdPersonalController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
+OJApp.controller('cadPersonalController',['$scope','$http','CadData','Data','CadData',function ($scope,$http,CadData,Data,CadData) {
 	
 
 	$scope.nav = 'cad/page/cadnav.html';
 	$scope.template= 'cad/page/cadPersonal.html';
-
+console.log("执行了第1步");
+	
 		
-	$scope.email=Data.email();
+	$scope.email=CadData.getEmail();
+	console.log($scope.email);
+	console.log("执行了第2步");
 	
-//	$scope.testid="347";
-//	$scope.username="韩亚全";
-//	$scope.email="aaa";
-//	$scope.school="bbb";
-//$scope.company="ccc";
-//$scope.blog="ddd";
-//$scope.age="24";
-//	$scope.tel="121121";
-//	$scope.degree="fff";
-//	$scope.gratime="ggg";
-//	$scope.city="hhh";
-//	$scope.gender="jjj";
-//$scope.rollnumber="222";
-//$scope.gpa="kkk";
-//$scope.discipline="lll";
-//	
-//	console.log("js控制器已经执行");
-	
-	
-	
-	
-	
-	
-	
-	
-	$scope.cdPersonalList=function(){
+	$scope.cadPersonalList=function(){
 		$http({
 			url : WEBROOT + "/personal/findAllList",
 			method : 'POST',
@@ -45,7 +23,7 @@ OJApp.controller('cdPersonalController',['$scope','$http','CadData','Data',funct
 		}).success(function(data) {
 			$scope.map=data["message"];
 			$scope.testuser=$scope.map.testuser;
-			$scope.inviteList=$scope.map.inviteList;
+			$scope.myChallenge=$scope.map.myChallenge;
        
 		}).error(function() {
 			console.log("get data failed");
@@ -53,7 +31,7 @@ OJApp.controller('cdPersonalController',['$scope','$http','CadData','Data',funct
 		
 	}
 
-	$scope.cdPersonalList();
+	$scope.cadPersonalList();
 
 	
 	$scope.showCompanyTest=function(company){
@@ -75,10 +53,12 @@ OJApp.controller('cdPersonalController',['$scope','$http','CadData','Data',funct
 //				'rollnumber':$scope.rollnumber,'gpa':$scope.gpa,'discipline':$scope.discipline
 			
 		}).success(function(data) {
-			$scope.map=data["message"];
-			$scope.testuser=$scope.map.testuser;
-			$scope.inviteList=$scope.map.inviteList;
-       
+//			$scope.map=data["message"];
+//			$scope.testuser=$scope.map.testuser;
+//			$scope.inviteList=$scope.map.inviteList;
+			var url = "#/cad/personal";
+			 window.location.href=url;
+			 $scope.ifShow();
 		}).error(function() {
 			console.log("get data failed");
 		})
@@ -92,12 +72,14 @@ OJApp.controller('cdPersonalController',['$scope','$http','CadData','Data',funct
 	$scope.show=true;
 	
 	$scope.ifShow=function(param){
-		if(param==1){
-		$scope.show=false;
-		}else if(param==2){
-			$scope.show=true;
-			
-		}
+//		if(param==1){
+//		$scope.show=false;
+//		}else if(param==2){
+//			$scope.show=true;
+//			
+//		}
+		
+		$scope.show==true?$scope.show=false:$scope.show=true;
 	}
 	
 
