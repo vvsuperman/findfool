@@ -44,47 +44,46 @@ public class Quiz implements Serializable {
 	 * 这个里面是测试报告发送地址的邮件，使用逗号隔开,
 	 */
 	private String emails;
-	
+
 	/**
 	 * 测试类型：0:私有;1:挑战赛
 	 */
 	private int type;
-	
+
 	/**
 	 * 挑战赛Logo
 	 */
 	private String logo;
-	
+
 	/**
 	 * 挑战赛描述
 	 */
 	private String description;
-	
+
 	/**
 	 * 开始时间
 	 */
 	private String startTime;
-	
+
 	/**
 	 * 结束时间
 	 */
 	private String endTime;
-	
+
 	/**
 	 * 挑战赛签名
 	 */
 	private String signedKey;
-	
+
 	/**
 	 * 创建时间
 	 */
 	private String createTime;
-	
+
 	/**
 	 * 状态：0:未审核；1:未开始；2:进行中；3:已结束
 	 */
 	private int status;
-	
 
 	// 统计数据，方便向前端传递，非数据库字段
 	// 统计数据：题量
@@ -93,6 +92,11 @@ public class Quiz implements Serializable {
 	private int invitedNum;
 	// 统计数据：完成数
 	private int finishedNum;
+
+	// 作为挑战赛时候的开始时间
+	private String pubStartTime;
+	// 作为挑战赛时候的结束时间
+	private String pubEndTime;
 
 	public int getQuestionNum() {
 		return questionNum;
@@ -244,6 +248,22 @@ public class Quiz implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getPubStartTime() {
+		return pubStartTime;
+	}
+
+	public void setPubStartTime(String pubStartTime) {
+		this.pubStartTime = pubStartTime;
+	}
+
+	public String getPubEndTime() {
+		return pubEndTime;
+	}
+
+	public void setPubEndTime(String pubEndTime) {
+		this.pubEndTime = pubEndTime;
 	}
 
 }

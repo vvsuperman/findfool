@@ -50,7 +50,8 @@ public interface QuizDao {
 
 	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
 			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
-			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey}"
+			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey} "
+			+ "openCamera = #{openCamera},  pubstarttime = #{pubStartTime}, pubendtime=#{pubEndTime}"
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
