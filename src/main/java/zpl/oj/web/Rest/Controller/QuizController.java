@@ -372,6 +372,7 @@ public class QuizController {
 		int publicFlag = RequestUtil.getIntParam(param, "publicFlag", -1);
 		String pubStartTime = RequestUtil.getStringParam(param, "st", true);
 		String pubEndTime = RequestUtil.getStringParam(param, "et", true);
+		int openCamera = RequestUtil.getIntParam(param, "oc", 0);
 		if (testId <= 0 || publicFlag < 0 || pubStartTime.equals("") || pubEndTime.equals("")) {
 			rb.setState(2);
 			rb.setMessage("输入均不可为空");
@@ -387,6 +388,7 @@ public class QuizController {
 		quiz.setSignedKey(signedKey);
 		quiz.setPubStartTime(pubStartTime);
 		quiz.setPubEndTime(pubEndTime);
+		quiz.setOpenCamera(openCamera);
 
 		quizDao.updateQuiz(quiz);
 		rb.setState(0);

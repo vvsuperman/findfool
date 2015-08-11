@@ -97,6 +97,8 @@ public class Quiz implements Serializable {
 	private String pubStartTime;
 	// 作为挑战赛时候的结束时间
 	private String pubEndTime;
+	// 开启摄像头标记
+	private int openCamera;
 
 	public int getQuestionNum() {
 		return questionNum;
@@ -264,6 +266,14 @@ public class Quiz implements Serializable {
 
 	public void setPubEndTime(String pubEndTime) {
 		this.pubEndTime = pubEndTime;
+	}
+
+	public int getOpenCamera() {
+		return openCamera;
+	}
+
+	public void setOpenCamera(int openCamera) {
+		this.openCamera = openCamera;
 	}
 
 }
