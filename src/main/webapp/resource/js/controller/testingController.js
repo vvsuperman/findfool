@@ -40,7 +40,54 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	 }
 	 
 	var testid = $routeParams.testid;
-	var email = CadData.getEmail();
+	
+	
+	if(typeof(testid)!="undefined"){
+		
+		var email = CadData.getEmail();
+		$http({
+	         url: WEBROOT+"/challenge/start",
+	         method: 'POST',
+         	 data: {"email":email,"testid":testid}
+	     }).success(function (data) {
+	    	  if(data.state == 2){
+	    		 $scope.invitedid=data.message["invitedid"];
+	    		 $scope.openCamera=data.message["openCamera"];
+	    		 $scope.errMsg = "";
+	    		 if($scope.openCamera==1){
+	    			  //不开启拍照区域
+	    			 $scope.showCZone =3;
+	    		 }
+	    		 $scope.show = 2;
+	    		 
+	    		 $http({
+	    	         url: WEBROOT+"/testing/getLabels",
+	    	         method: 'POST',
+	    	         data: {"email":$scope.email, "testid": $scope.tid}
+	    	     }).success(function (data) {
+	    	    	 $scope.userInfo=data["message"];
+	    	    	 //如果无label，摄像头也未强制开启，则跳转到试题详情页面
+	    	    	 if($scope.userInfo.length == 0 && ($scope.openCamera ==1 || $scope.openCamera ==2)){
+	    	    		 $scope.show =3;
+	    	    	 }
+	    	    	 
+	    	     });
+	    	 }else if(data.state==1){
+	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
+	    		 flashTip("务必开启摄像头已开始考试");
+	    		 $scope.$broadcast("takeVideo");
+	    		 //保存inviteid
+	    		 $scope.invitedid = data.message[0].inviteId;
+	    		 //再次打开摄像头
+	    		 $scope.cameraAgain = "again";
+	    		
+	    	 }else{
+	    		 flashTip(data.message);
+	    	 }	 
+	     }).error(function(){
+	    	 console.log("login failed");
+	     })
+	 }
 	 
 	 
    

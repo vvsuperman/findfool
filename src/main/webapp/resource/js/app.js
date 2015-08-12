@@ -155,6 +155,11 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/preparetest.html',
                 controller: 'testingController'
             }).
+            when('/pubtesting/:testid', {
+                templateUrl: 'page/preparetest.html',
+                controller: 'testingController'
+            }).
+            
             when('/report/show/:state', {
                 templateUrl: 'page/page.html',
                 controller: 'reportController'

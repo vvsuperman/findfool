@@ -131,6 +131,7 @@ public class ChallengeController {
 		
 		
 		String nowtime = StringUtil.nowDateTime();
+		
 		if(quiz.getStartTime().compareTo(nowtime)<0 || quiz.getEndTime().compareTo(nowtime)>0){
 			rb.setState(20002);
 			rb.setMessage("挑战赛未开始或已结束");
@@ -185,7 +186,8 @@ public class ChallengeController {
 		invite.setScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setOpenCamera(quiz.getOpenCamera());
-		
+		invite.setStarttime(quiz.getStartTime());
+		invite.setDeadtime(quiz.getEndTime());
 		
 		inviteDao.add(invite);
 		
