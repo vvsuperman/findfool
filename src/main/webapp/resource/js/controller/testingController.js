@@ -1,32 +1,54 @@
 'use strict';
 
-OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,Data,$routeParams,$timeout,$sce,$compile,$interval) {
+OJApp.controller('testingController',['$scope','$http','CadData','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,CadData,$routeParams,$timeout,$sce,$compile,$interval) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
-	 var param = strDec($routeParams.url, "1", "2", "3").split("|");
-	 $scope.email = param[0];
-	 $scope.tid = param[1];
+	 var url = $routeParams.url;
+	 
+	 if(typeof(url)!="undefined"){
+		 var param = strDec($routeParams.url, "1", "2", "3").split("|");
+		 $scope.email = param[0];
+		 $scope.tid = param[1];
+		 //检查该url是否合法
+		 $http({
+	         url: WEBROOT+"/testing/checkurl",
+	         method: 'POST',
+		     data: {"email":$scope.email, "testid": $scope.tid}
+	     }).success(function (data) {
+	         //测试未开始
+	    	 if( data.state == 0){
+	    		 //试题已截至
+	    		 if(data.message ==1){
+	    			 $scope.show =5;
+	    		 }else{
+	    			 flashTip(data.message);
+	    		 }
+	    	 }else if(data.state==2){ //试题尚未开始
+	    		 $scope.show =6
+	    	 }else if(data.state==3){//试题已截至
+	    		 $scope.show =7
+	    	 }
+	    	 else{
+	    		 $scope.show = 1;
+	    		
+	    		//测试数据
+	    	     //$scope.show = 2;
+	    	 }	 
+	         
+	     }).error(function(){
+	    	 console.log("get data failed");
+	     })
+	 }
+	 
+	var testid = $routeParams.testid;
+	var email = CadData.getEmail();
+	 
+	 
+   
+	
 	 //takePicture广播轮训的promise变量
 	 var pictureTimer;
 	
-//测试数据	
 
-//	 $scope.email ="693605668@qq.com";
-//	 $scope.testid ="11";
-//	 $scope.tid = "11";
-
-//回车时导致不在线编码不可用
-//	 document.onkeydown= function(e) {    
-//	        // 兼容FF和IE和Opera    
-//        var theEvent = e || window.event;    
-//        var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
-//        if (code == 13) {    
-//           if($scope.show ==1){
-//        	   $scope.login();
-//           }
-//            return false;    
-//        }    
-//        return true;    
-//	 }  
 	 
 	
 //测试数据	 
@@ -66,36 +88,7 @@ OJApp.controller('testingController',['$scope','$http','Data','$routeParams','$t
 	 $scope.isCameraOk.ok=0;	 
 	 
 	 $scope.userInfo=[];
-	 //检查该url是否合法
-	 $http({
-         url: WEBROOT+"/testing/checkurl",
-         method: 'POST',
-	     data: {"email":$scope.email, "testid": $scope.tid}
-     }).success(function (data) {
-         //测试未开始
-    	 if( data.state == 0){
-    		 //试题已截至
-    		 if(data.message ==1){
-    			 $scope.show =5;
-    		 }else{
-    			 flashTip(data.message);
-    		 }
-    	 }else if(data.state==2){ //试题尚未开始
-    		 $scope.show =6
-    	 }else if(data.state==3){//试题已截至
-    		 $scope.show =7
-    	 }
-    	 else{
-    		 $scope.show = 1;
-    		
-    		//测试数据
-    	     //$scope.show = 2;
-    	 }	 
-         
-     }).error(function(){
-    	 console.log("get data failed");
-     })
-     
+	
      
      //拍照
      $scope.takePicture = function(){

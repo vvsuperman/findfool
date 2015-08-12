@@ -128,24 +128,47 @@ public class ChallengeController {
 			rb.setMessage("挑战不存在或者不在进行");
 			return rb;
 		}
+		
+		
+		String nowtime = StringUtil.nowDateTime();
+		if(quiz.getStartTime().compareTo(nowtime)<0 || quiz.getEndTime().compareTo(nowtime)>0){
+			rb.setState(20002);
+			rb.setMessage("挑战赛未开始或已结束");
+			return rb;
+		}
 
 		// 生成invite
 		Invite invite = inviteDao.getInvites(quizId, email);
 		if (invite == null) {
 			invite = genInvite(email, quizId);
 		}
+		
+		
+		
 		if (invite.getState() == ExamConstant.INVITE_FINISH) {
 			// 试卷已做完
 			rb.setState(1);
 			rb.setMessage("试卷已做完");
 			return rb;
 		}
-		Map<String, Object> rtMap = new HashMap<String, Object>();
-		rtMap.put("problems", tuserProblemDao.findProblemByInviteId(invite.getIid()));
+		
+		//判读用户是否已经开始做题，若已开始，直接给出题目列表
+		if(invite.getBegintime().equals("")==false){
+			//用户已开始做题，直接返回tuserproblem的list
+			List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
+			rb.setState(1);
+			rb.setMessage(tuserProblems);
+			return rb;
+		}else{  
+		    //未开始
+			rb.setState(2);
+			Map<String, Integer> message=new HashMap<String, Integer>();
+			message.put("invitedid", invite.getIid());
+			message.put("openCamera", invite.getOpenCamera());
+			rb.setMessage(message);
+			return rb;
+		}
 
-		rb.setState(0);
-		rb.setMessage(rtMap);
-		return rb;
 	}
 	
 	private Invite genInvite(String email, int quizId) {
@@ -153,6 +176,7 @@ public class ChallengeController {
 		if (testuser == null) {
 			//
 		}
+		Quiz quiz = quizDao.getQuiz(quizId);
 		int tuId = testuser.getTuid();
 		Invite invite = new Invite();
 		invite.setUid(tuId);
@@ -160,9 +184,12 @@ public class ChallengeController {
 		invite.setBegintime(StringUtil.nowDateTime());
 		invite.setScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
+		invite.setOpenCamera(quiz.getOpenCamera());
+		
+		
 		inviteDao.add(invite);
 		
-		// 获取考题
+		// 生成考题
 		List<Problem> problemList = problemDao.getProblemByTestid(quizId);
 		for (Problem problem : problemList) {
 			TuserProblem tuserProblem = new TuserProblem();
