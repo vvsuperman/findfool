@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.squareup.okhttp.Request;
+
 import zpl.oj.dao.QuizDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Label;
@@ -179,6 +181,39 @@ public class QuizController {
 
 		return rb;
 	}
+	
+	
+	//保存通用设置中的开始时间和结束时间及摄像头是否必须开启
+	@RequestMapping(value = "/saveTime")
+	@ResponseBody
+	public ResponseBase saveTime(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+                  String  openCamera   =params.get("openCamera");
+		          String   startTime=params.get("starttime");
+		          String   deadTime=params.get("deadtime");
+		          String squizid=params.get("quizid");
+		          int   quizid=Integer.parseInt(squizid);
+		          
+		          quizService.saveTime(quizid,openCamera,startTime,deadTime);
+		          
+		ResponseMessage msg = new ResponseMessage();
+		msg.setMsg("update seccuss!!");
+		rb.setState(1);
+		rb.setMessage(msg);
+		return rb;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/manage")
 	@ResponseBody

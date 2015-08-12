@@ -85,6 +85,9 @@ public class Quiz implements Serializable {
 	 */
 	private int status;
 	
+	
+	
+	private int openCamera;
 
 	// 统计数据，方便向前端传递，非数据库字段
 	// 统计数据：题量
@@ -93,6 +96,16 @@ public class Quiz implements Serializable {
 	private int invitedNum;
 	// 统计数据：完成数
 	private int finishedNum;
+
+	
+	
+	public int getOpenCamera() {
+		return openCamera;
+	}
+
+	public void setOpenCamera(int openCamera) {
+		this.openCamera = openCamera;
+	}
 
 	public int getQuestionNum() {
 		return questionNum;

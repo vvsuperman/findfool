@@ -203,4 +203,22 @@ public class QuizServiceImp implements QuizService {
 		
 	}
 
+	@Override
+	public void saveTime(int quizid, String openCamera, String startTime,
+			String deadTime) {
+	 
+	           Quiz   quiz =quizDao.getQuiz(quizid);
+	           quiz.setEndTime(deadTime);
+	           quiz.setStartTime(startTime);
+	        if(openCamera.equals(true)){
+	        	quiz.setOpenCamera(1);        	
+	        }else if(openCamera.equals(false)){
+	        	quiz.setOpenCamera(0);
+	        	
+	        }
+	                
+		          quizDao.saveTime(quiz);
+		     		
+	}
+
 }

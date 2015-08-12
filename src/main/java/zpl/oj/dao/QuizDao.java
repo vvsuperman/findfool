@@ -73,4 +73,13 @@ public interface QuizDao {
 	
 	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND signed_key=#{0}")
 	Quiz getChallengeBySignedKey(String signedKey);
+
+
+	
+	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
+			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
+			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey},"
+			+"starttime=#{starttime},deadtime=#{deadtime},openCamera=#{openCamera}"
+			+ " where QUIZID = #{quizid}")
+	void saveTime(Quiz quiz);
 }

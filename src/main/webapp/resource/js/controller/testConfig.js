@@ -16,9 +16,16 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 	$scope.angmodel = [];
 	$scope.angmodel.labeladded = "";
 	$scope.angmodel.emailadded = "";
+	
+	
+	$scope.camera={};
+	$scope.camera.selected=0;
+	$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"}];
+
 
 	$scope.name = Data.tname();
 
+	
 	$scope.updateTestLabels = function() {
 		$http({
 			url : WEBROOT + "/label/getlabels",
@@ -199,6 +206,62 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
             });
     	
     }
+    
+    
+    
+    $scope.upload = function (tname, userlist) {
+        $http({
+            url: WEBROOT+"/test/manage/invite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            
+//          data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content, "starttime": $scope.startTime, "deadtime": $scope.endTime}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+            	removeTip();
+            	flashTip("邀请成功")
+            } else {
+            	flashTip($scope.message.msg)
+            }
+        }).error(function (data) {
+        });	
+    };
+    
+   
+    
+    
+    //保存开始时间、结束时间和摄像头是否开启
+    $scope.saveTime = function () {
+    	console.log("开始打印");
+    	 console.log($scope.startTime);
+    	    
+    	 $http({
+             url: WEBROOT+"/test/saveTime",
+             method: 'POST',
+             headers: {
+                 "Authorization": Data.token()
+             },      
+//           data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
+             data:  {"quizid":Data.tid(),"starttime":$scope.startTime,"deadtime":$scope.endTime,"openCamera":$scope.camera.selected}
+         }).success(function (data) {
+             $scope.state = data["state"];//1 true or 0 false
+             //Data.token = data["token"];
+             $scope.message = data["message"];
+             if ($scope.state) {
+             	removeTip();
+             	flashTip("保存成功")
+             } else {
+             	flashTip($scope.message.msg)
+             }
+         }).error(function (data) {
+         });	
+    };
     
    
     
