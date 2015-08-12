@@ -5,6 +5,31 @@ import java.util.Date;
 
 public class Quiz implements Serializable {
 
+	public Quiz() {
+		this.quizid = 0;
+		this.owner = 0;
+		this.name = "";
+		this.date = new Date();
+		this.time = 70;
+		this.extraInfo = "";
+		this.uuid = 0;
+		this.emails = "";
+		this.type = 0;
+		this.logo = "";
+		this.description = "";
+		this.startTime = "";
+		this.endTime = "";
+		this.signedKey = "";
+		this.createTime = "";
+		this.status = 0;
+		this.questionNum = 0;
+		this.invitedNum = 0;
+		this.finishedNum = 0;
+		this.pubStartTime = "";
+		this.pubEndTime = "";
+		this.openCamera = -1;
+	}
+
 	/**
 	 * ${item.comment}
 	 */

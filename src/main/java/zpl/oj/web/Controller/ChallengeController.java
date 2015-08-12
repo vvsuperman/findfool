@@ -132,9 +132,13 @@ public class ChallengeController {
 		
 		String nowtime = StringUtil.nowDateTime();
 		
-		if(quiz.getStartTime().compareTo(nowtime)<0 || quiz.getEndTime().compareTo(nowtime)>0){
+		if(quiz.getStartTime()!="" && quiz.getStartTime().compareTo(nowtime)<0 ){
 			rb.setState(20002);
-			rb.setMessage("挑战赛未开始或已结束");
+			rb.setMessage("挑战赛未开始");
+			return rb;
+		}else if(quiz.getEndTime()!="" && quiz.getEndTime().compareTo(nowtime)>0){
+			rb.setState(20003);
+			rb.setMessage("挑战赛已结束");
 			return rb;
 		}
 
