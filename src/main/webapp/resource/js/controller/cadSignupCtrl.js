@@ -66,11 +66,7 @@ OJApp.controller('signupCtrl',['$scope','$http','Data',function ($scope,$http,Da
                             //end bu zpl
                             Data.setName($scope.message.email);
                             Data.setEmail($scope.message.email);
-                            /*$scope.cancel();*/
-                            //除去modal层的遮罩
-//                            var child = document.getElementsByClassName("modal-backdrop fade in");
-//                            child[0].parentNode.removeChild(child[0]);
-                            window.location.href = '#/test';
+                            window.location.href = '#/cad/comlist';
                         } else {
                             alert($scope.message.msg);
                             window.location.reload(true);

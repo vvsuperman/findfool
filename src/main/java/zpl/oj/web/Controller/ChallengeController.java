@@ -121,9 +121,7 @@ public class ChallengeController {
 		}
 
 		Quiz quiz = quizDao.getQuiz(quizId);
-		if (quiz == null ||
-			quiz.getType() != ExamConstant.QUIZ_TYPE_CHALLENGE ||
-			quiz.getStatus() != ExamConstant.STATUS_RUNNING) {
+		if (quiz == null) {
 			rb.setState(20001);
 			rb.setMessage("挑战不存在或者不在进行");
 			return rb;
@@ -192,6 +190,8 @@ public class ChallengeController {
 		invite.setOpenCamera(quiz.getOpenCamera());
 		invite.setStarttime(quiz.getStartTime());
 		invite.setDeadtime(quiz.getEndTime());
+		invite.setDuration(quiz.getTime()+"");
+		invite.setState(ExamConstant.INVITE_PUB);
 		
 		inviteDao.add(invite);
 		

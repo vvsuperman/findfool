@@ -39,16 +39,16 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	     })
 	 }
 	 
-	var testid = $routeParams.testid;
+	$scope.tid = $routeParams.testid;
 	
 	
-	if(typeof(testid)!="undefined"){
+	if(typeof($scope.tid)!="undefined"){
 		
-		var email = CadData.getEmail();
+		$scope.email = CadData.getEmail();
 		$http({
 	         url: WEBROOT+"/challenge/start",
 	         method: 'POST',
-         	 data: {"email":email,"testid":testid}
+         	 data: {"email":$scope.email,"testid":$scope.tid}
 	     }).success(function (data) {
 	    	  if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
