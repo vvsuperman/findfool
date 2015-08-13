@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.InviteDao;
+import zpl.oj.dao.QuizDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.Testuser;
@@ -48,6 +49,11 @@ public class InviteServiceImp implements InviteService {
 	
 	@Autowired
 	private DESService desService;
+	
+
+	@Autowired 
+	private QuizDao quizDao;
+	
 	
 	@Autowired
 	private SMS sms;
@@ -92,7 +98,8 @@ public class InviteServiceImp implements InviteService {
 		if(oldInvite!=null){
 			invite = oldInvite;
 		}
-		
+		  Quiz  quiz=quizDao.getQuiz(q.getQuizid());
+
 		invite.setPwd(pwd);
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());
@@ -101,8 +108,8 @@ public class InviteServiceImp implements InviteService {
 		invite.setTotalScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setBegintime("");
-		invite.setStarttime(requestUser.getStarttime());
-		invite.setDeadtime(requestUser.getDeadtime());
+		invite.setStarttime(quiz.getStartTime());
+		invite.setDeadtime(quiz.getEndTime());
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
 		String duration = requestUser.getDuration();
@@ -111,9 +118,8 @@ public class InviteServiceImp implements InviteService {
 		}else{
 			invite.setDuration(q.getTime().toString());
 		}
-		invite.setOpenCamera(u.getOpenCamera());
+		invite.setOpenCamera(quiz.getOpenCamera());
 		
-	
 		if(invite.getIid()!=0){
 			inviteDao.updateInvite(invite);
 		}else{

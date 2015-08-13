@@ -5,11 +5,11 @@ import java.io.File;
 
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.foolrank.model.CompanyModel;
 
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
+import zpl.oj.model.common.Quiz;
 
 public interface ImgUploadService{
 	abstract String saveImg(Img img);
@@ -20,5 +20,6 @@ public interface ImgUploadService{
 			int flag);
 
 	abstract void saveCompanyImg(CompanyModel company, String img, Integer flag);
+	abstract void saveTestImg(Quiz quiz, MultipartFile fileitem);
 
 }

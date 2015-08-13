@@ -1,3 +1,10 @@
+<link rel="stylesheet" type="text/css"
+	href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css"
+	href="resource/css/mymodalcontent.css" />
+
+
 <div class="testqs">
 	<div class="topbar">
 		<div class="type">
@@ -51,26 +58,25 @@
 			<h4>报告接收邮箱</h4>
 			<p>做完测试后您可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入邮箱来接收报告（可多个，依次添加）</p>
 
+			<div>
 
-
-			<form class="form-horizontal" role="form">
-				<div class="form-group" ng-repeat="e in emails">
-					<div class="col-md-3">
-						<label class="form-control" ng-bind="e.email"></label>
+				<form class="form-horizontal" role="form">
+					<div class="form-group" ng-repeat="e in emails">
+						<div class="col-md-3">
+							<label class="form-control" ng-bind="e.email"></label>
+						</div>
 					</div>
-				</div>
-				<input type="text" ng-model="angmodel.emailadded"
-					placeholder="email">
-				<button class="btn btn-primary" ng-click="addEmail()">添加</button>
-			</form>
-		</div>
-
-
-		<h4>&nbsp;</h4>
-		<hr style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
-		<div>
-
-			<div class="form-group" style="margin-top: 20px">
+					<input type="text" ng-model="angmodel.emailadded"
+						placeholder="email">
+					<button class="btn btn-primary" ng-click="addEmail()">添加</button>
+				</form>
+			</div>
+			<h4>&nbsp;</h4>
+			<hr
+				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				
+				
+			<div class="form-group" style="margin-top:20px">
 				<label class="col-sm-2 control-label">摄像头</label>
 				<div class="col-md-3">
 					<select class="form-control" ng-model="camera.selected"
@@ -78,86 +84,100 @@
 					</select>
 				</div>
 			</div>
+
 			<div class="form-group">
-		              	<label for="dtp_input1" class="col-sm-2 control-label">开始时间</label>
-		              	<div class="col-md-4 input-group date form_datetime" data-data="new Date()"  data-link-field="dtp_input1">
-		                  <input class="form-control" size="16" type="text" value="" ng-model="startTime">
-		                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-						  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-		              	</div>
-						<input type="hidden" id="dtp_input1" value="" /><br/>
-		        </div>
-		        
-		        <div class="form-group">
-		              	<label for="dtp_input1" class="col-sm-2 control-label">结束时间</label>
-		              	<div class="col-md-4 input-group date form_datetime" data-data="new Date()"  data-link-field="dtp_input1">
-		                  <input class="form-control" size="16" type="text" value="" ng-model="endTime">
-		                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-						  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-		              	</div>
-						<input type="hidden" id="dtp_input1" value="" /><br/>
-		        </div>
-		
-			<div class="form-group" style="margin-left: 50px">
+				<label class="col-sm-3 control-label">考试时长(分钟)</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" ng-model="time.duration">
+				</div>
+			</div>
+			
+			<div style="clear: both"></div>
+          <div>
+			<div class="form-group" style="margin-top:20px">
+				<label for="dtp_input1" class="col-sm-2 control-label">开始时间</label>
+				<div class="col-md-4 input-group date form_datetime"
+					data-data="new Date()" data-link-field="dtp_input1">
+					<input class="form-control" size="16" type="text" value=""
+						ng-model="time.startTime"> <span class="input-group-addon"><span
+						class="glyphicon glyphicon-remove"></span></span> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input1" value="" />
+			</div>
+
+			<div class="form-group">
+				<label for="dtp_input1" class="col-sm-2 control-label">结束时间</label>
+				<div class="col-md-4 input-group date form_datetime"
+					data-data="new Date()" data-link-field="dtp_input1">
+					<input class="form-control" size="16" type="text" value=""
+						ng-model="time.endTime"> <span class="input-group-addon"><span
+						class="glyphicon glyphicon-remove"></span></span> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input1" value="" /><br />
+			</div>
+             </div>
+			<div class="form-group" style="margin-left:50px">
 				<button class="btn btn-primary btn-lg" ng-click="saveTime()">保存</button>
 				<input type="hidden" id="dtp_input1" value="" /><br />
 			</div>
+
 		</div>
-
-
-		<hr style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
-
+		<h4>&nbsp;</h4>
+			<hr
+				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				
 		<form class="form-horizontal">
 			<div style="margin-left: 50px" class="form-group">
 
-				<label>上传竞赛图片</label> <span style="margin-left: 20px"
-					class="btn btn-primary" upload-button header=4,1
-					ng-click="company/uploadimg" on-success="onSuccess(response)">上传竞赛图片
-				</span>
-			</div>
+				<label>上传竞赛图片</label>
+				<div style="margin-top: 10px" class="btn btn-primary" upload-button
+					header={{tid}} url="test/uploadimg"
+					on-success="onSuccess(response)">上传竞赛图片</div>
 
-			<div style="margin-left: 50px" class="form-group">
-				<table style="border: 0px;">
-					<tr>
-						<td>公司描述:&nbsp</td>
-						<td><textarea rows="3" cols="10" style="margin-left:10px" ></textarea></td>
+				<div style="margin-left:20px; margin-top:10px" class="form-group">
+					<table style="border: 0px;">
 						<tr>
-				</table>
-            </div>
+							<td><label>竞赛描述:&nbsp</label></td>
+							<td><textarea rows="3" cols="10" style="margin-left: 10px"
+									ng-model="test.tail"></textarea></td>
+						<tr>
+					</table>
+				</div>
 
 
 
- </body>
 
 
 
-			<div class="col-md-12"
-							style="margin-top: 20px; margin-bottom: 10px">
-							<h4>设为公开挑战</h4>
-				<p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
-				<p ng-if="publictest.flag==1">
-					挑战赛地址：<span ng-bind="publictest.url"></span>
-				</p>
-				<button class="btn btn-primary" ng-if="publictest.flag==0"
-								ng-click="setPublic()">设为公开挑战赛</button>
-				<button class="btn btn-primary" ng-if="publictest.flag==1"
-								ng-click="setPublic()">设为私有测试</button>
-				</span>
 
-			</div>
+				<div class="col-md-12" style="margin-top: 20px; margin-bottom: 10px">
+					<h4>设为公开挑战</h4>
+					<p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
+					<p ng-if="publictest.flag==1">
+						挑战赛地址：<span ng-bind="publictest.url"></span>
+					</p>
+					<button class="btn btn-primary" ng-if="publictest.flag==0"
+						ng-click="setPublic()">设为公开挑战赛</button>
+					<button class="btn btn-primary" ng-if="publictest.flag==1"
+						ng-click="setPublic()">设为私有测试</button>
+					</span>
 
-
-			<h4>&nbsp;</h4>
-			<hr
-							style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				</div>
 
 
-		
-					</form>
+				
+		</form>
 	</div>
-
+<h4>&nbsp;</h4>
+				<hr
+					style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
 </div>
 
+</body>
 
 <script src="resource/js/bootstrap-datetimepicker.min.js"></script>
 <script src="resource/js/bootstrap-datetimepicker.zh-CN.js"></script>

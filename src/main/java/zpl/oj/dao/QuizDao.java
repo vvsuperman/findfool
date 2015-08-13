@@ -21,7 +21,7 @@ public interface QuizDao {
 	Quiz getQuizByKey(String signedkey);
 	
 
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status,signed_key as signedKey "
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status , signed_key as signedKey, start_time as startTime, end_time as endTime ,openCamera, logo, description "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
 	Quiz getQuiz(int tid);
 
@@ -49,12 +49,12 @@ public interface QuizDao {
 	void deleteQuiz(Quiz quiz);
 
 	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
-			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
-			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey}"
+			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera},"
+			+ "UUID = #{uuid},  EMAILS = #{emails}, logo = #{logo}, DESCRIPTION=#{description}, signed_key=#{signedKey}"
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
-	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS  "
+	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS "
 			+ " FROM quiz WHERE OWNER=#{0} order by date desc ")
 	List<Quiz> getQuizs(int owner);
 
@@ -79,7 +79,7 @@ public interface QuizDao {
 	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
 			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
 			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey},"
-			+"starttime=#{starttime},deadtime=#{deadtime},openCamera=#{openCamera}"
+			+"start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera}"
 			+ " where QUIZID = #{quizid}")
 	void saveTime(Quiz quiz);
 }

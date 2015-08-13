@@ -197,8 +197,6 @@ public class QuizServiceImp implements QuizService {
 			 quizProblemDao.insertQuizproblem(quizProblem);
 		}
 		
-		
-
 		return quizId;
 		
 	}
@@ -210,14 +208,9 @@ public class QuizServiceImp implements QuizService {
 	           Quiz   quiz =quizDao.getQuiz(quizid);
 	           quiz.setEndTime(deadTime);
 	           quiz.setStartTime(startTime);
-	        if(openCamera.equals(true)){
-	        	quiz.setOpenCamera(1);        	
-	        }else if(openCamera.equals(false)){
-	        	quiz.setOpenCamera(0);
-	        	
-	        }
-	                
-		          quizDao.saveTime(quiz);
+	           int openCameras =Integer.parseInt(openCamera);
+	           quiz.setOpenCamera(openCameras);        	             
+		       quizDao.saveTime(quiz);
 		     		
 	}
 
