@@ -8,7 +8,7 @@
 
 
      <ul class="nav navbar-nav">
-        <li class="active"><a href="#/cad/comlist" >企业挑战赛<span class="sr-only"></span></a></li>
+        <li ><a href="#/cad/comlist" >企业挑战赛<span class="sr-only"></span></a></li>
         <li ><a href="#/cad/frcom">FR挑战赛</a></li>
         <li><a href="#">练习大厅</a></li>
         <li><a href="#/cad/rank">排行榜</a></li>
@@ -18,7 +18,7 @@
      <ul class="nav navbar-nav navbar-right">
           <li ng-show="isLogin(1)"><a href="#/cad/signup">注册</a></li>
           <li ng-show="isLogin(1)"><a href="#/cad/login">登录</a></li>
-          <li> <a href="#/cad/personal" >{{username}}</a>
+          <li> <a href="#/cad/personal" >{{email}}</a>
           <li ng-show="isLogin(2)"><a  ng-click="loginOut()"  href="">退出</a></li>
      </ul>
         

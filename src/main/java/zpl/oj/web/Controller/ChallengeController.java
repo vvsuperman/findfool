@@ -159,8 +159,11 @@ public class ChallengeController {
 		if(invite.getBegintime().equals("")==false){
 			//用户已开始做题，直接返回tuserproblem的list
 			List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
+			Map<String, Object> rtMap=new HashMap<String, Object>();
+			rtMap.put("problems", tuserProblems);
+			rtMap.put("openCamera",invite.getOpenCamera());
 			rb.setState(1);
-			rb.setMessage(tuserProblems);
+			rb.setMessage(rtMap);
 			return rb;
 		}else{  
 		    //未开始
@@ -184,7 +187,6 @@ public class ChallengeController {
 		Invite invite = new Invite();
 		invite.setUid(tuId);
 		invite.setTestid(quizId);
-		invite.setBegintime(StringUtil.nowDateTime());
 		invite.setScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setOpenCamera(quiz.getOpenCamera());

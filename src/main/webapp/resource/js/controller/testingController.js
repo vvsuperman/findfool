@@ -59,7 +59,6 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	    			 $scope.showCZone =3;
 	    		 }
 	    		 $scope.show = 2;
-	    		 
 	    		 $http({
 	    	         url: WEBROOT+"/testing/getLabels",
 	    	         method: 'POST',
@@ -74,12 +73,18 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	    	     });
 	    	 }else if(data.state==1){
 	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
-	    		 flashTip("务必开启摄像头已开始考试");
-	    		 $scope.$broadcast("takeVideo");
-	    		 //保存inviteid
-	    		 $scope.invitedid = data.message[0].inviteId;
-	    		 //再次打开摄像头
-	    		 $scope.cameraAgain = "again";
+	    		 if(data.message.openCamera==0){
+	    			 flashTip("务必开启摄像头已开始考试");
+		    		 $scope.$broadcast("takeVideo");
+		    		 //保存inviteid
+		    		 $scope.invitedid = data.message[0].inviteId;
+		    		 //再次打开摄像头
+		    		 $scope.cameraAgain = "again";
+	    		 }else{
+	    			 //不用开启摄像头
+	    			 $scope.startTest();
+	    		 }
+	    		 
 	    		
 	    	 }else{
 	    		 flashTip(data.message);
@@ -98,11 +103,10 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 
 	 
 	
-//测试数据	 
+	 //测试数据	 
 	 $scope.tuser = {};
 	 $scope.loginUser={};
-	 //$scope.loginUser.pwd="3XT75";
-	 //$scope.loginUser.email="apachee@qq.com";
+
 
      $scope.schools = [];
 	 $scope.question = {};
@@ -249,7 +253,6 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 		 $http({
 	         url: WEBROOT+"/testing/checkpwd",
 	         method: 'POST',
-	         //data: {"email":($scope.loginUser.email).replace(/(^\s*)|(\s*$)/g,''), "pwd": $scope.loginUser.pwd,"testid":$scope.tid}
          	 data: {"email":$scope.email,"pwd": $scope.loginUser.pwd,"testid":$scope.tid}
 	     }).success(function (data) {
 	    	 

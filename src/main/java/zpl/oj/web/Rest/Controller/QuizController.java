@@ -402,13 +402,13 @@ public class QuizController {
 	@ResponseBody
 	public ResponseBase checkPub(@RequestBody Map<String, Object> param) {
 		ResponseBase rb = new ResponseBase();
-		Integer testid = (Integer) param.get("testid");
+		String testid = (String) param.get("testid");
 		if (testid == null) {
 			rb.setState(1);
 			rb.setMessage("testid不可为空");
 			return rb;
 		}
-		Quiz quiz = quizDao.getQuiz(testid);
+		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
 
 		rb.setState(0);
 		rb.setMessage(quiz.getSignedKey());
