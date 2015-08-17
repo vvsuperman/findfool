@@ -1,7 +1,6 @@
 OJApp.controller('cadSignupCtrl',['$scope','$http','Data',function ($scope,$http,Data) {
 	
 	$scope.Remail;
-//	$scope.company;
 	$scope.name;
 	//手机的错误信息
 	$scope.errorMsg={};
@@ -47,22 +46,20 @@ OJApp.controller('cadSignupCtrl',['$scope','$http','Data',function ($scope,$http
                         if ($scope.state==0) {
  
                             Data.setToken(data["token"]);
-                            //end bu zpl
                             Data.setName($scope.message.email);
                             Data.setEmail($scope.message.email);
+                            var url = "#/cad/login";
+    						window.location.href = url;
                           
                         } else {
                             alert($scope.message);
-//                            window.location.reload(true);
                         }
                     }).error(function () {
                             alert("网络错误q");
-//                            window.location.reload(true);
                         }
                     );
                 } else {
                 	$scope.errorMsg.general = "验证问题答案错误";
-                    //$scope.createCode();
                 }
             } else {
             	$scope.errorMsg.general ="密码为空，请重新输入";

@@ -25,20 +25,17 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData',function($scope,
 						CadData.clear();// 清空缓存
 						var name = $scope.Lname;
 						$scope.message = data["message"];
-
-//						CadData.setName($scope.message.username);
-						CadData.setEmail($scope.Lemail);
-
 						// 修改
 						if ($scope.state == 0) {
-//							CadData.setToken(data["token"]);
-//							CadData.setLastActive((new Date()).getTime());
-						} else {
-							// window.location.href = '#/loginok';
+							var url = "#/cad/comlist";
+							window.location.href = url;
+							CadData.setEmail($scope.Lemail);
+						 CadData.setTestname($scope.message.username);
+						} else  {
+						
 							$scope.errmsg = data.message.msg;
 						}
-						var url = "#/cad/comlist";
-						window.location.href = url;
+						
 					}).error(function() {
 						console.log("err");
 						alert("网络错误");

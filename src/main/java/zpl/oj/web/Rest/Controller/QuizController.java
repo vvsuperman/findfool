@@ -189,6 +189,35 @@ public class QuizController {
 
 		return rb;
 	}
+	
+	
+	// 获得通用设置的回显数据
+		@RequestMapping(value = "/getconfig")
+		@ResponseBody
+		public ResponseBase getconfig(@RequestBody Map<String, String> params) {
+			ResponseBase rb = new ResponseBase();
+			ResponseMessage msg = new ResponseMessage();
+			String testid=params.get("testid");
+			if(testid==null){
+				msg.setMsg("当前试卷不存在，您可能未登录");
+				rb.setState(1);
+				rb.setMessage(msg);
+				return rb;
+				
+				
+				
+			}
+			int tid=Integer.parseInt(testid);
+			 Quiz quiz  =quizDao.getQuiz(tid);
+			rb.setMessage(quiz);
+			rb.setState(0);
+		
+			return rb;
+		}
+	
+	
+	
+	
 
 	// 保存通用设置中的开始时间和结束时间及摄像头是否必须开启
 	@RequestMapping(value = "/saveTime")
