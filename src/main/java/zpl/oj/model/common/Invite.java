@@ -12,7 +12,7 @@ public class Invite implements Serializable {
 		this.hrid = 0;
 		this.uid = 0;
 		this.invitetime = "";
-		this.duration = "";
+		this.duration = "70";//默认70分钟
 		this.begintime = "";
 		this.finishtime = "";
 		this.score = 0;

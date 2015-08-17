@@ -27,7 +27,14 @@ OJApp.controller('frComController',['$scope','$http','CadData',function ($scope,
 
 	$scope.getFrChallage();
 
-	
+	$scope.startTest=function(quizid){
+		var email=CadData.getEmail();
+		if(email==null){
+		    window.location.href="#/cad/login";
+		}else{
+			window.location.href="#/pubtesting/"+quizid;
+		}
+	}
 
 	
 	

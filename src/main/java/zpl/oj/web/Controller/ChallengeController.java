@@ -282,47 +282,52 @@ public class ChallengeController {
 	@RequestMapping(value = "/getFrChallage")
 	@ResponseBody
 	public ResponseBase getFrChallage(@RequestBody Map<String, String> params) {
-	//获得fr全部挑战赛
-		  List<Quiz>   frQuizList =   quizDao.getQuizByType(ExamConstant.QUIZ_TYPE_FRCHALLENGE);
-	
-	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		// 获得fr全部挑战赛
+		List<Quiz> frQuizList = quizDao
+				.getQuizByType(ExamConstant.QUIZ_TYPE_FRCHALLENGE);
 
-		  Date date = new Date();
-		  String str = df.format(date);
-		  List<Quiz>  frQuizBegin=new ArrayList<Quiz>();
-		  List<Quiz>  frQuizOver=new ArrayList<Quiz>();
-		  List<Quiz>  frQuizNaver=new ArrayList<Quiz>();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-		  
-	for (Quiz quiz : frQuizList) {
-		 int number1=str.compareTo(quiz.getStartTime());
-         int number2=str.compareTo(quiz.getEndTime());
-       
-         if(number1<0){
-        	 frQuizNaver.add(quiz);
-         }else if(number2==1){
-        	 frQuizOver.add(quiz);
-         }else if((number1==1)&&(number2==-1)){
-        	 frQuizBegin.add(quiz);
-         }
-		
-	}
-          
-          //返回 0 表示时间日期相同
-          //返回 1 表示日期1>日期2
-          //返回 -1 表示日期1<日期2
-		  
-	Map<String,Object> map=new HashMap<String, Object>();
-		  ResponseBase rb = new ResponseBase();
-		 map.put("frQuizNaver", frQuizNaver);
-		 map.put("frQuizBegin", frQuizBegin);
-		 map.put("frQuizOver", frQuizOver);
-		  
-		  
-		  
-          rb.setMessage(map);
-		
-		  return rb;
+		Date date = new Date();
+		String str = df.format(date);
+		List<Quiz> frQuizBegin = new ArrayList<Quiz>();
+		List<Quiz> frQuizOver = new ArrayList<Quiz>();
+		List<Quiz> frQuizNaver = new ArrayList<Quiz>();
+
+		for (Quiz quiz : frQuizList) {
+			//测试开始时间和结束时间为空
+			if(quiz.getStartTime().equals("") || quiz.getEndTime().equals("")){
+				frQuizBegin.add(quiz);
+			}
+				
+			quiz.setLogo( companyService.getImg(quiz.getLogo()));
+			
+			int number1 = str.compareTo(quiz.getStartTime());
+			int number2 = str.compareTo(quiz.getEndTime());
+
+			if (number1 < 0) {
+				frQuizNaver.add(quiz);
+			} else if (number2 == 1) {
+				frQuizOver.add(quiz);
+			} else if ((number1 == 1) && (number2 == -1)) {
+				frQuizBegin.add(quiz);
+			}
+
+		}
+
+		// 返回 0 表示时间日期相同
+		// 返回 1 表示日期1>日期2
+		// 返回 -1 表示日期1<日期2
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResponseBase rb = new ResponseBase();
+		map.put("frQuizNaver", frQuizNaver);
+		map.put("frQuizBegin", frQuizBegin);
+		map.put("frQuizOver", frQuizOver);
+
+		rb.setMessage(map);
+
+		return rb;
 	}
 
 	

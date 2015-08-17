@@ -232,6 +232,7 @@ public class QuizController {
 		quiz.setEndTime(deadTime);
 		quiz.setTime(duration);
 		quizDao.updateQuiz(quiz);
+		
 		msg.setMsg("update seccuss!!");
 		rb.setState(0);
 		rb.setMessage(msg);
@@ -464,54 +465,16 @@ public class QuizController {
 	public ResponseBase setPub(@RequestBody Map<String, String> param) {
 		ResponseBase rb = new ResponseBase();
 
-<<<<<<< HEAD
-		int testId = RequestUtil.getIntParam(param, "testid", 0);
-		int publicFlag = RequestUtil.getIntParam(param, "publicFlag", -1);
-		String pubStartTime = RequestUtil.getStringParam(param, "st", true);
-		String pubEndTime = RequestUtil.getStringParam(param, "et", true);
-		int openCamera = RequestUtil.getIntParam(param, "oc", 0);
-		if (testId <= 0 || publicFlag < 0 || pubStartTime.equals("") || pubEndTime.equals("")) {
-			rb.setState(2);
-			rb.setMessage("输入均不可为空");
-			return rb;
-		}
-
-		Quiz quiz = quizDao.getQuiz(testId);
-		String signedKey = "";
-		if (publicFlag == 0) {
-			signedKey = MD5Util.stringMD5(testId
-					+ StringUtil.toDateTimeString(new Date()));
-		}
-		quiz.setSignedKey(signedKey);
-		quiz.setPubStartTime(pubStartTime);
-		quiz.setPubEndTime(pubEndTime);
-		quiz.setOpenCamera(openCamera);
-
-		quizDao.updateQuiz(quiz);
-		rb.setState(0);
-		rb.setMessage(signedKey);
-
-		return rb;
-	}
-
-	// 判断是否有公开挑战赛
-	@RequestMapping(value = "/checkpub", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseBase checkPub(@RequestBody Map<String, String> param) {
-		ResponseBase rb = new ResponseBase();
-		
 		if (param.get("testid") == null || param.get("publicFlag") == null) {
 			rb.setState(2);
 			rb.setMessage("输入均不可为空");
 			return rb;
 		}
-		
-		String testid = (String) param.get("testid");
-		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
-		
 
+		String testid = param.get("testid");
 		String publicFlag = param.get("publicFlag");
 		String testTail = param.get("testTail");
+		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
 		if (testTail == null || quiz.getLogo() == null) {
 			rb.setState(3);
 			rb.setMessage("竞赛logo和竞赛详情不能为空");
@@ -531,6 +494,24 @@ public class QuizController {
 		return rb;
 	}
 
+	// 判断是否有公开挑战赛
+	@RequestMapping(value = "/checkpub", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase checkPub(@RequestBody Map<String, Object> param) {
+		ResponseBase rb = new ResponseBase();
+		String testid = (String) param.get("testid");
+		if (testid == null) {
+			rb.setState(1);
+			rb.setMessage("testid不可为空");
+			return rb;
+		}
+		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
+
+		rb.setState(0);
+		rb.setMessage(quiz.getSignedKey());
+		return rb;
+
+	}
 
 
 }

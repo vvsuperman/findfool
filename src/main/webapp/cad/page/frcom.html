@@ -10,19 +10,25 @@
                     <h3>已开始</h3>
                 </div>
                 
-                  <div class="media" style="padding-top: 20px" ng-repeat="x in frQuizBegin"  >
-                    <div class="media-left col-md-1" >
-                        <a href="#">
-                       	 <img class="media-object" src="resource/static/android.png" alt="android" style="width:50px">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h5 class="media-heading"><a href="#">{{x.name}}</a></h5>
-                    </div>
-                </div>
+                <div class="com-activities"  ng-repeat="quiz in frQuizBegin"  >
+                  
+                       <h5>
+                          {{quiz.name}}
+                      </h5>
+
+                      <p>{{quiz.description}}</p>
+                      <div style="margin-bottom: 10px" >
+                        <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
+                         开始挑战
+                        </button>
+                      </div>
+                  
+              </div>
                 
             </div>
-            <div class="comesoon">
+            
+            
+          <!--   <div class="comesoon">
                 <div class="squad-title">
                     <h3>即将开始</h3>
                 </div>
@@ -39,7 +45,7 @@
                     </div>
                 </div> 
                 
-            </div>
+            </div> -->
 
 
         </div>

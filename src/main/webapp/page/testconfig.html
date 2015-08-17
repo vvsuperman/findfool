@@ -40,8 +40,7 @@
 		  <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
 		 </div>  -->
 		<div class="col-md-12">
-			<hr
-				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+			<hr style="height: 1px; border: none; border-top: 1px solid #CCCCCC;" />
 			<h4>已添加标签</h4>
 			<div class="col-md-3" ng-repeat="label in labels"
 				ng-show="orseclected(label.isSelected)">
@@ -49,8 +48,7 @@
 					ng-click="saveConfigOne(label,2)">{{label.labelname}}</button>
 			</div>
 			<h4>&nbsp;</h4>
-			<hr
-				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+			<hr style="height: 1px; border: none; border-top: 1px solid #CCCCCC;" />
 		</div>
 
 		<!-- class="col-md-4" -->
@@ -72,64 +70,68 @@
 				</form>
 			</div>
 			<h4>&nbsp;</h4>
-			<hr
-				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
-				
-				
-			<div class="form-group" style="margin-top:20px">
-				<label class="col-sm-2 control-label">摄像头</label>
-				<div class="col-md-3">
-					<select class="form-control" ng-model="camera.selected"
-						ng-options="o.id as o.content for o in options">
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-sm-3 control-label">考试时长(分钟)</label>
-				<div class="col-md-4">
-					<input type="text" class="form-control" ng-model="time.duration">
-				</div>
-			</div>
+			<hr style="height: 1px; border: none; border-top: 1px solid #CCCCCC;" />
 			
-			<div style="clear: both"></div>
-          <div>
-			<div class="form-group" style="margin-top:20px">
-				<label for="dtp_input1" class="col-sm-2 control-label">开始时间</label>
-				<div class="col-md-4 input-group date form_datetime"
-					data-data="new Date()" data-link-field="dtp_input1">
-					<input class="form-control" size="16" type="text" value=""
-						ng-model="time.startTime"> <span class="input-group-addon"><span
-						class="glyphicon glyphicon-remove"></span></span> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-th"></span></span>
+			<h4>试卷信息</h4>
+			<p>您可以设置是否需要开启摄像头来防止作弊；设置考试时长；以及设置开始和结束时间</p>
+				
+			<form class="form-horizontal form-signup">	
+				<div class="form-group" style="margin-top:20px">
+					<label class="col-sm-2 control-label">摄像头</label>
+					<div class="col-md-3">
+						<select class="form-control" ng-model="camera.selected"
+							ng-options="o.id as o.content for o in options">
+						</select>
+					</div>
 				</div>
-				<input type="hidden" id="dtp_input1" value="" />
-			</div>
-
-			<div class="form-group">
-				<label for="dtp_input1" class="col-sm-2 control-label">结束时间</label>
-				<div class="col-md-4 input-group date form_datetime"
-					data-data="new Date()" data-link-field="dtp_input1">
-					<input class="form-control" size="16" type="text" value=""
-						ng-model="time.endTime"> <span class="input-group-addon"><span
-						class="glyphicon glyphicon-remove"></span></span> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-th"></span></span>
+	
+				<div class="form-group">
+					<label class="col-sm-2 control-label">考试时长(分钟)</label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" ng-model="time.duration">
+					</div>
 				</div>
-				<input type="hidden" id="dtp_input1" value="" /><br />
-			</div>
-             </div>
-			<div class="form-group" style="margin-left:50px">
-				<button class="btn btn-primary btn-lg" ng-click="saveTime()">保存</button>
-				<input type="hidden" id="dtp_input1" value="" /><br />
-			</div>
-
+				
+				<div style="clear: both"></div>
+	          <div>
+				<div class="form-group" style="margin-top:20px">
+					<label for="dtp_input1" class="col-sm-2 control-label">开始时间</label>
+					<div class="col-md-4 input-group date form_datetime"
+						data-data="new Date()" data-link-field="dtp_input1">
+						<input class="form-control" size="16" type="text" value=""
+							ng-model="time.startTime"> <span class="input-group-addon"><span
+							class="glyphicon glyphicon-remove"></span></span> <span
+							class="input-group-addon"><span
+							class="glyphicon glyphicon-th"></span></span>
+					</div>
+					<input type="hidden" id="dtp_input1" value="" />
+				</div>
+	
+				<div class="form-group">
+					<label for="dtp_input1" class="col-sm-2 control-label">结束时间</label>
+					<div class="col-md-4 input-group date form_datetime"
+						data-data="new Date()" data-link-field="dtp_input1">
+						<input class="form-control" size="16" type="text" value=""
+							ng-model="time.endTime"> <span class="input-group-addon"><span
+							class="glyphicon glyphicon-remove"></span></span> <span
+							class="input-group-addon"><span
+							class="glyphicon glyphicon-th"></span></span>
+					</div>
+					<input type="hidden" id="dtp_input1" value="" /><br />
+				   </div>
+	             </div>
+	             
+				<div class="form-group" style="margin-left:50px">
+					<button class="btn btn-primary btn-lg" ng-click="saveTime()">保存</button>
+					<input type="hidden" id="dtp_input1" value="" /><br />
+				</div>
+			
+         </form>
 		</div>
 		<h4>&nbsp;</h4>
-			<hr
-				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
-				
+			<hr style="height: 1px; border: none; border-top: 1px solid #CCCCCC;" />
+			<h4>设为公开挑战</h4>
+					<p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>	
 		<form class="form-horizontal">
 			<div style="margin-left: 50px" class="form-group">
 
@@ -155,8 +157,7 @@
 
 
 				<div class="col-md-12" style="margin-top: 20px; margin-bottom: 10px">
-					<h4>设为公开挑战</h4>
-					<p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
+					
 					<p ng-if="publictest.flag==1">
 						挑战赛地址：<span ng-bind="publictest.url"></span>
 					</p>
@@ -173,8 +174,7 @@
 		</form>
 	</div>
 <h4>&nbsp;</h4>
-				<hr
-					style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				<hr style="height: 1px; border: none; border-top: 1px solid #CCCCCC;" />
 </div>
 
 </body>

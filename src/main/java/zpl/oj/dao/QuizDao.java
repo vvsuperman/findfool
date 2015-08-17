@@ -50,9 +50,8 @@ public interface QuizDao {
 	void deleteQuiz(Quiz quiz);
 
 	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
-			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
-			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey} "
-			+ "openCamera = #{openCamera},  start_time = #{startTime}, end_time=#{endTime}"
+			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera},"
+			+ "UUID = #{uuid},  EMAILS = #{emails}, logo = #{logo}, DESCRIPTION=#{description}, signed_key=#{signedKey}"
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 

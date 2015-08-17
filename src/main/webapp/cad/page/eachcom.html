@@ -7,7 +7,6 @@
 
 
     <div class="company">
-
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
@@ -15,7 +14,7 @@
                     <div class="com-brief">
 
                         <div class="media media-middle">
-                            <img class="media-object" src="{{companyTail.logoLocation}}" alt="dp">
+                            <img class="media-object" ng-src="{{companyTail.logoLocation}}" alt="dp">
                         </div>
 
 
@@ -40,21 +39,20 @@
                     </div>
                 </div>
                 <div class="col-sm-9">
-
-                        
+                
                     <div class="com-activities" ng-repeat="quiz in quizList">
-                        <h2>
+                        <h5>
                             {{quiz.name}}
-                        </h2>
+                        </h5>
 
-                        <p style="padding-bottom: 20px">{{quiz.description}}</p>
-                        <div  >
+                        <p>{{quiz.description}}</p>
+                        <div style="margin-bottom: 10px" >
 	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
 	                          开始挑战
 	                         </button>
                         </div>
-
                     </div>
+                    
                 </div>
 
             </div>
