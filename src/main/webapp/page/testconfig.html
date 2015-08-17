@@ -1,7 +1,14 @@
-<div class="testqs" >
-	 <div class="topbar">
+<link rel="stylesheet" type="text/css"
+	href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+<link rel="stylesheet" type="text/css"
+	href="resource/css/mymodalcontent.css" />
+
+
+<div class="testqs">
+	<div class="topbar">
 		<div class="type">
-			<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 			&nbsp;<span ng-bind="name"></span>
 		</div>
 		<!-- <div>
@@ -11,61 +18,206 @@
 			<a href="#/invite" class="btn btn-default">发送邀请</a>
 		</div>
 	</div>
-	 
-	 <div class="col-md-11" style="margin-top: 30px;margin-left: 30px">
-		 <div class="col-md-12">
-		    <h4>自定义标签</h4>
-		    <p>通常来说，用户只需要输入用户名、密码就可以开始做题了。但如果您需要用户输入一些个人信息，请从下列选项选择，或手动增加</p>
-		    <div class="col-md-3"   ng-repeat="label in labels"  ng-show="istype(label)">
-		     <!--  <span  ng-hide="true"><input  style="opacity:1;width:20px"  type="checkbox" ng-model="label.isSelected">{{label.labelname}}</span> --> 
-		   		 <button  ng-class="setStyle(label.isSelected)"  style="margin-top: 5px "  ng-click="saveConfigOne(label,1)">  {{label.labelname}}</button>    
-		    </div>
-		 </div>
-		 <div class="col-md-12" style="margin-top: 20px">
-		   <input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签"> <button class="btn btn-primary" ng-click="addLabel()">添加</button>
-		 </div>
-		 
+
+	<div class="col-md-11" style="margin-top: 30px; margin-left: 30px">
+		<div class="col-md-12">
+			<h4>自定义标签</h4>
+			<p>通常来说，用户只需要输入用户名、密码就可以开始做题了。但如果您需要用户输入一些个人信息，请从下列选项选择，或手动增加</p>
+			<div class="col-md-3" ng-repeat="label in labels"
+				ng-show="istype(label)">
+				<!--  <span  ng-hide="true"><input  style="opacity:1;width:20px"  type="checkbox" ng-model="label.isSelected">{{label.labelname}}</span> -->
+				<button ng-class="setStyle(label.isSelected)"
+					style="margin-top: 5px" ng-click="saveConfigOne(label,1)">
+					{{label.labelname}}</button>
+			</div>
+		</div>
+		<div class="col-md-12" style="margin-top: 20px">
+			<input type="text" ng-model="angmodel.labeladded" placeholder="自定义标签">
+			<button class="btn btn-primary" ng-click="addLabel()">添加</button>
+		</div>
+
 		<!--<div class="col-md-12">
 		  <button class="btn btn-primary" ng-click="saveConfig()">保存</button>
-		 </div>  -->  
-		<div class="col-md-12"  >
-			 <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
-			  <h4>已添加标签</h4>
-			    <div   class="col-md-3" ng-repeat="label in labels" ng-show="orseclected(label.isSelected)" >
-			       <button   class="btn btn-info btn-xs" style="margin-top: 5px" 
-			       ng-click="saveConfigOne(label,2)">  {{label.labelname}}</button> 
-			    </div>
-			  <h4>&nbsp;</h4>  <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+		 </div>  -->
+		<div class="col-md-12">
+			<hr
+				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+			<h4>已添加标签</h4>
+			<div class="col-md-3" ng-repeat="label in labels"
+				ng-show="orseclected(label.isSelected)">
+				<button class="btn btn-info btn-xs" style="margin-top: 5px"
+					ng-click="saveConfigOne(label,2)">{{label.labelname}}</button>
+			</div>
+			<h4>&nbsp;</h4>
+			<hr
+				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
 		</div>
-		
-	    <!-- class="col-md-4" -->
-	     <div class="col-md-12" style="margin-top: 20px" >
-		 <h4>报告接收邮箱</h4>
-		 <p>做完测试后您可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入邮箱来接收报告（可多个，依次添加）</p>
-		 <form class="form-horizontal"  role="form">
-			<div class="form-group" ng-repeat="e in emails">
-			   <div class="col-md-3">
-			    <label class="form-control" ng-bind="e.email"></label>
-			   </div> 
-			 </div>	 
-			<input type="text" ng-model="angmodel.emailadded" placeholder="email"> 
-			<button class="btn btn-primary" ng-click="addEmail()">添加</button>
-		 </form>
-	    </div>
-	 
-	     <div class="col-md-12" style="margin-top: 20px;margin-bottom: 100px" >
-		   <h4>设为公开挑战</h4>
-		   <p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
-		     <p ng-if="publictest.flag==1">挑战赛地址：<span ng-bind="publictest.url"></span></p>
-	         <button class="btn btn-primary" ng-if="publictest.flag==0" ng-click="setPublic()">设为公开挑战赛</button>
-	         <button class="btn btn-primary" ng-if="publictest.flag==1" ng-click="setPublic()">设为私有测试</button> 
-	       </span>
-	       
-	    </div>
-	    
-	    
-	    	 
-	   
-    </div>
-    
+
+		<!-- class="col-md-4" -->
+		<div class="col-md-12" style="margin-top: 20px">
+			<h4>报告接收邮箱</h4>
+			<p>做完测试后您可以直接在本系统查看报告，如果期望其他人也能看到报告的话，请输入邮箱来接收报告（可多个，依次添加）</p>
+
+			<div>
+
+				<form class="form-horizontal" role="form">
+					<div class="form-group" ng-repeat="e in emails">
+						<div class="col-md-3">
+							<label class="form-control" ng-bind="e.email"></label>
+						</div>
+					</div>
+					<input type="text" ng-model="angmodel.emailadded"
+						placeholder="email">
+					<button class="btn btn-primary" ng-click="addEmail()">添加</button>
+				</form>
+			</div>
+			<h4>&nbsp;</h4>
+			<hr
+				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				
+				
+			<div class="form-group" style="margin-top:20px">
+				<label class="col-sm-2 control-label">摄像头</label>
+				<div class="col-md-3">
+					<select class="form-control" ng-model="camera.selected"
+						ng-options="o.id as o.content for o in options">
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">考试时长(分钟)</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" ng-model="time.duration">
+				</div>
+			</div>
+			
+			<div style="clear: both"></div>
+          <div>
+			<div class="form-group" style="margin-top:20px">
+				<label for="dtp_input1" class="col-sm-2 control-label">开始时间</label>
+				<div class="col-md-4 input-group date form_datetime"
+					data-data="new Date()" data-link-field="dtp_input1">
+					<input class="form-control" size="16" type="text" value=""
+						ng-model="time.startTime"> <span class="input-group-addon"><span
+						class="glyphicon glyphicon-remove"></span></span> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input1" value="" />
+			</div>
+
+			<div class="form-group">
+				<label for="dtp_input1" class="col-sm-2 control-label">结束时间</label>
+				<div class="col-md-4 input-group date form_datetime"
+					data-data="new Date()" data-link-field="dtp_input1">
+					<input class="form-control" size="16" type="text" value=""
+						ng-model="time.endTime"> <span class="input-group-addon"><span
+						class="glyphicon glyphicon-remove"></span></span> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input1" value="" /><br />
+			</div>
+             </div>
+			<div class="form-group" style="margin-left:50px">
+				<button class="btn btn-primary btn-lg" ng-click="saveTime()">保存</button>
+				<input type="hidden" id="dtp_input1" value="" /><br />
+			</div>
+
+		</div>
+		<h4>&nbsp;</h4>
+			<hr
+				style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
+				
+		<form class="form-horizontal">
+			<div style="margin-left: 50px" class="form-group">
+
+				<label>上传竞赛图片</label>
+				<div style="margin-top: 10px" class="btn btn-primary" upload-button
+					header={{tid}} url="test/uploadimg"
+					on-success="onSuccess(response)">上传竞赛图片</div>
+
+				<div style="margin-left:20px; margin-top:10px" class="form-group">
+					<table style="border: 0px;">
+						<tr>
+							<td><label>竞赛描述:&nbsp</label></td>
+							<td><textarea rows="3" cols="10" style="margin-left: 10px"
+									ng-model="test.tail"></textarea></td>
+						<tr>
+					</table>
+				</div>
+
+
+
+
+
+
+
+				<div class="col-md-12" style="margin-top: 20px; margin-bottom: 10px">
+					<h4>设为公开挑战</h4>
+					<p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>
+					<p ng-if="publictest.flag==1">
+						挑战赛地址：<span ng-bind="publictest.url"></span>
+					</p>
+					<button class="btn btn-primary" ng-if="publictest.flag==0"
+						ng-click="setPublic()">设为公开挑战赛</button>
+					<button class="btn btn-primary" ng-if="publictest.flag==1"
+						ng-click="setPublic()">设为私有测试</button>
+					</span>
+
+				</div>
+
+
+				
+		</form>
+	</div>
+<h4>&nbsp;</h4>
+				<hr
+					style="height: 1px; border: none; border-top: 1px dashed #0066CC;" />
 </div>
+
+</body>
+
+<script src="resource/js/bootstrap-datetimepicker.min.js"></script>
+<script src="resource/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<!-- <script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+<script src="resource/js/bootstrap-datetimepicker.zh-CN.js"></script> -->
+
+
+<!--  script src="resource/js/xls/excel.js"></script-->
+<!--<script src="js/xlsreader.js"></script>-->
+<script type="text/javascript">
+	$('.form_datetime').datetimepicker({
+		language : 'zh-CN',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 1
+	});
+	$('.form_date').datetimepicker({
+		language : 'fr',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 2,
+		forceParse : 0
+	});
+	$('.form_time').datetimepicker({
+		language : 'fr',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 1,
+		minView : 0,
+		maxView : 1,
+		forceParse : 0
+	});
+</script>

@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.foolrank.model.CompanyModel;
+import com.squareup.okhttp.Request;
 
 import com.foolrank.util.RequestUtil;
 
@@ -34,6 +39,7 @@ import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
 import zpl.oj.model.responsejson.ResponseQuizs;
+import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
@@ -56,6 +62,9 @@ public class QuizController {
 	private LabelService labelService;
 	@Autowired
 	private QuizDao quizDao;
+
+	@Autowired
+	private ImgUploadService imgUploadService;
 
 	@RequestMapping(value = "/queryByID")
 	@ResponseBody
@@ -179,6 +188,90 @@ public class QuizController {
 		rb.setMessage(msg);
 
 		return rb;
+	}
+
+	// 保存通用设置中的开始时间和结束时间及摄像头是否必须开启
+	@RequestMapping(value = "/saveTime")
+	@ResponseBody
+	public ResponseBase saveTime(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		String openCamera = params.get("openCamera");
+		String startTime = params.get("starttime");
+		String deadTime = params.get("deadtime");
+		String squizid = params.get("quizid");
+		String durations = params.get("duration");
+		ResponseMessage msg = new ResponseMessage();
+		if(squizid==null){
+			msg.setMsg("当前试卷不存在，您可能未登录");
+			rb.setState(1);
+			rb.setMessage(msg);
+			return rb;
+			
+		}		
+		if(openCamera==null){
+			msg.setMsg("开启摄像头异常，请刷新！");
+			rb.setState(2);
+			rb.setMessage(msg);
+			return rb;
+			
+		}
+		
+		
+		if (durations == null) {
+			msg.setMsg("考试时间不能为空！");
+			rb.setState(3);
+			rb.setMessage(msg);
+			return rb;
+
+		}
+		int duration = Integer.parseInt(durations);
+
+		int quizid = Integer.parseInt(squizid);
+		Quiz quiz = quizDao.getQuiz(quizid);
+		quiz.setStartTime(startTime);
+		quiz.setEndTime(deadTime);
+		quiz.setTime(duration);
+		quizDao.updateQuiz(quiz);
+		msg.setMsg("update seccuss!!");
+		rb.setState(0);
+		rb.setMessage(msg);
+		return rb;
+	}
+
+	// 插入竞赛图片或
+	@RequestMapping(value = "/uploadimg")
+	@ResponseBody
+	public ResponseBase uploadCompanyImg(
+			@RequestParam MultipartFile[] file,
+			// @RequestBody Map<String, String> params,
+			@RequestHeader(value = "Authorization", required = false) String imgifo) {
+
+		ResponseBase rb = new ResponseBase();
+
+		int quizId = Integer.parseInt(imgifo);
+		Quiz quiz = quizDao.getQuiz(quizId);
+
+		if (quiz == null) {
+			rb.setState(1);
+			rb.setMessage("图片插入错误，无法找到该公司");
+			return rb;
+		}
+
+		if (file == null) {
+			rb.setState(2);
+			rb.setMessage("图片不可为空");
+			return rb;
+		}
+
+		for (MultipartFile fileitem : file) {
+			if (!fileitem.isEmpty()) {
+				imgUploadService.saveTestImg(quiz, fileitem);
+			}
+
+		}
+		rb.setMessage(quiz);
+		return rb;
+
 	}
 
 	@RequestMapping(value = "/manage")
@@ -356,6 +449,9 @@ public class QuizController {
 			return rb;
 		}
 
+
+
+
 		rb.setState(0);
 		rb.setMessage(quizT.getQuizId());
 		return rb;
@@ -368,6 +464,7 @@ public class QuizController {
 	public ResponseBase setPub(@RequestBody Map<String, String> param) {
 		ResponseBase rb = new ResponseBase();
 
+<<<<<<< HEAD
 		int testId = RequestUtil.getIntParam(param, "testid", 0);
 		int publicFlag = RequestUtil.getIntParam(param, "publicFlag", -1);
 		String pubStartTime = RequestUtil.getStringParam(param, "st", true);
@@ -400,20 +497,40 @@ public class QuizController {
 	// 判断是否有公开挑战赛
 	@RequestMapping(value = "/checkpub", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseBase checkPub(@RequestBody Map<String, Object> param) {
+	public ResponseBase checkPub(@RequestBody Map<String, String> param) {
 		ResponseBase rb = new ResponseBase();
-		String testid = (String) param.get("testid");
-		if (testid == null) {
-			rb.setState(1);
-			rb.setMessage("testid不可为空");
+		
+		if (param.get("testid") == null || param.get("publicFlag") == null) {
+			rb.setState(2);
+			rb.setMessage("输入均不可为空");
 			return rb;
 		}
+		
+		String testid = (String) param.get("testid");
 		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
+		
 
+		String publicFlag = param.get("publicFlag");
+		String testTail = param.get("testTail");
+		if (testTail == null || quiz.getLogo() == null) {
+			rb.setState(3);
+			rb.setMessage("竞赛logo和竞赛详情不能为空");
+			return rb;
+		}
+		String signedKey = "";
+		if (publicFlag.equals("0")) {
+			signedKey = MD5Util.stringMD5(testid
+					+ StringUtil.toDateTimeString(new Date()));
+		}
+		quiz.setSignedKey(signedKey);
+		quiz.setDescription(testTail);
+
+		quizDao.updateQuiz(quiz);
 		rb.setState(0);
-		rb.setMessage(quiz.getSignedKey());
+		rb.setMessage(signedKey);
 		return rb;
-
 	}
+
+
 
 }

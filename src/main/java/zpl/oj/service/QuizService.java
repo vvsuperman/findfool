@@ -31,6 +31,9 @@ public interface QuizService {
 	void deleteQuestionFromTest(QuizProblem quizProblem);
 	
 	Integer genQuiz(String quizName, int uid);
+
+	void saveTime(int quizid, String openCamera, String startTime,
+			String deadTime);
 	
 	
 	

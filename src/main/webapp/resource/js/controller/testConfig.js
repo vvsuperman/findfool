@@ -16,9 +16,19 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 	$scope.angmodel = [];
 	$scope.angmodel.labeladded = "";
 	$scope.angmodel.emailadded = "";
+	
+	
+	$scope.camera={};
+	$scope.test = [];
+	$scope.test.tail= "";
+	$scope.time={};
+	$scope.camera.selected=0;
+	$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"}];
 
+	$scope.duration=70;
 	$scope.name = Data.tname();
 
+	
 	$scope.updateTestLabels = function() {
 		$http({
 			url : WEBROOT + "/label/getlabels",
@@ -178,10 +188,13 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     
     //将挑战赛设为公有
     $scope.setPublic = function(){
+    	
+    	
+    	
     		$http({
                 url: WEBROOT+"/test/setpub",
                 method: 'POST',
-        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag}
+        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag,"testTail":$scope.test.tail}
             }).success(function (data) {
             	if(data.state ==0){
             		if(data.message!=""){
@@ -199,6 +212,64 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
             });
     	
     }
+    
+    
+    
+    $scope.upload = function (tname, userlist) {
+        $http({
+            url: WEBROOT+"/test/manage/invite",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            
+//          data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content, "starttime": $scope.startTime, "deadtime": $scope.endTime}
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            //Data.token = data["token"];
+            $scope.message = data["message"];
+            if ($scope.state) {
+            	removeTip();
+            	flashTip("邀请成功")
+            } else {
+            	flashTip($scope.message.msg)
+            }
+        }).error(function (data) {
+        });	
+    };
+  
+    
+    //保存开始时间、结束时间和摄像头是否开启
+    $scope.saveTime = function () { 	    
+    	
+    	if(Data.tid()==null){
+    	   	flashTip("保存异常，您可能未登录！")
+    	}else if($scope.camera.selected==null){
+    		flashTip("参数错误")
+    	}else if($scope.time.duration==null){
+    		flashTip("考试时间不能为空")
+    	}else{
+    	
+    	 $http({
+             url: WEBROOT+"/test/saveTime",
+             method: 'POST',
+             headers: {
+                 "Authorization": Data.token()
+             },      
+             data:  {"quizid":Data.tid(),"starttime":$scope.time.startTime,"deadtime":$scope.time.endTime,"openCamera":$scope.camera.selected,"duration":$scope.time.duration}
+         }).success(function (data) {
+             $scope.state = data["state"];//1 true or 0 false
+             $scope.message = data["message"];
+             if (!$scope.state) {
+             	flashTip("保存成功")
+             } else {
+             	flashTip($scope.message.msg)
+             }
+         }).error(function (data) {
+         });
+    	 }
+    };
     
    
     

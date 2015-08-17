@@ -11,9 +11,9 @@ OJApp.controller("invite",['$scope','$http','Data',function($scope, $http, Data)
 OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) {
 	$scope.duration=70;
 	
-	$scope.camera={};
-	$scope.camera.selected=0;
-	$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"}];
+	//$scope.camera={};
+	//$scope.camera.selected=0;
+	//$scope.options=[{id:0,content:"必须开启"},{id:1,content:"不开启"}];
 //	$scope.options=[{id:0,content:"必须开启"}];
 	$scope.subject = "笔试邀请";
 	
@@ -141,7 +141,9 @@ OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) 
             },
             
 //          data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid": $scope.tnamelist[tname], "invite": userlist, "context": $scope.content}
-            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content, "starttime": $scope.startTime, "deadtime": $scope.endTime}
+//            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content, "starttime": $scope.startTime, "deadtime": $scope.endTime}
+            data: {"user": {"uid": Data.uid()}, "subject": $scope.subject,"duration":$scope.duration, "replyTo": $scope.replyTo, "quizid":Data.tid(), "invite": userlist, "context": $scope.content}
+
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             //Data.token = data["token"];
@@ -166,7 +168,7 @@ OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) 
             	   }
             	
                     
-                	$scope.xlsusers[user].openCamera=$scope.camera.selected;
+                	//$scope.xlsusers[user].openCamera=$scope.camera.selected;
                     tmp.push($scope.xlsusers[user]);
             }
             loadingTip();

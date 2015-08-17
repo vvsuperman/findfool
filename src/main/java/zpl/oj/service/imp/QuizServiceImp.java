@@ -197,10 +197,21 @@ public class QuizServiceImp implements QuizService {
 			 quizProblemDao.insertQuizproblem(quizProblem);
 		}
 		
-		
-
 		return quizId;
 		
+	}
+
+	@Override
+	public void saveTime(int quizid, String openCamera, String startTime,
+			String deadTime) {
+	 
+	           Quiz   quiz =quizDao.getQuiz(quizid);
+	           quiz.setEndTime(deadTime);
+	           quiz.setStartTime(startTime);
+	           int openCameras =Integer.parseInt(openCamera);
+	           quiz.setOpenCamera(openCameras);        	             
+		       quizDao.saveTime(quiz);
+		     		
 	}
 
 }

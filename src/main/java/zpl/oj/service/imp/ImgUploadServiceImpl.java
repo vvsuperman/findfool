@@ -12,8 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.ImgUploadDao;
+import zpl.oj.dao.QuizDao;
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
+import zpl.oj.model.common.Quiz;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.util.StringUtil;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
@@ -37,7 +39,8 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	@Autowired
 	CompanyDao companyDao;
 	
-	
+	@Autowired
+	QuizDao quizDao;
 	
 	
 	@Override
@@ -195,6 +198,20 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	public void saveCompanyImg(CompanyModel company, String img, Integer flag) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void saveTestImg(Quiz quiz, MultipartFile fileitem) {
+
+		String filename = quiz.getName()
+				+ StringUtil.toDateTimeString(new Date());
+		pushImg(filename, fileitem);
+		// 保存封面
+		
+			quiz.setLogo(filename);
+	         quizDao.updateQuiz(quiz);
+	          
 	}
 
 }

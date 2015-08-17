@@ -21,7 +21,8 @@ public interface QuizDao {
 	Quiz getQuizByKey(String signedkey);
 	
 
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status,signed_key as signedKey, start_time as startTime, end_time as endTime "
+
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status , signed_key as signedKey, start_time as startTime, end_time as endTime ,openCamera, logo, description "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
 	Quiz getQuiz(int tid);
 
@@ -55,7 +56,7 @@ public interface QuizDao {
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
-	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS  "
+	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS "
 			+ " FROM quiz WHERE OWNER=#{0} order by date desc ")
 	List<Quiz> getQuizs(int owner);
 
@@ -74,4 +75,13 @@ public interface QuizDao {
 	
 	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status FROM quiz WHERE type=1 AND signed_key=#{0}")
 	Quiz getChallengeBySignedKey(String signedKey);
+
+
+	
+	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
+			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, "
+			+ "UUID = #{uuid},  EMAILS = #{emails}, signed_key=#{signedKey},"
+			+"start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera}"
+			+ " where QUIZID = #{quizid}")
+	void saveTime(Quiz quiz);
 }

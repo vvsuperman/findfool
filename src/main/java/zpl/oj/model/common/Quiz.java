@@ -110,6 +110,8 @@ public class Quiz implements Serializable {
 	 */
 	private int status;
 
+	
+
 	// 统计数据，方便向前端传递，非数据库字段
 	// 统计数据：题量
 	private int questionNum;
@@ -124,7 +126,7 @@ public class Quiz implements Serializable {
 	private String pubEndTime;
 	// 开启摄像头标记
 	private int openCamera;
-
+	
 	public int getQuestionNum() {
 		return questionNum;
 	}
