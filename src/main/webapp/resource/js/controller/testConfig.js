@@ -45,7 +45,32 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		});
 	}
 
-
+	
+	$scope.getconfig = function() {
+		$http({
+			url : WEBROOT + "/test/getconfig",
+			method : 'POST',
+			data : {
+				"testid" : $scope.tid
+			}
+		}).success(function(data) {
+			$scope.quiz = data["message"];
+			$scope.time.startTime=$scope.quiz.startTime;
+			$scope.time.endTime=$scope.quiz.endTime;
+			$scope.time.duration=$scope.quiz.time;
+			$scope.test.tail=$scope.quiz.description;
+			$scope.camera.selected=$scope.quiz.openCamera;
+		
+		}).error(function() {
+			console.log("get data failed");
+		});
+	}
+	$scope.getconfig();
+	
+	
+	
+	
+	
 
 	$scope.orseclected = function(value) {
 
@@ -188,9 +213,12 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     
     //将挑战赛设为公有
     $scope.setPublic = function(){
-    	
-    	
-    	
+    	console.log("执行了setpublic的方法");
+    	if($scope.test.tail==''){
+    		flashTip("挑战赛详情不能为空");
+    		console.log("执行了判断的方法");
+    		
+    	}else{
     		$http({
                 url: WEBROOT+"/test/setpub",
                 method: 'POST',
@@ -210,6 +238,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
             }).error(function(){
            	 console.log("get data failed");
             });
+    	}
     	
     }
     
