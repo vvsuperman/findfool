@@ -47,8 +47,15 @@ public class PersonalService {
 		List<Invite> inviteList = inviteDao.getInviteByUid(testuser.getTuid());
 		for (Invite invite : inviteList) {
 			Challenge challenge = new Challenge();
+			if(invite.getHrid()==null){
+				continue;
+			}
 			User user = userDao.getUserIdByUid(invite.getHrid());
+			if(user==null){
+				continue;
+			}
 			CompanyModel company = companyDao.getByUid(user.getCompanyId());
+		
 			Quiz quiz = quizDao.getQuiz(invite.getTestid());
 			challenge.setChallengeScore(invite.getScore());
 			if (company != null) {

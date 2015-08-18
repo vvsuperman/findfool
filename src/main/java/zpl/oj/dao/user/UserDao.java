@@ -59,7 +59,7 @@ public interface UserDao {
 //	List<Quiz> getQuizByUid(int uid);
 //	
 	
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS,DESCRIPTION "
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS,DESCRIPTION ,start_time as startTime,end_time as endTime "
 			+ "FROM QUIZ WHERE OWNER = #{0} and type=#{1}")
 	List<Quiz> getQuizByUid(int uid,int quizTypeChallenge);
 

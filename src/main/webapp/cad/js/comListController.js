@@ -37,8 +37,8 @@ OJApp.controller('comListController',['$scope','$http','CadData','Data',function
 			
 		}
 
-//		$scope.comListByType();
-		$scope.comListAll();
+		$scope.comListByType();
+		//$scope.comListAll();
 
 		
 		$scope.showCompanyTest=function(company){

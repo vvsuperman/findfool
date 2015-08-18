@@ -14,6 +14,7 @@ import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.user.UserDao;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.request.User;
+import zpl.oj.util.StringUtil;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
@@ -115,11 +116,20 @@ public class CompanyService {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Quiz> quizList = new ArrayList<Quiz>();
+		String nowtime = StringUtil.nowDateTime();
 		for (User user : userList) {
 			// 做常量
 			List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
 					ExamConstant.QUIZ_TYPE_CHALLENGE);
 			for (Quiz quiz : quizListUse) {
+				if(quiz.getStartTime()!="" && nowtime.compareTo(quiz.getStartTime())<0 ){
+				   quiz.setStatus(1);
+				}else if(quiz.getEndTime()!="" &&nowtime.compareTo( quiz.getEndTime())>0){
+				quiz.setStatus(3);
+				}else{
+					quiz.setStatus(2);
+				}
+						
 				quizList.add(quiz);
 			}
 

@@ -130,15 +130,28 @@ public class ChallengeController {
 		
 		String nowtime = StringUtil.nowDateTime();
 		
-		if(quiz.getStartTime()!="" && quiz.getStartTime().compareTo(nowtime)<0 ){
+//		if(quiz.getStartTime()!="" && quiz.getStartTime().compareTo(nowtime)<0 ){
+//			rb.setState(20002);
+//			rb.setMessage("挑战赛未开始");
+//			return rb;
+//		}else if(quiz.getEndTime()!="" && quiz.getEndTime().compareTo(nowtime)>0){
+//			rb.setState(20003);
+//			rb.setMessage("挑战赛已结束");
+//			return rb;
+//		}
+		
+		if(quiz.getStartTime()!="" && nowtime.compareTo(quiz.getStartTime())<0 ){
 			rb.setState(20002);
 			rb.setMessage("挑战赛未开始");
 			return rb;
-		}else if(quiz.getEndTime()!="" && quiz.getEndTime().compareTo(nowtime)>0){
+		}else if(quiz.getEndTime()!="" &&nowtime.compareTo( quiz.getEndTime())>0){
 			rb.setState(20003);
 			rb.setMessage("挑战赛已结束");
 			return rb;
 		}
+		
+		
+		
 
 		// 生成invite
 		Invite invite = inviteDao.getInvites(quizId, email);
@@ -309,7 +322,7 @@ public class ChallengeController {
 				frQuizNaver.add(quiz);
 			} else if (number2 == 1) {
 				frQuizOver.add(quiz);
-			} else if ((number1 == 1) && (number2 == -1)) {
+			} else if ((number1 == 1) && (number2 <0)) {
 				frQuizBegin.add(quiz);
 			}
 

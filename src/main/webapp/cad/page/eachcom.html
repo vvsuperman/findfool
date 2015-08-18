@@ -38,9 +38,17 @@
                         </div>
                     </div>
                 </div>
+                
+                
+                
                 <div class="col-sm-9">
                 
-                    <div class="com-activities" ng-repeat="quiz in quizList">
+               <!--  <div class="underway" >-->
+                 <div class="squad-title">
+                    <h3>已开始</h3>
+                </div>
+                    <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==2">
+                    
                         <h5>
                             {{quiz.name}}
                         </h5>
@@ -50,10 +58,69 @@
 	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
 	                          开始挑战
 	                         </button>
+                        
+                        </div>
+                        
+                       </div>
+                        
+                           <div class="underway" >
+                 <div class="squad-title">
+                    <h3>即将开始</h3>
+                </div>
+                    <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==1">
+                    
+                        <h5>
+                            {{quiz.name}}
+                        </h5>
+
+                        <p>{{quiz.description}}</p>
+                        <div style="margin-bottom: 10px" >
+	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
+	                          开始挑战
+	                         </button>
+                        
                         </div>
                     </div>
                     
                 </div>
+                        
+                        
+                         <div class="underway" >
+                 <div class="squad-title">
+                    <h3>已经结束</h3>
+                </div>
+                    <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==3">
+                    
+                        <h5>
+                            {{quiz.name}}
+                        </h5>
+
+                        <p>{{quiz.description}}</p>
+                        <div style="margin-bottom: 10px" >
+	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
+	                          开始挑战
+	                         </button>
+                        
+                        </div>
+                    </div>
+                    
+                </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                  
+                    
+               
+                </div>
+                
+                
 
             </div>
         </div>
