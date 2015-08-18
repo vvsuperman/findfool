@@ -75,8 +75,6 @@ public class CompanyController {
 
 		return rb;
 	}
-	
-
 
 	// 根据公司id，查找该公司所有挑战赛
 	@RequestMapping(value = "/findAllTest")
@@ -108,9 +106,9 @@ public class CompanyController {
 	@RequestMapping(value = "/create")
 	@ResponseBody
 	public ResponseBase create(@RequestBody Map<String, String> params) {
-		
+
 		ResponseBase rb = new ResponseBase();
-		
+
 		String name = RequestUtil.getStringParam(params, "name", true);
 		String tel = RequestUtil.getStringParam(params, "mobile", true);
 		String address = RequestUtil.getStringParam(params, "address", true);
@@ -123,13 +121,12 @@ public class CompanyController {
 		company.setWebsite(website);
 		company.setDescription(description);
 		company.setTel(tel);
-		if(companyDao.findByName(name)!=null){
+		if (companyDao.findByName(name) != null) {
 			rb.setState(1);
 			rb.setMessage("公司已存在");
 			return rb;
 		}
-		
-		
+
 		companyDao.add(company);
 		CompanyModel companymodel = companyService
 				.findByName(company.getName());
@@ -138,8 +135,6 @@ public class CompanyController {
 
 		return rb;
 	}
-	
-	
 
 	@RequestMapping(value = "/updateimage")
 	@ResponseBody
@@ -184,8 +179,8 @@ public class CompanyController {
 				true);
 		CompanyModel company = companyDao.getById(id);
 		company.setName(name);
-//	    company.setCover(cover);
-//		company.setLogo(logo);
+		// company.setCover(cover);
+		// company.setLogo(logo);
 		company.setAddress(address);
 		company.setTel(tel);
 		company.setWebsite(website);
@@ -203,10 +198,10 @@ public class CompanyController {
 	public ResponseBase findAll() {
 		List<CompanyModel> companyList = companyService.findAll();
 		ResponseBase rb = new ResponseBase();
-	    for(CompanyModel company:companyList){
-	    	String logoLocation = companyService.getImg(company.getLogo());
+		for (CompanyModel company : companyList) {
+			String logoLocation = companyService.getImg(company.getLogo());
 			company.setLogo(logoLocation);
-	    }
+		}
 		rb.setMessage(companyList);
 
 		return rb;
@@ -313,38 +308,25 @@ public class CompanyController {
 
 	}
 
-		
-	
-	
+	// 得到公司详情
+	@RequestMapping(value = "/getcomTail")
+	@ResponseBody
+	public ResponseBase getcomTail(@RequestBody Map<String, String> params) {
+		String strComid = params.get("comid");
+		ResponseBase rb = new ResponseBase();
 
-	
-		
-		//得到公司详情
-		@RequestMapping(value = "/getcomTail")
-		@ResponseBody
-		public ResponseBase getcomTail(@RequestBody Map<String, String> params) {
-			String strComid = params.get("comid");
-			ResponseBase rb = new ResponseBase();
+		int comid = strComid == null ? 0 : Integer.parseInt(strComid.trim());
 
-			int comid = strComid == null ? 0 : Integer
-					.parseInt(strComid.trim());
-			
-			if(comid==0){
-				rb.setState(1);
-				return rb;
-			}
-	
-
-	      Map<String,Object>    map	=companyService.getcomTail(comid);
-			
-          rb.setMessage(map);
-
-	     
+		if (comid == 0) {
+			rb.setState(1);
 			return rb;
 		}
+		Map<String, Object> map = companyService.getcomTail(comid);
 
+		rb.setMessage(map);
 
-	
+		return rb;
+	}
 
 	// 查询所有挑战赛已经公开的公司
 	@RequestMapping(value = "/comListByType")
@@ -352,9 +334,9 @@ public class CompanyController {
 	public ResponseBase comListByType() {
 		ResponseBase rb = new ResponseBase();
 		List<CompanyModel> companyList = companyService.findAll();
-		for(int i=0;i<companyList.size();i++){
-			CompanyModel companyModel=companyList.get(i);
-  
+		for (int i = 0; i < companyList.size(); i++) {
+			CompanyModel companyModel = companyList.get(i);
+
 			int comid = companyModel.getId();
 
 			if (comid == 0) {
@@ -374,8 +356,7 @@ public class CompanyController {
 			List<Quiz> quizList = new ArrayList<Quiz>();
 			for (User user : userList) {
 				// 做常量
-				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
-						ExamConstant.QUIZ_TYPE_CHALLENGE);
+				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),ExamConstant.QUIZ_TYPE_CHALLENGE);
 				for (Quiz quiz : quizListUse) {
 					quizList.add(quiz);
 				}
@@ -397,8 +378,6 @@ public class CompanyController {
 		return rb;
 	}
 
-	
-	
 	@RequestMapping(value = "/getList")
 	@ResponseBody
 	public ResponseBase getList() {

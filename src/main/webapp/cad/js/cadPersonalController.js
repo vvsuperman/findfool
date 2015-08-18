@@ -10,6 +10,7 @@ console.log("执行了第1步");
 	
 		
 	$scope.email=CadData.getEmail();
+	console.log($scope.email);
 	
 	$scope.cadPersonalList=function(){
 		$http({

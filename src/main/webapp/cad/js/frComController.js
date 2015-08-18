@@ -33,6 +33,7 @@ OJApp.controller('frComController',['$scope','$http','CadData',function ($scope,
 		    window.location.href="#/cad/login";
 		}else{
 			window.location.href="#/pubtesting/"+quizid;
+		//	window.location.href="#/challenge/"+quizid;
 		}
 	}
 
