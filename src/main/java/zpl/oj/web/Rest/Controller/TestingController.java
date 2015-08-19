@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.LogTakeQuizDao;
+import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
@@ -29,6 +30,7 @@ import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
+import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizEmail;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
@@ -68,6 +70,9 @@ public class TestingController {
 	
 	@Autowired
 	private LabelService labelService;
+	
+	@Autowired
+	private QuizDao quizDao;
 
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -127,10 +132,7 @@ public class TestingController {
 		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
-		
 		Invite invite = inviteDao.getInvites(testid, email);
-		
-		
 		String nowDate = df.format(new Date());
 		
 		
@@ -151,6 +153,101 @@ public class TestingController {
 		rb.setState(1);
 		return rb;
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/checkstate")
+	@ResponseBody
+	public ResponseBase checkState(@RequestBody Map<Object,Object> params){
+		ResponseBase rb = new ResponseBase();
+//		Map rtMap = validateUser(params);
+//		String msg = (String) validateUser(params).get("msg");
+//		if(msg !=null){
+//			rb.setMessage(msg);
+//			rb.setState(0);
+//			return rb;
+//		}
+		
+		int testid = (Integer)params.get("testid");
+		String email = (String)params.get("email");
+		Invite invite = inviteDao.getInvites(testid, email);
+		String nowDate = df.format(new Date());
+		Quiz  quiz=quizDao.getQuiz(testid);
+
+			
+		if(quiz.getStartTime()!=null && nowDate.compareTo(quiz.getStartTime())<0){
+			rb.setMessage("试题尚未开始");
+			rb.setState(2);
+			return rb;
+		}
+		
+		else if(quiz.getEndTime()!=null && nowDate.compareTo(quiz.getEndTime())>0){
+			rb.setMessage("试题已截至");
+			rb.setState(3);
+			return rb;
+		} else if(invite==null){
+			rb.setState(1);
+			return rb;
+		}	
+		else if (invite.getState() == ExamConstant.INVITE_FINISH) {
+					rb.setMessage("试题已经完成");
+					rb.setState(0);
+				 
+				return rb;
+			}	
+		rb.setState(1);
+		return rb;
+	}
+		
+//		if(invite==null){
+//			
+//			
+//			rb.setState(1);
+//			return rb;
+//			
+//		}
+//			
+//		if(invite.getStarttime()!=null && nowDate.compareTo(invite.getStarttime())<0){
+//			rb.setMessage("试题尚未开始");
+//			rb.setState(2);
+//			return rb;
+//		}
+//		
+//		else if(invite.getDeadtime()!=null && nowDate.compareTo(invite.getDeadtime())>0){
+//			rb.setMessage("试题已截至");
+//			rb.setState(3);
+//			return rb;
+//		} else{
+//			
+//			 if (invite.getState() == ExamConstant.INVITE_FINISH) {
+//					rb.setMessage("试题已经完成");
+//					rb.setState(0);
+//				 
+//				return rb;
+//			}
+//			
+//			
+//		}
+//
+//		
+//		rb.setState(1);
+//		return rb;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/getLabels")
 	@ResponseBody
