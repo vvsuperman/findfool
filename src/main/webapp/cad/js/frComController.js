@@ -9,7 +9,7 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 	
 	$scope.getFrChallage=function(){
 		$http({
-			url : WEBROOT + "/challenge/getFrChallage",
+					url : WEBROOT + "/challenge/getFrChallage",
 			method : 'POST',
 			data : {
 			

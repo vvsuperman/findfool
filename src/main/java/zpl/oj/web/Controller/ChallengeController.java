@@ -30,6 +30,7 @@ import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.dao.user.UserDao;
 import zpl.oj.model.common.CadTest;
 import zpl.oj.model.common.Invite;
+import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.Testuser;
@@ -37,6 +38,8 @@ import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.InviteService;
+import zpl.oj.service.LabelService;
 import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.imp.CompanyService;
 import zpl.oj.util.StringUtil;
@@ -75,7 +78,12 @@ public class ChallengeController {
 	
 	@Autowired
 	private TuserService tuserService;
+	
+	@Autowired
+	private LabelService labelService;
 
+	
+	private InviteService inviteService;
 	
 	
 	//根据signedid获取testid
@@ -219,6 +227,17 @@ public class ChallengeController {
 			tuserProblem.setProblemid(problem.getProblemId());
 			
 			tuserProblemDao.insertTuserProblem(tuserProblem);
+		}
+		
+		List<Labeltest> labeltests = labelService.getLabelsOfTest(quizId);
+		for (Labeltest lt : labeltests) {
+			Invite invite2 = inviteService.getInvites(quizId,email);
+			if (labelService.getLabelUserByIidAndLid(invite2.getIid(),
+					lt.getLabelid()) == null) {
+				labelService.insertIntoLabelUser(invite2.getIid(),
+						lt.getLabelid(), "");
+			}
+
 		}
 		
 		return invite;
