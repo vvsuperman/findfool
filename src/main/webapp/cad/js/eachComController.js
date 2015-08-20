@@ -39,7 +39,34 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 		if(email==null){
 		    window.location.href="#/cad/login";
 		}else{
-			window.location.href="#/pubtesting/"+quizid;
+			 $http({
+		         url: WEBROOT+"/testing/checkstate",
+		         method: 'POST',
+			     data: {"email":CadData.getEmail(), "testid":quizid}
+		     }).success(function (data) {
+		         //测试未开始
+		    	 if( data.state == 0){	
+		    		 console.log("执行了第1步，");
+
+			    	smoke.alert("您已经参加过本次挑战，不能重复挑战！");
+		    	 }else if(data.state==2){ //试题尚未开始
+		    		 console.log("执行了第2步，");
+
+		    			smoke.alert("挑战还未开始，请您耐心等待！");
+		    	 }else if(data.state==3){//试题已截至
+		    		 console.log("执行了第3步，");
+
+		    		 smoke.alert("挑战赛已经结束，下次早点来哟！");
+		    	 }
+		    	 else{
+		    		 console.log("执行了第4步，");
+		 			window.location.href="#/pubtesting/"+quizid;
+
+		    	 }	 
+		         
+		     }).error(function(){
+		    	 console.log("get data failed");
+		     })
 		}
 	}
 	

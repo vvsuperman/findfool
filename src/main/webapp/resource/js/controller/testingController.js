@@ -29,7 +29,6 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	    	 }
 	    	 else{
 	    		 $scope.show = 1;
-	    		
 	    		//测试数据
 	    	     //$scope.show = 2;
 	    	 }	 
@@ -668,6 +667,18 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	     }).success(function (data) {
 	    	if(data.state==0){
 	    		//跳转到完成页面
+	   
+	    		console.log(url);
+	    		console.log($scope.tid);
+	    		if((typeof(url)=="undefined")&&(typeof($scope.tid)=="undefined")){
+	    			smoke.alert("参数错误");
+	    			console.log("执行了673");
+	    		}else if((typeof(url)=="undefined")&&(typeof($scope.tid)!="undefined")){
+	    			console.log("执行了675");
+	    			smoke.alert("完成本次测试");
+	    			 window.location.href='#/cad/comlist';	
+	    		}
+	    		console.log("执行了681");
 	    		$scope.show = 5;
 	    	}else{
 	    		alert(data.message);

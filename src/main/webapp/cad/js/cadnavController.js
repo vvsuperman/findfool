@@ -26,6 +26,7 @@ OJApp.controller('cadNavController',['$scope','$http','CadData','Data',function 
 	$scope.loginOut=function(){
 		CadData.clear();
 	    window.location.href="#/cad/comlist";		
+	    window.location.reload(true);
 	}
 	
 }])
