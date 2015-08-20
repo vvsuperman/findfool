@@ -1,30 +1,25 @@
-<nav class="navbar navbar-default" ng-controller="cadNavController">
+ <nav class="navbar navbar-default navbar-fixed-top " role="navigation" ng-controller="cadNavController">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>          
+                 <a class="navbar-brand" href="http://foolrank.com/#/"><img alt="" style="width: 20px" class="img-responsive" src="resource/static/foollogolarge.png"></a>
+                 <a class="navbar-brand" href="http://foolrank.com/#/">FoolRank</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                     <li >
+	                   <a href="#/cad/comlist">企业挑战赛</a>
+	                 </li>
+			         <li ><a href="#/cad/frcom">FR挑战赛</a></li>
+			         <li><a href="#">练习大厅</a></li>
+			         <li><a href="#/cad/rank">排行榜</a></li>
+			      
+			         <li ng-show="isLogin(1)"><a href="#/cad/signup">注册</a></li>
+			          <li ng-show="isLogin(1)"><a href="#/cad/login">登录</a></li>
+			          <li> <a href="#/cad/personal" >{{username}}</a>
+			          <li ng-show="isLogin(2)"><a  ng-click="loginOut()"  href="">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-     <ul class="nav navbar-nav">
-        <li class="active"><a href="#/cad/comlist" >企业挑战赛<span class="sr-only"></span></a></li>
-        <li ><a href="#/cad/frcom">FR挑战赛</a></li>
-        <li><a href="#">练习大厅</a></li>
-        <li><a href="#/cad/rank">排行榜</a></li>
-        <li><a href="#/">企业入口</a></li>
-     </ul> 
-     
-     <ul class="nav navbar-nav navbar-right">
-          <li ng-show="isLogin(1)"><a href="#/cad/signup">注册</a></li>
-          <li ng-show="isLogin(1)"><a href="#/cad/login">登录</a></li>
-          <li> <a href="#/cad/personal" >{{username}}</a>
-          <li ng-show="isLogin(2)"><a  ng-click="loginOut()"  href="">退出</a></li>
-     </ul>
-        
-   </div>
-
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
