@@ -33,6 +33,7 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 		    window.location.href="#/cad/login";
 		}else{
 
+
 			 $http({
 		         url: WEBROOT+"/testing/checkstate",
 		         method: 'POST',
@@ -58,6 +59,7 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 
 			
 			
+			window.location.href="#/pubtesting/"+quizid;
 		}
 	}
 
