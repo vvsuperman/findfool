@@ -105,4 +105,12 @@ public class ExamConstant {
 	public static final int STATUS_UNSTART = 1;
 	public static final int STATUS_RUNNING = 2;
 	public static final int STATUS_FINISHED = 3;
+	
+	
+	// 公司挑战/挑战赛时间是否开始
+		public static final int COMPANY_OVER = -1;
+		public static final int COMPANY_START = 0;
+		public static final int COMPANY_NERVER = 1;
+	
+	
 }

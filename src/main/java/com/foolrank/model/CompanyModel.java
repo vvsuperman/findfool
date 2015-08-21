@@ -10,6 +10,17 @@ public class CompanyModel {
 	private String tel;
 	private String website;
 	private String description;
+	private int invitestate;
+	
+	
+	public int getInvitestate() {
+		return invitestate;
+	}
+
+	public void setInvitestate(int invitestate) {
+		this.invitestate = invitestate;
+	}
+
 	public int getUid() {
 		return uid;
 	}

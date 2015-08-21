@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -356,7 +358,8 @@ public class CompanyController {
 			List<Quiz> quizList = new ArrayList<Quiz>();
 			for (User user : userList) {
 				// 做常量
-				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),ExamConstant.QUIZ_TYPE_CHALLENGE);
+				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
+						ExamConstant.QUIZ_TYPE_CHALLENGE);
 				for (Quiz quiz : quizListUse) {
 					quizList.add(quiz);
 				}
@@ -366,6 +369,46 @@ public class CompanyController {
 				companyList.remove(companyModel);
 				i = i - 1;
 				continue;
+			}
+			// 判断是否测试已开始
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+			Date date = new Date();
+			String str = df.format(date);
+
+			int[] companyflag = { -1, -1, -1 };
+			//companyflag作为数组标记位，
+            //进行循环，对所有挑战赛的标记位进行赋值
+			for (Quiz quiz : quizList) {
+				if (quiz.getStartTime().equals("")
+						|| quiz.getEndTime().equals("")) {
+					companyflag[1] = ExamConstant.COMPANY_START;
+					break;
+				}
+			
+				int number1 = str.compareTo(quiz.getStartTime());
+				int number2 = str.compareTo(quiz.getEndTime());
+				if ((number1 > 0) && (number2 < 0)) {
+					companyflag[1] = ExamConstant.COMPANY_START;
+					break;
+				}
+				if (number1 < 0) {
+					companyflag[2] = ExamConstant.COMPANY_NERVER;
+				}
+				if (number2 > 0) {
+					companyflag[0] = ExamConstant.COMPANY_OVER;
+				}
+			}
+			
+			//根据优先级进行赋值，优先级分别是：已经开始，即将开始，已经结束；
+			if (companyflag[1] == ExamConstant.COMPANY_START) {
+				companyModel.setInvitestate(ExamConstant.COMPANY_START);
+			} else if (companyflag[2] == ExamConstant.COMPANY_NERVER) {
+				companyModel.setInvitestate(ExamConstant.COMPANY_NERVER);
+
+			} else {
+				companyModel.setInvitestate(ExamConstant.COMPANY_OVER);
+
 			}
 
 			String logoLocation = companyService.getImg(companyModel.getLogo());

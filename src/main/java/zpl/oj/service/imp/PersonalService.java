@@ -20,42 +20,42 @@ import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.request.User;
+
 @Service
 public class PersonalService {
 
 	@Autowired
 	private TestuserDao testuserDao;
-	
+
 	@Autowired
 	private InviteDao inviteDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private CompanyDao companyDao;
 
 	@Autowired
 	private QuizDao quizDao;
-	
 
 	public Map<String, Object> findAllList(String email) {
-		
+
 		List<Challenge> myChallenge = new ArrayList<Challenge>();
 		Testuser testuser = testuserDao.findTuserByEmail(email);
 
 		List<Invite> inviteList = inviteDao.getInviteByUid(testuser.getTuid());
 		for (Invite invite : inviteList) {
 			Challenge challenge = new Challenge();
-			if(invite.getHrid()==null){
+			if (invite.getHrid() == null) {
 				continue;
 			}
 			User user = userDao.getUserIdByUid(invite.getHrid());
-			if(user==null){
+			if (user == null) {
 				continue;
 			}
 			CompanyModel company = companyDao.getByUid(user.getCompanyId());
-		
+
 			Quiz quiz = quizDao.getQuiz(invite.getTestid());
 			challenge.setChallengeScore(invite.getScore());
 			if (company != null) {
@@ -67,29 +67,22 @@ public class PersonalService {
 
 				challenge.setChallengeName(quiz.getExtraInfo());
 			}
+			
+	         int rankmodel =inviteDao.getRankByTidUid(invite.getTestid(),testuser.getTuid());
+		     int rank=rankmodel+1;
+	         challenge.setChallengeRank(rank);
+		     challenge.setChallengeTime(invite.getBegintime());
 
 			myChallenge.add(challenge);
 
-	}
-		
-		
-		
-		
-		
-		  Map<String,Object> map=new HashMap<String,Object>();
-		  
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		map.put("myChallenge", myChallenge);
-		map.put("testuser",testuser);
-		
-		
+		map.put("testuser", testuser);
+
 		return map;
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 }
