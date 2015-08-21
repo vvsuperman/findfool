@@ -123,11 +123,11 @@ public class CompanyService {
 					ExamConstant.QUIZ_TYPE_CHALLENGE);
 			for (Quiz quiz : quizListUse) {
 				if(quiz.getStartTime()!="" && nowtime.compareTo(quiz.getStartTime())<0 ){
-				   quiz.setStatus(1);
+				   quiz.setStatus(1);//未开始
 				}else if(quiz.getEndTime()!="" &&nowtime.compareTo( quiz.getEndTime())>0){
-				quiz.setStatus(3);
+				   quiz.setStatus(3);//已结束
 				}else{
-					quiz.setStatus(2);
+				   quiz.setStatus(2);//正在进行
 				}
 						
 				quizList.add(quiz);

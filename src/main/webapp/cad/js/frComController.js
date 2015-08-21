@@ -32,8 +32,6 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 		if(email==null){
 		    window.location.href="#/cad/login";
 		}else{
-
-
 			 $http({
 		         url: WEBROOT+"/testing/checkstate",
 		         method: 'POST',
@@ -43,9 +41,9 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 		    	 if( data.state == 0){		
 			    	smoke.alert("您已经参加过本次挑战，不能重复挑战！");
 		    	 }else if(data.state==2){ //试题尚未开始
-		    			smoke.alert("挑战还未开始，请您耐心等待！");
+		    		smoke.alert("挑战还未开始，请您耐心等待！");
 		    	 }else if(data.state==3){//试题已截至
-		    		 smoke.alert("挑战赛已经结束，下次早点来哟！");
+		    		smoke.alert("挑战赛已经结束，下次早点来哟！");
 		    	 }
 		    	 else{
 		 			window.location.href="#/pubtesting/"+quizid;

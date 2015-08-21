@@ -49,11 +49,15 @@
                 </div>
                     <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==2">
                     
-                        <h5>
-                            {{quiz.name}}
-                        </h5>
+                        <p>
+                            <span style="font-size:20px">{{quiz.name}}</span>
+                            <span class="pull-right">时间:{{quiz.startTime}}-{{quiz.endTime}}</span>
+                        </p>
 
-                        <p>{{quiz.description}}</p>
+                        <p>
+                          <span>{{quiz.description}}</span>
+                        </p>
+                        
                         <div style="margin-bottom: 10px" >
 	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
 	                          开始挑战
@@ -97,7 +101,7 @@
 
                         <p>{{quiz.description}}</p>
                         <div style="margin-bottom: 10px" >
-	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
+	                         <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)" disabled="disabled">
 	                          开始挑战
 	                         </button>
                         

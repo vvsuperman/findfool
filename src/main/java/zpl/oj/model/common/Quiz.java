@@ -27,7 +27,7 @@ public class Quiz implements Serializable {
 		this.finishedNum = 0;
 		this.pubStartTime = "";
 		this.pubEndTime = "";
-		this.openCamera = -1;
+		this.openCamera = 1;
 	}
 
 	/**

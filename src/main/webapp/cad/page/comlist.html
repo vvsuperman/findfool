@@ -21,9 +21,9 @@
    <!--   <div class="container" >  -->
 
             <div class="comesoon" >
-                <!-- <div class="squad-title">
+                <div class="squad-title">
                     <h3>已开始</h3>
-                </div> -->
+                </div> 
                 <div class="media" ng-repeat="company in companyList">
                    <div class="media-left col-md-1" style="padding-top: 20px">
                     <a href="">
@@ -34,8 +34,22 @@
                         <h5  class="media-heading"><a  ng-click="showCompanyTest(company)" href="" >{{company.name}}</a></h5>
                     </div>
                 </div>
-               
-  
+            </div>
+            
+            <div class="comesoon" >
+                <div class="squad-title">
+                    <h3>即将开始</h3>
+                </div> 
+                <div class="media" ng-repeat="company in companyList">
+                   <div class="media-left col-md-1" style="padding-top: 20px">
+                    <a href="">
+                       	 <img class="media-object" ng-src="{{company.logo}}"  style="width:50px" alt="dp">
+                    </a>
+                    </div>
+                    <div class="media-body" >
+                        <h5  class="media-heading"><a  ng-click="showCompanyTest(company)" href="" >{{company.name}}</a></h5>
+                    </div>
+                </div>
             </div>
 
 

@@ -143,6 +143,7 @@ public class QuizServiceImp implements QuizService {
 		quiz.setName(tm.getName());
 		quiz.setDate(new Date());
 		quiz.setOwner(tm.getUser().getUid());
+		quiz.setOpenCamera(1);//默认不开启摄像头
 		quizDao.insertQuiz(quiz);
 		quiz = quizDao.getNewestQuizByOwner(tm.getUser().getUid());
 		quiz.setUuid(quiz.getQuizid());

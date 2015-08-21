@@ -225,8 +225,7 @@ public class QuizController {
 	public ResponseBase saveTime(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
 		String openCamera = params.get("openCamera");
-		String startTime = params.get("starttime");
-		String deadTime = params.get("deadtime");
+		
 		String squizid = params.get("quizid");
 		String durations = params.get("duration");
 		ResponseMessage msg = new ResponseMessage();
@@ -242,7 +241,6 @@ public class QuizController {
 			rb.setState(2);
 			rb.setMessage(msg);
 			return rb;
-			
 		}
 		
 		
@@ -251,15 +249,13 @@ public class QuizController {
 			rb.setState(3);
 			rb.setMessage(msg);
 			return rb;
-
 		}
+		
 		int duration = Integer.parseInt(durations);
-
 		int quizid = Integer.parseInt(squizid);
 		Quiz quiz = quizDao.getQuiz(quizid);
-		quiz.setStartTime(startTime);
-		quiz.setEndTime(deadTime);
 		quiz.setTime(duration);
+		quiz.setOpenCamera(Integer.parseInt(openCamera));
 		quizDao.updateQuiz(quiz);
 		
 		msg.setMsg("update seccuss!!");
@@ -488,13 +484,13 @@ public class QuizController {
 
 	}
 
-	// 设置公开挑战的key
+	// 设置公开挑战赛，并生成url
 	@RequestMapping(value = "/setpub", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase setPub(@RequestBody Map<String, String> param) {
 		ResponseBase rb = new ResponseBase();
 
-		if (param.get("testid") == null || param.get("publicFlag") == null) {
+		if (param.get("testid") == null || param.get("publicFlag") == null||param.get("testTail") == null || param.get("starttime") == null || param.get("deadtime") == null) {
 			rb.setState(2);
 			rb.setMessage("输入均不可为空");
 			return rb;
@@ -503,6 +499,9 @@ public class QuizController {
 		String testid = param.get("testid");
 		String publicFlag = param.get("publicFlag");
 		String testTail = param.get("testTail");
+		String startTime = param.get("starttime");
+		String deadTime = param.get("deadtime");
+		
 		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
 		if (testTail == null || quiz.getLogo() == null) {
 			rb.setState(3);
@@ -516,6 +515,8 @@ public class QuizController {
 		}
 		quiz.setSignedKey(signedKey);
 		quiz.setDescription(testTail);
+		quiz.setStartTime(startTime);
+		quiz.setEndTime(deadTime);
 
 		quizDao.updateQuiz(quiz);
 		rb.setState(0);

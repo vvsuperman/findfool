@@ -6,8 +6,6 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 	
 	$scope.nav = 'cad/page/cadnav.html';
 	$scope.template= 'cad/page/eachcom.html';
-	
-	
 	var comid = $routeParams.comid;
 	$scope.getcomTail=function(){
 		$http({

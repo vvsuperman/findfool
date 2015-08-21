@@ -213,16 +213,14 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     
     //将挑战赛设为公有
     $scope.setPublic = function(){
-    	console.log("执行了setpublic的方法");
-    	if($scope.test.tail==''){
-    		flashTip("挑战赛详情不能为空");
-    		console.log("执行了判断的方法");
+    	if(!$scope.test.tail || !$scope.time.startTime || !$scope.time.endTime ){
+    		flashTip("所有输入皆不可为空");
     		
     	}else{
     		$http({
                 url: WEBROOT+"/test/setpub",
                 method: 'POST',
-        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag,"testTail":$scope.test.tail}
+        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag,"testTail":$scope.test.tail,"starttime":$scope.time.startTime,"deadtime":$scope.time.endTime}
             }).success(function (data) {
             	if(data.state ==0){
             		if(data.message!=""){
@@ -286,7 +284,7 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
              headers: {
                  "Authorization": Data.token()
              },      
-             data:  {"quizid":Data.tid(),"starttime":$scope.time.startTime,"deadtime":$scope.time.endTime,"openCamera":$scope.camera.selected,"duration":$scope.time.duration}
+             data:  {"quizid":Data.tid(),"openCamera":$scope.camera.selected,"duration":$scope.time.duration}
          }).success(function (data) {
              $scope.state = data["state"];//1 true or 0 false
              $scope.message = data["message"];
