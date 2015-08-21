@@ -6,7 +6,7 @@ public class Challenge {
 	private String challengeCompany;
 	private String challengeTime;
 	private int challengeScore;
-	private String challengeRank;
+	private int challengeRank;
 	public int getChallengeId() {
 		return challengeId;
 	}
@@ -37,10 +37,10 @@ public class Challenge {
 	public void setChallengeScore(int i) {
 		this.challengeScore = i;
 	}
-	public String getChallengeRank() {
+	public int getChallengeRank() {
 		return challengeRank;
 	}
-	public void setChallengeRank(String challengeRank) {
+	public void setChallengeRank(int challengeRank) {
 		this.challengeRank = challengeRank;
 	}
 

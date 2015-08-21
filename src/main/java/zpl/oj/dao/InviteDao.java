@@ -62,6 +62,14 @@ public interface InviteDao {
 	
 	@Select("select * FROM INVITE WHERE uid = #{0}")
 	List<Invite> getInviteByUid(int tuid);
+
+	
+	@Select("select * from invite where testid =#{0} order by score desc")
+	List<Invite> getInviteByTidOrderByScore(Integer testid);
+	
+	
+	@Select("select count(*) from invite where testid = #{0} and score > (select score from invite where uid = #{1})")
+	int getRankByTidUid(Integer testid,Integer userid);
 	
 	
 	

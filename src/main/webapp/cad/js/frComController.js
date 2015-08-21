@@ -53,11 +53,7 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 		     }).error(function(){
 		    	 console.log("get data failed");
 		     })
-			
-
-			
-			
-			window.location.href="#/pubtesting/"+quizid;
+		//	window.location.href="#/pubtesting/"+quizid;
 		}
 	}
 

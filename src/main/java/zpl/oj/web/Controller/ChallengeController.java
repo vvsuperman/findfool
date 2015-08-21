@@ -82,7 +82,7 @@ public class ChallengeController {
 	@Autowired
 	private LabelService labelService;
 
-	
+	@Autowired
 	private InviteService inviteService;
 	
 	
@@ -215,6 +215,7 @@ public class ChallengeController {
 		invite.setDeadtime(quiz.getEndTime());
 		invite.setDuration(quiz.getTime()+"");
 		invite.setState(ExamConstant.INVITE_PUB);
+		invite.setHrid(quiz.getOwner());
 		
 		inviteDao.add(invite);
 		
@@ -232,14 +233,10 @@ public class ChallengeController {
 		List<Labeltest> labeltests = labelService.getLabelsOfTest(quizId);
 		for (Labeltest lt : labeltests) {
 			Invite invite2 = inviteService.getInvites(quizId,email);
-			if (labelService.getLabelUserByIidAndLid(invite2.getIid(),
-					lt.getLabelid()) == null) {
-				labelService.insertIntoLabelUser(invite2.getIid(),
-						lt.getLabelid(), "");
+			if (labelService.getLabelUserByIidAndLid(invite2.getIid(),lt.getLabelid()) == null) {
+				labelService.insertIntoLabelUser(invite2.getIid(),lt.getLabelid(), "");
 			}
-
 		}
-		
 		return invite;
 	}
 
@@ -339,9 +336,9 @@ public class ChallengeController {
 
 			if (number1 < 0) {
 				frQuizNaver.add(quiz);
-			} else if (number2 == 1) {
+			} else if (number2 >0) {
 				frQuizOver.add(quiz);
-			} else if ((number1 == 1) && (number2 <0)) {
+			} else if ((number1 > 0) && (number2 <0)) {
 				frQuizBegin.add(quiz);
 			}
 
