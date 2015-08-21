@@ -377,8 +377,15 @@ public class CompanyController {
 			String str = df.format(date);
 
 			int[] companyflag = { -1, -1, -1 };
-			//companyflag作为数组标记位，
-            //进行循环，对所有挑战赛的标记位进行赋值
+			
+			/*
+			 * companyflag作为数组标记位，进行循环，对所有挑战赛的标记位进行赋值
+			 * companyflag[0]表示已经结束的比赛，companyflag[1]表示已经开始的挑战赛
+			 * companyflag[2]表示还未开始的挑战赛，
+			 * 相应字段分别与常量相对应！
+			 * 
+			 */
+		
 			for (Quiz quiz : quizList) {
 				if (quiz.getStartTime().equals("")
 						|| quiz.getEndTime().equals("")) {
