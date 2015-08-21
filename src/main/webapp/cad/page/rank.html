@@ -6,17 +6,58 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="squad-title">综合排行榜</div>
-                    <div class="rank">
+                    <div class="rank"  style="overflow-y:auto;">
+                    <table  class="table" style="text-align:center;"  >
+                    <tr >
+		               <td> 姓名</td>
+		               <td> 得分</td>
+		               <td> 排名</td> 
+		               </tr> 
+		               <tr><a href="">aa</a></tr>
+                    
+                    <tr ng-repeat="my in compreRank" >
+		               <td  > {{my.name}}</td>
+		               <td> {{my.score}}</td>
+		               <td> {{my.rank}}</td> 
+		           
+		               </tr>    
+		               </table>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="squad-title">岗位排行榜</div>
-                    <div class="rank">
+                    <div class="rank"  style="overflow-y:auto;">
+                    <table  class="table" style="text-align:center;"  >
+                    <tr >
+		               <td> 姓名</td>
+		               <td> 得分</td>
+		               <td> 排名</td> 
+		               </tr> 
+                    
+                    <tr ng-repeat="my in roleRank" >
+		               <td> {{my.name}}</td>
+		               <td> {{my.score}}</td>
+		               <td> {{my.rank}}</td> 
+		               </tr>    
+		               </table>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="squad-title">技能排行榜</div>
-                    <div class="rank">
+                    <div class="rank"  style="overflow-y:auto;">
+                    <table  class="table" style="text-align:center;"  >
+                    <tr >
+		               <td> 姓名</td>
+		               <td> 得分</td>
+		               <td> 排名</td> 
+		               </tr> 
+                    
+                    <tr ng-repeat="my in techRank" >
+		               <td> {{my.name}}</td>
+		               <td> {{my.score}}</td>
+		               <td> {{my.rank}}</td> 
+		               </tr>    
+		               </table>
                     </div>
                 </div>
             </div>
