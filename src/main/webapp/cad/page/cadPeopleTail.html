@@ -1,0 +1,64 @@
+
+<link rel="stylesheet" href="cad/css/index.css" />
+
+
+  <div class="form-group " id="textarea">
+    <textarea class="textArea" ></textarea>
+  </div>
+
+<div class="container" style="margin-top:5%">
+<div class="row ">
+<div class="col-md-3">
+<div class="panel panel-default panel-info" id="panel">
+ <div class="panel-heading">个人信息</div>
+  
+  <div class="panel-body ">
+   <ul class="list-group" >
+    <li class="list-group-item">邮箱：2357538@qq.com
+     </li>
+     <li class="list-group-item">学校：同济大学
+     </li>  
+     <li class="list-group-item">公司：无
+     </li>
+     <li class="list-group-item">博客：www.blog.com	
+     </li>
+     <li class="list-group-item">年龄: 24
+     </li>
+     <li class="list-group-item">学位：本科
+     </li>
+     <li class="list-group-item">居住地：上海
+     </li>
+    </ul>
+  </div>
+ </div>
+</div>
+
+<div   class="col-md-8"  style="margin-left:15px">
+<div class="panel panel-default panel-success " >
+
+    <div class="panel-heading">挑战纪录</div>
+   
+	<table  class="table table-bordered"style="text-align:center;">
+	<tr >
+	<td >挑战赛</td>
+			<td >公司</td>
+			<td>挑战时间</td>
+			<td >得分</td>
+			<td >排名</td>
+	</tr>
+		<tr ng-repeat="my in  peopleTail" >
+			<td >{{my.challengeName}}</td>
+			<td >{{my.companyName}}</td>
+			<td>{{my.challengeTime}}</td>
+			<td >{{my.score}}</td>
+			<td >{{my.rank}}</td>
+		</tr>
+	  </table>
+	<div class="panel-footer"></div>
+</div>
+</div>
+ 
+
+
+
+

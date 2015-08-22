@@ -54,6 +54,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 controller: 'programController'
             }).
             
+            when('/cad/people', {  //客户端主页
+                templateUrl: 'cad/page/pagenav.html',
+                controller: 'peopleController'
+            }).
             when('/dp/register', {  //点评主页
                 templateUrl: 'dp/page/dpregister.html',
                 controller: 'cadLoginController'
