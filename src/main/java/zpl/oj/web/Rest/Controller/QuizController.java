@@ -490,14 +490,42 @@ public class QuizController {
 	public ResponseBase setPub(@RequestBody Map<String, String> param) {
 		ResponseBase rb = new ResponseBase();
 
-		if (param.get("testid") == null || param.get("publicFlag") == null||param.get("testTail") == null || param.get("starttime") == null || param.get("deadtime") == null) {
+		if (param.get("testid") == null || param.get("publicFlag") == null) {
+			rb.setState(2);
+			rb.setMessage("设置异常，id不可为空");
+			return rb;
+		}
+		String testid = param.get("testid");
+		String publicFlag = param.get("publicFlag");	
+		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));	
+		String signedKey = "";
+		if (publicFlag.equals("0")) {
+			signedKey = MD5Util.stringMD5(testid
+					+ StringUtil.toDateTimeString(new Date()));
+		}
+		quiz.setSignedKey(signedKey);
+		quizDao.updateQuiz(quiz);
+		rb.setState(0);
+		rb.setMessage(signedKey);
+		return rb;
+	}
+	
+	
+
+	
+	// 保存公开挑战赛信息
+	@RequestMapping(value = "/setPublicConfig", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseBase setPublicConfig(@RequestBody Map<String, String> param) {
+		ResponseBase rb = new ResponseBase();
+
+		if (param.get("testid") == null ||param.get("testTail") == null || param.get("starttime") == null || param.get("deadtime") == null) {
 			rb.setState(2);
 			rb.setMessage("输入均不可为空");
 			return rb;
 		}
 
 		String testid = param.get("testid");
-		String publicFlag = param.get("publicFlag");
 		String testTail = param.get("testTail");
 		String startTime = param.get("starttime");
 		String deadTime = param.get("deadtime");
@@ -508,21 +536,17 @@ public class QuizController {
 			rb.setMessage("竞赛logo和竞赛详情不能为空");
 			return rb;
 		}
-		String signedKey = "";
-		if (publicFlag.equals("0")) {
-			signedKey = MD5Util.stringMD5(testid
-					+ StringUtil.toDateTimeString(new Date()));
-		}
-		quiz.setSignedKey(signedKey);
+	
 		quiz.setDescription(testTail);
 		quiz.setStartTime(startTime);
 		quiz.setEndTime(deadTime);
 
 		quizDao.updateQuiz(quiz);
 		rb.setState(0);
-		rb.setMessage(signedKey);
 		return rb;
 	}
+	
+	
 
 	// 判断是否有公开挑战赛
 	@RequestMapping(value = "/checkpub", method = RequestMethod.POST)

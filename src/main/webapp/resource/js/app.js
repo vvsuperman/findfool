@@ -124,6 +124,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/page.html',
                 controller: 'testConfig'
             }).
+            when('/testPublicConfig', {
+                templateUrl: 'page/page.html',
+                controller: 'testPublicConfig'
+            }).
             when('/upgrade', {
                 templateUrl: 'page/page.html',
                 controller: 'Upgrade'
