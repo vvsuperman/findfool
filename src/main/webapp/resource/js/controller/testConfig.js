@@ -211,34 +211,34 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     $scope.publictest={};
     $scope.publictest.flag=0;
     
-    //将挑战赛设为公有
-    $scope.setPublic = function(){
-    	if(!$scope.test.tail || !$scope.time.startTime || !$scope.time.endTime ){
-    		flashTip("所有输入皆不可为空");
-    		
-    	}else{
-    		$http({
-                url: WEBROOT+"/test/setpub",
-                method: 'POST',
-        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag,"testTail":$scope.test.tail,"starttime":$scope.time.startTime,"deadtime":$scope.time.endTime}
-            }).success(function (data) {
-            	if(data.state ==0){
-            		if(data.message!=""){
-            			$scope.publictest.url = "http://foolrank.com/challenge/"+data.message;	
-            			$scope.publictest.flag =1;
-            		}else{
-            			$scope.publictest.flag =0;
-            		}
-            	}else{
-            		console.log(data.message);
-            	}
-            	
-            }).error(function(){
-           	 console.log("get data failed");
-            });
-    	}
-    	
-    }
+//    //将挑战赛设为公有
+//    $scope.setPublic = function(){
+//    	if(!$scope.test.tail || !$scope.time.startTime || !$scope.time.endTime ){
+//    		flashTip("所有输入皆不可为空");
+//    		
+//    	}else{
+//    		$http({
+//                url: WEBROOT+"/test/setpub",
+//                method: 'POST',
+//        	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag,"testTail":$scope.test.tail,"starttime":$scope.time.startTime,"deadtime":$scope.time.endTime}
+//            }).success(function (data) {
+//            	if(data.state ==0){
+//            		if(data.message!=""){
+//            			$scope.publictest.url = "http://foolrank.com/challenge/"+data.message;	
+//            			$scope.publictest.flag =1;
+//            		}else{
+//            			$scope.publictest.flag =0;
+//            		}
+//            	}else{
+//            		console.log(data.message);
+//            	}
+//            	
+//            }).error(function(){
+//           	 console.log("get data failed");
+//            });
+//    	}
+//    	
+//    }
     
     
     
@@ -299,30 +299,30 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     };
     
    
-    
-    //查看挑战赛是否是公有,若为空则给出
-    $scope.checkPublic = function(){
-    	$http({
-            url: WEBROOT+"/test/checkpub",
-            method: 'POST',
-    	    data: {"testid": $scope.tid}
-        }).success(function (data) {
-        	if(data.state ==0){
-        		if(typeof(data.message) !="undefined" && data.message!=""){
-        			$scope.publictest.url = "http://foolrank.com/challenge/#/"+data.message;	
-        			$scope.publictest.flag =1;
-        		}else{
-        			$scope.publictest.flag =0;
-        		}
-        	}else{
-        		console.log(data.message);
-        	}
-        	
-        }).error(function(){
-       	 console.log("get data failed");
-        });
-    }
-    
-    $scope.checkPublic();
+//    
+//    //查看挑战赛是否是公有,若为空则给出
+//    $scope.checkPublic = function(){
+//    	$http({
+//            url: WEBROOT+"/test/checkpub",
+//            method: 'POST',
+//    	    data: {"testid": $scope.tid}
+//        }).success(function (data) {
+//        	if(data.state ==0){
+//        		if(typeof(data.message) !="undefined" && data.message!=""){
+//        			$scope.publictest.url = "http://foolrank.com/challenge/#/"+data.message;	
+//        			$scope.publictest.flag =1;
+//        		}else{
+//        			$scope.publictest.flag =0;
+//        		}
+//        	}else{
+//        		console.log(data.message);
+//        	}
+//        	
+//        }).error(function(){
+//       	 console.log("get data failed");
+//        });
+//    }
+//    
+//    $scope.checkPublic();
     
 }])

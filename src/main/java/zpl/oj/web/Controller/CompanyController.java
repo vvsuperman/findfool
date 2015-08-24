@@ -361,10 +361,13 @@ public class CompanyController {
 				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
 						ExamConstant.QUIZ_TYPE_CHALLENGE);
 				for (Quiz quiz : quizListUse) {
+					if(quiz.getSignedKey()==null||(quiz.getSignedKey().length()<=0)){
+						continue;
+					}
 					quizList.add(quiz);
+					
 				}
 			}
-
 			if (quizList.size() == 0) {
 				companyList.remove(companyModel);
 				i = i - 1;
@@ -385,7 +388,6 @@ public class CompanyController {
 			 * 相应字段分别与常量相对应！
 			 * 
 			 */
-		
 			for (Quiz quiz : quizList) {
 				if (quiz.getStartTime().equals("")
 						|| quiz.getEndTime().equals("")) {

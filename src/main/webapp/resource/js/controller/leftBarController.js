@@ -31,6 +31,10 @@ OJApp.controller('leftBarController',['$scope','Data',function($scope,Data){
 		window.location.href = '#/testConfig';
 	}
 	
+	$scope.	publicSet = function(){
+		$scope.publicset =true;
+		window.location.href = '#/testPublicConfig';
+	}
 	$scope.invited = function(state){
 		if(state==1){
 			$scope.lBar.state1= true;	
