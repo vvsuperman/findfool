@@ -55,7 +55,7 @@ public interface QuizDao {
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
-	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS "
+	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS,signed_key as singedKey "
 			+ " FROM quiz WHERE OWNER=#{0} order by date desc ")
 	List<Quiz> getQuizs(int owner);
 

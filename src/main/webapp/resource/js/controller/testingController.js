@@ -1,6 +1,6 @@
 'use strict';
 
-OJApp.controller('testingController',['$scope','$http','CadData','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,CadData,$routeParams,$timeout,$sce,$compile,$interval) {
+OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeParams','$timeout','$sce','$compile','$interval',function ($scope,$http,CadData,Data,$routeParams,$timeout,$sce,$compile,$interval) {
 	//根据头信息解析出测试id和用户id，检查有没有开始做测试
 	 var url = $routeParams.url;
 	 
@@ -8,6 +8,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 		 var param = strDec($routeParams.url, "1", "2", "3").split("|");
 		 $scope.email = param[0];
 		 $scope.tid = param[1];
+		 
 		 //检查该url是否合法
 		 $http({
 	         url: WEBROOT+"/testing/checkurl",
@@ -38,11 +39,12 @@ OJApp.controller('testingController',['$scope','$http','CadData','$routeParams',
 	     })
 	 }
 	 
-	$scope.tid = $routeParams.testid;
 	
 	
-	if(typeof($scope.tid)!="undefined"){
+	
+	if(typeof($routeParams.testid)!="undefined"){
 		
+		$scope.tid = $routeParams.testid;
 		$scope.email = CadData.getEmail();
 		$http({
 	         url: WEBROOT+"/challenge/start",

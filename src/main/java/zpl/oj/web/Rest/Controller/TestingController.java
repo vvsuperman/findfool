@@ -137,13 +137,13 @@ public class TestingController {
 		
 		
 		
-		if(invite.getStarttime()!=null && nowDate.compareTo(invite.getStarttime())<0){
+		if(invite.getStarttime().equals("")==false && nowDate.compareTo(invite.getStarttime())<0){
 			rb.setMessage("试题尚未开始");
 			rb.setState(2);
 			return rb;
 		}
 		
-		else if(invite.getDeadtime()!=null && nowDate.compareTo(invite.getDeadtime())>0){
+		else if(invite.getStarttime().equals("")==false && nowDate.compareTo(invite.getDeadtime())>0){
 			rb.setMessage("试题已截至");
 			rb.setState(3);
 			return rb;

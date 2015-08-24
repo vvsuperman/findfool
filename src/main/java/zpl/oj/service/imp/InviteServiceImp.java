@@ -108,8 +108,8 @@ public class InviteServiceImp implements InviteService {
 		invite.setTotalScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setBegintime("");
-		invite.setStarttime(quiz.getStartTime());
-		invite.setDeadtime(quiz.getEndTime());
+		invite.setStarttime(requestUser.getStarttime());
+		invite.setDeadtime(requestUser.getDeadtime());
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
 		String duration = requestUser.getDuration();
