@@ -96,9 +96,9 @@ public class ExamConstant {
 	public static final int COMMENT_SUBJECT_TYPE_QUESTION = 2;
 
 	// 测试/比赛类型
-	public static final int QUIZ_TYPE_PRIVATE = 0;
-	public static final int QUIZ_TYPE_CHALLENGE = 1;
-	public static final int QUIZ_TYPE_FRCHALLENGE = 2;
+	public static final int QUIZ_TYPE_PRIVATE = 0;//默认
+	public static final int QUIZ_TYPE_CHALLENGE = 1;//公司公开挑战赛
+	public static final int QUIZ_TYPE_FRCHALLENGE = 2;//fr挑战赛
 
 	public static final int STATUS_DELETED = -1;
 	public static final int STATUS_UNCHECK = 0;

@@ -189,6 +189,17 @@
 	padding-top: 20px;
  }
  
+ .professrank{
+background: #1ABC9C;
+size:25px;
+line-height:25px;
+color: white;
+font-weight:bold;
+text-align:center;
+}
+ 
+ 
+ 
  
 /* .panel-back li{
 	background: #f8f8f8; 
@@ -226,7 +237,7 @@
 	/* font-size: 13px; */
 }
 .testqs .topbar div{
-	width: 400px;
+	width: 200px;
 	height: 50px;
 	line-hight: 50px;
 	text-align: center;

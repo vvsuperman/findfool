@@ -502,8 +502,18 @@ public class QuizController {
 		if (publicFlag.equals("0")) {
 			signedKey = MD5Util.stringMD5(testid
 					+ StringUtil.toDateTimeString(new Date()));
+		}else if(publicFlag.equals("1")){
+	              quiz.setSignedKey(null);
+	              quiz.setType(0);
+	              quizDao.updateQuiz(quiz);
+	              rb.setMessage("");
+	               rb.setState(0);
+	      		  return rb;   
+	
 		}
+		
 		quiz.setSignedKey(signedKey);
+		quiz.setType(1);
 		quizDao.updateQuiz(quiz);
 		rb.setState(0);
 		rb.setMessage(signedKey);

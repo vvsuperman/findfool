@@ -38,10 +38,6 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
     
     //将挑战赛设为公有
     $scope.setPublic = function(){
-    	if(!$scope.test.tail || !$scope.time.startTime || !$scope.time.endTime ){
-    		flashTip("所有输入皆不可为空");
-    		
-    	}else{
     		$http({
                 url: WEBROOT+"/test/setpub",
                 method: 'POST',
@@ -51,8 +47,11 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
             		if(data.message!=""){
             			$scope.publictest.url = "http://foolrank.com/challenge/"+data.message;	
             			$scope.publictest.flag =1;
+            			console.log("设置公开挑战赛第一步");
             		}else{
             			$scope.publictest.flag =0;
+            			$scope.publictest.url="";
+            			
             		}
             	}else{
             		console.log(data.message);
@@ -61,7 +60,6 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
             }).error(function(){
            	 console.log("get data failed");
             });
-    	}
     	
     }
     
