@@ -84,8 +84,12 @@
                     
                 </div>
                     <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==1">
-                    
-                        <h5>
+						<div class="time-item">
+
+							<strong class="pull-right" id="hour_show">{{quiz.startTime}}</strong>
+							<span id="day_show" class="pull-right">开始时间:</span>
+						</div>
+						<h5>
                             {{quiz.name}}
                         </h5>
 

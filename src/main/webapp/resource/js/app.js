@@ -622,8 +622,8 @@ OJApp.factory('CadData', ['webStorage',function (webStorage) {
             return this._testemail;
         };
         this.setTestEmail = function (to) {
-            webStorage.remove('_testemail');
-            webStorage.add('_testemail', to);
+            webStorage.remove('testemail');
+            webStorage.add('testemail', to);
             this._testemail = to;
         };
         

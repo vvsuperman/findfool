@@ -37,7 +37,7 @@ OJApp.controller('cadSignupCtrl',['$scope','$http','CadData',function ($scope,$h
                         url: WEBROOT+"/tuser/register",
                         method: 'POST',
                         headers: {
-                            "Authorization": CadData.getTestToken
+                            "Authorization": CadData.getTestToken()
                         },
                         data: {"email": $scope.Remail, "pwd": md5(($scope.Rpwd).toLowerCase()), "username": $scope.name,"tel":$scope.mobile}
                     }).success(function (data) {

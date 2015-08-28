@@ -45,7 +45,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	if(typeof($routeParams.testid)!="undefined"){
 		
 		$scope.tid = $routeParams.testid;
-		$scope.email = CadData.getEmail();
+		$scope.email = CadData.getTestEmail();
 		$http({
 	         url: WEBROOT+"/challenge/start",
 	         method: 'POST',
