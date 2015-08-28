@@ -601,17 +601,17 @@ OJApp.factory('CadData', ['webStorage',function (webStorage) {
               this._token = to;
           };
     	
-    	this._email = "";
-        this.getEmail = function () {
-            if (this._email == "" || this._email == null) {
-                this._email = webStorage.get("email");
+    	this._testemail = "";
+        this.getTestEmail = function () {
+            if (this._testemail == "" || this._testemail == null) {
+                this._testemail = webStorage.get("testemail");
             }
-            return this._email;
+            return this._testemail;
         };
-        this.setEmail = function (to) {
-            webStorage.remove('email');
-            webStorage.add('email', to);
-            this._email = to;
+        this.setTestEmail = function (to) {
+            webStorage.remove('testemail');
+            webStorage.add('testemail', to);
+            this._testemail = to;
         };
         
         

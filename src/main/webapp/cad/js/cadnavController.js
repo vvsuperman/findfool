@@ -4,7 +4,7 @@
 OJApp.controller('cadNavController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
 
 	$scope.username=CadData.getTestname();
-	$scope.email=CadData.getEmail();
+	$scope.email=CadData.getTestEmail();
 
 	$scope.isLogin = function(param) {
 		if (param == 1) {

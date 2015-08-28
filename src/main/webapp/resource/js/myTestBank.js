@@ -308,7 +308,7 @@ OJApp.controller('mytestbank',['$scope','$http','Data','$sce','$modal',function(
         	$scope.newQuestion.tag = tags.split("，");
         }
      
-        $scope.newQuestion.setid=CUSTOM_SET;
+        $scope.newQuestion.setid=0;
         
         sendData = {"user": {"uid": Data.uid()}, "quizId":$scope.tid,"question": $scope.newQuestion};
         $scope.pushQuestion(sendData);
