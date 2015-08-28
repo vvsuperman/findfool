@@ -1,4 +1,4 @@
-OJApp.controller('cadSignupCtrl',['$scope','$http','Data',function ($scope,$http,Data) {
+OJApp.controller('cadSignupCtrl',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
 	$scope.Remail;
 	$scope.name;
@@ -37,7 +37,7 @@ OJApp.controller('cadSignupCtrl',['$scope','$http','Data',function ($scope,$http
                         url: WEBROOT+"/tuser/register",
                         method: 'POST',
                         headers: {
-                            "Authorization": Data.token()
+                            "Authorization": CadData.getTestToken
                         },
                         data: {"email": $scope.Remail, "pwd": md5(($scope.Rpwd).toLowerCase()), "username": $scope.name,"tel":$scope.mobile}
                     }).success(function (data) {
@@ -45,9 +45,9 @@ OJApp.controller('cadSignupCtrl',['$scope','$http','Data',function ($scope,$http
                         $scope.message = data["message"];
                         if ($scope.state==0) {
  
-                            Data.setToken(data["token"]);
-                            Data.setName($scope.message.email);
-                            Data.setEmail($scope.message.email);
+                        	CadData.setTestToken(data["token"]);
+                        	CadData.setCadTestname($scope.message.email);
+                        	CadData.setTestEmail($scope.message.email);
                             var url = "#/cad/login";
     						window.location.href = url;
                           

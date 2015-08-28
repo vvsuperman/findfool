@@ -1,7 +1,7 @@
 /**
  * 做题控制器
  */
-OJApp.controller('comListController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
+OJApp.controller('comListController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 
     	$scope.nav = 'cad/page/cadnav.html'
 		$scope.template = 'cad/page/comlist.html';
@@ -10,6 +10,7 @@ OJApp.controller('comListController',['$scope','$http','CadData','Data',function
 			$http({
 				url : WEBROOT + "/company/comListByType",
 				method : 'POST',
+				
 				data : {
 				
 				}

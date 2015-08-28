@@ -33,14 +33,14 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 	
 	
 	$scope.startTest=function(quizid){
-		var email=CadData.getEmail();
-		if(email==null){
+		var testemail=CadData.getTestEmail();
+		if(testemail==null){
 		    window.location.href="#/cad/login";
 		}else{
 			 $http({
 		         url: WEBROOT+"/testing/checkstate",
 		         method: 'POST',
-			     data: {"email":CadData.getEmail(), "testid":quizid}
+			     data: {"email":CadData.getTestEmail(), "testid":quizid}
 		     }).success(function (data) {
 		         //测试未开始
 		    	 if( data.state == 0){	

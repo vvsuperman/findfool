@@ -129,13 +129,14 @@ public class CompanyService {
 				}else{
 				   quiz.setStatus(2);//正在进行
 				}
-						
 				quizList.add(quiz);
 				
 				
 			}
 
 		}
+		
+		
 		map.put("quizList", quizList);
 		String imgCover = item.getCover();
 		String imgLogo = item.getLogo();

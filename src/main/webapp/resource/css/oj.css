@@ -1396,4 +1396,48 @@ ul li {
 	/* padding-right: 180px; */
 	min-width: 900px;
 }
+
+
+
+
+
+
+
+.time-item strong {
+	background:#1ABC9C;
+	color:#fff;
+	line-height:16px;
+	font-size:12px;
+	font-family:Arial;
+	padding:0 3px;
+	margin-right:3px;
+	border-radius:2px;
+	box-shadow:1px 1px 3px rgba(0,0,0,0.2);
+}
+#day_show {
+	float:left;
+	line-height:16px;
+	color:#1ABC9C;
+	font-size:11px;
+	margin:0 3px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+.item-title .unit {
+	background:none;
+	line-height:16px;
+	font-size:8px;
+	padding:0 3px;
+	float:left;
+}
+
+
+
+
+
+
+
+
+
+
+
  	

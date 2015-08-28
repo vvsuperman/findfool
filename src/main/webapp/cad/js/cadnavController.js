@@ -3,26 +3,29 @@
  */
 OJApp.controller('cadNavController',['$scope','$http','CadData','Data',function ($scope,$http,CadData,Data) {
 
-	$scope.username=CadData.getTestname();
-	$scope.email=CadData.getEmail();
+	$scope.username=CadData.getCadTestname();
+	$scope.testemail=CadData.getTestEmail();
+//	$scope.testemail=Data.getTestEmail();
 
-	$scope.isLogin = function(param) {
-		if (param == 1) {
-			if ($scope.email == null) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			if ($scope.email == null) {
+	$scope.isLogin = function() {
+			if ($scope.testemail == null) {
 				return false;
 			} else {
 				return true;
 			}
 		}
 
+
+$scope.isNotLogin = function() {
+	if ($scope.testemail == null) {
+		return true;
+	} else {
+		return false;
 	}
+}
 	
+	$scope.isLogin();
+	$scope.isNotLogin();
 	$scope.loginOut=function(){
 		CadData.clear();
 	    window.location.href="#/cad/comlist";		
