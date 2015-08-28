@@ -62,18 +62,18 @@
 
 <div class="text-center" style="width:100%;" ng-show="showPage==2">
 
-      <div style="margin-top: 10px" class="btn btn-primary"  upload-button header ={{company.id}},1
+      <div style="margin-top: 10px" class="btn btn-primary"  upload-button header ={{companyModel.id}},1
     	         url="company/uploadimg" on-success="onSuccess(response)" >上传公司图片
       </div>
       <br>
-      <div  style="margin-top: 10px" class="btn btn-primary"  upload-button header ={{company.id}},2
+      <div  style="margin-top: 10px" class="btn btn-primary"  upload-button header ={{companyModel.id}},2
         url="company/uploadimg" on-success="onSuccess(response)" >上传公司logo
         
       </div>
       <br>
       <div class="form-group" style="width:33%; margin-left: 33%; margin-top: 10px">
           
-         <a href="#/company/companySet"><button  class="btn btn-outline btn-lg btn-block">
+         <a href="#/company/companyset"><button  class="btn btn-outline btn-lg btn-block">
                完成</button>
                </a>   
       </div>

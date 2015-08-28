@@ -121,10 +121,7 @@ public class CompanyService {
 			// 做常量
 			List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
 					ExamConstant.QUIZ_TYPE_CHALLENGE);
-			for (Quiz quiz : quizListUse) {
-				if(quiz.getSignedKey()==null||(quiz.getSignedKey().length()<=0)){
-					continue;
-				}				
+			for (Quiz quiz : quizListUse) {			
 				if(quiz.getStartTime()!="" && nowtime.compareTo(quiz.getStartTime())<0 ){
 				   quiz.setStatus(1);//未开始
 				}else if(quiz.getEndTime()!="" &&nowtime.compareTo( quiz.getEndTime())>0){
@@ -132,13 +129,14 @@ public class CompanyService {
 				}else{
 				   quiz.setStatus(2);//正在进行
 				}
-						
 				quizList.add(quiz);
 				
 				
 			}
 
 		}
+		
+		
 		map.put("quizList", quizList);
 		String imgCover = item.getCover();
 		String imgLogo = item.getLogo();

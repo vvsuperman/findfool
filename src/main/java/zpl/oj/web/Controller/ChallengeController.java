@@ -165,6 +165,11 @@ public class ChallengeController {
 		Invite invite = inviteDao.getInvites(quizId, email);
 		if (invite == null) {
 			invite = genInvite(email, quizId);
+			if(invite==null){
+				
+				rb.setMessage("您尚未注册和登录，无法进行挑战赛！");
+				return rb;
+			}
 		}
 		
 		
@@ -200,9 +205,14 @@ public class ChallengeController {
 	
 	private Invite genInvite(String email, int quizId) {
 		Testuser testuser = testuserDao.findTuserByEmail(email);
-		if (testuser == null) {
-			//
+		if(testuser==null){
+			
+			return null;
+			
 		}
+		
+		
+		
 		Quiz quiz = quizDao.getQuiz(quizId);
 		int tuId = testuser.getTuid();
 		Invite invite = new Invite();

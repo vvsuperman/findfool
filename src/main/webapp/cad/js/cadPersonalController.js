@@ -9,15 +9,15 @@ OJApp.controller('cadPersonalController',['$scope','$http','CadData','Data','Cad
 console.log("执行了第1步");
 	
 		
-	$scope.email=CadData.getEmail();
-	console.log($scope.email);
+	$scope.testemail=CadData.getTestEmail();
+	console.log($scope.testemail);
 	
 	$scope.cadPersonalList=function(){
 		$http({
 			url : WEBROOT + "/personal/findAllList",
 			method : 'POST',
 			data : {
-				'email':$scope.email
+				'email':$scope.testemail
 			}
 		}).success(function(data) {
 			$scope.map=data["message"];

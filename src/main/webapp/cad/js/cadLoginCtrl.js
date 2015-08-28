@@ -1,11 +1,11 @@
 
-OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData',function($scope, $http, CadData) {
+OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData','Data',function($scope, $http,CadData,Data) {
 			// 手机的错误信息
 			$scope.errorMsg = {};
 			$scope.verifyQtn = {};
-
-
-
+			$scope.Lemail;
+			$scope.Lpwd;
+		
 	$scope.confirm = function () {
         if ($scope.Lemail && $scope.Lpwd) {
 				 //	console.log("1");
@@ -13,9 +13,9 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData',function($scope,
 					$http({
 						url : WEBROOT + "/tuser/confirm",
 						method : 'POST',
-//						headers : {
-//							"Authorization" : CadData.token()
-//						},
+//					headers : {
+//						"Authorization" : CadData.getTestToken()
+//					},
 						data : {
 							"email" : $scope.Lemail,
 							"pwd" : pwd
@@ -23,14 +23,18 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData',function($scope,
 					}).success(function(data) {
 						$scope.state = data["state"];// 1 true or 0 false
 						CadData.clear();// 清空缓存
-						var name = $scope.Lname;
+//						Data.clear();
 						$scope.message = data["message"];
+						console.log("执行了登录");
 						// 修改
 						if ($scope.state == 0) {
+					//		Data.setTestEmail($scope.message.email);							
+							CadData.setTestEmail($scope.message.email);
+							 CadData.setCadTestname($scope.message.username);
 							var url = "#/cad/comlist";
 							window.location.href = url;
-							CadData.setEmail($scope.Lemail);
-						 CadData.setTestname($scope.message.username);
+						
+							
 						} else  {
 						
 							$scope.errmsg = data.message.msg;

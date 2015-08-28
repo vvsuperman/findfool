@@ -101,7 +101,7 @@ public class TuserController {
 				u = tuserService.userLogin(u.getTuid());
 				rb.setMessage(u);
 				rb.setState(0);
-			//	rb.setToken(securityService.computeToken(u));
+				//rb.setToken(securityService.computeToken(u));
 			
 			
 			return rb;

@@ -7,41 +7,52 @@
             <div class="underway" >
 
                 <div class="squad-title">
-                    <h3>已开始</h3>
+                    <h3>已开始
+                   <img src="resource/static/小红旗-01.png" height="30px" width="20px"></h3></br>		  
+                    
                 </div>
-                
-                <div class="com-activities"  ng-repeat="quiz in frQuizBegin"  >
-                  
-                       <h5>
-                          {{quiz.name}}
-                      </h5>
 
-                      <p>{{quiz.description}}</p>
-                      <div style="margin-bottom: 10px" >
-                        <button class="btn btn-primary"  ng-click="startTest(quiz.quizid)">
-                         开始挑战
-                        </button>
-                      </div>
-                  
-              </div>
-                
-            </div>
+			<div class="com-activities" ng-repeat="quiz in frQuizBegin">
+				<div class="time-item">
+
+					<strong class="pull-right" id="hour_show">{{quiz.endTime}}</strong>
+					<span id="day_show" class="pull-right">结束时间:</span>
+				</div>
+
+				<h5>{{quiz.name}}</h5>
+
+				<p>{{quiz.description}}</p>
+				<div style="margin-bottom:10px">
+					<button class="btn btn-primary" ng-click="startTest(quiz.quizid)">
+						开始挑战</button>
+				</div>
+
+			</div>
+
+		</div>
             
             
             <div class="comesoon">
                 <div class="squad-title">
-                    <h3>即将开始</h3>
+                    <h3>即将开始
+                   <img src="resource/static/小红旗-02.png" height="30px" width="20px"></h3></br>		  
+                    
                 </div>
                 
                  
-                <div class="media" style="padding-top: 20px" ng-repeat="x  in  frQuizNaver">
-                    <div class="media-left col-md-1">
+                <div class="media" style="padding-top:20px" ng-repeat="x  in  frQuizNaver">
+
+				
+				<div class="media-left col-md-1">
                         <a href="">
                        	 <img class="media-object" src="resource/static/object_c.png" alt="object_c"  style="width:50px">
                         </a>
                     </div>
                     <div class="media-body">
+                 
+                    
                         <h5 class="media-heading"><a href="">{{x.name}}</a></h5>
+                           
                     </div>
                 </div> 
                 
@@ -50,7 +61,9 @@
             
               <div class="comesoon">
                 <div class="squad-title">
-                    <h3>已结束</h3>
+                    <h3>已结束
+                    <img src="resource/static/小红旗-03.png" height="30px" width="20px"></h3></br>		  
+                    
                 </div>
                 
                  

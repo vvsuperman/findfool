@@ -120,8 +120,15 @@ $scope.create = function () {
          data: {"name": $scope.company.companyname,"address": $scope.company.address,"mobile": $scope.company.mobile,"website": $scope.company.website,"description":$scope.company.description}
 
     }).success(function (data) {
+    	$scope.state = data["state"];// 1 true or 0 false
+		
+		if ($scope.state == 0) {
         $scope.companyModel = data["message"];
-        $scope.showPage =2; 
+        $scope.showPage =2; }
+		else {
+		$scope.errorMsg.general = data["message"];
+			
+		}
  
     })}
 	else{
@@ -169,8 +176,9 @@ $scope.modify = function () {
         data: {"cid":$scope.company.id,"name": $scope.company.name,"address": $scope.company.address,"tel": $scope.company.tel,"website": $scope.company.website,"description":$scope.company.description }
     }).success(function (data) {
         $scope.company = data["message"];
-        $scope.findAll();
-
+        var url = "#/company/companyset";
+        window.location.href=url;
+ 
     })
 };
 $scope.show(cid);

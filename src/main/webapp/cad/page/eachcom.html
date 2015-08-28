@@ -4,8 +4,6 @@
 
     </div>
 
-
-
     <div class="company">
         <div class="container">
             <div class="row">
@@ -20,10 +18,14 @@
 
 
                         <div class="com-info">
+                           <div class="comtail">
+                                <img src="resource/static/iconfont-zuobiao.png" alt="zuobiao">
+                                <p>上海</p>
+                            </div>
 
                             <div class="address">
                                 <img src="resource/static/iconfont-zuobiao.png" alt="zuobiao">
-                                <p>上海</p>
+                                <p>{{companyTail.address}}</p>
                             </div>
                             
 
@@ -45,13 +47,21 @@
                 
                <!--  <div class="underway" >-->
                  <div class="squad-title">
-                    <h3>已开始</h3>
+                    <h3>已开始
+	                <img src="resource/static/小红旗-01.png" height="30px" width="20px"></h3></br>		  
                 </div>
                     <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==2">
                     
+                    <div class="time-item">
+	
+	 <strong class="pull-right" id="hour_show">{{quiz.endTime}}</strong>
+	 <span id="day_show" class="pull-right" >结束时间:</span>
+</div>
+                    <p  class="time-item" style="margin-top:1px">                           
+                    
                         <p>
                             <span style="font-size:20px">{{quiz.name}}</span>
-                            <span class="pull-right">时间:{{quiz.startTime}}-{{quiz.endTime}}</span>
+                           <!--  <span class="pull-right">时间:{{quiz.startTime}}-{{quiz.endTime}}</span>-->
                         </p>
 
                         <p>
@@ -69,11 +79,17 @@
                         
                            <div class="underway" >
                  <div class="squad-title">
-                    <h3>即将开始</h3>
+                    <h3>即将开始
+                 <img src="resource/static/小红旗-02.png" height="30px" width="20px"></h3></br>		  
+                    
                 </div>
                     <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==1">
-                    
-                        <h5>
+						<div class="time-item">
+
+							<strong class="pull-right" id="hour_show">{{quiz.startTime}}</strong>
+							<span id="day_show" class="pull-right">开始时间:</span>
+						</div>
+						<h5>
                             {{quiz.name}}
                         </h5>
 
@@ -91,7 +107,9 @@
                         
                          <div class="underway" >
                  <div class="squad-title">
-                    <h3>已经结束</h3>
+                    <h3>已经结束
+                   <img src="resource/static/小红旗-03.png" height="30px" width="20px"></h3></br>		  
+                    
                 </div>
                     <div class="com-activities" ng-repeat="quiz in quizList" ng-if="quiz.status==3">
                     
@@ -131,3 +149,50 @@
 
 
     </div>
+    
+    
+    
+    
+ <!--    
+    <script type="text/javascript" src="resource/js/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+
+var intDiff = parseInt(60);//倒计时总秒数量
+
+function timer(intDiff){
+	window.setInterval(function(){
+	var day=0,
+		hour=0,
+		minute=0,
+		second=0;//时间默认值		
+	if(intDiff > 0){
+		day = Math.floor(intDiff / (60 * 60 * 24));
+		hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+		minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+		second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+	}
+	if (minute <= 9) minute = '0' + minute;
+	if (second <= 9) second = '0' + second;
+	$('#day_show').html(day+"天");
+	$('#hour_show').html('<s id="h"></s>'+hour+'时');
+	$('#minute_show').html('<s></s>'+minute+'分');
+	$('#second_show').html('<s></s>'+second+'秒');
+	intDiff--;
+	}, 1000);
+} 
+
+$(function(){
+	timer(intDiff);
+});	
+</script>
+     -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

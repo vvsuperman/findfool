@@ -282,6 +282,15 @@ public class CompanyController {
 		strArray = imgifo.split(",");
 		String id = strArray[0];
 		String f = strArray[1];
+		
+		if(id==null){
+			rb.setState(4);
+			rb.setMessage("公司id为空，不能插入图片！");
+			return rb;
+			
+			
+		}
+		
 		int companyId = Integer.parseInt(id);
 		int flag = Integer.parseInt(f);
 
@@ -305,6 +314,7 @@ public class CompanyController {
 			}
 
 		}
+		rb.setState(0);
 		rb.setMessage(company);
 		return rb;
 

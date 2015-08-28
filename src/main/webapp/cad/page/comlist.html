@@ -16,10 +16,8 @@
     </carousel>
   </div>
 
-    <div class="activities">
-
-   <!--   <div class="container" >  -->
-
+    <div class="activities" style="padding-bottom:20px;">
+ <div class="col-sm-8" style="padding-top: 20px;">
             <div class="comesoon" >
                 <div class="squad-title">
                     <h3>已开始</h3>
@@ -27,7 +25,7 @@
                 </div>
                 <div class="media" ng-repeat="company in companyList" ng-if="company.invitestate==0">
 
-                   <div class="media-left col-md-1" style="padding-top: 20px">
+                   <div class="media-left col-md-1" >
                     <a href="">
                        	 <img class="media-object" ng-src="{{company.logo}}"  style="width:50px" alt="dp">
                     </a>
@@ -40,12 +38,12 @@
             
            
             
-              <div class="comesoon" >
+              <div class="comesoon">
                  <div class="squad-title">
                     <h3>即将开始</h3>
                 </div> 
-                <div class="media" ng-repeat="company in companyList" ng-if="company.invitestate==1">
-                   <div class="media-left col-md-1" style="padding-top: 20px">
+                <div class="media"  ng-repeat="company in companyList" ng-if="company.invitestate==1">
+                   <div class="media-left col-md-1" style="padding-top: 20px" >
                     <a href="">
                        	 <img class="media-object" ng-src="{{company.logo}}"  style="width:50px" alt="dp">
                     </a>
@@ -56,7 +54,7 @@
                 </div>
             </div>
             
-             <div class="comesoon" >
+             <div class="comesoon" style="clear:both; padding-bottom: 100px;">
                  <div class="squad-title">
                     <h3>已结束</h3>
                 </div> 
@@ -72,42 +70,93 @@
                 </div>
             </div>
 
+</div>
+<div class="col-sm-4" style="padding-top:80px">
+<div class="panel panel-success" >
+                    <div class="professrank" style="text-align:center; height:30px;">入&nbsp;职&nbsp;榜</div>
+                    <div class="rank" style=" overflow-y:hidden; height:320px;" >
+                    <table  class="table" style="text-align:center;">
+                    <tr >
+		               <td> 姓名</td>
+		               <td> 公司</td>
+		               <td> 职位</td> 
+		               </tr>                     
+                    <tr   ng-repeat="my in professionRank" >
+           
+		               <td ><a href="#/cad/people"> {{my.name}}</a></td>
+		               <td> {{my.company}}</td>
+		               <td> {{my.profession}}</td> 
+		           
+		               </tr>    
+		               </table>
+                    </div>
+                    
+                    </div>
+                    <div style="padding-top:20px;">
+                    <div class="professrank" style="text-align:center; height:30px;">奖&nbsp;品&nbsp;榜</div>
+                    <div class="rank" style="overflow-y:hidden; height:200px;">
+                    <table  class="table" style="text-align:center; ">
+                    <tr >
+		               <td> 项目</td>
+		               <td> 公司</td>
+		               <td> 奖品</td> 
+		               </tr> 
+		               <tr><a href="#/cad/people"></a></tr>
+                    
+                    <tr   ng-repeat="my in prizeRank" >
+           
+		               <td ><a href="#/cad/people"> {{my.name}}</a></td>
+		               <td> {{my.company}}</td>
+		               <td> {{my.prize}}</td> 
+		           
+		               </tr>    
+		               </table>
+                    </div>
+                    
+                    </div>
+                    
+</div>
+
 
     </div>
-<div class="people">
+<div class="people" style="clear:both;">
 
-        <div class="container text-center">
+        <div class="container text-center" >
                 <h2>他们通过FoolRank找到工作</h2>
                 <div class="row">
                   <div class="col-xs-6 col-md-3">
                       <div class="pp1 thumbnail">
-                        <img src="resource/static/people1.jpg" alt="...">
-                        <div class="brief">
-                          标哥
+                        <img src="resource/static/people1.jpg"  alt="..."   ng-Mouseover="ismouseover(1)" ng-Mouseleave="ismouseleave(1)" style="height:230px;width:160px;">
+                        <div class="brief" ng-if="isTextShow==1">
+         项标&nbsp;</br>               
+                          非常感谢foolrank能提供挑战平台，让我能凭借自己的能力拿到offer！
                         </div>
                       </div>
                   </div>
                   <div class="col-xs-6 col-md-3">
                       <div class="pp1 thumbnail">
-                        <img src="resource/static/people1.jpg" alt="...">
-                        <div class="brief">
-                          标哥
+                        <img src="resource/static/people01.jpg" alt="..." ng-Mouseover="ismouseover(2)" ng-Mouseleave="ismouseleave(2)" style="height:230px;width:160px;">
+                        <div class="brief" ng-if="isTextShow==2">
+                        梁小丛&nbsp;</br>
+                      我简直不敢相信我找到了一份工作，而我做的事情仅仅是一次挑战，我喜欢这种找工作的方式。
                         </div>
                       </div>
                   </div>
                   <div class="col-xs-6 col-md-3">
                       <div class="pp1 thumbnail">
-                        <img src="resource/static/people1.jpg" alt="...">
-                        <div class="brief">
-                          标哥
+                        <img src="resource/static/people04.jpg" alt="..." ng-Mouseover="ismouseover(3)" ng-Mouseleave="ismouseleave(3)" style="height:230px;width:160px;">
+                        <div class="brief"  ng-if="isTextShow==3">
+                  佟建嵩&nbsp;</br>        
+                       经过一轮的拼杀，发现自己还不错哟，原来自己的实力这么强，foolrank，相信自己，从挑战开始！COME ON!
                         </div>
                       </div>
                   </div>
                   <div class="col-xs-6 col-md-3">
                       <div class="pp1 thumbnail">
-                        <img src="resource/static/people1.jpg" alt="...">
-                        <div class="brief">
-                          标哥
+                        <img src="resource/static/people03.jpg" alt="..." ng-Mouseover="ismouseover(4)" ng-Mouseleave="ismouseleave(4)" style="height:230px;width:160px;">
+                        <div class="brief"  ng-if="isTextShow==4">
+                          刘名亮&nbsp;</br>
+            努力才能成果，只要胸有成竹，才能一往直前，喜欢挑战，喜欢冒险，foolrank挑战，永无止境！
                         </div>
                       </div>
                   </div>

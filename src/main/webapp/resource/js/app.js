@@ -570,6 +570,19 @@ OJApp.factory('Data', ['webStorage',function (webStorage) {
             this._tuid = to;
         };
         
+        this._testemail = "";
+        this.getTestEmail = function () {
+            if (this._testemail == "" || this._testemail == null) {
+                this._testemail = webStorage.get("testemail");
+            }
+            return this._testemail;
+        };
+        this.setTestEmail = function (to) {
+            webStorage.remove('_testemail');
+            webStorage.add('_testemail', to);
+            this._testemail = to;
+        };
+        
         this.clear = function(){
         	webStorage.clear();
         	for (var p in this){
@@ -588,17 +601,17 @@ OJApp.factory('Data', ['webStorage',function (webStorage) {
 //用于客户端的服务
 OJApp.factory('CadData', ['webStorage',function (webStorage) {
     function _data() {
-    	  this._token = "";
-          this.getToken = function () {
-              if (this._token == "" || this._token == null) {
-                  this._token = webStorage.get("token");
+    	  this._testtoken = "";
+          this.getTsetToken = function () {
+              if (this._testtoken == "" || this._testtoken == null) {
+                  this._testtoken = webStorage.get("testtoken");
               }
-              return this._token;
+              return this._testtoken;
           };
-          this.setToken = function (to) {
-              webStorage.remove('token');
-              webStorage.add('token', to);
-              this._token = to;
+          this.setTestToken = function (to) {
+              webStorage.remove('testtoken');
+              webStorage.add('testtoken', to);
+              this._testtoken = to;
           };
     	
     	this._testemail = "";
@@ -615,45 +628,45 @@ OJApp.factory('CadData', ['webStorage',function (webStorage) {
         };
         
         
-        this._testid = "";
-        this.getTestid = function () {
-            if (this._testid == "" || this._testid == null) {
-                this._testid = webStorage.get("testid");
+        this._cadtestid = "";
+        this.getCadTestid = function () {
+            if (this._cadtestid == "" || this._cadtestid == null) {
+                this._cadtestid = webStorage.get("cadtestid");
             }
-            return this._testid;
+            return this._cadtestid;
         };
-        this.setTestid = function (to) {
-            webStorage.remove('testid');
-            webStorage.add('testid', to);
-            this._testid = to;
+        this.setCadTestid = function (to) {
+            webStorage.remove('cadtestid');
+            webStorage.add('cadtestid', to);
+            this._cadtestid = to;
         };
         
         
-        this._testname = "";
-        this.getTestname = function () {
-            if (this._testname == "" || this._testname == null) {
-                this._testname = webStorage.get("testname");
+        this._cadtestname = "";
+        this.getCadTestname = function () {
+            if (this._cadtestname == "" || this._cadtestname == null) {
+                this._cadtestname = webStorage.get("cadtestname");
             }
-            return this._testname;
+            return this._cadtestname;
         };
-        this.setTestname = function (to) {
-            webStorage.remove('testname');
-            webStorage.add('testname', to);
-            this._testname = to;
+        this.setCadTestname = function (to) {
+            webStorage.remove('cadtestname');
+            webStorage.add('cadtestname', to);
+            this._cadtestname = to;
         };
         
         
-        this._rembme = "";
-        this.getRembme = function () {
-            if (this._rembme == "" || this._rembme == null) {
-                this._rembme = webStorage.get("rembme");
+        this._cadrembme = "";
+        this.getCadRembme = function () {
+            if (this._cadrembme == "" || this._cadrembme == null) {
+                this._cadrembme = webStorage.get("cadrembme");
             }
-            return this._rembme;
+            return this._cadrembme;
         };
-        this.setRembme = function (to) {
-            webStorage.remove('rembme');
-            webStorage.add('rembme', to);
-            this._rembme = to;
+        this.setCadRembme = function (to) {
+            webStorage.remove('cadrembme');
+            webStorage.add('cadrembme', to);
+            this._cadrembme = to;
         };
         
         
