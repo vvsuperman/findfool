@@ -55,7 +55,21 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
 	
 	    })
 	};
-
+	
+	//插入url
+	$scope.operateurl = function () {	
+	    $http({
+	        url: WEBROOT+"/operate/operateurl",
+	        method: 'POST',
+	        headers: {
+	        },
+	        data: {}
+	    }).success(function (data) {
+	    
+	
+	    })
+	};
+	
 
 
 	$scope.items=[];    //初始化数组，以便为每一个ng-model分配一个对象

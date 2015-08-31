@@ -22,9 +22,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<mvc:annotation-driven />
  
-	 <mvc:interceptors>
-	 	<bean class="zpl.oj.web.security.AuthorizationInterceptors" />
-	 </mvc:interceptors>
+	
 <!-- 配置视图解析器 -->
 
 	<bean 
@@ -83,6 +81,14 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
             </props>  
         </property>  
     </bean>  
+    
+        <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">  
+           <property name="interceptors">  
+               <list>  
+                   <bean class="zpl.oj.web.security.AuthorizationInterceptors"/>  
+               </list>  
+           </property>  
+    </bean>  
 	
 	<!-- 某些静态文件不拦截 -->
 	<mvc:resources mapping="/static/**" location="/static/" />
@@ -94,4 +100,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<mvc:resources mapping="/dp/**" location="/dp/" />
 	<mvc:resources mapping="/cad/**" location="/cad/" />
 	<mvc:resources mapping="/company/**" location="/company/" />
+	
+	
 </beans>

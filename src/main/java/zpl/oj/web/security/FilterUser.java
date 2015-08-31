@@ -26,24 +26,37 @@ public class FilterUser extends OncePerRequestFilter  {
             HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// 不过滤的uri  
-        String[] notFilter = new String[] { "/user/add/hr", "index.html" };  
+        String[] notFilter = new String[] { "/user/add/hr", "index.html" ,"/user/oauthorlogin",
+        	"/user/confirm","/user/add/admin","/user/getVerifyQtn","/tuser/getvertifycode",
+        	"/tuser/confirm","/tuser/register","main.html","/company/companyset","/operate/operateurl"};  
   
         // 请求的uri  
-        String uri = request.getRequestURI();  
+        String uri = request.getRequestURI(); 
         
         //TODO check uri privilege
 
         //TODO chek request's privilege
         
-        //TODO is permit? if no, return 401,else contiune filter chain
-        boolean doFilter = true;  
-        for (String s : notFilter) {  
-            if (uri.indexOf(s) != -1) {  
-                // 如果uri中包含不过滤的uri，则不进行过滤  
-                doFilter = false;  
-                break;  
+      //TODO is permit? if no, return 401,else contiune filter chain
+        boolean doFilter = true; 
+        
+        if(uri.equals("/oj/")||uri.equals("/")){
+        	 doFilter = false; 
+        	
+        }else{
+            for (String s : notFilter) {  
+                if (uri.indexOf(s) != -1) {  
+                    // 如果uri中包含不过滤的uri，则不进行过滤  
+                    doFilter = false;  
+                    break;  
+                }  
             }  
-        }  
+        	
+        	
+        }
+        
+         
+    
         if(doFilter){
         	//进行过滤
         	String token = request.getHeader("Authorization");

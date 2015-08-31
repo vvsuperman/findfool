@@ -27,10 +27,24 @@ public class Testuser {
     private String rollnumber;  //年级
     private String gpa;         //gpa
     private String gender;      //性别
+    private int privilege; //权限
     
     
     
-    public String getCity() {
+
+
+
+	public int getPrivilege() {
+		return privilege;
+	}
+
+
+	public void setPrivilege(int privilege) {
+		this.privilege = privilege;
+	}
+
+
+	public String getCity() {
 		return city;
 	}
 
@@ -123,6 +137,7 @@ public class Testuser {
 		this.tel="";
 		this.state=0;
 		this.degree="";
+		this.privilege=0;
 	}
 	
 	
@@ -230,6 +245,7 @@ public class Testuser {
 	public void setState(int state) {
 		this.state = state;
 	}
+	
 	
 }
 
