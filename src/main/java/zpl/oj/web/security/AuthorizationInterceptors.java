@@ -35,9 +35,10 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
 //        String[] notFilter = new String[] { WEBROOT+"/user/confirm",WEBROOT+"/user/add/hr", 
 //        		WEBROOT+"/page/","/contactus",WEBROOT+"/resource" };  
 		
-		 String[] notFilter = new String[] { "/user/confirm","/user/add/hr", 
- 	        		"/page/","/contactus","/resource/" };  
-  
+		String[] notFilter = new String[] { "/user/add/hr", "index.html" ,"/user/oauthorlogin",
+	        	"/user/confirm","/user/add/admin","/user/getVerifyQtn","/tuser/getvertifycode",
+	        	"/tuser/confirm","/tuser/register","main.html","/company/companyset","/operate/operateurl"};  
+	  
         // 请求的uri  
         String url ="";
         url = request.getRequestURI();
@@ -50,8 +51,8 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
         	doFilter = false;
         }
         //test 任何请求均不过滤
-        doFilter = false;
-        
+//        doFilter = false;
+//        
         //TODO check uri privilege
 
         //TODO chek request's privilege
