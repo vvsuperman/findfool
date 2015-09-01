@@ -14,7 +14,6 @@
 			classpath*:spring-config-*.xml
 		</param-value>
 	</context-param>
-<<<<<<< HEAD
 	
 
 
