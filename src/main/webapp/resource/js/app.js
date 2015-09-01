@@ -599,7 +599,7 @@ OJApp.factory('Data', ['webStorage',function (webStorage) {
 OJApp.factory('CadData', ['webStorage',function (webStorage) {
     function _data() {
     	  this._testtoken = "";
-          this.getTsetToken = function () {
+          this.getTestToken = function () {
               if (this._testtoken == "" || this._testtoken == null) {
                   this._testtoken = webStorage.get("testtoken");
               }

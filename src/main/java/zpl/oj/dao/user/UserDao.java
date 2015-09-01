@@ -63,5 +63,10 @@ public interface UserDao {
 			+ "FROM QUIZ WHERE OWNER = #{0} and type=#{1}")
 	List<Quiz> getQuizByUid(int uid,int quizTypeChallenge);
 
+	
+	@Select("select uid,fname,lname,email,company,privilege,pwd,link,age,degree,school,register_date as registerDate,last_login_date as lastLoginDate,invited_left,invited_num,state,tel from "
+			+ "user where fname = #{0}")
+	User getUserByName(String username);
+
 
 }

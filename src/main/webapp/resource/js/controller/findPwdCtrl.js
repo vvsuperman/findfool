@@ -18,6 +18,9 @@ OJApp.controller('findPwdCtrl',['$scope','$http','Data','$routeParams','$window'
 			$http({
 				url: WEBROOT + "/user/setting/resetpwdapply",
 				method: 'POST',
+				headers: {
+		                "Authorization": Data.token()
+		            },
 				data: {'email': $scope.email,'content':$scope.content,'answer':$scope.answer}
 			}).success(function(data){
 				if(data.state !=0){
@@ -50,6 +53,9 @@ OJApp.controller('findPwdCtrl',['$scope','$http','Data','$routeParams','$window'
 		$http({
 			url: WEBROOT+"/user/setting/resetpwd",
 			method: 'POST',
+		    headers: {
+	                "Authorization": Data.token()
+	         },
 			data: {'email': $scope.email,'pwd': pwd,'confirmpwd': confirmpwd}
 		}).success(function(data){
 			if(data.state==0){
@@ -69,6 +75,9 @@ OJApp.controller('findPwdCtrl',['$scope','$http','Data','$routeParams','$window'
 		$http({
 			url: WEBROOT+'/user/setting/checkurl',
 			method: 'POST',
+			 headers: {
+	                "Authorization": Data.token()
+	            },
 			data: {'url': $routeParams.auth}
 		}).success(function(data){
 			$scope.email=data.message;

@@ -14,6 +14,9 @@ OJApp.controller('reportLogController',['$scope','$http','Data',function ($scope
     $http({
         url: WEBROOT+"/report/log",
         method: 'POST',
+        headers: {
+            "Authorization": Data.token()
+        },
         data: {"inviteid":Data.inviteid()}
     }).success(function (data) {
     	$scope.logs = data.message;

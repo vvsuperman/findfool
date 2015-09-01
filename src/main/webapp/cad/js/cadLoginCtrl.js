@@ -5,17 +5,16 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData','Data',function(
 			$scope.verifyQtn = {};
 			$scope.Lemail;
 			$scope.Lpwd;
-		
-	$scope.confirm = function () {
-        if ($scope.Lemail && $scope.Lpwd) {
-				 //	console.log("1");
+				$scope.confirm = function() {
+				if ($scope.Lemail && $scope.Lpwd) {
+					// console.log("1");
 					var pwd = md5($scope.Lpwd);
 					$http({
 						url : WEBROOT + "/tuser/confirm",
 						method : 'POST',
-//					headers : {
-//						"Authorization" : CadData.getTestToken()
-//					},
+						headers : {
+							"Authorization" : CadData.getTestToken()
+						},
 						data : {
 							"email" : $scope.Lemail,
 							"pwd" : pwd
@@ -23,28 +22,25 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData','Data',function(
 					}).success(function(data) {
 						$scope.state = data["state"];// 1 true or 0 false
 						CadData.clear();// 清空缓存
-//						Data.clear();
 						$scope.message = data["message"];
 						// 修改
 						if ($scope.state == 0) {
-					//		Data.setTestEmail($scope.message.email);							
+							// Data.setTestEmail($scope.message.email);
 							CadData.setTestEmail($scope.message.email);
 							CadData.setCadTestname($scope.message.username);
-							//登陆前的url
-							if(HISURL!=""){
+							  CadData.setTestToken(data["token"]);
+							// 登陆前的url
+							if (HISURL != "") {
 								window.location.href = HISURL;
-								HISURL ="";
-							}else{
-								window.location.href =  "#/cad/comlist";
+								HISURL = "";
+							} else {
+								window.location.href = "#/cad/comlist";
 							}
-							
-						
-							
-						} else  {
-						
+						} else {
+
 							$scope.errmsg = data.message.msg;
 						}
-						
+
 					}).error(function() {
 						console.log("err");
 						alert("网络错误");

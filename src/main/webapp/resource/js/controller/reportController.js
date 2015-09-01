@@ -19,6 +19,9 @@ OJApp.controller('reportController', [ '$scope', '$http', 'Data',
 			$http({
 				url : WEBROOT + "/report/list",
 				method : 'POST',
+				   headers: {
+		                "Authorization": Data.token()
+		            },
 				data : {
 					"testid" : testid,
 					"state" : state
@@ -107,6 +110,9 @@ OJApp.controller('reportListController', [
 			$http({
 				url : WEBROOT + "/report/overall",
 				method : 'POST',
+				   headers: {
+		                "Authorization": Data.token()
+		            },
 				data : {
 					"testid" : testid,
 					"iid" : inviteid,
@@ -237,6 +243,9 @@ OJApp.controller('publicReportListController', [
 			$http({
 				url : WEBROOT + "/report/overall",
 				method : 'POST',
+				   headers: {
+		                "Authorization": Data.token()
+		            },
 				data : {
 					"testid" : testid,
 					"iid" : inviteid,
@@ -329,6 +338,9 @@ OJApp.controller('reportDetailController', [ '$scope', '$http','Data', '$routePa
 			$http({
 				url : WEBROOT + "/report/detail",
 				method : 'POST',
+				   headers: {
+		                "Authorization": Data.token()
+		            },
 				data : {
 					"testid" : testid,
 					"iid" : inviteid,
@@ -384,6 +396,9 @@ OJApp.controller('reportDetailController', [ '$scope', '$http','Data', '$routePa
 					$http({
 						url : WEBROOT + "/report/getprodetail",
 						method : 'POST',
+						   headers: {
+				                "Authorization": Data.token()
+				            },
 						data : senddata
 					}).success(function(data) {
 
@@ -450,6 +465,9 @@ OJApp.controller('reportLogController', [ '$scope', '$http', 'Data',
 			$http({
 				url : WEBROOT + "/report/log",
 				method : 'POST',
+				   headers: {
+		                "Authorization": Data.token()
+		            },
 				data : {
 					"inviteid" : Data.inviteid()
 				}
@@ -494,6 +512,9 @@ OJApp.controller('publicReportListController', [
 			$http({
 				url : WEBROOT + "/report/overall",
 				method : 'POST',
+				   headers: {
+		                "Authorization": Data.token()
+		            },
 				data : {
 					"testid" : testid,
 					"iid" : inviteid,

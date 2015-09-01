@@ -57,15 +57,15 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
 	};
 	
 	//插入url
-	$scope.operateurl = function () {	
+	$scope.operateurl = function (x) {	
 	    $http({
 	        url: WEBROOT+"/operate/operateurl",
 	        method: 'POST',
 	        headers: {
 	        },
-	        data: {}
+	        data: {"arg":x}
 	    }).success(function (data) {
-	    
+	    	  $scope.msg = data["message"];
 	
 	    })
 	};

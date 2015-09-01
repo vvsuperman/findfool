@@ -11,6 +11,9 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 		$http({
 			url : WEBROOT + "/company/getcomTail",
 			method : 'POST',
+			   headers: {
+                   "Authorization": CadData.getTestToken()
+               },
 			data : {
 				"comid" :comid
 			}
@@ -40,6 +43,9 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 			 $http({
 		         url: WEBROOT+"/testing/checkstate",
 		         method: 'POST',
+		         headers: {
+                     "Authorization": CadData.getTestToken()
+                 },
 			     data: {"email":CadData.getTestEmail(), "testid":quiz.quizid}
 		     }).success(function (data) {
 		         //测试未开始
