@@ -131,7 +131,8 @@ $scope.create = function () {
        $http({
          url: WEBROOT+"/company/create",
          method: 'POST',
-         data: {"name": $scope.company.companyname,"address": $scope.company.address,"mobile": $scope.company.mobile,"website": $scope.company.website,"description":$scope.company.description}
+         data: {"name": $scope.company.companyname,"address": $scope.company.address,"mobile": $scope.company.mobile,
+        	   "website": $scope.company.website,"description":$scope.company.description}
 
     }).success(function (data) {
     	$scope.state = data["state"];// 1 true or 0 false

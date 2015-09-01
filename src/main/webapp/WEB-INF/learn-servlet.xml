@@ -23,9 +23,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<mvc:annotation-driven />
  
 	  <mvc:interceptors>
-	 	<bean class="zpl.oj.web.security.AuthorizationInterceptors" />
+	 	<bean class="zpl.oj.web.security.AuthorizationInterceptors" >
+	 	</bean>
 	 </mvc:interceptors>
 <!-- 配置视图解析器 -->
+
+   	
 
 	<bean 
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -104,6 +107,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<mvc:resources mapping="/dp/**" location="/dp/" />
 	<mvc:resources mapping="/cad/**" location="/cad/" />
 	<mvc:resources mapping="/company/**" location="/company/" />
-		
 	
+
 </beans>

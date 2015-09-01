@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+
 
 <div class="container">
 	<div style="width:100%;" class="text-center">
@@ -28,9 +31,11 @@
               <input type="textfield" class="form-control txt-large" placeholder="公司网址" ng-model="company.website">
  </div>
       <div class="form-group">
-      <a>详细信息</a>
-      <textarea    ng-model="company.description" class="form-control" rows="3"></textarea>
- </div>
+	      <a>详细信息</a>
+	      <textarea simditor minheight="500px" style="width: 100%"   operation="edit" ng-model="company.description"></textarea>
+      </div>
+      
+ 
     
  <div class="btn btn-primary"  upload-button header ={{company.id}},1
     	         url="company/uploadimg" on-success="onSuccess(response)" >上传公司图片
