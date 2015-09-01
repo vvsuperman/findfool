@@ -31,10 +31,15 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
             HttpServletResponse response, Object handler) throws Exception {
 		// 不过滤的url
 		String WEBROOT = (String) PropertiesUtil.getContextProperty("WEBROOT");
-				
-		 String[] notFilter = new String[] { "/user/confirm","/user/add/hr", 
- 	        		"/page/","/contactus","/resource/","/company/","/cad/","/dp/" };  
-  
+
+		
+//        String[] notFilter = new String[] { WEBROOT+"/user/confirm",WEBROOT+"/user/add/hr", 
+//        		WEBROOT+"/page/","/contactus",WEBROOT+"/resource" };  
+		
+		String[] notFilter = new String[] { "/user/add/hr", "index.html" ,"/user/oauthorlogin",
+	        	"/user/confirm","/user/add/admin","/user/getVerifyQtn","/tuser/getvertifycode",
+	        	"/tuser/confirm","/tuser/register","main.html","/company/companyset","/operate/operateurl","/resource/","/company/","/cad/","/dp/" };  
+
         // 请求的uri  
         String url ="";
         url = request.getRequestURI();
@@ -47,8 +52,8 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
         	doFilter = false;
         }
         //test 任何请求均不过滤
-        doFilter = false;
-        
+//        doFilter = false;
+//        
         //TODO check uri privilege
 
         //TODO chek request's privilege

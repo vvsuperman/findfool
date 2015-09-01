@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import zpl.oj.dao.TestuserDao;
 //import zpl.oj.model.common.Invite;
 //import zpl.oj.model.common.Quiz;
@@ -30,6 +29,7 @@ import zpl.oj.model.responsejson.ResponseMessage;
 import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.imp.CadService;
 import zpl.oj.service.imp.TuserService;
+import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.web.Rest.Controller.TestingController.JsonLable;
 import zpl.oj.util.Constant.ExamConstant;
@@ -53,6 +53,9 @@ public class TuserController {
 	
 	@Autowired
 	TuserService tuserService;
+	
+	@Autowired
+	SecurityService   securityService;
 	
 	
 	
@@ -99,9 +102,10 @@ public class TuserController {
 			}
 			else {
 				u = tuserService.userLogin(u.getTuid());
+				
 				rb.setMessage(u);
 				rb.setState(0);
-				//rb.setToken(securityService.computeToken(u));
+				rb.setToken(securityService.computeToken(u));
 			
 			
 			return rb;
@@ -118,6 +122,7 @@ public class TuserController {
 	public ResponseBase register(@RequestBody Testuser tuser) {
 		ResponseBase rb = new ResponseBase();
 		Testuser tuser1=tuser;
+		tuser1.setPrivilege(1);
 		if(tuser1.getEmail()==null||tuser1.getTel()==null||tuser1.getPwd()==null){
 			rb.setState(3);
 			rb.setMessage("输入项不得为空，请重新输入");
@@ -144,7 +149,9 @@ public class TuserController {
 				return rb;
 			}
 			else if(tuser2.getEmail()!=null){
+				
 				tuserService.updateTestuser(tuser1);
+			
 				rb.setState(0);
 				rb.setMessage(tuser2.getEmail());
 				return rb;
