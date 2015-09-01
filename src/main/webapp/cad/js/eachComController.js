@@ -32,7 +32,7 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 	//开始挑战前进行登录判断，如果没有登录，跳转到登录界面
 	
 	
-	$scope.startTest=function(quizid){
+	$scope.startTest=function(quiz){
 		var testemail=CadData.getTestEmail();
 		if(testemail==null){
 		    window.location.href="#/cad/login";
@@ -40,7 +40,7 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 			 $http({
 		         url: WEBROOT+"/testing/checkstate",
 		         method: 'POST',
-			     data: {"email":CadData.getTestEmail(), "testid":quizid}
+			     data: {"email":CadData.getTestEmail(), "testid":quiz.quizid}
 		     }).success(function (data) {
 		         //测试未开始
 		    	 if( data.state == 0){	
@@ -52,13 +52,11 @@ OJApp.controller('eachComController',['$scope','$http','CadData','$routeParams',
 
 		    			smoke.alert("挑战还未开始，请您耐心等待！");
 		    	 }else if(data.state==3){//试题已截至
-		    		 console.log("执行了第3步，");
 
 		    		 smoke.alert("挑战赛已经结束，下次早点来哟！");
 		    	 }
 		    	 else{
-		    		 console.log("执行了第4步，");
-		 			window.location.href="#/pubtesting/"+quizid;
+		 			window.location.href="#/pubtesting/"+quiz.signedKey;
 
 		    	 }	 
 		         

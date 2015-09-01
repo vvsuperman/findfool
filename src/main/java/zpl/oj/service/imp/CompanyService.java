@@ -121,7 +121,8 @@ public class CompanyService {
 			// 做常量
 			List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
 					ExamConstant.QUIZ_TYPE_CHALLENGE);
-			for (Quiz quiz : quizListUse) {			
+			for (Quiz quiz : quizListUse) {		
+				
 				if(quiz.getStartTime()!="" && nowtime.compareTo(quiz.getStartTime())<0 ){
 				   quiz.setStatus(1);//未开始
 				}else if(quiz.getEndTime()!="" &&nowtime.compareTo( quiz.getEndTime())>0){

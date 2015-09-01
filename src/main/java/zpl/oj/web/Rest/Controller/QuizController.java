@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.foolrank.model.CompanyModel;
 import com.squareup.okhttp.Request;
-
 import com.foolrank.util.RequestUtil;
 
 import zpl.oj.dao.QuizDao;
@@ -44,6 +43,7 @@ import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.MD5.MD5Util;
 import zpl.oj.util.base64.BASE64;
 import zpl.oj.util.StringUtil;
@@ -499,25 +499,30 @@ public class QuizController {
 		String publicFlag = param.get("publicFlag");	
 		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));	
 		String signedKey = "";
+		
 		if (publicFlag.equals("0")) {
+			
 			signedKey = MD5Util.stringMD5(testid
 					+ StringUtil.toDateTimeString(new Date()));
+			quiz.setSignedKey(signedKey);
+			quiz.setType(ExamConstant.QUIZ_TYPE_CHALLENGE);
+			quizDao.updateQuiz(quiz);
+			rb.setState(0);
+			rb.setMessage(signedKey);
+			return rb;
 		}else if(publicFlag.equals("1")){
-	              quiz.setSignedKey(null);
-	              quiz.setType(0);
-	              quizDao.updateQuiz(quiz);
-	              rb.setMessage("");
-	               rb.setState(0);
-	      		  return rb;   
+            quiz.setSignedKey("");
+            quiz.setType(ExamConstant.QUIZ_TYPE_PRIVATE);
+            quizDao.updateQuiz(quiz);
+            rb.setMessage("");
+            rb.setState(0);
+      		return rb;   
 	
 		}
 		
-		quiz.setSignedKey(signedKey);
-		quiz.setType(1);
-		quizDao.updateQuiz(quiz);
-		rb.setState(0);
-		rb.setMessage(signedKey);
-		return rb;
+		return null;
+		
+		
 	}
 	
 	

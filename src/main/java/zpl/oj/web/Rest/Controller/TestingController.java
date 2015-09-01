@@ -161,14 +161,7 @@ public class TestingController {
 	@ResponseBody
 	public ResponseBase checkState(@RequestBody Map<Object,Object> params){
 		ResponseBase rb = new ResponseBase();
-//		Map rtMap = validateUser(params);
-//		String msg = (String) validateUser(params).get("msg");
-//		if(msg !=null){
-//			rb.setMessage(msg);
-//			rb.setState(0);
-//			return rb;
-//		}
-		
+
 		int testid = (Integer)params.get("testid");
 		String email = (String)params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
@@ -200,46 +193,7 @@ public class TestingController {
 		return rb;
 	}
 		
-//		if(invite==null){
-//			
-//			
-//			rb.setState(1);
-//			return rb;
-//			
-//		}
-//			
-//		if(invite.getStarttime()!=null && nowDate.compareTo(invite.getStarttime())<0){
-//			rb.setMessage("试题尚未开始");
-//			rb.setState(2);
-//			return rb;
-//		}
-//		
-//		else if(invite.getDeadtime()!=null && nowDate.compareTo(invite.getDeadtime())>0){
-//			rb.setMessage("试题已截至");
-//			rb.setState(3);
-//			return rb;
-//		} else{
-//			
-//			 if (invite.getState() == ExamConstant.INVITE_FINISH) {
-//					rb.setMessage("试题已经完成");
-//					rb.setState(0);
-//				 
-//				return rb;
-//			}
-//			
-//			
-//		}
-//
-//		
-//		rb.setState(1);
-//		return rb;
-//	}
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

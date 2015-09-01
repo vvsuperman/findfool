@@ -118,17 +118,20 @@ public class ChallengeController {
 		String email = RequestUtil.getStringParam(params, "email", "", true);
 		if (email.equals("")) {
 			rb.setState(10001);
-			rb.setMessage("email不为空");
+			rb.setMessage("email不得为空");
 			return rb;
 		}
-		int quizId = RequestUtil.getIntParam(params, "testid");
-		if (quizId <= 0) {
+		String signedKey = RequestUtil.getStringParam(params, "signedKey",true);
+		if(signedKey.equals("")){
 			rb.setState(10002);
-			rb.setMessage("挑战赛ID非法");
+			rb.setMessage("signedKey不得为空");
 			return rb;
 		}
+		
+		
+		
 
-		Quiz quiz = quizDao.getQuiz(quizId);
+		Quiz quiz = quizDao.getQuizByKey(signedKey);
 		if (quiz == null) {
 			rb.setState(20001);
 			rb.setMessage("挑战不存在或者不在进行");
@@ -138,16 +141,7 @@ public class ChallengeController {
 		
 		String nowtime = StringUtil.nowDateTime();
 		
-//		if(quiz.getStartTime()!="" && quiz.getStartTime().compareTo(nowtime)<0 ){
-//			rb.setState(20002);
-//			rb.setMessage("挑战赛未开始");
-//			return rb;
-//		}else if(quiz.getEndTime()!="" && quiz.getEndTime().compareTo(nowtime)>0){
-//			rb.setState(20003);
-//			rb.setMessage("挑战赛已结束");
-//			return rb;
-//		}
-		
+
 		if(quiz.getStartTime()!="" && nowtime.compareTo(quiz.getStartTime())<0 ){
 			rb.setState(20002);
 			rb.setMessage("挑战赛未开始");
@@ -162,11 +156,11 @@ public class ChallengeController {
 		
 
 		// 生成invite
-		Invite invite = inviteDao.getInvites(quizId, email);
+		Invite invite = inviteDao.getInvites(quiz.getQuizid(), email);
 		if (invite == null) {
-			invite = genInvite(email, quizId);
+			invite = genInvite(email, quiz.getQuizid());
 			if(invite==null){
-				
+				rb.setState(20004);
 				rb.setMessage("您尚未注册和登录，无法进行挑战赛！");
 				return rb;
 			}
@@ -176,8 +170,8 @@ public class ChallengeController {
 		
 		if (invite.getState() == ExamConstant.INVITE_FINISH) {
 			// 试卷已做完
-			rb.setState(1);
-			rb.setMessage("试卷已做完");
+			rb.setState(20005);
+			rb.setMessage("您已完成该试卷");
 			return rb;
 		}
 		
@@ -197,6 +191,7 @@ public class ChallengeController {
 			Map<String, Integer> message=new HashMap<String, Integer>();
 			message.put("invitedid", invite.getIid());
 			message.put("openCamera", invite.getOpenCamera());
+			message.put("quizid", quiz.getQuizid());
 			rb.setMessage(message);
 			return rb;
 		}

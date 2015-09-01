@@ -137,7 +137,7 @@ public class UserController {
 		ResponseMessage msg = new ResponseMessage();
 		u = userService.getUserByEmail(request.getEmail());
 		if (u == null) {
-			msg.setMsg("usernotexist");
+			msg.setMsg("用户不存在");
 			rb.setState(0);
 			rb.setMessage(msg);
 		} else if (!u.getPwd().equals(request.getPwd())) {

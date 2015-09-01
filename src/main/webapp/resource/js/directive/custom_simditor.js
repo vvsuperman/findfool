@@ -1,3 +1,9 @@
+/*
+ * 首先引入css文件
+ * operation = view or edit 必须
+ * 
+ * */
+
 OJApp.directive('simditor', ['$timeout', function ($timeout) {
     return {
         restrict: 'A',

@@ -112,6 +112,8 @@ public class ReportService {
 		Invite myInvite = inviteDao.getInviteById(invite.getIid());
 		myInvite.setTotalScore(totalScore);
 		myInvite.setScore(userScore);
+		invite.setTotalScore(totalScore);
+		invite.setScore(userScore);
 		inviteDao.updateInvite(myInvite);
 		return userScore+"/"+totalScore;
 	}

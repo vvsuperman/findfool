@@ -368,15 +368,8 @@ public class CompanyController {
 			List<Quiz> quizList = new ArrayList<Quiz>();
 			for (User user : userList) {
 				// 做常量
-				List<Quiz> quizListUse = userDao.getQuizByUid(user.getUid(),
+				 quizList = userDao.getQuizByUid(user.getUid(),
 						ExamConstant.QUIZ_TYPE_CHALLENGE);
-				for (Quiz quiz : quizListUse) {
-					if(quiz.getSignedKey()==null||(quiz.getSignedKey().length()<=0)){
-						continue;
-					}
-					quizList.add(quiz);
-					
-				}
 			}
 			if (quizList.size() == 0) {
 				companyList.remove(companyModel);

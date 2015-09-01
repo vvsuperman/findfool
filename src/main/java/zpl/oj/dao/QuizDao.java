@@ -17,7 +17,7 @@ import com.foolrank.provider.QuizProvider;
 public interface QuizDao {
 	
 	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status "
-			+ "FROM QUIZ WHERE signedKey = #{0}")
+			+ "FROM QUIZ WHERE signed_key = #{0}")
 	Quiz getQuizByKey(String signedkey);
 	
 

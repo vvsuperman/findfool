@@ -17,11 +17,17 @@
 		<div class="invite">
 			<a href="#/invite" class="btn btn-default">发送邀请</a>
 		</div>
-	</div>
-	    <h4>设为公开挑战</h4>
-					<p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>	
+	   </div>
+	   
+	  
 		<form class="form-horizontal">
-			<div style="margin-left: 50px" class="form-group">
+		   <div style="margin-left: 50px;margin-top: 30px" class="form-group">
+		     <h4>设为公开挑战</h4>
+		     <p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>	
+		   </div>
+		   
+		
+			<div  class="form-group">
 			<div class="form-group" style="margin-top:20px">
 				<label class="col-sm-2 control-label">上传竞赛图片</label>
 				<div style="margin-top: 10px" class="btn btn-primary" upload-button
@@ -33,8 +39,10 @@
 			<div class="form-group" style="margin-top:20px">
 				<div style=" margin-top:10px" class="form-group">
 					 <label  class="col-sm-2 control-label">竞赛描述:&nbsp;</label>
-					 <textarea class="col-md-4 input-group"  style="margin-left: 10px;width:80%;height:200px" ng-model="test.tail">
-				     </textarea>
+					 <div class="col-md-8">
+					    <textarea simditor minheight="150px" operation="edit"  ng-model="test.tail"></textarea>
+					 </div>
+					 
 				</div>
 			</div>
 

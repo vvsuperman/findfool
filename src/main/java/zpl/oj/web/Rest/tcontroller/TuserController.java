@@ -84,7 +84,7 @@ public class TuserController {
 			Testuser u = tuserService.findTuserByEmail(request.getEmail());
 			
 			if (u== null) {
-				msg.setMsg("usernotexist");
+				msg.setMsg("用户不存在");
 				rb.setState(1);
 				rb.setMessage(msg);
 				return rb;

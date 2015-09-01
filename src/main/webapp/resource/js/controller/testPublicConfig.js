@@ -45,9 +45,8 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
             }).success(function (data) {
             	if(data.state ==0){
             		if(data.message!=""){
-            			$scope.publictest.url = "http://foolrank.com/challenge/"+data.message;	
+            			$scope.publictest.url = ROOT+"/pubtesting/"+data.message;	
             			$scope.publictest.flag =1;
-            			console.log("设置公开挑战赛第一步");
             		}else{
             			$scope.publictest.flag =0;
             			$scope.publictest.url="";
@@ -121,7 +120,7 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
         }).success(function (data) {
         	if(data.state ==0){
         		if(typeof(data.message) !="undefined" && data.message!=""){
-        			$scope.publictest.url = "http://foolrank.com/challenge/#/"+data.message;	
+        			$scope.publictest.url = ROOT+"/pubtesting/"+data.message;	
         			$scope.publictest.flag =1;
         		}else{
         			$scope.publictest.flag =0;

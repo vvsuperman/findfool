@@ -21,10 +21,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
-            when('/challenge/:signedid', {  //客户端主页
-                templateUrl: 'challenge/page/preparechallenge.html',
-                controller: 'ctestingController'
-            }).
+        
             when('/cad/comlist', {  //客户端主页
                 templateUrl: 'cad/page/pagenav.html',
                 controller: 'comListController'
@@ -168,7 +165,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/preparetest.html',
                 controller: 'testingController'
             }).
-            when('/pubtesting/:testid', {
+            when('/pubtesting/:signedKey', {
                 templateUrl: 'page/preparetest.html',
                 controller: 'testingController'
             }).

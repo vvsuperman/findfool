@@ -31,12 +31,9 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
             HttpServletResponse response, Object handler) throws Exception {
 		// 不过滤的url
 		String WEBROOT = (String) PropertiesUtil.getContextProperty("WEBROOT");
-		
-//        String[] notFilter = new String[] { WEBROOT+"/user/confirm",WEBROOT+"/user/add/hr", 
-//        		WEBROOT+"/page/","/contactus",WEBROOT+"/resource" };  
-		
+				
 		 String[] notFilter = new String[] { "/user/confirm","/user/add/hr", 
- 	        		"/page/","/contactus","/resource/" };  
+ 	        		"/page/","/contactus","/resource/","/company/","/cad/","/dp/" };  
   
         // 请求的uri  
         String url ="";

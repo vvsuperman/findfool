@@ -25,14 +25,19 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData','Data',function(
 						CadData.clear();// 清空缓存
 //						Data.clear();
 						$scope.message = data["message"];
-						console.log("执行了登录");
 						// 修改
 						if ($scope.state == 0) {
 					//		Data.setTestEmail($scope.message.email);							
 							CadData.setTestEmail($scope.message.email);
-							 CadData.setCadTestname($scope.message.username);
-							var url = "#/cad/comlist";
-							window.location.href = url;
+							CadData.setCadTestname($scope.message.username);
+							//登陆前的url
+							if(HISURL!=""){
+								window.location.href = HISURL;
+								HISURL ="";
+							}else{
+								window.location.href =  "#/cad/comlist";
+							}
+							
 						
 							
 						} else  {

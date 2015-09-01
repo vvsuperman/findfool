@@ -42,18 +42,26 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	
 	
 	
-	if(typeof($routeParams.testid)!="undefined"){
+	if(typeof($routeParams.signedKey)!="undefined"){
 		
-		$scope.tid = $routeParams.testid;
+		$scope.signedKey = $routeParams.signedKey;
 		$scope.email = CadData.getTestEmail();
+		if($scope.email == null || typeof($scope.email)=="undefined"){
+			HISURL = "#/pubtesting/"+$scope.signedKey;	//记录测试地址，登陆后直接跳转
+			window.location.href="#/cad/login";
+			return false;
+		}
+		
+		
 		$http({
 	         url: WEBROOT+"/challenge/start",
 	         method: 'POST',
-         	 data: {"email":$scope.email,"testid":$scope.tid}
+         	 data: {"email":$scope.email,"signedKey":$scope.signedKey}
 	     }).success(function (data) {
 	    	  if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
+	    		 $scope.tid = data.message["quizid"]+"";
 	    		 $scope.errMsg = "";
 	    		 if($scope.openCamera==1){
 	    			  //不开启拍照区域
