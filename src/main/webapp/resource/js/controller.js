@@ -19,6 +19,9 @@ OJApp.controller('mainController',['$scope','$http','$routeParams','$location','
     	 $http({
              url: WEBROOT+"/user/oauthorlogin",
              method: 'POST',
+     		headers : {
+				"Authorization" : Data.token()
+			}, 
              data:{"source":"mingdao","code":code}
          }).success(function (data) {
               console.log("data................",data);

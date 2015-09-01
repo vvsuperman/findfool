@@ -11,6 +11,9 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 		$http({
 					url : WEBROOT + "/challenge/getFrChallage",
 			method : 'POST',
+			   headers: {
+                   "Authorization": CadData.getTestToken()
+               },
 			data : {
 			
 			}
@@ -35,6 +38,9 @@ OJApp.controller('frComController',['$scope','$http','CadData','$routeParams',fu
 			 $http({
 		         url: WEBROOT+"/testing/checkstate",
 		         method: 'POST',
+		         headers: {
+                     "Authorization": CadData.getTestToken()
+                 },
 			     data: {"email":CadData.getTestEmail(), "testid":quizid}
 		     }).success(function (data) {
 		         //测试未开始

@@ -202,10 +202,7 @@ public class QuizController {
 				msg.setMsg("当前试卷不存在，您可能未登录");
 				rb.setState(1);
 				rb.setMessage(msg);
-				return rb;
-				
-				
-				
+				return rb;		
 			}
 			int tid=Integer.parseInt(testid);
 			 Quiz quiz  =quizDao.getQuiz(tid);
@@ -474,11 +471,7 @@ public class QuizController {
 			rb.setMessage("试题模板为空");
 			return rb;
 		}
-
-
-
-
-		rb.setState(0);
+     	rb.setState(0);
 		rb.setMessage(quizT.getQuizId());
 		return rb;
 

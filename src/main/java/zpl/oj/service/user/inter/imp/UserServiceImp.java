@@ -136,4 +136,9 @@ public class UserServiceImp implements UserService{
         
 	}
 
+	@Override
+	public User getUserByName(String username) {
+		return userDao.getUserByName(username);
+	}
+
 }

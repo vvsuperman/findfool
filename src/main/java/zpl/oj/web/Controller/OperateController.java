@@ -3,6 +3,7 @@ package zpl.oj.web.Controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,41 +43,52 @@ private OperateDao operateDao;
 	
 	@RequestMapping(value = "/operateurl")
 	@ResponseBody
-	public ResponseBase operateurl() {
-		String filePath = (String) PropertiesUtil.getContextProperty("bapi");
+	public ResponseBase operateurl(@RequestBody Map<String, Integer> params) {
+
+		int arg = params.get("arg");
+		String filePath ="";
+		int roleid = 0;
+		ResponseBase rb = new ResponseBase();
+		if (arg ==1) {
+			filePath = (String) PropertiesUtil.getContextProperty("bapi");
+			roleid = 2;
+		} else if (arg ==2) {
+			filePath = (String) PropertiesUtil.getContextProperty("capi");
+			roleid = 1;
+		} else {
+			rb.setMessage("参数传递出错，请核实！");
+			rb.setState(1);
+			return rb;
+		}
+		if (roleid == 0) {
+			rb.setMessage("roleid在程序中未被初始化！");
+			rb.setState(2);
+			return rb;
+		}
 		BufferedReader in;
 		try {
 			in = new BufferedReader(new FileReader(filePath));
-
 			String ss = "";
 			while ((ss = in.readLine()) != null) {
 				String[] s = ss.split(" ");
-
 				for (int i = 0; i < s.length; i++) {
-
 					String url = operateDao.getUrlbyApi(s[i]);
-					if ((url.length()>0)&&(url!=null)) {
+					if ( (url == null)||(url.isEmpty())) {
 						operateDao.insertApi(s[i]);
 						int apiid = operateDao.getApiidByApi(s[i]);
-						int roleid = 2;
+						
 						operateDao.insertRoleapi(roleid, apiid);
-
 					}
-
-					System.out.println(s[i]);
-
 				}
-
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		ResponseBase rb = new ResponseBase();
-
+		rb.setMessage("操作完成！");
+		rb.setState(0);
 		return rb;
+
 	}
-	
 
 }

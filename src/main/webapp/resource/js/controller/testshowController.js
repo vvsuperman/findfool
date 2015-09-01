@@ -11,6 +11,9 @@ OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Da
         $http({
             url: WEBROOT+'./data/TestManage.json',
             method: 'GET',
+            headers: {
+                "Authorization": Data.token()
+            },
             data: {'testID': $scope.tests[$scope.active - 1].id}
         }).success(function (data) {
             $scope.questions = data.qs;
@@ -21,6 +24,9 @@ OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Da
         $http({
             url: WEBROOT+'./data/TestManage.json',
             method: 'GET',
+            headers: {
+                "Authorization": Data.token()
+            },
             data: {'testID': $scope.tests[$scope.active - 1].id}
         }).success(function (data) {
             $scope.questions = data.qs;

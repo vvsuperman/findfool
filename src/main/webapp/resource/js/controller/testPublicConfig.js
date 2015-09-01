@@ -17,6 +17,9 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
 		$http({
 			url : WEBROOT + "/test/getconfig",
 			method : 'POST',
+			   headers: {
+	                "Authorization": Data.token()
+	            },
 			data : {
 				"testid" : $scope.tid
 			}
@@ -41,6 +44,9 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
     		$http({
                 url: WEBROOT+"/test/setpub",
                 method: 'POST',
+                headers: {
+	                "Authorization": Data.token()
+	            },
         	    data: {"testid": $scope.tid,"publicFlag":$scope.publictest.flag}
             }).success(function (data) {
             	if(data.state ==0){
@@ -72,6 +78,9 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
     		$http({
                 url: WEBROOT+"/test/setPublicConfig",
                 method: 'POST',
+                headers: {
+	                "Authorization": Data.token()
+	            },
         	    data: {"testid": $scope.tid,"testTail":$scope.test.tail,"starttime":$scope.time.startTime,"deadtime":$scope.time.endTime}
             }).success(function (data) {
                     flashTip("保存成功！");
@@ -116,6 +125,9 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
     	$http({
             url: WEBROOT+"/test/checkpub",
             method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
     	    data: {"testid": $scope.tid}
         }).success(function (data) {
         	if(data.state ==0){

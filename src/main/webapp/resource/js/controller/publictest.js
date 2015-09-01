@@ -55,6 +55,9 @@ OJApp.controller('publictestCtrl',['$scope','$http','CadData','$routeParams',fun
 			$http({
 		         url: WEBROOT+"/cad/preregister",
 		         method: 'POST',
+		         headers: {
+		                "Authorization": Data.token()
+		            },
 		         data: tmpUser
 		     }).success(function (data) {
 		    	 if(data.state!=0){

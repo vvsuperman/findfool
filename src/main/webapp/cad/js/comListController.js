@@ -7,36 +7,42 @@ OJApp.controller('comListController',['$scope','$http','CadData',function ($scop
 		$scope.template = 'cad/page/comlist.html';
 		
 		$scope.comListByType=function(){
-			$http({
-				url : WEBROOT + "/company/comListByType",
-				method : 'POST',
-				
-				data : {
-				
-				}
-			}).success(function(data) {
-				$scope.companyList=data["message"];
-			}).error(function() {
-				console.log("get data failed");
-			})
-			
-		}
+				$http({
+					url : WEBROOT + "/company/comListByType",
+					method : 'POST',
+					headers : {
+						"Authorization" : CadData.getTestToken()
+					},
+
+					data : {
+
+					}
+				}).success(function(data) {
+					$scope.companyList = data["message"];
+				}).error(function() {
+					console.log("get data failed");
+				})
+
+			}
 		
 		
 		$scope.comListAll=function(){
-			$http({
-				url : WEBROOT + "/company/findAll",
-				method : 'POST',
-				data : {
-				
-				}
-			}).success(function(data) {
-				$scope.companyList=data["message"];
-			}).error(function() {
-				console.log("get data failed");
-			})
-			
-		}
+				$http({
+					url : WEBROOT + "/company/findAll",
+					method : 'POST',
+					headers : {
+						"Authorization" : CadData.getTestToken()
+					},
+					data : {
+
+					}
+				}).success(function(data) {
+					$scope.companyList = data["message"];
+				}).error(function() {
+					console.log("get data failed");
+				})
+
+			}
 
 		$scope.comListByType();
 		//$scope.comListAll();

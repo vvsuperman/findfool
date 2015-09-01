@@ -26,4 +26,6 @@ public interface UserService {
 	User userLogin(int uid);
 
 	void resetPwdApply(String email,User user);
+
+	User getUserByName(String username);
 }

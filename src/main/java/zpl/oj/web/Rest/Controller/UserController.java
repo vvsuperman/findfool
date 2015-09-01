@@ -153,6 +153,34 @@ public class UserController {
 		}
 		return rb;
 	}
+	
+	@RequestMapping(value = "/checkuser")
+	@ResponseBody
+	public ResponseBase checkUser(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		ResponseMessage msg = new ResponseMessage();
+
+		String username = params.get("username");
+		if (username == null || username.isEmpty()) {
+
+			msg.setMsg("传入用户名为空");
+			rb.setState(1);
+			rb.setMessage(msg);
+			return rb;
+		}
+		User user = userService.getUserByName(username);
+		if (user == null) {
+			msg.setMsg("该用户不存在！");
+			rb.setState(1);
+			rb.setMessage(msg);
+			return rb;
+		}
+		rb.setMessage(user);
+		rb.setState(0);
+		rb.setToken(securityService.computeToken(user));
+		return rb;
+	}
+		
 
 	@RequestMapping(value = "/add/hr")
 	@ResponseBody

@@ -15,12 +15,12 @@ public interface InviteDao {
 	@Select("select * FROM INVITE WHERE IID = #{0}")
 	  Invite getInviteById(int iid);
 
-	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera)"
-			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera})")
+	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system)"
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera}),#{system}")
 	  void insertInvite(Invite invite);
 	
-	@Insert("INSERT INTO INVITE(TESTID,HRID,UID,INVITETIME,begintime,FINISHTIME,SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera)"
-			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera})")
+	@Insert("INSERT INTO INVITE(TESTID,HRID,UID,INVITETIME,begintime,FINISHTIME,SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system)"
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera},#{system})")
 	@Options(useGeneratedKeys = true, keyProperty = "iid", keyColumn = "iid")
 	int add(Invite invite);
 	  
@@ -28,7 +28,7 @@ public interface InviteDao {
 
 	@Update("UPDATE INVITE set  TESTID = #{testid},  "
 			+ " HRID = #{hrid},   UID = #{uid},begintime=#{begintime},   INVITETIME = #{invitetime},DURATION=#{duration},"
-			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd},openCamera=#{openCamera},starttime=#{starttime},deadtime=#{deadtime}  where IID = #{iid}")
+			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd},openCamera=#{openCamera},starttime=#{starttime},deadtime=#{deadtime},system=#{system} where IID = #{iid}")
 	  void updateInvite(Invite invite);
 
 	    

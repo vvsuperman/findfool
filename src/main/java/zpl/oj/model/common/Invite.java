@@ -22,6 +22,7 @@ public class Invite implements Serializable {
 		this.openCamera=0;
 		this.starttime ="";
 		this.deadtime = "";
+		this.system= "";
 		
 	}
 	
@@ -75,6 +76,15 @@ public class Invite implements Serializable {
 	/**
 	 * 用户分数
 	 */
+	
+	/**
+	 * 
+	 * 系统名称
+	 */
+	private String system;
+	
+	
+	
 	private int score;
 		
 	/**

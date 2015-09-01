@@ -1,4 +1,5 @@
 
+
 OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope, $http, Data,$modal) {
 	
 	$scope.url = '#/testConfig';
@@ -33,6 +34,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		$http({
 			url : WEBROOT + "/label/getlabels",
 			method : 'POST',
+			headers: {
+	                "Authorization": Data.token()
+	            },
 			data : {
 				"testid" : $scope.tid
 			}
@@ -50,6 +54,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		$http({
 			url : WEBROOT + "/test/getconfig",
 			method : 'POST',
+			 headers: {
+	                "Authorization": Data.token()
+	            },
 			data : {
 				"testid" : $scope.tid
 			}
@@ -99,6 +106,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		$http({
 			url : WEBROOT + "/quizemail/getemails",
 			method : 'POST',
+			 headers: {
+	                "Authorization": Data.token()
+	            },
 			data : {
 				"testid" : $scope.tid
 			}
@@ -119,6 +129,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		$http({
 			url : WEBROOT + "/label/saveconfig",
 			method : 'POST',
+			headers: {
+	                "Authorization": Data.token()
+	            },
 			data : {
 				"testid" : $scope.tid,
 				"labels" : $scope.labels
@@ -145,6 +158,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
 		$http({
 			url : WEBROOT + "/label/deletelable",
 			method : 'POST',
+			headers: {
+	                "Authorization": Data.token()
+	            },
 			data : {
 				"testid" : $scope.tid,
 				"labelname" : value.labelname
@@ -176,6 +192,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     	$http({
             url: WEBROOT+"/label/addlabel",
             method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
     	    data: {"testid": $scope.tid,"label":$scope.angmodel.labeladded}
         }).success(function (data) {
             flashTip("添加成功");
@@ -191,6 +210,9 @@ OJApp.controller('testConfig',['$scope','$http','Data','$modal',function($scope,
     	$http({
             url: WEBROOT+"/quizemail/addemail",
             method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
     	    data: {"testid": $scope.tid,"email":$scope.angmodel.emailadded}
         }).success(function (data) {
         	if(data.state==1){

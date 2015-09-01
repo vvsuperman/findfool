@@ -12,6 +12,9 @@ OJApp.controller('ctestingController',['$scope','$http','CadData','$routeParams'
 	 $http({
          url: WEBROOT+"/challenge/gettest",
          method: 'POST',
+         headers: {
+             "Authorization": CadData.getTestToken()
+         },
          data: sendData
      }).success(function (data) {
     	 if(data.state!=0){
@@ -61,6 +64,9 @@ OJApp.controller('ctestingController',['$scope','$http','CadData','$routeParams'
 		 $http({
 	         url: WEBROOT+"/testing/starttest",
 	         method: 'POST',
+	         headers: {
+                 "Authorization": CadData.getTestToken()
+             },
 	         data: sendData
 	     }).success(function (data) {
 	    	
@@ -174,6 +180,9 @@ OJApp.controller('ctestingController',['$scope','$http','CadData','$routeParams'
     	 $http({
 	         url: WEBROOT+"/testing/fetchProblem",
 	         method: 'POST',
+	         headers: {
+                 "Authorization": CadData.getTestToken()
+             },
 	         data: sendData
 	     }).success(function (data) {
 	    	 if(data.state == 0){
@@ -271,6 +280,9 @@ OJApp.controller('ctestingController',['$scope','$http','CadData','$routeParams'
        $http({
            url: WEBROOT+"/solution/query",
            method: "POST",
+           headers: {
+               "Authorization": CadData.getTestToken()
+           },
            data: solution
        }).success(function (data) {
        	   var end;
@@ -319,6 +331,9 @@ OJApp.controller('ctestingController',['$scope','$http','CadData','$routeParams'
     	 $http({
 	         url: WEBROOT+"/testing/finishtest",
 	         method: 'POST',
+	         headers: {
+                 "Authorization": CadData.getTestToken()
+             },
 	         data: sendData
 	     }).success(function (data) {
 	    	if(data.state==0){
