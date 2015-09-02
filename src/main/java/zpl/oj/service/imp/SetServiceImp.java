@@ -9,7 +9,10 @@ import zpl.oj.dao.DomainDao;
 import zpl.oj.dao.SetDao;
 import zpl.oj.model.common.Domain;
 import zpl.oj.model.common.ProblemSet;
+import zpl.oj.model.request.User;
+import zpl.oj.model.requestjson.RequestUser;
 import zpl.oj.service.SetService;
+import zpl.oj.service.user.inter.UserService;
 
 @Service
 public class SetServiceImp implements SetService {
@@ -18,13 +21,17 @@ public class SetServiceImp implements SetService {
 	private SetDao setDao;
 	@Autowired
 	private DomainDao domainDao;
+	@Autowired
+	private UserService userService;
 	
 	@Override
-	public List<Domain> getSets() {
+	public List<Domain> getSets(RequestUser request) {
+		
+		 User user =userService.getUserById(request.getUid());
 		List<Domain> domains = domainDao.getAllDomain();
 		for(Domain domain: domains){
 			//访问userset中存在的set
-			List<ProblemSet> sets = setDao.getSetByDomainId(domain.getDomainId());
+			List<ProblemSet> sets = setDao.getSetByDomainIdAndprivilege(domain.getDomainId(),user.getPrivilege());
 			domain.setProblemSets(sets);
 		}
 		return domains;
@@ -39,5 +46,9 @@ public class SetServiceImp implements SetService {
 		}
 		return true;
 	}
+
+
+
+
 
 }

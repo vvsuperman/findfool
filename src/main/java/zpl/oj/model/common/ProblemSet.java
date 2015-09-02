@@ -39,7 +39,19 @@ public class ProblemSet implements Serializable {
 	//详细描述
 	private String content;
 	
+	//试题权限
+	private int privilege;
+	
+	
+	
 
+	public int getPrivilege() {
+		return privilege;
+	}
+
+	public void setPrivilege(int privilege) {
+		this.privilege = privilege;
+	}
 
 	public String getFaceproblem() {
 		return faceproblem;

@@ -31,8 +31,14 @@ public interface SetDao {
 			+ "  FROM SETS where state=1")
 	List<ProblemSet> getSets();
 	
+//	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,DOMAIN_ID AS domainId,COMMENT,content,faceproblem"
+//			+ "  FROM SETS WHERE DOMAIN_ID=#{0} and state=1")
+//	List<ProblemSet> getSetByDomainId(int domainId);
+
+
+
 	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,DOMAIN_ID AS domainId,COMMENT,content,faceproblem"
-			+ "  FROM SETS WHERE DOMAIN_ID=#{0} and state=1")
-	List<ProblemSet> getSetByDomainId(int domainId);
+			+ "  FROM SETS WHERE DOMAIN_ID=#{0} and state=1 and PRIVILEGE<=#{1}")
+	List<ProblemSet> getSetByDomainIdAndprivilege(int domainId, int privilege);
 
 }

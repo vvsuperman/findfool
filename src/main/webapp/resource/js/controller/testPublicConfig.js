@@ -29,6 +29,7 @@ OJApp.controller('testPublicConfig',['$scope','$http','Data','$modal',function($
 			$scope.time.endTime=$scope.quiz.endTime;
 			$scope.time.duration=$scope.quiz.time;
 			$scope.test.tail=$scope.quiz.description;		
+			$scope.test.logo=$scope.quiz.logo;	
 		}).error(function() {
 			console.log("get data failed");
 		});
