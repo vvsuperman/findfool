@@ -17,6 +17,7 @@
 				<ul class="dropdown-menu" role="menu">
 				    <li><a href="" ng-click="showAddPage(1)">选择题</a></li>
 				    <li><a href="" ng-click="showAddPage(3)">简答题</a></li>
+				    <li><a href="" ng-click="showAddPage(4)">设计题</a></li>
 				</ul>
 				</div>
 				
@@ -176,7 +177,38 @@
 						  <div class="form-group"  style="margin-top: 40px;">
 						    <label  class="col-sm-2 control-label">试题内容</label>
 						    <div class="col-sm-8">
-						      	<textarea class="form-control" simditor minheight="150px" ng-model="newQuestion.context"></textarea>
+						      	<textarea class="form-control" simditor operation="edit" minheight="150px" ng-model="newQuestion.context"></textarea>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label  class="col-sm-2 control-label">标签(以 , 区分)</label>
+						    <div class="col-sm-6">
+						      	<input class="form-control" ng-model="newQuestion.tag"></input>
+						    </div>
+						  </div>
+						  
+						   <div class="form-group">
+						    <label  class="col-sm-2 control-label">分数</label>
+						    <div class="col-sm-4">
+						      	<input class="form-control" ng-model="newQuestion.score"></input>
+						    </div>
+						  </div>
+						  
+						  <div class="col-md-offset-1"  style="padding-top: 70px">
+		                    <button class="btn btn-primary " ng-click="addQuestion()">保存</button>
+		                    <button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
+		                    <button class="btn btn-primary" ng-click="cancel()">取消</button>
+				          </div>
+					</form>          
+        		</div>
+        		
+        		
+        		 <div ng-if="active==4">
+		            <form class="form-horizontal" role="form">
+						  <div class="form-group"  style="margin-top: 40px;">
+						    <label  class="col-sm-2 control-label">试题内容</label>
+						    <div class="col-sm-8">
+						      	<textarea class="form-control" simditor operation="edit" minheight="150px" ng-model="newQuestion.context"></textarea>
 						    </div>
 						  </div>
 						  <div class="form-group">
