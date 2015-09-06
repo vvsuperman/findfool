@@ -166,7 +166,7 @@ public class InviteServiceImp implements InviteService {
 
 	
         String content = "<p> 这是来自"+hrUser.getCompany()+"公司的邮件，我们非常荣幸能收到您的简历，做为优秀的候选人之一，我们诚挚的邀请您参加此次笔试，使我们能进一步了解您的能力。请登陆到：</p>"
-        		+"<a href="+baseurl+"/#/testing/"+testurl+">"+baseurl+"/#/testing/"+testurl+"</a>"
+        		+"<a href="+baseurl+"#/testing/"+testurl+">"+baseurl+"/#/testing/"+testurl+"</a>"
         		+" <p>完成笔试测试</p>"
         		+"<p>您的密码是："+pwd+"</p>"
         		+"<p>请务必使用火狐或Chrome等非IE浏览器打开链接</p>"

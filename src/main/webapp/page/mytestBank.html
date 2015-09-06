@@ -98,7 +98,7 @@
 			             	
 			                <ul style="margin-top: 30px;list-style-type:none">
 			                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-			                        <textarea simditor minheight="60px" style="height: 60px"  ng-model="ans.text" operation="edit"></textarea>
+			                        <textarea simditor operation="edit" minheight="60px" style="height: 60px"  ng-model="ans.text" operation="edit"></textarea>
 			                       
 			                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
 			                           ng-click="removeOne($index)">删除</a>
@@ -176,7 +176,7 @@
 						  <div class="form-group"  style="margin-top: 40px;">
 						    <label  class="col-sm-2 control-label">试题内容</label>
 						    <div class="col-sm-8">
-						      	<textarea class="form-control" simditor minheight="150px" ng-model="newQuestion.context"></textarea>
+						      	<textarea class="form-control" operation="edit" simditor minheight="150px" ng-model="newQuestion.context"></textarea>
 						    </div>
 						  </div>
 						  <div class="form-group">

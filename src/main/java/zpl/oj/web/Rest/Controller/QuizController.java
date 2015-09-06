@@ -568,15 +568,15 @@ public class QuizController {
 	// 判断是否有公开挑战赛
 	@RequestMapping(value = "/checkpub", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseBase checkPub(@RequestBody Map<String, Object> param) {
+	public ResponseBase checkPub(@RequestBody Map<String, Integer> param) {
 		ResponseBase rb = new ResponseBase();
-		String testid = (String) param.get("testid");
+		Integer testid = (Integer) param.get("testid");
 		if (testid == null) {
 			rb.setState(1);
 			rb.setMessage("testid不可为空");
 			return rb;
 		}
-		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
+		Quiz quiz = quizDao.getQuiz(testid);
 
 		rb.setState(0);
 		rb.setMessage(quiz.getSignedKey());

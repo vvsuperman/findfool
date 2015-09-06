@@ -1,7 +1,7 @@
 
 //常量
-var ROOT="localhost:8080/oj/#";
-//var ROOT="foolrank.com/#"
+//var ROOT="localhost:8080/oj/#";
+var ROOT="foolrank.com/#"
 var WEBROOT = "/oj";
 //var WEBROOT = "";
 //记录登陆前的url，便于登陆后跳转

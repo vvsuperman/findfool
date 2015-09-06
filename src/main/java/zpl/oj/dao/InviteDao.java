@@ -16,7 +16,7 @@ public interface InviteDao {
 	  Invite getInviteById(int iid);
 
 	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system)"
-			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera}),#{system}")
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera},#{system})")
 	  void insertInvite(Invite invite);
 	
 	@Insert("INSERT INTO INVITE(TESTID,HRID,UID,INVITETIME,begintime,FINISHTIME,SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system)"
