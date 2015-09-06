@@ -40,7 +40,9 @@ public class UserServiceImp implements UserService{
     private SetDao setDao;
     
     
-    
+    public void updateLoginDateByEmail(User u){
+    	userDao.updateLoginDateByEmail(u.getEmail());
+    }
     
 	@Override
 	public boolean addUser(User u) {

@@ -108,9 +108,15 @@ public class ExamConstant {
 	
 	
 	// 公司挑战/挑战赛时间是否开始
-		public static final int COMPANY_OVER = -1;
-		public static final int COMPANY_START = 0;
-		public static final int COMPANY_NERVER = 1;
+	public static final int COMPANY_OVER = -1;
+	public static final int COMPANY_START = 0;
+	public static final int COMPANY_NERVER = 1;
 	
+	//用户权限
+	public static final int ROLE_VISTOR = 0;
+	public static final int ROLE_TEST=1;
+	public static final int ROLE_HR=2;
+	public static final int ROLE_ADMIN=3;
+	public static final int ROLE_SUPERADMIN=4;
 	
 }

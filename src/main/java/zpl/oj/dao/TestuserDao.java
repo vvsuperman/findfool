@@ -12,8 +12,8 @@ import zpl.oj.model.request.User;
 
 public interface TestuserDao {
 
-	@Insert("INSERT INTO testuser( username,email,school,company,blog,age,tel,registerdate,lastlogindate,state,discipline,gratime,pwd)"
-			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{tel},#{registerDate},#{lastLoginDate},#{state},#{discipline},#{gratime},#{pwd})")
+	@Insert("INSERT INTO testuser( username,email,school,company,blog,age,tel,registerdate,lastlogindate,state,discipline,gratime,pwd,privilege)"
+			+ " VALUES( #{username}, #{email}, #{school}, #{company},#{blog},#{age},#{tel},#{registerDate},#{lastLoginDate},#{state},#{discipline},#{gratime},#{pwd},#{privilege})")
 	void insertTestuser(Testuser testuser);
 
 	@Update("update testuser set username=#{username},email=#{email} ,school=#{school},company=#{company},blog=#{blog},age=#{age},tel=#{tel},discipline=#{discipline},gratime=#{gratime},"

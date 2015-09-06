@@ -74,7 +74,12 @@ public class SecurityServiceImp implements SecurityService {
 		 * 用户登陆时，根据登录时间+70min得到的时间+email+pwd进行md5运算，
 		 * 得出的结果+,uid 进行base64编码，这个就token
 		 */
-		Date loginDate = u.getLastLoginDate();
+		
+		//bug修改，lastloginDate应该取当前时间
+		
+		Date loginDate = new Date();
+		userService.updateLoginDateByEmail(u);;
+		
 		//增加token refresh time :min
 		Calendar c = Calendar.getInstance();
 		c.setTime(loginDate);
@@ -104,17 +109,15 @@ public class SecurityServiceImp implements SecurityService {
 		 * 进行base64编码，这个就token
 		 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String loginDate = u.getLastLoginDate();
-		Date date = null;
-		try {
-			date = sdf.parse(loginDate);
-
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		
+		
+		Date loginDate = new Date();
+		u.setLastLoginDate(sdf.format(loginDate));
+		tuserService.updateUser(u);
+		
 		// 增加token refresh time :min
 		Calendar c = Calendar.getInstance();
-		c.setTime(date);
+		c.setTime(loginDate);
 
 		if (addmin == null) {
 			String t = (String) PropertiesUtil
@@ -122,7 +125,7 @@ public class SecurityServiceImp implements SecurityService {
 			addmin = Integer.parseInt(t);
 		}
 		c.add(Calendar.MINUTE, addmin);
-		date = c.getTime();
+		Date date = c.getTime();
 		String source = u.getTuid() + u.getPwd() + date.toString();
 		String token = MD5Util.stringMD5(source);
 		token += "@,@,@,@" +"**"+ u.getTuid();
@@ -136,13 +139,23 @@ public class SecurityServiceImp implements SecurityService {
 		return token;
 	}
 	
+	
+	
 		
 	
 	@Override
 	public boolean checkToken(String uri, String token) {
 		// 解码出uid
+		String tokenUid = "";
+		
 		try {
-			String tokenUid = new String(BASE64.decodeBASE64(token));
+			 tokenUid = new String(BASE64.decodeBASE64(token));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+			
+			
 			Pattern pat = Pattern.compile(regEx);
 			String[] strs = pat.split(tokenUid);
 			if (strs.length > 2)
@@ -160,8 +173,8 @@ public class SecurityServiceImp implements SecurityService {
 			int flag = 0;
 
 			if (strs[1].contains("**")) {
-				String[] ustrs = strs[1].split("**");
-				int tuid = Integer.parseInt(ustrs[1]);
+				String[] users = strs[1].split("\\*\\*");
+				int tuid = Integer.parseInt(users[1]);
 				Testuser u = tuserService.getTestuserById(tuid);
 
 				for (Integer i : level) {
@@ -176,7 +189,13 @@ public class SecurityServiceImp implements SecurityService {
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");
 
-				Date loginDate = sdf.parse(u.getLastLoginDate());
+				Date loginDate=new Date();
+				try {
+					loginDate = sdf.parse(u.getLastLoginDate());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				// 增加70min
 				Calendar c = Calendar.getInstance();
 				c.setTime(loginDate);
@@ -242,12 +261,6 @@ public class SecurityServiceImp implements SecurityService {
 					return false;
 				}
 			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
 	}
 
 }

@@ -17,7 +17,7 @@ public interface UserDao {
 
 	@Update("update user set "
 			+ "fname=#{fname},lname=#{lname},company=#{company},tel=#{tel},privilege=${privilege},"
-			+ "pwd=#{pwd},invited_left=${invited_left},resetUrl=#{resetUrl},invited_num=${invitedNum},companyId=${companyId} "
+			+ "pwd=#{pwd},invited_left=${invited_left},resetUrl=#{resetUrl},invited_num=${invitedNum},companyId=${companyId},last_login_date=${lastLoginDate} "
 			+ "where uid=${uid}")
 	void updateUser(User u);
 

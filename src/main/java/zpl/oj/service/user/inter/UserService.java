@@ -28,4 +28,6 @@ public interface UserService {
 	void resetPwdApply(String email,User user);
 
 	User getUserByName(String username);
+	
+	void updateLoginDateByEmail(User u);
 }

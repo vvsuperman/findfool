@@ -30,7 +30,7 @@ public class SearchController {
 	@ResponseBody
 	public ResponseBase searchSite(@RequestBody RequestUser request){
 		ResponseBase rb = new ResponseBase();
-		List<Domain> sets = setService.getSets();
+		List<Domain> sets = setService.getSets(request);
 		rb.setState(1);
 		rb.setMessage(sets);
 		return rb;

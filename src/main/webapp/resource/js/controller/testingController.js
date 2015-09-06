@@ -13,12 +13,10 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 		 $http({
 	         url: WEBROOT+"/testing/checkurl",
 	         method: 'POST',
-	         headers: {
-	                "Authorization": Data.token()
-	            },
 		     data: {"email":$scope.email, "testid": $scope.tid}
 	     }).success(function (data) {
 	         //测试未开始
+	    	 CadData.setTestToken(data["token"]);
 	    	 if( data.state == 0){
 	    		 //试题已截至
 	    		 if(data.message ==1){
@@ -33,8 +31,6 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	 }
 	    	 else{
 	    		 $scope.show = 1;
-	    		//测试数据
-	    	     //$scope.show = 2;
 	    	 }	 
 	         
 	     }).error(function(){
@@ -60,7 +56,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	         url: WEBROOT+"/challenge/start",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": Data.token()
+	                "Authorization": CadData.getTestToken()
 	            },
          	 data: {"email":$scope.email,"signedKey":$scope.signedKey}
 	     }).success(function (data) {
@@ -78,7 +74,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	         url: WEBROOT+"/testing/getLabels",
 	    	         method: 'POST',
 	    	         headers: {
-	 	                "Authorization": Data.token()
+	 	                "Authorization": CadData.getTestToken()
 	 	            },
 	    	         data: {"email":$scope.email, "testid": $scope.tid}
 	    	     }).success(function (data) {
@@ -272,7 +268,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	         url: WEBROOT+"/testing/checkpwd",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": Data.token()
+	                "Authorization": CadData.getTestToken()
 	            },
          	 data: {"email":$scope.email,"pwd": $scope.loginUser.pwd,"testid":$scope.tid}
 	     }).success(function (data) {
@@ -302,7 +298,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	         url: WEBROOT+"/testing/getLabels",
 	    	         method: 'POST',
 	    	         headers: {
-	 	                "Authorization": Data.token()
+	 	                "Authorization": CadData.getTestToken()
 	 	            },
 	    	         data: {"email":$scope.email, "testid": $scope.tid}
 	    	     }).success(function (data) {
@@ -377,6 +373,9 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",
 	         method: 'POST',
+	         headers: {
+	                "Authorization": CadData.getTestToken()
+	            },
 	         data: sendData
 	     }).success(function (data) {
 	    	 if( data.state == 0){
@@ -431,7 +430,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	         url: WEBROOT+"/testing/starttest",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": Data.token()
+	                "Authorization": CadData.getTestToken()
 	            },
 	         data: sendData
 	     }).success(function (data) {
@@ -515,7 +514,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	         url: WEBROOT+"/testing/submit",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": Data.token()
+	                "Authorization": CadData.getTestToken()
 	            },
 	         data: sendData
 	     }).success(function (data) {
@@ -550,7 +549,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	         url: WEBROOT+"/testing/fetchProblem",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": Data.token()
+	                "Authorization": CadData.getTestToken()
 	            },
 	         data: sendData
 	     }).success(function (data) {
@@ -622,8 +621,8 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
            url: WEBROOT+'/solution/run',
            method: "POST",
            headers: {
-               "Authorization": Data.token()
-           },
+                "Authorization": CadData.getTestToken()
+            },
            data: solution
        }).success(function (data) {
     	   if($scope.state == 0){
@@ -653,8 +652,8 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
            url: WEBROOT+"/solution/query",
            method: "POST",
            headers: {
-               "Authorization": Data.token()
-           },
+                "Authorization": CadData.getTestToken()
+            },
            data: solution
        }).success(function (data) {
        	   var end;
@@ -704,7 +703,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	         url: WEBROOT+"/testing/finishtest",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": Data.token()
+	                "Authorization": CadData.getTestToken()
 	            },
 	         data: sendData
 	     }).success(function (data) {

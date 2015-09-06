@@ -14,6 +14,7 @@ import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.request.Question;
+import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestMeta;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
 import zpl.oj.service.LabelService;

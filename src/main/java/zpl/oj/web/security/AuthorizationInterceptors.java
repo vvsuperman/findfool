@@ -39,7 +39,7 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
 		String[] notFilter = new String[] { "/user/add/hr", "index.html" ,"/user/oauthorlogin",
 	        	"/user/confirm","/user/add/admin","/user/getVerifyQtn","/tuser/getvertifycode",
 	        	"/tuser/confirm","/tuser/register","main.html","/company/companyset","/operate/operateurl",
-	        	"/resource/","/company/","/cad/","/dp/","/page/" };  
+	        	"/resource/","/company/","/cad/","/dp/","/page/","/testing/checkurl","/user/getvertifycode" };  
 
         // 请求的uri  
         String url ="";

@@ -42,6 +42,7 @@ import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.QuizService;
+import zpl.oj.service.imp.CompanyService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.MD5.MD5Util;
@@ -65,6 +66,10 @@ public class QuizController {
 
 	@Autowired
 	private ImgUploadService imgUploadService;
+	
+	@Autowired
+	private CompanyService companyService;
+	
 
 	@RequestMapping(value = "/queryByID")
 	@ResponseBody
@@ -206,6 +211,10 @@ public class QuizController {
 			}
 			int tid=Integer.parseInt(testid);
 			 Quiz quiz  =quizDao.getQuiz(tid);
+			 if((quiz.getLogo()!=null)&&(quiz.getLogo().length()>0)){
+			String logoString= companyService.getImg(quiz.getLogo());
+			 quiz.setLogo(logoString);
+			 }
 			rb.setMessage(quiz);
 			rb.setState(0);
 		

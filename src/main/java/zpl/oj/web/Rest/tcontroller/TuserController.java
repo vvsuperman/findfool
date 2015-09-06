@@ -122,7 +122,7 @@ public class TuserController {
 	public ResponseBase register(@RequestBody Testuser tuser) {
 		ResponseBase rb = new ResponseBase();
 		Testuser tuser1=tuser;
-		tuser1.setPrivilege(1);
+		tuser1.setPrivilege(ExamConstant.ROLE_TEST);
 		if(tuser1.getEmail()==null||tuser1.getTel()==null||tuser1.getPwd()==null){
 			rb.setState(3);
 			rb.setMessage("输入项不得为空，请重新输入");

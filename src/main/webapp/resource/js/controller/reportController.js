@@ -206,6 +206,9 @@ OJApp.controller('reportListController', [
 						$http({
 							url : WEBROOT + "/testing/getLabels",
 							method : 'POST',
+							headers: {
+					                "Authorization": Data.token()
+					        },
 							data : {
 								"email" : $scope.user.email,
 								"testid" : testid

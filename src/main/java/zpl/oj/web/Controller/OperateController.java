@@ -52,9 +52,59 @@ private OperateDao operateDao;
 		if (arg ==1) {
 			filePath = (String) PropertiesUtil.getContextProperty("bapi");
 			roleid = 2;
+			BufferedReader in;
+			try {
+				in = new BufferedReader(new FileReader(filePath));
+				String ss = "";
+				while ((ss = in.readLine()) != null) {
+					String[] s = ss.split(" ");
+					for (int i = 0; i < s.length; i++) {
+						System.out.println("api............."+ s[i]);
+						//判断api是否存在
+						int num = operateDao.countApi(s[i]);
+						if(num == 0){
+							operateDao.insertApi(s[i]);
+						}
+						int apiid = operateDao.getApiidByApi(s[i]);
+						//判断api_role是否存在
+						String url = operateDao.getUrlbyApi(s[i],roleid);
+						if ( (url == null)||(url.isEmpty())) {
+							operateDao.insertRoleapi(roleid, apiid);
+						}
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (arg ==2) {
 			filePath = (String) PropertiesUtil.getContextProperty("capi");
 			roleid = 1;
+			BufferedReader in;
+			try {
+				in = new BufferedReader(new FileReader(filePath));
+				String ss = "";
+				while ((ss = in.readLine()) != null) {
+					String[] s = ss.split(" ");
+					for (int i = 0; i < s.length; i++) {
+						System.out.println("api............."+ s[i]);
+						//判断api是否存在
+						int num = operateDao.countApi(s[i]);
+						if(num == 0){
+							operateDao.insertApi(s[i]);
+						}
+						int apiid = operateDao.getApiidByApi(s[i]);
+						//判断api_role是否存在
+						String url = operateDao.getUrlbyApi(s[i],roleid);
+						if ( (url == null)||(url.isEmpty())) {
+							operateDao.insertRoleapi(roleid, apiid);
+						}
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			rb.setMessage("参数传递出错，请核实！");
 			rb.setState(1);
@@ -65,26 +115,7 @@ private OperateDao operateDao;
 			rb.setState(2);
 			return rb;
 		}
-		BufferedReader in;
-		try {
-			in = new BufferedReader(new FileReader(filePath));
-			String ss = "";
-			while ((ss = in.readLine()) != null) {
-				String[] s = ss.split(" ");
-				for (int i = 0; i < s.length; i++) {
-					String url = operateDao.getUrlbyApi(s[i]);
-					if ( (url == null)||(url.isEmpty())) {
-						operateDao.insertApi(s[i]);
-						int apiid = operateDao.getApiidByApi(s[i]);
-						
-						operateDao.insertRoleapi(roleid, apiid);
-					}
-				}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		rb.setMessage("操作完成！");
 		rb.setState(0);
 		return rb;

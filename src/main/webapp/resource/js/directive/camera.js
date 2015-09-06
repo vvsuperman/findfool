@@ -1,7 +1,7 @@
 
 
 //摄像头指令
-OJApp.directive('camera', function() {
+OJApp.directive('camera', ['CadData',function(CadData) {
 	return {
 		restrict: 'AE',
 		scope:true,
@@ -44,6 +44,9 @@ OJApp.directive('camera', function() {
 		    	$.ajax({
 			    		url :WEBROOT+"/uploadimg",
 			    		type : "POST",
+			    		beforeSend: function(request) {
+	                        request.setRequestHeader("Authorization", CadData.getTestToken());
+	                    },
 			    		contentType : "application/json",
 			    		data:  JSON.stringify({ "imgData": imgsrc,"email":scope.email,"invitedid":scope.invitedid,"state":state}),
 			    		method:"POST",
@@ -66,7 +69,7 @@ OJApp.directive('camera', function() {
 
 		    });
 			
-		}}});
+		}}}]);
 
 var setupCamera = function(video,scope)
 {

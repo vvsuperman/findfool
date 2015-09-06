@@ -75,6 +75,7 @@ public class InviteServiceImp implements InviteService {
 		Testuser tuser = new Testuser();
 		tuser.setUsername(u.getUsernameame());
 		tuser.setEmail(u.getEmail());
+	    tuser.setPrivilege(ExamConstant.ROLE_TEST);
 		
 		//发送短信提醒
 	    if(u.getTel().equals("") == false ){

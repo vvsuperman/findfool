@@ -46,6 +46,7 @@ import zpl.oj.service.QuizService;
 import zpl.oj.service.SchoolService;
 //import zpl.oj.service.imp.LogService;
 import zpl.oj.service.imp.TuserService;
+import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.des.DESService;
@@ -88,6 +89,11 @@ public class TestingController {
 	private TuserProblemDao tuserProblemDao;
 	@Autowired
 	private QuizEmailService quizEmailService;
+	
+	@Autowired
+	private SecurityService securityService;
+	
+	
 //	@Autowired
 //	private LogService logService;
 
@@ -129,6 +135,16 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
+		
+		Integer tuid = (Integer) rtMap.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(rtMap.get("msg"));
+			rb.setState(4);
+			return rb;
+		}
+		
+		Testuser tuser = tuserDao.findTestuserById(tuid);
+		rb.setToken(securityService.computeToken(tuser));
 		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
@@ -282,6 +298,9 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
+		
+		
+		
 		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
