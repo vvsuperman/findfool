@@ -33,6 +33,8 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
     		return "编程题";
     	}else if(typeName ==3){
     		return "简答题";
+    	}else if(typeName ==4){
+    		return "设计题";
     	}else{
     		return "no";
     	}

@@ -13,10 +13,12 @@ import org.codehaus.jackson.map.type.MapLikeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -38,6 +40,7 @@ import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
@@ -71,6 +74,9 @@ public class TestingController {
 	
 	@Autowired
 	private LabelService labelService;
+	
+	@Autowired
+	private ImgUploadService imgUploadService;
 	
 	@Autowired
 	private QuizDao quizDao;
@@ -628,4 +634,43 @@ public class TestingController {
 		rb.setState(0);
 		return rb;
 	}
+	
+	
+	
+	
+	// 设计题添加文件
+		@RequestMapping(value = "/uploadimg")
+		@ResponseBody
+		public ResponseBase uploadCompanyImg(
+				@RequestParam MultipartFile[] file,
+				// @RequestBody Map<String, String> params,
+				@RequestHeader(value = "Authorization", required = false) String imgifo) {
+
+			ResponseBase rb = new ResponseBase();
+
+			int quizId = Integer.parseInt(imgifo);
+			Quiz quiz = quizDao.getQuiz(quizId);
+
+			if (quiz == null) {
+				rb.setState(1);
+				rb.setMessage("图片插入错误，无法找到该公司");
+				return rb;
+			}
+
+			if (file == null) {
+				rb.setState(2);
+				rb.setMessage("图片不可为空");
+				return rb;
+			}
+
+			for (MultipartFile fileitem : file) {
+				if (!fileitem.isEmpty()) {
+					imgUploadService.saveTestImg(quiz, fileitem);
+				}
+
+			}
+			rb.setMessage(quiz);
+			return rb;
+
+		}
 }
