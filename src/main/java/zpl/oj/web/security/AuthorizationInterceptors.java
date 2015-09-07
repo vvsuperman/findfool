@@ -39,18 +39,26 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
 		String[] notFilter = new String[] { "/user/add/hr", "index.html" ,"/user/oauthorlogin",
 	        	"/user/confirm","/user/add/admin","/user/getVerifyQtn","/tuser/getvertifycode",
 	        	"/tuser/confirm","/tuser/register","main.html","/company/companyset","/operate/operateurl",
-	        	"/resource/","/company/","/cad/","/dp/","/page/","/testing/checkurl","/user/getvertifycode","/test/uploadimg" };  
+
+	        	"/resource/","/company/","/cad/","/dp/","/page/","/static/","/testing/checkurl","/user/getvertifycode","/publicReport/list" };  
+
 
         // 请求的uri  
         String url ="";
         url = request.getRequestURI();
+        System.out.println("url..............."+url);
         
-        boolean doFilter = true;  
-        if(url.length()>WEBROOT.length()+1){
+        boolean doFilter = true;
+        if(url.equals("/")){
+        	doFilter=false;
+        }else if(WEBROOT.equals("foolrank")){
+        	
+        }
+        else if(url.length()>WEBROOT.length()+1){
         	url = url.substring(WEBROOT.length(),url.length()); 
         }else{
-        	url ="/";
-        	doFilter = false;
+        	url="/";
+        	doFilter=false;
         }
         //test 任何请求均不过滤
 //        doFilter = false;

@@ -21,11 +21,7 @@
 
 
                         <div class="com-info">
-                           <div class="comtail">
-                                <img src="resource/static/iconfont-zuobiao.png" alt="zuobiao">
-                                <p>上海</p>
-                            </div>
-
+                          
                             <div class="address">
                                 <img src="resource/static/iconfont-zuobiao.png" alt="zuobiao">
                                 <p>{{companyTail.address}}</p>
@@ -51,7 +47,7 @@
                 <div class="squad-title">
                     <h3>公司简介</h3>
                 </div>
-                <div class="com-activities" >
+                <div class="" >
                    <textarea simditor minheight="50px" operation="view" ng-model="map.company.description"></textarea>
                    
                     
@@ -104,7 +100,7 @@
                             {{quiz.name}}
                         </h5>
 
-                        <p>{{quiz.description}}</p>
+                        <textarea simditor minheight="50px" operation="view" ng-model="quiz.description"></textarea>
                         <div style="margin-bottom: 10px" >
 	                         <button class="btn btn-primary"  ng-click="startTest(quiz)">
 	                          开始挑战
@@ -128,7 +124,7 @@
                             {{quiz.name}}
                         </h5>
 
-                        <p>{{quiz.description}}</p>
+                         <textarea simditor minheight="50px" operation="view" ng-model="quiz.description"></textarea>
                         <div style="margin-bottom: 10px" >
 	                         <button class="btn btn-primary"  ng-click="startTest(quiz)" disabled="disabled">
 	                          开始挑战
