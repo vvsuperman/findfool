@@ -508,7 +508,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
     	 
     	 
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
-    			 		 "useranswer":useranswer,"index":index};
+    			 		 "useranswer":useranswer,"index":index,"questionType":$scope.questionType};
     	 
     	 $http({
 	         url: WEBROOT+"/testing/submit",

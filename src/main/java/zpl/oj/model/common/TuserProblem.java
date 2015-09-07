@@ -20,7 +20,19 @@ public class TuserProblem {
 	private int solutionId;   //编程题的运行ID
 	private int level;        //题目的等级
 	
-	
+	private String email ;//只用来传递参数，没有实际作用
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 
 	public TuserProblem() {

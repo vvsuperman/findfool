@@ -13,9 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.ImgUploadDao;
 import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.TuserProblem;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.util.StringUtil;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
@@ -41,6 +43,9 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 	
 	@Autowired
 	QuizDao quizDao;
+	
+	@Autowired
+	TuserProblemDao  tuserProblemDao;
 	
 	
 	@Override
@@ -212,6 +217,20 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 			quiz.setLogo(filename);
 	         quizDao.updateQuiz(quiz);
 	          
+	}
+
+
+	@Override
+	public void saveTestingFile(TuserProblem testuserProblem,
+			MultipartFile fileitem) {
+		// TODO Auto-generated method stub
+		String filename = testuserProblem.getEmail()
+				+ StringUtil.toDateTimeString(new Date());
+		pushImg(filename, fileitem);
+		// 保存封面
+		testuserProblem.setUseranswer(filename);
+		tuserProblemDao.updateAnswerByIds(testuserProblem);	
+		
 	}
 
 }

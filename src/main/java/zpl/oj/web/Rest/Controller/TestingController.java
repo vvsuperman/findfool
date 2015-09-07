@@ -481,11 +481,21 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
-		
+	     int questionType=(int)params.get("questionType");
 		Invite invite = (Invite)map.get("invite");
 		
-		//提交用户的答案
-		if(params.get("problemid")!=null){
+		if(questionType==4){
+//			int problemid = (int)params.get("problemid");
+//			String useranswer = (String)params.get("useranswer");
+//			TuserProblem testuserProblem=	tuserProblemDao.findByPidAndIid(invite.getIid(),problemid);
+//			
+//			TuserProblem testuserProblem  = new TuserProblem();
+//			testuserProblem.setProblemid(problemid);
+//			testuserProblem.setUseranswer(useranswer);
+//			testuserProblem.setInviteId(invite.getIid());
+		//	tuserProblemDao.updateAnswerByIds(testuserProblem);	
+			
+		}else if(params.get("problemid")!=null){
 			int problemid = (int)params.get("problemid");
 			String useranswer = (String)params.get("useranswer");
 			
@@ -644,33 +654,49 @@ public class TestingController {
 		public ResponseBase uploadCompanyImg(
 				@RequestParam MultipartFile[] file,
 				// @RequestBody Map<String, String> params,
-				@RequestHeader(value = "Authorization", required = false) String imgifo) {
+				@RequestHeader(value = "Authorization", required = false) String arg) {
 
 			ResponseBase rb = new ResponseBase();
-
-			int quizId = Integer.parseInt(imgifo);
-			Quiz quiz = quizDao.getQuiz(quizId);
-
-			if (quiz == null) {
-				rb.setState(1);
-				rb.setMessage("图片插入错误，无法找到该公司");
-				return rb;
-			}
-
-			if (file == null) {
-				rb.setState(2);
-				rb.setMessage("图片不可为空");
-				return rb;
-			}
-
-			for (MultipartFile fileitem : file) {
-				if (!fileitem.isEmpty()) {
-					imgUploadService.saveTestImg(quiz, fileitem);
+		
+			   String   args[]=arg.split(",");
+			
+			   
+			   Integer testid = Integer.parseInt(args[0]);
+			   String email=args[1];
+				Invite invite = inviteDao.getInvites(testid, email);
+				int tuid = invite.getUid();
+                
+				if(tuid ==0){
+					rb.setMessage("试题id不能为空");
+					rb.setState(0);
+					return rb;
 				}
-
-			}
-			rb.setMessage(quiz);
-			return rb;
+				
+				if (file == null) {
+					rb.setState(2);
+					rb.setMessage("图片不可为空");
+					return rb;
+				}
+				int problemid=Integer.parseInt(args[2]);
+				
+				String  temail=email.replace(".","/");
+				
+				//提交用户的答案
+				if(file!=null){
+					TuserProblem testuserProblem  = new TuserProblem();
+					testuserProblem.setProblemid(problemid);
+					testuserProblem.setEmail(temail);
+				
+					testuserProblem.setInviteId(invite.getIid());
+					for (MultipartFile fileitem : file) {
+						if (!fileitem.isEmpty()) {
+							imgUploadService.saveTestingFile(testuserProblem, fileitem);
+						}
+					}	
+				}
+				return rb;
+				
+				
 
 		}
 }
