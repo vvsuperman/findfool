@@ -679,7 +679,7 @@ public class TestingController {
 				
 				if (file == null) {
 					rb.setState(2);
-					rb.setMessage("图片不可为空");
+					rb.setMessage("文件为空");
 					return rb;
 				}
 				int problemid=Integer.parseInt(args[2]);

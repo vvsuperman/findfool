@@ -515,6 +515,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
      $scope.submitAndFetch= function(problem,index){
     	 //判断是否是第一道题，提交目前的试题
     	 var useranswer ="";
+      
     	 if($scope.question.type ==1){
     		 if(typeof($scope.question.answer)!="undefined"){
             	 for(var i in $scope.question.answer){
@@ -530,7 +531,10 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
     	 }else if($scope.question.type == 4){
     		 useranswer = $scope.question.useranswer;
     	 }
-    	
+    	 if(index==1){
+      	   $scope.question.type=problem.type;
+      	   
+         }
     	 
     	 
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
