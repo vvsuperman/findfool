@@ -36,7 +36,14 @@
 		            		simditor operation={{operation}}  data-ng-model="question.useranswer"></div>
 		            <div style="clear:both"></div>
 		        </div>
-			    
+			         <div class="col-xs-12" style="margin-top: 20px;" ng-if="question.type==4">
+		    	 <p>用户答案</p>
+<a  href="{{question.useranswer}}" data-ng-model="question.useranswer">点击下载文件！ </a>
+		           <!--  <div class="col-xs-11" style="min-height:500px; line-height: 1.7;position:absolute;" 
+		            		simditor operation={{operation}}  data-ng-model="question.useranswer">
+		            		</div> -->
+		            <div style="clear:both"></div>
+		        </div>
 
 			<div style="clear:both"></div>
         </div>

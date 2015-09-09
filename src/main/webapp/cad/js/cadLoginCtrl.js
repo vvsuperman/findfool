@@ -5,7 +5,9 @@ OJApp.controller('cadLoginCtrl', [ '$scope', '$http', 'CadData','Data',function(
 			$scope.verifyQtn = {};
 			$scope.Lemail;
 			$scope.Lpwd;
+		
 				$scope.confirm = function() {
+					_hmt.push(['_trackEvent','cadLoginButton']);
 				if ($scope.Lemail && $scope.Lpwd) {
 					// console.log("1");
 					var pwd = md5($scope.Lpwd);

@@ -43,6 +43,7 @@ public class ExamConstant {
 	public final static int OPTION = 1;
 	public final static int PROGRAM = 2;
 	public final static int ESSAY = 3;
+	public final static int DESIGN=4; 
 
 	public final static int INVITE_PUB = 0; // 邀请已发送
 	public final static int INVITE_PROGRESS = 1;// 测试进行中
@@ -69,6 +70,7 @@ public class ExamConstant {
 	public static final String QUESTION_TYPE_OPTION = "option";
 	public static final String QUESTION_TYPE_ESSAY = "essay";
 	public static final String QUESTION_TYPE_PROGRAM = "pragram";
+	public static final String QUESTION_TYPE_DESIGN = "design";
 
 	// 自定义题库，不列入统计
 	public static final int CUSTOM_SET_ID = 0;

@@ -597,6 +597,8 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 $scope.questionType =2;
 	    	 }else if(data.message.type ==3){
 	    		 $scope.questionType =3;
+	    	 }else if(data.message.type ==4){
+	    		 $scope.questionType =4;
 	    	 }
 	    	$scope.question = data.message;
 	     }).error(function(){

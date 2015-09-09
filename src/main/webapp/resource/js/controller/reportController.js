@@ -442,7 +442,24 @@ OJApp.controller('reportDetailController', [ '$scope', '$http','Data', '$routePa
 							}
 						}
 					});
+				} else if (q.type == 4) {
+					var modalInstance = $modal.open({
+						templateUrl : 'page/proModalContent.html',
+						controller : 'proModalInstanceCtrl',
+						size : size,
+						resolve : {
+							params : function() {
+								var obj = {};
+								obj.operation = params.operation;
+								obj.title = params.title;
+								obj.question = q;
+								obj.report = 1; // 表示是查看报告
+								return obj;
+							}
+						}
+					});
 				}
+
 
 			};
 
