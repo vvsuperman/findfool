@@ -51,28 +51,10 @@ private OperateDao operateDao;
 		ResponseBase rb = new ResponseBase();
 		if (arg ==1) {
 			filePath = (String) PropertiesUtil.getContextProperty("bapi");
-			roleid = 2;
 			BufferedReader in;
 			try {
-				in = new BufferedReader(new FileReader(filePath));
-				String ss = "";
-				while ((ss = in.readLine()) != null) {
-					String[] s = ss.split(" ");
-					for (int i = 0; i < s.length; i++) {
-						System.out.println("api............."+ s[i]);
-						//判断api是否存在
-						int num = operateDao.countApi(s[i]);
-						if(num == 0){
-							operateDao.insertApi(s[i]);
-						}
-						int apiid = operateDao.getApiidByApi(s[i]);
-						//判断api_role是否存在
-						String url = operateDao.getUrlbyApi(s[i],roleid);
-						if ( (url == null)||(url.isEmpty())) {
-							operateDao.insertRoleapi(roleid, apiid);
-						}
-					}
-				}
+				insertRoleApi(2,new BufferedReader(new FileReader(filePath))); //插入权限为2的api
+				insertRoleApi(3,new BufferedReader(new FileReader(filePath))); //插入权限为3的api
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -82,25 +64,8 @@ private OperateDao operateDao;
 			roleid = 1;
 			BufferedReader in;
 			try {
-				in = new BufferedReader(new FileReader(filePath));
-				String ss = "";
-				while ((ss = in.readLine()) != null) {
-					String[] s = ss.split(" ");
-					for (int i = 0; i < s.length; i++) {
-						System.out.println("api............."+ s[i]);
-						//判断api是否存在
-						int num = operateDao.countApi(s[i]);
-						if(num == 0){
-							operateDao.insertApi(s[i]);
-						}
-						int apiid = operateDao.getApiidByApi(s[i]);
-						//判断api_role是否存在
-						String url = operateDao.getUrlbyApi(s[i],roleid);
-						if ( (url == null)||(url.isEmpty())) {
-							operateDao.insertRoleapi(roleid, apiid);
-						}
-					}
-				}
+				insertRoleApi(1,new BufferedReader(new FileReader(filePath)));
+				insertRoleApi(3,new BufferedReader(new FileReader(filePath))); //插入权限为3的api
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -120,6 +85,33 @@ private OperateDao operateDao;
 		rb.setState(0);
 		return rb;
 
+	}
+
+
+	/**
+	 * @param roleid
+	 * @param in
+	 * @throws IOException
+	 */
+	public void insertRoleApi(int roleid, BufferedReader in) throws IOException {
+		String ss;
+		while ((ss = in.readLine()) != null) {
+			String[] s = ss.split(" ");
+			for (int i = 0; i < s.length; i++) {
+				System.out.println("api............."+ s[i]);
+				//判断api是否存在
+				int num = operateDao.countApi(s[i]);
+				if(num == 0){
+					operateDao.insertApi(s[i]);
+				}
+				int apiid = operateDao.getApiidByApi(s[i]);
+				//判断api_role是否存在
+				String url = operateDao.getUrlbyApi(s[i],roleid);
+				if ( (url == null)||(url.isEmpty())) {
+					operateDao.insertRoleapi(roleid, apiid);
+				}
+			}
+		}
 	}
 
 

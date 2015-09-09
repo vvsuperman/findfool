@@ -7,7 +7,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 	$scope.showtext = 1;
 	
 	 //判断用户是否登陆
-	$scope.email = CadData.getEmail();
+	$scope.email = CadData.getCadEmail();
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
@@ -15,7 +15,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 	$http({
         url: WEBROOT+"/cadquiz/starttest",
         method: 'POST',
-        data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
+        data: {"testid":CadData.getCadTestid(),"email":CadData.getCadEmail()}
     }).success(function (data) {
     	if(data.state == 101){
         	smoke.alert(data.message);
@@ -89,7 +89,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		$http({
 	        url: WEBROOT+"/cadquiz/answerQuestion",
 	        method: 'POST',
-	        data: {"testid":CadData.getTestid(),problemid:$scope.question.qid,"email":CadData.getEmail(),useranswer:useranswer}
+	        data: {"testid":CadData.getCadTestid(),problemid:$scope.question.qid,"email":CadData.getCadEmail(),useranswer:useranswer}
 	    }).success(function (data) {
 	    	if(data.state == 101){
 	        	smoke.alert(data.message);
@@ -132,7 +132,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		$http({
 	        url: WEBROOT+"/cadquiz/getquestion",
 	        method: 'POST',
-	        data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
+	        data: {"testid":CadData.getCadTestid(),"email":CadData.getCadEmail()}
 	    }).success(function (data) {
 	    	if(data.state == 101){
 	        	smoke.alert(data.message);
@@ -163,7 +163,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		$http({
 	        url: WEBROOT+"/comment/add",
 	        method: 'POST',
-	        data: {"email":CadData.getEmail(),"pid":0,"content":$scope.comment.txt,"stype":2,"sid":$scope.question.qid}
+	        data: {"email":CadData.getCadEmail(),"pid":0,"content":$scope.comment.txt,"stype":2,"sid":$scope.question.qid}
 	    }).success(function (data) {
 	    	flashTip("吐槽成功，感谢您的吐槽!");
 	    	$scope.showtext =0;
