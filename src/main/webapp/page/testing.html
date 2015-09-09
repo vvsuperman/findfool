@@ -117,6 +117,24 @@
 		<!-- essay -->
 		
 		
+			 <!-- 设计题 --> 
+		  <div class="row" ng-if="questionType==4" style="margin-left: 20px">
+		    <div style="margin-top: 20px">
+		        <textarea simditor minheight="50px" width="100%" operation="view" ng-model="question.context"></textarea>
+		    </div>
+		    
+		    <div style="margin-top: 20px">
+		       <h4 class="greenFont">回答</h4>
+		       	<label class="col-sm-2 control-label">上传您的文件</label>
+			<div style="margin-top: 10px" class="btn btn-primary" upload-button
+				header={{tid}},{{email}},{{question.qid}}  url="testing/uploadimg" on-success="onSuccess(response)">上传您的文件
+		<!-- 	</div>
+		       <textarea simditor minheight="200px" width="100%" operation="editor" ng-model="question.useranswer"></textarea>
+		    </div> -->
+		</div>
+		<!-- 设计题 -->
+		</div>
+		</div>
 		  <div class="col-md-2" style="margin-top: 20px;margin-bottom: 100px" >
 		  	<button class="btn btn-primary" ng-click="getNext(question)">提交/下一题</button>
 	      </div>

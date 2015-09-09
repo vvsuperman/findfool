@@ -1,86 +1,263 @@
-<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css"
+	href="resource/fonts/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
-<link rel="stylesheet" type="text/css" href="resource/css/mymodalcontent.css"/>
+<link rel="stylesheet" type="text/css"
+	href="resource/css/mymodalcontent.css" />
 
 <style>
-	
 </style>
 
-<div class="myqs"  >
+<div class="myqs">
 	<div class="panel panel-default cspanel">
 		<div class="panel-heading">
 			<h4>添加库试题</h4>
-			   <div class="btn-group" style="margin-left: 20px">
-				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				                 新增试题 <span class="caret"></span>
+			<div class="btn-group" style="margin-left: 20px">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-toggle="dropdown">
+					新增试题 <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
-				    <li><a href="" ng-click="showAddPage(1)">选择题</a></li>
-				    <li><a href="" ng-click="showAddPage(3)">简答题</a></li>
+					<li><a href="" ng-click="showAddPage(1)">选择题</a></li>
+					<li><a href="" ng-click="showAddPage(3)">简答题</a></li>
+					<li><a href="" ng-click="showAddPage(4)">设计题</a></li>
 				</ul>
-				</div>
-				
-				<button type="button" class="btn btn-outline" 
-				data-toggle="modal" data-target="#importModal" 
-				ng-click="showImportPage()">
-				导入试题
-			  </button>
-			
-			
+			</div>
+
+			<button type="button" class="btn btn-outline" data-toggle="modal"
+				data-target="#importModal" ng-click="showImportPage()">
+				导入试题</button>
+
+
 		</div>
 		<div class="panel-line no-padding">
 			<div></div>
 		</div>
 		<div class="panel-body">
-   			<ul class="nav nav-tabs">
-			  	<li ng-repeat="tt in Qtype"  ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
-            		<a href="" class='blackFont' ng-click="GoPage(tt.data)" ng-bind="tt.name"></a>
-        		</li>
+			<ul class="nav nav-tabs">
+				<li ng-repeat="tt in Qtype"
+					ng-class="{true: 'active', false: 'inactive'}[tt.data==active]">
+					<a href="" class='blackFont' ng-click="GoPage(tt.data)"
+					ng-bind="tt.name"></a>
+				</li>
 			</ul>
-			<form class="form-inline col-md-6 pull-right"  role="form" ng-if="0" >
-	            <input type="text" ng-model="reciveData.keyword" class=" col-md-8">
-	            <button class="btn btn-default col-md-3"  ng-click="queryQuestions(1)" style="margin-left: 10px">搜索</button>
-        	</form>
-        
-        	<div ng-class="{0:'hedden', 1: ''}[show]" style="border:1px solid #ddd;border-top: none;">
-        		<div class="title">
-   					<div class="qsindex">&nbsp;</div>
-   					<div class="qscontent">试题内容</div>
-   					<div class=qsoperate>操作</div>
-   					<div style="clear:both;"></div>
-   				</div>
-        		<div class="item" ng-repeat="q in reciveData.questions">
+			<form class="form-inline col-md-6 pull-right" role="form" ng-if="0">
+				<input type="text" ng-model="reciveData.keyword" class=" col-md-8">
+				<button class="btn btn-default col-md-3"
+					ng-click="queryQuestions(1)" style="margin-left: 10px">搜索</button>
+			</form>
+
+			<div ng-class="{0:'hedden', 1: ''}[show]"
+				style="border: 1px solid #ddd; border-top: none;">
+				<div class="title">
+					<div class="qsindex">&nbsp;</div>
+					<div class="qscontent">试题内容</div>
+					<div class=qsoperate>操作</div>
+					<div style="clear: both;"></div>
+				</div>
+				<div class="item" ng-repeat="q in reciveData.questions">
 					<div class="qsindex">
 						<span ng-bind="'Q'+($index+1)"></span>
 					</div>
 					<div class="qscontent">
-						<div class="content" style="width:90%; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-							<div abstract context={{q.context}} class="qcontent" ></div>
+						<div class="content"
+							style="width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+							<div abstract context={{q.context}} class="qcontent"></div>
 						</div>
 					</div>
 					<div class="qsoperate">
-						<a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
-		                <a class="blackFont" href="" ng-click="addQuestionToTest(q,$event)" ng-if="!isAdded(q.qid)&&test.addAction">/增加</a>
-		                <a class="blackFont" href="" ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'},$index)">/修改</a>
-		                <a ng-if="isAdded(q.qid)">已添加</a>
+						<a class="blackFont" href=""
+							ng-click="modifyQuestionInTest('lg',q,{'operation':'view','title':'查看试题'})">查看</a>
+						<a class="blackFont" href=""
+							ng-click="addQuestionToTest(q,$event)"
+							ng-if="!isAdded(q.qid)&&test.addAction">/增加</a> <a
+							class="blackFont" href=""
+							ng-click="modifyQuestionInTest('lg',q,{'operation':'edit','title':'修改试题'},$index)">/修改</a>
+						<a ng-if="isAdded(q.qid)">已添加</a>
 					</div>
-					<div style="clear:both;"></div>
+					<div style="clear: both;"></div>
 				</div>
 				<div class="col-md-12">
-			         <pagination total-items="reciveData.totalPage" max-size="10"  ng-model="currPage" ng-change="queryQuestions(currPage)"  class="pagination-sm" boundary-links="true" rotate="false" 
-			          first-text="第一页" last-text="最后一页" previous-text="上一页" next-text="下一页">
-			         </pagination>
-		        </div>
-		        
-		    </div>
-		    
-		    <div ng-class="{0:'', 1: 'hedden'}[show]">  
-        		<div class="col-md-10" ng-if="active==1">
-	            	<div class="row" style="margin-top: 30px;margin-left: 50px">
-	               		<p>题干</p>
-			            <form class="form-inline" role="form">
-							<textarea simditor minheight="60px" ng-model="newQuestion.context" operation="edit"></textarea>
+					<pagination total-items="reciveData.totalPage" max-size="10"
+						ng-model="currPage" ng-change="queryQuestions(currPage)"
+						class="pagination-sm" boundary-links="true" rotate="false"
+						first-text="第一页" last-text="最后一页" previous-text="上一页"
+						next-text="下一页"> </pagination>
+				</div>
+
+			</div>
+
+			<div ng-class="{0:'', 1: 'hedden'}[show]">
+				<div class="col-md-10" ng-if="active==1">
+					<div class="row" style="margin-top: 30px; margin-left: 50px">
+						<p>题干</p>
+						<form class="form-inline" role="form">
+							<textarea simditor minheight="60px"
+								ng-model="newQuestion.context" operation="edit"></textarea>
 							<!-- textarea ng-model="newQuestion.context"></textarea-->
+
+							<div class="hedden" id="context">{{context}}</div>
+							<div class="row">
+								<div class="col-md-5" style="padding: 20px">
+									标签(以,区分) <input type="text" id="tag" class="form-control"
+										ng-model="newQuestion.tag">
+								</div>
+								<div class="col-md-4" style="padding: 20px">
+									分数 <input type="text" class="form-control" ng-model="ans.score"
+										ng-change="isNum(ans.score)">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<button class="btn btn-outline" ng-click="addOne()">新增选项</button>
+								</div>
+							</div>
+
+							<ul style="margin-top: 30px; list-style-type: none">
+								<li ng-repeat="ans in newQuestion.answer"
+									style="margin-top: 30px"><textarea simditor
+										minheight="60px" style="height: 60px" ng-model="ans.text"
+										operation="edit"></textarea> <a data="{{$index}}"
+									class="glyphicon glyphicon-remove aa" href=""
+									ng-click="removeOne($index)">删除</a> <input style="width: 5%"
+									type="checkbox" ng-model="ans.isright">是否正确</li>
+							</ul>
+							<div style="padding-top: 70px">
+								<button class="btn btn-primary " ng-click="addQuestion()">保存</button>
+								<button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
+								<button class="btn btn-primary" ng-click="cancel()">取消</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div ng-if="active==2">
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">标题</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control"
+									ng-model="newQuestion.name" placeholder="标题">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">题干</label>
+							<div class="col-sm-10">
+								<textarea ckeditor minheight="240" width="100%"
+									operation={{operation}} ng-model="newQuestion.context"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">标签(以 , 区分)</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control"
+									ng-model="newQuestion.tag" placeholder="标签">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"></label>
+							<div class="col-sm-4">
+								<button class="btn btn-primary" ng-click="addOne()">新增测试用例</button>
+							</div>
+						</div>
+						<div style="list-style-type: upper-alpha;"
+							ng-class="{true:'', false: 'hedden'}[newQuestion.show]"
+							ng-repeat="ans in newQuestion.answer">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">输入</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" ng-model="ans.text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">输出</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" ng-model="ans.isright">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">分数</label>
+								<div class="col-sm-1">
+									<input type="text" class="form-control col-sm-1"
+										ng-model="ans.score" ng-change="isNum(ans.score)" />
+								</div>
+								<div class="col-sm-2">
+									<button class="btn btn-outline" ng-click="removeOne($index)">删除测试用例</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6 col-xs-offset-2">
+							<a class="btn btn-primary " ng-click="addQuestion()">保存</a> <a
+								class="btn btn-primary" ng-click="resetQuestion()">重置</a> <a
+								class="btn btn-primary" ng-click="cancel()">取消</a>
+						</div>
+					</form>
+				</div>
+
+				<div ng-if="active==3">
+					<form class="form-horizontal" role="form">
+						<div class="form-group" style="margin-top: 40px;">
+							<label class="col-sm-2 control-label">试题内容</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" simditor operation="edit"
+									minheight="150px" ng-model="newQuestion.context"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">标签(以 , 区分)</label>
+							<div class="col-sm-6">
+								<input class="form-control" ng-model="newQuestion.tag"></input>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">分数</label>
+							<div class="col-sm-4">
+								<input class="form-control" ng-model="newQuestion.score"></input>
+							</div>
+						</div>
+
+						<div class="col-md-offset-1" style="padding-top: 70px">
+							<button class="btn btn-primary " ng-click="addQuestion()">保存</button>
+							<button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
+							<button class="btn btn-primary" ng-click="cancel()">取消</button>
+						</div>
+					</form>
+				</div>
+
+
+				<div ng-if="active==4">
+					<form class="form-horizontal" role="form">
+						<div class="form-group" style="margin-top: 40px;">
+							<label class="col-sm-2 control-label">试题内容</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" simditor operation="edit"
+									minheight="150px" ng-model="newQuestion.context"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">标签(以 , 区分)</label>
+							<div class="col-sm-6">
+								<input class="form-control" ng-model="newQuestion.tag"></input>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">分数</label>
+							<div class="col-sm-4">
+								<input class="form-control" ng-model="newQuestion.score"></input>
+							</div>
+						</div>
+
+						<div class="col-md-offset-1" style="padding-top: 70px">
+							<button class="btn btn-primary " ng-click="addQuestion()">保存</button>
+							<button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
+							<button class="btn btn-primary" ng-click="cancel()">取消</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 			                <div class="hedden" id="context" >{{context}}</div>
 			                <div class="row">
 				                <div class="col-md-5" style="padding: 20px">标签(以,区分)
@@ -202,24 +379,31 @@
         		</div>
         	</div>
 	   </div>
+
 	</div>
 </div>
 
-<div class="modal fade" id="importModal" tabindex="0" role="dialog" aria-labelledby="PriceLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                自定义试题导入
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body" style="min-height: 380px">
-               <h3>请先下载<a href="resource/static/importtemplate.xls">模板</a></h3>
-               <p>导入试题用于通过excel的方式导入用户自己的试题，便于企业用户建立自己的题库，开展测试</p>
-               <div class="btn btn-primary" style="margin-top: 100px;margin-left: 150px"  upload-button header ={{token.data}}
-    	          url="/oj/upload" on-success="onSuccess(response)">Upload</div>
-            </div>
-        </div>
-    </div>
+<div class="modal fade" id="importModal" tabindex="0" role="dialog"
+	aria-labelledby="PriceLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				自定义试题导入
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body" style="min-height: 380px">
+				<h3>
+					请先下载<a href="resource/static/importtemplate.xls">模板</a>
+				</h3>
+				<p>导入试题用于通过excel的方式导入用户自己的试题，便于企业用户建立自己的题库，开展测试</p>
+				<div class="btn btn-primary"
+					style="margin-top: 100px; margin-left: 150px" upload-button
+					header={{token.data}} url="/oj/upload"
+					on-success="onSuccess(response)">Upload</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 

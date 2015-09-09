@@ -13,10 +13,12 @@ import org.codehaus.jackson.map.type.MapLikeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -38,6 +40,7 @@ import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
 import zpl.oj.model.responsejson.ResponseBase;
+import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
@@ -71,6 +74,9 @@ public class TestingController {
 	
 	@Autowired
 	private LabelService labelService;
+	
+	@Autowired
+	private ImgUploadService imgUploadService;
 	
 	@Autowired
 	private QuizDao quizDao;
@@ -319,8 +325,13 @@ public class TestingController {
 		if(invite.getBegintime().equals("")==false){
 			//用户已开始做题，直接返回tuserproblem的list
 			List<TuserProblem> tuserProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
+			Map<String, Object> message=new HashMap<String, Object>();
+		
+			message.put("openCamera", invite.getOpenCamera());
+		
+			message.put("tuserProblems", tuserProblems);
+			rb.setMessage(message);
 			rb.setState(1);
-			rb.setMessage(tuserProblems);
 			return rb;
 		}else{  
 		//未开始
@@ -475,11 +486,21 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
-		
+	     int questionType=(int)params.get("questionType");
 		Invite invite = (Invite)map.get("invite");
 		
-		//提交用户的答案
-		if(params.get("problemid")!=null){
+		if(questionType==4){
+//			int problemid = (int)params.get("problemid");
+//			String useranswer = (String)params.get("useranswer");
+//			TuserProblem testuserProblem=	tuserProblemDao.findByPidAndIid(invite.getIid(),problemid);
+//			
+//			TuserProblem testuserProblem  = new TuserProblem();
+//			testuserProblem.setProblemid(problemid);
+//			testuserProblem.setUseranswer(useranswer);
+//			testuserProblem.setInviteId(invite.getIid());
+		//	tuserProblemDao.updateAnswerByIds(testuserProblem);	
+			
+		}else if(params.get("problemid")!=null){
 			int problemid = (int)params.get("problemid");
 			String useranswer = (String)params.get("useranswer");
 			
@@ -628,4 +649,59 @@ public class TestingController {
 		rb.setState(0);
 		return rb;
 	}
+	
+	
+	
+	
+	// 设计题添加文件
+		@RequestMapping(value = "/uploadimg")
+		@ResponseBody
+		public ResponseBase uploadCompanyImg(
+				@RequestParam MultipartFile[] file,
+				// @RequestBody Map<String, String> params,
+				@RequestHeader(value = "Authorization", required = false) String arg) {
+
+			ResponseBase rb = new ResponseBase();
+		
+			   String   args[]=arg.split(",");
+			
+			   
+			   Integer testid = Integer.parseInt(args[0]);
+			   String email=args[1];
+				Invite invite = inviteDao.getInvites(testid, email);
+				int tuid = invite.getUid();
+                
+				if(tuid ==0){
+					rb.setMessage("试题id不能为空");
+					rb.setState(0);
+					return rb;
+				}
+				
+				if (file == null) {
+					rb.setState(2);
+					rb.setMessage("文件为空");
+					return rb;
+				}
+				int problemid=Integer.parseInt(args[2]);
+				
+				String  temail=email.replace(".","/");
+				
+				//提交用户的答案
+				if(file!=null){
+					TuserProblem testuserProblem  = new TuserProblem();
+					testuserProblem.setProblemid(problemid);
+					testuserProblem.setEmail(temail);
+				
+					testuserProblem.setInviteId(invite.getIid());
+					for (MultipartFile fileitem : file) {
+						if (!fileitem.isEmpty()) {
+							imgUploadService.saveTestingFile(testuserProblem, fileitem);
+						}
+					}	
+				}
+				return rb;
+				
+				
+
+		}
 }

@@ -310,7 +310,11 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	    	 
 	    	     });
 	    	 }else{
-	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头
+	    		 //用户已开始做题了，跳转到做题页面,并开启摄像头tuserProblems
+	    		 
+	    		 $scope.openCamera=data.message["openCamera"];
+	    		 $scope.tuserProblems=data.message["tuserProblems"];
+	    		 if( $scope.openCamera==0){
 	    		 flashTip("务必开启摄像头已开始考试");
 	    		 $scope.$broadcast("takeVideo");
 	    		 //保存inviteid
@@ -318,6 +322,26 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 console.log("inviteid.......",$scope.invitedid);
 	    		 //再次打开摄像头
 	    		 $scope.cameraAgain = "again";
+	    		 }else {
+	    			 
+	    			 
+	    			 
+	    			 
+	    			 
+	    			 
+	    			 
+	    			 
+	    			 if($scope.openCamera==1){
+		    			  //不开启拍照区域
+		    			 $scope.showCZone =3;
+		    		 }
+		    		
+	    			 $scope.startTest();
+	    			 
+	    	 
+	    			 
+	    			 
+	    		 }
 	    		
 	    	 }	 
 	     }).error(function(){
@@ -491,6 +515,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
      $scope.submitAndFetch= function(problem,index){
     	 //判断是否是第一道题，提交目前的试题
     	 var useranswer ="";
+      
     	 if($scope.question.type ==1){
     		 if(typeof($scope.question.answer)!="undefined"){
             	 for(var i in $scope.question.answer){
@@ -503,12 +528,17 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
         	 }
     	 }else if($scope.question.type == 3){
     		 useranswer = $scope.question.useranswer;
+    	 }else if($scope.question.type == 4){
+    		 useranswer = $scope.question.useranswer;
     	 }
-    	
+    	 if(index==1){
+      	   $scope.question.type=problem.type;
+      	   
+         }
     	 
     	 
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
-    			 		 "useranswer":useranswer,"index":index};
+    			 		 "useranswer":useranswer,"index":index,"questionType":$scope.question.type,};
     	 
     	 $http({
 	         url: WEBROOT+"/testing/submit",
@@ -524,10 +554,14 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	 }
 	    	 if(data.message.type ==1){
 	    		 $scope.questionType =1;
+	    		 
+	    		 
 	    	 }else if(data.message.type ==2){
 	    		 $scope.questionType =2;
 	    	 }else if(data.message.type ==3){
 	    		 $scope.questionType =3;
+	    	 }else if(data.message.type ==4){
+	    		 $scope.questionType =4;
 	    	 }
 	    	$scope.question = data.message;
 	     }).error(function(){

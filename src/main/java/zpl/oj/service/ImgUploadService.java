@@ -10,6 +10,7 @@ import com.foolrank.model.CompanyModel;
 import zpl.oj.model.common.Img;
 import zpl.oj.model.common.ImgForDao;
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.TuserProblem;
 
 public interface ImgUploadService{
 	abstract String saveImg(Img img);
@@ -21,5 +22,7 @@ public interface ImgUploadService{
 
 	abstract void saveCompanyImg(CompanyModel company, String img, Integer flag);
 	abstract void saveTestImg(Quiz quiz, MultipartFile fileitem);
+	abstract void saveTestingFile(TuserProblem testuserProblem,
+			MultipartFile fileitem);
 
 }
