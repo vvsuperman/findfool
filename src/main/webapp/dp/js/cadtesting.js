@@ -10,7 +10,6 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 
 	$scope.email = CadData.getTestEmail();
 
-	$scope.email = CadData.getCadEmail();
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
@@ -18,10 +17,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 	$http({
         url: WEBROOT+"/cadquiz/starttest",
         method: 'POST',
-
         data: {"testid":CadData.getCadTestid(),"email":CadData.getTestEmail()}
-
-        data: {"testid":CadData.getCadTestid(),"email":CadData.getCadEmail()}
     }).success(function (data) {
     	if(data.state == 101){
         	smoke.alert(data.message);
@@ -95,11 +91,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		$http({
 	        url: WEBROOT+"/cadquiz/answerQuestion",
 	        method: 'POST',
-<<<<<<< HEAD
 	        data: {"testid":CadData.getCadTestid(),problemid:$scope.question.qid,"email":CadData.getTestEmail(),useranswer:useranswer}
-=======
-	        data: {"testid":CadData.getCadTestid(),problemid:$scope.question.qid,"email":CadData.getCadEmail(),useranswer:useranswer}
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
 	    }).success(function (data) {
 	    	if(data.state == 101){
 	        	smoke.alert(data.message);
@@ -142,11 +134,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		$http({
 	        url: WEBROOT+"/cadquiz/getquestion",
 	        method: 'POST',
-<<<<<<< HEAD
 	        data: {"testid":CadData.getCadTestid(),"email":CadData.getTestEmail()}
-=======
-	        data: {"testid":CadData.getCadTestid(),"email":CadData.getCadEmail()}
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
 	    }).success(function (data) {
 	    	if(data.state == 101){
 	        	smoke.alert(data.message);
@@ -177,11 +165,7 @@ OJApp.controller('cadtestingController',['$scope','$http','CadData',function ($s
 		$http({
 	        url: WEBROOT+"/comment/add",
 	        method: 'POST',
-<<<<<<< HEAD
 	        data: {"email":CadData.getTestEmail(),"pid":0,"content":$scope.comment.txt,"stype":2,"sid":$scope.question.qid}
-=======
-	        data: {"email":CadData.getCadEmail(),"pid":0,"content":$scope.comment.txt,"stype":2,"sid":$scope.question.qid}
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
 	    }).success(function (data) {
 	    	flashTip("吐槽成功，感谢您的吐槽!");
 	    	$scope.showtext =0;
