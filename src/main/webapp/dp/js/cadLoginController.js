@@ -6,9 +6,9 @@ OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($sco
 	$scope.tuser={};
 	
 	//获取用户是否点击remberme
-	$scope.rembme = CadData.getRembme();
+	$scope.rembme = CadData.getCadRembme();
 	if($scope.rembme){
-		var email = CadData.getEmail();
+		var email = CadData.getTestEmail();
 		if(email !=null){
 			 window.location.href='#/dp/testmain';
 		}
@@ -17,9 +17,9 @@ OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($sco
 	//如果用户点击记住我,直接跳转到主界面
 	$scope.$watch("rembme",function(){
 		if($scope.rembme){
-			CadData.setRembme(true)
+			CadData.setCadRembme(true)
 		}else{
-			CadData.setRembme(false);
+			CadData.setCadRembme(false);
 			
 		}
 	})
@@ -66,7 +66,7 @@ OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($sco
 	    	 if(data.state!=0){
 	    		 $scope.errmsg = data.message;
 	    	 }else{
-	    		 CadData.setEmail(data.message);
+	    		 CadData.setTestEmail(data.message);
 	    		 window.location.href='#/dp/register2';
 	    	 }
 	    	
@@ -93,19 +93,19 @@ OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($sco
 			return false;
 		}
 		
-		$scope.tuser.email = CadData.getEmail();
+		$scope.tuser.email = CadData.getTestEmail();
 		$http({
 	         url: WEBROOT+"/cad/register",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": CadData.getToken()
+	                "Authorization": CadData.getTestToken()
 	         },
 	         data: $scope.tuser
 	     }).success(function (data) {
 	    	 if(data.state!=0){
 	    		 $scope.errmsg = data.message;
 	    	 }else{
-	    		 CadData.setEmail(data.message);
+	    		 CadData.setTestEmail(data.message);
 	    		 window.location.href='#/dp/testmain';
 	    	 }
 	     }).error(function(){
@@ -125,7 +125,7 @@ OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($sco
 	         url: WEBROOT+"/cad/login",
 	         method: 'POST',
 	         headers: {
-	                "Authorization": CadData.getToken()
+	                "Authorization": CadData.getTestToken()
 	         },
 	         data: $scope.cad
 	     }).success(function (data) {
@@ -133,13 +133,13 @@ OJApp.controller('cadLoginController',['$scope','$http','CadData',function ($sco
 	    		 $scope.errmsg = data.message;
 	    	 }else if(data.state ==4){
 	    	 //用户未完成第二步注册
-	    		 CadData.setEmail(data.message);
+	    		 CadData.setTestEmail(data.message);
 	    		 window.location.href='#/dp/register2';
 	    	 }
 	    	 
 	    	 else{
-	    		 CadData.setToken(data.message.token);
-	    		 CadData.setEmail(data.message.email);
+	    		 CadData.setTestToken(data.message.token);
+	    		 CadData.setTestEmail(data.message.email);
 	    		 window.location.href='#/dp/testmain';
 	    	 }
 	     }).error(function(){

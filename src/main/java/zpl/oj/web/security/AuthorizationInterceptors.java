@@ -59,7 +59,7 @@ public class AuthorizationInterceptors implements HandlerInterceptor{
         	doFilter=false;
         }
         //test 任何请求均不过滤
-//        doFilter = false;
+        doFilter = false;
 //        
         //TODO check uri privilege
 

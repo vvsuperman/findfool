@@ -7,7 +7,7 @@ OJApp.controller('testMainController',['$scope','$http','CadData','$location',fu
     $scope.showtext=0;	
   
     //判断用户是否登陆
-	$scope.email = CadData.getEmail();
+	$scope.email = CadData.getTestEmail();
 	
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
@@ -16,7 +16,7 @@ OJApp.controller('testMainController',['$scope','$http','CadData','$location',fu
 	$http({
         url: WEBROOT+"/cadquiz/getlevel",
         method: 'POST',
-        data: {"email":CadData.getEmail()}
+        data: {"email":CadData.getTestEmail()}
     }).success(function (data) {
    	    $scope.level = data.message;
     });
@@ -46,8 +46,8 @@ OJApp.controller('testMainController',['$scope','$http','CadData','$location',fu
 	   	    	smoke.alert(data.message);
 	   	    	return false;
 	   	    }else{
-	   	    	CadData.setTestid(data.message);
-	   	    	CadData.setTestname(testname);
+	   	    	CadData.setCadTestid(data.message);
+	   	    	CadData.setCadTestname(testname);
 	   			window.location.href='#/dp/testdetail';
 	   		 
 	   	    }
@@ -71,14 +71,14 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 	
 	
 	 //判断用户是否登陆
-	$scope.email = CadData.getEmail();
+	$scope.email = CadData.getTestEmail();
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
 	
 	
 	
-	$scope.testname = CadData.getTestname();
+	$scope.testname = CadData.getCadTestname();
 	$scope.testsrc ="resource/static/"+ $scope.testname+".png";	
 	$scope.testdes ="在"+$scope.testname+"中"
 	
@@ -86,7 +86,7 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 	$http({
         url: WEBROOT+"/cadquiz/preparetest",
         method: 'POST',
-        data: {"testid":CadData.getTestid(),"email":CadData.getEmail()}
+        data: {"testid":CadData.getCadTestid(),"email":CadData.getTestEmail()}
     }).success(function (data) {
     if(data.state == 101){
     	smoke.alert(data.message);
@@ -216,7 +216,7 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 OJApp.controller('profileController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
 	 //判断用户是否登陆
-	$scope.email = CadData.getEmail();
+	$scope.email = CadData.getTestEmail();
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
@@ -230,7 +230,7 @@ OJApp.controller('profileController',['$scope','$http','CadData',function ($scop
 	$http({
         url: WEBROOT+"/cad/getcadinfo",
         method: 'POST',
-        data: {"email":CadData.getEmail()}
+        data: {"email":CadData.getTestEmail()}
     }).success(function (data) {
    	 if(data.state!=0){
    		 $scope.errmsg = data.message;
@@ -275,7 +275,7 @@ OJApp.controller('profileController',['$scope','$http','CadData',function ($scop
 		$http({
 	        url: WEBROOT+"/cad/modifypwd",
 	        method: 'POST',
-	        data: {"email":CadData.getEmail(),"oldpwd":md5($scope.pwd.old),"newpwd":md5($scope.pwd.newpd)}
+	        data: {"email":CadData.getTestEmail(),"oldpwd":md5($scope.pwd.old),"newpwd":md5($scope.pwd.newpd)}
 	    }).success(function (data) {
 	   	 if(data.state!=0){
 	   		 $scope.errmsg = data.message;
