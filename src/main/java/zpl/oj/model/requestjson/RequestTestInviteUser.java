@@ -14,7 +14,14 @@ public class RequestTestInviteUser {
 	private String replyTo;
 	private String context;
 	private String duration;
+	private String system;   //来源系统，paas服务用
 	
+	public String getSystem() {
+		return system;
+	}
+	public void setSystem(String system) {
+		this.system = system;
+	}
 	private String starttime; //试题的开始时间
 	private List<InviteUser> invite;	
 	
