@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -203,22 +204,36 @@ public class ReportService {
 		List<TuserProblem> tProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
 		
 		//按照setid进行划分，将总的答题数放入setMap，答对的题数放入rightmap
-		Map<Integer, Integer> setMap = new HashMap<Integer, Integer>();
-		Map<Integer, Integer> rightMap = new HashMap<Integer,Integer>();
+	//	Map<Integer, Integer> setMap = new HashMap<Integer, Integer>();
+		//Map<Integer, Integer> rightMap = new HashMap<Integer,Integer>();
 		//难度划分的set
 		Map<Integer, Integer> levelMap = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> rightLevelMap = new HashMap<Integer,Integer>();
 		
+		
+		//区分组
+		Map<Integer, Integer> groupSetMap = new HashMap<Integer,Integer>();
+
+		Map<Integer, Integer> groupMap = new HashMap<Integer,Integer>();
+
+		
 		for(TuserProblem tProblem:tProblems){
 			int setid = tProblem.getSetid();
+			
+			int groupId=setDao.getGroupBySetid(setid);
 			//选择题
 			int level = tProblem.getLevel();
 			if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.OPTION){  //选择题才比较。若为自定义试题，则不列入统计
-				sumMap(setMap,setid);
+		//		sumMap(setMap,setid);
+				sumMap(groupSetMap,groupId);
+				
 				sumMap(levelMap,level);
 				if(tProblem.getRightanswer().equals(tProblem.getUseranswer())){
-					sumMap(rightMap,setid);
+			//		sumMap(rightMap,setid);
 					sumMap(rightLevelMap,level);
+				
+					sumMap(groupMap,groupId);
+				
 				}
 			//编程题
 			}else if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.PROGRAM){
@@ -227,10 +242,14 @@ public class ReportService {
 				List<ResultInfo> results = tuserProblemDao.getProResult(solutionId);
 				for(ResultInfo result: results){
 					//总题目累加
-					sumMap(setMap,setid);
+		//			sumMap(setMap,setid);
+					
+					sumMap(groupMap,groupId);
 					//正确的测试用例累加
 					if(result.getScore()>0){
-						sumMap(rightMap,setid);
+			//			sumMap(rightMap,setid);
+						
+						sumMap(groupMap,groupId);
 					}
 				}
 			}
@@ -240,16 +259,150 @@ public class ReportService {
 			
 		}
 		
-		Map<String, Object> rtSetMap = genResultMap(setMap, rightMap,1);
+//		Map<String, Object> rtSetMap = genResultMap(setMap, rightMap,1);
+		
+		Map<String, Object> rtGroupSetMap = genResultMap(groupSetMap, groupMap,1);
 		Map<String, Object> rtLevelMap = genResultMap(levelMap, rightLevelMap, 2);
 		Map<String, Object> rtMap = new HashMap<String, Object>();
-		rtMap.put("setRadar", rtSetMap);
+		//rtMap.put("setRadar", rtSetMap);
+		rtMap.put("setRadar", rtGroupSetMap);
 		rtMap.put("levelRadar", rtLevelMap);
 		
 		return rtMap;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	public Map getGroupDimension(Invite invite){
+		List<TuserProblem> tProblems = tuserProblemDao.findProblemByInviteId(invite.getIid());
+		
+		//按照setid进行划分，将总的答题数放入setMap，答对的题数放入rightmap
+	//	Map<Integer, Integer> setMap = new HashMap<Integer, Integer>();
+	//	Map<Integer, Integer> rightMap = new HashMap<Integer,Integer>();
+		//难度划分的set
+		Map<Integer, Integer> levelMap = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> rightLevelMap = new HashMap<Integer,Integer>();
+		
+		
+		//区分组
+		Map<Integer, Integer> groupSetMap = new HashMap<Integer,Integer>();
 
+		Map<Integer, Integer> groupMap = new HashMap<Integer,Integer>();
+
+		
+		for(TuserProblem tProblem:tProblems){
+			int setid = tProblem.getSetid();
+			
+			int groupId=setDao.getGroupBySetid(setid);
+			//选择题
+			int level = tProblem.getLevel();
+			if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.OPTION){  //选择题才比较。若为自定义试题，则不列入统计
+	//			sumMap(setMap,setid);
+				sumMap(groupSetMap,groupId);
+				
+				sumMap(levelMap,level);
+				if(tProblem.getRightanswer().equals(tProblem.getUseranswer())){
+		//			sumMap(rightMap,setid);
+					sumMap(rightLevelMap,level);
+				
+					sumMap(groupMap,groupId);
+				
+				}
+			//编程题
+			}else if(setid != ExamConstant.CUSTOM_SET_ID && tProblem.getType() == ExamConstant.PROGRAM){
+				//编程题得分统计
+				int solutionId = tProblem.getSolutionId();
+				List<ResultInfo> results = tuserProblemDao.getProResult(solutionId);
+				for(ResultInfo result: results){
+					//总题目累加
+		//			sumMap(setMap,setid);
+					
+					sumMap(groupMap,groupId);
+					//正确的测试用例累加
+					if(result.getScore()>0){
+		//				sumMap(rightMap,setid);
+						
+						sumMap(groupMap,groupId);
+					}
+				}
+			}
+			
+			
+			
+			
+		}
+		
+	//	Map<String, Object> rtSetMap = genResultMap(setMap, rightMap,1);
+		
+		Map<String, Object> rtGroupSetMap = genGroupResultMap(groupSetMap, groupMap,1);
+		Map<String, Object> rtLevelMap = genResultMap(levelMap, rightLevelMap, 2);
+		Map<String, Object> rtMap = new HashMap<String, Object>();
+//		rtMap.put("setRadar", rtSetMap);
+		rtMap.put("setRadar", rtGroupSetMap);
+		rtMap.put("levelRadar", rtLevelMap);
+		
+		return rtMap;
+	}
+
+	
+	
+	
+	private Map<String, Object> genGroupResultMap(Map<Integer, Integer> groupSetMap,
+			Map<Integer, Integer> groupMap, int flag) {
+		//生成返回数据
+		Map<String, Object> rtMap = new HashMap<String,Object>();
+		rtMap.put("name", new ArrayList<String>());
+		rtMap.put("content", new ArrayList<String>());
+		rtMap.put("faceproblem",  new ArrayList<String>());
+		
+		
+		//构建二维数组，使用parentList二维数组来储存元素
+		ArrayList parentList = new ArrayList<List<Integer>>();
+		ArrayList scoreList = new ArrayList<Integer>();      //总分
+		ArrayList userScoreList = new ArrayList<Integer>();  //用户得分
+		parentList.add(scoreList);
+		parentList.add(userScoreList);
+		rtMap.put("val", parentList);
+		
+		Iterator iter = groupSetMap.entrySet().iterator();
+
+			
+		//处理set名字的雷达图
+		if(flag == 1){
+			while(iter.hasNext()){
+				Map.Entry entry = (Map.Entry) iter.next();
+				int groupId = (Integer)entry.getKey();
+				int val = (Integer)entry.getValue();
+				int userVal =0;
+				if(groupMap.get(groupId)!=null){
+					userVal = groupMap.get(groupId);
+				}
+				List<ProblemSet> setList = setDao.getSetByGroupid(groupId);
+				
+				
+				String setName = setList.get(0).getComment();
+				String setContent = setList.get(0).getContent();
+				String faceproblem = setList.get(0).getFaceproblem();
+				
+				
+				
+				((ArrayList)rtMap.get("name")).add(setName);
+				((ArrayList)rtMap.get("content")).add(setContent);
+				((ArrayList)rtMap.get("faceproblem")).add(faceproblem);
+				scoreList.add(val);
+				userScoreList.add(userVal);
+			}
+	
+		}
+		
+		return rtMap;
+	}
 	/**
 	 * @param setMap
 	 * @param rightMap

@@ -41,4 +41,14 @@ public interface SetDao {
 			+ "  FROM SETS WHERE DOMAIN_ID=#{0} and state=1 and PRIVILEGE<=#{1}")
 	List<ProblemSet> getSetByDomainIdAndprivilege(int domainId, int privilege);
 
+
+	//返回组
+	@Select("select groupid FROM SETS WHERE problem_set_id=#{0} and state=1")
+	int getGroupBySetid(int setid);
+
+
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,DOMAIN_ID AS domainId,COMMENT,content,faceproblem,groupid"
+			+ "  FROM SETS where groupid=#{0} and state=1")
+	List<ProblemSet> getSetByGroupid(int groupId);
+
 }

@@ -72,9 +72,8 @@ var initialObjectc=["初步掌握IOS，掌握object c基本理论知识",
                 ];
 
 
-//利用数组取值
-var initialstr={'数据结构与算法(阿里)':initialdata,'数据结构与算法(腾讯)':initialdata,
-		'数据结构与算法(谷歌)':initialdata,'数据结构与算法(微软)':initialdata,
+//利用数组取值s
+var initialstr={'数据结构与算法':initialdata,
 		'html/css':initialhtml,
 		'javascript':initialjavascript,'jquery':initialjquery,'bootstrap':initialbootstrap,'angularjs':initialangularjs,
         'java':initialjava,'php':initialphp,'C/C++':initialcjia,'C++':initialcjia,'Object_c':initialObjectc,

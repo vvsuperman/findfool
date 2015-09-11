@@ -43,7 +43,17 @@ public class ProblemSet implements Serializable {
 	private int privilege;
 	
 	
+	//试题权限
+	private int group;
 	
+
+	public int getGroup() {
+		return group;
+	}
+
+	public void setGroup(int group) {
+		this.group = group;
+	}
 
 	public int getPrivilege() {
 		return privilege;
