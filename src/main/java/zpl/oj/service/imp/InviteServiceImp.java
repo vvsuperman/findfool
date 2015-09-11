@@ -113,6 +113,8 @@ public class InviteServiceImp implements InviteService {
 		invite.setDeadtime(requestUser.getDeadtime());
 		//邀请生成时间
 		invite.setInvitetime(df.format(new Date()));
+	    invite.setSystem(requestUser.getSystem());
+		
 		String duration = requestUser.getDuration();
 		if(duration!=null&&duration.equals("")==false){
 			invite.setDuration(duration);

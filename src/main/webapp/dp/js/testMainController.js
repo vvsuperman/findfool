@@ -10,7 +10,6 @@ OJApp.controller('testMainController',['$scope','$http','CadData','$location',fu
 
 	$scope.email = CadData.getTestEmail();
 
-	$scope.email = CadData.getCadEmail();
 	
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
@@ -21,7 +20,6 @@ OJApp.controller('testMainController',['$scope','$http','CadData','$location',fu
         method: 'POST',
 
         data: {"email":CadData.getTestEmail()}
-        data: {"email":CadData.getCadEmail()}
     }).success(function (data) {
    	    $scope.level = data.message;
     });
@@ -76,11 +74,8 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 	
 	
 	 //判断用户是否登陆
-<<<<<<< HEAD
 	$scope.email = CadData.getTestEmail();
-=======
-	$scope.email = CadData.getCadEmail();
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
+
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
@@ -95,11 +90,8 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 	$http({
         url: WEBROOT+"/cadquiz/preparetest",
         method: 'POST',
-<<<<<<< HEAD
         data: {"testid":CadData.getCadTestid(),"email":CadData.getTestEmail()}
-=======
-        data: {"testid":CadData.getCadTestid(),"email":CadData.getCadEmail()}
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
+
     }).success(function (data) {
     if(data.state == 101){
     	smoke.alert(data.message);
@@ -229,11 +221,7 @@ OJApp.controller('testDetailController',['$scope','$http','CadData','$location',
 OJApp.controller('profileController',['$scope','$http','CadData',function ($scope,$http,CadData) {
 	
 	 //判断用户是否登陆
-<<<<<<< HEAD
 	$scope.email = CadData.getTestEmail();
-=======
-	$scope.email = CadData.getCadEmail();
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
 	if($scope.email =="" || typeof($scope.email)=="undefined" || $scope.email ==null){
 		window.location.href='#/dp';
 	}
@@ -247,11 +235,7 @@ OJApp.controller('profileController',['$scope','$http','CadData',function ($scop
 	$http({
         url: WEBROOT+"/cad/getcadinfo",
         method: 'POST',
-<<<<<<< HEAD
         data: {"email":CadData.getTestEmail()}
-=======
-        data: {"email":CadData.getCadEmail()}
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
     }).success(function (data) {
    	 if(data.state!=0){
    		 $scope.errmsg = data.message;
@@ -296,11 +280,7 @@ OJApp.controller('profileController',['$scope','$http','CadData',function ($scop
 		$http({
 	        url: WEBROOT+"/cad/modifypwd",
 	        method: 'POST',
-<<<<<<< HEAD
 	        data: {"email":CadData.getTestEmail(),"oldpwd":md5($scope.pwd.old),"newpwd":md5($scope.pwd.newpd)}
-=======
-	        data: {"email":CadData.getCadEmail(),"oldpwd":md5($scope.pwd.old),"newpwd":md5($scope.pwd.newpd)}
->>>>>>> branch 'master' of https://github.com/vvsuperman/findfool.git
 	    }).success(function (data) {
 	   	 if(data.state!=0){
 	   		 $scope.errmsg = data.message;

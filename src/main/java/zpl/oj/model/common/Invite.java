@@ -85,6 +85,14 @@ public class Invite implements Serializable {
 	
 	
 	
+	public String getSystem() {
+		return system;
+	}
+
+	public void setSystem(String system) {
+		this.system = system;
+	}
+
 	private int score;
 		
 	/**
