@@ -57,11 +57,11 @@ public class ReportController {
 		rtMap.put("rank", reportService.getRank(invite));
 		rtMap.put("dimension", reportService.getGroupDimension(invite).get("setRadar"));
 		rtMap.put("user", reportService.getUserById(invite.getUid()));
-		rtMap.put("levelDimension", reportService.getDimension(invite).get("levelRadar"));
+		rtMap.put("levelDimension", reportService.getGroupDimension(invite).get("levelRadar"));
 		rtMap.put("imgs", reportService.getUserPhotos(invite));
 		return rtMap;
 	}
-	
+
 	/*
 	 * 返回用户报告细节
 	 * */

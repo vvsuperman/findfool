@@ -131,12 +131,13 @@ OJApp.controller('reportListController', [
 						$scope.faceproblmes = data.dimension.faceproblem;
 						$scope.names = data.dimension.name;
 
-						$scope.namenums = []
+						$scope.namenums = [];
 						$scope.showFacePro = [];
 						for (var i = 0; i < $scope.data[0].length; i++) {
 							var namenum = {};
 							namenum.name = $scope.names[i];
-							namenum.num = $scope.data[1][i] / $scope.data[0][i]
+							namenum.num =$scope.data[1][i] / $scope.data[0][i]
+						
 							namenum.faceproblem = $scope.faceproblmes[i];
 
 							// namenum.contents=initialstr[namenum.name];
@@ -174,7 +175,7 @@ OJApp.controller('reportListController', [
 						$scope.descStr = [];
 						for (var i = 0; i < totalScores.length; i++) {
 							var tmpStr = $scope.labels[i] + ":"
-									+ (userScores[i] / totalScores[i]) * 100
+									+  parseInt((userScores[i] / totalScores[i]) * 100)
 									+ "%";
 							$scope.descStr.push(tmpStr);
 						}
