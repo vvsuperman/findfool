@@ -93,6 +93,7 @@ public class ReportService {
 		//tuserProblemDao.getTotalScore(invite.getIid())可能返回空
 		Object o=tuserProblemDao.getTotalScore(invite.getIid());
 		if(o==null) return "0";
+		
 		int totalScore = (int)o;
 		//选择题得分
 		int mScore = tuserProblemDao.getUserScore(invite);
@@ -117,6 +118,7 @@ public class ReportService {
 		invite.setScore(userScore);
 		inviteDao.updateInvite(myInvite);
 		return userScore+"/"+totalScore;
+	
 	}
 	
 	
@@ -519,8 +521,10 @@ public class ReportService {
 		List<ResponseInvite> invites =  inviteDao.getOrderInviteByTid(testid,state);
 		for(ResponseInvite invite:invites){
 				getInviteScore(invite);
-		}
-		return invites;
+			
+			}
+		List<ResponseInvite> invitesUpdate =  inviteDao.getOrderInviteByTid(testid,state);
+		return invitesUpdate;
 	}
 
 	//生成编程题的用户答案
@@ -535,9 +539,12 @@ public class ReportService {
 			for(ResultInfo rs: resultInfos){
 				ProblemTestCase pt = new ProblemTestCase();
 			   	String input = ExamConstant.INPUT_STR + rs.getTestCase() + ExamConstant.BR;
-			   	String output = ExamConstant.OUTPUT_STR + rs.getTestCaseExpected() + ExamConstant.BR;
-			   	pt.setArgs(input+output);
-			   	pt.setScore(rs.getScore());
+			   //String output = ExamConstant.OUTPUT_STR + rs.getTestCaseExpected() + ExamConstant.BR;
+			   	String output = rs.getTestCaseExpected();
+
+               pt.setScore(rs.getScore());
+			   	pt.setArgs(output);
+
 			   	rtSet.add(pt);
 			}
 		}

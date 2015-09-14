@@ -72,12 +72,20 @@ var initialObjectc=["初步掌握IOS，掌握object c基本理论知识",
                 ];
 
 
+
+var initialprogram=["掌握基本编程，能进行简单编程",
+                    "熟练掌握开发技术，能熟练进行开发，拥有很好的编程能力",
+                    "精通编程开发 ,能非常熟练进行项目开发，拥有相当强的开发经验"
+                    ];
+
+
+
 //利用数组取值s
 var initialstr={'数据结构与算法':initialdata,
 		'html/css':initialhtml,
 		'javascript':initialjavascript,'jquery':initialjquery,'bootstrap':initialbootstrap,'angularjs':initialangularjs,
         'java':initialjava,'php':initialphp,'C/C++':initialcjia,'C++':initialcjia,'Object_c':initialObjectc,
-        'Android':initialandroid,'Linux/Shell':initiallinux,'数据库':initialsql
+        'Android':initialandroid,'Linux/Shell':initiallinux,'数据库':initialsql,'编程题':initialprogram
 };
 
 

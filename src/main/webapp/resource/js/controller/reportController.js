@@ -62,7 +62,7 @@ OJApp.controller('reportController', [ '$scope', '$http', 'Data',
 
 			$scope.isTimeDown = false;
 			function sortByTime(a, b) {
-				return a.finishtime - b.finishtime;
+				return a.starttime - b.starttime;
 			}
 			$scope.reversalTimeSort = function() {
 				$scope.invites.sort(sortByTime);

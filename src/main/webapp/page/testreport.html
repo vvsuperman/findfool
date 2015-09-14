@@ -22,7 +22,7 @@
         <tr>
             <th>用户名</th>
             <th>状态</th>
-            <th>完成时间&nbsp;&nbsp;
+            <th>开始时间&nbsp;&nbsp;
             	<span class="glyphicon" style="cursor:pointer" 
 	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isTimeDown]" 
 	            	ng-click="reversalTimeSort()">
@@ -41,7 +41,7 @@
         <tr ng-repeat = "invite in invites">
             <td ng-bind="invite.email"></td>
             <td ng-bind="getState(invite)"></td>
-            <td ng-bind="invite.finishtime"></td>
+            <td ng-bind="invite.starttime"></td>
             <td ng-bind="getScore(invite)"></td>
             <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
         </tr>
