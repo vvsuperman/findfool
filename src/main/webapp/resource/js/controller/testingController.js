@@ -323,14 +323,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 //再次打开摄像头
 	    		 $scope.cameraAgain = "again";
 	    		 }else {
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
+		 
 	    			 if($scope.openCamera==1){
 		    			  //不开启拍照区域
 		    			 $scope.showCZone =3;
@@ -435,7 +428,9 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	var nowTime = (new Date()).getTime();
 	    	var remain = $scope.time.remain - nowTime;
 	    	//随机拍照
+	    	if($scope.openCamera==0){
 	         $scope.randomTakePicture(remain/60/1000);
+	    	}
 //	    	 $scope.intervalTakePicture();
 	         //结束测试
 	    	$timeout($scope.endTest,remain);
@@ -716,6 +711,8 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
    };
      
     /* 
+     * 
+     * 
      * 完成所有测试
      * */
      $scope.finishTest = function(){

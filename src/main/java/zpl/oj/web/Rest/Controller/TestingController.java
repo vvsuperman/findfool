@@ -528,7 +528,7 @@ public class TestingController {
 			qs.setIsright("");
 		}
 		//存用户的答题记录
-		if(problemLength>=(int)params.get("index")){
+		if(problemLength>=((int)params.get("index"))){
 		LogTakeQuiz log = new LogTakeQuiz();
 		log.setIid(invite.getIid());
 		log.setProblemid(nowProblmeId);
@@ -637,11 +637,11 @@ public class TestingController {
 		
 		
 		//存用户的答题记录
-		LogTakeQuiz log = new LogTakeQuiz();
-		log.setIid(invite.getIid());
-		log.setTime(new Date());
+		//LogTakeQuiz log = new LogTakeQuiz();
+		//log.setIid(invite.getIid());
+		//log.setTime(new Date());
 		//log.setNum(-1); //-1表示答题完成
-		logTakeQuizDao.saveQuizLog(log);
+		//logTakeQuizDao.saveQuizLog(log);
 				
 		
 		//用戶完成测试后，将公开链接发送到测试所设置的邮箱

@@ -34,6 +34,7 @@ import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.imp.CompanyService;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.json.JsonImage;
 
 @Controller
 @RequestMapping("/company")
@@ -317,6 +318,33 @@ public class CompanyController {
 		rb.setState(0);
 		rb.setMessage(company);
 		return rb;
+
+	}
+	
+	@RequestMapping(value = "/uploadCompanyImageTail")
+	@ResponseBody
+	public JsonImage uploadCompanyImageTail(
+		//	@RequestParam MultipartFile[] file,
+			@RequestParam("file") MultipartFile[] file
+		
+			
+			) {
+
+		ResponseBase rb = new ResponseBase();
+		String  urltrue="";
+		for (MultipartFile fileitem : file) {
+			if (!fileitem.isEmpty()) {
+		  urltrue	  =	imgUploadService.uploadCompanyImageTail(fileitem);
+			}
+
+		}
+
+ JsonImage  jsonImage=new JsonImage();
+       jsonImage.setSuccess("true");
+       jsonImage.setFile_path(urltrue);
+       jsonImage.setMsg("你懂得");
+		   
+		return jsonImage;
 
 	}
 

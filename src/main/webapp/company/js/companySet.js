@@ -123,7 +123,7 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
 $scope.create = function () {	
 	$scope.errorMsg={};
 	
-	console.log($scope.company.companyname,$scope.company.address, $scope.company.mobile,$scope.company.website);
+	console.log($scope.company.companyname,$scope.company.address, $scope.company.mobile,$scope.company.website,$scope.company.description);
 	
     if($scope.company.companyname && $scope.company.address && $scope.company.mobile && $scope.company.website){
 	   $scope.companyModel={};
