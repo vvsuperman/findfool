@@ -1,6 +1,7 @@
 package zpl.oj.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -50,5 +51,10 @@ public interface SetDao {
 	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,DOMAIN_ID AS domainId,COMMENT,content,faceproblem,groupid"
 			+ "  FROM SETS where groupid=#{0} and state=1")
 	List<ProblemSet> getSetByGroupid(int groupId);
+
+
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,DOMAIN_ID AS domainId,COMMENT,content,faceproblem,groupid"
+			+ "  FROM SETS where privilege=#{0}")
+	List<ProblemSet> getSetsByPrivilege(int privilege);
 
 }

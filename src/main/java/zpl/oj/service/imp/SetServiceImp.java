@@ -1,6 +1,7 @@
 package zpl.oj.service.imp;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,12 @@ public class SetServiceImp implements SetService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public List<ProblemSet> getSetsByPrivilege(int privilege) {
+		
+		return setDao.getSetsByPrivilege(privilege);
 	}
 
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import zpl.oj.dao.QuizDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.Labeltest;
+import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.QuizTemplete;
@@ -41,7 +43,9 @@ import zpl.oj.model.responsejson.ResponseQuizs;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.InviteService;
 import zpl.oj.service.LabelService;
+import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
+import zpl.oj.service.SetService;
 import zpl.oj.service.imp.CompanyService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
@@ -63,6 +67,8 @@ public class QuizController {
 	private LabelService labelService;
 	@Autowired
 	private QuizDao quizDao;
+	@Autowired
+	private SetService setService;
 
 	@Autowired
 	private ImgUploadService imgUploadService;
@@ -582,6 +588,67 @@ public class QuizController {
 		rb.setMessage(quiz.getSignedKey());
 		return rb;
 
+	}
+	
+	
+//根据用户选择信息，生成相应的随机题库，保存在randomquiz表中，
+	@RequestMapping(value = "/addRandomQuiz")
+	@ResponseBody
+	public ResponseBase addRandomQuiz(@RequestBody Map<String,String> map) {
+		ResponseBase rb = new ResponseBase();
+		
+           int testid;
+           int problem_set_id;
+		  int level;
+		  int num;
+		
+		Quiz quiz=new Quiz();
+          
+         quiz.setParent(0);
+          quiz.setStatus(1);
+//           quizService.addQuiz();
+//           quizService.addRandomQuiz(testid,problem_set_id,level,num);
+//		
+//		
+		
+//		Quiz q = quizService.addQuiz(request);
+//		// 获取系统标签，并在labeltest中为该测试添加这些系统标签
+//
+//		List<Label> labels = labelService.getSystemLabels();
+//		for (Label label : labels) {
+//			labelService.insertIntoLabelTest(q.getQuizid(), label.getId(),
+//					label.getIsSelected());
+//		}
+//		ResponseMessage msg = new ResponseMessage();
+//		if (q == null) {
+//			msg.setMsg("add failed!!");
+//			msg.setHandler_url("/error");
+//			rb.setState(0);
+//			rb.setMessage(msg);
+//		} else {
+//			msg.setMsg("" + q.getQuizid());
+//			msg.setHandler_url("/");
+//			rb.setState(1);
+//			rb.setMessage(msg);
+//		}
+		return rb;
+		}
+
+	
+	// 查询所有的题型
+	@RequestMapping(value = "/findSet")
+	@ResponseBody
+	public ResponseBase findSet(@RequestBody Map<String, String> params) {
+		int uid = Integer.parseInt(params.get("userid"));
+		User user = userService.getUserById(uid);
+
+		ResponseBase rb = new ResponseBase();
+		List<ProblemSet> setlist = setService.getSetsByPrivilege(user
+				.getPrivilege());
+		rb.setMessage(setlist);
+		rb.setState(0);
+
+		return rb;
 	}
 
 
