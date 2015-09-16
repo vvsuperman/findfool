@@ -236,7 +236,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 
 	@Override
 	public String uploadCompanyImageTail(MultipartFile fileitem) {
-		String smallName="cadCompanyImageTail";
+		String smallName="compImg";
 		String filename = smallName
 				+ StringUtil.toDateTimeString(new Date());
 		pushImg(filename, fileitem);

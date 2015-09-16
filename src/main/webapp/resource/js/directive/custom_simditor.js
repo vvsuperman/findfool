@@ -34,10 +34,10 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
                                 leaveConfirm: 'Uploading is in progress, are you sure to leave this page?',
                                 	
                          },
-            	         tabIndent: true,
-            	      
-
-            	         pasteImage: false,
+//            	         tabIndent: true,
+//            	      
+//
+//            	         pasteImage: false,
             	 toolbarFloatOffset:0
             };
         	if(attrs.operation=="view"){
