@@ -323,14 +323,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 //再次打开摄像头
 	    		 $scope.cameraAgain = "again";
 	    		 }else {
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
-	    			 
+		 
 	    			 if($scope.openCamera==1){
 		    			  //不开启拍照区域
 		    			 $scope.showCZone =3;
@@ -435,7 +428,9 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	var nowTime = (new Date()).getTime();
 	    	var remain = $scope.time.remain - nowTime;
 	    	//随机拍照
+	    	if($scope.openCamera==0){
 	         $scope.randomTakePicture(remain/60/1000);
+	    	}
 //	    	 $scope.intervalTakePicture();
 	         //结束测试
 	    	$timeout($scope.endTest,remain);
@@ -465,7 +460,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	 }
 	    	if(data.state!=0){
 	    		$scope.tProblems = data.message.problems;
-		    	$scope.submitAndFetch($scope.tProblems[0],1);
+		    	$scope.submitAndFetch($scope.tProblems[0],1,$scope.tProblems.length);
 		    	$scope.genExtraInfo(data);
 		    	$scope.show =4;
 		    	//铺助数组，存储已完成的试题，用来判断已完成题数是否需要加一
@@ -512,7 +507,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
       *获取试题信息
       *自动提交上一道试题答案
      */
-     $scope.submitAndFetch= function(problem,index){
+     $scope.submitAndFetch= function(problem,index,length){
     	 //判断是否是第一道题，提交目前的试题
     	 var useranswer ="";
       
@@ -538,7 +533,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
     	 
     	 
     	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
-    			 		 "useranswer":useranswer,"index":index,"questionType":$scope.question.type,};
+    			 		 "useranswer":useranswer,"index":index,"questionType":$scope.question.type,"problemLength":length};
     	 
     	 $http({
 	         url: WEBROOT+"/testing/submit",
@@ -625,9 +620,9 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
     		 }
     	 }
     	 if(index<$scope.tProblems.length){
-    		 $scope.submitAndFetch($scope.tProblems[index],index+1)
+    		 $scope.submitAndFetch($scope.tProblems[index],index+1,$scope.tProblems.length);
     	 }else{
-    		 $scope.submitAndFetch($scope.tProblems[index-1],index+1);
+    		 $scope.submitAndFetch($scope.tProblems[index-1],index+1,$scope.tProblems.length);
     		 flashTip("以至最后一题，请仔细检查");
     	 }
     	 
@@ -716,6 +711,8 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
    };
      
     /* 
+     * 
+     * 
      * 完成所有测试
      * */
      $scope.finishTest = function(){

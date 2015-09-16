@@ -22,22 +22,54 @@
 		            <div style="clear:both"></div>
 		        </div>
 
-				<div class="options list col-md-12 col-sm-12  col-xs-12"  ng-if="question.type==2">
+				<!-- <div class="options list col-md-12 col-sm-12  col-xs-12"  ng-if="question.type==2">
 			       	  <label  customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}} 
 			       	  	score={{option.score}} report={{report}}>
 			       	  	
 			       	    <textarea simditor minheight="30px"  operation={{operation}} class='optiontext'  ng-model="option.args"></textarea>
 			       	  </label>
-			    </div>
-			    
-			     <div class="col-xs-12" style="margin-top: 20px;" ng-if="question.type==3">
+			    </div> -->
+
+	<div class="options list col-md-11 col-sm-11  col-xs-11"
+		ng-if="question.type==2">
+
+		<table class="table">
+			<caption>测试用例</caption>
+			<thead>
+				<tr>
+
+					<th>测试输出</th>
+					<th>结果</th>
+					<th>得分</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr class="success" ng-repeat="option in question.answer"
+					ng-if="option.score">
+
+					<td>{{option.args}}</td>
+					<td>正确</td>
+					<td>{{option.score}}</td>
+				</tr>
+				<tr class="danger" ng-repeat="option in question.answer"
+					ng-if="!option.score">
+					<td>{{option.args}}</td>
+					<td>错误</td>
+					<td>{{option.score}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<div class="col-xs-12" style="margin-top: 20px;" ng-if="question.type==3">
 		    	 <p>用户答案</p>
 		            <div class="col-xs-11" style="min-height:500px; line-height: 1.7;position:absolute;" 
 		            		simditor operation={{operation}}  data-ng-model="question.useranswer"></div>
 		            <div style="clear:both"></div>
 		        </div>
 			    
-
 			<div style="clear:both"></div>
         </div>
 

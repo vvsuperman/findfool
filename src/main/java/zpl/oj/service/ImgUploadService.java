@@ -24,5 +24,6 @@ public interface ImgUploadService{
 	abstract void saveTestImg(Quiz quiz, MultipartFile fileitem);
 	abstract void saveTestingFile(TuserProblem testuserProblem,
 			MultipartFile fileitem);
+	abstract String uploadCompanyImageTail(MultipartFile fileitem);
 
 }

@@ -481,6 +481,7 @@ public class TestingController {
 		Map map = validateUser(params);
 
 		Integer tuid = (Integer) map.get("tuid");
+		Integer problemLength = (Integer) params.get("problemLength");
 		if(tuid ==null){
 			rb.setMessage(map.get("msg"));
 			rb.setState(0);
@@ -527,12 +528,14 @@ public class TestingController {
 			qs.setIsright("");
 		}
 		//存用户的答题记录
+		if(problemLength>=((int)params.get("index"))){
 		LogTakeQuiz log = new LogTakeQuiz();
 		log.setIid(invite.getIid());
 		log.setProblemid(nowProblmeId);
 		log.setTime(new Date());
 		log.setNum((int)params.get("index"));
 		logTakeQuizDao.saveQuizLog(log);
+		}
 		
 		rb.setState(1);
 		rb.setMessage(question);
@@ -634,11 +637,11 @@ public class TestingController {
 		
 		
 		//存用户的答题记录
-		LogTakeQuiz log = new LogTakeQuiz();
-		log.setIid(invite.getIid());
-		log.setTime(new Date());
-		log.setNum(-1); //-1表示答题完成
-		logTakeQuizDao.saveQuizLog(log);
+		//LogTakeQuiz log = new LogTakeQuiz();
+		//log.setIid(invite.getIid());
+		//log.setTime(new Date());
+		//log.setNum(-1); //-1表示答题完成
+		//logTakeQuizDao.saveQuizLog(log);
 				
 		
 		//用戶完成测试后，将公开链接发送到测试所设置的邮箱

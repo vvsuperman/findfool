@@ -233,4 +233,24 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 		
 	}
 
+
+	@Override
+	public String uploadCompanyImageTail(MultipartFile fileitem) {
+		String smallName="cadCompanyImageTail";
+		String filename = smallName
+				+ StringUtil.toDateTimeString(new Date());
+		pushImg(filename, fileitem);
+		// 保存
+		String imgHome=(String)PropertiesUtil.getContextProperty("ImgUploadHome");
+		String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
+		String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");	
+		String 	paramLocation=imgHome+filename;
+			Auth auth=Auth.create(accessKey, secretKey);
+			paramLocation=auth.privateDownloadUrl(paramLocation);
+		return paramLocation;
+		
+		
+	
+	}
+
 }

@@ -23,7 +23,6 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
     
 	$scope.cDelete = function (id) {	
         $http({
-        	
             url: WEBROOT+"/company/delete",
             method: 'POST',
             headers: {
@@ -32,7 +31,6 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
             data: {"id":id}
         }).success(function (data) {
             $scope.companyList = data["message"];
-       
             $scope.findAll();
        console.log("shanchu");
   
@@ -123,7 +121,7 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
 $scope.create = function () {	
 	$scope.errorMsg={};
 	
-	console.log($scope.company.companyname,$scope.company.address, $scope.company.mobile,$scope.company.website);
+	console.log($scope.company.companyname,$scope.company.address, $scope.company.mobile,$scope.company.website,$scope.company.description);
 	
     if($scope.company.companyname && $scope.company.address && $scope.company.mobile && $scope.company.website){
 	   $scope.companyModel={};

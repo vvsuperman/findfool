@@ -25,6 +25,19 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             	           'indent'     ,//    # 向右缩进
             	           'outdent'    ,//    # 向左缩进
             	         ],
+                 	
+            	         upload: {
+                             url: 'company/uploadCompanyImageTail',
+                            	params: null,
+                                fileKey: 'file',
+                                connectionCount: 3,
+                                leaveConfirm: 'Uploading is in progress, are you sure to leave this page?',
+                                	
+                         },
+            	         tabIndent: true,
+            	      
+
+            	         pasteImage: false,
             	 toolbarFloatOffset:0
             };
         	if(attrs.operation=="view"){
@@ -53,7 +66,9 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
                if(attrs.operation=="edit"){  //为何会被替换掉，在view时强制改为不可替换
             	   $timeout(function () {
                        scope.$apply(function () {
+                    	   
                            var value = editor.getValue();
+                           console.log("value.............",value);
                            ngModel.$setViewValue(value);
                        });
                    }); 
