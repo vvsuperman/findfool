@@ -3,6 +3,7 @@ package zpl.oj.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -83,4 +84,11 @@ public interface QuizDao {
 			+"start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera}"
 			+ " where QUIZID = #{quizid}")
 	void saveTime(Quiz quiz);
+
+
+	@Insert("INSERT INTO QUIZ( OWNER,  NAME,  DATE,  TIME,  EXTRA_INFO,  UUID,  EMAILS)"
+			+ " VALUES("
+			+ "#{owner},#{name},#{date},#{time},#{extraInfo},#{uuid},#{emails})")
+	@Options(useGeneratedKeys = true, keyProperty = "quizid", keyColumn = "quizid")
+	int insertQuizRerurn(Quiz newquiz);
 }

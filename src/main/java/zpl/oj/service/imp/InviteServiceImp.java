@@ -101,6 +101,10 @@ public class InviteServiceImp implements InviteService {
 		}
 		  Quiz  quiz=quizDao.getQuiz(q.getQuizid());
 
+		  
+		  //!!!此处为增加内容,实体也增加了
+		  
+		 invite.setParentquiz(0);
 		invite.setPwd(pwd);
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());
@@ -109,6 +113,7 @@ public class InviteServiceImp implements InviteService {
 		invite.setTotalScore(0);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setBegintime("");
+		
 		invite.setStarttime(requestUser.getStarttime());
 		invite.setDeadtime(requestUser.getDeadtime());
 		//邀请生成时间

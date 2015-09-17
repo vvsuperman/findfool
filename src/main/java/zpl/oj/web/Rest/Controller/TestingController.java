@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.codehaus.jackson.map.type.MapLikeType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ import com.google.gson.Gson;
 
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.LogTakeQuizDao;
+import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.QuizProblemDao;
+import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
@@ -34,6 +38,9 @@ import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizEmail;
+import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.QuizTemplete;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
@@ -52,6 +59,7 @@ import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.base64.BASE64;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.timer.InviteReminder;
 
@@ -80,6 +88,13 @@ public class TestingController {
 	
 	@Autowired
 	private QuizDao quizDao;
+	
+	
+	@Autowired
+	private QuizProblemDao quizProblemDao;
+	
+	@Autowired
+	private 	RandomQuizDao randomQuizDao;
 
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -93,6 +108,11 @@ public class TestingController {
 	private TestuserDao tuserDao;
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
+	
+	@Autowired
+	private ProblemDao problemDao;
+	
+	
 	@Autowired
 	private QuizEmailService quizEmailService;
 	
@@ -108,7 +128,12 @@ public class TestingController {
 		// 需做合法性判断，异常等等
 		String email = (String) params.get("email");
 		int testid = Integer.parseInt((String) params.get("testid"));
+		
+		//
 		Invite invite = inviteDao.getInvites(testid, email);
+	
+		
+		
 
 		// 用户邀请不合法
 		if (invite == null) {
@@ -707,4 +732,69 @@ public class TestingController {
 				
 
 		}
+		
+		
+	// 根据randomquiz的要求生成quiz
+	public ResponseBase genRandomQuiz(int testid, int uid, Invite invite) {
+
+		// 根据类型和难度和数量找到试题
+		// 生成新的quiz ，并制定parent为原来的quiz
+		// 更新invite testid更新
+		Quiz oldquiz = quizDao.getQuiz(testid);
+		Quiz newquiz = new Quiz();
+		newquiz = oldquiz;
+		newquiz.setParent(oldquiz.getQuizid());
+		int quizid = quizDao.insertQuizRerurn(newquiz);
+		invite.setParentquiz(testid);
+		invite.setTestid(quizid);
+		inviteDao.updateInvite(invite);
+
+		// 从problem中按照规则选出题，并插入到quizproblem中；
+
+		List<RandomQuizSet> randomList = randomQuizDao.getListByTestid(testid);
+
+		for (RandomQuizSet randomQuizSet : randomList) {
+			List<Integer> list = problemDao.getPBySetidAndLevel(
+					randomQuizSet.getProblemSetId(), randomQuizSet.getLevel());
+			if (randomQuizSet.getNum() < list.size()) {
+				int[] random = randomCommon(0, list.size(),
+						randomQuizSet.getNum());
+				for (int i = 0; i < random.length; i++) {
+					QuizProblem quizProblem = new QuizProblem();
+					quizProblem.setProblemid(list.get(random[i]));
+					quizProblem.setQuizid(quizid);
+					quizProblemDao.insertQuizproblem(quizProblem);
+
+				}
+
+			}
+		}
+
+		return null;
+
+	}
+
+	public static int[] randomCommon(int min, int max, int n) {
+		if (n > (max - min + 1) || max < min) {
+			return null;
+		}
+		int[] result = new int[n];
+		int count = 0;
+		while (count < n) {
+			int num = (int) (Math.random() * (max - min)) + min;
+			boolean flag = true;
+			for (int j = 0; j < n; j++) {
+				if (num == result[j]) {
+					flag = false;
+					break;
+				}
+			}
+			if (flag) {
+				result[count] = num;
+				count++;
+			}
+		}
+		return result;
+	}
+
 }

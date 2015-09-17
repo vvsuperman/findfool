@@ -3,6 +3,7 @@ package zpl.oj.service.imp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,12 @@ import org.springframework.stereotype.Service;
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.QuizProblemDao;
+import zpl.oj.dao.RandomQuizDao;
+import zpl.oj.dao.SetDao;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.QuizTemplete;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestMeta;
@@ -35,6 +39,8 @@ public class QuizServiceImp implements QuizService {
 	@Autowired
 	private InviteDao inviteDao;
 	
+	@Autowired
+	private RandomQuizDao randomQuizDao;
 	@Autowired
 	private LabelService labelService;
 	
@@ -215,5 +221,31 @@ public class QuizServiceImp implements QuizService {
 		       quizDao.saveTime(quiz);
 		     		
 	}
+
+	@Override
+	public Quiz addQuiz(Quiz quiz) {
+	
+
+		quiz.setOpenCamera(1);//默认不开启摄像头
+		quizDao.insertQuiz(quiz);
+		quiz = quizDao.getNewestQuizByOwner(quiz.getOwner());
+		quiz.setUuid(quiz.getQuizid());
+		if(quiz != null)
+			quizDao.updateQuiz(quiz);
+		return quiz;
+		
+	}
+
+	@Override
+	public void addRandomQuiz(List<RandomQuizSet> randomQuizs) {
+		
+	for (RandomQuizSet randomQuiz : randomQuizs) {
+		randomQuizDao.add(randomQuiz);
+		
+	}
+		
+	}
+
+
 
 }

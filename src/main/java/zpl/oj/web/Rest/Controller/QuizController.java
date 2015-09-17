@@ -1,7 +1,9 @@
 package zpl.oj.web.Rest.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.foolrank.model.CompanyModel;
 import com.squareup.okhttp.Request;
 import com.foolrank.util.RequestUtil;
+import com.jcraft.jsch.jce.Random;
 
 import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.Labeltest;
@@ -29,6 +33,7 @@ import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.QuizTemplete;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestDetail;
@@ -67,15 +72,18 @@ public class QuizController {
 	private LabelService labelService;
 	@Autowired
 	private QuizDao quizDao;
+	
+	@Autowired
+	private RandomQuizDao randomQuizDao;
+	
 	@Autowired
 	private SetService setService;
 
 	@Autowired
 	private ImgUploadService imgUploadService;
-	
+
 	@Autowired
 	private CompanyService companyService;
-	
 
 	@RequestMapping(value = "/queryByID")
 	@ResponseBody
@@ -200,36 +208,31 @@ public class QuizController {
 
 		return rb;
 	}
-	
-	
+
 	// 获得通用设置的回显数据
-		@RequestMapping(value = "/getconfig")
-		@ResponseBody
-		public ResponseBase getconfig(@RequestBody Map<String, String> params) {
-			ResponseBase rb = new ResponseBase();
-			ResponseMessage msg = new ResponseMessage();
-			String testid=params.get("testid");
-			if(testid==null){
-				msg.setMsg("当前试卷不存在，您可能未登录");
-				rb.setState(1);
-				rb.setMessage(msg);
-				return rb;		
-			}
-			int tid=Integer.parseInt(testid);
-			 Quiz quiz  =quizDao.getQuiz(tid);
-			 if((quiz.getLogo()!=null)&&(quiz.getLogo().length()>0)){
-			String logoString= companyService.getImg(quiz.getLogo());
-			 quiz.setLogo(logoString);
-			 }
-			rb.setMessage(quiz);
-			rb.setState(0);
-		
+	@RequestMapping(value = "/getconfig")
+	@ResponseBody
+	public ResponseBase getconfig(@RequestBody Map<String, String> params) {
+		ResponseBase rb = new ResponseBase();
+		ResponseMessage msg = new ResponseMessage();
+		String testid = params.get("testid");
+		if (testid == null) {
+			msg.setMsg("当前试卷不存在，您可能未登录");
+			rb.setState(1);
+			rb.setMessage(msg);
 			return rb;
 		}
-	
-	
-	
-	
+		int tid = Integer.parseInt(testid);
+		Quiz quiz = quizDao.getQuiz(tid);
+		if ((quiz.getLogo() != null) && (quiz.getLogo().length() > 0)) {
+			String logoString = companyService.getImg(quiz.getLogo());
+			quiz.setLogo(logoString);
+		}
+		rb.setMessage(quiz);
+		rb.setState(0);
+
+		return rb;
+	}
 
 	// 保存通用设置中的开始时间和结束时间及摄像头是否必须开启
 	@RequestMapping(value = "/saveTime")
@@ -237,39 +240,38 @@ public class QuizController {
 	public ResponseBase saveTime(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
 		String openCamera = params.get("openCamera");
-		
+
 		String squizid = params.get("quizid");
 		String durations = params.get("duration");
 		ResponseMessage msg = new ResponseMessage();
-		if(squizid==null){
+		if (squizid == null) {
 			msg.setMsg("当前试卷不存在，您可能未登录");
 			rb.setState(1);
 			rb.setMessage(msg);
 			return rb;
-			
-		}		
-		if(openCamera==null){
+
+		}
+		if (openCamera == null) {
 			msg.setMsg("开启摄像头异常，请刷新！");
 			rb.setState(2);
 			rb.setMessage(msg);
 			return rb;
 		}
-		
-		
+
 		if (durations == null) {
 			msg.setMsg("考试时间不能为空！");
 			rb.setState(3);
 			rb.setMessage(msg);
 			return rb;
 		}
-		
+
 		int duration = Integer.parseInt(durations);
 		int quizid = Integer.parseInt(squizid);
 		Quiz quiz = quizDao.getQuiz(quizid);
 		quiz.setTime(duration);
 		quiz.setOpenCamera(Integer.parseInt(openCamera));
 		quizDao.updateQuiz(quiz);
-		
+
 		msg.setMsg("update seccuss!!");
 		rb.setState(0);
 		rb.setMessage(msg);
@@ -486,7 +488,7 @@ public class QuizController {
 			rb.setMessage("试题模板为空");
 			return rb;
 		}
-     	rb.setState(0);
+		rb.setState(0);
 		rb.setMessage(quizT.getQuizId());
 		return rb;
 
@@ -504,12 +506,12 @@ public class QuizController {
 			return rb;
 		}
 		String testid = param.get("testid");
-		String publicFlag = param.get("publicFlag");	
-		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));	
+		String publicFlag = param.get("publicFlag");
+		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
 		String signedKey = "";
-		
+
 		if (publicFlag.equals("0")) {
-			
+
 			signedKey = MD5Util.stringMD5(testid
 					+ StringUtil.toDateTimeString(new Date()));
 			quiz.setSignedKey(signedKey);
@@ -518,31 +520,29 @@ public class QuizController {
 			rb.setState(0);
 			rb.setMessage(signedKey);
 			return rb;
-		}else if(publicFlag.equals("1")){
-            quiz.setSignedKey("");
-            quiz.setType(ExamConstant.QUIZ_TYPE_PRIVATE);
-            quizDao.updateQuiz(quiz);
-            rb.setMessage("");
-            rb.setState(0);
-      		return rb;   
-	
-		}
-		
-		return null;
-		
-		
-	}
-	
-	
+		} else if (publicFlag.equals("1")) {
+			quiz.setSignedKey("");
+			quiz.setType(ExamConstant.QUIZ_TYPE_PRIVATE);
+			quizDao.updateQuiz(quiz);
+			rb.setMessage("");
+			rb.setState(0);
+			return rb;
 
-	
+		}
+
+		return null;
+
+	}
+
 	// 保存公开挑战赛信息
 	@RequestMapping(value = "/setPublicConfig", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseBase setPublicConfig(@RequestBody Map<String, String> param) {
 		ResponseBase rb = new ResponseBase();
 
-		if (param.get("testid") == null ||param.get("testTail") == null || param.get("starttime") == null || param.get("deadtime") == null) {
+		if (param.get("testid") == null || param.get("testTail") == null
+				|| param.get("starttime") == null
+				|| param.get("deadtime") == null) {
 			rb.setState(2);
 			rb.setMessage("输入均不可为空");
 			return rb;
@@ -552,14 +552,14 @@ public class QuizController {
 		String testTail = param.get("testTail");
 		String startTime = param.get("starttime");
 		String deadTime = param.get("deadtime");
-		
+
 		Quiz quiz = quizDao.getQuiz(Integer.parseInt(testid));
 		if (testTail == null || quiz.getLogo() == null) {
 			rb.setState(3);
 			rb.setMessage("竞赛logo和竞赛详情不能为空");
 			return rb;
 		}
-	
+
 		quiz.setDescription(testTail);
 		quiz.setStartTime(startTime);
 		quiz.setEndTime(deadTime);
@@ -568,8 +568,6 @@ public class QuizController {
 		rb.setState(0);
 		return rb;
 	}
-	
-	
 
 	// 判断是否有公开挑战赛
 	@RequestMapping(value = "/checkpub", method = RequestMethod.POST)
@@ -589,52 +587,59 @@ public class QuizController {
 		return rb;
 
 	}
-	
-	
-//根据用户选择信息，生成相应的随机题库，保存在randomquiz表中，
+
+	// 根据用户选择信息，生成相应的随机题库，保存在randomquiz表中，
 	@RequestMapping(value = "/addRandomQuiz")
 	@ResponseBody
-	public ResponseBase addRandomQuiz(@RequestBody Map<String,String> map) {
+	public ResponseBase addRandomQuiz(@RequestBody Map<String, String> params) {
 		ResponseBase rb = new ResponseBase();
-		
-           int testid;
-           int problem_set_id;
-		  int level;
-		  int num;
-		
-		Quiz quiz=new Quiz();
-          
-         quiz.setParent(0);
-          quiz.setStatus(1);
-//           quizService.addQuiz();
-//           quizService.addRandomQuiz(testid,problem_set_id,level,num);
-//		
-//		
-		
-//		Quiz q = quizService.addQuiz(request);
-//		// 获取系统标签，并在labeltest中为该测试添加这些系统标签
-//
-//		List<Label> labels = labelService.getSystemLabels();
-//		for (Label label : labels) {
-//			labelService.insertIntoLabelTest(q.getQuizid(), label.getId(),
-//					label.getIsSelected());
-//		}
-//		ResponseMessage msg = new ResponseMessage();
-//		if (q == null) {
-//			msg.setMsg("add failed!!");
-//			msg.setHandler_url("/error");
-//			rb.setState(0);
-//			rb.setMessage(msg);
-//		} else {
-//			msg.setMsg("" + q.getQuizid());
-//			msg.setHandler_url("/");
-//			rb.setState(1);
-//			rb.setMessage(msg);
-//		}
-		return rb;
-		}
 
-	
+		int uid = Integer.parseInt(params.get("userid"));
+
+		Quiz quiz = new Quiz();
+		quiz.setName("随机测试题");
+		quiz.setParent(0);
+		quiz.setStatus(1);
+		quiz.setTime(30);
+		Quiz q = quizService.addQuiz(quiz);
+		List<RandomQuizSet> randomQuizs = new ArrayList<RandomQuizSet>();
+		RandomQuizSet javaquiz = new RandomQuizSet();
+		javaquiz.setProblemSetId(20);
+		javaquiz.setNum(5);
+		javaquiz.setLevel(1);
+		javaquiz.setTestid(q.getQuizid());
+		RandomQuizSet phpquiz = new RandomQuizSet();
+		phpquiz.setProblemSetId(21);
+		phpquiz.setNum(5);
+		phpquiz.setLevel(2);
+		phpquiz.setTestid(q.getQuizid());
+		randomQuizs.add(phpquiz);
+		randomQuizs.add(javaquiz);
+
+		quizService.addRandomQuiz(randomQuizs);
+
+		// 获取系统标签，并在labeltest中为该测试添加这些系统标签
+
+		List<Label> labels = labelService.getSystemLabels();
+		for (Label label : labels) {
+			labelService.insertIntoLabelTest(q.getQuizid(), label.getId(),
+					label.getIsSelected());
+		}
+		ResponseMessage msg = new ResponseMessage();
+		if (q == null) {
+			msg.setMsg("add failed!!");
+			msg.setHandler_url("/error");
+			rb.setState(0);
+			rb.setMessage(msg);
+		} else {
+			msg.setMsg("" + q.getQuizid());
+			msg.setHandler_url("/");
+			rb.setState(1);
+			rb.setMessage(msg);
+		}
+		return rb;
+	}
+
 	// 查询所有的题型
 	@RequestMapping(value = "/findSet")
 	@ResponseBody
@@ -648,6 +653,72 @@ public class QuizController {
 		rb.setMessage(setlist);
 		rb.setState(0);
 
+		return rb;
+	}
+	
+	@RequestMapping(value = "/manage/inviteRandom")
+	@ResponseBody
+	public ResponseBase inviteUserToRandomQuiz(
+			@RequestBody RequestTestInviteUser request) {
+		ResponseBase rb = new ResponseBase();
+		
+		
+		Quiz q = quizService.getQuizMetaInfoByID(request.getQuizid());
+		
+	      // randomQuizDao.findByQuizid(q.getQuizid());
+		User ht = userService.getUserById(request.getUser().getUid());
+		ResponseMessage msg = new ResponseMessage();
+		int num = request.getInvite().size();
+		if (ht.getInvited_left() - num <= 0) {
+			msg.setMsg("failed you must be put more money!");
+			msg.setHandler_url("/");
+			rb.setState(0);
+		} else {
+			// 发送邀请
+			// by fangwei 重写发送邀请逻辑，新建testusr表
+			for (InviteUser tu : request.getInvite()) {
+				// 由inviteuser生成testuser
+
+				Invite oldInvite = inviteService.getInvites(q.getQuizid(),
+						tu.getEmail());
+
+				// 生成invite、testuser
+				
+				//!!!此处在实现方法中增加了一个parentquiz的设置
+				String pwd = inviteService.inviteUserToQuiz(tu, q, request, ht);
+				//密码存在invite中
+				List<Labeltest> labeltests = labelService.getLabelsOfTest(q
+						.getQuizid());
+				for (Labeltest lt : labeltests) {
+					Invite invite = inviteService.getInvites(q.getQuizid(),
+							tu.getEmail());
+					if (labelService.getLabelUserByIidAndLid(invite.getIid(),
+							lt.getLabelid()) == null) {
+						labelService.insertIntoLabelUser(invite.getIid(),
+								lt.getLabelid(), "");
+					}
+
+				}
+
+				try {
+					inviteService.sendmail(request, q, tu, pwd, ht);
+					//生成邀请emil 包含    tu.getEmail()+"|"+q.getQuizid()
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+
+				}
+			}
+
+			ht.setInvited_left(ht.getInvited_left() - num);
+			ht.setInvitedNum(ht.getInvitedNum() + num);
+			userService.updateUser(ht);
+			msg.setMsg("invite all ok!");
+			msg.setHandler_url("/");
+			rb.setState(1);
+		}
+		rb.setMessage(msg);
 		return rb;
 	}
 

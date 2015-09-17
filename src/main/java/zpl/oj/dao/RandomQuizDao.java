@@ -1,0 +1,23 @@
+package zpl.oj.dao;
+
+import java.util.List;
+import java.util.Set;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+
+import zpl.oj.model.common.ProblemSet;
+import zpl.oj.model.common.RandomQuizSet;
+
+
+public interface RandomQuizDao {
+
+	@Insert("INSERT INTO randomquiz(testid,level,problem_set_id,num)"
+			+ "VALUES(#{testid},#{level},#{problemSetId},#{num})")
+	void add(RandomQuizSet randomQuiz);
+
+	
+	@Select("SELECT randomid,testid,num,level,problem_set_id as problemSetId FROM quiz WHERE testid=#{0}  ORDER BY level ASC")
+	List<RandomQuizSet> getListByTestid(int testid);
+
+}
