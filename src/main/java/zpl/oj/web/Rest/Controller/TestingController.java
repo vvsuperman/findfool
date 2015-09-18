@@ -126,8 +126,9 @@ public class TestingController {
 	public Map validateUser(Map params) {
 		Map rtMap = new HashMap<String, Object>();
 		// 需做合法性判断，异常等等
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		String email = (String) params.get("email");
-		int testid = Integer.parseInt((String) params.get("testid"));
 		
 		//
 		Invite invite = inviteDao.getInvites(testid, email);
@@ -256,9 +257,17 @@ public class TestingController {
 		ResponseBase rb = new ResponseBase();
 		String idString=params.get("testid").toString();
 		int testid = Integer.parseInt(idString);
-		String email = (String)params.get("email");		
+		String email = (String)params.get("email");	
+		
 		Invite invite = inviteService.getInvites(testid, email);
-		List<Labeltest> labelList=labelService.getLabelsOfTest(testid);
+		List<Labeltest> labelList;
+	if(invite.getTestid()!=invite.getParentquiz()){
+		 labelList=labelService.getLabelsOfTest(invite.getParentquiz());
+	}else{
+	   labelList=labelService.getLabelsOfTest(testid);
+
+	}
+		
 		List<JsonLable> jsonLables=new ArrayList<TestingController.JsonLable>();
 		for(Labeltest lt:labelList){
 			if(lt.getIsSelected()==0) continue;
@@ -353,7 +362,9 @@ public class TestingController {
 		Quiz quiz = quizDao.getQuiz(testid);
 		if (invite.getParentquiz() == 0) {
 			genRandomQuiz(invite);
+			//Invite invite2 = inviteDao.getInvites(testid, email);
 //如果已经生成随机试题，就不再生成
+			newTestId =289;;
 		} else if ((invite.getParentquiz() != 0) && (quiz.getParent() == 0)) {
 		 	newTestId = invite.getTestid();
 		
@@ -363,7 +374,7 @@ public class TestingController {
 		
                    		
 		
-		 rb.setMessage(newTestId);
+		 
 		
 		
 		//判读用户是否已经开始做题，若已开始，直接给出题目列表
@@ -375,6 +386,7 @@ public class TestingController {
 			message.put("openCamera", invite.getOpenCamera());
 		
 			message.put("tuserProblems", tuserProblems);
+			message.put("newTestId", newTestId);
 			rb.setMessage(message);
 			rb.setState(1);
 			return rb;
@@ -384,6 +396,8 @@ public class TestingController {
 			Map<String, Integer> message=new HashMap<String, Integer>();
 			message.put("invitedid", invite.getIid());
 			message.put("openCamera", invite.getOpenCamera());
+			message.put("newTestId", newTestId);
+
 			rb.setMessage(message);
 			return rb;
 		}
@@ -428,7 +442,9 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
-		int testid = Integer.parseInt((String) params.get("testid"));
+		//int testid = Integer.parseInt((String) params.get("testid"));
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		String email = (String) params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
 
@@ -478,8 +494,9 @@ public class TestingController {
 		}
 		
 		
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		
-		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		Integer tuid = (Integer) map.get("tuid");
 		Invite invite = inviteDao.getInvites(testid, email);

@@ -287,7 +287,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	 }else if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
-	    		 $scope.newTestId=data.newTestId;
+	    		 $scope.newTestId=data.message["newTestId"];
 	    		 $scope.errMsg = "";
 	    		 if($scope.openCamera==1){
 	    			  //不开启拍照区域
@@ -301,9 +301,10 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	         headers: {
 	 	                "Authorization": CadData.getTestToken()
 	 	            },
-	    	         data: {"email":$scope.email, "testid": $scope.newTestId}
+	    	         data: {"email":$scope.email, "testid":$scope.newTestId}
 	    	     }).success(function (data) {
 	    	    	 $scope.userInfo=data["message"];
+	    	    	 
 	    	    	 //如果无label，摄像头也未强制开启，则跳转到试题详情页面
 	    	    	 if($scope.userInfo.length == 0 && ($scope.openCamera ==1 || $scope.openCamera ==2)){
 	    	    		 $scope.show =3;
@@ -315,6 +316,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.tuserProblems=data.message["tuserProblems"];
+	    		 $scope.newTestId=data.message["newTestId"];
 	    		 if( $scope.openCamera==0){
 	    		 flashTip("务必开启摄像头已开始考试");
 	    		 $scope.$broadcast("takeVideo");

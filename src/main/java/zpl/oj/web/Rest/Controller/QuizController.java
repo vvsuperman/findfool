@@ -351,8 +351,7 @@ public class QuizController {
 
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q, request, ht);
-				List<Labeltest> labeltests = labelService.getLabelsOfTest(q
-						.getQuizid());
+				List<Labeltest> labeltests = labelService.getLabelsOfTest(q.getQuizid());
 				for (Labeltest lt : labeltests) {
 					Invite invite = inviteService.getInvites(q.getQuizid(),
 							tu.getEmail());
