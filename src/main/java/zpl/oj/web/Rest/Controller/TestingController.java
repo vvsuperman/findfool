@@ -336,7 +336,8 @@ public class TestingController {
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		String pwd = (String)params.get("pwd");
-		
+		 int	newTestId=testid;
+
 		Invite invite = inviteDao.getInvites(testid, email);
 
 		//用户名、密码不匹配
@@ -345,6 +346,25 @@ public class TestingController {
 			rb.setMessage(2);
 			return rb;
 		}
+		
+		
+		// 判断该测试是否为随机，如果是随机调用生成试题方法，如果不是，跳过
+
+		Quiz quiz = quizDao.getQuiz(testid);
+		if (invite.getParentquiz() == 0) {
+			genRandomQuiz(invite);
+//如果已经生成随机试题，就不再生成
+		} else if ((invite.getParentquiz() != 0) && (quiz.getParent() == 0)) {
+		 	newTestId = invite.getTestid();
+		
+		 
+
+		}
+		
+                   		
+		
+		 rb.setMessage(newTestId);
+		
 		
 		//判读用户是否已经开始做题，若已开始，直接给出题目列表
 		if(invite.getBegintime().equals("")==false){
@@ -735,15 +755,18 @@ public class TestingController {
 		
 		
 	// 根据randomquiz的要求生成quiz
-	public ResponseBase genRandomQuiz(int testid, int uid, Invite invite) {
+	public void genRandomQuiz(Invite invite) {
 
 		// 根据类型和难度和数量找到试题
 		// 生成新的quiz ，并制定parent为原来的quiz
 		// 更新invite testid更新
-		Quiz oldquiz = quizDao.getQuiz(testid);
-		Quiz newquiz = new Quiz();
-		newquiz = oldquiz;
-		newquiz.setParent(oldquiz.getQuizid());
+	       int	testid=invite.getTestid();
+		Quiz newquiz = quizDao.getQuiz(testid);
+		//Quiz newquiz = new Quiz();
+		//Quiz newquiz = new Quiz();
+		int parent=newquiz.getQuizid();
+		newquiz.setQuizid(null);
+		newquiz.setParent(parent);
 		int quizid = quizDao.insertQuizRerurn(newquiz);
 		invite.setParentquiz(testid);
 		invite.setTestid(quizid);
@@ -770,7 +793,7 @@ public class TestingController {
 			}
 		}
 
-		return null;
+		return ;
 
 	}
 

@@ -12,12 +12,12 @@ import zpl.oj.model.common.RandomQuizSet;
 
 public interface RandomQuizDao {
 
-	@Insert("INSERT INTO randomquiz(testid,level,problem_set_id,num)"
+	@Insert("INSERT INTO randomquizset(testid,level,problem_set_id,num)"
 			+ "VALUES(#{testid},#{level},#{problemSetId},#{num})")
 	void add(RandomQuizSet randomQuiz);
 
 	
-	@Select("SELECT randomid,testid,num,level,problem_set_id as problemSetId FROM quiz WHERE testid=#{0}  ORDER BY level ASC")
+	@Select("SELECT randomid,testid,num,level,problem_set_id as problemSetId FROM randomquizset WHERE testid=#{0}  ORDER BY level ASC")
 	List<RandomQuizSet> getListByTestid(int testid);
 
 }

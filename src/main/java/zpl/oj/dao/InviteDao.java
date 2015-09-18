@@ -28,7 +28,7 @@ public interface InviteDao {
 
 	@Update("UPDATE INVITE set  TESTID = #{testid},  "
 			+ " HRID = #{hrid},   UID = #{uid},begintime=#{begintime},   INVITETIME = #{invitetime},DURATION=#{duration},"
-			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd},openCamera=#{openCamera},starttime=#{starttime},deadtime=#{deadtime},system=#{system} where IID = #{iid}")
+			+ " FINISHTIME = #{finishtime},  SCORE = #{score},totalscore=#{totalScore} ,STATE=#{state},pwd=#{pwd},openCamera=#{openCamera},starttime=#{starttime},deadtime=#{deadtime},system=#{system},parentquiz=#{parentquiz} where IID = #{iid}")
 	  void updateInvite(Invite invite);
 
 	    
