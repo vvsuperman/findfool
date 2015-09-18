@@ -26,19 +26,17 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             	           'outdent'    ,//    # 向左缩进
             	         ],
                  	
-            	         upload: {
-                             url: 'company/uploadCompanyImageTail',
-                            	params: null,
-                                fileKey: 'file',
-                                connectionCount: 3,
-                                leaveConfirm: 'Uploading is in progress, are you sure to leave this page?',
-                                	
-                         },
-//            	         tabIndent: true,
-//            	      
-//
-//            	         pasteImage: false,
-            	 toolbarFloatOffset:0
+	    	         upload: {
+	                     url: 'company/uploadCompanyImageTail',
+	                    	params: null,
+	                        fileKey: 'file',
+	                        connectionCount: 3,
+	                        leaveConfirm: 'Uploading is in progress, are you sure to leave this page?',
+	                        	
+	                 },
+	                 toolbarFloat:false,
+            	     toolbarFloatOffset:0,
+            	     pasteImage:true
             };
         	if(attrs.operation=="view"){
         		option.toolbarHidden =true;
