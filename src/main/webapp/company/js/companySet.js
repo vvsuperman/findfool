@@ -35,7 +35,7 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
        console.log("shanchu");
   
         })
-};
+	};
 //将公司关联到用户  通过手动输入邮箱来关联
 	$scope.addUser = function (companyId) {	
 	    $http({
@@ -118,102 +118,102 @@ OJApp.controller('companySet',['$scope','$http','$routeParams','Data',function (
 
 
 
-$scope.create = function () {	
-	$scope.errorMsg={};
-	
-	console.log($scope.company.companyname,$scope.company.address, $scope.company.mobile,$scope.company.website,$scope.company.description);
-	
-    if($scope.company.companyname && $scope.company.address && $scope.company.mobile && $scope.company.website){
-	   $scope.companyModel={};
-	   
-       $http({
-         url: WEBROOT+"/company/create",
-         method: 'POST',
-         data: {"name": $scope.company.companyname,"address": $scope.company.address,"mobile": $scope.company.mobile,
-        	   "website": $scope.company.website,"description":$scope.company.description}
-
-    }).success(function (data) {
-    	$scope.state = data["state"];// 1 true or 0 false
+    $scope.create = function () {	
+    	
+		$scope.errorMsg={};
+		console.log($scope.company.companyname,$scope.company.address, $scope.company.mobile,$scope.company.website,$scope.company.des);
 		
-		if ($scope.state == 0) {
-        $scope.companyModel = data["message"];
-        $scope.showPage =2; }
-		else {
-		$scope.errorMsg.general = data["message"];
+	    if($scope.company.companyname && $scope.company.address && $scope.company.mobile && $scope.company.website){
+		   $scope.companyModel={};
+		   
+	       $http({
+	         url: WEBROOT+"/company/create",
+	         method: 'POST',
+	         data: {"name": $scope.company.companyname,"address": $scope.company.address,"mobile": $scope.company.mobile,
+	        	   "website": $scope.company.website,"description":$scope.company.des}
+	
+	    }).success(function (data) {
+	    	$scope.state = data["state"];// 1 true or 0 false
 			
+			if ($scope.state == 0) {
+	        $scope.companyModel = data["message"];
+	        $scope.showPage =2; }
+			else {
+			$scope.errorMsg.general = data["message"];
+				
+			}
+	 
+	    })}
+		else{
+			$scope.errorMsg.general = "所有项均不能为空";
 		}
- 
-    })}
-	else{
-		$scope.errorMsg.general = "所有项均不能为空";
+    };
+
+
+
+
+	$scope.updateImageCompany=function(companyModel){
+		var url = "#/company/update/"+companyModel.id;
+		 window.location.href=url;
 	}
-};
-
-
-
-
-$scope.updateImageCompany=function(companyModel){
-	var url = "#/company/update/"+companyModel.id;
-	 window.location.href=url;
-}
-
-$scope.show = function (cid) {	
-    $http({
-        url: WEBROOT+"/company/getById",
-        method: 'POST',
-        data: {"cid":cid }
-    }).success(function (data) {
-        $scope.company = data["message"];
-
-    })
-
-
-};
-$scope.modifyCompany = function (company) {	
-	var url = "#/company/modify/"+company.id;
-	 window.location.href=url;
-
-};
-
-
-$scope.addUserFn = function (company) {	
-	var url = "#/company/addUser/"+company.id;
-	 window.location.href=url;
-
-};
-
-$scope.modify = function () {	
-    $http({
-        url: WEBROOT+"/company/modify",
-        method: 'POST',
-        data: {"cid":$scope.company.id,"name": $scope.company.name,"address": $scope.company.address,"tel": $scope.company.tel,"website": $scope.company.website,"description":$scope.company.description }
-    }).success(function (data) {
-        $scope.company = data["message"];
-        var url = "#/company/companyset";
-        window.location.href=url;
- 
-    })
-};
-$scope.show(cid);
-
-$scope.showCompany=function(company){
-	var url = "#/company/show/"+company.id;
-	 window.location.href=url;
-}
-
-   $scope.findAll();
-    
-    
-    $scope.onChange=function(x){
-    	if(x==1){
-    		$scope.findAll();}
-    	if(x==2)
-    
- {
- }   	
-    }
-  
+	
+	$scope.show = function (cid) {	
+	    $http({
+	        url: WEBROOT+"/company/getById",
+	        method: 'POST',
+	        data: {"cid":cid }
+	    }).success(function (data) {
+	        $scope.company = data["message"];
+	
+	    })
+	
+	
+	};
+	$scope.modifyCompany = function (company) {	
+		var url = "#/company/modify/"+company.id;
+		 window.location.href=url;
+	
+	};
+	
+	
+	$scope.addUserFn = function (company) {	
+		var url = "#/company/addUser/"+company.id;
+		 window.location.href=url;
+	
+	};
+	
+	$scope.modify = function () {	
+	    $http({
+	        url: WEBROOT+"/company/modify",
+	        method: 'POST',
+	        data: {"cid":$scope.company.id,"name": $scope.company.name,"address": $scope.company.address,"tel": $scope.company.tel,"website": $scope.company.website,"description":$scope.company.description }
+	    }).success(function (data) {
+	        $scope.company = data["message"];
+	        var url = "#/company/companyset";
+	        window.location.href=url;
+	 
+	    })
+	};
+	$scope.show(cid);
+	
+	$scope.showCompany=function(company){
+		var url = "#/company/show/"+company.id;
+		 window.location.href=url;
+	}
+	
+	   $scope.findAll();
+	    
+	    
+	    $scope.onChange=function(x){
+	    	if(x==1){
+	    		$scope.findAll();}
+	    	if(x==2)
+	    
+	 {
+	 }   	
+	    }
+	  
    
     
-}]);
+	}]);
 
