@@ -88,7 +88,7 @@ public interface QuizDao {
 
 	@Insert("INSERT INTO QUIZ( OWNER,  NAME,  DATE,  TIME,  EXTRA_INFO,  UUID,  EMAILS, PARENT)"
 			+ " VALUES("
-			+ "#{owner},#{name},#{date},#{time},#{extraInfo},#{uuid},#{emails}，#{parent})")
+			+ "#{owner},#{name},#{date},#{time},#{extraInfo},#{uuid},#{emails},#{parent})")
 	@Options(useGeneratedKeys = true, keyProperty = "quizid", keyColumn = "quizid")
 	int insertQuizRerurn(Quiz newquiz);
 }

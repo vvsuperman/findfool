@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.foolrank.model.CompanyModel;
 import com.squareup.okhttp.Request;
 import com.foolrank.util.RequestUtil;
-import com.jcraft.jsch.jce.Random;
+//import com.jcraft.jsch.jce.Random;
 
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.RandomQuizDao;
