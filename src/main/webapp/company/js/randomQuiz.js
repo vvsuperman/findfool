@@ -26,6 +26,8 @@ OJApp.controller('randomQuiz',['$scope','$http','$routeParams','Data',function (
 		})
 	};
 	$scope.addRandomQuiz = function() {
+		console.log("执行了插入1");
+
 		$http({
 			url : WEBROOT + "/test/addRandomQuiz",
 			method : 'POST',

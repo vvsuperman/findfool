@@ -5,7 +5,11 @@ OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Da
     $scope.leftBar = '';
     $scope.name = Data.name();
     
-
+	$scope.test = function() {
+		
+			console.log("执行了查询全部");
+	};
+	
 
     if ($scope.local == true) {
         $http({
@@ -111,11 +115,11 @@ OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Da
 	$scope.phpset={'id':16,'level':1,'num':3
 		       
 	};   
-	 $scope.Remail = Data.email();
-	    $scope.company = Data.company();
-	    $scope.mdUid = Data.mdUid();
-	$scope.userid= Data.uid();
-	console.log($scope.userid);
+//	 $scope.Remail = Data.email();
+//	    $scope.company = Data.company();
+//	    $scope.mdUid = Data.mdUid();
+//	$scope.userid= Data.uid();
+//	console.log($scope.userid);
 	$scope.findAll = function() {
 		$http({
 			url : WEBROOT + "/test/findSet",
@@ -128,7 +132,8 @@ OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Da
 
 		})
 	};
-	$scope.addRandomQuiz = function() {
+	$scope.addRandomQuiz= function() {
+		console.log("阿萨德");
 		$http({
 			url : WEBROOT + "/test/addRandomQuiz",
 			method : 'POST',
@@ -141,8 +146,10 @@ OJApp.controller("testshow",['$scope','$http','$Data',function($scope, $http, Da
 		})
 	};
 	//$scope.findAll();
-	$scope.addRandomQuiz();
+	//$scope.addRandomQuiz();
 	
+	
+
     
     
     

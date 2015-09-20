@@ -24,6 +24,7 @@ import com.squareup.okhttp.Request;
 import com.foolrank.util.RequestUtil;
 //import com.jcraft.jsch.jce.Random;
 
+
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.model.common.Invite;
@@ -171,6 +172,8 @@ public class QuizController {
 		ResponseBase rb = new ResponseBase();
 
 		Quiz q = quizService.addQuiz(request);
+		q.setParent(q.getQuizid());
+		quizDao.updateQuiz(q);
 		// 获取系统标签，并在labeltest中为该测试添加这些系统标签
 
 		List<Label> labels = labelService.getSystemLabels();
@@ -598,6 +601,7 @@ public class QuizController {
 		Quiz quiz = new Quiz();
 		quiz.setName("随机测试题");
 		quiz.setParent(0);
+		quiz.setOwner(uid);
 		quiz.setStatus(1);
 		quiz.setTime(30);
 		Quiz q = quizService.addQuiz(quiz);

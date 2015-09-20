@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.codehaus.jackson.map.type.MapLikeType;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -89,6 +90,9 @@ public class TestingController {
 	@Autowired
 	private QuizDao quizDao;
 	
+	@Autowired
+	private TestuserDao testuserDao;
+	
 	
 	@Autowired
 	private QuizProblemDao quizProblemDao;
@@ -129,10 +133,20 @@ public class TestingController {
 		String idString=params.get("testid").toString();
 		int testid = Integer.parseInt(idString);
 		String email = (String) params.get("email");
-		
-		//
-		Invite invite = inviteDao.getInvites(testid, email);
-	
+		                          
+		     Quiz quiz=    quizDao.getQuiz(testid);
+		    Testuser  testuser=  testuserDao.findTuserByEmail(email);
+		    Invite invite;
+		     if(quiz.getParent()==0 ){ 
+		      invite    = inviteDao.getInviteByTestidAndUser(testuser.getTuid(),testid);  
+		      if(invite==null){
+		    	   invite=inviteDao.getInviteByTestidAndParent(testuser.getTuid(),testid);
+		    	  
+		      };
+		     }
+		     else {
+		     invite= inviteDao.getInvites(testid, email);
+		     }
 		
 		
 
@@ -364,7 +378,7 @@ public class TestingController {
 			genRandomQuiz(invite);
 			//Invite invite2 = inviteDao.getInvites(testid, email);
 //如果已经生成随机试题，就不再生成
-			newTestId =289;;
+			newTestId =302;;
 		} else if ((invite.getParentquiz() != 0) && (quiz.getParent() == 0)) {
 		 	newTestId = invite.getTestid();
 		
@@ -784,7 +798,8 @@ public class TestingController {
 		int parent=newquiz.getQuizid();
 		newquiz.setQuizid(null);
 		newquiz.setParent(parent);
-		int quizid = quizDao.insertQuizRerurn(newquiz);
+		 quizDao.insertQuizRerurn(newquiz);
+		 int quizid=newquiz.getQuizid();
 		invite.setParentquiz(testid);
 		invite.setTestid(quizid);
 		inviteDao.updateInvite(invite);
@@ -814,6 +829,7 @@ public class TestingController {
 
 	}
 
+
 	public static int[] randomCommon(int min, int max, int n) {
 		if (n > (max - min + 1) || max < min) {
 			return null;
@@ -836,5 +852,6 @@ public class TestingController {
 		}
 		return result;
 	}
+	
 
 }

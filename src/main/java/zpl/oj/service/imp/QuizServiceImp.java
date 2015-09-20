@@ -54,17 +54,28 @@ public class QuizServiceImp implements QuizService {
 	@Override
 	public List<Quiz> getQuizByOwner(int owner) {
 		List<Quiz> quizList = quizDao.getQuizs(owner);
-		for(Quiz quiz:quizList){
-			int pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
-			int invited = inviteDao.countInvites(quiz.getQuizid());
-			int finished = inviteDao.countInviteFinished(quiz.getQuizid());
+		for (Quiz quiz : quizList) {
+			int pNum = 0;
+			int invited = 0;
+			int finished = 0;
+			if (quiz.getParent() == 0) {
+				pNum = randomQuizDao.countPnumInRQ(quiz.getQuizid());
+				invited = inviteDao.countInvitesByP(quiz.getQuizid());
+				finished = inviteDao.countInviteFinishedByP(quiz.getQuizid());
+
+			} else if(quiz.getParent()==quiz.getQuizid()) {
+				pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
+				invited = inviteDao.countInvites(quiz.getQuizid());
+				finished = inviteDao.countInviteFinished(quiz.getQuizid());
+			}
+
 			quiz.setQuestionNum(pNum);
 			quiz.setInvitedNum(invited);
 			quiz.setFinishedNum(finished);
 		}
-		
+
 		return quizList;
-		
+
 	}
 	
 	@Override
@@ -197,7 +208,8 @@ public class QuizServiceImp implements QuizService {
 		quiz.setTime(quizT.getTime());
 		quizDao.insertQuiz(quiz);
 		int quizId = quizDao.getNewestQuizByOwner(uid).getQuizid();
-		
+					quiz.setParent(quizId);
+					quizDao.updateQuiz(quiz);
 		
 		List<QuizProblem> quizProbs = quizProblemDao.getQuizProblemsByQuizId(quizT.getQuizId());
 		for(QuizProblem quizProblem:quizProbs){
@@ -245,6 +257,14 @@ public class QuizServiceImp implements QuizService {
 	}
 		
 	}
+
+	@Override
+	public Quiz getQuizByTestid(Integer testid) {
+		// TODO Auto-generated method stub
+		return  quizDao.getQuizByTestid(testid);
+	}
+
+
 
 
 

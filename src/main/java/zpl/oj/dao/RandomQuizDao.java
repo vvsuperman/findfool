@@ -20,4 +20,7 @@ public interface RandomQuizDao {
 	@Select("SELECT randomid,testid,num,level,problem_set_id as problemSetId FROM randomquizset WHERE testid=#{0}  ORDER BY level ASC")
 	List<RandomQuizSet> getListByTestid(int testid);
 
+	@Select("select count(*) from randomquizset where testid = #{0}")
+	int countPnumInRQ(Integer quizid);
+
 }

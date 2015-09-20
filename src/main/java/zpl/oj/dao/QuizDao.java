@@ -56,7 +56,7 @@ public interface QuizDao {
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
-	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS,signed_key as singedKey "
+	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS,signed_key as singedKey ,parent"
 			+ " FROM quiz WHERE OWNER=#{0}  order by date desc ")
 	List<Quiz> getQuizs(int owner);
 
@@ -91,4 +91,8 @@ public interface QuizDao {
 			+ "#{owner},#{name},#{date},#{time},#{extraInfo},#{uuid},#{emails},#{parent})")
 	@Options(useGeneratedKeys = true, keyProperty = "quizid", keyColumn = "quizid")
 	int insertQuizRerurn(Quiz newquiz);
+
+
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status,parent FROM quiz WHERE quizid=#{0}")
+	Quiz getQuizByTestid(Integer testid);
 }

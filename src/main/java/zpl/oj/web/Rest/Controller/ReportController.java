@@ -12,6 +12,7 @@ import java.util.Map;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.Problem;
+import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.responsejson.ResponseInvite;
 import zpl.oj.model.responsejson.ResponseProDetail;
@@ -79,10 +81,16 @@ public class ReportController {
 	public List<ResponseInvite> getReportList(@RequestBody Map<String,Integer> map) {
 		Integer testid = map.get("testid");
 		Integer state = map.get("state");
+		
 		if(testid == null || state == null){
 			return null;
 		}
-		
+         Quiz quiz=  quizService.getQuizByTestid(testid);	
+         if(quiz.getParent()==0){
+        	 int parentquiz=testid;
+        	 return reportService.getInviteReportByStateAndP(state,parentquiz);
+        	 
+         }
 		return reportService.getInviteReport(testid,state);
 	}
 	

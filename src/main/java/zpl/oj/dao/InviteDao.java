@@ -70,7 +70,31 @@ public interface InviteDao {
 	
 	@Select("select count(*) from invite where testid = #{0} and score > (select score from invite where uid = #{1} and testid= #{0})")
 	int getRankByTidUid(Integer testid,Integer userid);
+
 	
+	@Select("select * FROM INVITE WHERE uid = #{0} and testid = #{1}")
+	Invite getInviteByTestidAndUser(int tuid, int testid);
+
+	
+	@Select("select * FROM INVITE WHERE uid = #{0} and parentquiz = #{1}")
+	Invite getInviteByTestidAndParent(int tuid, int testid);
+
+	
+	@Select("select t2.email,t1.iid,t1.testid,t1.parentquiz,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd "
+			+ "from invite t1,testuser t2 "
+			+ "where  t1.uid= t2.tuid  and t1.state=#{0} and t1.parentquiz =#{1} order by t1.state,t1.starttime,t1.inviteTime desc")
+	List<ResponseInvite> getOrderInviteByStateAndP(Integer state, int parentquiz);
+
+	
+	@Select("select count(*) from invite where parentquiz=#{0}")
+	int countInvitesByP(Integer quizid);
+
+	@Select("select count(*) from invite where parentquiz=#{0} and state=2") 
+	int countInviteFinishedByP(Integer quizid);
+	
+	@Select("SELECT *  FROM INVITE t1, testuser t2 WHERE t1.parentquiz=#{0} and t1.uid = t2.tuid and t2.email=#{1}")
+	Invite getInvitesByP(Integer quizid, String email);
+
 	
 	
 }

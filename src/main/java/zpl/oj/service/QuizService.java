@@ -41,6 +41,10 @@ public interface QuizService {
 	Quiz addQuiz(Quiz quiz);
 
 	void addRandomQuiz(List<RandomQuizSet> randomQuizs);
+
+	Quiz getQuizByTestid(Integer testid);
+
+
 	
 	
 	
