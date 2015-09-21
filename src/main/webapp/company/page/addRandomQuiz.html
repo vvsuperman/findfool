@@ -1,0 +1,51 @@
+<link rel="stylesheet" type="text/css" href="resource/fonts/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/simditor.css" />
+
+
+
+<div class="container">
+	<div style="width:100%;" class="text-center">
+	  <form method="post" action="">
+
+	<table border="1" width=300px; style="margin-left: 200px;margin-top: 200px;"> 
+	<tr>
+		<td height="30px">题</td>
+		<td height="30px">难度</td>
+		<td>数目</td>
+		<td></td>
+	</tr>
+	<tr >
+		<td><select name="" >
+			<option value="{{set.comment}}" ng-repeat="set in  setList">
+			
+		</select></td>
+		<td><select name="">
+			<option value="" selected>
+			<option value="">
+		</select></td>
+		<td></td>
+		<td><input type="button" name="haha" value="增加"></td>
+	</tr>
+	
+	<tr>
+		<td colspan="3"><button ng-click="addRandomQuiz()" value="生成试卷"></button></td>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="addRandomQuiz()">
+
+	</tr>
+	</table>
+  </form>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

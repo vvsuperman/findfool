@@ -3,6 +3,7 @@ package zpl.oj.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -22,7 +23,7 @@ public interface QuizDao {
 	
 
 
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status , signed_key as signedKey, start_time as startTime, end_time as endTime ,openCamera, logo, description "
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status , signed_key as signedKey, start_time as startTime, end_time as endTime ,openCamera, logo, description ,parent "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
 	Quiz getQuiz(int tid);
 
@@ -55,7 +56,7 @@ public interface QuizDao {
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
-	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS,signed_key as singedKey "
+	@Select("SELECT QUIZID,  OWNER, NAME,  DATE,  TIME,  EXTRA_INFO as extraInfo,  UUID,  EMAILS,signed_key as singedKey ,parent"
 			+ " FROM quiz WHERE OWNER=#{0}  order by date desc ")
 	List<Quiz> getQuizs(int owner);
 
@@ -83,4 +84,19 @@ public interface QuizDao {
 			+"start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera}"
 			+ " where QUIZID = #{quizid}")
 	void saveTime(Quiz quiz);
+
+
+	@Insert("INSERT INTO QUIZ( OWNER,  NAME,  DATE,  TIME,  EXTRA_INFO,  UUID,  EMAILS, PARENT)"
+			+ " VALUES("
+			+ "#{owner},#{name},#{date},#{time},#{extraInfo},#{uuid},#{emails},#{parent})")
+	@Options(useGeneratedKeys = true, keyProperty = "quizid", keyColumn = "quizid")
+	int insertQuizRerurn(Quiz newquiz);
+
+
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status,parent FROM quiz WHERE quizid=#{0}")
+	Quiz getQuizByTestid(Integer testid);
+
+
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status,parent FROM quiz WHERE parent=#{0}")
+	Quiz getQuizByParent(int testid);
 }

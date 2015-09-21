@@ -28,6 +28,7 @@ public class Quiz implements Serializable {
 		this.pubStartTime = "";
 		this.pubEndTime = "";
 		this.openCamera = 1;
+		this.parent=0;
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class Quiz implements Serializable {
 	 * 状态：0:未审核；1:未开始；2:进行中；3:已结束
 	 */
 	private int status;
-
+	private int  parent;
 	
 	
 
@@ -302,6 +303,14 @@ public class Quiz implements Serializable {
 
 	public void setOpenCamera(int openCamera) {
 		this.openCamera = openCamera;
+	}
+
+	public int getParent() {
+		return parent;
+	}
+
+	public void setParent(int parent) {
+		this.parent = parent;
 	}
 
 }

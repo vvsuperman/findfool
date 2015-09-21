@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.codehaus.jackson.map.type.MapLikeType;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +26,10 @@ import com.google.gson.Gson;
 
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.LogTakeQuizDao;
+import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.QuizProblemDao;
+import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
@@ -34,6 +39,9 @@ import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizEmail;
+import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.QuizTemplete;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
@@ -52,6 +60,7 @@ import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.base64.BASE64;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.timer.InviteReminder;
 
@@ -80,6 +89,16 @@ public class TestingController {
 	
 	@Autowired
 	private QuizDao quizDao;
+	
+	@Autowired
+	private TestuserDao testuserDao;
+	
+	
+	@Autowired
+	private QuizProblemDao quizProblemDao;
+	
+	@Autowired
+	private 	RandomQuizDao randomQuizDao;
 
 	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -93,6 +112,11 @@ public class TestingController {
 	private TestuserDao tuserDao;
 	@Autowired
 	private TuserProblemDao tuserProblemDao;
+	
+	@Autowired
+	private ProblemDao problemDao;
+	
+	
 	@Autowired
 	private QuizEmailService quizEmailService;
 	
@@ -106,9 +130,25 @@ public class TestingController {
 	public Map validateUser(Map params) {
 		Map rtMap = new HashMap<String, Object>();
 		// 需做合法性判断，异常等等
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		String email = (String) params.get("email");
-		int testid = Integer.parseInt((String) params.get("testid"));
-		Invite invite = inviteDao.getInvites(testid, email);
+		                          
+		     Quiz quiz=    quizDao.getQuiz(testid);
+		    Testuser  testuser=  testuserDao.findTuserByEmail(email);
+		    Invite invite;
+		     if(quiz.getParent()==0 ){ 
+		      invite    = inviteDao.getInviteByTestidAndUser(testuser.getTuid(),testid);  
+		      if(invite==null){
+		    	   invite=inviteDao.getInviteByTestidAndParent(testuser.getTuid(),testid);
+		    	  
+		      };
+		     }
+		     else {
+		     invite= inviteDao.getInvites(testid, email);
+		     }
+		
+		
 
 		// 用户邀请不合法
 		if (invite == null) {
@@ -154,7 +194,13 @@ public class TestingController {
 		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
-		Invite invite = inviteDao.getInvites(testid, email);
+	    Quiz quiz=quizDao.getQuiz(testid);
+	     Invite  invite= inviteDao.getInvites(testid, email);
+
+	     if(invite==null){
+	    	 
+	    	 invite = inviteDao.getInvitesByP(testid, email);
+	     }
 		String nowDate = df.format(new Date());
 		
 		
@@ -231,9 +277,17 @@ public class TestingController {
 		ResponseBase rb = new ResponseBase();
 		String idString=params.get("testid").toString();
 		int testid = Integer.parseInt(idString);
-		String email = (String)params.get("email");		
+		String email = (String)params.get("email");	
+		
 		Invite invite = inviteService.getInvites(testid, email);
-		List<Labeltest> labelList=labelService.getLabelsOfTest(testid);
+		List<Labeltest> labelList;
+	if(invite.getTestid()!=invite.getParentquiz()){
+		 labelList=labelService.getLabelsOfTest(invite.getParentquiz());
+	}else{
+	   labelList=labelService.getLabelsOfTest(testid);
+
+	}
+		
 		List<JsonLable> jsonLables=new ArrayList<TestingController.JsonLable>();
 		for(Labeltest lt:labelList){
 			if(lt.getIsSelected()==0) continue;
@@ -311,8 +365,12 @@ public class TestingController {
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		String pwd = (String)params.get("pwd");
-		
+		 int	newTestId=testid;
+
 		Invite invite = inviteDao.getInvites(testid, email);
+		if(invite==null){
+			invite=inviteDao.getInvitesByP(testid, email);
+		}
 
 		//用户名、密码不匹配
 		if(invite.getPwd().equals(pwd)==false){
@@ -320,6 +378,28 @@ public class TestingController {
 			rb.setMessage(2);
 			return rb;
 		}
+		
+		
+		// 判断该测试是否为随机，如果是随机调用生成试题方法，如果不是，跳过
+
+		Quiz quiz = quizDao.getQuiz(testid);
+		if (invite.getParentquiz() == 0) {
+			genRandomQuiz(invite);
+			Invite invite2 = inviteDao.getInvitesByP(testid, email);
+			newTestId=invite2.getTestid();
+//如果已经生成随机试题，就不再生成
+		//	newTestId =302;;
+		} else if ((invite.getParentquiz() != 0) && (invite.getParentquiz()!=invite.getTestid())) {
+		 	newTestId = invite.getTestid();
+		
+		 
+
+		}
+		
+                   		
+		
+		 
+		
 		
 		//判读用户是否已经开始做题，若已开始，直接给出题目列表
 		if(invite.getBegintime().equals("")==false){
@@ -330,6 +410,7 @@ public class TestingController {
 			message.put("openCamera", invite.getOpenCamera());
 		
 			message.put("tuserProblems", tuserProblems);
+			message.put("newTestId", newTestId);
 			rb.setMessage(message);
 			rb.setState(1);
 			return rb;
@@ -339,6 +420,8 @@ public class TestingController {
 			Map<String, Integer> message=new HashMap<String, Integer>();
 			message.put("invitedid", invite.getIid());
 			message.put("openCamera", invite.getOpenCamera());
+			message.put("newTestId", newTestId);
+
 			rb.setMessage(message);
 			return rb;
 		}
@@ -383,7 +466,9 @@ public class TestingController {
 			rb.setState(0);
 			return rb;
 		}
-		int testid = Integer.parseInt((String) params.get("testid"));
+		//int testid = Integer.parseInt((String) params.get("testid"));
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		String email = (String) params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
 
@@ -433,8 +518,9 @@ public class TestingController {
 		}
 		
 		
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		
-		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		Integer tuid = (Integer) map.get("tuid");
 		Invite invite = inviteDao.getInvites(testid, email);
@@ -707,4 +793,75 @@ public class TestingController {
 				
 
 		}
+		
+		
+	// 根据randomquiz的要求生成quiz
+	public void genRandomQuiz(Invite invite) {
+
+		// 根据类型和难度和数量找到试题
+		// 生成新的quiz ，并制定parent为原来的quiz
+		// 更新invite testid更新
+	       int	testid=invite.getTestid();
+		Quiz newquiz = quizDao.getQuiz(testid);
+		//Quiz newquiz = new Quiz();
+		//Quiz newquiz = new Quiz();
+		int parent=newquiz.getQuizid();
+		newquiz.setQuizid(null);
+		newquiz.setParent(parent);
+		 quizDao.insertQuizRerurn(newquiz);
+		 int quizid=newquiz.getQuizid();
+		invite.setParentquiz(testid);
+		invite.setTestid(quizid);
+		inviteDao.updateInvite(invite);
+
+		// 从problem中按照规则选出题，并插入到quizproblem中；
+
+		List<RandomQuizSet> randomList = randomQuizDao.getListByTestid(testid);
+
+		for (RandomQuizSet randomQuizSet : randomList) {
+			List<Integer> list = problemDao.getPBySetidAndLevel(
+					randomQuizSet.getProblemSetId(), randomQuizSet.getLevel());
+			if (randomQuizSet.getNum() < list.size()) {
+				int[] random = randomCommon(0, list.size(),
+						randomQuizSet.getNum());
+				for (int i = 0; i < random.length; i++) {
+					QuizProblem quizProblem = new QuizProblem();
+					quizProblem.setProblemid(list.get(random[i]));
+					quizProblem.setQuizid(quizid);
+					quizProblemDao.insertQuizproblem(quizProblem);
+
+				}
+
+			}
+		}
+
+		return ;
+
+	}
+
+
+	public static int[] randomCommon(int min, int max, int n) {
+		if (n > (max - min + 1) || max < min) {
+			return null;
+		}
+		int[] result = new int[n];
+		int count = 0;
+		while (count < n) {
+			int num = (int) (Math.random() * (max - min)) + min;
+			boolean flag = true;
+			for (int j = 0; j < n; j++) {
+				if (num == result[j]) {
+					flag = false;
+					break;
+				}
+			}
+			if (flag) {
+				result[count] = num;
+				count++;
+			}
+		}
+		return result;
+	}
+	
+
 }

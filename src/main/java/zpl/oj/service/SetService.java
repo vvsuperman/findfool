@@ -1,6 +1,7 @@
 package zpl.oj.service;
 
 import java.util.List;
+import java.util.Set;
 
 import zpl.oj.model.common.Domain;
 import zpl.oj.model.common.ProblemSet;
@@ -11,5 +12,7 @@ public interface SetService {
 	List<Domain> getSets(RequestUser request);
 	
 	boolean insertSet(ProblemSet s);
+
+	List<ProblemSet> getSetsByPrivilege(int privilege);
 
 }

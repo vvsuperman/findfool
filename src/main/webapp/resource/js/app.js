@@ -249,6 +249,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'company/page/addUser.html',
             	controller: 'companySet'
             }). 
+            when('/company/randomQuiz',{
+            	templateUrl: 'company/page/addRandomQuiz.html',
+            	controller: 'randomQuiz'
+            }). 
             otherwise({
                 redirectTo: '/'
             });

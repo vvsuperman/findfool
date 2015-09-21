@@ -287,6 +287,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	 }else if(data.state == 2){
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
+	    		 $scope.newTestId=data.message["newTestId"];
 	    		 $scope.errMsg = "";
 	    		 if($scope.openCamera==1){
 	    			  //不开启拍照区域
@@ -300,9 +301,10 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	         headers: {
 	 	                "Authorization": CadData.getTestToken()
 	 	            },
-	    	         data: {"email":$scope.email, "testid": $scope.tid}
+	    	         data: {"email":$scope.email, "testid":$scope.newTestId}
 	    	     }).success(function (data) {
 	    	    	 $scope.userInfo=data["message"];
+	    	    	 
 	    	    	 //如果无label，摄像头也未强制开启，则跳转到试题详情页面
 	    	    	 if($scope.userInfo.length == 0 && ($scope.openCamera ==1 || $scope.openCamera ==2)){
 	    	    		 $scope.show =3;
@@ -314,6 +316,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.tuserProblems=data.message["tuserProblems"];
+	    		 $scope.newTestId=data.message["newTestId"];
 	    		 if( $scope.openCamera==0){
 	    		 flashTip("务必开启摄像头已开始考试");
 	    		 $scope.$broadcast("takeVideo");
@@ -386,7 +389,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 			} 
 		 }
 		 
-		 var sendData ={"email":$scope.email,"testid":$scope.tid,"userInfo":$scope.userInfo}
+		 var sendData ={"email":$scope.email,"testid":$scope.newTestId,"userInfo":$scope.userInfo}
 		 $http({
 	         url: WEBROOT+"/testing/submituserinfo",
 	         method: 'POST',
@@ -444,7 +447,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 		
 	 
 	 $scope.startTest = function(){
-    	 var sendData ={"email":$scope.email,"testid":$scope.tid}
+    	 var sendData ={"email":$scope.email,"testid":$scope.newTestId}
 		 $http({
 	         url: WEBROOT+"/testing/starttest",
 	         method: 'POST',
@@ -532,7 +535,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
          }
     	 
     	 
-    	 var sendData = {"testid":$scope.tid,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
+    	 var sendData = {"testid":$scope.newTestId,"email":$scope.email,"nowProblemId":problem.problemid,"problemid":$scope.question.qid,
     			 		 "useranswer":useranswer,"index":index,"questionType":$scope.question.type,"problemLength":length};
     	 
     	 $http({
@@ -573,7 +576,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
      $scope.fetchProblem= function(problem,index){
     	 //判断是否是第一道题，提交目前的试题
     	 console.log("index.............",index);
-    	 var sendData = {"testid":$scope.tid,"email":$scope.email,"problemId":problem.problemid,"index":index+1};
+    	 var sendData = {"testid":$scope.newTestId,"email":$scope.email,"problemId":problem.problemid,"index":index+1};
     	 $http({
 	         url: WEBROOT+"/testing/fetchProblem",
 	         method: 'POST',
@@ -644,7 +647,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
        $scope.queryNum =5;
        //solution.solution = $scope.proSolution;
        solution.email =$scope.email
-       solution.testid = $scope.tid;
+       solution.testid = $scope.newTestId;
        solution.solution = $scope.programCode.context;
        $http({
            url: WEBROOT+'/solution/run',
@@ -729,7 +732,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
      };
      
      $scope.endTest = function(){
-    	 var sendData ={"email":$scope.email,"testid":$scope.tid};
+    	 var sendData ={"email":$scope.email,"testid":$scope.newTestId};
     	 $http({
 	         url: WEBROOT+"/testing/finishtest",
 	         method: 'POST',
@@ -742,11 +745,11 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		//跳转到完成页面
 	   
 	    		console.log(url);
-	    		console.log($scope.tid);
-	    		if((typeof(url)=="undefined")&&(typeof($scope.tid)=="undefined")){
+	    		console.log($scope.newTestId);
+	    		if((typeof(url)=="undefined")&&(typeof($scope.newTestId)=="undefined")){
 	    			smoke.alert("参数错误");
 	    			console.log("执行了673");
-	    		}else if((typeof(url)=="undefined")&&(typeof($scope.tid)!="undefined")){
+	    		}else if((typeof(url)=="undefined")&&(typeof($scope.newTestId)!="undefined")){
 	    			console.log("执行了675");
 	    			smoke.alert("完成本次测试");
 	    			 window.location.href='#/cad/comlist';	

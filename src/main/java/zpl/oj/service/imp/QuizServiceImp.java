@@ -3,6 +3,7 @@ package zpl.oj.service.imp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,12 @@ import org.springframework.stereotype.Service;
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.QuizProblemDao;
+import zpl.oj.dao.RandomQuizDao;
+import zpl.oj.dao.SetDao;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.QuizTemplete;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestMeta;
@@ -36,6 +40,8 @@ public class QuizServiceImp implements QuizService {
 	private InviteDao inviteDao;
 	
 	@Autowired
+	private RandomQuizDao randomQuizDao;
+	@Autowired
 	private LabelService labelService;
 	
 	/*
@@ -48,17 +54,33 @@ public class QuizServiceImp implements QuizService {
 	@Override
 	public List<Quiz> getQuizByOwner(int owner) {
 		List<Quiz> quizList = quizDao.getQuizs(owner);
-		for(Quiz quiz:quizList){
-			int pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
-			int invited = inviteDao.countInvites(quiz.getQuizid());
-			int finished = inviteDao.countInviteFinished(quiz.getQuizid());
+		for (Quiz quiz : quizList) {
+			int pNum = 0;
+			int invited = 0;
+			int finished = 0;
+			if (quiz.getParent() == 0) {
+				     List<RandomQuizSet> randomList=   randomQuizDao.getListByTestid(quiz.getQuizid());
+				if((randomList!=null)&&(!randomList.isEmpty())){
+				pNum = randomQuizDao.countPnumInRQ(quiz.getQuizid());
+				}else{
+					pNum=0;
+				}
+				invited = inviteDao.countInvitesByP(quiz.getQuizid());
+				finished = inviteDao.countInviteFinishedByP(quiz.getQuizid());
+
+			} else if(quiz.getParent()==quiz.getQuizid()) {
+				pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
+				invited = inviteDao.countInvites(quiz.getQuizid());
+				finished = inviteDao.countInviteFinished(quiz.getQuizid());
+			}
+
 			quiz.setQuestionNum(pNum);
 			quiz.setInvitedNum(invited);
 			quiz.setFinishedNum(finished);
 		}
-		
+
 		return quizList;
-		
+
 	}
 	
 	@Override
@@ -191,7 +213,8 @@ public class QuizServiceImp implements QuizService {
 		quiz.setTime(quizT.getTime());
 		quizDao.insertQuiz(quiz);
 		int quizId = quizDao.getNewestQuizByOwner(uid).getQuizid();
-		
+					quiz.setParent(quizId);
+					quizDao.updateQuiz(quiz);
 		
 		List<QuizProblem> quizProbs = quizProblemDao.getQuizProblemsByQuizId(quizT.getQuizId());
 		for(QuizProblem quizProblem:quizProbs){
@@ -215,5 +238,39 @@ public class QuizServiceImp implements QuizService {
 		       quizDao.saveTime(quiz);
 		     		
 	}
+
+	@Override
+	public Quiz addQuiz(Quiz quiz) {
+	
+
+		quiz.setOpenCamera(1);//默认不开启摄像头
+		quizDao.insertQuiz(quiz);
+		quiz = quizDao.getNewestQuizByOwner(quiz.getOwner());
+		quiz.setUuid(quiz.getQuizid());
+		if(quiz != null)
+			quizDao.updateQuiz(quiz);
+		return quiz;
+		
+	}
+
+	@Override
+	public void addRandomQuiz(List<RandomQuizSet> randomQuizs) {
+		
+	for (RandomQuizSet randomQuiz : randomQuizs) {
+		randomQuizDao.add(randomQuiz);
+		
+	}
+		
+	}
+
+	@Override
+	public Quiz getQuizByTestid(Integer testid) {
+		// TODO Auto-generated method stub
+		return  quizDao.getQuizByTestid(testid);
+	}
+
+
+
+
 
 }

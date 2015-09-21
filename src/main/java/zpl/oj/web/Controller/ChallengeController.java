@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,8 @@ import zpl.oj.dao.CompanyDao;
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.QuizDao;
+import zpl.oj.dao.QuizProblemDao;
+import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.dao.user.UserDao;
@@ -33,6 +36,8 @@ import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.Labeltest;
 import zpl.oj.model.common.Problem;
 import zpl.oj.model.common.Quiz;
+import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
@@ -85,6 +90,14 @@ public class ChallengeController {
 	@Autowired
 	private InviteService inviteService;
 	
+	
+	@Autowired
+	private RandomQuizDao randomQuizDao;
+	
+	
+	
+	@Autowired
+	private QuizProblemDao quizProblemDao;
 	
 	//根据signedid获取testid
 	@RequestMapping(value = "/checktest")
@@ -154,9 +167,24 @@ public class ChallengeController {
 		
 		
 		
+		Invite invite;
+		if(quiz.getParent()==0){
 
-		// 生成invite
-		Invite invite = inviteDao.getInvites(quiz.getQuizid(), email);
+			invite = inviteDao.getInvitesByP(quiz.getQuizid(), email);
+
+			if (invite == null) {
+				   int newquizId=   genRandomQuiz(quiz);
+               
+				invite = genInviteRandom(email, newquizId,quiz.getQuizid());
+				if(invite==null){
+					rb.setState(20004);
+					rb.setMessage("您尚未注册和登录，无法进行挑战赛！");
+					return rb;
+				}
+			}
+		}else{
+
+		 invite = inviteDao.getInvites(quiz.getQuizid(), email);
 		if (invite == null) {
 			invite = genInvite(email, quiz.getQuizid());
 			if(invite==null){
@@ -165,7 +193,7 @@ public class ChallengeController {
 				return rb;
 			}
 		}
-		
+		}
 		
 		
 		if (invite.getState() == ExamConstant.INVITE_FINISH) {
@@ -198,6 +226,51 @@ public class ChallengeController {
 
 	}
 	
+	private Invite genInviteRandom(String email, int newquizId, Integer oldquizid) {
+		Testuser testuser = testuserDao.findTuserByEmail(email);
+		if(testuser==null){
+			
+			return null;
+			
+		}
+		Quiz quiz = quizDao.getQuiz(newquizId);
+		int tuId = testuser.getTuid();
+		Invite invite = new Invite();
+		invite.setUid(tuId);
+		invite.setTestid(newquizId);
+		invite.setScore(0);
+		invite.setState(ExamConstant.INVITE_PUB);
+		invite.setOpenCamera(quiz.getOpenCamera());
+		invite.setStarttime(quiz.getStartTime());
+		invite.setDeadtime(quiz.getEndTime());
+		invite.setDuration(quiz.getTime()+"");
+		invite.setState(ExamConstant.INVITE_PUB);
+		invite.setHrid(quiz.getOwner());
+		invite.setParentquiz(oldquizid);
+		
+		inviteDao.add(invite);
+		
+		// 生成考题
+		List<Problem> problemList = problemDao.getProblemByTestid(newquizId);
+		for (Problem problem : problemList) {
+			TuserProblem tuserProblem = new TuserProblem();
+			tuserProblem.setInviteId(invite.getIid());
+			tuserProblem.setTuid(tuId);
+			tuserProblem.setProblemid(problem.getProblemId());
+			
+			tuserProblemDao.insertTuserProblem(tuserProblem);
+		}
+		
+		List<Labeltest> labeltests = labelService.getLabelsOfTest(newquizId);
+		for (Labeltest lt : labeltests) {
+			Invite invite2 = inviteService.getInvites(newquizId,email);
+			if (labelService.getLabelUserByIidAndLid(invite2.getIid(),lt.getLabelid()) == null) {
+				labelService.insertIntoLabelUser(invite2.getIid(),lt.getLabelid(), "");
+			}
+		}
+		return invite;
+	}
+
 	private Invite genInvite(String email, int quizId) {
 		Testuser testuser = testuserDao.findTuserByEmail(email);
 		if(testuser==null){
@@ -372,8 +445,73 @@ public class ChallengeController {
 		return null;
 	}
 	
+	// 根据randomquiz的要求生成quiz
+	public int  genRandomQuiz(Quiz quiz) {
+
+		// 根据类型和难度和数量找到试题
+		// 生成新的quiz ，并制定parent为原来的quiz
+		// 更新invite testid更新
+	       int	testid=quiz.getQuizid();
+		Quiz newquiz = quizDao.getQuiz(testid);
+		//Quiz newquiz = new Quiz();
+		//Quiz newquiz = new Quiz();
+		int parent=newquiz.getQuizid();
+		newquiz.setQuizid(null);
+		newquiz.setParent(parent);
+		 quizDao.insertQuizRerurn(newquiz);
+		 int quizid =newquiz.getQuizid();
+		//invite.setParentquiz(testid);
+		//invite.setTestid(quizid);
+		//inviteDao.updateInvite(invite);
+
+		// 从problem中按照规则选出题，并插入到quizproblem中；
+
+		List<RandomQuizSet> randomList = randomQuizDao.getListByTestid(testid);
+
+		for (RandomQuizSet randomQuizSet : randomList) {
+			List<Integer> list = problemDao.getPBySetidAndLevel(
+					randomQuizSet.getProblemSetId(), randomQuizSet.getLevel());
+			if (randomQuizSet.getNum() < list.size()) {
+				int[] random = randomCommon(0, list.size(),
+						randomQuizSet.getNum());
+				for (int i = 0; i < random.length; i++) {
+					QuizProblem quizProblem = new QuizProblem();
+					quizProblem.setProblemid(list.get(random[i]));
+					quizProblem.setQuizid(quizid);
+					quizProblemDao.insertQuizproblem(quizProblem);
+
+				}
+
+			}
+		}
+
+		return  quizid;
+
+	}
+
+	public static int[] randomCommon(int min, int max, int n) {
+		if (n > (max - min + 1) || max < min) {
+			return null;
+		}
+		int[] result = new int[n];
+		int count = 0;
+		while (count < n) {
+			int num = (int) (Math.random() * (max - min)) + min;
+			boolean flag = true;
+			for (int j = 0; j < n; j++) {
+				if (num == result[j]) {
+					flag = false;
+					break;
+				}
+			}
+			if (flag) {
+				result[count] = num;
+				count++;
+			}
+		}
+		return result;
+	}
 	
-	
-	
+
 	
 }

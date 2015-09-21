@@ -12,7 +12,7 @@
 				<div></div>
 			</div>
 			<div class="panel-body">
-				<div class="info1">
+				<div class="info1">				
 					<span ng-bind="test.questionNum"></span>道题，<span ng-bind="test.time"></span>分钟
 				</div>
 				<div class="info2">
@@ -31,9 +31,10 @@
 		<div class="horizontal"></div>
 		<div class="vertical"></div>
 	</div>
+
 	<div class="clearfix"></div>
 </div>	
-
+	<div><button ng-click="addRandomQuiz()">新建随机试题</button></div>
 <div class="modal" id="testCreateModal" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"
      aria-hidden="true">
@@ -69,10 +70,11 @@
 			  </form>
 	      </div>
 	      <div class="modal-footer">
-	     	 <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="pushTest()">新建</button>
 	         <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
 	        
 	      </div>
+	      	     	 <button type="button" class="btn btn-primary"   ng-click="addRandomQuiz()">新建</button>
+	      
 	    </div>
   </div>
 </div>

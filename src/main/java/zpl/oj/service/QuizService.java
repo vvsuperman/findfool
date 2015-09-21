@@ -1,9 +1,11 @@
 package zpl.oj.service;
 
 import java.util.List;
+import java.util.Map;
 
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
+import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.User;
 import zpl.oj.model.requestjson.RequestTestMeta;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
@@ -35,6 +37,14 @@ public interface QuizService {
 
 	void saveTime(int quizid, String openCamera, String startTime,
 			String deadTime);
+
+	Quiz addQuiz(Quiz quiz);
+
+	void addRandomQuiz(List<RandomQuizSet> randomQuizs);
+
+	Quiz getQuizByTestid(Integer testid);
+
+
 	
 	
 	

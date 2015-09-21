@@ -569,6 +569,16 @@ public class ReportService {
 		
 	    return	logTakeQuizDao.getQuizLogByIid(inviteid);
 	}
+
+	public List<ResponseInvite> getInviteReportByStateAndP(Integer state,int parentquiz) {
+		List<ResponseInvite> invites =  inviteDao.getOrderInviteByStateAndP(state,parentquiz);
+		for(ResponseInvite invite:invites){
+				getInviteScore(invite);
+			
+			}
+		List<ResponseInvite> invitesUpdate =  inviteDao.getOrderInviteByStateAndP(state,parentquiz);
+		return invitesUpdate;
+	}
 	
 	
 	

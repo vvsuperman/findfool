@@ -23,9 +23,11 @@ public class Invite implements Serializable {
 		this.starttime ="";
 		this.deadtime = "";
 		this.system= "";
+		this.parentquiz=0;
 		
 	}
 	
+	private int parentquiz;
 	/**
 	 * ${item.pwd}
 	 */
@@ -85,6 +87,16 @@ public class Invite implements Serializable {
 	
 	
 	
+	
+	
+	public int getParentquiz() {
+		return parentquiz;
+	}
+
+	public void setParentquiz(int parentquiz) {
+		this.parentquiz = parentquiz;
+	}
+
 	public String getSystem() {
 		return system;
 	}

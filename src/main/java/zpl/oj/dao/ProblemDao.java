@@ -83,7 +83,11 @@ public interface ProblemDao {
 	  /**主要用于分页，可返回总记录数*/
 	@Select("    select  COUNT(*) FROM PROBLEM"
 			+ " WHERE creator=${uid}")
-	  Integer selectCount(int uid);  
+	  Integer selectCount(int uid);
+
+	
+	@Select("select problem_id from PROBLEM where PROBLEM_SET_ID=#{0} and level=#{1} ORDER BY problem_id DESC ")
+	List<Integer> getPBySetidAndLevel(Integer problemSetId, Integer level);  
 	
 	
 	
