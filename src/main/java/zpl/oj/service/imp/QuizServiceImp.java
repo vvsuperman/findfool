@@ -59,7 +59,12 @@ public class QuizServiceImp implements QuizService {
 			int invited = 0;
 			int finished = 0;
 			if (quiz.getParent() == 0) {
+				     List<RandomQuizSet> randomList=   randomQuizDao.getListByTestid(quiz.getQuizid());
+				if((randomList!=null)&&(!randomList.isEmpty())){
 				pNum = randomQuizDao.countPnumInRQ(quiz.getQuizid());
+				}else{
+					pNum=0;
+				}
 				invited = inviteDao.countInvitesByP(quiz.getQuizid());
 				finished = inviteDao.countInviteFinishedByP(quiz.getQuizid());
 

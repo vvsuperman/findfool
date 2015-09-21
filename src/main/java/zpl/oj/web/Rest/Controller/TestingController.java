@@ -194,7 +194,13 @@ public class TestingController {
 		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
-		Invite invite = inviteDao.getInvites(testid, email);
+	    Quiz quiz=quizDao.getQuiz(testid);
+	     Invite  invite= inviteDao.getInvites(testid, email);
+
+	     if(invite==null){
+	    	 
+	    	 invite = inviteDao.getInvitesByP(testid, email);
+	     }
 		String nowDate = df.format(new Date());
 		
 		
@@ -362,6 +368,9 @@ public class TestingController {
 		 int	newTestId=testid;
 
 		Invite invite = inviteDao.getInvites(testid, email);
+		if(invite==null){
+			invite=inviteDao.getInvitesByP(testid, email);
+		}
 
 		//用户名、密码不匹配
 		if(invite.getPwd().equals(pwd)==false){
@@ -376,10 +385,11 @@ public class TestingController {
 		Quiz quiz = quizDao.getQuiz(testid);
 		if (invite.getParentquiz() == 0) {
 			genRandomQuiz(invite);
-			//Invite invite2 = inviteDao.getInvites(testid, email);
+			Invite invite2 = inviteDao.getInvitesByP(testid, email);
+			newTestId=invite2.getTestid();
 //如果已经生成随机试题，就不再生成
-			newTestId =302;;
-		} else if ((invite.getParentquiz() != 0) && (quiz.getParent() == 0)) {
+		//	newTestId =302;;
+		} else if ((invite.getParentquiz() != 0) && (invite.getParentquiz()!=invite.getTestid())) {
 		 	newTestId = invite.getTestid();
 		
 		 

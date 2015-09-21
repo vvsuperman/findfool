@@ -95,6 +95,7 @@ public interface InviteDao {
 	@Select("SELECT *  FROM INVITE t1, testuser t2 WHERE t1.parentquiz=#{0} and t1.uid = t2.tuid and t2.email=#{1}")
 	Invite getInvitesByP(Integer quizid, String email);
 
+
 	
 	
 }

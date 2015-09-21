@@ -23,7 +23,7 @@ public interface QuizDao {
 	
 
 
-	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status , signed_key as signedKey, start_time as startTime, end_time as endTime ,openCamera, logo, description "
+	@Select("select QUIZID, OWNER, NAME, DATE, TIME, EXTRA_INFO as extraInfo,  UUID, EMAILS, type, status , signed_key as signedKey, start_time as startTime, end_time as endTime ,openCamera, logo, description ,parent "
 			+ "FROM QUIZ WHERE QUIZID = #{0}")
 	Quiz getQuiz(int tid);
 
@@ -95,4 +95,8 @@ public interface QuizDao {
 
 	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status,parent FROM quiz WHERE quizid=#{0}")
 	Quiz getQuizByTestid(Integer testid);
+
+
+	@Select("SELECT quizid,owner,name,date,time,extra_info as extraInfo,uuid,emails,type,logo,description,start_time as startTime,end_time as endTime,signed_key as signedKey,create_time as createTime,status,parent FROM quiz WHERE parent=#{0}")
+	Quiz getQuizByParent(int testid);
 }
