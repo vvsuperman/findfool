@@ -706,7 +706,9 @@ public class TestingController {
 		ResponseBase rb = new ResponseBase();
 
 		String email = (String) params.get("email");
-		int testid = Integer.parseInt((String) params.get("testid"));
+		//int testid = Integer.parseInt((String) params.get("testid"));
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
 		Invite invite = inviteDao.getInvites(testid, email);
 		// 用户邀请不合法
 		if (invite == null) {

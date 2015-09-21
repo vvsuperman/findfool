@@ -104,7 +104,7 @@ public class InviteServiceImp implements InviteService {
 		  
 		  //!!!此处为增加内容,实体也增加了
 		  
-		 invite.setParentquiz(0);
+		 invite.setParentquiz(q.getQuizid());
 		invite.setPwd(pwd);
 		invite.setTestid(q.getQuizid());
 		invite.setHrid(q.getOwner());

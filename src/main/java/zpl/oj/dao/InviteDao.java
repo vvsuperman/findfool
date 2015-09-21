@@ -15,12 +15,12 @@ public interface InviteDao {
 	@Select("select * FROM INVITE WHERE IID = #{0}")
 	  Invite getInviteById(int iid);
 
-	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system)"
-			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera},#{system})")
+	@Insert(" INSERT INTO INVITE(  TESTID,  HRID,   UID,   INVITETIME,begintime,  FINISHTIME,  SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system,parentquiz)"
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera},#{system},#{parentquiz})")
 	  void insertInvite(Invite invite);
 	
-	@Insert("INSERT INTO INVITE(TESTID,HRID,UID,INVITETIME,begintime,FINISHTIME,SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system)"
-			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera},#{system})")
+	@Insert("INSERT INTO INVITE(TESTID,HRID,UID,INVITETIME,begintime,FINISHTIME,SCORE,totalscore,STATE,DURATION,pwd,starttime,deadtime,openCamera,system,parentquiz)"
+			+ " VALUES (#{testid}, #{hrid}, #{uid}, #{invitetime},#{begintime}, #{finishtime}, #{score}, #{totalScore}, #{state}, #{duration},#{pwd},#{starttime},#{deadtime},#{openCamera},#{system},#{parentquiz})")
 	@Options(useGeneratedKeys = true, keyProperty = "iid", keyColumn = "iid")
 	int add(Invite invite);
 	  
@@ -46,7 +46,7 @@ public interface InviteDao {
 	/*
 	 * 返回测试中和测试完成的测试，倒序排列
 	 * */
-	@Select("select t2.email,t1.iid,t1.testid,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd "
+	@Select("select t2.email,t1.iid,t1.testid,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd,t1.parentquiz "
 			+ "from invite t1,testuser t2 "
 			+ "where  t1.uid= t2.tuid and t1.testid =#{0} and t1.state=#{1} order by t1.state,t1.starttime,t1.inviteTime desc")
 	List<ResponseInvite> getOrderInviteByTid(Integer testid, Integer state); 
