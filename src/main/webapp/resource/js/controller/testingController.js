@@ -751,7 +751,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    			console.log("执行了673");
 	    		}else if((typeof(url)=="undefined")&&(typeof($scope.newTestId)!="undefined")){
 	    			console.log("执行了675");
-	    			smoke.alert("完成本次测试");
+	    			//smoke.alert("完成本次测试");
 	    			 window.location.href='#/cad/comlist';	
 	    		}
 	    		console.log("执行了681");

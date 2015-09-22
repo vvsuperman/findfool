@@ -28,9 +28,9 @@
 				</div>
 				
 				<div class="qstype">类型</div>
-	            <div class="qseasy">难度</div>
-				
-				<div class="qsoperate">删除/上移/下移/修改</div>
+
+				<div class="qseasy">难度</div>	
+				<div class="qsoperate">删除/上移/下移</div>
 			</div>
 			<div class="scroll">
 				<div class="item" ng-repeat="q in qs">
@@ -64,14 +64,14 @@
 					<div class="qstype">
 						<input abstract ng-bind="getTypeName(q.type)">
 					</div>
-						<div class="qseasy" >
-	
-					<a  style="margin-left: 25px" class="blackFont">
+
+						<div class="qseasy">
+						<a style="margin-left: 23px" class="blackFont">
+						<span ng-if="q.level==-1">简单</span>
 							<span ng-if="q.level==1">简单</span>
 							<span ng-if="q.level==2">中等</span>
 							<span ng-if="q.level==3">困难</span>
-							<span ng-if="q.level==-1" >简单</span>	
-                          </a>
+	                      </a>
 						</div>
 					<div class="qsoperate">
 					

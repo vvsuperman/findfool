@@ -394,10 +394,12 @@ public class CompanyController {
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<Quiz> quizList = new ArrayList<Quiz>();
+			//hr存在好几个
 			for (User user : userList) {
 				// 做常量
-				 quizList = userDao.getQuizByUid(user.getUid(),
+				List<Quiz> quizList1 = userDao.getQuizByUid(user.getUid(),
 						ExamConstant.QUIZ_TYPE_CHALLENGE);
+				quizList.addAll(quizList1);
 			}
 			if (quizList.size() == 0) {
 				companyList.remove(companyModel);
