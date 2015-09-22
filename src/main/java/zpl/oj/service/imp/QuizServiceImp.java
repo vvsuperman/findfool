@@ -213,17 +213,17 @@ public class QuizServiceImp implements QuizService {
 		quiz.setName(quizT.getQuizTDesc());
 		quiz.setTime(quizT.getTime());
 		quizDao.insertQuiz(quiz);
-		int quizId = quizDao.getNewestQuizByOwner(uid).getQuizid();
-					quiz.setParent(quizId);
+		quiz = quizDao.getNewestQuizByOwner(uid);
+					quiz.setParent(quiz.getQuizid());
 					quizDao.updateQuiz(quiz);
 		
 		List<QuizProblem> quizProbs = quizProblemDao.getQuizProblemsByQuizId(quizT.getQuizId());
 		for(QuizProblem quizProblem:quizProbs){
-			 quizProblem.setQuizid(quizId);
+			 quizProblem.setQuizid(quiz.getQuizid());
 			 quizProblemDao.insertQuizproblem(quizProblem);
 		}
 		
-		return quizId;
+		return quiz.getQuizid();
 		
 	}
 
