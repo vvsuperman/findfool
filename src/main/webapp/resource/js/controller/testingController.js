@@ -776,10 +776,10 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
      $scope.lg ={};
      $scope.lg.context =$scope.lgs[0];
      
-     var codeTemplete ={'C':'#include <stdio.h>\r\n int main(){\r\n   //sample input and output:  \r\n	char name[10];\r\n    scanf("%s",name); \r\n     printf(name);  \r\n return 0;\r\n}',
-				"C++":"using namespace std; \r\n #include <iostream>\r\n int main(){\r\n  //sample input and output:   \r\n int num; \r\n cin>>num; \r\n cout<<num<<endl;\r\n	return 0;\r\n}",
-				"Java":"public class Solution {\r\n    public static void main(String[] args) {\r\n    //sample input and output:  \r\n" +
-					   "   BufferedReader strin=new BufferedReader(new InputStreamReader(System.in)); \r\n"+"   String c=strin.readLine();  \r\n    System.out.println(c);\r\n   }\r\n}",
+     var codeTemplete ={'C':'#include <stdio.h>\r\n int main(){\r\n    //sample input and output:  \r\n    char name[10];\r\n    scanf("%s",name); \r\n    printf(name);  \r\n    return 0;\r\n}',
+				"C++":"using namespace std; \r\n #include <iostream>\r\n int main(){\r\n    //sample input and output:\r\n    int num; \r\n    cin>>num; \r\n    cout<<num<<endl;\r\n    return 0;\r\n}",
+				"Java":"import java.io.*;\r\npublic class Solution {\r\n    public static void main(String[] args) throws IOException {\r\n    //sample input and output:  \r\n" +
+					   "    BufferedReader strin=new BufferedReader(new InputStreamReader(System.in)); \r\n"+"    String c=strin.readLine();  \r\n    System.out.println(c);\r\n}\r\n}",
 				"php":"<?php \r\n  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n  \r\n   ?>",
 				'C#':'public void Solution() {\r\n    Console.WriteLine("Hello World");\r\n}'
      }

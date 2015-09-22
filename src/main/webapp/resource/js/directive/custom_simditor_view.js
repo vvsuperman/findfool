@@ -1,10 +1,11 @@
 /*
+ * 由于控件bug，加入上传后点击会默认打开文件查看框
  * 首先引入css文件
  * operation = view or edit 必须
  * 
  * */
 
-OJApp.directive('simditor', ['$timeout', function ($timeout) {
+OJApp.directive('simditorview', ['$timeout', function ($timeout) {
     return {
         restrict: 'A',
         require: '?ngModel',
@@ -26,26 +27,12 @@ OJApp.directive('simditor', ['$timeout', function ($timeout) {
             	           'outdent'    ,//    # 向左缩进
             	         ],
                  	
-	    	   
+	    	        
 	                 toolbarFloat:false,
             	     toolbarFloatOffset:0,
-            	     //pasteImage:true
             };
         	if(attrs.operation=="view"){
         		option.toolbarHidden =true;
-        	}
-        	
-        	if(attrs.operation=="edit"){
-        		option.upload={
-	                     url: 'company/uploadCompanyImageTail',
-	                    	params: null,
-	                        fileKey: 'file',
-	                        connectionCount: 3,
-	                        leaveConfirm: 'Uploading is in progress, are you sure to leave this page?',
-	                        	
-	                 };
-        		option.pasteImage = true;
-        		
         	}
         	
             var editor = new Simditor(option);
