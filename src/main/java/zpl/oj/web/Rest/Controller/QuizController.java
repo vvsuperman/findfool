@@ -24,7 +24,6 @@ import com.squareup.okhttp.Request;
 import com.foolrank.util.RequestUtil;
 //import com.jcraft.jsch.jce.Random;
 
-
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.model.common.Invite;
@@ -73,10 +72,10 @@ public class QuizController {
 	private LabelService labelService;
 	@Autowired
 	private QuizDao quizDao;
-	
+
 	@Autowired
 	private RandomQuizDao randomQuizDao;
-	
+
 	@Autowired
 	private SetService setService;
 
@@ -354,11 +353,12 @@ public class QuizController {
 
 				// 生成invite、testuser
 				String pwd = inviteService.inviteUserToQuiz(tu, q, request, ht);
-				List<Labeltest> labeltests = labelService.getLabelsOfTest(q.getQuizid());
+				List<Labeltest> labeltests = labelService.getLabelsOfTest(q
+						.getQuizid());
 				for (Labeltest lt : labeltests) {
 					Invite invite = inviteService.getInvites(q.getQuizid(),
 							tu.getEmail());
-					
+
 					if (labelService.getLabelUserByIidAndLid(invite.getIid(),
 							lt.getLabelid()) == null) {
 						labelService.insertIntoLabelUser(invite.getIid(),
@@ -659,17 +659,16 @@ public class QuizController {
 
 		return rb;
 	}
-	
+
 	@RequestMapping(value = "/manage/inviteRandom")
 	@ResponseBody
 	public ResponseBase inviteUserToRandomQuiz(
 			@RequestBody RequestTestInviteUser request) {
 		ResponseBase rb = new ResponseBase();
-		
-		
+
 		Quiz q = quizService.getQuizMetaInfoByID(request.getQuizid());
-		
-	      // randomQuizDao.findByQuizid(q.getQuizid());
+
+		// randomQuizDao.findByQuizid(q.getQuizid());
 		User ht = userService.getUserById(request.getUser().getUid());
 		ResponseMessage msg = new ResponseMessage();
 		int num = request.getInvite().size();
@@ -687,10 +686,10 @@ public class QuizController {
 						tu.getEmail());
 
 				// 生成invite、testuser
-				
-				//!!!此处在实现方法中增加了一个parentquiz的设置
+
+				// !!!此处在实现方法中增加了一个parentquiz的设置
 				String pwd = inviteService.inviteUserToQuiz(tu, q, request, ht);
-				//密码存在invite中
+				// 密码存在invite中
 				List<Labeltest> labeltests = labelService.getLabelsOfTest(q
 						.getQuizid());
 				for (Labeltest lt : labeltests) {
@@ -706,7 +705,7 @@ public class QuizController {
 
 				try {
 					inviteService.sendmail(request, q, tu, pwd, ht);
-					//生成邀请emil 包含    tu.getEmail()+"|"+q.getQuizid()
+					// 生成邀请emil 包含 tu.getEmail()+"|"+q.getQuizid()
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -725,6 +724,5 @@ public class QuizController {
 		rb.setMessage(msg);
 		return rb;
 	}
-
 
 }

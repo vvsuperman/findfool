@@ -52,7 +52,7 @@ public interface QuizDao {
 
 	@Update("UPDATE QUIZ set OWNER = #{owner},   NAME = #{name},  "
 			+ "DATE = #{date},  TIME = #{time},  EXTRA_INFO = #{extraInfo}, start_time=#{startTime},end_time=#{endTime},openCamera=#{openCamera},"
-			+ "UUID = #{uuid},  EMAILS = #{emails}, logo = #{logo}, DESCRIPTION=#{description}, signed_key=#{signedKey} ,type=#{type}"
+			+ "UUID = #{uuid},  EMAILS = #{emails}, logo = #{logo}, DESCRIPTION=#{description}, signed_key=#{signedKey} ,type=#{type} ,parent=#{parent} "
 			+ " where QUIZID = #{quizid}")
 	void updateQuiz(Quiz quiz);
 
