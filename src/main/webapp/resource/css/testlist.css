@@ -24,7 +24,7 @@
 .qslist .item .qscontent a{
 	color: #00d8bd;
 }
-.qslist .qsindex,.qslist .qscontent,.qslist .qstype,.qslist .qsoperate{
+.qslist .qsindex,.qslist .qscontent,.qslist .qstype,.qslist .qseasy,.qslist .qsoperate{
 	float: left;
 	width: 10%;
 }
@@ -50,8 +50,14 @@
 	text-align: center;
 }
 .qslist .qstype{
-	width: 20%;
+	width: 10%;
 }
+.qslist .qseasy{
+	width: 10%;
+	text-align: center;
+	padding-right: 40px;
+}
+
 .qslist .qsoperate{
 	width: 20%;
 }
