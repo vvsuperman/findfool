@@ -116,6 +116,7 @@ public class QuizServiceImp implements QuizService {
 		//得到problems
 		for(QuizProblem qp :qps){
 			Question q = problemService.getProblemById(qp.getProblemid());
+	
 			if(q != null)
 				qlist.add(q);
 		}
