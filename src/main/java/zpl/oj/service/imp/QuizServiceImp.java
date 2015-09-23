@@ -65,6 +65,7 @@ public class QuizServiceImp implements QuizService {
 				}else{
 					pNum=0;
 				}
+				quiz.setIsRandom(1);
 				invited = inviteDao.countInvitesByP(quiz.getQuizid());
 				finished = inviteDao.countInviteFinishedByP(quiz.getQuizid());
 
@@ -72,6 +73,7 @@ public class QuizServiceImp implements QuizService {
 				pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
 				invited = inviteDao.countInvites(quiz.getQuizid());
 				finished = inviteDao.countInviteFinished(quiz.getQuizid());
+				quiz.setIsRandom(0);
 			}
 
 			quiz.setQuestionNum(pNum);

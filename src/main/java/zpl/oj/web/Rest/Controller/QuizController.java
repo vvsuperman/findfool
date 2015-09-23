@@ -24,6 +24,7 @@ import com.squareup.okhttp.Request;
 import com.foolrank.util.RequestUtil;
 //import com.jcraft.jsch.jce.Random;
 
+
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.model.common.Invite;
@@ -648,7 +649,9 @@ public class QuizController {
 	@RequestMapping(value = "/findSet")
 	@ResponseBody
 	public ResponseBase findSet(@RequestBody Map<String, String> params) {
-		int uid = Integer.parseInt(params.get("userid"));
+		
+		String idString=params.get("userid").toString();
+		int uid = Integer.parseInt(idString);
 		User user = userService.getUserById(uid);
 
 		ResponseBase rb = new ResponseBase();

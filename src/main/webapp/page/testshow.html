@@ -6,7 +6,7 @@
 	<div class="item" ng-repeat="test in tests">
 		<div class="panel panel-default cspanel" >
 			<div class="panel-heading">
-				<h4><a href="#/test/{{test.quizid}}">{{test.name}}</a></h4>
+				<h4><a href="#/test/{{test.quizid}},{{test.isRandom}}">{{test.name}}</a></h4>
 			</div>
 			<div class="panel-line">
 				<div></div>
@@ -32,9 +32,14 @@
 		<div class="vertical"></div>
 	</div>
 
+
+
+	<div class="item addtest" data-toggle="modal" data-target="#randomtestCreateModal" style="margin-bottom: 100px">
+		<div class="horizontal"></div>
+		<div class="vertical"></div>
+	</div>
 	<div class="clearfix"></div>
 </div>	
-	<!-- <div><button ng-click="addRandomQuiz()">新建随机试题</button></div> -->
 <div class="modal" id="testCreateModal" tabindex="0"
      role="dialog" aria-labelledby="TryLabel"
      aria-hidden="true">
@@ -71,6 +76,91 @@
 	      </div>
 	      <div class="modal-footer">
 	         <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="pushTest()">新建测试</button>
+	        <!--  <button type="button" class="btn btn-primary"   ng-click="addRandomQuiz()">新建随机测试</button> -->
+	         <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
+	      </div>
+	      	     	
+	      
+	    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+	<div class="clearfix"></div>
+</div>	
+<div class="modal" id="randomtestCreateModal" tabindex="0"
+     role="dialog" aria-labelledby="TryLabel"
+     aria-hidden="true">
+     <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel" style="font-size:16px;color:#1abc9c">新建随机测试</h4>
+	      </div>
+	      <div class="modal-body">
+	         <form class="form-horizontal" role="form">
+				  
+				  <div class="form-group">
+				    <label class="col-sm-2 control-label">测试名称</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" ng-model="addtest.name" placeholder="测试名称">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label  class="col-sm-2 control-label">时间</label>
+				    <div class="col-sm-6">
+				      <input type="text" class="form-control" ng-model="addtest.testtime" >
+				    </div>
+				  </div>
+				  
+				   <div class="form-group">
+ <table class="table table-hover col-sm-8">
+  <tr>
+  <td class="col-sm-3 " style=" text-align:center;">题目</td>
+  <td class="col-sm-3 " style=" text-align:center;">难度</td>
+  <td class="col-sm-3 " style=" text-align:center;">数量</td>
+  <td  class="col-sm-2 " style=" text-align:center;">选中</td>
+    <td class="col-sm-2 " style=" text-align:center;"></td>
+      </tr>
+  
+    <tr  ng-repeat="set in  setList">
+  <td  class="col-sm-3 " style=" text-align:center;">{{set.name}}</td>
+  <td style=" text-align:center;"><select class="form-control col-sm-3 ">
+  <option>简单</option>
+  <option>中等</option>
+  <option>困难</option>
+</select></td>
+  <td style=" text-align:center;" class="col-sm-2 ">  <input type="text" class="form-control" ng-model="" ></td>
+  <td style=" text-align:center;" class="col-sm-2 ">
+  <input type="checkbox" id="inlineCheckbox1" value="option"></td>
+     
+         <td class="col-sm-2 " style=" text-align:center;"></td>
+     
+      </tr>
+ 
+</table>
+ 
+
+</div>
+		  
+				   <div class="form-group">
+				    <label  class="col-sm-2 control-label">备注</label>
+				    <div class="col-sm-6">
+				      <textarea  class="form-control" ng-model="addtest.extrainfo"  placeholder="备注" style="width:100%;heght:200px"></textarea>
+				    </div>
+				  </div>
+			  </form>
+	      </div>
+	      <div class="modal-footer">
+	         <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="pushTest()">新建随机测试</button>
 	        <!--  <button type="button" class="btn btn-primary"   ng-click="addRandomQuiz()">新建随机测试</button> -->
 	         <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
 	      </div>

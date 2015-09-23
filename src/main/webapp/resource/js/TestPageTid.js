@@ -7,6 +7,8 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
     $scope.template = 'page/testlist.html';
     $scope.leftBar = 'page/testlistleftbar.html';
     $scope.tid = $routeParams.tid;
+    $scope.isRandom = $routeParams.isRandom;
+    
     $scope.modifyQsIndex="";
     $scope.contain ={};
     $scope.contain.show =1;
@@ -21,7 +23,7 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
     $scope.test.addAction = true;
     
     $scope.set={};
-    
+
    /*$scope.$watch("Data.tname()",function(){
 		$scope.tname = Data.tname();
 	});*/
@@ -78,7 +80,52 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
         $scope.template = 'page/testlist.html';
         $scope.myu = 1;
     };
+    
+    
+    //加载随机测试信息
+    $scope.testRandomManage = function () {
+        //add by zpl
+        var sendData = new Object();
+        sendData.user = new Object();
+        sendData.user.uid = Data.uid();
+        sendData.quizid = Data.tid();
+        $http({
+            url: WEBROOT+"/test/manageRandom",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: sendData
+        }).success(function (data) {
+            $scope.state = data["state"];//1 true or 0 false
+            $scope.message = data["message"];
+            console.log($scope.message);
+            if ($scope.state) {
+//                console.log($scope.message);
+                $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
+                $scope.isDisplay = new Array($scope.qs.length);
+                for(i in $scope.isDisplay)
+                	$scope.isDisplay[i]=false;
+                $scope.testtime = $scope.message.testtime;
+                $scope.extraInfo = $scope.message.extraInfo;
+                $scope.emails = $scope.message.emails;
+                $scope.name = $scope.message.name;
+                Data.setTname($scope.name);
+            } else {
+
+            }
+        }).error(function (data) {
+        	flashTip("获取数据错误");
+        });
+        $scope.template = 'page/testlist.html';
+        $scope.myu = 1;
+    };
+    if($scope.isRandom==0){
     $scope.testManage();
+    }else{
+    	//$scope.testRandomManage();
+    	$scope.template = 'page/testlist.html';
+    }
 //    $scope.testPage = function (target) {
 //        console.log('testPage');
 //        $scope.template = 'testlist.html';

@@ -158,8 +158,36 @@ OJApp.controller('TestPage',['$scope','$http','Data','$modal',function($scope, $
  
     };
    
+    //插入随机试卷
+    $scope.addRandomQuiz = function() {
+		console.log("执行了插入1");
 
+		$http({
+			url : WEBROOT + "/test/addRandomQuiz",
+			method : 'POST',
+			data : {"userid":$scope.userid}
+		}).success(function(data) {
+			$scope.setList = data["message"];
 
+			console.log("执行了插入");
+
+		})
+	};
+
+	
+	$scope.findAllSet = function() {
+		$http({
+			url : WEBROOT + "/test/findSet",
+			method : 'POST',
+			data : {"userid":Data.uid()}
+		}).success(function(data) {
+			$scope.setList = data["message"];
+
+			console.log("执行了查询全部");
+
+		})
+	};
+	$scope.findAllSet();
     $scope.testManage = function () {
     	//add by zpl
     	var sendData = new Object();
