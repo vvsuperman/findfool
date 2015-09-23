@@ -10,7 +10,7 @@
 <div class="myqs">
 	<div class="panel panel-default cspanel">
 		<div class="panel-heading">
-			<h4>添加库试题</h4>
+			<h4>添加自定义试题</h4>
 			<div class="btn-group" style="margin-left: 20px">
 				<button type="button" class="btn btn-primary dropdown-toggle"
 					data-toggle="dropdown">
@@ -258,36 +258,6 @@
 			</div>
 		</div>
 
-			                <div class="hedden" id="context" >{{context}}</div>
-			                <div class="row">
-				                <div class="col-md-5" style="padding: 20px">标签(以,区分)
-				                    <input type="text" id="tag" class="form-control" ng-model="newQuestion.tag">
-				                </div>
-				                <div class="col-md-4" style="padding: 20px">分数
-				                     <input type="text"  class="form-control" ng-model="ans.score" ng-change="isNum(ans.score)">
-				                </div>
-			                </div>
-			                <div class="row">
-				                <div class="col-md-6">
-				                	<button class="btn btn-outline" ng-click="addOne()">新增选项</button>
-				             	</div>
-			             	</div>
-			             	
-			                <ul style="margin-top: 30px;list-style-type:none">
-			                    <li ng-repeat="ans in newQuestion.answer" style="margin-top: 30px">
-			                        <textarea simditor operation="edit" minheight="60px" style="height: 60px"  ng-model="ans.text" operation="edit"></textarea>
-			                       
-			                        <a data="{{$index}}" class="glyphicon glyphicon-remove aa" href=""
-			                           ng-click="removeOne($index)">删除</a>
-			                        <input style="width:5%" type="checkbox" ng-model="ans.isright">是否正确
-			                    </li>
-			                </ul>
-			                <div  style="padding-top: 70px">
-			                    <button class="btn btn-primary " ng-click="addQuestion()">保存</button>
-			                    <button class="btn btn-primary" ng-click="resetQuestion()">重置</button>
-			                    <button class="btn btn-primary" ng-click="cancel()">取消</button>
-			                </div>
-			            </form>
 		           </div>  
         		</div>
         		
