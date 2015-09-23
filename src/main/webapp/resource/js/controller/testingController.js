@@ -307,7 +307,36 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    	    	 
 	    	    	 //如果无label，摄像头也未强制开启，则跳转到试题详情页面
 	    	    	 if($scope.userInfo.length == 0 && ($scope.openCamera ==1 || $scope.openCamera ==2)){
-	    	    		 $scope.show =3;
+//	    	    		 $scope.show =3;
+	    	    		 
+	    	    		 
+	    	   	 $http({
+	    	    	         url: WEBROOT+"/testing/getTestTail",
+	    	    	         method: 'POST',
+	    	    	         headers: {
+	    	    	                "Authorization": CadData.getTestToken()
+	    	    	            },
+	    	    	         data: {"email":$scope.email, "testid":$scope.newTestId}
+	    	    	     }).success(function (data) {
+	    	    	    	 if( data.state == 0){
+	    	    	    		 //用户名或密码不匹配
+	    	    	    		 $scope.errMsg = "错误";
+	    	    	    		 
+	    	    	    	 }else{
+	    	    	    		 $scope.show=3;
+	    	    	    		 $scope.testInfo = data.message;
+	    	    	    	 }	 
+	    	    	     })
+	    	    		 
+	    	    		 
+	    	    		 
+	    	    	
+	    	    		 
+	    	    		 
+	    	    		 
+	    	    		 
+	    	    		 
+	    	    		 
 	    	    	 }
 	    	    	 
 	    	     });

@@ -450,6 +450,33 @@ public class TestingController {
 		return rb;
 	}
 
+	
+	
+	//得到试题详情，（如果用户没有开启摄像头和标签，直接跳转试卷详情也可以得到信息）
+	@RequestMapping(value = "/getTestTail")
+	@ResponseBody
+	public ResponseBase getTestTail(@RequestBody Map<String, Object> params) {
+		ResponseBase rb = new ResponseBase();
+		Map map = validateUser(params);
+		Integer tuid = (Integer) map.get("tuid");
+		if (tuid == null) {
+			rb.setMessage(map.get("msg"));
+			rb.setState(0);
+			return rb;
+		}
+		//int testid = Integer.parseInt((String) params.get("testid"));
+		String idString=params.get("testid").toString();
+		int testid = Integer.parseInt(idString);
+		String email = (String) params.get("email");
+		Invite invite = inviteDao.getInvites(testid, email);
+	
+		Map rtMap = tuserService.getTestInfo(testid);
+		rtMap.put("duration", invite.getDuration());
+		rb.setMessage(rtMap);
+		rb.setState(1);
+		return rb;
+	}
+
 	/*
 	 * 根据传递的参数获取学校信息
 	 */
