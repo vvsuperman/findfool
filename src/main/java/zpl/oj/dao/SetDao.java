@@ -57,4 +57,8 @@ public interface SetDao {
 			+ "  FROM SETS where privilege=#{0}")
 	List<ProblemSet> getSetsByPrivilege(int privilege);
 
+	@Select("select PROBLEM_SET_ID as problemSetId, NAME, DATE, OWNER,DOMAIN_ID AS domainId,COMMENT,content,faceproblem,groupid"
+			+ "  FROM SETS where problem_set_id=#{0}")
+	ProblemSet getSetsBtSetId(Integer problemSetId);
+
 }

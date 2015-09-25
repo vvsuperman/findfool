@@ -7,6 +7,7 @@ import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.User;
+import zpl.oj.model.requestjson.RequestRandomTestMeta;
 import zpl.oj.model.requestjson.RequestTestMeta;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
 
@@ -43,6 +44,8 @@ public interface QuizService {
 	void addRandomQuiz(List<RandomQuizSet> randomQuizs);
 
 	Quiz getQuizByTestid(Integer testid);
+
+	RequestRandomTestMeta getRandomQuizDetail(int quizid);
 
 
 	

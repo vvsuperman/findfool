@@ -102,65 +102,53 @@
 		
 	<div class="qslist" ng-if="isRandom==1">
 		<div class="listcontent">
-			<div class="item header">
-				<div class="qsindex" style="width:30%">&nbsp;</div>
-				<div class="qscontent">题目
-				<!--  <a style="margin-left: 68%" href="" ng-click="expandAll()">展开全部</a> 展开全部会死机--> 
-				</div>
-				
-				<div class="qstype">难度</div>
+					<div class="form-group">
+						<table class="table table-hover col-sm-8">
+							<tr>
+								<td class="col-sm-1 " style="text-align: center;">题目</td>
+								<td class="col-sm-1 " style="text-align: center;">难度</td>
+								<td class="col-sm-1 " style="text-align: center;">数量</td>
+								<td class="col-sm-1 " style="text-align: center;">难度</td>
+								<td class="col-sm-1 " style="text-align: center;">数量</td>
+								<td class="col-sm-1 " style="text-align: center;">难度</td>
+								<td class="col-sm-1 " style="text-align: center;">数量</td>
+							</tr>
 
-				<div class="qseasy">数量</div>	
-				<div class="qsoperate">选中</div>
-			</div>
-			<div class="scroll">
-				<div class="item" >
-					<div class="qsindex">
-						<span ng-bind="'Q'+($index+1)"></span>
-					</div>
-					<div class="qscontent">
-						<div class="content" >
-							<a href=""  class="greenFont"
-								ng-click="displayQuestionDetails($index)"
-								ng-if="!isDisplay[$index]">
-								 <input abstract context={{q.context}} > 
-							</a>
-							<a href=""   class="greenFont"
-								ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
-								 <input abstract context={{q.context}} > 
-							</a>
-						</div>
-						 <div class="icon">
-						 	<a  href=""   class="greenFont"
-								ng-click="displayQuestionDetails($index)"
-								ng-if="!isDisplay[$index]">
-								<span class="glyphicon glyphicon-chevron-down"></span>	
-							</a>
-							 <a  href=""   class="greenFont"
-								ng-click="hideQuestionDetails($index)" ng-if="isDisplay[$index]">
-								<span class="glyphicon glyphicon-chevron-up"></span>
-							</a>
-						 </div>
-					</div>
-					<div class="qstype">
-						<select class="form-control col-sm-3 ">
-  <option>简单</option>
-  <option>中等</option>
-  <option>困难</option>
-</select>
-					</div>
+							<tr ng-repeat="set in  setList">
+								<td class="col-sm-1" style="text-align: center;">{{set.name}}</td>
+							
+	                          <td style="text-align: center;" class="col-sm-1 ">
+                               <label> 简单</label>		                            
+								</td>	
+									<td style="text-align: center;" class="col-sm-1 ">				
+												
+								<input type="number"  min="0" class="form-control" id="name" placeholder="" value="0" ng-model="set.minlevel">
+								</td>
+								
+								<td style="text-align: center;" class="col-sm-1 ">
+								
+								<label> 中等</label>		 
+								</td>
+								
+								<td style="text-align: center;" class="col-sm-1 ">
+								<input type="number"   min="0" class="form-control" id="name"
+									placeholder="" value="0" ng-model="set.midlevel"></td>
+									
+								<td style="text-align: center;" class="col-sm-1 ">
+								<label> 困难</label>		 
+								</td>
+							<td style="text-align: center;" class="col-sm-1 ">
+								 <input type="number"  min="0" class="form-control" id="name"
+									placeholder="" value="0" ng-model="set.biglevel">
+									</td>
+                                   
 
-						<div class="qseasy">
-						<input type="text" class="form-control" ng-model="" >
-						</div>
-					<div class="qsoperate">
-					
-						<input type="checkbox" id="inlineCheckbox1" value="option">
+							</tr>
+
+						</table>
+
+
 					</div>
-					<div ng-include src="'page/questiondetail.html'" ng-if="isDisplay[$index]">
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="addqs" >

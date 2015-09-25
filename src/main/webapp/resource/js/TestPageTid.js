@@ -61,16 +61,13 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
             $scope.message = data["message"];
             console.log($scope.message);
             if ($scope.state) {
-//                console.log($scope.message);
-                $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
-                $scope.isDisplay = new Array($scope.qs.length);
-                for(i in $scope.isDisplay)
-                	$scope.isDisplay[i]=false;
                 $scope.testtime = $scope.message.testtime;
                 $scope.extraInfo = $scope.message.extraInfo;
                 $scope.emails = $scope.message.emails;
                 $scope.name = $scope.message.name;
                 Data.setTname($scope.name);
+                $scope.setList=$scope.message.setList;
+                
             } else {
 
             }
@@ -123,7 +120,7 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
     if($scope.isRandom==0){
     $scope.testManage();
     }else{
-    	//$scope.testRandomManage();
+    	$scope.testRandomManage();
     	$scope.template = 'page/testlist.html';
     }
 //    $scope.testPage = function (target) {

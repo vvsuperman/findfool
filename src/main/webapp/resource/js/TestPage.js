@@ -158,21 +158,7 @@ OJApp.controller('TestPage',['$scope','$http','Data','$modal',function($scope, $
  
     };
    
-    //插入随机试卷
-    $scope.addRandomQuiz = function() {
-		console.log("执行了插入1");
-
-		$http({
-			url : WEBROOT + "/test/addRandomQuiz",
-			method : 'POST',
-			data : {"userid":$scope.userid}
-		}).success(function(data) {
-			$scope.setList = data["message"];
-
-			console.log("执行了插入");
-
-		})
-	};
+  
 
 	
 	$scope.findAllSet = function() {
@@ -188,6 +174,51 @@ OJApp.controller('TestPage',['$scope','$http','Data','$modal',function($scope, $
 		})
 	};
 	$scope.findAllSet();
+	
+	
+	  //插入随机试卷
+    $scope.addRandomQuiz = function() {
+		console.log("执行了插入1");
+		  //检查名字是否为空
+        if($scope.addtest.name == ''){
+            alert("名字不允许为空");
+            return;
+        }
+ //       $scope.addtest.user.uid = Data.uid();
+       $scope.addRandomTest={};
+        $scope.addRandomTest.user={};
+        $scope.addRandomTest.user.uid = Data.uid();
+        $scope.addRandomTest.setList={};
+       
+     
+      $scope.addRandomTest.testtime=$scope.addtest.testtime;
+        $scope.addRandomTest.extrainfo=$scope.addtest.extrainfo;
+       $scope.addRandomTest.name=$scope.addtest.name;
+        $scope.addRandomTest.setList=$scope.setList;
+        $http({
+            url: WEBROOT+"/test/addRandomQuiz",
+            method: 'POST',
+            headers: {
+                "Authorization": Data.token()
+            },
+            data: $scope.addRandomTest
+	
+		}).success(function(data) {
+			  $scope.state = data["state"];//1 true or 0 false
+	            $scope.message = data["message"];
+	            if ($scope.state) {
+	             
+	                //跳转到testdetail
+	                Data.setTid($scope.message.msg);
+	                Data.setTname($scope.addtest.name);
+	                $scope.testManage();
+	                window.location.href = '#/test/'+$scope.message.msg ;
+	            } else {
+	            	flashTip('error:'+$scope.message.msg);
+	            }
+
+		})
+	};
     $scope.testManage = function () {
     	//add by zpl
     	var sendData = new Object();
