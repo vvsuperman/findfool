@@ -2,6 +2,7 @@ package zpl.oj.service.imp;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.SetService;
+import zpl.oj.service.user.inter.UserService;
 @Service
 public class QuizServiceImp implements QuizService {
 
@@ -53,6 +55,10 @@ public class QuizServiceImp implements QuizService {
 	@Autowired
 	private SetDao setDao;
 	
+	@Autowired
+	private UserService userService;
+	       
+	
 	/*
 	 *根据拥有者返回quiz 
 	 * 返回：
@@ -63,8 +69,9 @@ public class QuizServiceImp implements QuizService {
 	@Override
 	public List<Quiz> getQuizByOwner(int owner) {
 		List<Quiz> quizList = quizDao.getQuizs(owner);
-		for (Quiz quiz : quizList) {
-			int pNum = 0;
+		for(Iterator<Quiz> iterator =quizList.iterator();iterator.hasNext();){
+			Quiz quiz=iterator.next();
+		int pNum = 0;
 			int invited = 0;
 			int finished = 0;
 			if (quiz.getParent() == 0) {
@@ -83,6 +90,9 @@ public class QuizServiceImp implements QuizService {
 				invited = inviteDao.countInvites(quiz.getQuizid());
 				finished = inviteDao.countInviteFinished(quiz.getQuizid());
 				quiz.setIsRandom(0);
+			}else if(quiz.getParent()!=quiz.getQuizid()){
+				iterator.remove();
+				
 			}
 
 			quiz.setQuestionNum(pNum);
@@ -288,7 +298,10 @@ public class QuizServiceImp implements QuizService {
 		List<RandomQuizSet> randomList= randomQuizDao.getListByTestid(quizid);
 		 List<ProblemSet> setList=new ArrayList<ProblemSet>();
 
-		 List<ProblemSet>    setList2    =setDao.getSetsByPrivilege(3);
+		int  uid=quiz.getOwner();
+		User user = userService.getUserById(uid);
+        
+		 List<ProblemSet>   setList2=setDao.getSetsByPrivilege(user.getPrivilege());
 	
 		 int a[]=new int[100];
 		 for(int i=0;i<100;i++){
@@ -333,20 +346,7 @@ public class QuizServiceImp implements QuizService {
 			}
 		}
 	
-//		for (int i =setList2.size(); i>=0; i--) {
-//			
-//			for (int j =  setList.size(); j >=0; j--) {
-//			
-//				if(setList2.get(i).getProblemSetId()==setList.get(j).getProblemSetId()){
-//					setList2.remove(i);	
-//					break;
-//					
-//				}
-//				
-//			}
-//			
-//			
-//		}
+
 		for (ProblemSet problemSet2 : setList2) {
 			
 			for (ProblemSet problemSet : setList) {
@@ -356,18 +356,9 @@ public class QuizServiceImp implements QuizService {
 				problemSet2.setBiglevel(problemSet.getBiglevel());
                 problemSet2.setPrivilege(problemSet.getPrivilege());
                 problemSet2.setOwner(problemSet.getOwner());				
+				}							
 				}
-					
-				
-				}
-			
-				
-			
 			}
-		
-
-	
-		
 
 		detail.setName(quiz.getName());
 		detail.setEmails(quiz.getEmails());

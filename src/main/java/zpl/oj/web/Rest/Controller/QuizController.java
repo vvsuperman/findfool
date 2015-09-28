@@ -162,6 +162,8 @@ public class QuizController {
 			rq.setInviteLeft(u.getInvited_left());
 
 			List<Quiz> lists = quizService.getQuizByOwner(u.getUid());
+			
+			
 			rq.setTests(lists);
 
 			rb.setMessage(rq);
