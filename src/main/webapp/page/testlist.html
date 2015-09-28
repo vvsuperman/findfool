@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	
-	<div class="qslist">
+	<div class="qslist" ng-if="isRandom==0">
 		<div class="listcontent">
 			<div class="item header">
 				<div class="qsindex">&nbsp;</div>
@@ -99,6 +99,58 @@
 			</div>
 		</div>
 	</div>	
+		
+	<div class="qslist" ng-if="isRandom==1">
+		<div class="listcontent">
+					<div class="form-group">
+						<table class="table table-hover col-sm-8">
+							<tr>
+								<td class="col-sm-1 " style="text-align: center;">题目</td>
+								<td class="col-sm-1 " style="text-align: center;">难度</td>
+								<td class="col-sm-1 " style="text-align: center;">数量</td>
+								<td class="col-sm-1 " style="text-align: center;">难度</td>
+								<td class="col-sm-1 " style="text-align: center;">数量</td>
+								<td class="col-sm-1 " style="text-align: center;">难度</td>
+								<td class="col-sm-1 " style="text-align: center;">数量</td>
+							</tr>
+
+							<tr ng-repeat="set in  setList">
+								<td class="col-sm-1" style="text-align: center;">{{set.name}}</td>
+							
+	                          <td style="text-align: center;" class="col-sm-1 ">
+                               <label> 简单</label>		                            
+								</td>	
+									<td style="text-align: center;" class="col-sm-1 ">				
+												
+								<input type="number"  min="0" class="form-control" id="name" placeholder="" value="0" ng-model="set.minlevel">
+								</td>
+								
+								<td style="text-align: center;" class="col-sm-1 ">
+								
+								<label> 中等</label>		 
+								</td>
+								
+								<td style="text-align: center;" class="col-sm-1 ">
+								<input type="number"   min="0" class="form-control" id="name"
+									placeholder="" value="0" ng-model="set.midlevel"></td>
+									
+								<td style="text-align: center;" class="col-sm-1 ">
+								<label> 困难</label>		 
+								</td>
+							<td style="text-align: center;" class="col-sm-1 ">
+								 <input type="number"  min="0" class="form-control" id="name"
+									placeholder="" value="0" ng-model="set.biglevel">
+									</td>
+                                   
+
+							</tr>
+
+						</table>
+
+
+					</div>
+		</div>
+	</div>
 	<div class="addqs" >
 		<button class="btn btn-outline" data="{{tid}}"
 			ng-click="showDefaultPanel()">&nbsp;&nbsp;&nbsp;添加库试题&nbsp;&nbsp;&nbsp;

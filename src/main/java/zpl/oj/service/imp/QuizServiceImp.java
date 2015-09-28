@@ -9,21 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.InviteDao;
+import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.QuizProblemDao;
 import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.dao.SetDao;
+import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
 import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.User;
+import zpl.oj.model.requestjson.RequestRandomTestMeta;
 import zpl.oj.model.requestjson.RequestTestMeta;
 import zpl.oj.model.responsejson.ResponseQuizDetail;
 import zpl.oj.service.LabelService;
 import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
+import zpl.oj.service.SetService;
 @Service
 public class QuizServiceImp implements QuizService {
 
@@ -43,6 +47,11 @@ public class QuizServiceImp implements QuizService {
 	private RandomQuizDao randomQuizDao;
 	@Autowired
 	private LabelService labelService;
+	@Autowired
+	private SetService setService;
+	
+	@Autowired
+	private SetDao setDao;
 	
 	/*
 	 *根据拥有者返回quiz 
@@ -65,6 +74,7 @@ public class QuizServiceImp implements QuizService {
 				}else{
 					pNum=0;
 				}
+				quiz.setIsRandom(1);
 				invited = inviteDao.countInvitesByP(quiz.getQuizid());
 				finished = inviteDao.countInviteFinishedByP(quiz.getQuizid());
 
@@ -72,6 +82,7 @@ public class QuizServiceImp implements QuizService {
 				pNum = quizProblemDao.countPnumInQuiz(quiz.getQuizid());
 				invited = inviteDao.countInvites(quiz.getQuizid());
 				finished = inviteDao.countInviteFinished(quiz.getQuizid());
+				quiz.setIsRandom(0);
 			}
 
 			quiz.setQuestionNum(pNum);
@@ -268,6 +279,63 @@ public class QuizServiceImp implements QuizService {
 	public Quiz getQuizByTestid(Integer testid) {
 		// TODO Auto-generated method stub
 		return  quizDao.getQuizByTestid(testid);
+	}
+
+	@Override
+	public RequestRandomTestMeta getRandomQuizDetail(int quizid) {
+		RequestRandomTestMeta detail = new RequestRandomTestMeta();
+		Quiz quiz = quizDao.getQuiz(quizid);
+		List<RandomQuizSet> randomList= randomQuizDao.getListByTestid(quizid);
+		 List<ProblemSet> setList=new ArrayList<ProblemSet>();
+		 int a[]=new int[100]; ;
+		 for(int i=0;i<100;i++){
+			 a[i]=0;
+		 }
+		for (RandomQuizSet randomQuizSet : randomList) {
+			ProblemSet problemset = null;
+			if (a[randomQuizSet.getProblemSetId()] == 0) {
+				problemset = setDao.getSetsBtSetId(randomQuizSet
+						.getProblemSetId());
+
+			} else {
+				for (ProblemSet problemset2 : setList) {
+
+					if (problemset2 != null
+							&& problemset2.getProblemSetId() == randomQuizSet
+									.getProblemSetId()) {
+						problemset = problemset2;
+					}
+
+				}
+			}
+			if (randomQuizSet.getLevel() == 1) {
+				problemset.setMinlevel(randomQuizSet.getNum());
+				setList.add(problemset);
+				a[randomQuizSet.getProblemSetId()] = a[randomQuizSet
+						.getProblemSetId()] + 1;
+
+			} else if (randomQuizSet.getLevel() == 2) {
+				problemset.setMidlevel(randomQuizSet.getNum());
+				setList.add(problemset);
+				a[randomQuizSet.getProblemSetId()] = a[randomQuizSet
+						.getProblemSetId()] + 1;
+
+			} else if (randomQuizSet.getLevel() == 3) {
+				problemset.setMidlevel(randomQuizSet.getNum());
+				setList.add(problemset);
+				a[randomQuizSet.getProblemSetId()] = a[randomQuizSet
+						.getProblemSetId()] + 1;
+
+			}
+		}
+
+		detail.setName(quiz.getName());
+		detail.setEmails(quiz.getEmails());
+		detail.setExtrainfo(quiz.getExtraInfo());
+		detail.setTesttime(quiz.getTime());
+		detail.setQuizid(quizid);
+		detail.setSetList(setList);
+		return detail;
 	}
 
 

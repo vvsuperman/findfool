@@ -46,6 +46,37 @@ public class ProblemSet implements Serializable {
 	//试题权限
 	private int group;
 	
+	private int minlevel;
+	private int midlevel;
+	private int biglevel;
+
+	
+	
+	
+
+	public int getMinlevel() {
+		return minlevel;
+	}
+
+	public void setMinlevel(int minlevel) {
+		this.minlevel = minlevel;
+	}
+
+	public int getMidlevel() {
+		return midlevel;
+	}
+
+	public void setMidlevel(int midlevel) {
+		this.midlevel = midlevel;
+	}
+
+	public int getBiglevel() {
+		return biglevel;
+	}
+
+	public void setBiglevel(int biglevel) {
+		this.biglevel = biglevel;
+	}
 
 	public int getGroup() {
 		return group;

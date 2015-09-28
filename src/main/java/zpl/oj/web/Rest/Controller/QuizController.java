@@ -2,13 +2,17 @@ package zpl.oj.web.Rest.Controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +28,13 @@ import com.squareup.okhttp.Request;
 import com.foolrank.util.RequestUtil;
 //import com.jcraft.jsch.jce.Random;
 
+
+
+
+
+
+
+
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.model.common.Invite;
@@ -36,6 +47,7 @@ import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.request.InviteUser;
 import zpl.oj.model.request.User;
+import zpl.oj.model.requestjson.RequestRandomTestMeta;
 import zpl.oj.model.requestjson.RequestTestDetail;
 import zpl.oj.model.requestjson.RequestTestInviteUser;
 import zpl.oj.model.requestjson.RequestTestMeta;
@@ -328,7 +340,20 @@ public class QuizController {
 		rb.setState(1);
 		return rb;
 	}
+	
+	
+	@RequestMapping(value = "/manageRandom")
+	@ResponseBody
+	public ResponseBase queryRandomQuizDetailByTid(@RequestBody RequestTestDetail request) {
+		ResponseBase rb = new ResponseBase();
 
+		RequestRandomTestMeta rqd = quizService.getRandomQuizDetail(request.getQuizid());
+
+		rb.setMessage(rqd);
+		rb.setState(1);
+		return rb;
+	}
+	
 	@RequestMapping(value = "/manage/invite")
 	@ResponseBody
 	public ResponseBase inviteUserToQuiz(
@@ -590,35 +615,56 @@ public class QuizController {
 		return rb;
 
 	}
+	
 
 	// 根据用户选择信息，生成相应的随机题库，保存在randomquiz表中，
 	@RequestMapping(value = "/addRandomQuiz")
 	@ResponseBody
-	public ResponseBase addRandomQuiz(@RequestBody Map<String, String> params) {
-		ResponseBase rb = new ResponseBase();
-
-		int uid = Integer.parseInt(params.get("userid"));
-
+	public ResponseBase addRandomQuiz(@RequestBody RequestRandomTestMeta request) {
+		ResponseBase rb = new ResponseBase();	
+		List<ProblemSet> setList=request.getSetList();
+		
 		Quiz quiz = new Quiz();
-		quiz.setName("随机测试题");
+
+		quiz.setTime(request.getTesttime());
+		quiz.setEmails(request.getEmails());
+		quiz.setExtraInfo(request.getExtrainfo());
+		quiz.setName(request.getName());
+		quiz.setDate(new Date());
+		quiz.setOwner(request.getUser().getUid());
+		quiz.setOpenCamera(1);//默认不开启摄像头
 		quiz.setParent(0);
-		quiz.setOwner(uid);
 		quiz.setStatus(1);
-		quiz.setTime(30);
 		Quiz q = quizService.addQuiz(quiz);
 		List<RandomQuizSet> randomQuizs = new ArrayList<RandomQuizSet>();
-		RandomQuizSet javaquiz = new RandomQuizSet();
-		javaquiz.setProblemSetId(20);
-		javaquiz.setNum(5);
-		javaquiz.setLevel(1);
-		javaquiz.setTestid(q.getQuizid());
-		RandomQuizSet phpquiz = new RandomQuizSet();
-		phpquiz.setProblemSetId(21);
-		phpquiz.setNum(5);
-		phpquiz.setLevel(2);
-		phpquiz.setTestid(q.getQuizid());
-		randomQuizs.add(phpquiz);
-		randomQuizs.add(javaquiz);
+		for (ProblemSet problemSet : setList) {
+			if (problemSet.getMinlevel() != 0) {
+
+				RandomQuizSet randomQuizSet = new RandomQuizSet();
+				randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+				randomQuizSet.setLevel(1);
+				randomQuizSet.setNum(problemSet.getMinlevel());
+				randomQuizSet.setTestid(q.getQuizid());
+				randomQuizs.add(randomQuizSet);
+			}
+			if (problemSet.getMidlevel() != 0) {
+
+				RandomQuizSet randomQuizSet = new RandomQuizSet();
+				randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+				randomQuizSet.setLevel(2);
+				randomQuizSet.setNum(problemSet.getMidlevel());
+				randomQuizs.add(randomQuizSet);
+			}
+			if (problemSet.getBiglevel() != 0) {
+
+				RandomQuizSet randomQuizSet = new RandomQuizSet();
+				randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+				randomQuizSet.setLevel(3);
+				randomQuizSet.setNum(problemSet.getBiglevel());
+				randomQuizs.add(randomQuizSet);
+			}
+
+		}
 
 		quizService.addRandomQuiz(randomQuizs);
 
@@ -648,7 +694,9 @@ public class QuizController {
 	@RequestMapping(value = "/findSet")
 	@ResponseBody
 	public ResponseBase findSet(@RequestBody Map<String, String> params) {
-		int uid = Integer.parseInt(params.get("userid"));
+		
+		String idString=params.get("userid").toString();
+		int uid = Integer.parseInt(idString);
 		User user = userService.getUserById(uid);
 
 		ResponseBase rb = new ResponseBase();

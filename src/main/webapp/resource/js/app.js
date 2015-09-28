@@ -113,7 +113,7 @@ OJApp.config(['$routeProvider' , '$locationProvider',
             	templateUrl: 'page/page.html',
             	controller: 'InnerTest'
             }).
-            when('/test/:tid', {
+            when('/test/:tid,:isRandom', {
                 templateUrl: 'page/page.html',
                 controller: 'TestPageTid'
             }).

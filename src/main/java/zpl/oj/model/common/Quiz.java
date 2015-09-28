@@ -29,6 +29,7 @@ public class Quiz implements Serializable {
 		this.pubEndTime = "";
 		this.openCamera = 1;
 		this.parent=0;
+		this.isRandom=0;
 	}
 
 	/**
@@ -112,6 +113,7 @@ public class Quiz implements Serializable {
 	private int status;
 	private int  parent;
 	
+	private  int isRandom;
 	
 
 	// 统计数据，方便向前端传递，非数据库字段
@@ -129,6 +131,14 @@ public class Quiz implements Serializable {
 	// 开启摄像头标记
 	private int openCamera;
 	
+	public int getIsRandom() {
+		return isRandom;
+	}
+
+	public void setIsRandom(int isRandom) {
+		this.isRandom = isRandom;
+	}
+
 	public int getQuestionNum() {
 		return questionNum;
 	}
