@@ -559,7 +559,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
     		 useranswer = $scope.question.useranswer;
     	 }
     	 if(index==1){
-      	   $scope.question.type=problem.type;
+      	   $scope.question.type= problem.type;
       	   
          }
     	 

@@ -211,7 +211,7 @@ OJApp.controller('TestPage',['$scope','$http','Data','$modal',function($scope, $
 	                //跳转到testdetail
 	                Data.setTid($scope.message.msg);
 	                Data.setTname($scope.addtest.name);
-	                $scope.testManage();
+	            //  $scope.testManage();
 	                window.location.href = '#/test/'+$scope.message.msg ;
 	            } else {
 	            	flashTip('error:'+$scope.message.msg);

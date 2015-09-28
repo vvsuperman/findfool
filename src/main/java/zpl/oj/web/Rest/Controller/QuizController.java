@@ -676,6 +676,8 @@ public class QuizController {
 					label.getIsSelected());
 		}
 		ResponseMessage msg = new ResponseMessage();
+		
+		
 		if (q == null) {
 			msg.setMsg("add failed!!");
 			msg.setHandler_url("/error");

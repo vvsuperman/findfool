@@ -383,7 +383,8 @@ public class TestingController {
 		// 判断该测试是否为随机，如果是随机调用生成试题方法，如果不是，跳过
 
 		Quiz quiz = quizDao.getQuiz(testid);
-		if (invite.getParentquiz() == 0) {
+//		if (invite.getParentquiz() == 0) {   by fw, 0928 bug?
+		if(quiz.getParent() ==0 ){	
 			genRandomQuiz(invite);
 			Invite invite2 = inviteDao.getInvitesByP(testid, email);
 			newTestId=invite2.getTestid();
