@@ -61,13 +61,16 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
             $scope.message = data["message"];
             console.log($scope.message);
             if ($scope.state) {
+//                console.log($scope.message);
+                $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
+                $scope.isDisplay = new Array($scope.qs.length);
+                for(i in $scope.isDisplay)
+                	$scope.isDisplay[i]=false;
                 $scope.testtime = $scope.message.testtime;
                 $scope.extraInfo = $scope.message.extraInfo;
                 $scope.emails = $scope.message.emails;
                 $scope.name = $scope.message.name;
                 Data.setTname($scope.name);
-                $scope.setList=$scope.message.setList;
-                
             } else {
 
             }
@@ -99,14 +102,16 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
             console.log($scope.message);
             if ($scope.state) {
 //                console.log($scope.message);
-                $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
-                $scope.isDisplay = new Array($scope.qs.length);
-                for(i in $scope.isDisplay)
-                	$scope.isDisplay[i]=false;
+               // $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
+              //  $scope.isDisplay = new Array($scope.qs.length);
+                //for(i in $scope.isDisplay)
+                	//$scope.isDisplay[i]=false;
                 $scope.testtime = $scope.message.testtime;
                 $scope.extraInfo = $scope.message.extraInfo;
                 $scope.emails = $scope.message.emails;
                 $scope.name = $scope.message.name;
+                $scope.quizid=$scope.message.quizid;
+                $scope.setList = $scope.message.setList;
                 Data.setTname($scope.name);
             } else {
 
@@ -325,5 +330,40 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
     	}
     	
     }
+    
+	$scope.modifyRandomQuiz= function() {
+
+	 //       $scope.addtest.user.uid = Data.uid();
+	       $scope.addRandomTest={};
+	        $scope.addRandomTest.user={};
+	        $scope.addRandomTest.user.uid = Data.uid();
+	        $scope.addRandomTest.setList={};
+	       
+	     
+	        $scope.addRandomTest.setList=$scope.setList;
+	        $scope.addRandomTest.quizid= $scope.quizid;
+	        
+	        $http({
+	            url: WEBROOT+"/test/modifyRandomQuiz",
+	            method: 'POST',
+	            headers: {
+	                "Authorization": Data.token()
+	            },
+	            data: $scope.addRandomTest
+		
+			}).success(function(data) {
+				  $scope.state = data["state"];//1 true or 0 false
+		            $scope.message = data["message"];
+		            if ($scope.state) {
+		             
+		                //跳转到testdetail
+		                Data.setTid($scope.message.msg);
+		                window.location.href = '#/test/'+$scope.message.msg ;
+		            } else {
+		            	flashTip('error:'+$scope.message.msg);
+		            }
+
+			})
+		};
  
 }]);

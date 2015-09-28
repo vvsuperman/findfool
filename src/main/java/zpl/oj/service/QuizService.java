@@ -47,6 +47,8 @@ public interface QuizService {
 
 	RequestRandomTestMeta getRandomQuizDetail(int quizid);
 
+	void modifyRandomQuiz(RandomQuizSet randomQuiz);
+
 
 	
 	

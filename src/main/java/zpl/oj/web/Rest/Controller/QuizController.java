@@ -653,6 +653,7 @@ public class QuizController {
 				randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
 				randomQuizSet.setLevel(2);
 				randomQuizSet.setNum(problemSet.getMidlevel());
+				randomQuizSet.setTestid(q.getQuizid());
 				randomQuizs.add(randomQuizSet);
 			}
 			if (problemSet.getBiglevel() != 0) {
@@ -661,6 +662,7 @@ public class QuizController {
 				randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
 				randomQuizSet.setLevel(3);
 				randomQuizSet.setNum(problemSet.getBiglevel());
+				randomQuizSet.setTestid(q.getQuizid());
 				randomQuizs.add(randomQuizSet);
 			}
 
@@ -687,6 +689,103 @@ public class QuizController {
 			rb.setState(1);
 			rb.setMessage(msg);
 		}
+		return rb;
+	}
+	
+	
+
+	// 修改随机时间信息
+	@RequestMapping(value = "/modifyRandomQuiz")
+	@ResponseBody
+	public ResponseBase modifyRandomQuiz(@RequestBody RequestRandomTestMeta request) {
+		ResponseBase rb = new ResponseBase();	
+		List<ProblemSet> setList=request.getSetList();
+	    Quiz quiz=quizService.getQuizByTestid(request.getQuizid());
+		List<RandomQuizSet> randomQuizs = new ArrayList<RandomQuizSet>();
+		for (ProblemSet problemSet : setList) {
+			if (problemSet.getMinlevel() != 0) {
+                RandomQuizSet randomQuizSet= randomQuizDao.getRandomQuizByPsid(quiz.getQuizid(),problemSet.getProblemSetId(),1);
+				int flag=0;
+                if(randomQuizSet!=null){
+					
+					randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+    				randomQuizSet.setLevel(1);
+    				randomQuizSet.setNum(problemSet.getMinlevel());
+    				randomQuizSet.setTestid(quiz.getQuizid());
+    				quizService.modifyRandomQuiz(randomQuizSet);
+    				
+    				flag=1;
+				}
+                if(randomQuizSet==null||flag==0){   
+                    randomQuizSet = new RandomQuizSet();
+                	randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+    				randomQuizSet.setLevel(1);
+    				randomQuizSet.setNum(problemSet.getMinlevel());
+    				randomQuizSet.setTestid(quiz.getQuizid());
+    				randomQuizDao.add(randomQuizSet);
+                }
+			
+
+			}
+			if (problemSet.getMidlevel() != 0) {
+                RandomQuizSet randomQuizSet= randomQuizDao.getRandomQuizByPsid(quiz.getQuizid(),problemSet.getProblemSetId(),2);
+					
+                int flag=0;
+                if(randomQuizSet!=null){
+					
+					randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+    				randomQuizSet.setLevel(2);
+    				randomQuizSet.setNum(problemSet.getMidlevel());
+    				randomQuizSet.setTestid(quiz.getQuizid());
+    				quizService.modifyRandomQuiz(randomQuizSet);
+    				
+    				flag=1;
+				}
+                if(randomQuizSet==null||flag==0){   
+                    randomQuizSet = new RandomQuizSet();
+                	randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+    				randomQuizSet.setLevel(2);
+    				randomQuizSet.setNum(problemSet.getMidlevel());
+    				randomQuizSet.setTestid(quiz.getQuizid());
+    				randomQuizDao.add(randomQuizSet);
+                }
+			}
+			if (problemSet.getBiglevel() != 0) {
+                RandomQuizSet randomQuizSet= randomQuizDao.getRandomQuizByPsid(quiz.getQuizid(),problemSet.getProblemSetId(),3);
+					
+                int flag=0;
+                if(randomQuizSet!=null){
+					
+					randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+    				randomQuizSet.setLevel(3);
+    				randomQuizSet.setNum(problemSet.getBiglevel());
+    				randomQuizSet.setTestid(quiz.getQuizid());
+    				quizService.modifyRandomQuiz(randomQuizSet);
+    				
+    				flag=1;
+				}
+                if(randomQuizSet==null||flag==0){   
+                    randomQuizSet = new RandomQuizSet();
+                	randomQuizSet.setProblemSetId(problemSet.getProblemSetId());
+    				randomQuizSet.setLevel(3);
+    				randomQuizSet.setNum(problemSet.getBiglevel());
+    				randomQuizSet.setTestid(quiz.getQuizid());
+    				randomQuizDao.add(randomQuizSet);
+                }
+			}
+
+		}
+
+
+		// 获取系统标签，并在labeltest中为该测试添加这些系统标签
+
+
+		ResponseMessage msg = new ResponseMessage();
+	
+			msg.setMsg("" + request.getQuizid());
+			msg.setHandler_url("/");
+			rb.setState(1);
+			rb.setMessage(msg);
 		return rb;
 	}
 

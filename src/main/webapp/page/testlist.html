@@ -98,14 +98,29 @@
 				</div>
 			</div>
 		</div>
+		
+		
+			<div class="addqs" >
+		<button class="btn btn-outline" data="{{tid}}"
+			ng-click="showDefaultPanel()">&nbsp;&nbsp;&nbsp;添加库试题&nbsp;&nbsp;&nbsp;
+		</button>
+		<button class="btn btn-outline" data="{{tid}}"
+			ng-click="showCustomPanel()">添加自定义试题
+		</button>
+	</div>
+	<div  ng-include src="'page/testBank.html'" ng-controller="TestBank"
+	ng-if="panel.show=='default'"></div>
+	<div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
+		ng-if="panel.show=='custom'"></div>
+</div>
 	</div>	
 		
 	<div class="qslist" ng-if="isRandom==1">
 		<div class="listcontent">
 					<div class="form-group">
-						<table class="table table-hover col-sm-8">
+						<table class="table table-hover col-sm-12">
 							<tr>
-								<td class="col-sm-1 " style="text-align: center;">题目</td>
+								<td class="" style="text-align: center;">题目</td>
 								<td class="col-sm-1 " style="text-align: center;">难度</td>
 								<td class="col-sm-1 " style="text-align: center;">数量</td>
 								<td class="col-sm-1 " style="text-align: center;">难度</td>
@@ -150,8 +165,15 @@
 
 					</div>
 		</div>
+		
+				<div class="addqs" >
+		<button class="btn btn-outline" ng-click="modifyRandomQuiz()">&nbsp;&nbsp;&nbsp;保存修改&nbsp;&nbsp;&nbsp;
+		</button>
+		<button class="btn btn-outline" ng-click="showCustomPanel()">重置
+		</button>
 	</div>
-	<div class="addqs" >
+	</div>
+<!-- 	<div class="addqs" >
 		<button class="btn btn-outline" data="{{tid}}"
 			ng-click="showDefaultPanel()">&nbsp;&nbsp;&nbsp;添加库试题&nbsp;&nbsp;&nbsp;
 		</button>
@@ -163,7 +185,7 @@
 	ng-if="panel.show=='default'"></div>
 	<div ng-include src="'page/mytestBank.html'" ng-controller="mytestbank"
 		ng-if="panel.show=='custom'"></div>
-</div>
+</div> -->
 
 
 

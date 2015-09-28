@@ -287,6 +287,9 @@ public class QuizServiceImp implements QuizService {
 		Quiz quiz = quizDao.getQuiz(quizid);
 		List<RandomQuizSet> randomList= randomQuizDao.getListByTestid(quizid);
 		 List<ProblemSet> setList=new ArrayList<ProblemSet>();
+
+		 List<ProblemSet>    setList2    =setDao.getSetsByPrivilege(3);
+	
 		 int a[]=new int[100];
 		 for(int i=0;i<100;i++){
 			 a[i]=0;
@@ -329,14 +332,58 @@ public class QuizServiceImp implements QuizService {
 
 			}
 		}
+	
+//		for (int i =setList2.size(); i>=0; i--) {
+//			
+//			for (int j =  setList.size(); j >=0; j--) {
+//			
+//				if(setList2.get(i).getProblemSetId()==setList.get(j).getProblemSetId()){
+//					setList2.remove(i);	
+//					break;
+//					
+//				}
+//				
+//			}
+//			
+//			
+//		}
+		for (ProblemSet problemSet2 : setList2) {
+			
+			for (ProblemSet problemSet : setList) {
+				if(problemSet2.getProblemSetId()==problemSet.getProblemSetId()){
+				problemSet2.setMidlevel(problemSet.getMidlevel());
+				problemSet2.setMinlevel(problemSet.getMinlevel());
+				problemSet2.setBiglevel(problemSet.getBiglevel());
+                problemSet2.setPrivilege(problemSet.getPrivilege());
+                problemSet2.setOwner(problemSet.getOwner());				
+				}
+					
+				
+				}
+			
+				
+			
+			}
+		
+
+	
+		
 
 		detail.setName(quiz.getName());
 		detail.setEmails(quiz.getEmails());
 		detail.setExtrainfo(quiz.getExtraInfo());
 		detail.setTesttime(quiz.getTime());
 		detail.setQuizid(quizid);
-		detail.setSetList(setList);
+		detail.setSetList(setList2);
 		return detail;
+	}
+
+	@Override
+	public void modifyRandomQuiz(RandomQuizSet randomQuiz) {
+	
+			randomQuizDao.modify(randomQuiz);
+			
+		
 	}
 
 
