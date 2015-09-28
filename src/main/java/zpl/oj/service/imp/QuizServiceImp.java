@@ -287,7 +287,7 @@ public class QuizServiceImp implements QuizService {
 		Quiz quiz = quizDao.getQuiz(quizid);
 		List<RandomQuizSet> randomList= randomQuizDao.getListByTestid(quizid);
 		 List<ProblemSet> setList=new ArrayList<ProblemSet>();
-		 int a[]=new int[100]; ;
+		 int a[]=new int[100];
 		 for(int i=0;i<100;i++){
 			 a[i]=0;
 		 }
@@ -296,6 +296,7 @@ public class QuizServiceImp implements QuizService {
 			if (a[randomQuizSet.getProblemSetId()] == 0) {
 				problemset = setDao.getSetsBtSetId(randomQuizSet
 						.getProblemSetId());
+				a[randomQuizSet.getProblemSetId()]=1;
 
 			} else {
 				for (ProblemSet problemset2 : setList) {
