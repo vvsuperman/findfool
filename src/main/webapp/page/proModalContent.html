@@ -8,21 +8,26 @@
             
         </div>
 
-        <div class="modal-body">
-			
-				<div class="col-md-12" style="margin-top: 20px">
-		       	  	<textarea simditor minheight="30px" operation={{operation}} ng-model="question.context"></textarea>
-		       	</div>  
-		    	
-		    	
-		    	 <div class="col-xs-12 clearUl" style="margin-top: 20px;min-height:500px;overflow: auto" ng-if="question.type==2">
-		    	 <p>用户答案</p>
-		            <div class="col-xs-11 editor" style="min-height:500px; line-height: 1.7;position:absolute;" 
-		            		aceeditor data-language={{question.language}} data-ng-model="question.useranswer"></div>
-		            <div style="clear:both"></div>
-		        </div>
+<div class="modal-body">
 
-				<!-- <div class="options list col-md-12 col-sm-12  col-xs-12"  ng-if="question.type==2">
+	<div class="col-md-12" style="margin-top: 20px">
+		<textarea simditor minheight="30px" operation={{operation}}
+			ng-model="question.context"></textarea>
+	</div>
+
+
+	<div class="col-xs-12 clearUl"
+		style="margin-top: 20px; min-height: 500px; overflow: auto"
+		ng-if="question.type==2">
+		<p>用户答案</p>
+		<div class="col-xs-11 editor"
+			style="min-height: 500px; line-height: 1.7; position: absolute;"
+			aceeditor data-language={{question.language}}
+			data-ng-model="question.useranswer"></div>
+		<div style="clear: both"></div>
+	</div>
+
+	<!-- <div class="options list col-md-12 col-sm-12  col-xs-12"  ng-if="question.type==2">
 			       	  <label  customcheckbox option={{option}} class='optionlabel checkbox'  ng-repeat="option in question.answer" operation={{operation}} 
 			       	  	score={{option.score}} report={{report}}>
 			       	  	
@@ -63,17 +68,31 @@
 
 	</div>
 
-	<div class="col-xs-12" style="margin-top: 20px;" ng-if="question.type==3">
-		    	 <p>用户答案</p>
-		            <div class="col-xs-11" style="min-height:500px; line-height: 1.7;position:absolute;" 
-		            		simditor operation={{operation}}  data-ng-model="question.useranswer"></div>
-		            <div style="clear:both"></div>
-		        </div>
-			    
-			<div style="clear:both"></div>
-        </div>
+	<div class="col-xs-12" style="margin-top: 20px;"
+		ng-if="question.type==3">
+		<p>用户答案</p>
+		<div class="col-xs-11"
+			style="min-height: 500px; line-height: 1.7; position: absolute;"
+			simditor operation={{operation}} data-ng-model="question.useranswer"></div>
+		<div style="clear: both"></div>
+	</div>
 
-        <div class="modal-footer" >
+	<div class="col-xs-12" style="margin-top: 20px;"
+		ng-if="question.type==4">
+		<p>用户答案</p>
+		<a href="{{question.useranswer}}" data-ng-model="question.useranswer">点击下载文件！
+		</a>
+		<!--  <div class="col-xs-11" style="min-height:500px; line-height: 1.7;position:absolute;" 
+		            		simditor operation={{operation}}  data-ng-model="question.useranswer">
+		            		</div> -->
+		<div style="clear: both"></div>
+	</div>
+
+
+	<div style="clear: both"></div>
+</div>
+
+<div class="modal-footer" >
             <button class="btn btn-primary" ng-if="operation=='edit'" ng-click="saveQustion()">保存</button>
             <button class="btn btn-warning" ng-click="cancel()">取消</button>
         </div>

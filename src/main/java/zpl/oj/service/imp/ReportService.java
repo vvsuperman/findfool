@@ -509,6 +509,16 @@ public class ReportService {
 			  }
 			  question.setAnswer(qts);
 		   }
+		   if(question.getType().equals(ExamConstant.DESIGN)){
+			 
+					String imgHome=(String)PropertiesUtil.getContextProperty("ImgUploadHome");
+					String accessKey=(String)PropertiesUtil.getContextProperty("qiniuAccessKey");
+					String secretKey=(String)PropertiesUtil.getContextProperty("qiniuSecretKey");	
+					String 	paramLocation=imgHome+question.getUseranswer();
+						Auth auth=Auth.create(accessKey, secretKey);
+						paramLocation=auth.privateDownloadUrl(paramLocation);
+				  question.setUseranswer(paramLocation);
+		   }
 	   }
 	   return questions;
 	}
