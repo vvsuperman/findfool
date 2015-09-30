@@ -99,8 +99,8 @@ public interface InviteDao {
 	@Select("select * from invite where parentquiz =#{0}")
 	List<Invite> getInviteByParentQuiz(int parentQuizId);
 
-	@Select("select count(*) from invite where parentquiz = #{0} and score > (select score from invite where parentquiz = #{0} and testid = #{1}) ")
-	int getRankByParent(Integer parentquiz,Integer testid);
+	@Select("select count(*) from invite where parentquiz = #{0} and score > (select score from invite where parentquiz = #{0} and uid =#{1} and testid = #{2}) ")
+	int getRankByParent(Integer parentquiz,Integer uid,Integer testid);
 	
 	
 }

@@ -41,7 +41,7 @@
         <tr ng-repeat = "invite in invites">
             <td ng-bind="invite.email"></td>
             <td ng-bind="getState(invite)"></td>
-            <td ng-bind="invite.starttime"></td>
+            <td ng-bind="invite.begintime"></td>
             <td ng-bind="getScore(invite)"></td>
             <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
         </tr>

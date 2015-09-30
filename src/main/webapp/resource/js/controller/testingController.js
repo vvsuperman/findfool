@@ -64,6 +64,7 @@ OJApp.controller('testingController',['$scope','$http','CadData','Data','$routeP
 	    		 $scope.invitedid=data.message["invitedid"];
 	    		 $scope.openCamera=data.message["openCamera"];
 	    		 $scope.tid = data.message["quizid"]+"";
+	    		 $scope.newTestId=$scope.tid;
 	    		 $scope.errMsg = "";
 	    		 if($scope.openCamera==1){
 	    			  //不开启拍照区域

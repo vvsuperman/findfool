@@ -147,9 +147,6 @@ public class TestingController {
 		     else {
 		     invite= inviteDao.getInvites(testid, email);
 		     }
-		
-		
-
 		// 用户邀请不合法
 		if (invite == null) {
 			rtMap.put("msg", "非法用户");
@@ -202,9 +199,6 @@ public class TestingController {
 	    	 invite = inviteDao.getInvitesByP(testid, email);
 	     }
 		String nowDate = df.format(new Date());
-		
-		
-		
 		if(invite.getStarttime().equals("")==false && nowDate.compareTo(invite.getStarttime())<0){
 			rb.setMessage("试题尚未开始");
 			rb.setState(2);
@@ -216,13 +210,9 @@ public class TestingController {
 			rb.setState(3);
 			return rb;
 		}
-
-		
 		rb.setState(1);
 		return rb;
 	}
-	
-	
 	
 	
 	@RequestMapping(value = "/checkstate")
@@ -233,10 +223,10 @@ public class TestingController {
 		int testid = (Integer)params.get("testid");
 		String email = (String)params.get("email");
 		Invite invite = inviteDao.getInvites(testid, email);
+		Testuser testuser=testuserDao.findTuserByEmail(email);
+		Invite invite2=inviteDao.getInviteByTestidAndParent(testuser.getTuid(), testid);
 		String nowDate = df.format(new Date());
 		Quiz  quiz=quizDao.getQuiz(testid);
-
-			
 		if(quiz.getStartTime()!=null && nowDate.compareTo(quiz.getStartTime())<0){
 			rb.setMessage("试题尚未开始");
 			rb.setState(2);
@@ -247,29 +237,25 @@ public class TestingController {
 			rb.setMessage("试题已截至");
 			rb.setState(3);
 			return rb;
-		} else if(invite==null){
+		} else if(invite==null&&invite2==null){
 			rb.setState(1);
 			return rb;
-		}	
-		else if (invite.getState() == ExamConstant.INVITE_FINISH) {
+		}
+		else if (invite!=null&&invite.getState() == ExamConstant.INVITE_FINISH) {
 					rb.setMessage("试题已经完成");
 					rb.setState(0);
 				 
 				return rb;
-			}	
+			}else if(invite2!=null&&invite2.getState() == ExamConstant.INVITE_FINISH) {
+				rb.setMessage("试题已经完成");
+				rb.setState(0);
+			 
+			return rb;
+		}	
 		rb.setState(1);
 		return rb;
 	}
-		
-
-	
-	
-	
-	
-	
-	
-	
-	
+			
 	
 	@RequestMapping(value = "/getLabels")
 	@ResponseBody
@@ -359,9 +345,6 @@ public class TestingController {
 			return rb;
 		}
 		
-		
-		
-		
 		int testid = Integer.parseInt((String)params.get("testid"));
 		String email = (String)params.get("email");
 		String pwd = (String)params.get("pwd");
@@ -392,15 +375,7 @@ public class TestingController {
 		//	newTestId =302;;
 		} else if ((invite.getParentquiz() != 0) && (invite.getParentquiz()!=invite.getTestid())) {
 		 	newTestId = invite.getTestid();
-		
-		 
-
 		}
-		
-                   		
-		
-		 
-		
 		
 		//判读用户是否已经开始做题，若已开始，直接给出题目列表
 		if(invite.getBegintime().equals("")==false){
@@ -666,8 +641,6 @@ public class TestingController {
 	public ResponseBase fetchQuestion(@RequestBody Map<String,Object> params){
 		ResponseBase rb = new ResponseBase();
 		Map map =  validateUser(params);
-		
-		
 		Integer tuid = (Integer) map.get("tuid");
 		if(tuid ==null){
 			rb.setMessage(map.get("msg"));

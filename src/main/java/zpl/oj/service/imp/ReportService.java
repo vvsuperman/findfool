@@ -166,7 +166,7 @@ public class ReportService {
 		Invite socreInvite = inviteDao.getInvitesByIds(invite.getTestid(), invite.getUid());
 		int parentQuizId=socreInvite.getParentquiz();
 
-		int i= inviteDao.getRankByParent(parentQuizId,testid);
+		int i= inviteDao.getRankByParent(parentQuizId,invite.getUid(),testid);
 		i=i+1;
 		 int j= inviteDao.countInviteFinishedByP(parentQuizId);
 //		List<Invite> invites=null;

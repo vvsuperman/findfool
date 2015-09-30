@@ -141,9 +141,6 @@ public class ChallengeController {
 			return rb;
 		}
 		
-		
-		
-
 		Quiz quiz = quizDao.getQuizByKey(signedKey);
 		if (quiz == null) {
 			rb.setState(20001);
@@ -168,33 +165,32 @@ public class ChallengeController {
 		
 		
 		Invite invite;
-		if(quiz.getParent()==0){
+	
+		if (quiz.getParent() == 0) {
 
 			invite = inviteDao.getInvitesByP(quiz.getQuizid(), email);
 
 			if (invite == null) {
-				   int newquizId=   genRandomQuiz(quiz);
-               
-				invite = genInviteRandom(email, newquizId,quiz.getQuizid());
-				if(invite==null){
+				int newquizId = genRandomQuiz(quiz);
+				invite = genInviteRandom(email, newquizId, quiz.getQuizid());
+				if (invite == null) {
 					rb.setState(20004);
 					rb.setMessage("您尚未注册和登录，无法进行挑战赛！");
 					return rb;
 				}
 			}
-		}else{
+		} else {
 
-		 invite = inviteDao.getInvites(quiz.getQuizid(), email);
-		if (invite == null) {
-			invite = genInvite(email, quiz.getQuizid());
-			if(invite==null){
-				rb.setState(20004);
-				rb.setMessage("您尚未注册和登录，无法进行挑战赛！");
-				return rb;
+			invite = inviteDao.getInvites(quiz.getQuizid(), email);
+			if (invite == null) {
+				invite = genInvite(email, quiz.getQuizid());
+				if (invite == null) {
+					rb.setState(20004);
+					rb.setMessage("您尚未注册和登录，无法进行挑战赛！");
+					return rb;
+				}
 			}
 		}
-		}
-		
 		
 		if (invite.getState() == ExamConstant.INVITE_FINISH) {
 			// 试卷已做完
@@ -215,11 +211,14 @@ public class ChallengeController {
 			return rb;
 		}else{  
 		    //未开始
+			
+		
 			rb.setState(2);
 			Map<String, Integer> message=new HashMap<String, Integer>();
 			message.put("invitedid", invite.getIid());
 			message.put("openCamera", invite.getOpenCamera());
-			message.put("quizid", quiz.getQuizid());
+		//	message.put("quizid", quiz.getQuizid());
+			message.put("quizid", invite.getTestid());
 			rb.setMessage(message);
 			return rb;
 		}
@@ -261,7 +260,7 @@ public class ChallengeController {
 			tuserProblemDao.insertTuserProblem(tuserProblem);
 		}
 		
-		List<Labeltest> labeltests = labelService.getLabelsOfTest(newquizId);
+		List<Labeltest> labeltests = labelService.getLabelsOfTest(oldquizid);
 		for (Labeltest lt : labeltests) {
 			Invite invite2 = inviteService.getInvites(newquizId,email);
 			if (labelService.getLabelUserByIidAndLid(invite2.getIid(),lt.getLabelid()) == null) {
@@ -287,6 +286,7 @@ public class ChallengeController {
 		invite.setUid(tuId);
 		invite.setTestid(quizId);
 		invite.setScore(0);
+		invite.setParentquiz(quizId);
 		invite.setState(ExamConstant.INVITE_PUB);
 		invite.setOpenCamera(quiz.getOpenCamera());
 		invite.setStarttime(quiz.getStartTime());
