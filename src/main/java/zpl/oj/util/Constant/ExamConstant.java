@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExamConstant {
+	
+	public final static String SOURCE_YIDA = "yida";
+	public final static String YIDA_URL = "http://114.215.204.149/Rest";
 
-	public static final int SET_BASE = 1;
+	public final static int SET_BASE = 1;
 
 	public final static int DP_RED = 1;
 	public final static int DP_WHITE = 2;

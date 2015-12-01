@@ -20,14 +20,15 @@
     <table class="table table-striped">
         <thead>
         <tr>
+        	<th>姓名</th>
             <th>用户名</th>
             <th>状态</th>
-            <th>开始时间&nbsp;&nbsp;
+           <!--  <th>开始时间&nbsp;&nbsp;
             	<span class="glyphicon" style="cursor:pointer" 
 	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isTimeDown]" 
 	            	ng-click="reversalTimeSort()">
             	</span>
-            </th>
+            </th> -->
             <th  >得分&nbsp;&nbsp;
             	<span class="glyphicon" style="cursor:pointer" 
 	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
@@ -39,9 +40,9 @@
         </thead>
         <tbody>
         <tr ng-repeat = "invite in invites">
+        	<td ng-bind="invite.username"></td>
             <td ng-bind="invite.email"></td>
             <td ng-bind="getState(invite)"></td>
-            <td ng-bind="invite.begintime"></td>
             <td ng-bind="getScore(invite)"></td>
             <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
         </tr>

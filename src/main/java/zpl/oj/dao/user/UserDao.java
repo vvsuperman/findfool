@@ -11,8 +11,8 @@ import zpl.oj.model.request.User;
 
 public interface UserDao {
 
-	@Insert("insert into user (fname,lname,email,company,privilege,pwd,link,age,degree,school,register_date,last_login_date,invited_left,invited_num,state,tel)"
-			+ " values(#{fname},#{lname},#{email},#{company},${privilege},#{pwd},#{link},#{age},#{degree},#{school},Now(),Now(),${invited_left},${invitedNum},${state},#{tel})")
+	@Insert("insert into user (fname,lname,email,company,privilege,pwd,link,age,degree,school,register_date,last_login_date,invited_left,invited_num,state,tel,userSource)"
+			+ " values(#{fname},#{lname},#{email},#{company},${privilege},#{pwd},#{link},#{age},#{degree},#{school},Now(),Now(),${invited_left},${invitedNum},${state},#{tel},#{userSource})")
 	void addUser(User u);
 
 	@Update("update user set "

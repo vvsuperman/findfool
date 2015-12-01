@@ -4,6 +4,21 @@
  * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
  */
  
+.jdbg {
+    background-image: url(../static/jdback.jpg);
+    position: relative;
+    min-height: 400px;
+    margin-top: -20px;
+    margin-bottom: 0px;
+    background-position: center top;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+} 
+ 
+ 
 .myqs{
 		padding: 20px;
 		width: 100%;

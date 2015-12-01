@@ -9,8 +9,16 @@ public class RequestUserLogin {
 	private String tel;
 	
 	private String mdUid; //明道的用户ID
+	private String userSource; //用户来源
 	
 	
+	
+	public String getUserSource() {
+		return userSource;
+	}
+	public void setUserSource(String userSource) {
+		this.userSource = userSource;
+	}
 	public String getTel() {
 		return tel;
 	}

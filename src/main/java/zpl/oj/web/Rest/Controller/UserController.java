@@ -193,10 +193,12 @@ public class UserController {
 		u.setCompany(request.getCompany());
 		u.setTel(request.getTel()); // 用户联系方式
 		u.setMdUid(request.getMdUid()); // 明道id
+		u.setUserSource(request.getUserSource());
 		// 测试阶段先免费
-		u.setInvited_left(100);
+		u.setInvited_left(30);
 		// 默认等级
 		u.setPrivilege(2);
+		
 		ResponseMessage msg = new ResponseMessage();
 		boolean res = userService.addUser(u);
 

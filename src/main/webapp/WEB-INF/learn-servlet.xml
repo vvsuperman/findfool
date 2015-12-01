@@ -107,6 +107,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<mvc:resources mapping="/dp/**" location="/dp/" />
 	<mvc:resources mapping="/cad/**" location="/cad/" />
 	<mvc:resources mapping="/company/**" location="/company/" />
+	<mvc:resources mapping="/jd/**" location="/jd/" />
 	
 
 </beans>

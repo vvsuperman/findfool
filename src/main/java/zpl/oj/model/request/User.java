@@ -24,6 +24,15 @@ public class User {
 	private String mdUid;// 明道的uid
 	private String resetUrl; // 重置密码时随机生成的url
 	private int companyId;
+	private String userSource; //客户来源
+
+	public String getUserSource() {
+		return userSource;
+	}
+
+	public void setUserSource(String userSource) {
+		this.userSource = userSource;
+	}
 
 	public String getResetUrl() {
 		return resetUrl;
@@ -58,6 +67,7 @@ public class User {
 		this.invitedNum = 0;
 		this.state = 1;
 		this.tel = "no value";
+		this.userSource = "";
 	}
 
 	public int getUid() {

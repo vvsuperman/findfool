@@ -1,5 +1,11 @@
 package zpl.oj.web.Rest.Controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,10 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-import org.codehaus.jackson.map.type.MapLikeType;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
-
 import zpl.oj.dao.InviteDao;
 import zpl.oj.dao.LogTakeQuizDao;
 import zpl.oj.dao.ProblemDao;
@@ -33,20 +34,20 @@ import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.dao.TestuserDao;
 import zpl.oj.dao.TuserProblemDao;
 import zpl.oj.model.common.Invite;
-import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.Label;
 import zpl.oj.model.common.LabelUser;
 import zpl.oj.model.common.Labeltest;
+import zpl.oj.model.common.LogTakeQuiz;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizEmail;
 import zpl.oj.model.common.QuizProblem;
-import zpl.oj.model.common.QuizTemplete;
 import zpl.oj.model.common.RandomQuizSet;
 import zpl.oj.model.common.School;
 import zpl.oj.model.common.Testuser;
 import zpl.oj.model.common.TuserProblem;
 import zpl.oj.model.request.Question;
 import zpl.oj.model.request.QuestionTestCase;
+import zpl.oj.model.request.User;
 import zpl.oj.model.responsejson.ResponseBase;
 import zpl.oj.service.ImgUploadService;
 import zpl.oj.service.InviteService;
@@ -60,9 +61,12 @@ import zpl.oj.service.imp.TuserService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.base64.BASE64;
 import zpl.oj.util.des.DESService;
 import zpl.oj.util.timer.InviteReminder;
+
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/testing")
@@ -738,9 +742,100 @@ public class TestingController {
 		for(QuizEmail e:emailList){
 			quizEmailService.sendMail(e, invite);
 		}
+		
+		
+		//如果是来自yida的信息，则将做题信息返回
+		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+		String url = desService.encode(invite.getIid().toString()+"|"+invite.getTestid().toString()+"|"+invite.getUid().toString());
+		String targetUrl = baseurl+"/#/publicReport/list/"+url;
+		User user = userService.getUserByEmail(email);		
 		rb.setState(0);
 		return rb;
 	}
+	
+	
+	//发送测试结果到yida软件
+	public void sendToYida(User user, int score, String scoreUrl){
+		PrintWriter out = null;
+        BufferedReader in = null;
+        String result = "";
+      
+        
+        
+        try {
+            URL realUrl = new URL(ExamConstant.YIDA_URL);
+            // 打开和URL之间的连接
+            URLConnection conn = realUrl.openConnection();
+            // 设置通用的请求属性
+            conn.setRequestProperty("accept", "*/*");
+            conn.setRequestProperty("connection", "Keep-Alive");
+            conn.setRequestProperty("user-agent",
+                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("Method", "JOB.INTERVIEWPROCESS.UPDATE");
+            conn.setRequestProperty("CompanyName",BASE64.encodeBASE64(user.getCompany().getBytes()) );
+            conn.setRequestProperty("Email",BASE64.encodeBASE64( user.getEmail().getBytes()));
+            conn.setRequestProperty("Phone", BASE64.encodeBASE64( user.getTel().getBytes()));
+            conn.setRequestProperty("LoginName", BASE64.encodeBASE64( user.getFname().getBytes()));
+            
+            conn.setRequestProperty("EvaluationResult", BASE64.encodeBASE64(scoreUrl.getBytes()));
+            conn.setRequestProperty("score",BASE64.encodeBASE64( (score+"").getBytes()));
+            conn.setRequestProperty("Password",BASE64.encodeBASE64( user.getPwd().getBytes()));
+            
+            System.out.print("begin send......");
+            // 发送POST请求必须设置如下两行
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            
+            // 获取URLConnection对象对应的输出流
+            out = new PrintWriter(conn.getOutputStream());
+            // 发送请求参数
+            
+            // flush输出流的缓冲
+            out.flush();
+            // 定义BufferedReader输入流来读取URL的响应
+            in = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("发送成功"+result);
+        } catch (Exception e) {
+            System.out.println("发送 POST 请求出现异常！"+e);
+            e.printStackTrace();
+        }
+        //使用finally块来关闭输出流、输入流
+        finally{
+            try{
+                if(out!=null){
+                    out.close();
+                }
+                if(in!=null){
+                    in.close();
+                }
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
+        }
+      
+    }    
+	
+	
+	public static void main(String[] args){
+		TestingController tc = new TestingController();
+		User user = new User();
+		user.setCompany("foolrank");
+		user.setTel("123456");
+		user.setFname("sh003");
+		user.setEmail("123456@qq.com");
+		user.setPwd("sh003");
+		
+		
+		tc.sendToYida(user, 260, "www.foolrank.com");
+	}
+	
+	
 	
 	
 	

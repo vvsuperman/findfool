@@ -8,6 +8,15 @@ import zpl.oj.model.common.Invite;
  * */
 public class ResponseInvite extends Invite {
 	
+	private String username;
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	private String email;
 	
 	public ResponseInvite(){

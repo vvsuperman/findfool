@@ -46,7 +46,7 @@ public interface InviteDao {
 	/*
 	 * 返回测试中和测试完成的测试，倒序排列
 	 * */
-	@Select("select t2.email,t1.iid,t1.testid,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd,t1.parentquiz "
+	@Select("select t2.email,t2.username,t1.iid,t1.testid,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd,t1.parentquiz "
 			+ "from invite t1,testuser t2 "
 			+ "where  t1.uid= t2.tuid and t1.testid =#{0} and t1.state=#{1} order by t1.state,t1.starttime,t1.inviteTime desc")
 	List<ResponseInvite> getOrderInviteByTid(Integer testid, Integer state); 
@@ -80,7 +80,7 @@ public interface InviteDao {
 	Invite getInviteByTestidAndParent(int tuid, int testid);
 
 	
-	@Select("select t2.email,t1.iid,t1.testid,t1.parentquiz,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd,t1.parentquiz "
+	@Select("select t2.username,t2.email,t1.iid,t1.testid,t1.parentquiz,t1.uid ,t1.invitetime,t1.begintime,t1.starttime,t1.finishtime,t1.duration,t1.score,t1.totalscore,t1.state,t1.pwd,t1.parentquiz "
 			+ "from invite t1,testuser t2 "
 			+ "where  t1.uid= t2.tuid  and t1.state=#{0} and t1.parentquiz =#{1} order by t1.state,t1.starttime,t1.inviteTime desc")
 	List<ResponseInvite> getOrderInviteByStateAndP(Integer state, int parentquiz);

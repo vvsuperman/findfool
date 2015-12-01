@@ -47,7 +47,7 @@ OJApp.controller('loginCtrl',['$scope','$http','Data',function ($scope,$http,Dat
                     Data.setLastActive((new Date()).getTime());
                     $scope.invitedleft = $scope.message.invited_left;
                    
-                    window.location.href = '#/loginok';
+                    window.location.href = ROOT+'/loginok';
 //                    $scope.name = $scope.message.handler_url;
                 } else {
                     

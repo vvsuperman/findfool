@@ -52,7 +52,7 @@ OJApp.controller('signupCtrl',['$scope','$http','Data',function ($scope,$http,Da
                         headers: {
                             "Authorization": Data.token()
                         },
-                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name,"company":$scope.company,"tel":$scope.mobile}
+                        data: {"email": $scope.Remail, "pwd": md5($scope.Rpwd), "name": $scope.name,"company":$scope.company,"tel":$scope.mobile,"userSource":Data.getUserSource()}
                     }).success(function (data) {
                         $scope.state = data["state"];//1 true or 0 false
                         $scope.message = data["message"];
@@ -70,7 +70,7 @@ OJApp.controller('signupCtrl',['$scope','$http','Data',function ($scope,$http,Da
                             //除去modal层的遮罩
 //                            var child = document.getElementsByClassName("modal-backdrop fade in");
 //                            child[0].parentNode.removeChild(child[0]);
-                            window.location.href = '#/test';
+                            window.location.href = ROOT+'/test';
                         } else {
                             alert($scope.message.msg);
                             window.location.reload(true);

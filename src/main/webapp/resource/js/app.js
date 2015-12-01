@@ -21,6 +21,11 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'page/main.html',
                 controller: 'mainController'
             }).
+            when('/jd/main', {
+                templateUrl: 'jd/page/jd.html',
+                controller: 'jdMainController'
+            }).
+            
         
             when('/cad/comlist', {  //客户端主页
                 templateUrl: 'cad/page/pagenav.html',
@@ -350,6 +355,27 @@ OJApp.factory('Data', ['webStorage',function (webStorage) {
         	webStorage.remove('mdToken');
         	this._mdToken = '';
         };
+        
+        
+        //来源，获取系统的注册用户来源
+        this._userSource = "";
+        this.getUserSource = function () {
+            if (this._userSource == "" || this._userSource == null) {
+                this._userSource = webStorage.get("userSource");
+            }
+            return this._userSource;
+        };
+        
+        this.setUserSource = function (to) {
+            webStorage.remove("userSource");
+            webStorage.add('userSource', to);
+            this._userSource = to;
+        };
+        this.removeUserSource = function(){
+        	webStorage.remove('userSource');
+        	this._userSource = '';
+        };
+        
         
         //明道的uid
         this._mdUid = "";
