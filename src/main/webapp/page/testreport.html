@@ -3,52 +3,66 @@
 
 <div class=" testqs" ng-if="showReport ==1">
     <!-- <p>搜索用户<input type="text"><btn class="btn btn-outline">搜索</btn> -->
+    <div class="col-md-12" style="padding-top:8px; padding-bottom:8px;border-bottom:1px solid #000000">
+	    <form class="form-inline">
+		  <div class="form-group">
+		    <label for="exampleInputName2" style="color:#00d8bd">
+		    	<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
+					&nbsp;{{tname}}
+		    </label>	    
+		  </div>
+		  <div class="form-group col-md-offset-4">
+	      	 <label ><strong> 分位值</strong> </label>
+	      </div>
+	       
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputAmount">分位值:</label>
+		    <div class="input-group">
+		      <div class="input-group-addon">></div>
+		      <input type="text" class="form-control" ng-model="decline.score" style="width:70px" placeholder="0~100">
+		      <div class="input-group-addon">%</div>
+		    </div>
+		    <button class="btn btn-info" ng-click="confirmScore()">确认</button>
+		    <button class="btn btn-default" ng-click="showAll()">显示全部</button>
+		  </div>
+		
+		  
+		  <a href="#/invite" class="btn btn-default pull-right">发送邀请</a>
+		 
+	   </form>
+   </div>
     
-    <div class="topbar">
-		<div class="type">
-			<span class="glyphicon glyphicon-list-alt" aria-hidden="true" ></span>
-				&nbsp;{{tname}}
-		</div>
-		<!-- <div>
-			40道题，90分钟
-		</div> -->
-		<div class="invite">
-			<a href="#/invite" class="btn btn-default">发送邀请</a>
-		</div>
-	</div>
+ 
     
-    <table class="table table-striped">
-        <thead>
-        <tr>
-        	<th>姓名</th>
-            <th>用户名</th>
-            <th>状态</th>
-           <!--  <th>开始时间&nbsp;&nbsp;
-            	<span class="glyphicon" style="cursor:pointer" 
-	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isTimeDown]" 
-	            	ng-click="reversalTimeSort()">
-            	</span>
-            </th> -->
-            <th  >得分&nbsp;&nbsp;
-            	<span class="glyphicon" style="cursor:pointer" 
-	            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
-	            	ng-click="reversalScoreSort()">
-            	</span>
-            </th>
-            <th>查看详情</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat = "invite in invites">
-        	<td ng-bind="invite.username"></td>
-            <td ng-bind="invite.email"></td>
-            <td ng-bind="getState(invite)"></td>
-            <td ng-bind="getScore(invite)"></td>
-            <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
-        </tr>
-        
-        </tbody>
-    </table>
+    <div class="col-md-12">
+	    <table class="table table-striped">
+	        <thead>
+	        <tr>
+	        	<th>姓名</th>
+	            <th>用户名</th>
+	            <th>状态</th>
+	          
+	            <th  >得分&nbsp;&nbsp;
+	            	<span class="glyphicon" style="cursor:pointer" 
+		            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
+		            	ng-click="reversalScoreSort()">
+	            	</span>
+	            </th>
+	            <th>查看详情</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <tr ng-repeat = "invite in tempInvites">
+	        	<td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">{{invite.username}}</a></td>
+	            <td ng-bind="invite.email"></td>
+	            <td ng-bind="getState(invite)"></td>
+	            <td ng-bind="getScore(invite)"></td>
+	            <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
+	        </tr>
+	        
+	        </tbody>
+	    </table>
+    </div>
 </div>	
 
 
@@ -68,12 +82,22 @@
 		      <!-- <div class="knowtag">知识结构</div> -->
 		       <div class="col-md-12" style="margin-top:20px"><img src="resource/static/knowledge.png" alt="知识结构"></div> 
 		        <div class="col-md-4 col-md-offset-1" style="margin-top: 20px" >
-			         <p><strong>得分:</strong></p>
+			         <p><strong>得分/总分:</strong></p>
 			         <p ng-repeat="str in descStr">{{str}}</p>
 		        </div>
 		         
 			      <div class="col-md-7" style="margin-top: 20px;margin-bottom: 10px">
-			        <canvas id="radar" class="chart chart-radar " series="series" data="data"   labels="labels"  ></canvas> 
+			        <canvas id="radar" class="chart chart-radar " series="series" data="data" 			        
+			          colours="[{
+					    fillColor: 'rgba(0, 153, 255, 0.3)',
+					    strokeColor: 'rgba(0, 0, 0, 0.8)',
+					    highlightFill: 'rgba(255, 255, 0, 0.8)',
+					    highlightStroke: 'rgba(255, 255, 0, 0.8)',
+					    pointHighlightFill: 'rgba(255, 255, 0, 0.8)',
+         				
+					   }]"		        
+					   
+			          labels="labels"  ></canvas> 
 			      </div>  
 		  
 		       <div style="clear:both"></div>

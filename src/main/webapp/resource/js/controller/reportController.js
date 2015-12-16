@@ -6,6 +6,10 @@
 
 OJApp.controller('reportController', [ '$scope', '$http', 'Data',
 		'$routeParams', function($scope, $http, Data, $routeParams) {
+	
+	
+			$scope.decline = {};
+			
 			$scope.showReport = 1;
 			$scope.ContentUs = 'page/contentUs.html';
 			$scope.template = 'page/testreport.html';
@@ -29,10 +33,45 @@ OJApp.controller('reportController', [ '$scope', '$http', 'Data',
 			}).success(function(data) {
 
 				$scope.invites = data;
-				console.log(data);
+				$scope.tempInvites = data;
+			
 			}).error(function() {
 				console.log("get data failed");
 			})
+			
+			
+	       $scope.confirmScore = function(){
+				if($scope.decline.score === undefined){
+					smoke.alert("分位值不得为空");
+					return false;
+				}				
+				var re = /^[1-9]+[0-9]*]*$/;
+				  
+			    if (!re.test($scope.decline.score))  
+			    {  			       
+			        smoke.alert("请输入正整数");
+					return false;
+			     }  
+			    
+			    if($scope.decline.score<0 || $scope.decline.score>100){
+			    	smoke.alert("非法数字，请输入0-100正整数");
+					return false;
+			    }
+				
+				var length = $scope.invites.length;
+				var dLength = length*$scope.decline.score/100;
+				if(dLength <1){
+					smoke.alert("返回结果少于一条");
+					return false;
+				}else{
+					$scope.tempInvites = $scope.invites.slice(0,dLength);
+				}
+							
+			}
+			
+			$scope.showAll = function(){
+				$scope.tempInvites = $scope.invites;
+			}
 
 			$scope.getScore = function(invite) {
 				return invite.score + "/" + invite.totalScore;
@@ -100,6 +139,8 @@ OJApp.controller('reportListController', [
 
 			$scope.userInfo = [];
 
+		
+			
 			$scope.printPDF = function() {
 				var pdf = new jsPDF('p', 'pt', 'a4');
 				pdf.addHTML(document.getElementById('pdf'), function() {
@@ -174,9 +215,7 @@ OJApp.controller('reportListController', [
 						var userScores = $scope.data[1];
 						$scope.descStr = [];
 						for (var i = 0; i < totalScores.length; i++) {
-							var tmpStr = $scope.labels[i] + ":"
-									+  parseInt((userScores[i] / totalScores[i]) * 100)
-									+ "%";
+							var tmpStr = $scope.labels[i] + ":"+  userScores[i]+ "/"+ totalScores[i];								
 							$scope.descStr.push(tmpStr);
 						}
 

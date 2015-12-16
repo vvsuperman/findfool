@@ -58,6 +58,9 @@ public interface InviteDao {
 	//某一个测试的完成人数
 	@Select("select count(*) from invite where testid=#{0} and state=2") 
 	int countInviteFinished(Integer testid);
+	
+	@Select("select count(*) from invite where testid=#{0} and state=#{1}") 
+	int countInviteByState(Integer testid, int state);
 
 	
 	@Select("select * FROM INVITE WHERE uid = #{0}")

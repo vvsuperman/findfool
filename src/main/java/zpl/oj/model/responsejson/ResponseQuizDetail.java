@@ -14,11 +14,38 @@ public class ResponseQuizDetail {
 	private int testtime;
 	private String extrainfo;
 	private String emails;
+	private int invited;	
+	private int process;
+	private int finished;
+	
+	
+		
 	public ResponseQuizDetail(){
 		extrainfo = null;
 		emails = null;
 		qs = null;
 	}
+	
+	public int getInvited() {
+		return invited;
+	}
+	public void setInvited(int invited) {
+		this.invited = invited;
+	}
+	public int getProcess() {
+		return process;
+	}
+	public void setProcess(int process) {
+		this.process = process;
+	}
+	public int getFinished() {
+		return finished;
+	}
+	public void setFinished(int finished) {
+		this.finished = finished;
+	}
+	
+	
 	public List<Question> getQs() {
 		return qs;
 	}

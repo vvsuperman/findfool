@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import zpl.oj.dao.InviteDao;
-import zpl.oj.dao.ProblemDao;
 import zpl.oj.dao.QuizDao;
 import zpl.oj.dao.QuizProblemDao;
 import zpl.oj.dao.RandomQuizDao;
 import zpl.oj.dao.SetDao;
+import zpl.oj.model.common.Invite;
 import zpl.oj.model.common.ProblemSet;
 import zpl.oj.model.common.Quiz;
 import zpl.oj.model.common.QuizProblem;
@@ -30,6 +29,7 @@ import zpl.oj.service.ProblemService;
 import zpl.oj.service.QuizService;
 import zpl.oj.service.SetService;
 import zpl.oj.service.user.inter.UserService;
+import zpl.oj.util.Constant.ExamConstant;
 @Service
 public class QuizServiceImp implements QuizService {
 
@@ -134,13 +134,17 @@ public class QuizServiceImp implements QuizService {
 		
 		List<Question> qlist = new ArrayList<Question>();
 		List<QuizProblem> qps = quizProblemDao.getQuizProblemsByQuizId(tid);
-		//得到problems
+		//得到quiz中包含的problems
 		for(QuizProblem qp :qps){
-			Question q = problemService.getProblemById(qp.getProblemid());
-	
+			Question q = problemService.getProblemById(qp.getProblemid());	
 			if(q != null)
 				qlist.add(q);
 		}
+		
+		//获取邀请，进行中，已完成的个数
+		detail.setInvited(inviteDao.countInviteByState(tid, ExamConstant.INVITE_PUB));
+		detail.setProcess(inviteDao.countInviteByState(tid, ExamConstant.INVITE_PROGRESS));
+		detail.setFinished(inviteDao.countInviteByState(tid, ExamConstant.INVITE_FINISH));
 		
 		detail.setQs(qlist);
 		return detail;

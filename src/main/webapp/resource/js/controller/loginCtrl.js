@@ -27,7 +27,7 @@ OJApp.controller('loginCtrl',['$scope','$http','Data',function ($scope,$http,Dat
             }).success(function (data) {
             	console.log("success");
                 $scope.state = data["state"];//1 true or 0 false
-                Data.clear();//清空缓存
+//                Data.clear();//清空缓存
                 var name = $scope.Lemail;
                 $scope.message = data["message"];
                 if (data["message"].handler_url != null && data["message"].handler_url !== "") {

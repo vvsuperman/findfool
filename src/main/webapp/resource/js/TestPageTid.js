@@ -14,6 +14,7 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
     $scope.contain.show =1;
     
     Data.setTid($scope.tid);
+    Data.setIsRandom($scope.isRandom);
     
     $scope.showDefault = false;
     $scope.showCustom = false;
@@ -59,7 +60,7 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
-            console.log($scope.message);
+          
             if ($scope.state) {
 //                console.log($scope.message);
                 $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目
@@ -70,6 +71,14 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
                 $scope.extraInfo = $scope.message.extraInfo;
                 $scope.emails = $scope.message.emails;
                 $scope.name = $scope.message.name;
+                
+                $scope.inviteNum ={};
+                Data.setInvitedNum($scope.message.invited);
+                Data.setProcessNum($scope.message.process);
+                Data.setFinishedNum( $scope.message.finished); 
+                $scope.$broadcast("numChange");
+                
+               
                 Data.setTname($scope.name);
             } else {
 
@@ -99,7 +108,6 @@ OJApp.controller('TestPageTid',['$scope','$rootScope','$routeParams','$http','$m
         }).success(function (data) {
             $scope.state = data["state"];//1 true or 0 false
             $scope.message = data["message"];
-            console.log($scope.message);
             if ($scope.state) {
 //                console.log($scope.message);
                // $scope.qs = $scope.message.qs;	//$scope.qs即测试题的所有题目

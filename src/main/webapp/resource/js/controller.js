@@ -352,9 +352,20 @@ OJApp.controller('nav', ['$scope','Data',function($scope, Data) {
 	};
 
 	$scope.logout = function() {
-		Data.clear();
-		window.location.href = '#/';
+		
+		if(Data.getUserSource() == 'jd'){
+			Data.clear();
+			window.location.href = '#/jd/main';
+		}else{
+			Data.clear();
+			window.location.href = '#/';
+		}
+		
+		
 	}
+	
+	
+
 }]);
 
 OJApp.controller('Upgrade', ['$scope',function($scope) {

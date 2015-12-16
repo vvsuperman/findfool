@@ -396,7 +396,72 @@ OJApp.factory('Data', ['webStorage',function (webStorage) {
         	this._mdUid = '';
         };
         
+        this.isRandom = "";
+        this.getIsRandom = function () {
+            if (this.isRandom == "" || this.isRandom == null) {
+                this.isRandom = webStorage.get("isRandom");
+            }
+            return this.isRandom;
+        };
+        this.setIsRandom = function (to) {
+            webStorage.remove('isRandom');
+            webStorage.add('isRandom', to);
+            this.isRandom = to;
+        };
         
+        
+        this.invitedNum ="";
+        this.getInvitedNum = function () {
+            if (this.invitedNum == "" || this.invitedNum == null) {
+                this.invitedNum = webStorage.get("invitedNum");
+            }
+            return this.invitedNum;
+        };
+        this.setInvitedNum = function (to) {
+            webStorage.remove('invitedNum');
+            webStorage.add('invitedNum', to);
+            this.invitedNum = to;
+        };
+        
+        
+        this.invitedNum ="";
+        this.getInvitedNum = function () {
+            if (this.invitedNum == "" || this.invitedNum == null) {
+                this.invitedNum = webStorage.get("invitedNum");
+            }
+            return this.invitedNum;
+        };
+        this.setInvitedNum = function (to) {
+            webStorage.remove('invitedNum');
+            webStorage.add('invitedNum', to);
+            this.invitedNum = to;
+        };
+        
+        this.processNum ="";
+        this.getProcessNum = function () {
+            if (this.processNum == "" || this.processNum == null) {
+                this.processNum = webStorage.get("processNum");
+            }
+            return this.processNum;
+        };
+        this.setProcessNum = function (to) {
+            webStorage.remove('processNum');
+            webStorage.add('processNum', to);
+            this.processNum = to;
+        };
+        
+        this.finishedNum ="";
+        this.getFinishedNum = function () {
+            if (this.finishedNum == "" || this.finishedNum == null) {
+                this.finishedNum = webStorage.get("finishedNum");
+            }
+            return this.finishedNum;
+        };
+        this.setFinishedNum = function (to) {
+            webStorage.remove('finishedNum');
+            webStorage.add('finishedNum', to);
+            this.finishedNum = to;
+        };
         
         
         this._invitedleft = "";

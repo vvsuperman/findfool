@@ -20,10 +20,23 @@ OJApp.controller('leftBarController',['$scope','Data',function($scope,Data){
 	
 //	$scope.question =1;
 	
+	$scope.inviteNum ={};
+	$scope.inviteNum.invited = Data.getInvitedNum();
+	$scope.inviteNum.process = Data.getProcessNum();
+	$scope.inviteNum.finished = Data.getFinishedNum();
+	
+	$scope.$on("numChange",function(){
+		$scope.inviteNum.invited = Data.getInvitedNum();
+		$scope.inviteNum.process = Data.getProcessNum();
+		$scope.inviteNum.finished = Data.getFinishedNum();
+	});
+	
+	
+	
+	
 	$scope.showQuestions = function(){
 		$scope.question =true;
-		console.log("tid............",Data.tid());
-		window.location.href = '#/test/'+Data.tid();
+		window.location.href = '#/test/'+Data.tid()+","+Data.getIsRandom();
 	}
 	
 	$scope.commonSet = function(){

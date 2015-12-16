@@ -107,29 +107,7 @@ OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) 
     
     $scope.tnamelist = {};
     
-    /*
-     * 该方法有问题，需通过testid来查，否则当同一个用户有相同测试会bug
-     * */
-//    $scope.queryByName = function (tname) {
-//        $http({
-//            url: WEBROOT+"/test/queryByName",
-//            method: 'POST',
-//            headers: {
-//                "Authorization": Data.token()
-//            },
-//            data: {"user": {"uid": Data.uid()}, "name": tname}
-//        }).success(function (data) {
-//            $scope.state = data["state"];//1 true or 0 false
-//            $scope.message = data["message"];
-//            if ($scope.state) {
-//                $scope.tnamelist[tname] = $scope.message.quizid;
-//            } else {
-//            }
-//        }).error(function (data) {
-//        });
-//    };
-    
-//    $scope.testlist.forEach($scope.queryByName);
+   
     
     $scope.upload = function (tname, userlist) {
         $http({
@@ -149,7 +127,7 @@ OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) 
             $scope.message = data["message"];
             if ($scope.state) {
             	removeTip();
-            	flashTip("邀请成功")
+            	smoke.alert("邀请成功")
             } else {
             	flashTip($scope.message.msg)
             }

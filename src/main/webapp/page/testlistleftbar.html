@@ -16,7 +16,7 @@
 		<li>
 		  <a  ng-click="commonSet()"  ng-class="{true: 'active', false: 'inactive'}[set]">
 			<span style="font-size: 14px" class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-			<span  style="font-size:14px" class="glyphicon">&nbsp;通用设置</span>
+			<span  style="font-size:14px" class="glyphicon">&nbsp;试卷设置</span>
 		  </a>	
 		</li>
 			<li>
@@ -36,14 +36,14 @@
 	<ul>
 		<li>邀请</li>
 		<li>
-			<a href="" ng-class="{true: 'active', false: 'inactive'}[lBar.state1]" ng-click="invited(0)" class="glyphicon glyphicon-record" aria-hidden="true">&nbsp;已邀请</a>
+			<a href="" ng-class="{true: 'active', false: 'inactive'}[lBar.state1]" ng-click="invited(0)" class="glyphicon glyphicon-record" aria-hidden="true">&nbsp;已邀请 {{inviteNum.invited}}</a>
 			
 		</li>
 		<li>
-			<a href=""  ng-class="{true: 'active', false: 'inactive'}[lBar.state2]"  ng-click="invited(1)"  class="glyphicon glyphicon-adjust" aria-hidden="true">&nbsp;进行中</a>
+			<a href=""  ng-class="{true: 'active', false: 'inactive'}[lBar.state2]"  ng-click="invited(1)"  class="glyphicon glyphicon-adjust" aria-hidden="true">&nbsp;进行中 {{inviteNum.process}}</a>
 			
 		<li>
-			<a href=""  ng-class="{true: 'active', false: 'inactive'}[lBar.state3]"  ng-click="invited(2)" class="glyphicon glyphicon-ok-circle" aria-hidden="true">&nbsp;已完成</a>
+			<a href=""  ng-class="{true: 'active', false: 'inactive'}[lBar.state3]"  ng-click="invited(2)" class="glyphicon glyphicon-ok-circle" aria-hidden="true">&nbsp;已完成 {{inviteNum.finished}}</a>
 		
 		</li>
 		<!-- <li class="sub-list">
