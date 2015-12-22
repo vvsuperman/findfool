@@ -128,6 +128,7 @@ OJApp.controller("Excel",['$scope','$http','Data',function($scope, $http, Data) 
             if ($scope.state) {
             	removeTip();
             	smoke.alert("邀请成功")
+            	window.location.href = '#/report/show/0';
             } else {
             	flashTip($scope.message.msg)
             }

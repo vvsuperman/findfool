@@ -21,7 +21,7 @@
 		<form class="form-horizontal">
 		   <div style="margin-left: 50px;margin-top: 30px" class="form-group">
 		     <h4>设为公开挑战</h4>
-		     <p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试</p>	
+		     <p>可以将您的试卷变成公开挑战，生成对应的链接，并放置与您公司主页等位置，来吸纳更多的人参与测试:  <a target="_blank" href="http://foolrank.com/#/cad/eachcom/11">示例页面</a></p>	
 		   </div>
 		<div class="form-group">
 			<div class="form-group" style="margin-top: 20px" ng-if="test.logo">
@@ -48,15 +48,16 @@
 			</div>
 			<label class="col-sm-2 control-label">上传竞赛图片</label>
 			<div style="margin-top: 10px" class="btn btn-primary" upload-button
-				header={{tid}} url="test/uploadimg" on-success="onSuccess(response)">上传竞赛图片
+				header={{tid}} url="test/uploadimg" on-success="onSuccess(response)">1280*720的公司展示图，不得超过2M
 			</div>
+			(如已设置则毋须再设置)
 		</div>
 
 		<div class="form-group" style="margin-top:20px">
 				<div style=" margin-top:10px" class="form-group">
 					 <label  class="col-sm-2 control-label">竞赛描述:&nbsp;</label>
 					 <div class="col-md-8">
-					    <textarea simditor minheight="150px" operation="edit"  ng-model="test.tail"></textarea>
+					    <textarea simditor minheight="150px" operation="edit"  ng-model="test.tail" placeholder="用来描述公司信息，招聘岗位信息，奖品等"></textarea>
 					 </div>
 					 
 				</div>
