@@ -28,6 +28,7 @@ import zpl.oj.service.VerifyQuestionService;
 import zpl.oj.service.security.inter.SecurityService;
 import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
+import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.sms.SMS;
 
 import com.mingdao.sdk.Config;
@@ -146,9 +147,17 @@ public class UserController {
 			rb.setState(0);
 			rb.setMessage(msg);
 		} else {
+			String ltEmail = (String) PropertiesUtil.getContextProperty("lantuo"); //如果是蓝拓，那么把标题换下
+			
 			u = userService.userLogin(u.getUid());
 			rb.setMessage(u);
-			rb.setState(1);
+			
+			if(ltEmail.equals(u.getEmail())){
+				rb.setState(2);
+			}else{
+				rb.setState(1);
+			}
+		
 			rb.setToken(securityService.computeToken(u));
 		}
 		return rb;

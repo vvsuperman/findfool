@@ -38,6 +38,10 @@ OJApp.controller('loginCtrl',['$scope','$http','Data',function ($scope,$http,Dat
                 
 
                 if ($scope.state) {
+                	//蓝拓人力过来的，把标题换下
+                	if($scope.state == 2){
+                		Data.setUserSource("lantuo");
+                	}
                     Data.setToken(data["token"]);
                     Data.setUid($scope.message.uid);
                     Data.setPrivi($scope.message.privilege);

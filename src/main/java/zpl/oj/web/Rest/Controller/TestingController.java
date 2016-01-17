@@ -743,12 +743,18 @@ public class TestingController {
 			quizEmailService.sendMail(e, invite);
 		}
 		
+		//生成用户的分数,先不做吧
+		
 		
 		//如果是来自yida的信息，则将做题信息返回
-		String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
-		String url = desService.encode(invite.getIid().toString()+"|"+invite.getTestid().toString()+"|"+invite.getUid().toString());
-		String targetUrl = baseurl+"/#/publicReport/list/"+url;
-		User user = userService.getUserByEmail(email);		
+		User user = userService.getUserByEmail(email);	
+		if(user.getUserSource() == ExamConstant.SOURCE_YIDA){
+			String baseurl = (String) PropertiesUtil.getContextProperty("baseurl");
+			String url = desService.encode(invite.getIid().toString()+"|"+invite.getTestid().toString()+"|"+invite.getUid().toString());
+			String targetUrl = baseurl+"/#/publicReport/list/"+url;			
+			sendToYida(user, 0, targetUrl);
+		}		
+		
 		rb.setState(0);
 		return rb;
 	}
@@ -772,13 +778,14 @@ public class TestingController {
             conn.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Method", "JOB.INTERVIEWPROCESS.UPDATE");
-            conn.setRequestProperty("CompanyName",BASE64.encodeBASE64(user.getCompany().getBytes()) );
+            conn.setRequestProperty("Company",BASE64.encodeBASE64(user.getCompany().getBytes()) );
+            conn.setRequestProperty("CompanyName",BASE64.encodeBASE64(user.getCompanyName().getBytes()) );
             conn.setRequestProperty("Email",BASE64.encodeBASE64( user.getEmail().getBytes()));
             conn.setRequestProperty("Phone", BASE64.encodeBASE64( user.getTel().getBytes()));
             conn.setRequestProperty("LoginName", BASE64.encodeBASE64( user.getFname().getBytes()));
             
             conn.setRequestProperty("EvaluationResult", BASE64.encodeBASE64(scoreUrl.getBytes()));
-            conn.setRequestProperty("score",BASE64.encodeBASE64( (score+"").getBytes()));
+//            conn.setRequestProperty("score",BASE64.encodeBASE64( (score+"").getBytes()));
             conn.setRequestProperty("Password",BASE64.encodeBASE64( user.getPwd().getBytes()));
             
             System.out.print("begin send......");
@@ -826,10 +833,12 @@ public class TestingController {
 		TestingController tc = new TestingController();
 		User user = new User();
 		user.setCompany("foolrank");
-		user.setTel("123456");
+		user.setTel("13761229484");
 		user.setFname("sh003");
-		user.setEmail("123456@qq.com");
-		user.setPwd("sh003");
+		user.setEmail("772012319@qq.com");
+		user.setPwd("93763935");
+		user.setCompanyName("演示公司");
+		
 		
 		
 		tc.sendToYida(user, 260, "www.foolrank.com");

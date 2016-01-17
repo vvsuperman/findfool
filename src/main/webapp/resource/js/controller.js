@@ -312,8 +312,16 @@ OJApp.controller('mainController',['$scope','$http','$routeParams','$location','
 
 
 OJApp.controller('nav', ['$scope','Data',function($scope, Data) {
+	
+
 	$scope.invitedleft = Data.invitedleft();
 	$scope.name = Data.email();
+	
+	if(Data.getUserSource() == LANTUO){
+		$scope.navImg = "resource/static/lantuo2.png";
+	}else{
+		$scope.navImg = "resource/static/logo.png";
+	}
 	
 	var hash=window.location.hash;
 	if(hash=="#/test"||hash=="#/innertest"){

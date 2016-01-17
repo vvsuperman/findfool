@@ -356,6 +356,7 @@ OJApp.factory('Data', ['webStorage',function (webStorage) {
         	this._mdToken = '';
         };
         
+      
         
         //来源，获取系统的注册用户来源
         this._userSource = "";

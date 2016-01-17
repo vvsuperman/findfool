@@ -6,6 +6,7 @@ var WEBROOT = "/oj";
 //var WEBROOT = "";
 //记录登陆前的url，便于登陆后跳转
 var HISURL="";
+var LANTUO = "lantuo"; //蓝拓人力
 
 
 var initialdata =["了解数据结构与算法，知道数据结构的基础知识，能进行数据结构的基本操作，基础知识掌握较差",

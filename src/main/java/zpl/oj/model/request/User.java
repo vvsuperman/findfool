@@ -25,6 +25,15 @@ public class User {
 	private String resetUrl; // 重置密码时随机生成的url
 	private int companyId;
 	private String userSource; //客户来源
+	private String companyName; //公司名
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
 	public String getUserSource() {
 		return userSource;
