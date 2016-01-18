@@ -26,8 +26,8 @@
 		    <button class="btn btn-default" ng-click="showAll()">显示全部</button>
 		  </div>
 		
-		  <a href="" class="btn btn-info pull-right" ng-click="exportExcel()" download="测试报告.xls">导出excel</a> 
-		  <a id="download"></a> 
+		  <a href="" class="btn btn-info pull-right" ng-click="exportExcel()">导出excel</a> 
+		  <a id="download"></a>
 		  <a href="#/invite" class="btn btn-default pull-right" style="margin-right:5px">发送邀请</a>
 		 
 	   </form>
@@ -35,7 +35,7 @@
     
  
     
-    <div class="col-md-12" >
+    <div class="col-md-12">
 	    <table class="table table-striped" id="reportList">
 	        <thead>
 	        <tr>
@@ -73,14 +73,13 @@
       <ul class="nav nav-tabs" role="tablist" style="margin-top:20px;padding-left: 20px">
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[listNav]"><a customnav url="#/report/list"  href="" >报告</a></li>
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[detailNav]" style="margin-left: 10px"><a customnav url="#/report/detail" href="">详细报告</a></li>
-		 
 		  <li role="presentation" ng-class="{1: 'active', 0: ''}[logNav]" style="margin-left: 10px"><a customnav url="#/report/log" href="">答题日志</a></li>
 		  <li role="presentation" style="margin-left: 100px" ng-class="{1: 'active', 0: ''}[detailNav]"><button class="btn btn-primary" ng-click="printPDF()">打印报告</button></li>
 	  </ul>
 	  
      
-        <div class="col-md-8"  id="pdf"  style="margin-top: 20px;background-color: #fff">
-		    <div class="col-md-8">
+        <div class="col-md-8" id="pdf" style="background-color:#fff;margin-top: 20px">
+		    <div class="col-md-12">
 		      <!-- <div class="knowtag">知识结构</div> -->
 		       <div class="col-md-12" style="margin-top:20px"><img src="resource/static/knowledge.png" alt="知识结构"></div> 
 		        <div class="col-md-4 col-md-offset-1" style="margin-top: 20px" >
@@ -134,7 +133,7 @@
 		       </div>
 		 </div>      
 		     
-		   
+		</div>   
 		
 		
 	  
@@ -229,8 +228,6 @@
 			
   </div>
 </div>
+ <script src="resource/js/tableexport/jquery.base64.js"></script>
 
-<script src="resource/js/tableexport/jquery.base64.js"></script>
-<!-- <script src="resource/js/base64.js"></script> -->
 <script src="resource/js/tableexport/tableExport.js"></script>
-
