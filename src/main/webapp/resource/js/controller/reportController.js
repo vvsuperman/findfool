@@ -41,11 +41,12 @@ OJApp.controller('reportController', [ '$scope', '$http', 'Data',
 			
 			
 			$scope.exportExcel = function(){				
-				var url = $("#reportList").tableExport({type:'excel',escape:'false',ignoreColumn:"4"});
-				 
-				document.getElementById("download").href = url;
-				document.getElementById("download").download = "测试报告"+ $scope.getCurrentTime() + ".xls";
-				document.getElementById("download").click();
+//				var url = $("#reportList").tableExport({type:'excel',escape:'false',ignoreColumn:"4"});
+//				 
+//				document.getElementById("download").href = url;
+//				document.getElementById("download").download = "测试报告"+ $scope.getCurrentTime() + ".xls";
+//				document.getElementById("download").click();
+				export_table_to_excel('reportList');
 				
 			}
 			

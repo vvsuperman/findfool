@@ -39,16 +39,16 @@
 	    <table class="table table-striped" id="reportList">
 	        <thead>
 	        <tr>
-	        	<th>姓名</th>
-	            <th>用户名</th>
-	            <th>状态</th>
+	        	<td>姓名</td>
+	            <td>用户名</td>
+	            <td>状态</td>
 	          
-	            <th  >得分&nbsp;&nbsp;
+	            <td  >得分&nbsp;&nbsp;
 	            	<span class="glyphicon" style="cursor:pointer" 
 		            	ng-class="{true: 'glyphicon-chevron-down', false: 'glyphicon-chevron-up'}[isScoreDown]" 
 		            	ng-click="reversalScoreSort()">
 	            	</span>
-	            </th>
+	            </td>
 	            <th>查看详情</th>
 	        </tr>
 	        </thead>
@@ -58,7 +58,7 @@
 	            <td ng-bind="invite.email"></td>
 	            <td ng-bind="getState(invite)"></td>
 	            <td ng-bind="getScore(invite)"></td>
-	            <td ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></td>
+	            <th ><a href="" ng-click="viewReport(invite)" ng-if="invite.state==2">详情</a></th>
 	        </tr>
 	        
 	        </tbody>
@@ -228,6 +228,10 @@
 			
   </div>
 </div>
- <script src="resource/js/tableexport/jquery.base64.js"></script>
+<!--  <script src="resource/js/tableexport/jquery.base64.js"></script>
 
-<script src="resource/js/tableexport/tableExport.js"></script>
+<script src="resource/js/tableexport/tableExport.js"></script> -->
+
+ <script src="resource/js/jsxls/xlsx.core.min.js"></script>
+ <script src="resource/js/jsxls/FileSave.js"></script>
+ <script src="resource/js/jsxls/Export2Excel.js"></script>
