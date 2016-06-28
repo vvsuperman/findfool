@@ -25,7 +25,10 @@ OJApp.config(['$routeProvider' , '$locationProvider',
                 templateUrl: 'jd/page/jd.html',
                 controller: 'jdMainController'
             }).
-            
+            when('/cad/study',{   //学习页面
+            	templateUrl:'cad/page/pagenav.html',
+            	controller:'studyController'
+            }).
         
             when('/cad/comlist', {  //客户端主页
                 templateUrl: 'cad/page/pagenav.html',
