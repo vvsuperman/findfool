@@ -34,6 +34,7 @@ import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.web.Rest.Controller.TestingController.JsonLable;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.sms.SMS;
+import zpl.oj.util.sms.SmsApi_Send;
 
 import com.google.gson.Gson;
 
@@ -72,7 +73,8 @@ public class TuserController {
 			int s = random.nextInt(max) % (max - min + 1) + min;
 			List<String> ls = new ArrayList<String>();
 			ls.add(s + "");
-			sms.send(mobile, ls, ExamConstant.SMS_TEMPID_REMIND);
+			//sms.send(mobile, ls, ExamConstant.SMS_TEMPID_REMIND);
+			SmsApi_Send.doSend(mobile, ExamConstant.SendCloud_SMS_VALID, ls);
 			rb.setMessage(s);
 			return rb;
 		}

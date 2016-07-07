@@ -37,6 +37,7 @@ import zpl.oj.util.mail.SendCloud;
 import zpl.oj.util.mail.SimpleMailSender;
 import zpl.oj.util.randomCode.RandomCode;
 import zpl.oj.util.sms.SMS;
+import zpl.oj.util.sms.SmsApi_Send;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 
 @Service
@@ -82,9 +83,10 @@ public class InviteServiceImp implements InviteService {
 	    	tuser.setTel(u.getTel());
 			//给应聘者发送笔试邀请
 			List<String> ls = new ArrayList<String>();
-			ls.add(user.getCompany());
 			ls.add(u.getEmail());
+			ls.add(user.getCompany());			
 			sms.send(u.getTel(), ls, ExamConstant.SMS_TEMPID_INVITE);
+			SmsApi_Send.doSend(u.getTel(), ExamConstant.SendCloud_SMS_INVITE, ls);
 	    }
 		
 		

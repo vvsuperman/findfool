@@ -30,6 +30,7 @@ import zpl.oj.service.user.inter.UserService;
 import zpl.oj.util.Constant.ExamConstant;
 import zpl.oj.util.PropertiesUtil.PropertiesUtil;
 import zpl.oj.util.sms.SMS;
+import zpl.oj.util.sms.SmsApi_Send;
 
 import com.mingdao.sdk.Config;
 
@@ -64,7 +65,8 @@ public class UserController {
 		int s = random.nextInt(max) % (max - min + 1) + min;
 		List<String> ls = new ArrayList<String>();
 		ls.add(s + "");
-		sms.send(mobile, ls, ExamConstant.SMS_TEMPID_REMIND);
+		//sms.send(mobile, ls, ExamConstant.SMS_TEMPID_REMIND);
+		SmsApi_Send.doSend(mobile, ExamConstant.SendCloud_SMS_VALID, ls);
 		rb.setMessage(s);
 		return rb;
 	}

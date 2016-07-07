@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class ExamConstant {
 	
+	
+	public final static int SendCloud_SMS_VALID = 1678;
+	public final static int SendCloud_SMS_INVITE = 1679;
+	
 	public final static String SOURCE_YIDA = "yida";
 	public final static String YIDA_URL = "http://114.215.204.149/Rest";
 
